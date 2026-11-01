@@ -1,6 +1,6 @@
 # 数据集合 DataTable
 
-Package: @qingye_lab/ui@5.1.0
+Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
 Source SHA-256: 3de1a5e1e426d3f8bef7406f1358bccc50accfd164516da5d74121c444585929
@@ -11,7 +11,7 @@ Source SHA-256: 3de1a5e1e426d3f8bef7406f1358bccc50accfd164516da5d74121c444585929
 常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。虚拟化只改变当前行模型的渲染窗口，不改变全选与分页范围。
 
 ## Notes
-- 标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern。跨页选择的对象内容、权限与批量执行范围仍由应用核实。
+- 标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern，自 5.2.0 起随其改为一行布局，只有一页时只留范围摘要。跨页选择的对象内容、权限与批量执行范围仍由应用核实。
 - TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。
 - 只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。
 - 固定布局中未写 size 的文字列是弹性列，平分定宽列与标记列之外的剩余空间；标记列仍按已有 marker 与单元格内缘角色取宽。列宽过小不会裁掉交互控件，请给操作列留下真实容量。

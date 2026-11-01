@@ -1,6 +1,6 @@
 # 字段组 Fieldset
 
-Package: @qingye_lab/ui@5.1.0
+Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/fieldset
 Source: packages/ui/src/components/fieldset.tsx
 Source SHA-256: a7cb5961235149cd60abe9b0291b81238c755469f313982fd9446a41f0138ad4

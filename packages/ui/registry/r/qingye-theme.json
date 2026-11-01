@@ -13,6 +13,6 @@
     }
   ],
   "dependencies": [
-    "@qingye_lab/ui@5.1.0"
+    "@qingye_lab/ui@5.2.0"
   ]
 }

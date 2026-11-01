@@ -104,7 +104,7 @@ try {
       const search = page.getByRole("searchbox", { name: "搜索采集记录" });
       await search.fill("不存在的记录");
       await page.getByText("没有匹配的记录", { exact: true }).waitFor();
-      assert.equal(await page.getByRole("button", { name: "下一页", exact: true }).isDisabled(), true);
+      assert.equal(await page.getByRole("button", { name: "下一页", exact: true }).count(), 0, "zero results leave no page actions");
       assert.equal(await note.inputValue(), "保留这份待核对的草稿");
       assert.equal(await page.getByRole("complementary", { name: "记录详情" }).count(), 1);
       await search.fill("");

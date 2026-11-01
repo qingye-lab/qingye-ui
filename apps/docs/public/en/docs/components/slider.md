@@ -1,6 +1,6 @@
 # Slider
 
-Package: @qingye_lab/ui@5.1.0
+Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/slider
 Source: packages/ui/src/components/slider.tsx
 Source SHA-256: 836d2fa5c3b4ba8449b959f7b5f521c0ecaf427760c3edbd3a1c7309db591de5

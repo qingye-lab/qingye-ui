@@ -1,6 +1,6 @@
 # NavigationMenu
 
-Package: @qingye_lab/ui@5.1.0
+Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
 Source SHA-256: abc91fdc8bbf4ab987c0cc35f6b9e5e35ba590dd845c7cc556000d16d97acf10

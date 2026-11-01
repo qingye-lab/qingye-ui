@@ -6,12 +6,12 @@ Qingye UI is a React component library built from the design basis in [design.md
 
 | Workspace | Purpose | Current version |
 | --- | --- | --- |
-| [packages/ui](./packages/ui/README.md) | `@qingye_lab/ui`, components and public design resources | **5.1.0** |
+| [packages/ui](./packages/ui/README.md) | `@qingye_lab/ui`, components and public design resources | **5.2.0** |
 | [apps/docs](./apps/docs) | Chinese and English component documentation, playgrounds and workspace examples | Private documentation app |
 | [packages/tooling](./packages/tooling/README.md) | `@qingye/tooling`, explicit project queries, AST diagnostics and theme tools | 0.5.0 |
 | [apps/studio](./apps/studio/README.md) | Local Theme Studio for explicitly registered projects | 0.4.0, private |
 
-UI 5.1.0 loads the Sidebar drawer on demand, adds page-transition, layout and time-value capabilities, and keeps DataTable sticky headers on the page scroll. Read the [5.1.0 notes](./docs/releases/v5.1.0.md): two adjustments to 5.0.0 contracts (the Sidebar drawer handle outside `Workspace`, TimeField seconds at `minute` granularity) can require code changes. UI 5.0.0 added ColorPicker, Resizable, TimeField, Cascader, TreeSelect, Command and FileTrigger, completes table, sidebar and form states, and removes four unused spacing tokens and the motion-provider subpath. Read the [5.0.0 notes](./docs/releases/v5.0.0.md) for the breaking changes before upgrading. UI 4.2.0 added measured VirtualList and DataTable windows, explicit column dimensions and row activation, opt-in Sparkline point inspection, leading menu marks and styled scrollbar parts. Read the [4.2.0 notes](./docs/releases/v4.2.0.md) for the new contracts and popup positioning repair. UI 4.1.0 added standard table, pagination, confirmation, asynchronous-content and search-selection compositions. Read the [4.1.0 notes](./docs/releases/v4.1.0.md) for their contracts and the confirmation lifecycle repair. Read the [4.0.0 notes](./docs/releases/v4.0.0.md) when upgrading from 3.0.0, the [3.0.0 notes](./docs/releases/v3.0.0.md) when coming from 2.0.0, the [2.0.0 notes](./docs/releases/v2.0.0.md) when coming from 1.0.0, and the [1.0.0 notes](./docs/releases/v1.0.0.md) when migrating from 0.4.x. Tooling and private Studio have their own version and API boundaries.
+UI 5.2.0 rebuilds the PaginationPattern and DataTablePattern pager as one row with icon page buttons, a constant page window and only the controls that change the result. Read the [5.2.0 notes](./docs/releases/v5.2.0.md): tests that relied on always-present page controls and custom complete locales (`paginationRange`) need updating. UI 5.1.0 loads the Sidebar drawer on demand, adds page-transition, layout and time-value capabilities, and keeps DataTable sticky headers on the page scroll. Read the [5.1.0 notes](./docs/releases/v5.1.0.md): two adjustments to 5.0.0 contracts (the Sidebar drawer handle outside `Workspace`, TimeField seconds at `minute` granularity) can require code changes. UI 5.0.0 added ColorPicker, Resizable, TimeField, Cascader, TreeSelect, Command and FileTrigger, completes table, sidebar and form states, and removes four unused spacing tokens and the motion-provider subpath. Read the [5.0.0 notes](./docs/releases/v5.0.0.md) for the breaking changes before upgrading. UI 4.2.0 added measured VirtualList and DataTable windows, explicit column dimensions and row activation, opt-in Sparkline point inspection, leading menu marks and styled scrollbar parts. Read the [4.2.0 notes](./docs/releases/v4.2.0.md) for the new contracts and popup positioning repair. UI 4.1.0 added standard table, pagination, confirmation, asynchronous-content and search-selection compositions. Read the [4.1.0 notes](./docs/releases/v4.1.0.md) for their contracts and the confirmation lifecycle repair. Read the [4.0.0 notes](./docs/releases/v4.0.0.md) when upgrading from 3.0.0, the [3.0.0 notes](./docs/releases/v3.0.0.md) when coming from 2.0.0, the [2.0.0 notes](./docs/releases/v2.0.0.md) when coming from 1.0.0, and the [1.0.0 notes](./docs/releases/v1.0.0.md) when migrating from 0.4.x. Tooling and private Studio have their own version and API boundaries.
 
 ## Install
 
@@ -21,10 +21,10 @@ UI 5.1.0 loads the Sidebar drawer on demand, adds page-transition, layout and ti
 pnpm add @qingye_lab/ui
 ```
 
-Without npm access, install the same version from its tarball. Download `qingye_lab-ui-5.1.0.tgz` from a GitHub Release, or pack it from this repository (`pnpm --filter @qingye_lab/ui pack`), then install the file and commit it with the lockfile:
+Without npm access, install the same version from its tarball. Download `qingye_lab-ui-5.2.0.tgz` from a GitHub Release, or pack it from this repository (`pnpm --filter @qingye_lab/ui pack`), then install the file and commit it with the lockfile:
 
 ```sh
-pnpm add ./qingye_lab-ui-5.1.0.tgz
+pnpm add ./qingye_lab-ui-5.2.0.tgz
 ```
 
 Historical GitHub releases use `@qingye/ui`; their package name and API differ from 1.0.0 and later.
@@ -62,7 +62,7 @@ Component pages live at `/docs/components/<name>` and isolated demos at `/playgr
 
 The root [design.md](./design.md) is the sole authored source for the public design guide. Its methods retain their Chinese names: 名实相符、相成相制、布白有用、随境取度、展开有据、进退相承. [STANDARDS.md](./STANDARDS.md) specifies the component implementation contracts, and [component-layering.md](./docs/decisions/component-layering.md) records the library boundary.
 
-The package and site receive generated Chinese and English guides (`design.md`, `design.en.md`), `catalog.json`, AI guidance (`ai/SKILL.md`, `ai/SKILL.en.md`) and versioned component resources (`ai/v5.1.0/`, including `en/`). Generated copies are not independent design sources. Use the guide's adoption snippets to merge persistent package/API references into a consumer's existing `AGENTS.md` and `design.md`; downloading the package alone does not configure an AI assistant. Registry templates reference the shared library while projects own their theme, composition and application state.
+The package and site receive generated Chinese and English guides (`design.md`, `design.en.md`), `catalog.json`, AI guidance (`ai/SKILL.md`, `ai/SKILL.en.md`) and versioned component resources (`ai/v5.2.0/`, including `en/`). Generated copies are not independent design sources. Use the guide's adoption snippets to merge persistent package/API references into a consumer's existing `AGENTS.md` and `design.md`; downloading the package alone does not configure an AI assistant. Registry templates reference the shared library while projects own their theme, composition and application state.
 
 ## Development
 

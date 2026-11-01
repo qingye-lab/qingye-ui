@@ -10,7 +10,10 @@ export type UILocaleMessages = {
   toastSuccess: string;
   pagination: string; previousPage: string; nextPage: string; morePages: string;
   paginationPage: (page: number) => string; paginationPageSize: string; paginationPageSizeOption: (size: number) => string;
+  /** @deprecated 5.2.0 起 PaginationPattern 改读 paginationRange（已知总数）与 paginationPage（未知总数），不再读这一项；下一个主版本移除。 */
   paginationSummary: (page: number, totalPages: number | null, totalCount: number | null) => string;
+  /** 已知总数时的摘要。start、end 从 1 起，含两端；totalCount 为 0 时 start、end 也为 0。 */
+  paginationRange: (start: number, end: number, totalCount: number) => string;
   sidebar: string; sidebarOpen: string;
   showOptions: string; clearSelection: string; remove: string;
   decrease: string; increase: string; numberInput: string;
@@ -77,6 +80,7 @@ export const zhCN: UILocale = {
     pagination: "分页", previousPage: "上一页", nextPage: "下一页", morePages: "更多页",
     paginationPage: page => `第 ${page} 页`, paginationPageSize: "每页条数", paginationPageSizeOption: size => `${size} 条/页`,
     paginationSummary: (page, totalPages, totalCount) => totalCount === 0 ? "0 条" : totalPages === null ? `第 ${page} 页，总数未知` : `第 ${page} 页，共 ${totalPages} 页 · ${totalCount} 条`,
+    paginationRange: (start, end, totalCount) => start <= 1 && end === totalCount ? `共 ${totalCount} 条` : `第 ${start}–${end} 条，共 ${totalCount} 条`,
     sidebar: "工作区导航", sidebarOpen: "打开工作区导航", skipToContent: "跳到主要内容",
     showOptions: "展开选项", clearSelection: "清除选择", remove: "移除",
     decrease: "减少", increase: "增加", numberInput: "数值输入",

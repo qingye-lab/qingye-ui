@@ -1,6 +1,6 @@
 # 角标 CornerMark
 
-Package: @qingye_lab/ui@5.1.0
+Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/corner-mark
 Source: packages/ui/src/components/corner-mark.tsx
 Source SHA-256: 2ab94e2f89fda39bfa2f8751be6394fa346a22d2de902c123d38e012e59c9ac6

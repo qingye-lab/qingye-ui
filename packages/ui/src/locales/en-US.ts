@@ -11,6 +11,7 @@ export const enUS: UILocale = {
     pagination: "Pagination", previousPage: "Previous", nextPage: "Next", morePages: "More pages",
     paginationPage: page => `Page ${page}`, paginationPageSize: "Rows per page", paginationPageSizeOption: size => `${size} / page`,
     paginationSummary: (page, totalPages, totalCount) => totalCount === 0 ? "0 results" : totalPages === null ? `Page ${page}, total unknown` : `Page ${page} of ${totalPages} · ${totalCount} results`,
+    paginationRange: (start, end, totalCount) => start <= 1 && end === totalCount ? `${totalCount} ${totalCount === 1 ? "result" : "results"}` : `${start}–${end} of ${totalCount}`,
     sidebar: "Workspace navigation", sidebarOpen: "Open workspace navigation", skipToContent: "Skip to main content",
     showOptions: "Show options", clearSelection: "Clear selection", remove: "Remove",
     decrease: "Decrease", increase: "Increase", numberInput: "Number input",

@@ -1,6 +1,6 @@
 # DateTimePicker
 
-Package: @qingye_lab/ui@5.1.0
+Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
 Source SHA-256: 3540578e75987160e761639eee05f8895e2bfa22419f6962796887499b39d8b1

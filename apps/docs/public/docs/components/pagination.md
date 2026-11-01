@@ -1,17 +1,18 @@
 # 分页 Pagination
 
-Package: @qingye_lab/ui@5.1.0
+Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
-Source SHA-256: 0e02ee1ce285a97b8e909e8baf4ba19d0c212ded3db2d2ea6e636a81b961ece2
+Source SHA-256: 7b07abeea9f8f8a94d87a23f9168ec613aaabdef810c06fb4df56db15caf98ac
 
 页位置、真实入口与明确的未知总数。
 
 ## Decision
-PaginationPattern 提供页窗、条数选择和总数下降校正；页码与 pageSize 一次通知。未知总数必须显式提供 hasNextPage。链接导航或自定结构继续使用分页原语。
+PaginationPattern 一行呈现范围摘要、页窗与条数选择，只放能改变结果的控件；页码与 pageSize 一次通知，总数下降时校正。未知总数必须显式提供 hasNextPage。链接导航或自定结构继续使用分页原语。
 
 ## Notes
 - 标准组合不请求数据或保存路由；受控 value 越界时呈现校正页，并以 total-change 通知一次，应用据此更新状态和请求。未知总数不证明有无下一页。
+- 自 5.2.0：PaginationPattern 与 DataTablePattern 分页条改为一行布局与图标翻页按钮，属性不变；只有一页、0 条或游标首页无下一页时控件收起或整条不渲染，依赖这些按钮常驻的测试需按新行为更新。自定完整 UILocale 时补 paginationRange；paginationSummary 已弃用，下个主版本移除。
 
 ## Use and ownership
 - 结果按页呈现，页位置和方向可用性已知。
@@ -20,7 +21,7 @@ PaginationPattern 提供页窗、条数选择和总数下降校正；页码与 p
 - Application: 页内容、当前页、总数或未知、前后页可用性与请求结果。
 
 ## Composition
-- PaginationPattern：本地页动作的标准组合。
+- PaginationPattern：本地页动作的标准组合：上一页／下一页为带名称的图标按钮，页窗格数恒定，当前页以选中面标出。
 - Pagination：有名称的 nav，不生成页码。
 - PaginationList / PaginationItem：ul / li 组织页面入口。
 - PaginationLink：a，匹配当前页时 aria-current=page，并以选中面加中等字重呈现；每个页码按中等字重预留宽度，当前页进出时按钮不变宽。
@@ -28,7 +29,7 @@ PaginationPattern 提供页窗、条数选择和总数下降校正；页码与 p
 - PaginationEllipsis：省略页名称，不代表末页。
 
 ## Responsive behavior
-- 动作可换行，保留当前页与总数状态。
+- 宽屏一行：摘要在左，页码与条数在右。窄屏页窗收为五格，页码排独占第二行。
 
 ## Customization
 - 先使用当前属性与组合，再调整项目集中主题；共享缺口在公共库修复。
@@ -121,11 +122,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 ### PaginationPattern
-本地页动作的标准组合。
+本地页动作的标准组合：上一页／下一页为带名称的图标按钮，页窗格数恒定，当前页以选中面标出。
 - value / defaultValue / onValueChange: PaginationValue / (value, { reason }) => void. { page, pageSize } 原子更新；page 从 1 开始。reason 为 page、page-size 或 total-change。条数改变同时回到第 1 页。
-- totalCount / hasNextPage: number | null / boolean. 非负条数计算总页数，下降时校正当前页；0 条时内部 page=1 但不呈现当前页。未知 null 时必须显式给 hasNextPage，不推断末页。
-- pageSizeOptions / disabled / busy: readonly number[] / boolean / boolean. 省略 options 时隐藏条数控件；候选为不重复正整数。disabled 只阻止本地操作，不推断请求状态。busy 同样挡住翻页，但按钮保持可聚焦（原生 disabled 会让刚按下的按钮丢掉焦点），条数控件改为只读；DataTablePattern 的 busy 会传给它。
-- aria-label / render / ref / native nav props: PaginationProps. 转发到 nav；可访问页名、总数摘要与条数标签来自 locale。
+- totalCount / hasNextPage: number | null / boolean. 非负条数计算总页数，下降时校正当前页；只有一页时只留范围摘要，0 条时显示「共 0 条」。未知 null 时必须显式给 hasNextPage，不推断末页；第 1 页且无下一页时整条不渲染。
+- pageSizeOptions / disabled / busy: readonly number[] / boolean / boolean. 省略 options 时隐藏条数控件；候选为不重复正整数。总数不超过最小候选时，换条数不改变结果，控件不出现。disabled 只阻止本地操作，不推断请求状态。busy 同样挡住翻页，但按钮保持可聚焦（原生 disabled 会让刚按下的按钮丢掉焦点），条数控件改为只读；DataTablePattern 的 busy 会传给它。
+- aria-label / render / ref / native nav props: PaginationProps. 转发到 nav；可访问页名、上一页／下一页图标按钮名称、范围摘要（paginationRange）与条数标签来自 locale。
 
 ### Pagination
 有名称的 nav，不生成页码。
@@ -161,7 +162,7 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "页码与每页条数", titleEn: "Pages and page size" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <PaginationPattern totalCount={120} defaultValue={{ page: 2, pageSize: 10 }} pageSizeOptions={[10, 20, 50]} />;
+  return <PaginationPattern totalCount={95} defaultValue={{ page: 2, pageSize: 20 }} pageSizeOptions={[20, 50, 100]} />;
 }
 ```
 
@@ -181,12 +182,14 @@ export default function Demo() {
 ### 总数未知
 Source: apps/docs/src/content/pagination/demos/03-unknown.tsx
 ```tsx
-import { PaginationPattern } from "@qingye_lab/ui/components/pagination";
+import { PaginationPattern, type PaginationValue } from "@qingye_lab/ui/components/pagination";
+import * as React from "react";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "总数未知", titleEn: "Unknown total" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <PaginationPattern totalCount={null} hasNextPage />;
+  const [value, setValue] = React.useState<PaginationValue>({ page: 1, pageSize: 20 });
+  return <PaginationPattern totalCount={null} hasNextPage={value.page < 4} value={value} onValueChange={setValue} />;
 }
 ```

@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-10-31T04:56:41.913Z",
-  "revision": "6b8f8094042317909051d10c371fbb011eb5993c",
+  "generatedAt": "2026-11-01T01:57:57.444Z",
+  "revision": "51d4cffaa475b0f4e00c3a7ba92b806ed01f86c9",
   "static": {
     "fingerprint": {
-      "sha256": "9c43149f7ea88e404bd76fea8cf0b0b7ff05f46deb62257d793056b3abf48355",
+      "sha256": "91b3b5e6bdc51a45cef41a3c3bcccc77203d1ef4d34e5deb0ecee66cb0157632",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -697,7 +697,7 @@
         },
         {
           "path": "apps/docs/src/content/data-table/meta.ts",
-          "sha256": "21e7db3103de0683df6f256e5fdac54560a4fb9cecda32390876cee2ef20666b"
+          "sha256": "e89733194a8c01609884ded3403a47d9521ee4978c95f5be73cf896416a64d43"
         },
         {
           "path": "apps/docs/src/content/date-picker/cover.tsx",
@@ -1265,7 +1265,7 @@
         },
         {
           "path": "apps/docs/src/content/pagination/demos/01-pages.tsx",
-          "sha256": "9ae49b516492532782080d7e8c00a9ad13ca26028cca2d22b8eac8865f6dd5c0"
+          "sha256": "61d81839e29743778f8ddc623fa63c11adeaade605a7a0e752c105987857ec34"
         },
         {
           "path": "apps/docs/src/content/pagination/demos/02-ellipsis.tsx",
@@ -1273,11 +1273,11 @@
         },
         {
           "path": "apps/docs/src/content/pagination/demos/03-unknown.tsx",
-          "sha256": "7ba5d07208aeaf5d67854b4361849970a3541b6fdd4e8d61b045916c3fe6d25f"
+          "sha256": "7fac262abc88def6352a22ac4c1c84a07def423e26b8259bde87e0013a866698"
         },
         {
           "path": "apps/docs/src/content/pagination/meta.ts",
-          "sha256": "9bb7bafeb2ae6df1b40b2bfc73119a0f9ba192d7ae68c355c0ca60b725ff0c36"
+          "sha256": "d664e4e234017cdf740fc8f3350b2d2a336c0048dec9d06b991553aa1ada9f9e"
         },
         {
           "path": "apps/docs/src/content/password-input/cover.tsx",
@@ -2409,7 +2409,7 @@
         },
         {
           "path": "packages/ui/package.json",
-          "sha256": "dd1ce8251e93381ce4d35c540c52b34a7866add814bacfdcbdb34c67f4556ad4"
+          "sha256": "992f5fd1e8867c168bfe8c1cbd5d4e3302686710cd4bc484d864aeedbca8b046"
         },
         {
           "path": "packages/ui/prose.css",
@@ -2669,7 +2669,7 @@
         },
         {
           "path": "packages/ui/src/components/pagination.tsx",
-          "sha256": "0e02ee1ce285a97b8e909e8baf4ba19d0c212ded3db2d2ea6e636a81b961ece2"
+          "sha256": "7b07abeea9f8f8a94d87a23f9168ec613aaabdef810c06fb4df56db15caf98ac"
         },
         {
           "path": "packages/ui/src/components/password-input.tsx",
@@ -2897,11 +2897,11 @@
         },
         {
           "path": "packages/ui/src/locale.tsx",
-          "sha256": "1b1f47361ecc67beca44ddb7d32f745013d5c23629b2b9be4c8a2641b3062151"
+          "sha256": "0c264ddcf44a142932a8b1cbf6f82cd44a2aeef570a592356df36e02977b3592"
         },
         {
           "path": "packages/ui/src/locales/en-US.ts",
-          "sha256": "7ec75536fda79a4770535f2344916ddadc98c2403bfd58d8b826a52e8e582804"
+          "sha256": "44b5afed0c365a3440d151e49e945abb2e68f20b42485f3c0e9bfc6dcd1c6d29"
         },
         {
           "path": "packages/ui/src/nav-line.ts",
@@ -261871,7 +261871,7 @@
         "className": "gap-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 15
+          "line": 17
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -261902,7 +261902,7 @@
         "className": "gap-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 15
+          "line": 17
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -261941,7 +261941,7 @@
         "className": "gap-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 15
+          "line": 17
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -261972,7 +261972,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 15
+          "line": 17
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262003,7 +262003,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 15
+          "line": 17
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262042,7 +262042,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 15
+          "line": 17
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262073,7 +262073,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 15
+          "line": 17
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262104,7 +262104,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 15
+          "line": 17
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262143,7 +262143,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 15
+          "line": 17
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262166,7 +262166,7 @@
         "className": "gap-(--qy-action-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 20
+          "line": 22
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262197,7 +262197,7 @@
         "className": "gap-(--qy-action-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 20
+          "line": 22
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262236,7 +262236,7 @@
         "className": "gap-(--qy-action-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 20
+          "line": 22
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262269,7 +262269,7 @@
         "className": "after:font-medium",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 43
+          "line": 45
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262300,7 +262300,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262331,7 +262331,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262370,7 +262370,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262401,7 +262401,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262432,7 +262432,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262471,7 +262471,7 @@
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262502,7 +262502,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262541,7 +262541,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262588,7 +262588,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262635,7 +262635,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262674,7 +262674,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262713,7 +262713,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262760,7 +262760,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262807,7 +262807,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262862,7 +262862,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262925,7 +262925,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -262988,7 +262988,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263043,7 +263043,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263106,7 +263106,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263161,7 +263161,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263216,7 +263216,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263263,30 +263263,100 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 78
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
       {
-        "token": "--qy-action-gap",
+        "token": "--qy-field-group-gap",
         "chain": [
-          "--qy-action-gap"
+          "--qy-field-group-gap"
         ],
         "component": "pagination",
         "sourceComponent": "pagination",
         "publicNames": [
           "PaginationPattern"
         ],
-        "part": "pagination-details",
-        "selector": "[data-slot=\"pagination-details\"]",
+        "part": "pagination-pattern",
+        "selector": "[data-slot=\"pagination-pattern\"]",
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "gap",
         "conditions": [],
-        "className": "gap-(--qy-action-gap)",
+        "className": "gap-x-(--qy-field-group-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 144
+          "line": 171
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-space-module",
+        "chain": [
+          {
+            "variable": "--qy-field-group-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 579
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          "--qy-space-module"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-pattern",
+        "selector": "[data-slot=\"pagination-pattern\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-x-(--qy-field-group-gap)",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 171
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--qy-field-group-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 579
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          {
+            "variable": "--qy-space-module",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 492
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-pattern",
+        "selector": "[data-slot=\"pagination-pattern\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-x-(--qy-field-group-gap)",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 171
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263294,10 +263364,119 @@
         "token": "--qy-fen",
         "chain": [
           {
-            "variable": "--qy-action-gap",
+            "variable": "--qy-field-group-gap",
             "source": {
               "path": "packages/ui/tokens/components.css",
-              "line": 494
+              "line": 579
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          {
+            "variable": "--qy-space-module",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 625
+            },
+            "condition": "[data-density=\"compact\"]"
+          },
+          "--qy-fen"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-pattern",
+        "selector": "[data-slot=\"pagination-pattern\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-x-(--qy-field-group-gap)",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 171
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--qy-field-group-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 579
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          {
+            "variable": "--qy-space-module",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 625
+            },
+            "condition": "[data-density=\"compact\"]"
+          },
+          {
+            "variable": "--qy-fen",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 18
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-pattern",
+        "selector": "[data-slot=\"pagination-pattern\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-x-(--qy-field-group-gap)",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 171
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-field-gap",
+        "chain": [
+          "--qy-field-gap"
+        ],
+        "component": "pagination",
+        "sourceComponent": "pagination",
+        "publicNames": [
+          "PaginationPattern"
+        ],
+        "part": "pagination-pattern",
+        "selector": "[data-slot=\"pagination-pattern\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-y-(--qy-field-gap)",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 171
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-fen",
+        "chain": [
+          {
+            "variable": "--qy-field-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 493
             },
             "condition": "@layer base {\n  :root"
           },
@@ -263308,16 +263487,16 @@
         "publicNames": [
           "PaginationPattern"
         ],
-        "part": "pagination-details",
-        "selector": "[data-slot=\"pagination-details\"]",
+        "part": "pagination-pattern",
+        "selector": "[data-slot=\"pagination-pattern\"]",
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "gap",
         "conditions": [],
-        "className": "gap-(--qy-action-gap)",
+        "className": "gap-y-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 144
+          "line": 171
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263325,10 +263504,10 @@
         "token": "--qy-cai",
         "chain": [
           {
-            "variable": "--qy-action-gap",
+            "variable": "--qy-field-gap",
             "source": {
               "path": "packages/ui/tokens/components.css",
-              "line": 494
+              "line": 493
             },
             "condition": "@layer base {\n  :root"
           },
@@ -263347,16 +263526,16 @@
         "publicNames": [
           "PaginationPattern"
         ],
-        "part": "pagination-details",
-        "selector": "[data-slot=\"pagination-details\"]",
+        "part": "pagination-pattern",
+        "selector": "[data-slot=\"pagination-pattern\"]",
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "gap",
         "conditions": [],
-        "className": "gap-(--qy-action-gap)",
+        "className": "gap-y-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 144
+          "line": 171
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263383,11 +263562,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "font-size",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263414,11 +263595,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "line-height",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263453,11 +263636,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "line-height",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263484,11 +263669,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "letter-spacing",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263515,11 +263702,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "font-weight",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263554,11 +263743,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "font-weight",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-support",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263585,11 +263776,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263624,11 +263817,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263671,11 +263866,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263718,11 +263915,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263757,11 +263956,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263796,11 +263997,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263843,11 +264046,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263890,11 +264095,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -263945,11 +264152,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -264008,11 +264217,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -264071,11 +264282,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -264126,11 +264339,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -264189,11 +264404,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -264244,11 +264461,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -264299,11 +264518,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -264346,11 +264567,13 @@
         "precision": "EXACT_SLOT",
         "pseudo": null,
         "property": "color",
-        "conditions": [],
+        "conditions": [
+          "summary !== null"
+        ],
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 145
+          "line": 172
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -538997,7 +539220,70 @@
         "className": "min-w-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 55
+          "line": 58
+        },
+        "reason": "Unsupported class/property mapping; no runtime claim"
+      },
+      {
+        "sourceComponent": "pagination",
+        "className": "px-(--qy-space-1)",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 58
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "pagination",
+        "className": "sm:min-w-(--qy-fill-height)",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 58
+        },
+        "reason": "Unsupported class/property mapping; no runtime claim"
+      },
+      {
+        "sourceComponent": "pagination",
+        "className": "-me-[calc((var(--qy-fill-height-narrow)-var(--qy-fill-icon-narrow))/2)]",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 175
+        },
+        "reason": "Unsupported class/property mapping; no runtime claim"
+      },
+      {
+        "sourceComponent": "pagination",
+        "className": "sm:-me-[calc((var(--qy-fill-height)-var(--qy-fill-icon))/2)]",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 175
+        },
+        "reason": "Unsupported class/property mapping; no runtime claim"
+      },
+      {
+        "sourceComponent": "pagination",
+        "className": "max-sm:-mx-[calc((var(--qy-fill-height-narrow)-var(--qy-fill-icon-narrow))/2)]",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 175
+        },
+        "reason": "Unsupported class/property mapping; no runtime claim"
+      },
+      {
+        "sourceComponent": "pagination",
+        "className": "max-sm:basis-[calc(100%+var(--qy-fill-height-narrow)-var(--qy-fill-icon-narrow))]",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 175
+        },
+        "reason": "Unsupported class/property mapping; no runtime claim"
+      },
+      {
+        "sourceComponent": "pagination",
+        "className": "min-w-(--qy-fill-height-narrow)",
+        "source": {
+          "path": "packages/ui/src/components/pagination.tsx",
+          "line": 179
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -539006,7 +539292,7 @@
         "className": "sm:min-w-(--qy-fill-height)",
         "source": {
           "path": "packages/ui/src/components/pagination.tsx",
-          "line": 55
+          "line": 179
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -540703,8 +540989,8 @@
     ]
   },
   "runtime": {
-    "fingerprint": "b0eacdf0314a9c040f4ab786735cc3c123899a3f396aeacb8bbe962b65880b86",
-    "measuredAt": "2026-10-30T10:19:31.450Z",
+    "fingerprint": "91b3b5e6bdc51a45cef41a3c3bcccc77203d1ef4d34e5deb0ecee66cb0157632",
+    "measuredAt": "2026-11-01T02:02:43.750Z",
     "browser": {
       "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.8010.12 Safari/537.36",
       "owner": "caller-provided page"
@@ -540728,7 +541014,7 @@
         },
         "route": "/playground/sidebar",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:15.950Z",
+        "measuredAt": "2026-11-01T02:01:30.041Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -540797,7 +541083,7 @@
         },
         "route": "/playground/field",
         "override": "17px",
-        "measuredAt": "2026-10-30T10:18:17.392Z",
+        "measuredAt": "2026-11-01T02:01:31.420Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -540868,7 +541154,7 @@
         },
         "route": "/playground/field",
         "override": "37px",
-        "measuredAt": "2026-10-30T10:18:18.805Z",
+        "measuredAt": "2026-11-01T02:01:32.828Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -540935,7 +541221,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:20.209Z",
+        "measuredAt": "2026-11-01T02:01:34.213Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541010,7 +541296,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-30T10:18:21.600Z",
+        "measuredAt": "2026-11-01T02:01:35.575Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541085,7 +541371,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:18:23.016Z",
+        "measuredAt": "2026-11-01T02:01:36.944Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541160,7 +541446,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:24.442Z",
+        "measuredAt": "2026-11-01T02:01:38.310Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541227,7 +541513,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:18:25.846Z",
+        "measuredAt": "2026-11-01T02:01:39.671Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541297,7 +541583,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:27.259Z",
+        "measuredAt": "2026-11-01T02:01:41.053Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541364,7 +541650,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:28.642Z",
+        "measuredAt": "2026-11-01T02:01:42.411Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541441,7 +541727,7 @@
         },
         "route": "/playground/dialog",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:18:30.058Z",
+        "measuredAt": "2026-11-01T02:01:43.887Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541518,7 +541804,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:31.466Z",
+        "measuredAt": "2026-11-01T02:01:45.413Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541536,7 +541822,7 @@
           "token": "oklch(0% 0 0/.32)",
           "rootToken": "oklch(0% 0 0/.32)",
           "rect": {
-            "width": 1100,
+            "width": 1085,
             "height": 900
           },
           "tag": "DIV",
@@ -541556,7 +541842,7 @@
           "token": "rgb(12, 130, 210)",
           "rootToken": "rgb(12, 130, 210)",
           "rect": {
-            "width": 1100,
+            "width": 1085,
             "height": 900
           },
           "tag": "DIV",
@@ -541591,7 +541877,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:32.874Z",
+        "measuredAt": "2026-11-01T02:01:46.847Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541666,7 +541952,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:34.320Z",
+        "measuredAt": "2026-11-01T02:01:48.278Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541737,7 +542023,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:18:35.824Z",
+        "measuredAt": "2026-11-01T02:01:50.018Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541813,7 +542099,7 @@
         },
         "route": "/playground/card",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:18:37.256Z",
+        "measuredAt": "2026-11-01T02:01:51.430Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541882,7 +542168,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-30T10:18:38.648Z",
+        "measuredAt": "2026-11-01T02:01:52.801Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -541954,7 +542240,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-30T10:18:40.028Z",
+        "measuredAt": "2026-11-01T02:01:54.161Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542021,7 +542307,7 @@
         },
         "route": "/playground/native-select",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:18:41.400Z",
+        "measuredAt": "2026-11-01T02:01:55.518Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542095,7 +542381,7 @@
         },
         "route": "/playground/input-group",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:18:42.880Z",
+        "measuredAt": "2026-11-01T02:01:56.871Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542165,7 +542451,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:18:44.327Z",
+        "measuredAt": "2026-11-01T02:01:58.227Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542238,7 +542524,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:18:45.717Z",
+        "measuredAt": "2026-11-01T02:01:59.670Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542313,7 +542599,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:47.139Z",
+        "measuredAt": "2026-11-01T02:02:01.034Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542386,7 +542672,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:48.522Z",
+        "measuredAt": "2026-11-01T02:02:02.404Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542459,7 +542745,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:49.914Z",
+        "measuredAt": "2026-11-01T02:02:03.784Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542536,7 +542822,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:51.342Z",
+        "measuredAt": "2026-11-01T02:02:05.142Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542613,7 +542899,7 @@
         },
         "route": "/playground/progress",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:52.783Z",
+        "measuredAt": "2026-11-01T02:02:06.509Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542682,7 +542968,7 @@
         },
         "route": "/playground/sidebar",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:54.184Z",
+        "measuredAt": "2026-11-01T02:02:07.899Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542751,7 +543037,7 @@
         },
         "route": "/playground/field",
         "override": "17px",
-        "measuredAt": "2026-10-30T10:18:55.772Z",
+        "measuredAt": "2026-11-01T02:02:09.290Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542822,7 +543108,7 @@
         },
         "route": "/playground/field",
         "override": "37px",
-        "measuredAt": "2026-10-30T10:18:57.192Z",
+        "measuredAt": "2026-11-01T02:02:10.677Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542889,7 +543175,7 @@
         },
         "route": "/playground/button",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:18:58.613Z",
+        "measuredAt": "2026-11-01T02:02:12.050Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -542964,7 +543250,7 @@
         },
         "route": "/playground/button",
         "override": "19px",
-        "measuredAt": "2026-10-30T10:19:00.045Z",
+        "measuredAt": "2026-11-01T02:02:13.409Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543039,7 +543325,7 @@
         },
         "route": "/playground/button",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:19:01.495Z",
+        "measuredAt": "2026-11-01T02:02:14.788Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543114,7 +543400,7 @@
         },
         "route": "/playground/input",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:19:03.050Z",
+        "measuredAt": "2026-11-01T02:02:16.162Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543184,7 +543470,7 @@
         },
         "route": "/playground/input",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:04.456Z",
+        "measuredAt": "2026-11-01T02:02:17.541Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543251,7 +543537,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:05.831Z",
+        "measuredAt": "2026-11-01T02:02:18.906Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543328,7 +543614,7 @@
         },
         "route": "/playground/dialog",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:19:07.219Z",
+        "measuredAt": "2026-11-01T02:02:20.283Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543405,7 +543691,7 @@
         },
         "route": "/playground/dialog",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:08.656Z",
+        "measuredAt": "2026-11-01T02:02:21.672Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543423,7 +543709,7 @@
           "token": "oklch(0% 0 0/.56)",
           "rootToken": "oklch(0% 0 0/.56)",
           "rect": {
-            "width": 1100,
+            "width": 1085,
             "height": 900
           },
           "tag": "DIV",
@@ -543443,7 +543729,7 @@
           "token": "rgb(12, 130, 210)",
           "rootToken": "rgb(12, 130, 210)",
           "rect": {
-            "width": 1100,
+            "width": 1085,
             "height": 900
           },
           "tag": "DIV",
@@ -543478,7 +543764,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:10.107Z",
+        "measuredAt": "2026-11-01T02:02:23.049Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543553,7 +543839,7 @@
         },
         "route": "/playground/select",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:11.554Z",
+        "measuredAt": "2026-11-01T02:02:24.459Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543624,7 +543910,7 @@
         },
         "route": "/playground/select",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:19:13.182Z",
+        "measuredAt": "2026-11-01T02:02:25.943Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543700,7 +543986,7 @@
         },
         "route": "/playground/card",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:19:14.638Z",
+        "measuredAt": "2026-11-01T02:02:27.323Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543769,7 +544055,7 @@
         },
         "route": "/playground/card",
         "override": "41px",
-        "measuredAt": "2026-10-30T10:19:16.031Z",
+        "measuredAt": "2026-11-01T02:02:28.689Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543841,7 +544127,7 @@
         },
         "route": "/playground/table",
         "override": "67px",
-        "measuredAt": "2026-10-30T10:19:17.443Z",
+        "measuredAt": "2026-11-01T02:02:30.054Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543908,7 +544194,7 @@
         },
         "route": "/playground/native-select",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:19:18.852Z",
+        "measuredAt": "2026-11-01T02:02:31.421Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -543982,7 +544268,7 @@
         },
         "route": "/playground/input-group",
         "override": "51px",
-        "measuredAt": "2026-10-30T10:19:20.273Z",
+        "measuredAt": "2026-11-01T02:02:32.792Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544052,7 +544338,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:19:21.695Z",
+        "measuredAt": "2026-11-01T02:02:34.163Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544125,7 +544411,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "21px",
-        "measuredAt": "2026-10-30T10:19:23.089Z",
+        "measuredAt": "2026-11-01T02:02:35.527Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544200,7 +544486,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:24.492Z",
+        "measuredAt": "2026-11-01T02:02:36.895Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544273,7 +544559,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:25.875Z",
+        "measuredAt": "2026-11-01T02:02:38.254Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544346,7 +544632,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:27.280Z",
+        "measuredAt": "2026-11-01T02:02:39.617Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544423,7 +544709,7 @@
         },
         "route": "/playground/segmented-control",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:28.655Z",
+        "measuredAt": "2026-11-01T02:02:40.980Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544500,7 +544786,7 @@
         },
         "route": "/playground/progress",
         "override": "rgb(12, 130, 210)",
-        "measuredAt": "2026-10-30T10:19:30.036Z",
+        "measuredAt": "2026-11-01T02:02:42.366Z",
         "observation": "OBSERVED_CHANGE",
         "validOverride": true,
         "themeEvidence": {
@@ -544556,7 +544842,7 @@
     "method": "Root inline important custom-property override; computed styles and geometry on real existing rendered parts; value restored after each probe."
   },
   "computation": {
-    "staleRuntime": true,
+    "staleRuntime": false,
     "scope": "Only the selected probes and recorded theme/viewport/state combinations. PASS for no-change proves measured non-effect, never universal non-consumption.",
     "cases": [
       {
@@ -544566,9 +544852,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544598,9 +544884,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544630,9 +544916,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544654,9 +544940,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544678,9 +544964,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "field-group-relationship-gap:light:desktop:1100x900:fine"
       },
@@ -544691,9 +544977,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "field-group-relationship-gap:dark:desktop:1100x900:fine"
       },
@@ -544704,9 +544990,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-primary:light:desktop:1100x900:fine"
       },
@@ -544717,9 +545003,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-primary:dark:desktop:1100x900:fine"
       },
@@ -544730,9 +545016,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-radius:light:desktop:1100x900:fine"
       },
@@ -544743,9 +545029,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-radius:dark:desktop:1100x900:fine"
       },
@@ -544756,9 +545042,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-control:light:desktop:1100x900:fine"
       },
@@ -544769,9 +545055,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "button-control:dark:desktop:1100x900:fine"
       },
@@ -544782,9 +545068,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544822,9 +545108,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544856,9 +545142,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544890,9 +545176,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544922,9 +545208,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544954,9 +545240,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -544986,9 +545272,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545018,9 +545304,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545050,9 +545336,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545082,9 +545368,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545114,9 +545400,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545146,9 +545432,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545178,9 +545464,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545210,9 +545496,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "select-highlight:light:desktop:1100x900:fine"
       },
@@ -545223,9 +545509,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "select-highlight:dark:desktop:1100x900:fine"
       },
@@ -545236,9 +545522,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "select-control:light:desktop:1100x900:fine"
       },
@@ -545249,9 +545535,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "select-control:dark:desktop:1100x900:fine"
       },
@@ -545262,9 +545548,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545294,9 +545580,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545326,9 +545612,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "panel-padding:light:desktop:1100x900:fine"
       },
@@ -545339,9 +545625,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "panel-padding:dark:desktop:1100x900:fine"
       },
@@ -545352,9 +545638,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545376,9 +545662,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545400,9 +545686,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "native-select-control:light:desktop:1100x900:fine"
       },
@@ -545413,9 +545699,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "native-select-control:dark:desktop:1100x900:fine"
       },
@@ -545426,9 +545712,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "input-group-control:light:desktop:1100x900:fine"
       },
@@ -545439,9 +545725,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "input-group-control:dark:desktop:1100x900:fine"
       },
@@ -545452,9 +545738,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-radius:light:desktop:1100x900:fine"
       },
@@ -545465,9 +545751,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-radius:dark:desktop:1100x900:fine"
       },
@@ -545478,9 +545764,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-item-radius:light:desktop:1100x900:fine"
       },
@@ -545491,9 +545777,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-item-radius:dark:desktop:1100x900:fine"
       },
@@ -545504,9 +545790,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-surface:light:desktop:1100x900:fine"
       },
@@ -545517,9 +545803,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-surface:dark:desktop:1100x900:fine"
       },
@@ -545530,9 +545816,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-border:light:desktop:1100x900:fine"
       },
@@ -545543,9 +545829,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "UNVERIFIED",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Runtime effect has no matching static path",
         "staticRecordSources": [],
         "evidenceId": "track-border:dark:desktop:1100x900:fine"
       },
@@ -545556,9 +545842,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545606,9 +545892,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545656,9 +545942,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545688,9 +545974,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545720,9 +546006,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545744,9 +546030,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "NOT_RUN",
-        "observation": "NOT_OBSERVED",
-        "reason": "Recorded runtime evidence is stale after source/style changes",
+        "status": "PASS",
+        "observation": "OBSERVED_CHANGE",
+        "reason": "Matching static path and observed property change in this case",
         "staticRecordSources": [
           {
             "source": {
@@ -545763,10 +546049,10 @@
       }
     ],
     "counts": {
-      "PASS": 0,
+      "PASS": 27,
       "FAIL": 0,
-      "UNVERIFIED": 0,
-      "NOT_RUN": 53
+      "UNVERIFIED": 26,
+      "NOT_RUN": 0
     }
   },
   "probePlan": [

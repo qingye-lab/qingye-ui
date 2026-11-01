@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-10-31T04:56:32.597Z",
-  "revision": "6b8f8094042317909051d10c371fbb011eb5993c",
+  "generatedAt": "2026-11-01T01:57:58.562Z",
+  "revision": "51d4cffaa475b0f4e00c3a7ba92b806ed01f86c9",
   "fingerprint": {
-    "sha256": "b096320d8e07a9ac320d35c3d44239d9f965d917c96834e9fc5cb66596b1b069",
+    "sha256": "8eae0052ce2e395cb9f37293b7573d2665eec7fa61c1b4c3b73bdbdfc4d31820",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -120,7 +120,7 @@
       },
       {
         "path": "apps/docs/src/content/data-table/meta.ts",
-        "sha256": "21e7db3103de0683df6f256e5fdac54560a4fb9cecda32390876cee2ef20666b"
+        "sha256": "e89733194a8c01609884ded3403a47d9521ee4978c95f5be73cf896416a64d43"
       },
       {
         "path": "apps/docs/src/content/date-picker/meta.ts",
@@ -248,7 +248,7 @@
       },
       {
         "path": "apps/docs/src/content/pagination/meta.ts",
-        "sha256": "9bb7bafeb2ae6df1b40b2bfc73119a0f9ba192d7ae68c355c0ca60b725ff0c36"
+        "sha256": "d664e4e234017cdf740fc8f3350b2d2a336c0048dec9d06b991553aa1ada9f9e"
       },
       {
         "path": "apps/docs/src/content/password-input/meta.ts",
@@ -432,7 +432,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "efcb4622b6cb8d8adf553e82f4cf66287f63cfcba04aeb708bf49b07aa3f1f61"
+        "sha256": "562211f8eaf7e34ab81b1908e3b2fc75e8dd41cf33d460cc8d55265de9e8c414"
       },
       {
         "path": "packages/ui/motion.css",
@@ -440,7 +440,7 @@
       },
       {
         "path": "packages/ui/package.json",
-        "sha256": "dd1ce8251e93381ce4d35c540c52b34a7866add814bacfdcbdb34c67f4556ad4"
+        "sha256": "992f5fd1e8867c168bfe8c1cbd5d4e3302686710cd4bc484d864aeedbca8b046"
       },
       {
         "path": "packages/ui/prose.css",
@@ -684,7 +684,7 @@
       },
       {
         "path": "packages/ui/src/components/pagination.tsx",
-        "sha256": "0e02ee1ce285a97b8e909e8baf4ba19d0c212ded3db2d2ea6e636a81b961ece2"
+        "sha256": "7b07abeea9f8f8a94d87a23f9168ec613aaabdef810c06fb4df56db15caf98ac"
       },
       {
         "path": "packages/ui/src/components/password-input.tsx",
@@ -891,7 +891,7 @@
   "scope": "Implementation facts; PRESENT means source exists, not runtime acceptance. Internal docs are not added to package files.",
   "package": {
     "name": "@qingye_lab/ui",
-    "version": "5.1.0",
+    "version": "5.2.0",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
@@ -992,7 +992,8 @@
       "!ai/v4.0.0",
       "!ai/v4.1.0",
       "!ai/v4.2.0",
-      "!ai/v5.0.0"
+      "!ai/v5.0.0",
+      "!ai/v5.1.0"
     ],
     "source": "packages/ui/package.json"
   },
@@ -1315,7 +1316,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1745,7 +1746,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1981,7 +1982,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2159,7 +2160,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2716,7 +2717,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2984,7 +2985,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3166,7 +3167,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3536,7 +3537,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3889,7 +3890,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4060,7 +4061,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4357,7 +4358,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4666,7 +4667,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4844,7 +4845,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5130,7 +5131,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5696,7 +5697,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5935,7 +5936,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6177,7 +6178,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6386,7 +6387,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6674,7 +6675,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6977,7 +6978,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7692,7 +7693,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8206,7 +8207,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8463,7 +8464,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8730,7 +8731,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9272,7 +9273,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9508,7 +9509,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9691,7 +9692,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10048,7 +10049,7 @@
           }
         ],
         "notes": [
-          "标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern。跨页选择的对象内容、权限与批量执行范围仍由应用核实。",
+          "标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern，自 5.2.0 起随其改为一行布局，只有一页时只留范围摘要。跨页选择的对象内容、权限与批量执行范围仍由应用核实。",
           "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。",
           "只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。",
           "固定布局中未写 size 的文字列是弹性列，平分定宽列与标记列之外的剩余空间；标记列仍按已有 marker 与单元格内缘角色取宽。列宽过小不会裁掉交互控件，请给操作列留下真实容量。",
@@ -10057,7 +10058,7 @@
           "焦点所在的离屏行额外保留一行，输入草稿不因滚动丢失；该行移出当前模型时，焦点仍属于它才回到滚动容器。"
         ],
         "notesEn": [
-          "Import DataTablePattern from components/data-table; its pager reuses PaginationPattern. Applications still verify cross-page object data, permissions and bulk-action scope.",
+          "Import DataTablePattern from components/data-table; its pager reuses PaginationPattern and since 5.2.0 follows its one-row layout, leaving only the range summary for a single page. Applications still verify cross-page object data, permissions and bulk-action scope.",
           "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.",
           "With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component.",
           "In fixed layout, text columns without size are flexible and split the width left over by fixed and marker columns; marker columns retain their marker and cell-inset roles. Interactive content is not clipped to force a narrow width: allow actual capacity for action columns.",
@@ -10192,7 +10193,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10397,7 +10398,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10645,7 +10646,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10848,7 +10849,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11125,7 +11126,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11614,7 +11615,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12080,7 +12081,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12357,7 +12358,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12895,7 +12896,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13132,7 +13133,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13322,7 +13323,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13610,7 +13611,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14015,7 +14016,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14221,7 +14222,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14518,7 +14519,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14823,7 +14824,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15129,7 +15130,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15309,7 +15310,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15532,7 +15533,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15888,7 +15889,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16041,7 +16042,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16204,7 +16205,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16541,7 +16542,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16721,7 +16722,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16901,7 +16902,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17608,7 +17609,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17925,7 +17926,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18104,7 +18105,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18659,7 +18660,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19015,7 +19016,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19247,7 +19248,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19539,7 +19540,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19562,7 +19563,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 100
+            "line": 103
           }
         },
         {
@@ -19570,7 +19571,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 13
+            "line": 15
           }
         },
         {
@@ -19578,7 +19579,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 83
+            "line": 86
           }
         },
         {
@@ -19586,7 +19587,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 76
+            "line": 79
           }
         },
         {
@@ -19594,7 +19595,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 75
+            "line": 78
           }
         },
         {
@@ -19602,7 +19603,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 23
+            "line": 25
           }
         },
         {
@@ -19610,7 +19611,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 22
+            "line": 24
           }
         },
         {
@@ -19618,7 +19619,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 40
+            "line": 42
           }
         },
         {
@@ -19626,7 +19627,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 26
+            "line": 28
           }
         },
         {
@@ -19634,7 +19635,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 19
+            "line": 21
           }
         },
         {
@@ -19642,7 +19643,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 18
+            "line": 20
           }
         },
         {
@@ -19650,7 +19651,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 71
+            "line": 74
           }
         },
         {
@@ -19658,7 +19659,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 70
+            "line": 73
           }
         },
         {
@@ -19666,7 +19667,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 113
+            "line": 135
           }
         },
         {
@@ -19674,7 +19675,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 85
+            "line": 88
           }
         },
         {
@@ -19682,7 +19683,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 66
+            "line": 69
           }
         },
         {
@@ -19690,7 +19691,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 65
+            "line": 68
           }
         },
         {
@@ -19698,7 +19699,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 12
+            "line": 14
           }
         },
         {
@@ -19706,7 +19707,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/pagination.tsx",
-            "line": 82
+            "line": 85
           }
         }
       ],
@@ -19729,8 +19730,8 @@
           "PaginationNext",
           "PaginationEllipsis"
         ],
-        "decisions": "PaginationPattern 提供页窗、条数选择和总数下降校正；页码与 pageSize 一次通知。未知总数必须显式提供 hasNextPage。链接导航或自定结构继续使用分页原语。",
-        "decisionsEn": "PaginationPattern provides page windows, page-size selection and correction after totals decrease; page and pageSize change in one notification. Unknown totals require explicit hasNextPage. Retain the primitive parts for link navigation and custom anatomy.",
+        "decisions": "PaginationPattern 一行呈现范围摘要、页窗与条数选择，只放能改变结果的控件；页码与 pageSize 一次通知，总数下降时校正。未知总数必须显式提供 hasNextPage。链接导航或自定结构继续使用分页原语。",
+        "decisionsEn": "PaginationPattern renders one row of range summary, page window and page-size selection, showing only controls that can change the result; page and pageSize change in one notification and totals that decrease correct the page. Unknown totals require explicit hasNextPage. Retain the primitive parts for link navigation and custom anatomy.",
         "design": {
           "methods": [
             "名实相符",
@@ -19751,7 +19752,7 @@
             ]
           },
           "responsive": [
-            "动作可换行，保留当前页与总数状态。"
+            "宽屏一行：摘要在左，页码与条数在右。窄屏页窗收为五格，页码排独占第二行。"
           ]
         },
         "designEn": {
@@ -19770,7 +19771,7 @@
             ]
           },
           "responsive": [
-            "Actions wrap while retaining current-page and total states."
+            "Wide screens use one row: summary first, pages and page size at the end. Narrow screens keep five page slots and give the page row its own line."
           ]
         },
         "keywords": [
@@ -19783,7 +19784,7 @@
         "api": [
           {
             "name": "PaginationPattern",
-            "description": "本地页动作的标准组合。",
+            "description": "本地页动作的标准组合：上一页／下一页为带名称的图标按钮，页窗格数恒定，当前页以选中面标出。",
             "descriptionEn": "Standard composition for local page actions.",
             "props": [
               {
@@ -19795,20 +19796,20 @@
               {
                 "name": "totalCount / hasNextPage",
                 "type": "number | null / boolean",
-                "description": "非负条数计算总页数，下降时校正当前页；0 条时内部 page=1 但不呈现当前页。未知 null 时必须显式给 hasNextPage，不推断末页。",
-                "descriptionEn": "A nonnegative total determines pages and corrects the current page when it decreases. Zero results retain internal page=1 but present no current page. null requires explicit hasNextPage and never invents a final page."
+                "description": "非负条数计算总页数，下降时校正当前页；只有一页时只留范围摘要，0 条时显示「共 0 条」。未知 null 时必须显式给 hasNextPage，不推断末页；第 1 页且无下一页时整条不渲染。",
+                "descriptionEn": "A nonnegative total determines pages and corrects the current page when it decreases. A single page leaves only the range summary; zero results read \"0 results\". null requires explicit hasNextPage and never invents a final page; page 1 without a next page renders nothing."
               },
               {
                 "name": "pageSizeOptions / disabled / busy",
                 "type": "readonly number[] / boolean / boolean",
-                "description": "省略 options 时隐藏条数控件；候选为不重复正整数。disabled 只阻止本地操作，不推断请求状态。busy 同样挡住翻页，但按钮保持可聚焦（原生 disabled 会让刚按下的按钮丢掉焦点），条数控件改为只读；DataTablePattern 的 busy 会传给它。",
-                "descriptionEn": "Omit options to hide the page-size control; candidates are distinct positive integers. disabled blocks local actions without inferring request state. busy also blocks paging but keeps buttons focusable (native disabled would drop focus from the button just pressed) and makes the page-size control read-only; DataTablePattern passes its busy to it."
+                "description": "省略 options 时隐藏条数控件；候选为不重复正整数。总数不超过最小候选时，换条数不改变结果，控件不出现。disabled 只阻止本地操作，不推断请求状态。busy 同样挡住翻页，但按钮保持可聚焦（原生 disabled 会让刚按下的按钮丢掉焦点），条数控件改为只读；DataTablePattern 的 busy 会传给它。",
+                "descriptionEn": "Omit options to hide the page-size control; candidates are distinct positive integers. When the total fits the smallest candidate the control is omitted, since changing it would not change the result. disabled blocks local actions without inferring request state. busy also blocks paging but keeps buttons focusable (native disabled would drop focus from the button just pressed) and makes the page-size control read-only; DataTablePattern passes its busy to it."
               },
               {
                 "name": "aria-label / render / ref / native nav props",
                 "type": "PaginationProps",
-                "description": "转发到 nav；可访问页名、总数摘要与条数标签来自 locale。",
-                "descriptionEn": "Forwarded to nav; accessible page names, total summaries and page-size labels come from locale."
+                "description": "转发到 nav；可访问页名、上一页／下一页图标按钮名称、范围摘要（paginationRange）与条数标签来自 locale。",
+                "descriptionEn": "Forwarded to nav; accessible page names, previous/next icon-button names, the range summary (paginationRange) and page-size labels come from locale."
               }
             ]
           },
@@ -19891,10 +19892,12 @@
           }
         ],
         "notes": [
-          "标准组合不请求数据或保存路由；受控 value 越界时呈现校正页，并以 total-change 通知一次，应用据此更新状态和请求。未知总数不证明有无下一页。"
+          "标准组合不请求数据或保存路由；受控 value 越界时呈现校正页，并以 total-change 通知一次，应用据此更新状态和请求。未知总数不证明有无下一页。",
+          "自 5.2.0：PaginationPattern 与 DataTablePattern 分页条改为一行布局与图标翻页按钮，属性不变；只有一页、0 条或游标首页无下一页时控件收起或整条不渲染，依赖这些按钮常驻的测试需按新行为更新。自定完整 UILocale 时补 paginationRange；paginationSummary 已弃用，下个主版本移除。"
         ],
         "notesEn": [
-          "The standard composition does not fetch or route. When controlled value exceeds the known total it presents the corrected page and emits total-change once; applications update state and requests. Unknown totals establish no next-page availability."
+          "The standard composition does not fetch or route. When controlled value exceeds the known total it presents the corrected page and emits total-change once; applications update state and requests. Unknown totals establish no next-page availability.",
+          "Since 5.2.0: the PaginationPattern and DataTablePattern pager uses one row and icon page buttons with unchanged props; a single page, zero results or a cursor first page without a next page collapse controls or render nothing, so tests that relied on always-present buttons need updating. Custom complete UILocale objects add paginationRange; paginationSummary is deprecated and goes in the next major."
         ],
         "usageResolution": [
           {
@@ -19902,11 +19905,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 113
+              "line": 135
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 113
+              "line": 135
             },
             "status": "PRESENT"
           },
@@ -19915,11 +19918,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 13
+              "line": 15
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 13
+              "line": 15
             },
             "status": "PRESENT"
           },
@@ -19928,11 +19931,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 19
+              "line": 21
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 19
+              "line": 21
             },
             "status": "PRESENT"
           },
@@ -19941,11 +19944,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 23
+              "line": 25
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 23
+              "line": 25
             },
             "status": "PRESENT"
           },
@@ -19954,11 +19957,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 40
+              "line": 42
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 40
+              "line": 42
             },
             "status": "PRESENT"
           },
@@ -19967,11 +19970,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 66
+              "line": 69
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 66
+              "line": 69
             },
             "status": "PRESENT"
           },
@@ -19980,11 +19983,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 71
+              "line": 74
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 71
+              "line": 74
             },
             "status": "PRESENT"
           },
@@ -19993,11 +19996,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 76
+              "line": 79
             },
             "rootEntry": {
               "path": "packages/ui/src/components/pagination.tsx",
-              "line": 76
+              "line": 79
             },
             "status": "PRESENT"
           }
@@ -20013,7 +20016,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20227,7 +20230,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20408,7 +20411,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20802,7 +20805,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21133,7 +21136,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21318,7 +21321,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21507,7 +21510,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21839,7 +21842,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22182,7 +22185,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22397,7 +22400,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22830,7 +22833,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23055,7 +23058,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23360,7 +23363,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23682,7 +23685,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24245,7 +24248,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24439,7 +24442,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24645,7 +24648,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25328,7 +25331,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25582,7 +25585,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26073,7 +26076,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26293,7 +26296,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26682,7 +26685,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26865,7 +26868,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27142,7 +27145,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27385,7 +27388,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27852,7 +27855,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28183,7 +28186,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28452,7 +28455,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28697,7 +28700,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28974,7 +28977,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -29203,7 +29206,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -29495,7 +29498,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -29882,7 +29885,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30172,7 +30175,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30462,7 +30465,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30714,7 +30717,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31067,7 +31070,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31507,7 +31510,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31745,7 +31748,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31998,7 +32001,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32295,7 +32298,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32533,7 +32536,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -33036,7 +33039,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.1.0",
+        "version": "5.2.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {

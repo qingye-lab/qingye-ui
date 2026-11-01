@@ -1,6 +1,6 @@
 # 语言切换 LocaleSwitch
 
-Package: @qingye_lab/ui@5.1.0
+Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/locale-switch
 Source: packages/ui/src/components/locale-switch.tsx
 Source SHA-256: af568223120f14393e7ed79577f99f09b60d38043d1f6e943c7c66263534dfb5

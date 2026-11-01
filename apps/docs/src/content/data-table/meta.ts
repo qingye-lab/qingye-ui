@@ -124,7 +124,7 @@ export default {
     { "keys": "ArrowUp / ArrowDown / Home / End", "description": "行激活或虚拟化时，在行间移动焦点（虚拟化时也可从滚动容器出发，目标行先滚动渲染）；不会接管内部输入框的编辑键位。", "descriptionEn": "With row activation or virtualization, move focus between rows (in virtual mode also from the viewport, scrolling the target row into render first) without intercepting editing keys in nested inputs." }
   ],
   "notes": [
-    "标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern。跨页选择的对象内容、权限与批量执行范围仍由应用核实。",
+    "标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern，自 5.2.0 起随其改为一行布局，只有一页时只留范围摘要。跨页选择的对象内容、权限与批量执行范围仍由应用核实。",
     "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。",
     "只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。",
     "固定布局中未写 size 的文字列是弹性列，平分定宽列与标记列之外的剩余空间；标记列仍按已有 marker 与单元格内缘角色取宽。列宽过小不会裁掉交互控件，请给操作列留下真实容量。",
@@ -133,7 +133,7 @@ export default {
     "焦点所在的离屏行额外保留一行，输入草稿不因滚动丢失；该行移出当前模型时，焦点仍属于它才回到滚动容器。"
   ],
   "notesEn": [
-    "Import DataTablePattern from components/data-table; its pager reuses PaginationPattern. Applications still verify cross-page object data, permissions and bulk-action scope.",
+    "Import DataTablePattern from components/data-table; its pager reuses PaginationPattern and since 5.2.0 follows its one-row layout, leaving only the range summary for a single page. Applications still verify cross-page object data, permissions and bulk-action scope.",
     "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.",
     "With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component.",
     "In fixed layout, text columns without size are flexible and split the width left over by fixed and marker columns; marker columns retain their marker and cell-inset roles. Interactive content is not clipped to force a narrow width: allow actual capacity for action columns.",

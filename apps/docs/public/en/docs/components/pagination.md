@@ -1,17 +1,18 @@
 # Pagination
 
-Package: @qingye_lab/ui@5.1.0
+Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
-Source SHA-256: 0e02ee1ce285a97b8e909e8baf4ba19d0c212ded3db2d2ea6e636a81b961ece2
+Source SHA-256: 7b07abeea9f8f8a94d87a23f9168ec613aaabdef810c06fb4df56db15caf98ac
 
 Page position, real actions and explicit unknown totals.
 
 ## Decision
-PaginationPattern provides page windows, page-size selection and correction after totals decrease; page and pageSize change in one notification. Unknown totals require explicit hasNextPage. Retain the primitive parts for link navigation and custom anatomy.
+PaginationPattern renders one row of range summary, page window and page-size selection, showing only controls that can change the result; page and pageSize change in one notification and totals that decrease correct the page. Unknown totals require explicit hasNextPage. Retain the primitive parts for link navigation and custom anatomy.
 
 ## Notes
 - The standard composition does not fetch or route. When controlled value exceeds the known total it presents the corrected page and emits total-change once; applications update state and requests. Unknown totals establish no next-page availability.
+- Since 5.2.0: the PaginationPattern and DataTablePattern pager uses one row and icon page buttons with unchanged props; a single page, zero results or a cursor first page without a next page collapse controls or render nothing, so tests that relied on always-present buttons need updating. Custom complete UILocale objects add paginationRange; paginationSummary is deprecated and goes in the next major.
 
 ## Use and ownership
 - Results are paged and positions/navigation availability are known.
@@ -28,7 +29,7 @@ PaginationPattern provides page windows, page-size selection and correction afte
 - PaginationEllipsis: An omitted-pages marker, not a final page.
 
 ## Responsive behavior
-- Actions wrap while retaining current-page and total states.
+- Wide screens use one row: summary first, pages and page size at the end. Narrow screens keep five page slots and give the page row its own line.
 
 ## Customization
 - Use the current props and composition first, then adjust the project's central theme; fix shared gaps in the public library.
@@ -123,9 +124,9 @@ Written descriptions; the list above is the type-resolved fact.
 ### PaginationPattern
 Standard composition for local page actions.
 - value / defaultValue / onValueChange: PaginationValue / (value, { reason }) => void. Atomically updates { page, pageSize }; page starts at 1. Reasons are page, page-size and total-change. A page-size change also returns to page 1.
-- totalCount / hasNextPage: number | null / boolean. A nonnegative total determines pages and corrects the current page when it decreases. Zero results retain internal page=1 but present no current page. null requires explicit hasNextPage and never invents a final page.
-- pageSizeOptions / disabled / busy: readonly number[] / boolean / boolean. Omit options to hide the page-size control; candidates are distinct positive integers. disabled blocks local actions without inferring request state. busy also blocks paging but keeps buttons focusable (native disabled would drop focus from the button just pressed) and makes the page-size control read-only; DataTablePattern passes its busy to it.
-- aria-label / render / ref / native nav props: PaginationProps. Forwarded to nav; accessible page names, total summaries and page-size labels come from locale.
+- totalCount / hasNextPage: number | null / boolean. A nonnegative total determines pages and corrects the current page when it decreases. A single page leaves only the range summary; zero results read "0 results". null requires explicit hasNextPage and never invents a final page; page 1 without a next page renders nothing.
+- pageSizeOptions / disabled / busy: readonly number[] / boolean / boolean. Omit options to hide the page-size control; candidates are distinct positive integers. When the total fits the smallest candidate the control is omitted, since changing it would not change the result. disabled blocks local actions without inferring request state. busy also blocks paging but keeps buttons focusable (native disabled would drop focus from the button just pressed) and makes the page-size control read-only; DataTablePattern passes its busy to it.
+- aria-label / render / ref / native nav props: PaginationProps. Forwarded to nav; accessible page names, previous/next icon-button names, the range summary (paginationRange) and page-size labels come from locale.
 
 ### Pagination
 A named nav without generated pages.
@@ -161,7 +162,7 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "页码与每页条数", titleEn: "Pages and page size" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <PaginationPattern totalCount={120} defaultValue={{ page: 2, pageSize: 10 }} pageSizeOptions={[10, 20, 50]} />;
+  return <PaginationPattern totalCount={95} defaultValue={{ page: 2, pageSize: 20 }} pageSizeOptions={[20, 50, 100]} />;
 }
 ```
 
@@ -181,12 +182,14 @@ export default function Demo() {
 ### 总数未知
 Source: apps/docs/src/content/pagination/demos/03-unknown.tsx
 ```tsx
-import { PaginationPattern } from "@qingye_lab/ui/components/pagination";
+import { PaginationPattern, type PaginationValue } from "@qingye_lab/ui/components/pagination";
+import * as React from "react";
 import type { DemoMeta } from "@/lib/types";
 
 export const meta = { title: "总数未知", titleEn: "Unknown total" } satisfies DemoMeta;
 
 export default function Demo() {
-  return <PaginationPattern totalCount={null} hasNextPage />;
+  const [value, setValue] = React.useState<PaginationValue>({ page: 1, pageSize: 20 });
+  return <PaginationPattern totalCount={null} hasNextPage={value.page < 4} value={value} onValueChange={setValue} />;
 }
 ```

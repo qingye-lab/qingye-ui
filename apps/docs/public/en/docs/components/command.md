@@ -1,6 +1,6 @@
 # Command
 
-Package: @qingye_lab/ui@5.1.0
+Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/command
 Source: packages/ui/src/components/command.tsx
 Source SHA-256: d1f5f5fb0d95dea7c5314b09fd04d8299d0b7e700d4acdabc7936087e899cb7d

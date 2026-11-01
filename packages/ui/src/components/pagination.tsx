@@ -2,10 +2,12 @@
 
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
+import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 import * as React from "react";
 import { Button, type ButtonProps, buttonVariants } from "./button";
 import { Select, SelectItem, SelectPopup, SelectTrigger, SelectValue } from "./select";
-import { useUILocale } from "../locale";
+import { useMediaQuery } from "../hooks/use-media-query";
+import { useUIDirection, useUILocale } from "../locale";
 import { cn } from "../utils";
 
 const PageContext = React.createContext<number | undefined>(undefined);
@@ -50,9 +52,10 @@ export function PaginationLink({ page, render, className, children, ...props }: 
       props,
       {
         className: cn(
-          // 成排的同等入口（基础层 §19）：复用按钮画法；最小宽度等于外高，单个数字时是正方形。
+          // 成排的同等入口（基础层 §19）：复用按钮画法；最小宽度等于外高，横向留白收为 1 分，
+          // 两位数以内的页码都是正方形，页窗各格同宽（按钮默认的标签留白会让一位数也宽出 5px，格位参差）。
           buttonVariants({ variant: "quiet" }),
-          "min-w-(--qy-fill-height-narrow) numeric sm:min-w-(--qy-fill-height)",
+          "min-w-(--qy-fill-height-narrow) px-(--qy-space-1) numeric sm:min-w-(--qy-fill-height)",
           current
             ? "bg-surface-selected font-medium text-foreground not-aria-disabled:hover:bg-surface-selected not-aria-disabled:active:bg-surface-selected"
             : "font-normal text-muted-foreground not-aria-disabled:hover:text-foreground",
@@ -104,14 +107,35 @@ export function normalizePaginationValue(value: PaginationValue, totalCount: num
   return { page: Math.min(value.page, lastPage), pageSize: value.pageSize };
 }
 
-function pageWindow(page: number, total: number): (number | "gap")[] {
-  const pages = [...new Set([1, page - 1, page, page + 1, total])].filter(value => value >= 1 && value <= total).sort((a, b) => a - b);
-  return pages.flatMap((value, index) => index > 0 && value - pages[index - 1]! > 1 ? ["gap", value] : [value]);
+/**
+ * 页窗：首页、末页各一格，当前页两侧各 siblings 格，断开处各一格省略号，**格数恒定**（2 × siblings + 5）。
+ * 格数恒定是**派生**的：翻页时页码排总宽不变，上一页、下一页不在指针下挪位（NG9：状态不改变尺寸）。
+ * 宽屏 siblings = 1（7 格）；窄屏 siblings = 0（5 格）：窄屏外高下 7 格加两枚箭头约 388px，超出 375 宽视口的内容宽，5 格约 300px（**派生**）。
+ */
+function pageWindow(page: number, total: number, siblings: number): (number | "gap")[] {
+  const slots = 2 * siblings + 5;
+  const range = (from: number, to: number) => Array.from({ length: to - from + 1 }, (_, index) => from + index);
+  if (total <= slots) return range(1, total);
+  if (page <= siblings + 3) return [...range(1, slots - 2), "gap", total];
+  if (page >= total - siblings - 2) return [1, "gap", ...range(total - slots + 3, total)];
+  return [1, "gap", ...range(page - siblings, page + siblings), "gap", total];
 }
 
-/** A complete local-action pager. Link-based navigation remains available through the primitive parts above. */
-export function PaginationPattern({ value, defaultValue = { page: 1, pageSize: 10 }, onValueChange, totalCount, hasNextPage, pageSizeOptions, disabled = false, busy = false, ...props }: PaginationPatternProps) {
+/**
+ * A complete local-action pager. Link-based navigation remains available through the primitive parts above.
+ *
+ * 一行：行首是安静的摘要（辅助字号、淡墨、等宽数字），行尾是翻页与条数——摘要回答「我看到的是哪些」，控件回答「去哪」，
+ * 各部件之间一个组间距（**派生**，§3）。窄屏有页码时，摘要与条数选择在第一行，页码排独占第二行。
+ * 只出现有事可做的部件（**约束**，名实相符：不可操作的入口不是入口）：
+ * - 页码排：已知总数时多于一页才出现；未知总数时不在第 1 页或还有下一页才出现。
+ * - 条数选择：换一个候选能改变分页时才出现——已知总数时总数大于最小候选；未知总数时可翻页，或当前条数大于最小候选。
+ * - 未知总数、第 1 页、没有下一页、条数也无可换时，整个组件不渲染，使用方不必自己判断。
+ * 上一页、下一页是图标按钮，可访问名称来自 locale；页码在旁，箭头的方向不需要文字再说一遍。从右向左时箭头镜像。
+ */
+export function PaginationPattern({ value, defaultValue = { page: 1, pageSize: 10 }, onValueChange, totalCount, hasNextPage, pageSizeOptions, disabled = false, busy = false, className, ...props }: PaginationPatternProps) {
   const { messages } = useUILocale();
+  const dir = useUIDirection();
+  const narrow = useMediaQuery("max-sm");
   const [internalValue, setInternalValue] = React.useState(defaultValue);
   const source = value ?? internalValue;
   const current = normalizePaginationValue(source, totalCount);
@@ -135,20 +159,32 @@ export function PaginationPattern({ value, defaultValue = { page: 1, pageSize: 1
     onValueChange?.(normalized, { reason });
   };
   const options = pageSizeOptions && !pageSizeOptions.includes(current.pageSize) ? [...pageSizeOptions, current.pageSize].sort((a, b) => a - b) : pageSizeOptions;
-  return <Pagination data-slot="pagination-pattern" {...props} {...(totalPages === 0 ? {} : { page: current.page })} totalPages={totalPages}>
-    <PaginationList>
-      <PaginationItem><PaginationPrevious disabled={disabled || current.page === 1 || totalPages === 0} aria-disabled={busy || undefined} onClick={() => change({ ...current, page: current.page - 1 }, "page")} /></PaginationItem>
-      {totalPages !== null && pageWindow(current.page, totalPages).map((entry, index) => <PaginationItem key={entry === "gap" ? `gap-${index}` : entry}>{entry === "gap" ? <PaginationEllipsis /> : <PaginationLink page={entry} aria-label={messages.paginationPage(entry)} render={<Button variant="quiet" disabled={disabled} />} aria-disabled={busy || undefined} onClick={() => change({ ...current, page: entry }, "page")}>{entry}</PaginationLink>}</PaginationItem>)}
-      <PaginationItem><PaginationNext disabled={disabled || (totalPages === null ? !hasNextPage : totalPages === 0 || current.page >= totalPages)} aria-disabled={busy || undefined} onClick={() => change({ ...current, page: current.page + 1 }, "page")} /></PaginationItem>
-    </PaginationList>
-    <div data-slot="pagination-details" className="flex min-w-0 flex-wrap items-center gap-(--qy-action-gap)">
-      <span data-slot="pagination-summary" className="text-support text-muted-foreground">{messages.paginationSummary(current.page, totalPages, totalCount)}</span>
-      {options && options.length > 0 && <Select<number> value={current.pageSize} disabled={disabled} readOnly={busy} items={options.map(option => ({ value: option, label: messages.paginationPageSizeOption(option) }))} onValueChange={pageSize => { if (pageSize !== null) change({ page: 1, pageSize }, "page-size"); }}>
-        {/* 可见文字只写「10 条/页」：单位随值写出，读者一眼知道这是什么，不再挂一个与值并列的字段名；
-         *  可访问名称仍是「每页条数」，读屏先读名称再读当前值。 */}
-        <SelectTrigger aria-label={messages.paginationPageSize}><SelectValue /></SelectTrigger>
-        <SelectPopup>{options.map(option => <SelectItem key={option} value={option}>{messages.paginationPageSizeOption(option)}</SelectItem>)}</SelectPopup>
-      </Select>}
-    </div>
+  const paging = totalPages === null ? current.page > 1 || hasNextPage === true : totalPages > 1;
+  const smallest = options && options.length > 0 ? Math.min(...options) : undefined;
+  const sizing = smallest !== undefined && (totalCount === null ? paging || current.pageSize > smallest : totalCount > smallest);
+  const summary = totalCount === null
+    ? paging ? messages.paginationPage(current.page) : null
+    : messages.paginationRange(totalCount === 0 ? 0 : (current.page - 1) * current.pageSize + 1, Math.min(current.page * current.pageSize, totalCount), totalCount);
+  if (summary === null && !paging && !sizing) return null;
+  const Back = dir === "rtl" ? IconChevronRight : IconChevronLeft;
+  const Forward = dir === "rtl" ? IconChevronLeft : IconChevronRight;
+  return <Pagination data-slot="pagination-pattern" {...props} className={cn("flex-row flex-wrap items-center gap-x-(--qy-field-group-gap) gap-y-(--qy-field-gap)", className)} {...(totalPages === 0 ? {} : { page: current.page })} totalPages={totalPages}>
+    {summary !== null && <span data-slot="pagination-summary" className="numeric text-support text-muted-foreground">{summary}</span>}
+    {/* 行尾是 quiet 图标按钮时抵消它的横向留白，箭头压在行尾（§19：没有形的入口以字形对齐）；行尾是条数选择时它有边，以外缘对齐，不抵消。
+     *  窄屏有页码时，页码排独占第二行、铺满并两端对齐，两侧都抵消留白；摘要与条数选择留在第一行。 */}
+    {paging && <PaginationList className={cn("ms-auto", !sizing && "-me-[calc((var(--qy-fill-height-narrow)-var(--qy-fill-icon-narrow))/2)] sm:-me-[calc((var(--qy-fill-height)-var(--qy-fill-icon))/2)]", totalPages !== null && "max-sm:order-last max-sm:-mx-[calc((var(--qy-fill-height-narrow)-var(--qy-fill-icon-narrow))/2)] max-sm:basis-[calc(100%+var(--qy-fill-height-narrow)-var(--qy-fill-icon-narrow))] max-sm:justify-between")}>
+      <PaginationItem><PaginationPrevious shape="icon" aria-label={messages.previousPage} disabled={disabled || current.page === 1} aria-disabled={busy || undefined} onClick={() => change({ ...current, page: current.page - 1 }, "page")}><Back aria-hidden="true" /></PaginationPrevious></PaginationItem>
+      {totalPages !== null && pageWindow(current.page, totalPages, narrow ? 0 : 1).map((entry, index) => <PaginationItem key={entry === "gap" ? `gap-${index}` : entry}>{entry === "gap"
+        // 省略号占一个页码格宽，格位与页码同一节拍。
+        ? <PaginationEllipsis className="inline-flex min-w-(--qy-fill-height-narrow) justify-center sm:min-w-(--qy-fill-height)" />
+        : <PaginationLink page={entry} aria-label={messages.paginationPage(entry)} render={<Button variant="quiet" disabled={disabled} />} aria-disabled={busy || undefined} onClick={() => change({ ...current, page: entry }, "page")}>{entry}</PaginationLink>}</PaginationItem>)}
+      <PaginationItem><PaginationNext shape="icon" aria-label={messages.nextPage} disabled={disabled || (totalPages === null ? !hasNextPage : current.page >= totalPages)} aria-disabled={busy || undefined} onClick={() => change({ ...current, page: current.page + 1 }, "page")}><Forward aria-hidden="true" /></PaginationNext></PaginationItem>
+    </PaginationList>}
+    {sizing && <Select<number> value={current.pageSize} disabled={disabled} readOnly={busy} items={options!.map(option => ({ value: option, label: messages.paginationPageSizeOption(option) }))} onValueChange={pageSize => { if (pageSize !== null) change({ page: 1, pageSize }, "page-size"); }}>
+      {/* 可见文字只写「10 条/页」：单位随值写出，读者一眼知道这是什么，不再挂一个与值并列的字段名；
+       *  可访问名称仍是「每页条数」，读屏先读名称再读当前值。 */}
+      <SelectTrigger aria-label={messages.paginationPageSize} className={cn(!paging ? "ms-auto" : totalPages !== null && "max-sm:ms-auto")}><SelectValue /></SelectTrigger>
+      <SelectPopup>{options!.map(option => <SelectItem key={option} value={option}>{messages.paginationPageSizeOption(option)}</SelectItem>)}</SelectPopup>
+    </Select>}
   </Pagination>;
 }

@@ -34,9 +34,32 @@ describe("PaginationPattern", () => {
     expect(changed).toHaveBeenLastCalledWith({ page: 1, pageSize: 10 }, { reason: "total-change" });
     expect(screen.getByRole("navigation")).toHaveAttribute("data-total-pages", "0");
     expect(screen.getByRole("navigation")).not.toHaveAttribute("data-page");
-    expect(screen.queryByRole("button", { name: /第 .* 页/ })).toBeNull();
-    expect(screen.getByRole("button", { name: "上一页" })).toBeDisabled();
-    expect(screen.getByRole("button", { name: "下一页" })).toBeDisabled();
+    expect(screen.queryByRole("button")).toBeNull();
+    expect(screen.getByRole("navigation")).toHaveTextContent("共 0 条");
+  });
+
+  it("keeps the page window at a constant slot count and summarizes the visible range", () => {
+    const { rerender } = render(<PaginationPattern value={{ page: 1, pageSize: 20 }} totalCount={500} />);
+    const pages = () => screen.getAllByRole("listitem").length;
+    expect(pages()).toBe(9);
+    rerender(<PaginationPattern value={{ page: 13, pageSize: 20 }} totalCount={500} />);
+    expect(pages()).toBe(9);
+    rerender(<PaginationPattern value={{ page: 2, pageSize: 20 }} totalCount={95} />);
+    expect(screen.getByRole("navigation")).toHaveTextContent("第 21–40 条，共 95 条");
+  });
+
+  it("offers only the controls that can change something", () => {
+    const { rerender, container } = render(<PaginationPattern totalCount={2} defaultValue={{ page: 1, pageSize: 20 }} pageSizeOptions={[20, 50, 100]} />);
+    expect(screen.getByRole("navigation")).toHaveTextContent("共 2 条");
+    expect(screen.queryByRole("button")).toBeNull();
+    expect(screen.queryByRole("combobox")).toBeNull();
+    rerender(<PaginationPattern totalCount={30} defaultValue={{ page: 1, pageSize: 20 }} pageSizeOptions={[20, 50, 100]} />);
+    expect(screen.getByRole("combobox", { name: "每页条数" })).toBeInTheDocument();
+    rerender(<PaginationPattern totalCount={null} hasNextPage={false} value={{ page: 1, pageSize: 20 }} pageSizeOptions={[20, 50, 100]} />);
+    expect(container).toBeEmptyDOMElement();
+    rerender(<PaginationPattern totalCount={null} hasNextPage value={{ page: 1, pageSize: 20 }} pageSizeOptions={[20, 50, 100]} />);
+    expect(screen.getByRole("navigation")).toHaveTextContent("第 1 页");
+    expect(screen.getByRole("navigation")).not.toHaveTextContent("未知");
   });
 
   it("keeps unknown totals explicit and obeys server next-page facts", async () => {
