@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
-Source SHA-256: 38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57
+Source SHA-256: 71aede6b755dc1272bb8554342b47ba0416d64dbb0f009f47128f33ea552a0a0
 
 在当地日历中导航年月，选择单日、多个日期或日期范围。
 
@@ -11,6 +11,7 @@ Source SHA-256: 38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57
 日历的 Date 按当地年月日解释。范围是否允许同日、哪些日期不可选由调用方声明，库不添加业务时长规则。
 
 ## Notes
+- granularity 不是 day 时，没有传 selected 的 Calendar 自己记住最近一次选择；传了 selected（哪怕是 undefined）就完全由调用方决定。受控值若不在周期起点上，仍整周或整格显示为选中。
 - 本组件不生成原生表单值；用 DatePicker 或在调用方序列化选中日期。
 - 一个月、caption label 与 nav after 是默认布局选择，可通过公共 props 改动。
 - 表面、颜色、圆角与尺寸角色沿用当前主题预设；选中与焦点信号来自真实状态。
@@ -39,11 +40,13 @@ Source SHA-256: 38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57
 - CalendarProps: type; owner calendar; PASS
 - formatLocalDate: function; owner calendar; PASS; props: Date
 - parseLocalDate: function; owner calendar; PASS; props: string
+- weekRulesFor: function; owner calendar; PASS; props: string
 
 ## Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Calendar
+- `granularity?`: `"day" | "week" | "month" | "quarter" | "year"`. 选择的粒度，默认 `"day"`（按天，行为不变）。`"week"` 在按天的网格里整行选一周；`"month"` / `"quarter"` / `"year"` 换成对应的格子网格。 非 `"day"` 时只支持 `mode="single"` 与 `mode="range"`；值仍是 `Date`：单选为该周期的起点，区间的 `from` 是首个周期的起点、`to` 是末个周期的最后一天。
 - `ref?`: `React.Ref<HTMLDivElement> | undefined`.
 - `render?`: `useRender.ComponentProps<"div">["render"]`.
 - plus 68 inherited (react-day-picker 68); not expanded, see the installed declarations
@@ -61,6 +64,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### Calendar
 复用安装版 DayPicker 的日期、年月、键盘与选择语义。
 - mode / selected / onSelect / required: DayPickerProps discriminated union. single、multiple、range 各按公开原语类型组合；选中值归调用方，required 限制原语取消选择。
+- granularity: "day" | "week" | "month" | "quarter" | "year"; default "day". 选择的粒度。week 仍是按天的网格，整行选一周；month / quarter / year 换成对应的格子网格（年格一页 12 年）。值仍是 Date：单选为该周期的起点，范围的 from 是首个周期的起点、to 是末个周期的最后一天。非 day 时只支持 single 与 range；周的起始日与第 1 周的规则取自区域（weekStartsOn / firstWeekContainsDate 优先），无区域信息时周一起始、第 1 周至少 4 天（ISO 8601）。
 - month / defaultMonth / onMonthChange: Date / Date / (month: Date) => void. 受控或非受控年月导航；未指定时采用 DayPicker 当前月份默认值。
 - disabled / hidden / startMonth / endMonth: DayPicker public props. 明确不可选日期、隐藏日期与导航范围。disabled 不替调用方纠正已有选中值。
 - min / max / excludeDisabled: range mode: number / number / boolean. 范围长度与跨禁用日期的规则由调用方显式声明。默认允许同日完整范围。
@@ -75,6 +79,7 @@ Written descriptions; the list above is the type-resolved fact.
 安装版 @daypicker/react 命名空间。
 
 ## Keyboard
+- Arrow keys / Home / End / PageUp / PageDown（月、季、年格）: 方向键按格移动；Home / End 到一行的头尾；PageUp / PageDown 翻一页（月、季为一年，年格为 12 年）。
 - Arrow keys / Home / End: 由日期原语在真实日历网格中移动焦点。
 - PageUp / PageDown: 按日期原语规则导航年月。
 - Enter / Space: 选择聚焦日期，遵守 disabled 与当前选择模式。
@@ -113,5 +118,39 @@ export const meta = { title: "年月下拉", titleEn: "Year and month dropdowns"
 export default function Demo() {
   const [value, setValue] = useState<Date | undefined>(new Date(1994, 4, 18));
   return <div className="grid justify-items-start gap-(--qy-field-group-gap)"><Calendar mode="single" selected={value} onSelect={setValue} defaultMonth={new Date(1994, 4, 1)} captionLayout="dropdown" startMonth={new Date(1920, 0)} endMonth={new Date(2026, 11)} /><output className="text-support text-muted-foreground">{value ? formatLocalDate(value) : "—"}</output></div>;
+}
+```
+
+### 周、月、季、年
+Source: apps/docs/src/content/calendar/demos/04-granularity.tsx
+```tsx
+import { useId, useState } from "react";
+import { Calendar, formatLocalDate, type CalendarDateRange, type CalendarProps } from "@qingye_lab/ui/components/calendar";
+import { Field, FieldTitle } from "@qingye_lab/ui/components/field";
+import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
+
+export const meta = { title: "周、月、季、年", titleEn: "Week, month, quarter, year" };
+
+type Granularity = NonNullable<CalendarProps["granularity"]>;
+
+export default function Demo() {
+  const id = useId();
+  const [granularity, setGranularity] = useState<Granularity>("week");
+  const [value, setValue] = useState<CalendarDateRange | undefined>();
+  const change = (next: Granularity) => { setGranularity(next); setValue(undefined); };
+  return (
+    <div className="grid justify-items-start gap-(--qy-field-group-gap)">
+      <Field><FieldTitle id={id}>粒度</FieldTitle>
+        <SegmentedControl value={granularity} onValueChange={change} aria-labelledby={id}>
+          <SegmentedControlItem value="week">周</SegmentedControlItem>
+          <SegmentedControlItem value="month">月</SegmentedControlItem>
+          <SegmentedControlItem value="quarter">季</SegmentedControlItem>
+          <SegmentedControlItem value="year">年</SegmentedControlItem>
+        </SegmentedControl>
+      </Field>
+      <Calendar key={granularity} granularity={granularity} mode="range" selected={value} onSelect={setValue} defaultMonth={new Date(2026, 9, 1)} />
+      <output className="text-support text-muted-foreground">{value?.from ? formatLocalDate(value.from) : "—"} / {value?.to ? formatLocalDate(value.to) : "—"}</output>
+    </div>
+  );
 }
 ```

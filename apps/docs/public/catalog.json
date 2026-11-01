@@ -758,7 +758,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1447,7 +1447,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1823,7 +1823,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2779,7 +2779,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -3643,7 +3643,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -4535,7 +4535,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5499,7 +5499,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -6060,7 +6060,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -6958,6 +6958,7 @@
       ],
       "docs": "/docs/components/calendar",
       "notes": [
+        "granularity 不是 day 时，没有传 selected 的 Calendar 自己记住最近一次选择；传了 selected（哪怕是 undefined）就完全由调用方决定。受控值若不在周期起点上，仍整周或整格显示为选中。",
         "本组件不生成原生表单值；用 DatePicker 或在调用方序列化选中日期。",
         "一个月、caption label 与 nav after 是默认布局选择，可通过公共 props 改动。",
         "表面、颜色、圆角与尺寸角色沿用当前主题预设；选中与焦点信号来自真实状态。",
@@ -6980,6 +6981,13 @@
               "type": "DayPickerProps discriminated union",
               "description": "single、multiple、range 各按公开原语类型组合；选中值归调用方，required 限制原语取消选择。",
               "descriptionEn": "Use the public single, multiple, or range union. The caller owns selection; required limits deselection."
+            },
+            {
+              "name": "granularity",
+              "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
+              "default": "\"day\"",
+              "description": "选择的粒度。week 仍是按天的网格，整行选一周；month / quarter / year 换成对应的格子网格（年格一页 12 年）。值仍是 Date：单选为该周期的起点，范围的 from 是首个周期的起点、to 是末个周期的最后一天。非 day 时只支持 single 与 range；周的起始日与第 1 周的规则取自区域（weekStartsOn / firstWeekContainsDate 优先），无区域信息时周一起始、第 1 周至少 4 天（ISO 8601）。",
+              "descriptionEn": "What one selection covers. week stays on the day grid and selects a whole row; month / quarter / year replace it with a grid of cells (the year grid pages twelve years). Values stay Date: a single value is the period start; a range's from is the first period's start and to is the last day of the last period. Non-day granularities support single and range only. The week start and the week-one rule come from the locale (weekStartsOn / firstWeekContainsDate win), falling back to Monday-start with at least four days in week one (ISO 8601)."
             },
             {
               "name": "month / defaultMonth / onMonthChange",
@@ -7041,16 +7049,23 @@
             "status": "resolved",
             "ownProps": [
               {
+                "name": "granularity",
+                "optional": true,
+                "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
+                "doc": "选择的粒度，默认 `\"day\"`（按天，行为不变）。`\"week\"` 在按天的网格里整行选一周；`\"month\"` / `\"quarter\"` / `\"year\"` 换成对应的格子网格。\n非 `\"day\"` 时只支持 `mode=\"single\"` 与 `mode=\"range\"`；值仍是 `Date`：单选为该周期的起点，区间的 `from` 是首个周期的起点、`to` 是末个周期的最后一天。",
+                "declaredAt": "packages/ui/src/components/calendar.tsx:19"
+              },
+              {
                 "name": "ref",
                 "optional": true,
                 "type": "React.Ref<HTMLDivElement> | undefined",
-                "declaredAt": "packages/ui/src/components/calendar.tsx:12"
+                "declaredAt": "packages/ui/src/components/calendar.tsx:20"
               },
               {
                 "name": "render",
                 "optional": true,
                 "type": "useRender.ComponentProps<\"div\">[\"render\"]",
-                "declaredAt": "packages/ui/src/components/calendar.tsx:12"
+                "declaredAt": "packages/ui/src/components/calendar.tsx:20"
               }
             ],
             "inheritedCount": 68,
@@ -7098,6 +7113,11 @@
       },
       "keyboard": [
         {
+          "keys": "Arrow keys / Home / End / PageUp / PageDown（月、季、年格）",
+          "description": "方向键按格移动；Home / End 到一行的头尾；PageUp / PageDown 翻一页（月、季为一年，年格为 12 年）。",
+          "descriptionEn": "On the month, quarter and year grids, arrow keys move cell by cell, Home / End go to the row ends, and PageUp / PageDown turn a page (a year for months and quarters, twelve years for the year grid)."
+        },
+        {
           "keys": "Arrow keys / Home / End",
           "description": "由日期原语在真实日历网格中移动焦点。",
           "descriptionEn": "The date primitive moves focus through the calendar grid."
@@ -7120,7 +7140,7 @@
           "owner": "calendar",
           "module": "@qingye_lab/ui/components/calendar",
           "propsType": "CalendarProps",
-          "signature": "Calendar({ className, classNames, components, style, locale, formatters, labels, render, ref, ...props }: CalendarProps)",
+          "signature": "Calendar({ className, classNames, components, style, locale, formatters, labels, granularity = \"day\", render, ref, ...props }: CalendarProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -7160,7 +7180,7 @@
           "kind": "type",
           "owner": "calendar",
           "module": "@qingye_lab/ui/components/calendar",
-          "signature": "CalendarPrimitive.DayPickerProps & { render?: useRender.ComponentProps<\"div\">[\"render\"]; ref?: React.Ref<HTMLDivElement> | undefined }",
+          "signature": "CalendarPrimitive.DayPickerProps & {\n  /**\n   * 选择的粒度，默认 `\"day\"`（按天，行为不变）。`\"week\"` 在按天的网格里整行选一周；`\"month\"` / `\"quarter\"` / `\"year\"` 换成对应的格子网格。\n   * 非 `\"day\"` 时只支持 `mode=\"single\"` 与 `mode=\"range\"`；值仍是 `Date`：单选为该周期的起点，区间的 `from` 是首个周期的起点、`to` 是末个周期的最后一天。\n   */\n  granularity?: DateGranularity;\n  render?: useRender.ComponentProps<\"div\">[\"render\"]; ref?: React.Ref<HTMLDivElement> | undefined;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -7186,12 +7206,23 @@
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "weekRulesFor",
+          "kind": "function",
+          "owner": "calendar",
+          "module": "@qingye_lab/ui/components/calendar",
+          "propsType": "string",
+          "signature": "weekRulesFor(code: string, own: { weekStartsOn?: number | undefined; firstWeekContainsDate?: number | undefined; locale?: CalendarProps[\"locale\"] | undefined } = {}): WeekRules",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
         }
       ],
       "types": [
         {
           "name": "CalendarProps",
-          "definition": "export type CalendarProps = CalendarPrimitive.DayPickerProps & { render?: useRender.ComponentProps<\"div\">[\"render\"]; ref?: React.Ref<HTMLDivElement> | undefined };"
+          "definition": "export type CalendarProps = CalendarPrimitive.DayPickerProps & {\n  /**\n   * 选择的粒度，默认 `\"day\"`（按天，行为不变）。`\"week\"` 在按天的网格里整行选一周；`\"month\"` / `\"quarter\"` / `\"year\"` 换成对应的格子网格。\n   * 非 `\"day\"` 时只支持 `mode=\"single\"` 与 `mode=\"range\"`；值仍是 `Date`：单选为该周期的起点，区间的 `from` 是首个周期的起点、`to` 是末个周期的最后一天。\n   */\n  granularity?: DateGranularity;\n  render?: useRender.ComponentProps<\"div\">[\"render\"]; ref?: React.Ref<HTMLDivElement> | undefined;\n};"
         },
         {
           "name": "CalendarDateRange",
@@ -7245,7 +7276,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -7254,7 +7285,7 @@
           },
           {
             "name": "RootComposition",
-            "declaredAt": "packages/ui/src/components/calendar.tsx:14",
+            "declaredAt": "packages/ui/src/components/calendar.tsx:23",
             "defaultValue": "{}",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -7307,6 +7338,20 @@
           "providers": [],
           "code": "import { useState } from \"react\";\nimport { Calendar, formatLocalDate } from \"@qingye_lab/ui/components/calendar\";\nexport const meta = { title: \"年月下拉\", titleEn: \"Year and month dropdowns\" };\nexport default function Demo() {\n  const [value, setValue] = useState<Date | undefined>(new Date(1994, 4, 18));\n  return <div className=\"grid justify-items-start gap-(--qy-field-group-gap)\"><Calendar mode=\"single\" selected={value} onSelect={setValue} defaultMonth={new Date(1994, 4, 1)} captionLayout=\"dropdown\" startMonth={new Date(1920, 0)} endMonth={new Date(2026, 11)} /><output className=\"text-support text-muted-foreground\">{value ? formatLocalDate(value) : \"—\"}</output></div>;\n}\n",
           "sha256": "0e336d997011defc871ac5e31ce84b7c37f902c5aeef41f8f7ee70909b1ba1c3"
+        },
+        {
+          "id": "granularity",
+          "title": "周、月、季、年",
+          "source": "apps/docs/src/content/calendar/demos/04-granularity.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/calendar",
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/segmented-control",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useId, useState } from \"react\";\nimport { Calendar, formatLocalDate, type CalendarDateRange, type CalendarProps } from \"@qingye_lab/ui/components/calendar\";\nimport { Field, FieldTitle } from \"@qingye_lab/ui/components/field\";\nimport { SegmentedControl, SegmentedControlItem } from \"@qingye_lab/ui/components/segmented-control\";\n\nexport const meta = { title: \"周、月、季、年\", titleEn: \"Week, month, quarter, year\" };\n\ntype Granularity = NonNullable<CalendarProps[\"granularity\"]>;\n\nexport default function Demo() {\n  const id = useId();\n  const [granularity, setGranularity] = useState<Granularity>(\"week\");\n  const [value, setValue] = useState<CalendarDateRange | undefined>();\n  const change = (next: Granularity) => { setGranularity(next); setValue(undefined); };\n  return (\n    <div className=\"grid justify-items-start gap-(--qy-field-group-gap)\">\n      <Field><FieldTitle id={id}>粒度</FieldTitle>\n        <SegmentedControl value={granularity} onValueChange={change} aria-labelledby={id}>\n          <SegmentedControlItem value=\"week\">周</SegmentedControlItem>\n          <SegmentedControlItem value=\"month\">月</SegmentedControlItem>\n          <SegmentedControlItem value=\"quarter\">季</SegmentedControlItem>\n          <SegmentedControlItem value=\"year\">年</SegmentedControlItem>\n        </SegmentedControl>\n      </Field>\n      <Calendar key={granularity} granularity={granularity} mode=\"range\" selected={value} onSelect={setValue} defaultMonth={new Date(2026, 9, 1)} />\n      <output className=\"text-support text-muted-foreground\">{value?.from ? formatLocalDate(value.from) : \"—\"} / {value?.to ? formatLocalDate(value.to) : \"—\"}</output>\n    </div>\n  );\n}\n",
+          "sha256": "4bf1af46504fc4d6ec05f688edc4249b32bb12e8d0021e74ab726b6cbe00498b"
         }
       ],
       "design": {
@@ -7341,7 +7386,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/calendar.tsx",
-        "sha256": "38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57",
+        "sha256": "71aede6b755dc1272bb8554342b47ba0416d64dbb0f009f47128f33ea552a0a0",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "日历的 Date 按当地年月日解释。范围是否允许同日、哪些日期不可选由调用方声明，库不添加业务时长规则。",
@@ -7352,6 +7397,7 @@
           "category": "Date and time",
           "decisions": "Dates use local year, month, and day. The caller declares same-day rules and unavailable dates; the library adds no business duration rules.",
           "notes": [
+            "With a granularity other than day, a Calendar without a selected prop remembers the latest selection itself; passing selected (even undefined) leaves it entirely to the caller. A controlled value that is not on a period start still shows the whole week or cell as selected.",
             "Calendar does not create native form fields. Use DatePicker or serialize selection in the application.",
             "One month, label captions, and navigation after the caption are default layout choices exposed through public props.",
             "Surfaces, colors, corners, and size roles use the current theme presets; selection and focus reflect real state.",
@@ -7368,6 +7414,13 @@
                   "type": "DayPickerProps discriminated union",
                   "description": "Use the public single, multiple, or range union. The caller owns selection; required limits deselection.",
                   "descriptionEn": "Use the public single, multiple, or range union. The caller owns selection; required limits deselection."
+                },
+                {
+                  "name": "granularity",
+                  "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
+                  "default": "\"day\"",
+                  "description": "What one selection covers. week stays on the day grid and selects a whole row; month / quarter / year replace it with a grid of cells (the year grid pages twelve years). Values stay Date: a single value is the period start; a range's from is the first period's start and to is the last day of the last period. Non-day granularities support single and range only. The week start and the week-one rule come from the locale (weekStartsOn / firstWeekContainsDate win), falling back to Monday-start with at least four days in week one (ISO 8601).",
+                  "descriptionEn": "What one selection covers. week stays on the day grid and selects a whole row; month / quarter / year replace it with a grid of cells (the year grid pages twelve years). Values stay Date: a single value is the period start; a range's from is the first period's start and to is the last day of the last period. Non-day granularities support single and range only. The week start and the week-one rule come from the locale (weekStartsOn / firstWeekContainsDate win), falling back to Monday-start with at least four days in week one (ISO 8601)."
                 },
                 {
                   "name": "month / defaultMonth / onMonthChange",
@@ -7419,6 +7472,11 @@
             }
           ],
           "keyboard": [
+            {
+              "keys": "Arrow keys / Home / End / PageUp / PageDown（月、季、年格）",
+              "description": "On the month, quarter and year grids, arrow keys move cell by cell, Home / End go to the row ends, and PageUp / PageDown turn a page (a year for months and quarters, twelve years for the year grid).",
+              "descriptionEn": "On the month, quarter and year grids, arrow keys move cell by cell, Home / End go to the row ends, and PageUp / PageDown turn a page (a year for months and quarters, twelve years for the year grid)."
+            },
             {
               "keys": "Arrow keys / Home / End",
               "description": "The date primitive moves focus through the calendar grid.",
@@ -8192,7 +8250,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -9429,7 +9487,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -10949,7 +11007,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -11400,7 +11458,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -12482,7 +12540,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13752,7 +13810,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -14916,7 +14974,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -16015,7 +16073,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -16568,7 +16626,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -17118,7 +17176,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -18790,7 +18848,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -20333,7 +20391,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -20721,6 +20779,7 @@
       ],
       "docs": "/docs/components/date-picker",
       "notes": [
+        "granularity 不是 day 时，输入框不再是浏览器的原生日期控件，所以显示格式由区域的 periodWeek / periodMonth / periodQuarter / periodYear 决定，也接受 2026-W44、2026-11、2026-Q4、2026 这类 ISO 写法。",
         "日期输入的本地显示格式由浏览器决定，提交值固定 YYYY-MM-DD。",
         "日历选择完成后关闭；调用方拒绝变更时原日期仍保留。",
         "没有自动修正越界值或推断提交成功；用 FieldError 表达调用方已知错误。",
@@ -20749,6 +20808,13 @@
               "type": "Date",
               "description": "一处声明最早 / 最晚日期，同时写入原生输入的 min / max 与日历的禁用范围和可翻到的月份。与 inputProps.min/max、calendarProps.disabled/startMonth/endMonth 并存，同时给出时取交集；交集为空时开发环境警告（2026-10-12）。",
               "descriptionEn": "Declare the earliest and latest date once; it sets the native min / max and the calendar's disabled range and reachable months. It coexists with inputProps.min/max and calendarProps.disabled/startMonth/endMonth, and the intersection applies when both are given. An empty intersection warns in development (2026-10-12)."
+            },
+            {
+              "name": "granularity",
+              "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
+              "default": "\"day\"",
+              "description": "选择的粒度。非 day 时输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」「2026 年 11 月」「2026 年第 4 季度」），键入在失焦或回车时采纳，空文本清除，解析不了的文字留在输入里并标为未填完整（复用 dateIncomplete / dateOutOfRange 提示）。value 是周期的起点（传入的非边界日期显示为所在周期）；min / max 与周期有交集即可选；name 提交的是 ISO 日期。",
+              "descriptionEn": "What one selection covers. Beyond day the input becomes text that is shown and parsed by the locale format (for example Week 44 2026, 11/2026, Q4 2026); typing is adopted on blur or Enter, blank text clears, and text that cannot be read stays in the input marked incomplete (reusing the dateIncomplete / dateOutOfRange messages). The value is the period start (a date off the boundary shows as its period); min / max need only overlap a period; name submits an ISO date."
             },
             {
               "name": "name / form",
@@ -20797,71 +20863,78 @@
               {
                 "name": "calendarProps",
                 "optional": true,
-                "type": "Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:32"
+                "type": "Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\" | \"granularity\">",
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:41"
               },
               {
                 "name": "defaultValue",
                 "optional": true,
                 "type": "Date | undefined",
                 "doc": "非受控的初值，原生表单 reset 会回到它。",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:22"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:25"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:30"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:39"
               },
               {
                 "name": "form",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:29"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:38"
+              },
+              {
+                "name": "granularity",
+                "optional": true,
+                "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
+                "doc": "选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`，规范为该周期的起点（周：区域的周起始日；月、季、年：当月 / 季 / 年的第一天）；\n输入框改为文本，按区域的格式显示与解析（如「2026 年第 44 周」「2026 年 11 月」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n提交的 `name` 仍是周期起点的 ISO 日期。",
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:37"
               },
               {
                 "name": "inputProps",
                 "optional": true,
                 "type": "Omit<InputProps, \"value\" | \"defaultValue\" | \"type\" | \"size\" | \"name\" | \"form\" | \"disabled\" | \"readOnly\" | \"onValueChange\">",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:31"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:40"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "Date | undefined",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:28"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:31"
               },
               {
                 "name": "min",
                 "optional": true,
                 "type": "Date | undefined",
                 "doc": "可选的最早 / 最晚日期，一处声明同时约束原生输入（min / max 属性）与日历（禁用范围与可翻到的月份）。\n与 `inputProps.min/max`、`calendarProps.disabled/startMonth/endMonth` 并存，同时给出时取交集。",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:28"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:31"
               },
               {
                 "name": "name",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:29"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:38"
               },
               {
                 "name": "onValueChange",
                 "optional": true,
                 "type": "((value: Date | undefined, event: React.SyntheticEvent) => void) | undefined",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:23"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:26"
               },
               {
                 "name": "readOnly",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:30"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:39"
               },
               {
                 "name": "value",
                 "optional": true,
                 "type": "Date | undefined",
                 "doc": "受控日期；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:20"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:23"
               }
             ],
             "inheritedCount": 278,
@@ -20916,7 +20989,7 @@
           "kind": "type",
           "owner": "date-picker",
           "module": "@qingye_lab/ui/components/date-picker",
-          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** 受控日期；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: Date | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: Date | undefined;\n  onValueChange?: ((value: Date | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 可选的最早 / 最晚日期，一处声明同时约束原生输入（min / max 属性）与日历（禁用范围与可翻到的月份）。\n   * 与 `inputProps.min/max`、`calendarProps.disabled/startMonth/endMonth` 并存，同时给出时取交集。\n   */\n  min?: Date | undefined; max?: Date | undefined;\n  name?: string | undefined; form?: string | undefined;\n  disabled?: boolean; readOnly?: boolean;\n  inputProps?: Omit<InputProps, \"value\" | \"defaultValue\" | \"type\" | \"size\" | \"name\" | \"form\" | \"disabled\" | \"readOnly\" | \"onValueChange\">;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">;\n}",
+          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** 受控日期；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: Date | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: Date | undefined;\n  onValueChange?: ((value: Date | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 可选的最早 / 最晚日期，一处声明同时约束原生输入（min / max 属性）与日历（禁用范围与可翻到的月份）。\n   * 与 `inputProps.min/max`、`calendarProps.disabled/startMonth/endMonth` 并存，同时给出时取交集。\n   */\n  min?: Date | undefined; max?: Date | undefined;\n  /**\n   * 选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`，规范为该周期的起点（周：区域的周起始日；月、季、年：当月 / 季 / 年的第一天）；\n   * 输入框改为文本，按区域的格式显示与解析（如「2026 年第 44 周」「2026 年 11 月」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n   * 提交的 `name` 仍是周期起点的 ISO 日期。\n   */\n  granularity?: DateGranularity;\n  name?: string | undefined; form?: string | undefined;\n  disabled?: boolean; readOnly?: boolean;\n  inputProps?: Omit<InputProps, \"value\" | \"defaultValue\" | \"type\" | \"size\" | \"name\" | \"form\" | \"disabled\" | \"readOnly\" | \"onValueChange\">;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\" | \"granularity\">;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -20925,7 +20998,7 @@
       "types": [
         {
           "name": "DatePickerProps",
-          "definition": "export type DatePickerProps = Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** 受控日期；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: Date | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: Date | undefined;\n  onValueChange?: ((value: Date | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 可选的最早 / 最晚日期，一处声明同时约束原生输入（min / max 属性）与日历（禁用范围与可翻到的月份）。\n   * 与 `inputProps.min/max`、`calendarProps.disabled/startMonth/endMonth` 并存，同时给出时取交集。\n   */\n  min?: Date | undefined; max?: Date | undefined;\n  name?: string | undefined; form?: string | undefined;\n  disabled?: boolean; readOnly?: boolean;\n  inputProps?: Omit<InputProps, \"value\" | \"defaultValue\" | \"type\" | \"size\" | \"name\" | \"form\" | \"disabled\" | \"readOnly\" | \"onValueChange\">;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">;\n};"
+          "definition": "export type DatePickerProps = Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** 受控日期；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: Date | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: Date | undefined;\n  onValueChange?: ((value: Date | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 可选的最早 / 最晚日期，一处声明同时约束原生输入（min / max 属性）与日历（禁用范围与可翻到的月份）。\n   * 与 `inputProps.min/max`、`calendarProps.disabled/startMonth/endMonth` 并存，同时给出时取交集。\n   */\n  min?: Date | undefined; max?: Date | undefined;\n  /**\n   * 选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`，规范为该周期的起点（周：区域的周起始日；月、季、年：当月 / 季 / 年的第一天）；\n   * 输入框改为文本，按区域的格式显示与解析（如「2026 年第 44 周」「2026 年 11 月」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n   * 提交的 `name` 仍是周期起点的 ISO 日期。\n   */\n  granularity?: DateGranularity;\n  name?: string | undefined; form?: string | undefined;\n  disabled?: boolean; readOnly?: boolean;\n  inputProps?: Omit<InputProps, \"value\" | \"defaultValue\" | \"type\" | \"size\" | \"name\" | \"form\" | \"disabled\" | \"readOnly\" | \"onValueChange\">;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\" | \"granularity\">;\n};"
         }
       ],
       "usageImports": [
@@ -20957,7 +21030,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -21019,6 +21092,18 @@
           "providers": [],
           "code": "import { DatePicker } from \"@qingye_lab/ui/components/date-picker\";\nimport { Field, FieldDescription, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\n\nexport const meta = { title: \"范围与非受控\", titleEn: \"Bounds and uncontrolled\" };\n\nexport default function Demo() {\n  return (\n    <form>\n      <FieldGroup className=\"grid w-full items-start gap-(--qy-field-group-gap) sm:grid-cols-2\">\n        <Field name=\"checkin\">\n          <FieldLabel>入住</FieldLabel>\n          <DatePicker defaultValue={new Date(2026, 9, 12)} min={new Date(2026, 9, 5)} max={new Date(2026, 10, 30)} calendarProps={{ defaultMonth: new Date(2026, 9, 1) }} />\n          <FieldDescription>10 月 5 日至 11 月 30 日</FieldDescription>\n        </Field>\n        <Field name=\"birthday\">\n          <FieldLabel>生日</FieldLabel>\n          <DatePicker calendarProps={{ captionLayout: \"dropdown\", startMonth: new Date(1920, 0), endMonth: new Date(2026, 11), defaultMonth: new Date(1990, 0) }} />\n        </Field>\n      </FieldGroup>\n    </form>\n  );\n}\n",
           "sha256": "5c88776577b69a85be5c6a3dc796e5cde36b06c71ae654858d0d4de879eecd1b"
+        },
+        {
+          "id": "granularity",
+          "title": "周、月、季、年",
+          "source": "apps/docs/src/content/date-picker/demos/04-granularity.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/date-picker",
+            "@qingye_lab/ui/components/field"
+          ],
+          "providers": [],
+          "code": "import { DatePicker } from \"@qingye_lab/ui/components/date-picker\";\nimport { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\n\nexport const meta = { title: \"周、月、季、年\", titleEn: \"Week, month, quarter, year\" };\n\nexport default function Demo() {\n  return (\n    <form>\n      <FieldGroup className=\"grid w-full items-start gap-(--qy-field-group-gap) sm:grid-cols-2\">\n        <Field name=\"week\"><FieldLabel>周</FieldLabel><DatePicker granularity=\"week\" defaultValue={new Date(2026, 9, 28)} /></Field>\n        <Field name=\"month\"><FieldLabel>月</FieldLabel><DatePicker granularity=\"month\" defaultValue={new Date(2026, 10, 1)} /></Field>\n        <Field name=\"quarter\"><FieldLabel>季度</FieldLabel><DatePicker granularity=\"quarter\" defaultValue={new Date(2026, 9, 1)} /></Field>\n        <Field name=\"year\"><FieldLabel>年</FieldLabel><DatePicker granularity=\"year\" defaultValue={new Date(2026, 0, 1)} min={new Date(2020, 0, 1)} max={new Date(2030, 11, 31)} /></Field>\n      </FieldGroup>\n    </form>\n  );\n}\n",
+          "sha256": "54fd9326dc0775e3456b642055be32f52acfe1279a7babb618ab0a9c7a4e84c9"
         }
       ],
       "design": {
@@ -21053,7 +21138,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-picker.tsx",
-        "sha256": "4c967eae5350995183082d1c9c69a5a2ce250b2f669ff4551a48ba30d2daa7d5",
+        "sha256": "2039377cc2572bc6c6e47fab6baf740d1b74cd2720bbbe2ff146f5b731864850",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是调用方持有的当地 Date。输入和日历选择只请求变更；清除请求 undefined，Escape 关闭日历并保留已接受值。",
@@ -21064,6 +21149,7 @@
           "category": "Date and time",
           "decisions": "The caller owns the local Date. Input and calendar selection request changes; clearing requests undefined. Escape closes the calendar and preserves accepted values.",
           "notes": [
+            "With a granularity other than day the input is no longer the browser's native date control, so the display format comes from the locale's periodWeek / periodMonth / periodQuarter / periodYear, and ISO spellings such as 2026-W44, 2026-11, 2026-Q4 and 2026 are also accepted.",
             "The browser chooses the displayed date format; submission uses YYYY-MM-DD.",
             "Calendar selection closes the popup. Rejected controlled changes preserve the prior date.",
             "The component does not repair bounds or infer submission success. Express known errors with FieldError.",
@@ -21086,6 +21172,13 @@
                   "type": "Date",
                   "description": "Declare the earliest and latest date once; it sets the native min / max and the calendar's disabled range and reachable months. It coexists with inputProps.min/max and calendarProps.disabled/startMonth/endMonth, and the intersection applies when both are given. An empty intersection warns in development (2026-10-12).",
                   "descriptionEn": "Declare the earliest and latest date once; it sets the native min / max and the calendar's disabled range and reachable months. It coexists with inputProps.min/max and calendarProps.disabled/startMonth/endMonth, and the intersection applies when both are given. An empty intersection warns in development (2026-10-12)."
+                },
+                {
+                  "name": "granularity",
+                  "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
+                  "default": "\"day\"",
+                  "description": "What one selection covers. Beyond day the input becomes text that is shown and parsed by the locale format (for example Week 44 2026, 11/2026, Q4 2026); typing is adopted on blur or Enter, blank text clears, and text that cannot be read stays in the input marked incomplete (reusing the dateIncomplete / dateOutOfRange messages). The value is the period start (a date off the boundary shows as its period); min / max need only overlap a period; name submits an ISO date.",
+                  "descriptionEn": "What one selection covers. Beyond day the input becomes text that is shown and parsed by the locale format (for example Week 44 2026, 11/2026, Q4 2026); typing is adopted on blur or Enter, blank text clears, and text that cannot be read stays in the input marked incomplete (reusing the dateIncomplete / dateOutOfRange messages). The value is the period start (a date off the boundary shows as its period); min / max need only overlap a period; name submits an ISO date."
                 },
                 {
                   "name": "name / form",
@@ -21185,6 +21278,7 @@
       ],
       "docs": "/docs/components/date-range-picker",
       "notes": [
+        "granularity 不是 day 时，未能解析的文字留在输入里，整个字段在焦点离开后按未填完整处理；两端的顺序按周期比较，同一周期的起止是合法的。",
         "两个日期输入是原生输入，显示格式随浏览器；键入与日历共用一份草稿，互相同步。",
         "每次打开从当前输入内容建立草稿；没有默认业务长度或自动纠正。",
         "只读时不开弹层：值在、可聚焦、可读出，不能改。"
@@ -21219,6 +21313,13 @@
               "type": "Date",
               "description": "一处声明最早 / 最晚日期，同时写入两个原生输入与日历的禁用范围、可翻到的月份，并使超出范围的预设不可点。与 inputProps.min/max、calendarProps.disabled 并存，取交集；交集为空时开发环境警告。",
               "descriptionEn": "Declare the earliest and latest date once; it sets both native inputs, the calendar's disabled range and reachable months, and disables presets that fall outside. It coexists with inputProps.min/max and calendarProps.disabled; the intersection applies, and an empty one warns in development."
+            },
+            {
+              "name": "granularity",
+              "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
+              "default": "\"day\"",
+              "description": "选择的粒度。非 day 时 from 是首个周期的起点、to 是末个周期的最后一天（传入的值与 presets 都会被规范到这两个日子）；两个输入改为文本，按区域格式显示与解析，失焦或回车时采纳；min / max 与周期有交集即可选。此时 calendarProps.min / max（天数限制）与 excludeDisabled 不再适用，name.from / name.to 提交 ISO 日期。",
+              "descriptionEn": "What one selection covers. Beyond day, from is the first period's start and to is the last day of the last period (given values and presets are normalized to them); the two inputs become text shown and parsed by the locale format and adopted on blur or Enter; min / max need only overlap a period. calendarProps.min / max (day-count limits) and excludeDisabled no longer apply, and name.from / name.to submit ISO dates."
             },
             {
               "name": "presets",
@@ -21273,94 +21374,101 @@
               {
                 "name": "calendarProps",
                 "optional": true,
-                "type": "Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\"> & { min?: number; max?: number; excludeDisabled?: boolean }",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:50"
+                "type": "Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\" | \"granularity\"> & { min?: number; max?: number; excludeDisabled?: boolean }",
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:58"
               },
               {
                 "name": "defaultValue",
                 "optional": true,
                 "type": "DateRangeValue | undefined",
                 "doc": "非受控的初值，原生表单 reset 会回到它。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:32"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:34"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:45"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:53"
               },
               {
                 "name": "endInputProps",
                 "optional": true,
                 "type": "NativeInputProps",
                 "doc": "终点日期输入。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:49"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:57"
               },
               {
                 "name": "form",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:45"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:53"
+              },
+              {
+                "name": "granularity",
+                "optional": true,
+                "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
+                "doc": "选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）；\n两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n此时 `calendarProps.min` / `max`（天数限制）与 `excludeDisabled` 不再适用；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。",
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:50"
               },
               {
                 "name": "inputProps",
                 "optional": true,
                 "type": "NativeInputProps",
                 "doc": "起点日期输入（也是 Field 标签指向的输入）。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:47"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:55"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "Date | undefined",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:42"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:44"
               },
               {
                 "name": "min",
                 "optional": true,
                 "type": "Date | undefined",
                 "doc": "可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:42"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:44"
               },
               {
                 "name": "name",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:45"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:53"
               },
               {
                 "name": "onInvalid",
                 "optional": true,
                 "type": "((draft: DateRangeDraft, reason: DateRangeInvalidReason) => void) | undefined",
                 "doc": "键入或选择得出的草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`）：键入是逐段的，\n填第二个日期之前只有一端、改终点时暂时早于起点，都是正常的中间状态。草稿变成可提交时，调用方会收到 `onValueChange`。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:40"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:42"
               },
               {
                 "name": "onValueChange",
                 "optional": true,
                 "type": "((value: DateRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined",
                 "doc": "只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:34"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:36"
               },
               {
                 "name": "presets",
                 "optional": true,
                 "type": "readonly DateRangePreset[] | undefined",
                 "doc": "常用范围，显示在弹层里日历旁；点击只写入草稿，仍须「应用」。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:44"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:52"
               },
               {
                 "name": "readOnly",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:45"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:53"
               },
               {
                 "name": "value",
                 "optional": true,
                 "type": "DateRangeValue | undefined",
                 "doc": "受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:30"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:32"
               }
             ],
             "inheritedCount": 277,
@@ -21435,7 +21543,7 @@
           "kind": "type",
           "owner": "date-range-picker",
           "module": "@qingye_lab/ui/components/date-range-picker",
-          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** 受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: DateRangeValue | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: DateRangeValue | undefined;\n  /** 只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。 */\n  onValueChange?: ((value: DateRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 键入或选择得出的草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n   * 只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`）：键入是逐段的，\n   * 填第二个日期之前只有一端、改终点时暂时早于起点，都是正常的中间状态。草稿变成可提交时，调用方会收到 `onValueChange`。\n   */\n  onInvalid?: ((draft: DateRangeDraft, reason: DateRangeInvalidReason) => void) | undefined;\n  /** 可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。 */\n  min?: Date | undefined; max?: Date | undefined;\n  /** 常用范围，显示在弹层里日历旁；点击只写入草稿，仍须「应用」。 */\n  presets?: readonly DateRangePreset[] | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  /** 起点日期输入（也是 Field 标签指向的输入）。 */\n  inputProps?: NativeInputProps;\n  /** 终点日期输入。 */\n  endInputProps?: NativeInputProps;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\"> & { min?: number; max?: number; excludeDisabled?: boolean };\n}",
+          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** 受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: DateRangeValue | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: DateRangeValue | undefined;\n  /** 只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。 */\n  onValueChange?: ((value: DateRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 键入或选择得出的草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n   * 只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`）：键入是逐段的，\n   * 填第二个日期之前只有一端、改终点时暂时早于起点，都是正常的中间状态。草稿变成可提交时，调用方会收到 `onValueChange`。\n   */\n  onInvalid?: ((draft: DateRangeDraft, reason: DateRangeInvalidReason) => void) | undefined;\n  /** 可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。 */\n  min?: Date | undefined; max?: Date | undefined;\n  /**\n   * 选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）；\n   * 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n   * 此时 `calendarProps.min` / `max`（天数限制）与 `excludeDisabled` 不再适用；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。\n   */\n  granularity?: DateGranularity;\n  /** 常用范围，显示在弹层里日历旁；点击只写入草稿，仍须「应用」。 */\n  presets?: readonly DateRangePreset[] | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  /** 起点日期输入（也是 Field 标签指向的输入）。 */\n  inputProps?: NativeInputProps;\n  /** 终点日期输入。 */\n  endInputProps?: NativeInputProps;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\" | \"granularity\"> & { min?: number; max?: number; excludeDisabled?: boolean };\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -21480,7 +21588,7 @@
         },
         {
           "name": "DateRangePickerProps",
-          "definition": "export type DateRangePickerProps = Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** 受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: DateRangeValue | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: DateRangeValue | undefined;\n  /** 只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。 */\n  onValueChange?: ((value: DateRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 键入或选择得出的草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n   * 只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`）：键入是逐段的，\n   * 填第二个日期之前只有一端、改终点时暂时早于起点，都是正常的中间状态。草稿变成可提交时，调用方会收到 `onValueChange`。\n   */\n  onInvalid?: ((draft: DateRangeDraft, reason: DateRangeInvalidReason) => void) | undefined;\n  /** 可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。 */\n  min?: Date | undefined; max?: Date | undefined;\n  /** 常用范围，显示在弹层里日历旁；点击只写入草稿，仍须「应用」。 */\n  presets?: readonly DateRangePreset[] | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  /** 起点日期输入（也是 Field 标签指向的输入）。 */\n  inputProps?: NativeInputProps;\n  /** 终点日期输入。 */\n  endInputProps?: NativeInputProps;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\"> & { min?: number; max?: number; excludeDisabled?: boolean };\n};"
+          "definition": "export type DateRangePickerProps = Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** 受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: DateRangeValue | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: DateRangeValue | undefined;\n  /** 只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。 */\n  onValueChange?: ((value: DateRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 键入或选择得出的草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n   * 只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`）：键入是逐段的，\n   * 填第二个日期之前只有一端、改终点时暂时早于起点，都是正常的中间状态。草稿变成可提交时，调用方会收到 `onValueChange`。\n   */\n  onInvalid?: ((draft: DateRangeDraft, reason: DateRangeInvalidReason) => void) | undefined;\n  /** 可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。 */\n  min?: Date | undefined; max?: Date | undefined;\n  /**\n   * 选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）；\n   * 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n   * 此时 `calendarProps.min` / `max`（天数限制）与 `excludeDisabled` 不再适用；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。\n   */\n  granularity?: DateGranularity;\n  /** 常用范围，显示在弹层里日历旁；点击只写入草稿，仍须「应用」。 */\n  presets?: readonly DateRangePreset[] | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  /** 起点日期输入（也是 Field 标签指向的输入）。 */\n  inputProps?: NativeInputProps;\n  /** 终点日期输入。 */\n  endInputProps?: NativeInputProps;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\" | \"granularity\"> & { min?: number; max?: number; excludeDisabled?: boolean };\n};"
         }
       ],
       "usageImports": [
@@ -21512,7 +21620,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -21574,6 +21682,19 @@
           "providers": [],
           "code": "import { useState } from \"react\";\nimport { DateRangePicker, type DateRangePreset, type DateRangeValue } from \"@qingye_lab/ui/components/date-range-picker\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\n\nexport const meta = { title: \"常用范围\", titleEn: \"Presets\" };\n\nconst lastDays = (count: number) => (): DateRangeValue => {\n  const to = new Date();\n  to.setHours(0, 0, 0, 0);\n  const from = new Date(to);\n  from.setDate(to.getDate() - (count - 1));\n  return { from, to };\n};\nconst thisMonth = (): DateRangeValue => {\n  const now = new Date();\n  return { from: new Date(now.getFullYear(), now.getMonth(), 1), to: new Date(now.getFullYear(), now.getMonth() + 1, 0) };\n};\nconst presets: DateRangePreset[] = [\n  { label: \"近 7 日\", value: lastDays(7) },\n  { label: \"近 30 日\", value: lastDays(30) },\n  { label: \"本月\", value: thisMonth },\n];\n\nexport default function Demo() {\n  const [value, setValue] = useState<DateRangeValue | undefined>();\n  return <form><Field name=\"range\"><FieldLabel>统计区间</FieldLabel><DateRangePicker value={value} onValueChange={setValue} presets={presets} /></Field></form>;\n}\n",
           "sha256": "bc5509b01c0a83e8a7183421ce5efeb25f7f90e00b43dd08f1670fceb2b62bbd"
+        },
+        {
+          "id": "granularity",
+          "title": "周、月、季、年",
+          "source": "apps/docs/src/content/date-range-picker/demos/04-granularity.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/date-range-picker",
+            "@qingye_lab/ui/components/field",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { DateRangePicker, type DateRangePreset, type DateRangeValue } from \"@qingye_lab/ui/components/date-range-picker\";\nimport { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\n\nexport const meta = { title: \"周、月、季、年\", titleEn: \"Week, month, quarter, year\" };\n\nconst thisQuarter = (): DateRangeValue => {\n  const now = new Date();\n  const first = Math.floor(now.getMonth() / 3) * 3;\n  return { from: new Date(now.getFullYear(), first, 1), to: new Date(now.getFullYear(), first + 3, 0) };\n};\nconst quarters: DateRangePreset[] = [{ label: \"本季度\", value: thisQuarter }];\n\nexport default function Demo() {\n  const [months, setMonths] = useState<DateRangeValue | undefined>({ from: new Date(2026, 1, 1), to: new Date(2026, 3, 30) });\n  return (\n    <form>\n      <FieldGroup className=\"grid w-full items-start gap-(--qy-field-group-gap) sm:grid-cols-2\">\n        <Field name=\"weeks\"><FieldLabel>周</FieldLabel><DateRangePicker granularity=\"week\" defaultValue={{ from: new Date(2026, 9, 26), to: new Date(2026, 10, 8) }} /></Field>\n        <Field name=\"months\"><FieldLabel>月</FieldLabel><DateRangePicker granularity=\"month\" value={months} onValueChange={setMonths} /></Field>\n        <Field name=\"quarters\"><FieldLabel>季度</FieldLabel><DateRangePicker granularity=\"quarter\" presets={quarters} /></Field>\n        <Field name=\"years\"><FieldLabel>年</FieldLabel><DateRangePicker granularity=\"year\" defaultValue={{ from: new Date(2024, 0, 1), to: new Date(2026, 11, 31) }} /></Field>\n      </FieldGroup>\n    </form>\n  );\n}\n",
+          "sha256": "44aab749d0f57685da923b0b421caf68325c3b2b55f1e7cf3460e4b52cfe04d3"
         }
       ],
       "design": {
@@ -21608,7 +21729,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-range-picker.tsx",
-        "sha256": "bc6f7c96ad39bc91ddc30b5d3833ed35365a190e5e38e9fe73107f22dda3a6f7",
+        "sha256": "50954292790b2429d2da553a7f9594db52b6583300fc3f5e362a74118f17aad3",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "只有完整且有序的 from/to 才是确认值。起止两个原生日期输入与弹层日历共用同一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid 并通过 onInvalid 交给应用说明，库不静默交换端点。日历里的选择与预设只写草稿，取消或 Escape 保留原确认值，应用才请求替换。",
@@ -21619,6 +21740,7 @@
           "category": "Date and time",
           "decisions": "Only a complete, ordered from/to is a confirmed value. The two native date inputs and the popup calendar share one draft: typing a complete ordered range requests the change at once; one endpoint alone, a reversed range, or one out of bounds is not submitted, and after focus leaves both inputs are marked aria-invalid and onInvalid hands the explanation to the application. Endpoints are never swapped silently. Calendar picks and presets only write the draft; Cancel or Escape keeps the confirmed value and Apply requests the replacement.",
           "notes": [
+            "With a granularity other than day, text that cannot be read stays in the input and the field counts as incomplete once focus leaves; order is compared by period, so the same period at both ends is valid.",
             "The two date inputs are native, so the display format follows the browser. Typing and the calendar share one draft and stay in step.",
             "Each opening starts from what the inputs currently hold. There is no default business duration or automatic repair.",
             "Read-only does not open the popup: the value is there, focusable and readable, but it cannot change."
@@ -21646,6 +21768,13 @@
                   "type": "Date",
                   "description": "Declare the earliest and latest date once; it sets both native inputs, the calendar's disabled range and reachable months, and disables presets that fall outside. It coexists with inputProps.min/max and calendarProps.disabled; the intersection applies, and an empty one warns in development.",
                   "descriptionEn": "Declare the earliest and latest date once; it sets both native inputs, the calendar's disabled range and reachable months, and disables presets that fall outside. It coexists with inputProps.min/max and calendarProps.disabled; the intersection applies, and an empty one warns in development."
+                },
+                {
+                  "name": "granularity",
+                  "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
+                  "default": "\"day\"",
+                  "description": "What one selection covers. Beyond day, from is the first period's start and to is the last day of the last period (given values and presets are normalized to them); the two inputs become text shown and parsed by the locale format and adopted on blur or Enter; min / max need only overlap a period. calendarProps.min / max (day-count limits) and excludeDisabled no longer apply, and name.from / name.to submit ISO dates.",
+                  "descriptionEn": "What one selection covers. Beyond day, from is the first period's start and to is the last day of the last period (given values and presets are normalized to them); the two inputs become text shown and parsed by the locale format and adopted on blur or Enter; min / max need only overlap a period. calendarProps.min / max (day-count limits) and excludeDisabled no longer apply, and name.from / name.to submit ISO dates."
                 },
                 {
                   "name": "presets",
@@ -21986,7 +22115,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -22297,86 +22426,86 @@
                 "name": "calendarProps",
                 "optional": true,
                 "type": "Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:47"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:48"
               },
               {
                 "name": "defaultValue",
                 "optional": true,
                 "type": "DateTimeRangeValue | undefined",
                 "doc": "非受控的初值，原生表单 reset 会回到它。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:32"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:33"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:42"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:43"
               },
               {
                 "name": "endInputProps",
                 "optional": true,
                 "type": "NativeInputProps",
                 "doc": "终点输入。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:46"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:47"
               },
               {
                 "name": "form",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:42"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:43"
               },
               {
                 "name": "inputProps",
                 "optional": true,
                 "type": "NativeInputProps",
                 "doc": "起点输入（也是 Field 标签指向的输入）。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:44"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:45"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:41"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:42"
               },
               {
                 "name": "min",
                 "optional": true,
                 "type": "string | undefined",
                 "doc": "可选的最早 / 最晚时刻（无时区文本），一处声明同时约束两个原生输入、日历的可选日与边界日的时间输入。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:41"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:42"
               },
               {
                 "name": "name",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:42"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:43"
               },
               {
                 "name": "onInvalid",
                 "optional": true,
                 "type": "((draft: DateTimeRangeDraft, reason: DateTimeRangeInvalidReason) => void) | undefined",
                 "doc": "草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`、挂原生校验信息），原因同 DateRangePicker。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:39"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:40"
               },
               {
                 "name": "onValueChange",
                 "optional": true,
                 "type": "((value: DateTimeRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined",
                 "doc": "只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。起止相同是有效的零长度范围。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:34"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:35"
               },
               {
                 "name": "readOnly",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:42"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:43"
               },
               {
                 "name": "value",
                 "optional": true,
                 "type": "DateTimeRangeValue | undefined",
                 "doc": "受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:30"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:31"
               }
             ],
             "inheritedCount": 277,
@@ -22514,7 +22643,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -22611,7 +22740,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-time-range-picker.tsx",
-        "sha256": "72ee3961e280d14bb29cfc38510d642b184c1b1539b2dc22c22570af8ab197b2",
+        "sha256": "8cb029363deef75facbb9396698e8df450e0b4987a10625bfd36729d52ccb54c",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "值是 { from, to }，两端各是 DateTimePicker 的值（无时区的本地文本 YYYY-MM-DDTHH:mm[:ss[.SSS]]），而不是 DateRangePicker 的 Date：时间不能放进只含日期的 Date，也不会因此猜一个时区。只有完整且有序的 from/to 才是确认值；起止相同是有效的零长度范围。两个原生 datetime-local 输入共用一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid，起点输入带原生校验信息让表单提交被拦下，并通过 onInvalid 交给应用说明。弹层里是日历区间加两个时间输入，同一天时结束时刻早于开始时刻会在弹层里提示并不能应用；取消或 Escape 保留原确认值。",
@@ -23852,7 +23981,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -24695,7 +24824,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -26179,7 +26308,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -27767,7 +27896,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -28844,7 +28973,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -29779,7 +29908,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -30663,7 +30792,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -31033,7 +31162,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -31937,7 +32066,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -34768,7 +34897,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -36715,7 +36844,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -38646,7 +38775,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -39202,7 +39331,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -40799,7 +40928,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41307,7 +41436,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41687,7 +41816,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -43015,7 +43144,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -43409,7 +43538,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44218,7 +44347,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44688,7 +44817,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -45912,7 +46041,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -46350,7 +46479,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -47512,7 +47641,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -49568,7 +49697,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -51869,7 +51998,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52491,7 +52620,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52824,7 +52953,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -53519,7 +53648,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -54075,7 +54204,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -54811,7 +54940,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -55219,7 +55348,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -55677,7 +55806,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -58026,7 +58155,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -58513,7 +58642,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -59591,7 +59720,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -60104,7 +60233,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -60655,7 +60784,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -61201,7 +61330,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -61822,7 +61951,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -64728,7 +64857,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -65239,7 +65368,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -65883,7 +66012,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -66490,7 +66619,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -68342,7 +68471,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:192",
+            "declaredAt": "packages/ui/src/locale.tsx:199",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [

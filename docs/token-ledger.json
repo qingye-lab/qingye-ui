@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-11-01T05:30:40.951Z",
-  "revision": "44659e90cf91616b40dfe4b47422e39c0341c62a",
+  "generatedAt": "2026-11-01T05:32:28.606Z",
+  "revision": "f4233bc7ee7f33fd34d4f1bc16702f7af30d04a3",
   "static": {
     "fingerprint": {
-      "sha256": "720bcf7cde877a42da4f5ff7542ee86c6a6141483dd1a9f3c094f2d925904b0a",
+      "sha256": "71725894221b02979a74bf4db3dde6d5d16e07e69d64e8561f886cdce2a9b047",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -336,8 +336,12 @@
           "sha256": "0e336d997011defc871ac5e31ce84b7c37f902c5aeef41f8f7ee70909b1ba1c3"
         },
         {
+          "path": "apps/docs/src/content/calendar/demos/04-granularity.tsx",
+          "sha256": "4bf1af46504fc4d6ec05f688edc4249b32bb12e8d0021e74ab726b6cbe00498b"
+        },
+        {
           "path": "apps/docs/src/content/calendar/meta.ts",
-          "sha256": "212e4fd340cdb438db0fd04e8febbc578cfbe5ca3c7c5f34d3cce47d91bb1bd2"
+          "sha256": "379d9c14f1e83180cfa54cffd990196daa46fe47ccfda4c9f65a4bfec95e7715"
         },
         {
           "path": "apps/docs/src/content/card/cover.tsx",
@@ -804,8 +808,12 @@
           "sha256": "5c88776577b69a85be5c6a3dc796e5cde36b06c71ae654858d0d4de879eecd1b"
         },
         {
+          "path": "apps/docs/src/content/date-picker/demos/04-granularity.tsx",
+          "sha256": "54fd9326dc0775e3456b642055be32f52acfe1279a7babb618ab0a9c7a4e84c9"
+        },
+        {
           "path": "apps/docs/src/content/date-picker/meta.ts",
-          "sha256": "440fe86b534fd3ec0126438590dff6f9bea34b98a0729083391a7fd8d1e0519a"
+          "sha256": "a0afb493d4c633e202102f6b02d4666c9544e448639c029fba8db35835dd7775"
         },
         {
           "path": "apps/docs/src/content/date-range-picker/cover.tsx",
@@ -824,8 +832,12 @@
           "sha256": "bc5509b01c0a83e8a7183421ce5efeb25f7f90e00b43dd08f1670fceb2b62bbd"
         },
         {
+          "path": "apps/docs/src/content/date-range-picker/demos/04-granularity.tsx",
+          "sha256": "44aab749d0f57685da923b0b421caf68325c3b2b55f1e7cf3460e4b52cfe04d3"
+        },
+        {
           "path": "apps/docs/src/content/date-range-picker/meta.ts",
-          "sha256": "f78f76815e1d69d623073863e3b6da5e45c0cc742ca3aa1e7e7af700cbce2647"
+          "sha256": "b9d299a785c925e10d87da28e826ce4059590ff7080c43069f6ba87dae7cfab3"
         },
         {
           "path": "apps/docs/src/content/date-time-picker/cover.tsx",
@@ -2809,7 +2821,7 @@
         },
         {
           "path": "packages/ui/src/components/calendar.tsx",
-          "sha256": "38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57"
+          "sha256": "71aede6b755dc1272bb8554342b47ba0416d64dbb0f009f47128f33ea552a0a0"
         },
         {
           "path": "packages/ui/src/components/card.tsx",
@@ -2885,11 +2897,11 @@
         },
         {
           "path": "packages/ui/src/components/date-picker.tsx",
-          "sha256": "4c967eae5350995183082d1c9c69a5a2ce250b2f669ff4551a48ba30d2daa7d5"
+          "sha256": "2039377cc2572bc6c6e47fab6baf740d1b74cd2720bbbe2ff146f5b731864850"
         },
         {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "sha256": "bc6f7c96ad39bc91ddc30b5d3833ed35365a190e5e38e9fe73107f22dda3a6f7"
+          "sha256": "50954292790b2429d2da553a7f9594db52b6583300fc3f5e362a74118f17aad3"
         },
         {
           "path": "packages/ui/src/components/date-time-picker.tsx",
@@ -2897,7 +2909,7 @@
         },
         {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "sha256": "72ee3961e280d14bb29cfc38510d642b184c1b1539b2dc22c22570af8ab197b2"
+          "sha256": "8cb029363deef75facbb9396698e8df450e0b4987a10625bfd36729d52ccb54c"
         },
         {
           "path": "packages/ui/src/components/description-list.tsx",
@@ -3220,8 +3232,16 @@
           "sha256": "508593b7d93dee8c7a786c8a4479c09c7c8aca256701a28689077daf794896f9"
         },
         {
+          "path": "packages/ui/src/date-granularity.ts",
+          "sha256": "5b7772f9ad1f88990f72579b546ee401043ec231108b89700ee3f6e703447c91"
+        },
+        {
           "path": "packages/ui/src/disclosure.tsx",
           "sha256": "3f2cd3d2b252df7d54051ec35f920263e9cf8213115cabeb591d04a7374b4035"
+        },
+        {
+          "path": "packages/ui/src/draft-surface.tsx",
+          "sha256": "0dd15064f1c1330d1b68702b8e46b4be2a27785849357f75def575e38be17b04"
         },
         {
           "path": "packages/ui/src/file-rules.ts",
@@ -3281,11 +3301,11 @@
         },
         {
           "path": "packages/ui/src/locale.tsx",
-          "sha256": "4b65da61678538ae7d95b292b4e4c892c4406581e8f89ce61f50b876f665ac4e"
+          "sha256": "9e0caa231aab331665c152424cab388c8b22dbbc7690ffcbb981137035ead92a"
         },
         {
           "path": "packages/ui/src/locales/en-US.ts",
-          "sha256": "f0d8e869d7c44127586fd09849e914e0854627cf9680e975336fd9146ecd3691"
+          "sha256": "9065a316997aa23b21551cc22985939f4b7d37b32f2a786cc6e10511dc231960"
         },
         {
           "path": "packages/ui/src/nav-line.ts",
@@ -3298,6 +3318,10 @@
         {
           "path": "packages/ui/src/overlay-item.ts",
           "sha256": "98d6602141ba2cbac35807844c1a57b1a1749d21e5fa50d8e95ed32a22e680bd"
+        },
+        {
+          "path": "packages/ui/src/period-grid.tsx",
+          "sha256": "388991350fa9548e1a7ea03618cd4417c1dcf5475fa4c39e18465431fdbd9416"
         },
         {
           "path": "packages/ui/src/picker-trigger.tsx",
@@ -119971,7 +119995,7 @@
         "className": "gap-(--qy-space-1)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 232
+          "line": 268
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120004,7 +120028,7 @@
         "className": "gap-(--qy-space-1)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 232
+          "line": 268
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120045,7 +120069,7 @@
         "className": "gap-(--qy-space-1)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 232
+          "line": 268
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120078,7 +120102,7 @@
         "className": "text-caption",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 243
+          "line": 238
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120111,7 +120135,7 @@
         "className": "text-caption",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 243
+          "line": 238
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120152,7 +120176,7 @@
         "className": "text-caption",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 243
+          "line": 238
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120185,7 +120209,7 @@
         "className": "text-caption",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 243
+          "line": 238
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120218,7 +120242,7 @@
         "className": "text-caption",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 243
+          "line": 238
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120259,7 +120283,7 @@
         "className": "text-caption",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 243
+          "line": 238
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120292,7 +120316,7 @@
         "className": "text-destructive-foreground",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 243
+          "line": 238
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120333,7 +120357,7 @@
         "className": "text-destructive-foreground",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 243
+          "line": 238
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120374,7 +120398,7 @@
         "className": "text-destructive-foreground",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 243
+          "line": 238
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120415,7 +120439,7 @@
         "className": "text-destructive-foreground",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 243
+          "line": 238
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -120456,7 +120480,7 @@
         "className": "text-destructive-foreground",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 243
+          "line": 238
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -153954,7 +153978,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -153987,7 +154011,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -154028,7 +154052,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -154077,7 +154101,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -154134,7 +154158,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -154191,7 +154215,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -154256,7 +154280,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -154329,7 +154353,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -154402,7 +154426,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -154467,7 +154491,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -154540,7 +154564,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -154605,7 +154629,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -154670,7 +154694,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -166973,7 +166997,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -167006,7 +167030,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -167047,7 +167071,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -167096,7 +167120,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -167153,7 +167177,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -167210,7 +167234,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -167275,7 +167299,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -167348,7 +167372,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -167421,7 +167445,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -167486,7 +167510,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -167559,7 +167583,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -167624,7 +167648,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -167689,7 +167713,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -170469,7 +170493,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -170502,7 +170526,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -170543,7 +170567,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -170592,7 +170616,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -170649,7 +170673,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -170706,7 +170730,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -170771,7 +170795,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -170844,7 +170868,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -170917,7 +170941,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -170982,7 +171006,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -171055,7 +171079,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -171120,7 +171144,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -171185,7 +171209,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316035,7 +316059,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316069,7 +316093,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316103,7 +316127,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316145,7 +316169,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316187,7 +316211,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316237,7 +316261,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316287,7 +316311,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316345,7 +316369,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316403,7 +316427,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316461,7 +316485,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316519,7 +316543,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316585,7 +316609,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316651,7 +316675,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316725,7 +316749,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316799,7 +316823,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316873,7 +316897,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -316947,7 +316971,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -317013,7 +317037,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -317079,7 +317103,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -317153,7 +317177,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -317227,7 +317251,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -317293,7 +317317,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -317359,7 +317383,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -317425,7 +317449,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -317491,7 +317515,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -317549,7 +317573,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -377171,7 +377195,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -377204,7 +377228,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -377245,7 +377269,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -377294,7 +377318,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -377351,7 +377375,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -377408,7 +377432,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -377473,7 +377497,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -377546,7 +377570,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -377619,7 +377643,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -377684,7 +377708,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -377757,7 +377781,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -377822,7 +377846,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -377887,7 +377911,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -379941,7 +379965,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -379974,7 +379998,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -380015,7 +380039,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -380064,7 +380088,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -380121,7 +380145,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -380178,7 +380202,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -380243,7 +380267,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -380316,7 +380340,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -380389,7 +380413,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -380454,7 +380478,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -380527,7 +380551,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -380592,7 +380616,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -380657,7 +380681,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -449279,7 +449303,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -449312,7 +449336,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -449353,7 +449377,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -449402,7 +449426,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -449459,7 +449483,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -449516,7 +449540,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -449581,7 +449605,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -449654,7 +449678,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -449727,7 +449751,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -449792,7 +449816,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -449865,7 +449889,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -449930,7 +449954,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -449995,7 +450019,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -462323,7 +462347,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -462357,7 +462381,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -462399,7 +462423,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -462449,7 +462473,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -462507,7 +462531,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -462565,7 +462589,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -462631,7 +462655,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -462705,7 +462729,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -462779,7 +462803,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -462845,7 +462869,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -462919,7 +462943,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -462985,7 +463009,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -463051,7 +463075,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -606777,7 +606801,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -606810,7 +606834,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -606851,7 +606875,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -606900,7 +606924,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -606957,7 +606981,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -607014,7 +607038,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -607079,7 +607103,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -607152,7 +607176,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -607225,7 +607249,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -607290,7 +607314,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -607363,7 +607387,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -607428,7 +607452,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -607493,7 +607517,7 @@
             "variable": "--qy-focus-ring-color",
             "source": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 129
+              "line": 134
             },
             "condition": "[td[data-selected=true]_&]"
           },
@@ -613874,7 +613898,7 @@
         "className": "min-h-(--qy-fill-height-narrow)",
         "source": {
           "path": "packages/ui/src/components/calendar.tsx",
-          "line": 129
+          "line": 133
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -613883,7 +613907,7 @@
         "className": "sm:min-h-(--qy-fill-height)",
         "source": {
           "path": "packages/ui/src/components/calendar.tsx",
-          "line": 129
+          "line": 133
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -613892,7 +613916,7 @@
         "className": "rounded-(--qy-fill-radius)",
         "source": {
           "path": "packages/ui/src/components/calendar.tsx",
-          "line": 129
+          "line": 133
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -613901,7 +613925,7 @@
         "className": "pointer-coarse:min-h-(--qy-touch-target)",
         "source": {
           "path": "packages/ui/src/components/calendar.tsx",
-          "line": 129
+          "line": 133
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -613910,7 +613934,7 @@
         "className": "pointer-coarse:w-(--qy-touch-target)",
         "source": {
           "path": "packages/ui/src/components/calendar.tsx",
-          "line": 129
+          "line": 133
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -613919,7 +613943,7 @@
         "className": "[td[data-selected=true]_&]:bg-primary",
         "source": {
           "path": "packages/ui/src/components/calendar.tsx",
-          "line": 129
+          "line": 134
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -613928,7 +613952,7 @@
         "className": "[td[data-selected=true]_&]:hover:bg-primary-hover",
         "source": {
           "path": "packages/ui/src/components/calendar.tsx",
-          "line": 129
+          "line": 134
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -613937,7 +613961,7 @@
         "className": "[td[data-selected=true]_&]:active:bg-primary-hover",
         "source": {
           "path": "packages/ui/src/components/calendar.tsx",
-          "line": 129
+          "line": 134
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -613946,115 +613970,7 @@
         "className": "[td[data-selected=true]_&]:text-primary-foreground",
         "source": {
           "path": "packages/ui/src/components/calendar.tsx",
-          "line": 129
-        },
-        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
-      },
-      {
-        "sourceComponent": "calendar",
-        "className": "[td[data-today=true]_&]:font-semibold",
-        "source": {
-          "path": "packages/ui/src/components/calendar.tsx",
-          "line": 129
-        },
-        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
-      },
-      {
-        "sourceComponent": "calendar",
-        "className": "--qy-calendar-cell",
-        "source": {
-          "path": "packages/ui/src/components/calendar.tsx",
-          "line": 137
-        },
-        "reason": "Unsupported class/property mapping; no runtime claim"
-      },
-      {
-        "sourceComponent": "calendar",
-        "className": "var(--qy-fill-height)",
-        "source": {
-          "path": "packages/ui/src/components/calendar.tsx",
-          "line": 137
-        },
-        "reason": "Unsupported class/property mapping; no runtime claim"
-      },
-      {
-        "sourceComponent": "calendar",
-        "className": "--qy-calendar-cell-narrow",
-        "source": {
-          "path": "packages/ui/src/components/calendar.tsx",
-          "line": 137
-        },
-        "reason": "Unsupported class/property mapping; no runtime claim"
-      },
-      {
-        "sourceComponent": "calendar",
-        "className": "var(--qy-fill-height-narrow)",
-        "source": {
-          "path": "packages/ui/src/components/calendar.tsx",
-          "line": 137
-        },
-        "reason": "Unsupported class/property mapping; no runtime claim"
-      },
-      {
-        "sourceComponent": "calendar",
-        "className": "gap-(--qy-space-6)",
-        "source": {
-          "path": "packages/ui/src/components/calendar.tsx",
-          "line": 140
-        },
-        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
-      },
-      {
-        "sourceComponent": "calendar",
-        "className": "gap-y-(--qy-space-2)",
-        "source": {
-          "path": "packages/ui/src/components/calendar.tsx",
-          "line": 140
-        },
-        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
-      },
-      {
-        "sourceComponent": "calendar",
-        "className": "ps-(--qy-space-2)",
-        "source": {
-          "path": "packages/ui/src/components/calendar.tsx",
-          "line": 140
-        },
-        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
-      },
-      {
-        "sourceComponent": "calendar",
-        "className": "gap-(--qy-space-2)",
-        "source": {
-          "path": "packages/ui/src/components/calendar.tsx",
-          "line": 140
-        },
-        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
-      },
-      {
-        "sourceComponent": "calendar",
-        "className": "w-(--qy-calendar-cell-narrow)",
-        "source": {
-          "path": "packages/ui/src/components/calendar.tsx",
-          "line": 142
-        },
-        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
-      },
-      {
-        "sourceComponent": "calendar",
-        "className": "sm:w-(--qy-calendar-cell)",
-        "source": {
-          "path": "packages/ui/src/components/calendar.tsx",
-          "line": 142
-        },
-        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
-      },
-      {
-        "sourceComponent": "calendar",
-        "className": "pointer-coarse:w-(--qy-touch-target)",
-        "source": {
-          "path": "packages/ui/src/components/calendar.tsx",
-          "line": 142
+          "line": 134
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -614063,7 +613979,7 @@
         "className": "bg-surface-selected",
         "source": {
           "path": "packages/ui/src/components/calendar.tsx",
-          "line": 144
+          "line": 137
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -614072,7 +613988,7 @@
         "className": "[&>button]:text-foreground!",
         "source": {
           "path": "packages/ui/src/components/calendar.tsx",
-          "line": 144
+          "line": 137
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -614081,7 +613997,124 @@
         "className": "[&>button:hover]:bg-(--qy-surface-hover)!",
         "source": {
           "path": "packages/ui/src/components/calendar.tsx",
-          "line": 144
+          "line": 137
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "calendar",
+        "className": "--qy-calendar-cell",
+        "source": {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "line": 172
+        },
+        "reason": "Unsupported class/property mapping; no runtime claim"
+      },
+      {
+        "sourceComponent": "calendar",
+        "className": "var(--qy-fill-height)",
+        "source": {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "line": 172
+        },
+        "reason": "Unsupported class/property mapping; no runtime claim"
+      },
+      {
+        "sourceComponent": "calendar",
+        "className": "--qy-calendar-cell-narrow",
+        "source": {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "line": 172
+        },
+        "reason": "Unsupported class/property mapping; no runtime claim"
+      },
+      {
+        "sourceComponent": "calendar",
+        "className": "var(--qy-fill-height-narrow)",
+        "source": {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "line": 172
+        },
+        "reason": "Unsupported class/property mapping; no runtime claim"
+      },
+      {
+        "sourceComponent": "calendar",
+        "className": "gap-(--qy-space-6)",
+        "source": {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "line": 219
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "calendar",
+        "className": "gap-y-(--qy-space-2)",
+        "source": {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "line": 219
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "calendar",
+        "className": "ps-(--qy-space-2)",
+        "source": {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "line": 219
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "calendar",
+        "className": "gap-(--qy-space-2)",
+        "source": {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "line": 219
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "calendar",
+        "className": "w-(--qy-calendar-cell-narrow)",
+        "source": {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "line": 221
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "calendar",
+        "className": "sm:w-(--qy-calendar-cell)",
+        "source": {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "line": 221
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "calendar",
+        "className": "pointer-coarse:w-(--qy-touch-target)",
+        "source": {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "line": 221
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "calendar",
+        "className": "rounded-s-(--qy-fill-radius)",
+        "source": {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "line": 225
+        },
+        "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
+      },
+      {
+        "sourceComponent": "calendar",
+        "className": "rounded-e-(--qy-fill-radius)",
+        "source": {
+          "path": "packages/ui/src/components/calendar.tsx",
+          "line": 225
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -615350,7 +615383,7 @@
         "className": "gap-(--qy-field-group-gap)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 231
+          "line": 267
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -615359,7 +615392,7 @@
         "className": "gap-(--qy-field-group-gap)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 241
+          "line": 277
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -615368,7 +615401,7 @@
         "className": "gap-(--qy-action-gap)",
         "source": {
           "path": "packages/ui/src/components/date-range-picker.tsx",
-          "line": 243
+          "line": 279
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -615404,7 +615437,7 @@
         "className": "gap-(--qy-field-group-gap)",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 236
+          "line": 231
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -615413,7 +615446,7 @@
         "className": "gap-(--qy-field-group-gap)",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 239
+          "line": 234
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -615422,7 +615455,7 @@
         "className": "gap-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 240
+          "line": 235
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -615431,7 +615464,7 @@
         "className": "gap-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 241
+          "line": 236
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -615440,7 +615473,7 @@
         "className": "gap-(--qy-action-gap)",
         "source": {
           "path": "packages/ui/src/components/date-time-range-picker.tsx",
-          "line": 244
+          "line": 239
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },

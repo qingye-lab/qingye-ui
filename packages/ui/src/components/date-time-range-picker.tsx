@@ -6,6 +6,7 @@ import { Input as InputPrimitive } from "@base-ui/react/input";
 import { IconCalendar, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { intersectNativeBounds, mergeCalendarBounds, readNativeEntry, useCustomValidity, useInputFacts, useInputRef, useTypingText, warnEmptyBounds } from "../input-facts";
+import { DraftSurface } from "../draft-surface";
 import { inputAdjunctClassName, withHiddenIndicator } from "../input-adjunct";
 import { InputGroupReadOnlyNote } from "../input-readonly-note";
 import { comparableTime, validLocalTime } from "../local-time";
@@ -46,12 +47,6 @@ export type DateTimeRangePickerProps = Omit<useRender.ComponentProps<"div">, "ch
   endInputProps?: NativeInputProps;
   calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect" | "required">;
 };
-
-// Field 把 name 交给它登记的输入；这里的输入只放草稿，不参与提交——提交的是确认值（name.from / name.to）。
-function DraftSurface({ elementProps, state, render, onName }: { elementProps: React.ComponentPropsWithRef<"input">; state: InputPrimitive.State; render: InputProps["render"]; onName: (name: string | undefined) => void }) {
-  React.useLayoutEffect(() => onName(elementProps.name), [elementProps.name, onName]);
-  return useRender({ defaultTagName: "input", render, ref: elementProps.ref, state: { ...state }, props: { ...elementProps, name: undefined } });
-}
 
 const validDateTime = (text: string) => { const parts = text.split("T"); return parts.length === 2 && parseLocalDate(parts[0]!) !== undefined && validLocalTime(parts[1]!); };
 // 与 DateTimePicker 同一比较：日期，再按补齐到毫秒的时刻（local-time.ts）。值本身从不被补齐或截断。

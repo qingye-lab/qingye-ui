@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-01T05:30:39.971Z",
-  "revision": "44659e90cf91616b40dfe4b47422e39c0341c62a",
+  "generatedAt": "2026-11-01T05:32:27.577Z",
+  "revision": "f4233bc7ee7f33fd34d4f1bc16702f7af30d04a3",
   "fingerprint": {
-    "sha256": "977dde558eaee039fe6ca489ca2c3b7268f0a411b45bccaf59ef19985035f2b9",
+    "sha256": "68d6299ab67f88b1cf62887bda8c74362de2c8420e1deb104f09e4a32e986086",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -60,7 +60,7 @@
       },
       {
         "path": "apps/docs/src/content/calendar/meta.ts",
-        "sha256": "212e4fd340cdb438db0fd04e8febbc578cfbe5ca3c7c5f34d3cce47d91bb1bd2"
+        "sha256": "379d9c14f1e83180cfa54cffd990196daa46fe47ccfda4c9f65a4bfec95e7715"
       },
       {
         "path": "apps/docs/src/content/card/meta.ts",
@@ -136,11 +136,11 @@
       },
       {
         "path": "apps/docs/src/content/date-picker/meta.ts",
-        "sha256": "440fe86b534fd3ec0126438590dff6f9bea34b98a0729083391a7fd8d1e0519a"
+        "sha256": "a0afb493d4c633e202102f6b02d4666c9544e448639c029fba8db35835dd7775"
       },
       {
         "path": "apps/docs/src/content/date-range-picker/meta.ts",
-        "sha256": "f78f76815e1d69d623073863e3b6da5e45c0cc742ca3aa1e7e7af700cbce2647"
+        "sha256": "b9d299a785c925e10d87da28e826ce4059590ff7080c43069f6ba87dae7cfab3"
       },
       {
         "path": "apps/docs/src/content/date-time-picker/meta.ts",
@@ -476,7 +476,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "a2a10ca6ba21fcc8fc8b5d9850aa3490551a9213ff69bc442ae05135d475b6b6"
+        "sha256": "32705d1729c1642bd6f137b7551f1df8f8d341502f506cd2992f729710fad266"
       },
       {
         "path": "packages/ui/motion.css",
@@ -540,7 +540,7 @@
       },
       {
         "path": "packages/ui/src/components/calendar.tsx",
-        "sha256": "38138628515318036c2f466b3fe46a8618abb2a148ac6173fccb977da468da57"
+        "sha256": "71aede6b755dc1272bb8554342b47ba0416d64dbb0f009f47128f33ea552a0a0"
       },
       {
         "path": "packages/ui/src/components/card.tsx",
@@ -616,11 +616,11 @@
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
-        "sha256": "4c967eae5350995183082d1c9c69a5a2ce250b2f669ff4551a48ba30d2daa7d5"
+        "sha256": "2039377cc2572bc6c6e47fab6baf740d1b74cd2720bbbe2ff146f5b731864850"
       },
       {
         "path": "packages/ui/src/components/date-range-picker.tsx",
-        "sha256": "bc6f7c96ad39bc91ddc30b5d3833ed35365a190e5e38e9fe73107f22dda3a6f7"
+        "sha256": "50954292790b2429d2da553a7f9594db52b6583300fc3f5e362a74118f17aad3"
       },
       {
         "path": "packages/ui/src/components/date-time-picker.tsx",
@@ -628,7 +628,7 @@
       },
       {
         "path": "packages/ui/src/components/date-time-range-picker.tsx",
-        "sha256": "72ee3961e280d14bb29cfc38510d642b184c1b1539b2dc22c22570af8ab197b2"
+        "sha256": "8cb029363deef75facbb9396698e8df450e0b4987a10625bfd36729d52ccb54c"
       },
       {
         "path": "packages/ui/src/components/description-list.tsx",
@@ -4774,7 +4774,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/calendar.tsx",
-            "line": 107
+            "line": 146
           }
         },
         {
@@ -4782,7 +4782,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/calendar.tsx",
-            "line": 13
+            "line": 22
           }
         },
         {
@@ -4790,7 +4790,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/calendar.tsx",
-            "line": 37
+            "line": 46
           }
         },
         {
@@ -4799,7 +4799,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@daypicker+react@10.0.2_@types+react@19.2.7_react@19.2.1/node_modules/@daypicker/react/dist/esm/index\"",
           "source": {
             "path": "packages/ui/src/components/calendar.tsx",
-            "line": 157
+            "line": 243
           }
         },
         {
@@ -4807,7 +4807,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/calendar.tsx",
-            "line": 12
+            "line": 14
           }
         },
         {
@@ -4815,7 +4815,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/calendar.tsx",
-            "line": 72
+            "line": 98
           }
         },
         {
@@ -4823,7 +4823,15 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/calendar.tsx",
-            "line": 76
+            "line": 102
+          }
+        },
+        {
+          "name": "weekRulesFor",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/calendar.tsx",
+            "line": 85
           }
         }
       ],
@@ -4861,6 +4869,13 @@
                 "type": "DayPickerProps discriminated union",
                 "description": "single、multiple、range 各按公开原语类型组合；选中值归调用方，required 限制原语取消选择。",
                 "descriptionEn": "Use the public single, multiple, or range union. The caller owns selection; required limits deselection."
+              },
+              {
+                "name": "granularity",
+                "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
+                "default": "\"day\"",
+                "description": "选择的粒度。week 仍是按天的网格，整行选一周；month / quarter / year 换成对应的格子网格（年格一页 12 年）。值仍是 Date：单选为该周期的起点，范围的 from 是首个周期的起点、to 是末个周期的最后一天。非 day 时只支持 single 与 range；周的起始日与第 1 周的规则取自区域（weekStartsOn / firstWeekContainsDate 优先），无区域信息时周一起始、第 1 周至少 4 天（ISO 8601）。",
+                "descriptionEn": "What one selection covers. week stays on the day grid and selects a whole row; month / quarter / year replace it with a grid of cells (the year grid pages twelve years). Values stay Date: a single value is the period start; a range's from is the first period's start and to is the last day of the last period. Non-day granularities support single and range only. The week start and the week-one rule come from the locale (weekStartsOn / firstWeekContainsDate win), falling back to Monday-start with at least four days in week one (ISO 8601)."
               },
               {
                 "name": "month / defaultMonth / onMonthChange",
@@ -4913,6 +4928,11 @@
         ],
         "keyboard": [
           {
+            "keys": "Arrow keys / Home / End / PageUp / PageDown（月、季、年格）",
+            "description": "方向键按格移动；Home / End 到一行的头尾；PageUp / PageDown 翻一页（月、季为一年，年格为 12 年）。",
+            "descriptionEn": "On the month, quarter and year grids, arrow keys move cell by cell, Home / End go to the row ends, and PageUp / PageDown turn a page (a year for months and quarters, twelve years for the year grid)."
+          },
+          {
             "keys": "Arrow keys / Home / End",
             "description": "由日期原语在真实日历网格中移动焦点。",
             "descriptionEn": "The date primitive moves focus through the calendar grid."
@@ -4929,12 +4949,14 @@
           }
         ],
         "notes": [
+          "granularity 不是 day 时，没有传 selected 的 Calendar 自己记住最近一次选择；传了 selected（哪怕是 undefined）就完全由调用方决定。受控值若不在周期起点上，仍整周或整格显示为选中。",
           "本组件不生成原生表单值；用 DatePicker 或在调用方序列化选中日期。",
           "一个月、caption label 与 nav after 是默认布局选择，可通过公共 props 改动。",
           "表面、颜色、圆角与尺寸角色沿用当前主题预设；选中与焦点信号来自真实状态。",
           "从右向左的语言下，翻页箭头镜像；方向取 dir 属性，其次 UILocale，再次祖先元素实际生效的方向。"
         ],
         "notesEn": [
+          "With a granularity other than day, a Calendar without a selected prop remembers the latest selection itself; passing selected (even undefined) leaves it entirely to the caller. A controlled value that is not on a period start still shows the whole week or cell as selected.",
           "Calendar does not create native form fields. Use DatePicker or serialize selection in the application.",
           "One month, label captions, and navigation after the caption are default layout choices exposed through public props.",
           "Surfaces, colors, corners, and size roles use the current theme presets; selection and focus reflect real state.",
@@ -5001,11 +5023,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 107
+              "line": 146
             },
             "rootEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 107
+              "line": 146
             },
             "status": "PRESENT"
           },
@@ -5014,11 +5036,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 157
+              "line": 243
             },
             "rootEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 157
+              "line": 243
             },
             "status": "PRESENT"
           },
@@ -5027,11 +5049,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 72
+              "line": 98
             },
             "rootEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 72
+              "line": 98
             },
             "status": "PRESENT"
           },
@@ -5040,11 +5062,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 76
+              "line": 102
             },
             "rootEntry": {
               "path": "packages/ui/src/components/calendar.tsx",
-              "line": 76
+              "line": 102
             },
             "status": "PRESENT"
           }
@@ -11564,7 +11586,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/date-picker.tsx",
-            "line": 38
+            "line": 47
           }
         },
         {
@@ -11572,7 +11594,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-picker.tsx",
-            "line": 18
+            "line": 21
           }
         }
       ],
@@ -11613,6 +11635,13 @@
                 "type": "Date",
                 "description": "一处声明最早 / 最晚日期，同时写入原生输入的 min / max 与日历的禁用范围和可翻到的月份。与 inputProps.min/max、calendarProps.disabled/startMonth/endMonth 并存，同时给出时取交集；交集为空时开发环境警告（2026-10-12）。",
                 "descriptionEn": "Declare the earliest and latest date once; it sets the native min / max and the calendar's disabled range and reachable months. It coexists with inputProps.min/max and calendarProps.disabled/startMonth/endMonth, and the intersection applies when both are given. An empty intersection warns in development (2026-10-12)."
+              },
+              {
+                "name": "granularity",
+                "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
+                "default": "\"day\"",
+                "description": "选择的粒度。非 day 时输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」「2026 年 11 月」「2026 年第 4 季度」），键入在失焦或回车时采纳，空文本清除，解析不了的文字留在输入里并标为未填完整（复用 dateIncomplete / dateOutOfRange 提示）。value 是周期的起点（传入的非边界日期显示为所在周期）；min / max 与周期有交集即可选；name 提交的是 ISO 日期。",
+                "descriptionEn": "What one selection covers. Beyond day the input becomes text that is shown and parsed by the locale format (for example Week 44 2026, 11/2026, Q4 2026); typing is adopted on blur or Enter, blank text clears, and text that cannot be read stays in the input marked incomplete (reusing the dateIncomplete / dateOutOfRange messages). The value is the period start (a date off the boundary shows as its period); min / max need only overlap a period; name submits an ISO date."
               },
               {
                 "name": "name / form",
@@ -11666,12 +11695,14 @@
           }
         ],
         "notes": [
+          "granularity 不是 day 时，输入框不再是浏览器的原生日期控件，所以显示格式由区域的 periodWeek / periodMonth / periodQuarter / periodYear 决定，也接受 2026-W44、2026-11、2026-Q4、2026 这类 ISO 写法。",
           "日期输入的本地显示格式由浏览器决定，提交值固定 YYYY-MM-DD。",
           "日历选择完成后关闭；调用方拒绝变更时原日期仍保留。",
           "没有自动修正越界值或推断提交成功；用 FieldError 表达调用方已知错误。",
           "年份可键到 5–6 位、分段可只填一半：这些键入中间态不是值，不上报也不清空已有值，焦点离开后回到已接受的日期；只有所有分段都被清空才是清除。"
         ],
         "notesEn": [
+          "With a granularity other than day the input is no longer the browser's native date control, so the display format comes from the locale's periodWeek / periodMonth / periodQuarter / periodYear, and ISO spellings such as 2026-W44, 2026-11, 2026-Q4 and 2026 are also accepted.",
           "The browser chooses the displayed date format; submission uses YYYY-MM-DD.",
           "Calendar selection closes the popup. Rejected controlled changes preserve the prior date.",
           "The component does not repair bounds or infer submission success. Express known errors with FieldError.",
@@ -11726,11 +11757,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/date-picker.tsx",
-              "line": 38
+              "line": 47
             },
             "rootEntry": {
               "path": "packages/ui/src/components/date-picker.tsx",
-              "line": 38
+              "line": 47
             },
             "status": "PRESENT"
           }
@@ -11769,7 +11800,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 22
+            "line": 24
           }
         },
         {
@@ -11777,7 +11808,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 24
+            "line": 26
           }
         },
         {
@@ -11785,7 +11816,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 65
+            "line": 67
           }
         },
         {
@@ -11793,7 +11824,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 28
+            "line": 30
           }
         },
         {
@@ -11801,7 +11832,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 26
+            "line": 28
           }
         },
         {
@@ -11809,7 +11840,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 20
+            "line": 22
           }
         }
       ],
@@ -11857,6 +11888,13 @@
                 "type": "Date",
                 "description": "一处声明最早 / 最晚日期，同时写入两个原生输入与日历的禁用范围、可翻到的月份，并使超出范围的预设不可点。与 inputProps.min/max、calendarProps.disabled 并存，取交集；交集为空时开发环境警告。",
                 "descriptionEn": "Declare the earliest and latest date once; it sets both native inputs, the calendar's disabled range and reachable months, and disables presets that fall outside. It coexists with inputProps.min/max and calendarProps.disabled; the intersection applies, and an empty one warns in development."
+              },
+              {
+                "name": "granularity",
+                "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
+                "default": "\"day\"",
+                "description": "选择的粒度。非 day 时 from 是首个周期的起点、to 是末个周期的最后一天（传入的值与 presets 都会被规范到这两个日子）；两个输入改为文本，按区域格式显示与解析，失焦或回车时采纳；min / max 与周期有交集即可选。此时 calendarProps.min / max（天数限制）与 excludeDisabled 不再适用，name.from / name.to 提交 ISO 日期。",
+                "descriptionEn": "What one selection covers. Beyond day, from is the first period's start and to is the last day of the last period (given values and presets are normalized to them); the two inputs become text shown and parsed by the locale format and adopted on blur or Enter; min / max need only overlap a period. calendarProps.min / max (day-count limits) and excludeDisabled no longer apply, and name.from / name.to submit ISO dates."
               },
               {
                 "name": "presets",
@@ -11916,11 +11954,13 @@
           }
         ],
         "notes": [
+          "granularity 不是 day 时，未能解析的文字留在输入里，整个字段在焦点离开后按未填完整处理；两端的顺序按周期比较，同一周期的起止是合法的。",
           "两个日期输入是原生输入，显示格式随浏览器；键入与日历共用一份草稿，互相同步。",
           "每次打开从当前输入内容建立草稿；没有默认业务长度或自动纠正。",
           "只读时不开弹层：值在、可聚焦、可读出，不能改。"
         ],
         "notesEn": [
+          "With a granularity other than day, text that cannot be read stays in the input and the field counts as incomplete once focus leaves; order is compared by period, so the same period at both ends is valid.",
           "The two date inputs are native, so the display format follows the browser. Typing and the calendar share one draft and stay in step.",
           "Each opening starts from what the inputs currently hold. There is no default business duration or automatic repair.",
           "Read-only does not open the popup: the value is there, focusable and readable, but it cannot change."
@@ -11974,11 +12014,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/date-range-picker.tsx",
-              "line": 65
+              "line": 67
             },
             "rootEntry": {
               "path": "packages/ui/src/components/date-range-picker.tsx",
-              "line": 65
+              "line": 67
             },
             "status": "PRESENT"
           }
@@ -12220,7 +12260,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-time-range-picker.tsx",
-            "line": 24
+            "line": 25
           }
         },
         {
@@ -12228,7 +12268,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-time-range-picker.tsx",
-            "line": 26
+            "line": 27
           }
         },
         {
@@ -12236,7 +12276,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/date-time-range-picker.tsx",
-            "line": 65
+            "line": 60
           }
         },
         {
@@ -12244,7 +12284,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-time-range-picker.tsx",
-            "line": 28
+            "line": 29
           }
         },
         {
@@ -12252,7 +12292,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-time-range-picker.tsx",
-            "line": 22
+            "line": 23
           }
         }
       ],
@@ -12413,11 +12453,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/date-time-range-picker.tsx",
-              "line": 65
+              "line": 60
             },
             "rootEntry": {
               "path": "packages/ui/src/components/date-time-range-picker.tsx",
-              "line": 65
+              "line": 60
             },
             "status": "PRESENT"
           }

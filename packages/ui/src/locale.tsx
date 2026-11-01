@@ -52,6 +52,10 @@ export type UILocaleMessages = {
   // Dates
   selectDateRange: string; today: string; previousMonth: string; nextMonth: string; monthNavigation: string; month: string; year: string; selectedDate: string;
   startDate: string; endDate: string; dateRangePresets: string;
+  // 日期粒度（周 / 月 / 季 / 年）：四条文本格式（占位符 {year} {week} {month} {quarter}，输入显示与解析共用）、季度格名、年份翻页与触发入口名称
+  periodWeek: string; periodMonth: string; periodQuarter: string; periodYear: string; quarterName: string;
+  previousYear: string; nextYear: string; previousYears: string; nextYears: string; yearNavigation: string;
+  selectWeek: string; selectMonth: string; selectQuarter: string; selectYear: string;
   // Tables
   selectedCount: (count: number) => string; sortAscending: string; sortDescending: string; selectRow: string;
   filterUnapplied: string; bulkVersion: string; treeEmpty: string;
@@ -129,6 +133,9 @@ export const zhCN: UILocale = {
     selectPlaceholder: "请选择", addTag: "添加标签", tagExists: (tag) => `“${tag}”已添加`,
     selectDateRange: "选择日期范围", today: "今天", previousMonth: "上个月", nextMonth: "下个月", monthNavigation: "切换月份", month: "月份", year: "年份", selectedDate: "已选择",
     startDate: "开始日期", endDate: "结束日期", dateRangePresets: "常用范围",
+    periodWeek: "{year} 年第 {week} 周", periodMonth: "{year} 年 {month} 月", periodQuarter: "{year} 年第 {quarter} 季度", periodYear: "{year} 年", quarterName: "第 {quarter} 季度",
+    previousYear: "上一年", nextYear: "下一年", previousYears: "上一组年份", nextYears: "下一组年份", yearNavigation: "切换年份",
+    selectWeek: "选择周", selectMonth: "选择月份", selectQuarter: "选择季度", selectYear: "选择年份",
     selectedCount: (count) => `已选 ${count.toLocaleString("zh-CN")} 项`, sortAscending: "升序", sortDescending: "降序", selectRow: "选择此行", selectRowNamed: (name) => `选择“${name}”`,
     filterUnapplied: "条件尚未应用", bulkVersion: "版本", treeEmpty: "没有条目",
     tableNoValue: "无值", selectAllMatching: (count) => `选择全部 ${count.toLocaleString("zh-CN")} 项`, selectAllScoped: (label, scope) => `${label}（${scope === "page" ? "仅本页" : "全部筛选结果"}）`,

@@ -2,18 +2,20 @@
 
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
+import { DraftSurface } from "../draft-surface";
 import { Input as InputPrimitive } from "@base-ui/react/input";
 import { InputGroup, InputGroupAddon } from "./input-group";
 import { IconCalendar, IconX } from "@tabler/icons-react";
 import { dateMatchModifiers, rangeContainsModifiers } from "@daypicker/react";
 import * as React from "react";
 import { intersectNativeBounds, mergeCalendarBounds, readNativeEntry, useInputFacts, useInputRef, useTypingText, warnEmptyBounds } from "../input-facts";
+import { formatPeriod, parsePeriod, periodEnd, periodFullyDisabled, periodStart, periodWithinBounds, type DateGranularity, type PeriodGranularity } from "../date-granularity";
 import { useUILocale } from "../locale";
 import { inputAdjunctClassName, withHiddenIndicator } from "../input-adjunct";
 import { InputGroupReadOnlyNote } from "../input-readonly-note";
 import { cn } from "../utils";
 import { Button } from "./button";
-import { Calendar, formatLocalDate, parseLocalDate, type CalendarProps, type CalendarDateRange } from "./calendar";
+import { Calendar, formatLocalDate, parseLocalDate, weekRulesFor, type CalendarProps, type CalendarDateRange } from "./calendar";
 import { Input, type InputProps } from "./input";
 import { Popover, PopoverPopup, PopoverTrigger } from "./popover";
 
@@ -40,6 +42,12 @@ export type DateRangePickerProps = Omit<useRender.ComponentProps<"div">, "childr
   onInvalid?: ((draft: DateRangeDraft, reason: DateRangeInvalidReason) => void) | undefined;
   /** 可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。 */
   min?: Date | undefined; max?: Date | undefined;
+  /**
+   * 选择的粒度，默认 `"day"`。非 `"day"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）；
+   * 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。
+   * 此时 `calendarProps.min` / `max`（天数限制）与 `excludeDisabled` 不再适用；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。
+   */
+  granularity?: DateGranularity;
   /** 常用范围，显示在弹层里日历旁；点击只写入草稿，仍须「应用」。 */
   presets?: readonly DateRangePreset[] | undefined;
   name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;
@@ -47,14 +55,8 @@ export type DateRangePickerProps = Omit<useRender.ComponentProps<"div">, "childr
   inputProps?: NativeInputProps;
   /** 终点日期输入。 */
   endInputProps?: NativeInputProps;
-  calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect" | "required"> & { min?: number; max?: number; excludeDisabled?: boolean };
+  calendarProps?: Omit<CalendarProps, "mode" | "selected" | "onSelect" | "required" | "granularity"> & { min?: number; max?: number; excludeDisabled?: boolean };
 };
-
-// Field 把 name 交给它登记的输入；这里的输入只放草稿，不参与提交——提交的是确认值（name.from / name.to）。
-function DraftSurface({ elementProps, state, render, onName }: { elementProps: React.ComponentPropsWithRef<"input">; state: InputPrimitive.State; render: InputProps["render"]; onName: (name: string | undefined) => void }) {
-  React.useLayoutEffect(() => onName(elementProps.name), [elementProps.name, onName]);
-  return useRender({ defaultTagName: "input", render, ref: elementProps.ref, state: { ...state }, props: { ...elementProps, name: undefined } });
-}
 
 const dayText = (date: Date | undefined) => date ? formatLocalDate(date) : "";
 const sameDay = (a: Date | undefined, b: Date | undefined) => dayText(a) === dayText(b);
@@ -63,11 +65,16 @@ const assertOrdered = (range: DateRangeValue, what: string) => { if (dayText(ran
 
 /** Only explicit Apply (or a complete, ordered, typed pair) requests a range; the draft never owns form submission. */
 export function DateRangePicker(allProps: DateRangePickerProps) {
-  const { value: valueProp, defaultValue, onValueChange, onInvalid, min, max, presets, name, form, disabled = false, readOnly = false, inputProps = {}, endInputProps = {}, calendarProps = {}, className, render, ref, ...props } = allProps;
-  const { messages } = useUILocale();
+  const { value: valueProp, defaultValue, onValueChange, onInvalid, min, max, granularity = "day", presets, name, form, disabled = false, readOnly = false, inputProps = {}, endInputProps = {}, calendarProps = {}, className, render, ref, ...props } = allProps;
+  const { code, messages } = useUILocale();
+  const period: PeriodGranularity | undefined = granularity === "day" ? undefined : granularity;
+  const rules = React.useMemo(() => weekRulesFor(code, calendarProps), [code, calendarProps.weekStartsOn, calendarProps.firstWeekContainsDate, calendarProps.locale]);
   const controlled = "value" in allProps;
   const [uncontrolled, setUncontrolled] = React.useState<DateRangeValue | undefined>(defaultValue);
-  const value = controlled ? valueProp : uncontrolled;
+  // 非按天时，确认值总是规范到周期边界：首个周期的起点、末个周期的最后一天。
+  const normalize = (range: DateRangeValue): DateRangeValue => period ? { from: periodStart(range.from, period, rules), to: periodEnd(range.to, period, rules) } : range;
+  const rawValue = controlled ? valueProp : uncontrolled;
+  const value = rawValue && normalize(rawValue);
   if (value) assertOrdered(value, "DateRangePicker");
   const [open, setOpen] = React.useState(false);
   const [fieldName, setFieldName] = React.useState<string | undefined>(name);
@@ -88,8 +95,9 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
   const [draftState, setDraftState] = React.useState<{ base: string; draft: DateRangeDraft } | undefined>();
   const draft: DateRangeDraft = draftState && draftState.base === valueKey ? draftState.draft : { from: value?.from, to: value?.to };
   const setDraft = (next: DateRangeDraft) => setDraftState({ base: valueKey, draft: next });
-  const fromTyping = useTypingText(dayText(draft.from));
-  const toTyping = useTypingText(dayText(draft.to));
+  const entryText = (date: Date | undefined) => date && period ? formatPeriod(date, period, rules, messages) : dayText(date);
+  const fromTyping = useTypingText(entryText(draft.from));
+  const toTyping = useTypingText(entryText(draft.to));
   const releaseTyping = () => { fromTyping.release(); toTyping.release(); };
 
   const change = (next: DateRangeValue | undefined, event: React.SyntheticEvent) => {
@@ -116,12 +124,16 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
   const native = intersectNativeBounds(intersectNativeBounds(startRest, text(endRest.min), text(endRest.max)), min && formatLocalDate(min), max && formatLocalDate(max));
   warnEmptyBounds("DateRangePicker", native.min, native.max);
   const bounds = mergeCalendarBounds(calendarProps, min, max);
-  const inBounds = (date: Date) => (!native.min || dayText(date) >= native.min) && (!native.max || dayText(date) <= native.max);
+  const inBounds = (date: Date) => period
+    ? periodWithinBounds(date, period, rules, native.min ? parseLocalDate(native.min) : undefined, native.max ? parseLocalDate(native.max) : undefined)
+    : (!native.min || dayText(date) >= native.min) && (!native.max || dayText(date) <= native.max);
   const problem = (target: DateRangeDraft): DateRangeInvalidReason | null => {
     if (!target.from && !target.to) return null;
     if (!target.from || !target.to) return "incomplete";
     if (dayText(target.from) > dayText(target.to)) return "order";
     if (!inBounds(target.from) || !inBounds(target.to)) return "bounds";
+    // 非按天：天数限制与区间内禁用日不适用（一个周期里总有可选的日子才可选）；只看两端的周期是否整个被禁用。
+    if (period) return calendarProps.disabled !== undefined && (periodFullyDisabled(target.from, period, rules, calendarProps.disabled) || periodFullyDisabled(target.to, period, rules, calendarProps.disabled)) ? "disabled" : null;
     // 日历点选时 DayPicker 执行的区间规则，键入同样执行：天数差（同 `addToRange`）与禁用日（同 `excludeDisabled`）。
     const days = Math.round((Date.UTC(target.to.getFullYear(), target.to.getMonth(), target.to.getDate()) - Date.UTC(target.from.getFullYear(), target.from.getMonth(), target.from.getDate())) / 86_400_000);
     if ((calendarProps.max && calendarProps.max > 0 && days > calendarProps.max) || (calendarProps.min && calendarProps.min > 1 && days < calendarProps.min)) return "length";
@@ -144,10 +156,12 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
   const [focusWithin, setFocusWithin] = React.useState(false);
   // 键入是逐段进行的（年份 0002、0020、0202、2026 都是有效中间态；改终点的「2」会暂时早于起点）：
   // 无效只在焦点离开整个字段、弹层也关闭之后判定与通知，键入过程中不闪烁、不逐键播报。
-  const invalid = focusWithin || open ? null : problem(draft);
+  // 周期输入里还留着没解析成功的文字，就是没填完整（文字原样保留，等读者改正）。
+  const heldText = Boolean(period && (fromTyping.active || toTyping.active));
+  const invalid = focusWithin || open ? null : heldText ? "incomplete" : problem(draft);
   const pendingInvalid = React.useRef(onInvalid);
   pendingInvalid.current = onInvalid;
-  const invalidKey = invalid ? `${invalid}:${valueKey}:${dayText(draft.from)}|${dayText(draft.to)}` : "";
+  const invalidKey = invalid ? `${invalid}:${valueKey}:${dayText(draft.from)}|${dayText(draft.to)}:${heldText}` : "";
   React.useEffect(() => { if (invalid) pendingInvalid.current?.(draft, invalid); }, [invalidKey]);
 
   const field = fieldName ?? name;
@@ -162,10 +176,21 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
   });
   const named = (self: string, label: string) => wiring.label && self ? { "aria-label": label, "aria-labelledby": `${wiring.label} ${self}` } : { "aria-label": label };
 
+  // 周期输入的采纳：失焦或回车时解析，空文本是清除这一端，解析不了就让文字留着（上面的 heldText 把它标为未填完整）。
+  const commitText = (end: "from" | "to", raw: string, event: React.SyntheticEvent) => {
+    if (!period) return;
+    const typing = end === "from" ? fromTyping : toTyping;
+    if (!raw.trim()) { typing.release(); return settle({ ...draft, [end]: undefined }, event); }
+    const parsed = parsePeriod(raw, period, rules, messages);
+    if (!parsed) return;
+    typing.release();
+    settle({ ...draft, [end]: end === "to" ? periodEnd(parsed, period, rules) : parsed }, event);
+  };
   const handleEntry = (end: "from" | "to") => (event: InputEvents["change"]) => {
     (end === "from" ? onStartChange : onEndChange)?.(event);
     if (event.defaultPrevented || event.baseUIHandlerPrevented || !editable) return;
     const typing = end === "from" ? fromTyping : toTyping;
+    if (period) return typing.hold(event.currentTarget.value);
     // 键入中间态不是值（同 DatePicker）：不改草稿、不上报，只留在输入里。
     const entry = readNativeEntry(event.currentTarget);
     if (entry === "partial") return typing.hold("");
@@ -178,16 +203,27 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
   const handleBlur = (end: "from" | "to") => (event: InputEvents["blur"]) => {
     (end === "from" ? onStartBlur : onEndBlur)?.(event);
     const typing = end === "from" ? fromTyping : toTyping;
+    if (period) { if (editable && typing.active) commitText(end, event.currentTarget.value, event); return; }
     // 逐段删完时值一直是空串，浏览器不再发 input 事件：离开输入时所有分段都空，这才是清除这一端。
     if (editable && typing.active && draft[end] && readNativeEntry(event.currentTarget) === "empty") settle({ ...draft, [end]: undefined }, event);
     typing.release();
   };
 
+  const handleKeyDown = (end: "from" | "to") => (event: Parameters<NonNullable<InputProps["onKeyDown"]>>[0]) => {
+    (end === "from" ? startRest : endRest).onKeyDown?.(event);
+    if (!period || event.key !== "Enter" || event.defaultPrevented || !editable) return;
+    const typing = end === "from" ? fromTyping : toTyping;
+    if (!typing.active) return;
+    event.preventDefault();
+    commitText(end, event.currentTarget.value, event);
+  };
+  const entryKind = period ? { type: "text" as const } : { type: "date" as const, min: native.min, max: native.max };
+
   // 弹层打开时拍下草稿快照；取消、Escape、点外面都回到快照，应用与清除才改确认值。
   const snapshot = React.useRef<DateRangeDraft>(draft);
   const [visibleMonth, setVisibleMonth] = React.useState<Date>(() => calendarProps.defaultMonth ?? new Date());
   const [presetValues, setPresetValues] = React.useState<DateRangeValue[] | undefined>();
-  const resolvePresets = () => (presets ?? []).map(preset => { const range = typeof preset.value === "function" ? preset.value() : preset.value; assertOrdered(range, "DateRangePicker preset"); return range; });
+  const resolvePresets = () => (presets ?? []).map(preset => { const range = typeof preset.value === "function" ? preset.value() : preset.value; assertOrdered(range, "DateRangePicker preset"); return normalize(range); });
   const resolved = presets && (presetValues && presetValues.length === presets.length ? presetValues : open ? resolvePresets() : []);
   const onOpenChange = (next: boolean) => {
     if (next) {
@@ -213,13 +249,13 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
           if (event.currentTarget.contains(event.relatedTarget as Node | null)) return;
           setFocusWithin(false);
         }}>
-        <Input {...startRest} min={native.min} max={native.max} type="date" form={form} disabled={disabled} readOnly={readOnly} ref={setStartRef} unstyled value={fromTyping.shown}
+        <Input {...startRest} {...entryKind} onKeyDown={handleKeyDown("from")} form={form} disabled={disabled} readOnly={readOnly} ref={setStartRef} unstyled value={fromTyping.shown}
           {...named(wiring.id, messages.startDate)} {...(startRest["aria-label"] ? { "aria-label": startRest["aria-label"] } : {})} {...(startRest["aria-labelledby"] ? { "aria-labelledby": startRest["aria-labelledby"] } : {})} aria-invalid={invalid ? true : startRest["aria-invalid"]}
           controlClassName={cn("min-w-0 flex-1", startRest.controlClassName)} className={withHiddenIndicator(startRest.className)}
           onChange={handleEntry("from")} onBlur={handleBlur("from")}
           render={nameless(inputRender)} />
         <InputGroupAddon aria-hidden="true" className="px-0">—</InputGroupAddon>
-        <Input nativeInput {...endRest} min={native.min} max={native.max} type="date" form={form} disabled={disabled} readOnly={readOnly} ref={setEndRef} id={endId} unstyled value={toTyping.shown}
+        <Input nativeInput {...endRest} {...entryKind} onKeyDown={handleKeyDown("to")} form={form} disabled={disabled} readOnly={readOnly} ref={setEndRef} id={endId} unstyled value={toTyping.shown}
           {...named(endId, messages.endDate)} aria-describedby={endRest["aria-describedby"] ?? wiring.described} {...(endRest["aria-label"] ? { "aria-label": endRest["aria-label"] } : {})} {...(endRest["aria-labelledby"] ? { "aria-labelledby": endRest["aria-labelledby"] } : {})} aria-invalid={invalid ? true : endRest["aria-invalid"]}
           controlClassName={cn("min-w-0 flex-1", endRest.controlClassName)} className={withHiddenIndicator(endRest.className)}
           onChange={handleEntry("to")} onBlur={handleBlur("to")} />
@@ -238,7 +274,7 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
               onClick={() => { releaseTyping(); setDraft({ from: range.from, to: range.to }); setVisibleMonth(range.from); }}>{preset.label}</Button>;
           })}
         </div>}
-        <div className="grid gap-(--qy-field-group-gap)"><Calendar {...calendarProps} {...bounds} month={calendarProps.month ?? visibleMonth} onMonthChange={month => { setVisibleMonth(month); calendarProps.onMonthChange?.(month); }}
+        <div className="grid gap-(--qy-field-group-gap)"><Calendar {...calendarProps} {...bounds} granularity={granularity} month={calendarProps.month ?? visibleMonth} onMonthChange={month => { setVisibleMonth(month); calendarProps.onMonthChange?.(month); }}
           mode="range" selected={calendarRange} disabled={editable ? bounds.disabled : true} autoFocus onSelect={next => { releaseTyping(); setDraft({ from: next?.from, to: next?.to }); }} />
           <div className="flex flex-wrap gap-(--qy-action-gap)">
             <Button disabled={!editable || !complete} onClick={event => { if (draft.from && draft.to && complete) { change({ from: draft.from, to: draft.to }, event); setDraftState(undefined); if (!event.defaultPrevented) closeWith(false); } }}>{messages.apply}</Button>
