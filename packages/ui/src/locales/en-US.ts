@@ -40,6 +40,7 @@ export const enUS: UILocale = {
     chartEvent: "Event", chartReferences: "References", chartBandPosition: (position, amount, label) => position === "within" ? `Within ${label}` : `${amount} ${position === "above" ? "above" : "below"} ${label}`,
     chartTotal: "Total", chartTotalPartial: "Part missing, not totaled", chartShareAxis: valueLabel => `Share of ${valueLabel}`,
     steps: "Steps", stepComplete: "Completed", stepCurrent: "Current", stepUpcoming: "Not started", stepError: "Error", timeline: "Timeline",
+    tourPrevious: "Previous", tourNext: "Next", tourFinish: "Done", tourSkip: "Skip", tourProgress: (current, total) => `Step ${current} of ${total}`,
     clear: "Clear", cancel: "Cancel", confirm: "Confirm", apply: "Apply", reset: "Reset", back: "Back", search: "Search", expand: "Expand", collapse: "Collapse",
     theme: "Theme", lightTheme: "Light", darkTheme: "Dark", systemTheme: "System",
     selectPlaceholder: "Select…", addTag: "Add tag", tagExists: (tag) => `“${tag}” is already added`,

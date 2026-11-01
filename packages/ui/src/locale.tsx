@@ -42,6 +42,7 @@ export type UILocaleMessages = {
   chartEvent: string; chartReferences: string; chartBandPosition: (position: "above" | "below" | "within", amount: string, label: string) => string;
   chartTotal: string; chartTotalPartial: string; chartShareAxis: (valueLabel: string) => string;
   steps: string; stepComplete: string; stepCurrent: string; stepUpcoming: string; stepError: string; timeline: string;
+  tourPrevious: string; tourNext: string; tourFinish: string; tourSkip: string; tourProgress: (current: number, total: number) => string;
   // General actions
   clear: string; cancel: string; confirm: string; apply: string; reset: string; back: string; search: string; expand: string; collapse: string;
   // Theme
@@ -115,6 +116,7 @@ export const zhCN: UILocale = {
     chartEvent: "事件", chartReferences: "参照", chartBandPosition: (position, amount, label) => position === "within" ? `在${label}内` : `${position === "above" ? "高于" : "低于"}${label} ${amount}`,
     chartTotal: "合计", chartTotalPartial: "缺项，未合计", chartShareAxis: valueLabel => `${valueLabel}占比`,
     steps: "步骤", stepComplete: "已完成", stepCurrent: "进行中", stepUpcoming: "未开始", stepError: "出错", timeline: "时间线",
+    tourPrevious: "上一步", tourNext: "下一步", tourFinish: "完成", tourSkip: "跳过", tourProgress: (current, total) => `第 ${current} / ${total} 步`,
     clear: "清除", cancel: "取消", confirm: "确认", apply: "应用", reset: "重置", back: "返回", search: "搜索", expand: "展开", collapse: "收起",
     theme: "主题", lightTheme: "浅色", darkTheme: "深色", systemTheme: "跟随系统",
     selectPlaceholder: "请选择", addTag: "添加标签", tagExists: (tag) => `“${tag}”已添加`,

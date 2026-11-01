@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-11-01T05:21:50.836Z",
-  "revision": "4fbab96b564480352c43a27a460538202d96ba1b",
+  "generatedAt": "2026-11-01T05:22:31.176Z",
+  "revision": "cc58417c2d7fc8287250a7a1eeb9f7846119f770",
   "static": {
     "fingerprint": {
-      "sha256": "9e48b79e0816051d6d953afc145116e04e966774de89b4b1a88c87fbe45fb1ea",
+      "sha256": "673c6cd1359464f43ad5b4355ada418c23bfefae91d91895dc6fd7caf0145b22",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -2076,6 +2076,26 @@
           "sha256": "8b812684e8cacbb609408d1f74f527921451257e6c988df27a19be1605cb37f1"
         },
         {
+          "path": "apps/docs/src/content/tour/cover.tsx",
+          "sha256": "1b95a5e300ec8b3b37b193af3147d36b38ea6912eb58a443c19eb533ad37f654"
+        },
+        {
+          "path": "apps/docs/src/content/tour/demos/01-basic.tsx",
+          "sha256": "7b15d4e502eb629194d989608bdc57bbeb978aa1f5c8a09716ae6b1e7f26316c"
+        },
+        {
+          "path": "apps/docs/src/content/tour/demos/02-spotlight.tsx",
+          "sha256": "fa7bf708fa0321defddc4ef7076dc218c6412c2fd9bdaf29912aa50eb819bb6b"
+        },
+        {
+          "path": "apps/docs/src/content/tour/demos/03-controlled-step.tsx",
+          "sha256": "c7e8c9742549d7b867287377c69b58e01cb2cc4e912ec829ab4d6561f2adeb09"
+        },
+        {
+          "path": "apps/docs/src/content/tour/meta.ts",
+          "sha256": "67adefe5ea31da4cda308a0f0db0da1830ec83b3de6ae5f1b59372ce8421c34f"
+        },
+        {
           "path": "apps/docs/src/content/transfer/cover.tsx",
           "sha256": "0f62a41d72389a909ebaa0be5106c291cd87d589a5baf7ac419b5aeecb8681f7"
         },
@@ -2972,6 +2992,10 @@
           "sha256": "4dd9b24c79431acd6f078c8ffae3d40788c79a47f11561f55ceb4429e8a8aab6"
         },
         {
+          "path": "packages/ui/src/components/tour.tsx",
+          "sha256": "2b2d6f7b97214df0371feb91848cbbaa00f3fc9e2133dbb55939529ec9dcbf2c"
+        },
+        {
           "path": "packages/ui/src/components/transfer.tsx",
           "sha256": "84ad943c10022f1cb49d8f88d030ba66cd2f5eda7908c0d3b5ebdbd51beaf159"
         },
@@ -3029,7 +3053,7 @@
         },
         {
           "path": "packages/ui/src/index.ts",
-          "sha256": "344fa20e11a6d99a385a79b19b265a80924f53fcfe90b8a023ec6807326d4330"
+          "sha256": "1da0ac00543432de6cc0b21d36a36fa59fef70e2a3bfa396adf014a9b516257a"
         },
         {
           "path": "packages/ui/src/input-adjunct.ts",
@@ -3053,11 +3077,11 @@
         },
         {
           "path": "packages/ui/src/locale.tsx",
-          "sha256": "04c6c5654dba88b7a4417b8349639625dab1c5f514e2683aca583684a510b323"
+          "sha256": "8b91c1fa590dccf36150fba8b24d32cd2d6b11f30676e92a6de9051a9a5eb50a"
         },
         {
           "path": "packages/ui/src/locales/en-US.ts",
-          "sha256": "f3dc4ef0ecfe3b1349b46a5d7bef6e098b9d99e942b6d38cd110afe2874e6b91"
+          "sha256": "a9093649f2dcfc60a5e97f76e372da3112387336126617b2a79ed8add4e49249"
         },
         {
           "path": "packages/ui/src/nav-line.ts",
@@ -3986,6 +4010,14 @@
           "Tooltip"
         ],
         "route": "/playground/tooltip"
+      },
+      {
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicName": [
+          "Tour"
+        ],
+        "route": "/playground/tour"
       },
       {
         "component": "transfer",
@@ -511957,6 +511989,1504 @@
         "mapping": "Global CSS selector and source class/slot"
       },
       {
+        "token": "--qy-duration-base",
+        "chain": [
+          "--qy-duration-base"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "TourSpotlight"
+        ],
+        "part": "tour-spotlight",
+        "selector": "[data-slot=\"tour-spotlight\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "transition-duration",
+        "conditions": [],
+        "className": "duration-(--qy-duration-base)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 132
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-ease-out",
+        "chain": [
+          "--qy-ease-out"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "TourSpotlight"
+        ],
+        "part": "tour-spotlight",
+        "selector": "[data-slot=\"tour-spotlight\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "transition-timing-function",
+        "conditions": [],
+        "className": "ease-(--qy-ease-out)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 132
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-panel-gap",
+        "chain": [
+          "--qy-panel-gap"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-body",
+        "selector": "[data-slot=\"tour-body\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 273
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-space-module",
+        "chain": [
+          {
+            "variable": "--qy-panel-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 580
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          "--qy-space-module"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-body",
+        "selector": "[data-slot=\"tour-body\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 273
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--qy-panel-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 580
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          {
+            "variable": "--qy-space-module",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 492
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-body",
+        "selector": "[data-slot=\"tour-body\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 273
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-fen",
+        "chain": [
+          {
+            "variable": "--qy-panel-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 580
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          {
+            "variable": "--qy-space-module",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 625
+            },
+            "condition": "[data-density=\"compact\"]"
+          },
+          "--qy-fen"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-body",
+        "selector": "[data-slot=\"tour-body\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 273
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--qy-panel-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 580
+            },
+            "condition": ":root,\n  [data-density]"
+          },
+          {
+            "variable": "--qy-space-module",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 625
+            },
+            "condition": "[data-density=\"compact\"]"
+          },
+          {
+            "variable": "--qy-fen",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 18
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-body",
+        "selector": "[data-slot=\"tour-body\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-panel-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 273
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-field-gap",
+        "chain": [
+          "--qy-field-gap"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-body",
+        "selector": "[data-slot=\"tour-body\"] > div",
+        "precision": "EXACT_DESCENDANT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-field-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 274
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-fen",
+        "chain": [
+          {
+            "variable": "--qy-field-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 493
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-fen"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-body",
+        "selector": "[data-slot=\"tour-body\"] > div",
+        "precision": "EXACT_DESCENDANT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-field-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 274
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--qy-field-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 493
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          {
+            "variable": "--qy-fen",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 18
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-body",
+        "selector": "[data-slot=\"tour-body\"] > div",
+        "precision": "EXACT_DESCENDANT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-field-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 274
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-text-label-size",
+        "chain": [
+          {
+            "variable": "--text-label",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 304
+            },
+            "condition": "@theme inline"
+          },
+          "--qy-text-label-size"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "font-size",
+        "conditions": [],
+        "className": "text-label",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-text-label-leading",
+        "chain": [
+          {
+            "variable": "--text-label--line-height",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 305
+            },
+            "condition": "@theme inline"
+          },
+          "--qy-text-label-leading"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "line-height",
+        "conditions": [],
+        "className": "text-label",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--text-label--line-height",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 305
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-text-label-leading",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 173
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "line-height",
+        "conditions": [],
+        "className": "text-label",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-text-label-tracking",
+        "chain": [
+          {
+            "variable": "--text-label--letter-spacing",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 306
+            },
+            "condition": "@theme inline"
+          },
+          "--qy-text-label-tracking"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "letter-spacing",
+        "conditions": [],
+        "className": "text-label",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-text-label-weight",
+        "chain": [
+          {
+            "variable": "--text-label--font-weight",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 307
+            },
+            "condition": "@theme inline"
+          },
+          "--qy-text-label-weight"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "font-weight",
+        "conditions": [],
+        "className": "text-label",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-weight-medium",
+        "chain": [
+          {
+            "variable": "--text-label--font-weight",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 307
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-text-label-weight",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 175
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-weight-medium"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "font-weight",
+        "conditions": [],
+        "className": "text-label",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-foreground-muted",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          "--qy-foreground-muted"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-ink",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          "--qy-ink"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-black",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-ink",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 41
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          "--qy-black"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-white",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-ink",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 114
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          "--qy-white"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-ink-nong",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          "--qy-ink-nong"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-paper",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          "--qy-paper"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-white",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 42
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          "--qy-white"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-background",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          "--qy-background"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-ink",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 47
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          "--qy-ink"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-black",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 47
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          {
+            "variable": "--qy-ink",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 41
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          "--qy-black"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-white",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 47
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          {
+            "variable": "--qy-ink",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 114
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          "--qy-white"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-wash-qing",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 47
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          "--qy-wash-qing"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-ink-qing",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 47
+            },
+            "condition": ":root,\n  .light,\n  [data-theme=\"light\"]"
+          },
+          {
+            "variable": "--qy-wash-qing",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 34
+            },
+            "condition": "@layer base {\n  :root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          "--qy-ink-qing"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-neutral-950",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 116
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          "--qy-neutral-950"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-white",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          {
+            "variable": "--qy-background",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 116
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          "--qy-white"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-white",
+        "chain": [
+          {
+            "variable": "--color-muted-foreground",
+            "source": {
+              "path": "packages/ui/theme.css",
+              "line": 115
+            },
+            "condition": "@theme inline"
+          },
+          {
+            "variable": "--qy-foreground-muted",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 166
+            },
+            "condition": ":root,\n  .light,\n  .dark,\n  [data-theme]"
+          },
+          {
+            "variable": "--qy-paper",
+            "source": {
+              "path": "packages/ui/tokens/semantic.css",
+              "line": 117
+            },
+            "condition": ".dark,\n  [data-theme=\"dark\"]"
+          },
+          "--qy-white"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-progress",
+        "selector": "[data-slot=\"tour-progress\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "color",
+        "conditions": [],
+        "className": "text-muted-foreground",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 276
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-action-gap",
+        "chain": [
+          "--qy-action-gap"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-actions",
+        "selector": "[data-slot=\"tour-actions\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-action-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 282
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-fen",
+        "chain": [
+          {
+            "variable": "--qy-action-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 494
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-fen"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-actions",
+        "selector": "[data-slot=\"tour-actions\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-action-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 282
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--qy-action-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 494
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          {
+            "variable": "--qy-fen",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 18
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-actions",
+        "selector": "[data-slot=\"tour-actions\"]",
+        "precision": "EXACT_SLOT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-action-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 282
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-action-gap",
+        "chain": [
+          "--qy-action-gap"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-actions",
+        "selector": "[data-slot=\"tour-actions\"] > div",
+        "precision": "EXACT_DESCENDANT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-action-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 288
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-fen",
+        "chain": [
+          {
+            "variable": "--qy-action-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 494
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-fen"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-actions",
+        "selector": "[data-slot=\"tour-actions\"] > div",
+        "precision": "EXACT_DESCENDANT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-action-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 288
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
+        "token": "--qy-cai",
+        "chain": [
+          {
+            "variable": "--qy-action-gap",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 494
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          {
+            "variable": "--qy-fen",
+            "source": {
+              "path": "packages/ui/tokens/components.css",
+              "line": 18
+            },
+            "condition": "@layer base {\n  :root"
+          },
+          "--qy-cai"
+        ],
+        "component": "tour",
+        "sourceComponent": "tour",
+        "publicNames": [
+          "Tour"
+        ],
+        "part": "tour-actions",
+        "selector": "[data-slot=\"tour-actions\"] > div",
+        "precision": "EXACT_DESCENDANT",
+        "pseudo": null,
+        "property": "gap",
+        "conditions": [],
+        "className": "gap-(--qy-action-gap)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 288
+        },
+        "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
+      },
+      {
         "token": "--qy-field-gap",
         "chain": [
           "--qy-field-gap"
@@ -566464,6 +567994,15 @@
         "source": {
           "path": "packages/ui/src/components/toast.tsx",
           "line": 164
+        },
+        "reason": "Unsupported class/property mapping; no runtime claim"
+      },
+      {
+        "sourceComponent": "tour",
+        "className": "var(--qy-overlay)",
+        "source": {
+          "path": "packages/ui/src/components/tour.tsx",
+          "line": 130
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },

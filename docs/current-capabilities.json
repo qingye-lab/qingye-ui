@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-01T05:21:49.886Z",
-  "revision": "4fbab96b564480352c43a27a460538202d96ba1b",
+  "generatedAt": "2026-11-01T05:22:29.349Z",
+  "revision": "cc58417c2d7fc8287250a7a1eeb9f7846119f770",
   "fingerprint": {
-    "sha256": "b86a42175f25927f1656bb1ed1f8da043428ca7490af67bf0c5e85e830a091af",
+    "sha256": "5d8a336bc155adb71269e7c103b3a2e026cc37e6223ac18daf0b20ccbffeb5fd",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -415,6 +415,10 @@
         "sha256": "8b812684e8cacbb609408d1f74f527921451257e6c988df27a19be1605cb37f1"
       },
       {
+        "path": "apps/docs/src/content/tour/meta.ts",
+        "sha256": "67adefe5ea31da4cda308a0f0db0da1830ec83b3de6ae5f1b59372ce8421c34f"
+      },
+      {
         "path": "apps/docs/src/content/transfer/meta.ts",
         "sha256": "a750682abab819ed53d467332f98c28ef47e90fdfcc29bc194180d48f3787342"
       },
@@ -452,7 +456,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "329792a9a9ee5368b4113f395d7356f107ac16a388e370ea000f7b86917dcbc6"
+        "sha256": "130c43d38823e7204114f818fa312e0867d189bacd39063b320bd805268ce818"
       },
       {
         "path": "packages/ui/motion.css",
@@ -871,6 +875,10 @@
         "sha256": "4dd9b24c79431acd6f078c8ffae3d40788c79a47f11561f55ceb4429e8a8aab6"
       },
       {
+        "path": "packages/ui/src/components/tour.tsx",
+        "sha256": "2b2d6f7b97214df0371feb91848cbbaa00f3fc9e2133dbb55939529ec9dcbf2c"
+      },
+      {
         "path": "packages/ui/src/components/transfer.tsx",
         "sha256": "84ad943c10022f1cb49d8f88d030ba66cd2f5eda7908c0d3b5ebdbd51beaf159"
       },
@@ -896,7 +904,7 @@
       },
       {
         "path": "packages/ui/src/index.ts",
-        "sha256": "344fa20e11a6d99a385a79b19b265a80924f53fcfe90b8a023ec6807326d4330"
+        "sha256": "1da0ac00543432de6cc0b21d36a36fa59fef70e2a3bfa396adf014a9b516257a"
       },
       {
         "path": "packages/ui/styles.css",
@@ -1038,10 +1046,10 @@
     "source": "packages/ui/package.json"
   },
   "counts": {
-    "components": 107,
-    "catalog": 107,
+    "components": 108,
+    "catalog": 108,
     "dist": 102,
-    "local": 107
+    "local": 108
   },
   "buildArtifacts": {
     "status": "PRESENT",
@@ -32651,6 +32659,240 @@
         "js": true,
         "declarations": true,
         "status": "PRESENT"
+      },
+      "consistency": {
+        "status": "PASS",
+        "missingPublicMetadataExports": []
+      }
+    },
+    {
+      "name": "tour",
+      "status": "PRESENT",
+      "source": "packages/ui/src/components/tour.tsx",
+      "exports": [
+        {
+          "name": "Tour",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/tour.tsx",
+            "line": 138
+          }
+        },
+        {
+          "name": "TourCloseReason",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/tour.tsx",
+            "line": 28
+          }
+        },
+        {
+          "name": "TourOpenChangeDetails",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/tour.tsx",
+            "line": 30
+          }
+        },
+        {
+          "name": "TourProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/tour.tsx",
+            "line": 34
+          }
+        },
+        {
+          "name": "TourStep",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/tour.tsx",
+            "line": 17
+          }
+        },
+        {
+          "name": "TourTarget",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/tour.tsx",
+            "line": 15
+          }
+        }
+      ],
+      "metadata": {
+        "path": "apps/docs/src/content/tour/meta.ts",
+        "title": "新手引导 Tour",
+        "titleEn": "Tour",
+        "description": "依次指向页面上的元素并逐步说明的非阻断引导，可选聚光遮罩。",
+        "descriptionEn": "A non-modal, step-by-step guide that points at page elements one after another, with an optional spotlight.",
+        "category": "浮层",
+        "layer": "pattern",
+        "source": "local",
+        "exports": [
+          "Tour"
+        ],
+        "keywords": [
+          "tour",
+          "引导",
+          "新手",
+          "导览",
+          "onboarding",
+          "聚光"
+        ],
+        "decisions": "引导只指路，不替用户完成任务，也不阻断页面：遮罩不拦截指针，只有 Esc 是退出。找不到锚点的步骤会被跳过，「第 N / M 步」的 M 只数实际能走的步数；结束后是否不再提示由应用记录。",
+        "decisionsEn": "A tour only points the way: it neither does the task for the user nor blocks the page. The mask does not intercept the pointer and only Escape exits. Steps without an anchor are skipped, and M in \"Step N of M\" counts only the steps that can be shown. The application records whether the tour should not appear again.",
+        "api": [
+          {
+            "name": "Tour",
+            "description": "按 steps 顺序把浮层锚定到各步的元素；定位复用 Popover，锚点在视口外时先滚入视口。",
+            "descriptionEn": "Anchors a popup to each step's element in order, reusing Popover positioning. Scrolls the anchor into view first when it is outside the viewport.",
+            "props": [
+              {
+                "name": "steps",
+                "type": "TourStep[]",
+                "description": "每步含 target（元素、ref 或返回元素的函数）、title、description、side、align。锚点只在打开与换步时解析。",
+                "descriptionEn": "Each step has target (element, ref or function returning an element), title, description, side and align. Anchors are resolved on open and on step change."
+              },
+              {
+                "name": "open / defaultOpen",
+                "type": "boolean",
+                "default": "false",
+                "description": "受控 / 非受控打开状态。Tour 只请求关闭，打开由应用决定。",
+                "descriptionEn": "Controlled / uncontrolled open state. Tour only requests closing; the application decides to open."
+              },
+              {
+                "name": "onOpenChange",
+                "type": "(open, { reason }) => void",
+                "description": "reason 为 finish、skip、escape 或 unavailable（没有任何一步的锚点可用）。",
+                "descriptionEn": "reason is finish, skip, escape or unavailable (no step has a usable anchor)."
+              },
+              {
+                "name": "step / defaultStep",
+                "type": "number",
+                "default": "0",
+                "description": "当前步在 steps 中的下标，受控 / 非受控。非受控时结束后回到起点。",
+                "descriptionEn": "Index of the current step in steps, controlled / uncontrolled. An uncontrolled step returns to the start after the tour ends."
+              },
+              {
+                "name": "onStepChange",
+                "type": "(step: number) => void",
+                "description": "换步时调用，参数是新步的下标；被跳过的步不会出现。",
+                "descriptionEn": "Called with the new step index; skipped steps never appear."
+              },
+              {
+                "name": "onFinish / onSkip",
+                "type": "() => void / (step) => void",
+                "description": "在最后一步点「完成」，或在某步点「跳过」。随后各自触发 onOpenChange。",
+                "descriptionEn": "Called on Done at the last step or Skip at any step, each followed by onOpenChange."
+              },
+              {
+                "name": "spotlight",
+                "type": "boolean",
+                "default": "false",
+                "description": "在锚点处挖洞的遮罩；不拦截指针，随窗口尺寸与滚动跟随锚点。",
+                "descriptionEn": "A mask with a cutout at the anchor. It does not intercept the pointer and follows window size and scroll."
+              },
+              {
+                "name": "className",
+                "type": "string",
+                "description": "追加到浮层。",
+                "descriptionEn": "Appended to the popup."
+              }
+            ]
+          }
+        ],
+        "keyboard": [
+          {
+            "keys": "← / →",
+            "description": "上一步 / 下一步（RTL 下方向相反）；焦点在输入控件内时不处理。",
+            "descriptionEn": "Previous / next step (reversed in RTL). Ignored while focus is in an input control."
+          },
+          {
+            "keys": "Esc",
+            "description": "退出引导并把焦点还给打开之前的位置。",
+            "descriptionEn": "Exit the tour and return focus to where it was before opening."
+          },
+          {
+            "keys": "Tab / Shift+Tab",
+            "description": "在浮层内的按钮间移动，也可回到页面。",
+            "descriptionEn": "Move between the popup's buttons, or back to the page."
+          }
+        ],
+        "notes": [
+          "浮层是非模态 dialog，名称取自当前步骤的标题，说明取自 description。",
+          "步骤的 target 用函数或 ref 时，锚点晚于 Tour 出现也能被找到；缺失的步骤在开发环境给出警告。",
+          "开启 spotlight 后页面依然可操作；需要阻断时用 Dialog。",
+          "减弱动效时遮罩的洞直接到位，滚动不再平滑。"
+        ],
+        "notesEn": [
+          "The popup is a non-modal dialog named by the current step's title and described by its description.",
+          "Function and ref targets are found even when the anchor appears after Tour mounts. Missing steps warn in development.",
+          "The page stays operable with spotlight on. Use Dialog when blocking is needed.",
+          "With reduced motion the cutout jumps into place and scrolling is no longer smooth."
+        ],
+        "design": {
+          "methods": [
+            "名实相符",
+            "进退相承",
+            "相成相制"
+          ],
+          "whenToUse": [
+            "首次使用时依次指出几处关键入口。"
+          ],
+          "avoid": [
+            "把必须完成的操作放进引导；用遮罩阻断页面；步数过多。"
+          ],
+          "composition": [
+            "锚点是页面上已有的元素；Tour 只持有当前步与打开请求，不改动锚点。"
+          ],
+          "stateOwner": {
+            "library": [
+              "当前步、可用步的解析与跳过、焦点移入与返回、定位。"
+            ],
+            "application": [
+              "何时开始、是否已看过、受控的 open 与 step。"
+            ]
+          },
+          "responsive": [
+            "浮层宽度受可用宽度限制；锚点在视口外时先滚入。"
+          ],
+          "customization": [
+            "浮层宽度与方向可调；遮罩外扩与圆角随系统尺度，不单设令牌。"
+          ]
+        },
+        "usageResolution": [
+          {
+            "name": "Tour",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/tour.tsx",
+              "line": 138
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/tour.tsx",
+              "line": 138
+            },
+            "status": "PRESENT"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "local",
+        "source": "apps/docs/src/content/tour/meta.ts",
+        "designBasis": "design.md",
+        "trackingStatus": "PRESENT",
+        "verificationStatus": "NOT_RUN",
+        "scope": "Current library authorship classification; this generator does not perform independent provenance comparison."
+      },
+      "catalog": {
+        "present": true,
+        "version": "5.2.0",
+        "source": "packages/ui/catalog.json"
+      },
+      "dist": {
+        "js": false,
+        "declarations": false,
+        "status": "NOT_RUN"
       },
       "consistency": {
         "status": "PASS",

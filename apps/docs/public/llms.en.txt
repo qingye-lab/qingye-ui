@@ -112,6 +112,7 @@
 - [ToggleGroup](/en/docs/components/toggle-group.md): A shared single or multiple set of toggles whose pressed fact persists.
 - [Toolbar](/en/docs/components/toolbar.md): Actual groups, arrow-key focus and operable actions.
 - [Tooltip](/en/docs/components/tooltip.md): Read shortcuts, formats and brief context on hover or focus.
+- [Tour](/en/docs/components/tour.md): A non-modal, step-by-step guide that points at page elements one after another, with an optional spotlight.
 - [Transfer](/en/docs/components/transfer.md): Move items between an available list and a selected list; the value is the keys on the selected side.
 - [Tree](/en/docs/components/tree.md): Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.
 - [TreeSelect](/en/docs/components/tree-select.md): Choose one node, or check several leaves, on a tree inside a popup.
