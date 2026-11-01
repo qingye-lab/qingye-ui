@@ -6,12 +6,13 @@ import { ScrollArea, ScrollAreaContent, ScrollAreaCorner, ScrollAreaRoot, Scroll
 /* jsdom 不做布局：用可改的尺寸桩表示「内容是否溢出」，并捕获 ResizeObserver 的回调来模拟尺寸变化。 */
 const metrics = { scrollHeight: 0, clientHeight: 0, scrollWidth: 0, clientWidth: 0 };
 let notify: (() => void) | undefined;
+let callbacks: (() => void)[] = [];
 function stubLayout(next: Partial<typeof metrics>) {
   Object.assign(metrics, { scrollHeight: 0, clientHeight: 0, scrollWidth: 0, clientWidth: 0 }, next);
   for (const key of Object.keys(metrics) as (keyof typeof metrics)[]) vi.spyOn(HTMLElement.prototype, key, "get").mockImplementation(() => metrics[key]);
-  vi.stubGlobal("ResizeObserver", class { constructor(callback: () => void) { notify = callback; } observe() {} unobserve() {} disconnect() {} });
+  vi.stubGlobal("ResizeObserver", class { constructor(callback: () => void) { callbacks.push(callback); notify = () => callbacks.forEach(run => run()); } observe() {} unobserve() {} disconnect() {} });
 }
-afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); notify = undefined; });
+afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals(); notify = undefined; callbacks = []; });
 
 test("an overflowing area is reachable by keyboard; one that fits is not a tab stop", () => {
   stubLayout({ scrollHeight: 400, clientHeight: 100 });
@@ -77,4 +78,62 @@ test("styled composition keeps distinct root and viewport refs and forwards actu
   expect(element.scrollTop).toBe(70);
   expect(element.scrollLeft).toBe(20);
   expect(onScroll).toHaveBeenCalledOnce();
+});
+
+/* fade：竖向的偏移读 scrollTop，横向读 scrollLeft；jsdom 里这两个是可写的普通属性。 */
+test("fade marks only the ends that are actually cut off, and follows scrolling", () => {
+  stubLayout({ scrollHeight: 400, clientHeight: 100 });
+  render(<ScrollArea fade aria-label="条目">很长</ScrollArea>);
+  const viewport = screen.getByLabelText("条目");
+  expect(viewport).not.toHaveAttribute("data-overflow-y-start");
+  expect(viewport).toHaveAttribute("data-overflow-y-end");
+  fireEvent.scroll(viewport, { target: { scrollTop: 150 } });
+  expect(viewport).toHaveAttribute("data-overflow-y-start");
+  expect(viewport).toHaveAttribute("data-overflow-y-end");
+  fireEvent.scroll(viewport, { target: { scrollTop: 300 } });
+  expect(viewport).toHaveAttribute("data-overflow-y-start");
+  expect(viewport).not.toHaveAttribute("data-overflow-y-end");
+  expect(viewport).not.toHaveAttribute("data-overflow-x-start");
+  expect(viewport).not.toHaveAttribute("data-overflow-x-end");
+});
+
+test("fade measures the horizontal axis independently, in either direction", () => {
+  stubLayout({ scrollWidth: 500, clientWidth: 200 });
+  render(<ScrollArea fade aria-label="条目">很宽</ScrollArea>);
+  const viewport = screen.getByLabelText("条目");
+  expect(viewport).toHaveAttribute("data-overflow-x-end");
+  expect(viewport).not.toHaveAttribute("data-overflow-x-start");
+  expect(viewport).not.toHaveAttribute("data-overflow-y-end");
+  fireEvent.scroll(viewport, { target: { scrollLeft: -300 } });
+  expect(viewport).toHaveAttribute("data-overflow-x-start");
+  expect(viewport).not.toHaveAttribute("data-overflow-x-end");
+});
+
+test("fade appears and disappears when the content grows or shrinks, and a fitting area has no fade", () => {
+  stubLayout({ scrollHeight: 100, clientHeight: 100 });
+  render(<ScrollArea fade aria-label="条目">短</ScrollArea>);
+  const viewport = screen.getByLabelText("条目");
+  expect(viewport.getAttributeNames().filter(name => name.startsWith("data-overflow"))).toEqual([]);
+  act(() => { metrics.scrollHeight = 400; notify?.(); });
+  expect(viewport).toHaveAttribute("data-overflow-y-end");
+  act(() => { metrics.scrollHeight = 100; notify?.(); });
+  expect(viewport).not.toHaveAttribute("data-overflow-y-end");
+});
+
+test("fade keeps the plain contract: ref, tabIndex and native events", () => {
+  stubLayout({ scrollHeight: 400, clientHeight: 100 });
+  const ref = createRef<HTMLDivElement>();
+  const onScroll = vi.fn();
+  render(<ScrollArea fade aria-label="条目" ref={ref} onScroll={onScroll}>末项</ScrollArea>);
+  const viewport = screen.getByLabelText("条目");
+  expect(ref.current).toBe(viewport);
+  expect(viewport).toHaveAttribute("tabindex", "0");
+  fireEvent.scroll(viewport, { target: { scrollTop: 10 } });
+  expect(onScroll).toHaveBeenCalledOnce();
+});
+
+test("without fade no edge attributes are exposed", () => {
+  stubLayout({ scrollHeight: 400, clientHeight: 100 });
+  render(<ScrollArea aria-label="条目">很长</ScrollArea>);
+  expect(screen.getByLabelText("条目").getAttributeNames().filter(name => name.startsWith("data-overflow"))).toEqual([]);
 });

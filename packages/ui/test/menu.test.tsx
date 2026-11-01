@@ -3,7 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogPopup, AlertDialogTitle } from "../src/components/alert-dialog";
-import { Menu, MenuCheckboxItem, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuRadioGroup, MenuRadioItem, MenuTrigger } from "../src/components/menu";
+import { Menu, MenuCheckboxItem, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuRadioGroup, MenuRadioItem, MenuSwitchItem, MenuTrigger } from "../src/components/menu";
 describe("Menu", () => {
   it("opens by keyboard, keeps disabled commands inert and returns focus on Escape", async () => {
     const user = userEvent.setup(); const action = vi.fn(); const ref = React.createRef<HTMLDivElement>();
@@ -68,5 +68,34 @@ describe("Menu danger commands", () => {
     render(<Example />);
     await user.click(screen.getByRole("menuitem", { name: "删除" }));
     expect(await screen.findByRole("alertdialog", { name: "删除这个项目？" })).toHaveAccessibleDescription("删除后无法恢复。");
+  });
+});
+describe("MenuSwitchItem", () => {
+  it("is a menuitemcheckbox with a decorative track, toggles by keyboard and reports the change", async () => {
+    const user = userEvent.setup(); const change = vi.fn();
+    render(<Menu defaultOpen><MenuTrigger>操作</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup>
+      <MenuSwitchItem closeOnClick={false} onCheckedChange={change}>静音</MenuSwitchItem>
+    </MenuPopup></MenuPositioner></MenuPortal></Menu>);
+    const item = screen.getByRole("menuitemcheckbox", { name: "静音" });
+    expect(item).toHaveAttribute("aria-checked", "false");
+    expect(item).toHaveAttribute("data-slot", "menu-switch-item");
+    expect(item.querySelector("[data-slot=menu-switch-track]")).toHaveAttribute("aria-hidden", "true");
+    item.focus(); await user.keyboard("{Enter}");
+    expect(item).toHaveAttribute("aria-checked", "true");
+    expect(change).toHaveBeenLastCalledWith(true, expect.anything());
+    await user.keyboard(" ");
+    expect(item).toHaveAttribute("aria-checked", "false");
+  });
+  it("honors the canceled-change protocol and stays inert when disabled", async () => {
+    const user = userEvent.setup(); const change = vi.fn();
+    render(<Menu defaultOpen><MenuTrigger>操作</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup>
+      <MenuSwitchItem closeOnClick={false} onCheckedChange={(_, details) => details.cancel()}>固定</MenuSwitchItem>
+      <MenuSwitchItem disabled defaultChecked onCheckedChange={change}>锁定</MenuSwitchItem>
+    </MenuPopup></MenuPositioner></MenuPortal></Menu>);
+    await user.click(screen.getByRole("menuitemcheckbox", { name: "固定" }));
+    expect(screen.getByRole("menuitemcheckbox", { name: "固定" })).toHaveAttribute("aria-checked", "false");
+    await user.click(screen.getByRole("menuitemcheckbox", { name: "锁定" }));
+    expect(screen.getByRole("menuitemcheckbox", { name: "锁定" })).toHaveAttribute("aria-checked", "true");
+    expect(change).not.toHaveBeenCalled();
   });
 });

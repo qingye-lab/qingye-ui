@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
-Source SHA-256: 576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34
+Source SHA-256: 735ccc846c990c30f8e0c87be3d494cc5d541b64a59db1c0e736f9616170d67a
 
 A context-menu enhancement for commands on the current object.
 
@@ -22,6 +22,7 @@ Right click is an enhancement; applications also provide a visible Menu using th
 ## Composition
 - ContextMenu / ContextMenuTrigger: Root and focusable trigger region for the same object.
 - ContextMenuPortal / ContextMenuPositioner / ContextMenuPopup: Floating parts belonging to the context root.
+- ContextMenuSwitchItem: A switch-style checked item sharing MenuSwitchItem's implementation.
 - ContextMenuItem / ContextMenuLinkItem / ContextMenuCheckboxItem / ContextMenuRadioItem / ContextMenuSubmenuTrigger: Reuses this library's public Menu parts and sizes.
 - ContextMenuGroup / ContextMenuGroupLabel / ContextMenuSeparator / ContextMenuSubmenu / ContextMenuRadioGroup / ContextMenuPrimitive: Groups, separators and public primitives.
 
@@ -48,6 +49,7 @@ Right click is an enhancement; applications also provide a visible Menu using th
 - ContextMenuSeparator: function; owner context-menu; PASS; props: MenuSeparatorProps
 - ContextMenuSubmenu: const; owner context-menu; UNVERIFIED
 - ContextMenuSubmenuTrigger: function; owner context-menu; PASS; props: MenuSubmenuTriggerProps
+- ContextMenuSwitchItem: function; owner context-menu; PASS; props: MenuSwitchItemProps
 - ContextMenuTrigger: function; owner context-menu; PASS; props: ContextMenuTriggerProps
 - ContextMenuTriggerProps: type; owner context-menu; PASS
 
@@ -119,6 +121,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
 - plus 284 inherited (@types/react 273, @base-ui/react 11); not expanded, see the installed declarations
 
+### ContextMenuSwitchItem
+- `inset?`: `boolean`.
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 285 inherited (@types/react 273, @base-ui/react 12); not expanded, see the installed declarations
+
 ### ContextMenuTrigger
 - no props declared by this library
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
@@ -140,6 +147,10 @@ Root and focusable trigger region for the same object.
 ### ContextMenuPortal / ContextMenuPositioner / ContextMenuPopup
 Floating parts belonging to the context root.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
+
+### ContextMenuSwitchItem
+A switch-style checked item sharing MenuSwitchItem's implementation.
+- checked / onCheckedChange / size / inset / disabled: MenuSwitchItemProps. Still a menuitemcheckbox; the track is decorative and assistive technology hears only the checked state.
 
 ### ContextMenuItem / ContextMenuLinkItem / ContextMenuCheckboxItem / ContextMenuRadioItem / ContextMenuSubmenuTrigger
 Reuses this library's public Menu parts and sizes.
@@ -165,5 +176,20 @@ export const meta = { title: "可见入口与右键", titleEn: "Visible and cont
 export default function Demo() {
   const [marked, setMarked] = React.useState(false); const label = marked ? "取消标记" : "标记"; const action = () => setMarked(value => !value);
   return <Stack><Inline><ContextMenu><ContextMenuTrigger className="p-(--qy-panel-padding-sm) border border-border">接入设备 · {marked ? "已标记" : "未标记"}</ContextMenuTrigger><ContextMenuPortal><ContextMenuPositioner><ContextMenuPopup><ContextMenuItem onClick={action}>{label}</ContextMenuItem></ContextMenuPopup></ContextMenuPositioner></ContextMenuPortal></ContextMenu><Menu><MenuTrigger>接入设备操作</MenuTrigger><MenuPortal><MenuPositioner><MenuPopup><MenuItem onClick={action}>{label}</MenuItem></MenuPopup></MenuPositioner></MenuPortal></Menu></Inline></Stack>;
+}
+```
+
+### 开关式勾选项
+Source: apps/docs/src/content/context-menu/demos/02-switch.tsx
+```tsx
+import * as React from "react";
+import { ContextMenu, ContextMenuTrigger, ContextMenuPortal, ContextMenuPositioner, ContextMenuPopup, ContextMenuSwitchItem } from "@qingye_lab/ui/components/context-menu";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "开关式勾选项", titleEn: "Switch-style checked item" } satisfies DemoMeta;
+export default function Demo() {
+  const [muted, setMuted] = React.useState(false);
+  return <ContextMenu><ContextMenuTrigger className="p-(--qy-panel-padding-sm) border border-border">接入设备 · {muted ? "已静音" : "未静音"}</ContextMenuTrigger><ContextMenuPortal><ContextMenuPositioner><ContextMenuPopup>
+    <ContextMenuSwitchItem checked={muted} onCheckedChange={setMuted} closeOnClick={false}>静音</ContextMenuSwitchItem>
+  </ContextMenuPopup></ContextMenuPositioner></ContextMenuPortal></ContextMenu>;
 }
 ```

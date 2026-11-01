@@ -20,6 +20,7 @@ export default {
     "MenuGroupLabel",
     "MenuSeparator",
     "MenuCheckboxItem",
+    "MenuSwitchItem",
     "MenuRadioGroup",
     "MenuRadioItem",
     "MenuSubmenuTrigger",
@@ -116,6 +117,25 @@ export default {
           "type": "Base UI part props",
           "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
           "descriptionEn": "Props and refs target actual elements; caller events and styles are preserved."
+        }
+      ]
+    },
+    {
+      "name": "MenuSwitchItem",
+      "description": "开关式的勾选项：语义仍是 menuitemcheckbox，尾部的标记换成一条开关槽。",
+      "descriptionEn": "A switch-style checked item: still a menuitemcheckbox, with the trailing mark replaced by a switch track.",
+      "props": [
+        {
+          "name": "checked / defaultChecked / onCheckedChange / disabled / closeOnClick",
+          "type": "Base UI CheckboxItem props",
+          "description": "与 MenuCheckboxItem 相同，含 details.cancel()；读屏听到的是「菜单项复选框，已勾选/未勾选」，槽是装饰（aria-hidden）。槽的几何与 Switch 一致（高一材、长两材、抓手等距内缩），固定在行尾，所以没有 markerPosition。适合立即生效的开关类设置；是一次性的选择用 MenuCheckboxItem。",
+          "descriptionEn": "Same as MenuCheckboxItem, including details.cancel(). Assistive technology hears a menu item checkbox, checked or unchecked; the track is decorative (aria-hidden). The track geometry matches Switch (one cai high, two wide, thumb inset evenly) and sits at the end of the row, so there is no markerPosition. Use it for settings that take effect immediately; use MenuCheckboxItem for plain choices."
+        },
+        {
+          "name": "size / inset",
+          "type": "xs | sm | md | lg | xl / boolean",
+          "description": "与 MenuCheckboxItem 相同的尺寸档与缩进。",
+          "descriptionEn": "Same size steps and indent as MenuCheckboxItem."
         }
       ]
     },

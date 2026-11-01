@@ -21,6 +21,7 @@ export default {
     "ContextMenuGroupLabel",
     "ContextMenuSeparator",
     "ContextMenuCheckboxItem",
+    "ContextMenuSwitchItem",
     "ContextMenuRadioItem",
     "ContextMenuSubmenuTrigger",
     "ContextMenuPrimitive"
@@ -58,6 +59,19 @@ export default {
           "type": "Base UI part props",
           "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
           "descriptionEn": "Props and refs target actual elements; caller events and styles are preserved."
+        }
+      ]
+    },
+    {
+      "name": "ContextMenuSwitchItem",
+      "description": "开关式的勾选项，与 MenuSwitchItem 共用实现。",
+      "descriptionEn": "A switch-style checked item sharing MenuSwitchItem's implementation.",
+      "props": [
+        {
+          "name": "checked / onCheckedChange / size / inset / disabled",
+          "type": "MenuSwitchItemProps",
+          "description": "语义仍是 menuitemcheckbox；槽是装饰，读屏只听到勾选状态。",
+          "descriptionEn": "Still a menuitemcheckbox; the track is decorative and assistive technology hears only the checked state."
         }
       ]
     },

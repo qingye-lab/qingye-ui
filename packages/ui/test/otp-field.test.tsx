@@ -170,3 +170,58 @@ test("a composition that fits is kept", () => {
   expect(input).toHaveValue("01青叶");
   expect(screen.queryByRole("status")).not.toBeInTheDocument();
 });
+
+test("groups draw separators between groups only and leave one real input for assistive technology", () => {
+  const { container } = render(<OtpField aria-label="编码" length={6} groups={[3, 3]} defaultValue="123456" />);
+  expect(screen.getAllByRole("textbox")).toHaveLength(1);
+  expect(screen.getByRole("textbox")).toHaveValue("123456");
+  expect(container.querySelectorAll("[data-slot=otp-field-segment]")).toHaveLength(6);
+  const separators = container.querySelectorAll("[data-slot=otp-field-separator]");
+  expect(separators).toHaveLength(1);
+  expect(separators[0]).toHaveAttribute("aria-hidden", "true");
+  const parts = [...container.querySelectorAll("[data-slot=otp-field-segment], [data-slot=otp-field-separator]")].map(node => node.getAttribute("data-slot"));
+  expect(parts.indexOf("otp-field-separator")).toBe(3);
+});
+
+test("three groups give two separators; no groups give none", () => {
+  const grouped = render(<OtpField aria-label="编码" length={8} groups={[2, 3, 3]} />);
+  expect(grouped.container.querySelectorAll("[data-slot=otp-field-separator]")).toHaveLength(2);
+  grouped.unmount();
+  const plain = render(<OtpField aria-label="编码" length={8} />);
+  expect(plain.container.querySelectorAll("[data-slot=otp-field-separator]")).toHaveLength(0);
+});
+
+test.each([[[2, 3]], [[4, 4]], [[0, 6]], [[2.5, 3.5]]])("groups %j that do not partition length 6 throw", groups => {
+  const error = vi.spyOn(console, "error").mockImplementation(() => {});
+  expect(() => render(<OtpField aria-label="编码" length={6} groups={groups} />)).toThrow();
+  error.mockRestore();
+});
+
+test("a placeholder fills every empty cell by code point and gives way to typed characters", () => {
+  const { container } = render(<OtpField aria-label="编码" length={4} placeholder="·" defaultValue="1" />);
+  const placeholders = () => container.querySelectorAll("[data-slot=otp-field-placeholder]");
+  expect(placeholders()).toHaveLength(3);
+  expect(screen.getByRole("textbox")).not.toHaveAttribute("placeholder");
+  fireEvent.change(screen.getByRole("textbox"), { target: { value: "12" } });
+  expect(placeholders()).toHaveLength(2);
+});
+
+test("a placeholder that is not exactly one code point is not drawn in the cells", () => {
+  const { container } = render(<OtpField aria-label="编码" length={4} placeholder="ab" />);
+  expect(container.querySelectorAll("[data-slot=otp-field-placeholder]")).toHaveLength(0);
+  const emoji = render(<OtpField aria-label="编码2" length={4} placeholder="🙂" />);
+  expect(emoji.container.querySelectorAll("[data-slot=otp-field-placeholder]")).toHaveLength(4);
+});
+
+test("mask hides filled characters visually while the value, paste and form data stay plain text", async () => {
+  const user = userEvent.setup();
+  const { container } = render(<form><OtpField aria-label="编码" length={4} mask name="code" /></form>);
+  const input = screen.getByRole("textbox") as HTMLInputElement;
+  expect(input).toHaveAttribute("type", "text");
+  await user.click(input);
+  await user.paste("1234");
+  expect(input).toHaveValue("1234");
+  expect(container.querySelectorAll("[data-slot=otp-field-mask]")).toHaveLength(4);
+  expect(container.querySelector("[data-slot=otp-field-segment]")).not.toHaveTextContent("1");
+  expect(new FormData(container.querySelector("form")!).get("code")).toBe("1234");
+});

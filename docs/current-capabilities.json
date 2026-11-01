@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-01T05:23:15.332Z",
-  "revision": "d5349fad42d4fc647054a00ef67360420ad1f9a2",
+  "generatedAt": "2026-11-01T05:23:57.800Z",
+  "revision": "39d6de0405819776194f7dd6c0357c38d3eb315d",
   "fingerprint": {
-    "sha256": "0f2b943fe14285b6b0af21fdfd323b6f461d9034fe91f6c5a7742c8bdc4a9c64",
+    "sha256": "491095e7b2ff13cf01537c09ceee8656c139547811e702c012ed0c9e2430fb7c",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -116,7 +116,7 @@
       },
       {
         "path": "apps/docs/src/content/context-menu/meta.ts",
-        "sha256": "9b3054b15e1f7911d0fef55ca58e726b47f235fde834b6f94e537be704566974"
+        "sha256": "8898e40e83be3d93d4251efd93bdf70f1680ec72a2ffb6d3dffa9f83bb49696a"
       },
       {
         "path": "apps/docs/src/content/copy-button/meta.ts",
@@ -156,7 +156,7 @@
       },
       {
         "path": "apps/docs/src/content/drawer/meta.ts",
-        "sha256": "e860b8ff7bd0671a7a5d8b1d3de5e879c2990e4ca900d38f62b3a1eafdfe5eac"
+        "sha256": "500b57f1e7de1800e8d693031d669e1efb7ccdeb1a25a4efaa885f09f02606d8"
       },
       {
         "path": "apps/docs/src/content/empty/meta.ts",
@@ -236,7 +236,7 @@
       },
       {
         "path": "apps/docs/src/content/menu/meta.ts",
-        "sha256": "ce0948d7a5d5e6050d9c8f6122a5bedaf9e4221d38ae8162227d7f68ad248cf6"
+        "sha256": "1a69b673183dcba0a6880543e6583b6727c436c63d99a3b8790b83f042ff507c"
       },
       {
         "path": "apps/docs/src/content/meter/meta.ts",
@@ -256,7 +256,7 @@
       },
       {
         "path": "apps/docs/src/content/otp-field/meta.ts",
-        "sha256": "7cb624796e40d7eb11bf7334f684ad55f2800124cb1e68bd6080d6f1483f26fa"
+        "sha256": "0b3c075b267600e40ab1789b4a36d3edb71937e841be1239dc22ab1829250750"
       },
       {
         "path": "apps/docs/src/content/page-header/meta.ts",
@@ -312,7 +312,7 @@
       },
       {
         "path": "apps/docs/src/content/scroll-area/meta.ts",
-        "sha256": "367485c813b7f8f8f9251e004f03b26cf15bbe08a3fed60f3736efa9ffe15960"
+        "sha256": "29d706b617be3d6ce36e387ef3e891a2fd90df931d255a5394731fca7eca86bb"
       },
       {
         "path": "apps/docs/src/content/search-input/meta.ts",
@@ -472,11 +472,11 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "23251aa89a6315afe4946a6af3a341385e084f4f71aca9f00db20ff37a9feae2"
+        "sha256": "c4ea5cd25d452518b430924ec9be7787fa75adc44e41c83659aa4ed7f787dbaa"
       },
       {
         "path": "packages/ui/motion.css",
-        "sha256": "34de94574a47d153899937a95d7e0c8f8e424244217f21915bec0b2e0c7f53af"
+        "sha256": "98b1248c4eff3a0279be63d99f9ce56490978154e27f73286f1881b672152309"
       },
       {
         "path": "packages/ui/package.json",
@@ -592,7 +592,7 @@
       },
       {
         "path": "packages/ui/src/components/context-menu.tsx",
-        "sha256": "576477f81ad788ebfb4c68ebe7a69749a717fceb8536e321ad506f3911684d34"
+        "sha256": "735ccc846c990c30f8e0c87be3d494cc5d541b64a59db1c0e736f9616170d67a"
       },
       {
         "path": "packages/ui/src/components/copy-button.tsx",
@@ -632,7 +632,7 @@
       },
       {
         "path": "packages/ui/src/components/drawer.tsx",
-        "sha256": "e79e156401236e2fe59b0372c1aa7744dc3a293167264bbd1f001674057b2a55"
+        "sha256": "63395abb3d4f641fe6170a87574be325b93daf28603ddc2e868606f68a69d652"
       },
       {
         "path": "packages/ui/src/components/empty.tsx",
@@ -712,7 +712,7 @@
       },
       {
         "path": "packages/ui/src/components/menu.tsx",
-        "sha256": "41394a38fa4f3f55c1d61b474e66140995bce81b4c4543b27545ce1ab540ed3e"
+        "sha256": "b92792b834d6c9f8884551bb4c8201109abd8ad265016f9a99028c3fa803cb28"
       },
       {
         "path": "packages/ui/src/components/meter.tsx",
@@ -732,7 +732,7 @@
       },
       {
         "path": "packages/ui/src/components/otp-field.tsx",
-        "sha256": "ade6360692f110cf8a976f05a073188bed5ecd91fc5354409287bb8e1f8689ec"
+        "sha256": "d6ac787b80dd6a4b61a5012e7336bbd9e3ad112e170bb3e505fc59913e6c400b"
       },
       {
         "path": "packages/ui/src/components/page-header.tsx",
@@ -788,7 +788,7 @@
       },
       {
         "path": "packages/ui/src/components/scroll-area.tsx",
-        "sha256": "0519efa99f42cc71c986065481f58f1a5abd93f3f5f715f74cd8a51672caa22c"
+        "sha256": "b707f3af7514ad7bdf32dc3e71fb5d70c08246f17b45fd5a0f2ad19d833e3005"
       },
       {
         "path": "packages/ui/src/components/search-input.tsx",
@@ -9468,7 +9468,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/context-menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/context-menu.tsx",
-            "line": 25
+            "line": 26
           }
         },
         {
@@ -9492,7 +9492,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/context-menu.tsx",
-            "line": 23
+            "line": 24
           }
         },
         {
@@ -9516,7 +9516,15 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/context-menu.tsx",
-            "line": 24
+            "line": 25
+          }
+        },
+        {
+          "name": "ContextMenuSwitchItem",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/context-menu.tsx",
+            "line": 23
           }
         },
         {
@@ -9559,6 +9567,7 @@
           "ContextMenuGroupLabel",
           "ContextMenuSeparator",
           "ContextMenuCheckboxItem",
+          "ContextMenuSwitchItem",
           "ContextMenuRadioItem",
           "ContextMenuSubmenuTrigger",
           "ContextMenuPrimitive"
@@ -9602,6 +9611,19 @@
                 "type": "Base UI part props",
                 "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
                 "descriptionEn": "Props and refs target actual elements; caller events and styles are preserved."
+              }
+            ]
+          },
+          {
+            "name": "ContextMenuSwitchItem",
+            "description": "开关式的勾选项，与 MenuSwitchItem 共用实现。",
+            "descriptionEn": "A switch-style checked item sharing MenuSwitchItem's implementation.",
+            "props": [
+              {
+                "name": "checked / onCheckedChange / size / inset / disabled",
+                "type": "MenuSwitchItemProps",
+                "description": "语义仍是 menuitemcheckbox；槽是装饰，读屏只听到勾选状态。",
+                "descriptionEn": "Still a menuitemcheckbox; the track is decorative and assistive technology hears only the checked state."
               }
             ]
           },
@@ -9864,7 +9886,7 @@
             "status": "PRESENT"
           },
           {
-            "name": "ContextMenuRadioItem",
+            "name": "ContextMenuSwitchItem",
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/context-menu.tsx",
@@ -9873,6 +9895,19 @@
             "rootEntry": {
               "path": "packages/ui/src/components/context-menu.tsx",
               "line": 23
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ContextMenuRadioItem",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/context-menu.tsx",
+              "line": 24
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/context-menu.tsx",
+              "line": 24
             },
             "status": "PRESENT"
           },
@@ -9881,11 +9916,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/context-menu.tsx",
-              "line": 24
+              "line": 25
             },
             "rootEntry": {
               "path": "packages/ui/src/components/context-menu.tsx",
-              "line": 24
+              "line": 25
             },
             "status": "PRESENT"
           },
@@ -9894,11 +9929,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/context-menu.tsx",
-              "line": 25
+              "line": 26
             },
             "rootEntry": {
               "path": "packages/ui/src/components/context-menu.tsx",
-              "line": 25
+              "line": 26
             },
             "status": "PRESENT"
           }
@@ -12546,7 +12581,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/drawer.tsx",
-            "line": 68
+            "line": 77
           }
         },
         {
@@ -12554,7 +12589,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/drawer.tsx",
-            "line": 62
+            "line": 71
           }
         },
         {
@@ -12570,7 +12605,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/drawer.tsx",
-            "line": 51
+            "line": 60
           }
         },
         {
@@ -12578,7 +12613,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/drawer.tsx",
-            "line": 65
+            "line": 74
           }
         },
         {
@@ -12586,7 +12621,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/drawer.tsx",
-            "line": 54
+            "line": 63
           }
         },
         {
@@ -12594,7 +12629,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/drawer.tsx",
-            "line": 55
+            "line": 64
           }
         },
         {
@@ -12602,7 +12637,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/drawer.tsx",
-            "line": 37
+            "line": 46
           }
         },
         {
@@ -12619,7 +12654,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/drawer/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/drawer.tsx",
-            "line": 72
+            "line": 81
           }
         },
         {
@@ -12635,7 +12670,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/drawer.tsx",
-            "line": 48
+            "line": 57
           }
         },
         {
@@ -12702,6 +12737,12 @@
                 "default": "\"down\"",
                 "description": "退出方向与所在边缘，沿用原语手势、snapPoints 与 activeSnapPoint 公共 API。",
                 "descriptionEn": "Exit direction and owning edge; retains public primitive gestures, snapPoints, and activeSnapPoint."
+              },
+              {
+                "name": "snapPoints / snapPoint / defaultSnapPoint / onSnapPointChange",
+                "type": "DrawerPrimitive.Root.Props",
+                "description": "停靠点：0 到 1 的数是视口高度的比例，大于 1 的数是像素，也可写 '148px' / '30rem'。只对 swipeDirection 为 down 或 up 的抽屉有效；默认停在第一个；面板必须比最高的停靠点更高（如 className=\"h-full\"）。停靠点由调用方事实持有，可受控。",
+                "descriptionEn": "Snap points: numbers 0 to 1 are fractions of the viewport height, numbers above 1 are pixels, and '148px' / '30rem' strings work too. Only effective when swipeDirection is down or up; the default is the first; the popup must be taller than the largest snap point (for example className=\"h-full\"). The active snap point is caller-owned and may be controlled."
               }
             ]
           },
@@ -12710,6 +12751,13 @@
             "description": "边缘工作面、遮罩与视口组合。",
             "descriptionEn": "A composition of edge workspace, backdrop, and viewport.",
             "props": [
+              {
+                "name": "inset",
+                "type": "boolean",
+                "default": "false",
+                "description": "悬浮式：四边离视口 --qy-space-2（与 Workspace 的侧栏、工作面离视口的边相同），四角圆（rounded-overlay，与 Dialog 同档）、四边有线；四个方向都可用。滑动关闭、吸附点、焦点与键盘与贴边时完全相同；关闭动画的出屏位移已把这段距离算入。",
+                "descriptionEn": "Floating variant: all four sides sit --qy-space-2 from the viewport (the same distance Workspace keeps for its sidebar and surface), with four rounded corners (rounded-overlay, the Dialog step) and four borders; available in all four directions. Swipe-to-close, snap points, focus and keyboard are identical to the edge-attached form; the exit animation travel accounts for the gap."
+              },
               {
                 "name": "initialFocus / finalFocus",
                 "type": "DialogFocusTarget",
@@ -12755,6 +12803,7 @@
           }
         ],
         "notes": [
+          "从屏幕边缘滑出抽屉：用 DrawerPrimitive.SwipeArea 放一条看不见的边缘热区（滑动方向默认与 Drawer 的 swipeDirection 相反），位置和宽度由调用方给；它不是控件，不进入 Tab 序列，所以仍须保留可见的触发器。库不另包一层。",
           "程序打开且无触发者时明确 finalFocus。",
           "长内容时用 DrawerHeader / DrawerContent / DrawerFooter：页眉与页脚固定，只有 DrawerContent 滚动；不用 DrawerContent 的写法仍是整面板滚动。",
           "草稿、保存、放弃与撤销由应用分别处理。",
@@ -12763,6 +12812,7 @@
           "ARIA实测驱动的契约收窄：Portal固定keepMounted=false，JS传true也不保留关闭DOM。应用显式持有草稿；Primitive自行组合仍有原语保留Portal隔离缺陷。"
         ],
         "notesEn": [
+          "To pull a drawer out from the screen edge, place DrawerPrimitive.SwipeArea as an invisible edge hot zone (its swipe direction defaults to the opposite of the Drawer swipeDirection); the caller gives its position and width. It is not a control and is not in the Tab order, so a visible trigger is still required. The library does not wrap it.",
           "Specify finalFocus when opening programmatically without a trigger.",
           "For long content use DrawerHeader / DrawerContent / DrawerFooter: header and footer stay fixed and only DrawerContent scrolls; without DrawerContent the whole panel still scrolls.",
           "Applications handle drafts, saving, abandonment, and undo separately.",
@@ -12857,11 +12907,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 37
+              "line": 46
             },
             "rootEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 37
+              "line": 46
             },
             "status": "PRESENT"
           },
@@ -12870,11 +12920,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 48
+              "line": 57
             },
             "rootEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 48
+              "line": 57
             },
             "status": "PRESENT"
           },
@@ -12883,11 +12933,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 51
+              "line": 60
             },
             "rootEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 51
+              "line": 60
             },
             "status": "PRESENT"
           },
@@ -12896,11 +12946,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 55
+              "line": 64
             },
             "rootEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 55
+              "line": 64
             },
             "status": "PRESENT"
           },
@@ -12909,11 +12959,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 62
+              "line": 71
             },
             "rootEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 62
+              "line": 71
             },
             "status": "PRESENT"
           },
@@ -12922,11 +12972,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 65
+              "line": 74
             },
             "rootEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 65
+              "line": 74
             },
             "status": "PRESENT"
           },
@@ -12935,11 +12985,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 68
+              "line": 77
             },
             "rootEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 68
+              "line": 77
             },
             "status": "PRESENT"
           },
@@ -12961,11 +13011,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 72
+              "line": 81
             },
             "rootEntry": {
               "path": "packages/ui/src/components/drawer.tsx",
-              "line": 72
+              "line": 81
             },
             "status": "PRESENT"
           }
@@ -18149,7 +18199,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 87
+            "line": 108
           }
         },
         {
@@ -18165,7 +18215,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 77
+            "line": 98
           }
         },
         {
@@ -18173,7 +18223,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 76
+            "line": 97
           }
         },
         {
@@ -18181,7 +18231,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 79
+            "line": 100
           }
         },
         {
@@ -18189,7 +18239,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 78
+            "line": 99
           }
         },
         {
@@ -18221,7 +18271,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 84
+            "line": 105
           }
         },
         {
@@ -18229,7 +18279,23 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 83
+            "line": 104
+          }
+        },
+        {
+          "name": "MenuSwitchItem",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/menu.tsx",
+            "line": 89
+          }
+        },
+        {
+          "name": "MenuSwitchItemProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/menu.tsx",
+            "line": 76
           }
         },
         {
@@ -18271,6 +18337,7 @@
           "MenuGroupLabel",
           "MenuSeparator",
           "MenuCheckboxItem",
+          "MenuSwitchItem",
           "MenuRadioGroup",
           "MenuRadioItem",
           "MenuSubmenuTrigger",
@@ -18375,6 +18442,25 @@
                 "type": "Base UI part props",
                 "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
                 "descriptionEn": "Props and refs target actual elements; caller events and styles are preserved."
+              }
+            ]
+          },
+          {
+            "name": "MenuSwitchItem",
+            "description": "开关式的勾选项：语义仍是 menuitemcheckbox，尾部的标记换成一条开关槽。",
+            "descriptionEn": "A switch-style checked item: still a menuitemcheckbox, with the trailing mark replaced by a switch track.",
+            "props": [
+              {
+                "name": "checked / defaultChecked / onCheckedChange / disabled / closeOnClick",
+                "type": "Base UI CheckboxItem props",
+                "description": "与 MenuCheckboxItem 相同，含 details.cancel()；读屏听到的是「菜单项复选框，已勾选/未勾选」，槽是装饰（aria-hidden）。槽的几何与 Switch 一致（高一材、长两材、抓手等距内缩），固定在行尾，所以没有 markerPosition。适合立即生效的开关类设置；是一次性的选择用 MenuCheckboxItem。",
+                "descriptionEn": "Same as MenuCheckboxItem, including details.cancel(). Assistive technology hears a menu item checkbox, checked or unchecked; the track is decorative (aria-hidden). The track geometry matches Switch (one cai high, two wide, thumb inset evenly) and sits at the end of the row, so there is no markerPosition. Use it for settings that take effect immediately; use MenuCheckboxItem for plain choices."
+              },
+              {
+                "name": "size / inset",
+                "type": "xs | sm | md | lg | xl / boolean",
+                "description": "与 MenuCheckboxItem 相同的尺寸档与缩进。",
+                "descriptionEn": "Same size steps and indent as MenuCheckboxItem."
               }
             ]
           },
@@ -18625,15 +18711,28 @@
             "status": "PRESENT"
           },
           {
+            "name": "MenuSwitchItem",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/menu.tsx",
+              "line": 89
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/menu.tsx",
+              "line": 89
+            },
+            "status": "PRESENT"
+          },
+          {
             "name": "MenuRadioGroup",
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 77
+              "line": 98
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 77
+              "line": 98
             },
             "status": "PRESENT"
           },
@@ -18642,11 +18741,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 79
+              "line": 100
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 79
+              "line": 100
             },
             "status": "PRESENT"
           },
@@ -18655,11 +18754,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 84
+              "line": 105
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 84
+              "line": 105
             },
             "status": "PRESENT"
           },
@@ -18668,11 +18767,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 87
+              "line": 108
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 87
+              "line": 108
             },
             "status": "PRESENT"
           }
@@ -20133,7 +20232,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/otp-field.tsx",
-            "line": 42
+            "line": 54
           }
         },
         {
@@ -20197,6 +20296,25 @@
                 "defaultEn": "strip whitespace and hyphens",
                 "description": "键入与粘贴的文本先经它归一化，再按 length 校验；返回值就是写入的文本。验证码常以分组形式送达（123 456、123-456），WCAG 3.3.8 不允许靠拒绝粘贴来为难人，所以默认去掉分隔。限定字符集用 text => text.replace(/\\D/g, \"\")；码本身含连字符时传 text => text。",
                 "descriptionEn": "Typed and pasted text is normalised first, then checked against length; the result is what is written. Codes often arrive grouped (123 456, 123-456) and WCAG 3.3.8 forbids refusing a paste, so whitespace and hyphens are stripped by default. Restrict the character set with text => text.replace(/\\D/g, \"\"); pass text => text when the code itself contains hyphens."
+              },
+              {
+                "name": "groups",
+                "type": "readonly number[]",
+                "description": "把 length 分成几组，组间画一条分隔线，如 [3, 3]。各组之和必须等于 length，且都是正整数，否则抛错。分隔线是装饰，读屏仍只遇到一个输入框；值里不含分隔符。",
+                "descriptionEn": "Splits length into groups with a separator drawn between them, for example [3, 3]. The groups must be positive integers summing to length, otherwise it throws. Separators are decorative; assistive technology still meets one input and the value contains no separator."
+              },
+              {
+                "name": "placeholder",
+                "type": "string",
+                "description": "恰好一个字符（以 code point 计）时显示在每个空格里，填入字符后让位；其他长度不在格内显示，只作为真实输入框的 placeholder 属性。",
+                "descriptionEn": "Exactly one character (counted in code points) is shown in every empty cell and gives way once filled; any other length is not drawn in the cells and only becomes the real input's placeholder attribute."
+              },
+              {
+                "name": "mask",
+                "type": "boolean",
+                "default": "false",
+                "description": "已填的格显示圆点而不是字符。只改呈现：值、粘贴、表单提交与读屏所读的文本不变。没有用 type=password——那会让浏览器把它当密码保存、触发密码管理器，并让 one-time-code 自动填充失效；验证码需要的是遮住旁人的视线，不是密码的存储语义。",
+                "descriptionEn": "Filled cells show a dot instead of the character. Presentation only: the value, paste, form submission and the text read by assistive technology are unchanged. type=password is not used because browsers would treat it as a password to save, prompt password managers and break one-time-code autofill; a code needs shoulder-surfing cover, not password storage semantics."
               },
               {
                 "name": "inputMode / autoComplete",
@@ -20322,11 +20440,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/otp-field.tsx",
-              "line": 42
+              "line": 54
             },
             "rootEntry": {
               "path": "packages/ui/src/components/otp-field.tsx",
-              "line": 42
+              "line": 54
             },
             "status": "PRESENT"
           }
@@ -24046,7 +24164,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 17
+            "line": 75
           }
         },
         {
@@ -24054,7 +24172,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 37
+            "line": 119
           }
         },
         {
@@ -24062,7 +24180,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 36
+            "line": 118
           }
         },
         {
@@ -24070,7 +24188,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 62
+            "line": 144
           }
         },
         {
@@ -24078,7 +24196,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 61
+            "line": 143
           }
         },
         {
@@ -24087,7 +24205,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/scroll-area/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 66
+            "line": 148
           }
         },
         {
@@ -24103,7 +24221,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 27
+            "line": 109
           }
         },
         {
@@ -24111,7 +24229,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 26
+            "line": 108
           }
         },
         {
@@ -24119,7 +24237,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 42
+            "line": 124
           }
         },
         {
@@ -24127,7 +24245,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 41
+            "line": 123
           }
         },
         {
@@ -24135,7 +24253,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 53
+            "line": 135
           }
         },
         {
@@ -24143,7 +24261,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 52
+            "line": 134
           }
         },
         {
@@ -24151,7 +24269,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 32
+            "line": 114
           }
         },
         {
@@ -24159,7 +24277,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 31
+            "line": 113
           }
         }
       ],
@@ -24207,6 +24325,13 @@
                 "type": "div props",
                 "description": "消费布局给出 height/maxHeight 与宽度；默认 overflow:auto。",
                 "descriptionEn": "Consumer layout supplies height/maxHeight and width; overflow defaults to auto."
+              },
+              {
+                "name": "fade",
+                "type": "boolean",
+                "default": "false",
+                "description": "边缘渐隐：只在内容确实被切掉的一端渐隐，滚到头的一端不渐隐；横纵两向各自量。做法与 TabsList 相同（遮罩、宽度基准、RTL 翻转）；渐隐宽度取一个填值控件行高（预设）。边缘事实以 data-overflow-x-start/end 与 data-overflow-y-start/end 暴露。",
+                "descriptionEn": "Edge fade: only the end that is actually cut off fades; an end scrolled to its limit does not. Both axes are measured independently. Built like TabsList (mask, width basis, RTL flip); the fade width is one fill-control row height (a preset). The edge facts are exposed as data-overflow-x-start/end and data-overflow-y-start/end."
               },
               {
                 "name": "tabIndex",
@@ -24278,6 +24403,7 @@
           }
         ],
         "notes": [
+          "fade 的遮罩罩住整个盒子，所以盒内原生滚动条的被渐隐一端也会变淡；需要完整可见的滚动条时用 ScrollAreaRoot 组合，或不开 fade。",
           "分工：默认用 ScrollArea（一个元素，原生滚动条，尊重平台设置）；只有设计要求自绘滚动条时才用 ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent / ScrollAreaScrollbar / ScrollAreaThumb / ScrollAreaCorner 组合。两者互不嵌套，ScrollArea 不接受 Scrollbar 子部件。",
           "ScrollArea 保持原有单一原生视口与 ref 契约；原生滚动条可见性尊重平台设置。",
           "需要可控滚动条时用 Root > Viewport > Content，Scrollbar/Thumb 与 Viewport 并列；Viewport 继续保留原生滚轮、键盘与触摸滚动。",
@@ -24285,6 +24411,7 @@
           "尺寸由消费布局给出；内容需全量渲染时使用此组件，长集合可使用 VirtualList。"
         ],
         "notesEn": [
+          "The fade mask covers the whole box, so the faded end of the native scrollbar inside it also dims; when a fully visible scrollbar is required, compose with ScrollAreaRoot or leave fade off.",
           "Division of labor: use ScrollArea by default (one element, native scrollbars that follow platform settings); reach for ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent / ScrollAreaScrollbar / ScrollAreaThumb / ScrollAreaCorner only when the design requires drawn scrollbars. Do not nest one inside the other; ScrollArea does not accept Scrollbar parts.",
           "ScrollArea retains its single native viewport and ref contract; native scrollbar visibility respects platform preferences.",
           "For styled scrollbars use Root > Viewport > Content, with Scrollbar/Thumb alongside Viewport. Native wheel, keyboard and touch scrolling stays on Viewport.",
@@ -24345,11 +24472,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 17
+              "line": 75
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 17
+              "line": 75
             },
             "status": "PRESENT"
           },
@@ -24358,11 +24485,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 27
+              "line": 109
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 27
+              "line": 109
             },
             "status": "PRESENT"
           },
@@ -24371,11 +24498,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 32
+              "line": 114
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 32
+              "line": 114
             },
             "status": "PRESENT"
           },
@@ -24384,11 +24511,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 37
+              "line": 119
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 37
+              "line": 119
             },
             "status": "PRESENT"
           },
@@ -24397,11 +24524,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 42
+              "line": 124
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 42
+              "line": 124
             },
             "status": "PRESENT"
           },
@@ -24410,11 +24537,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 53
+              "line": 135
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 53
+              "line": 135
             },
             "status": "PRESENT"
           },
@@ -24423,11 +24550,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 62
+              "line": 144
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 62
+              "line": 144
             },
             "status": "PRESENT"
           },
@@ -24436,11 +24563,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 66
+              "line": 148
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 66
+              "line": 148
             },
             "status": "PRESENT"
           }

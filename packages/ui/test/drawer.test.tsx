@@ -2,7 +2,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test } from "vitest";
-import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerPopup, DrawerTitle, DrawerTrigger } from "../src/components/drawer";
+import { Drawer, DrawerClose, DrawerContent, DrawerFooter, DrawerHeader, DrawerPopup, DrawerPrimitive, DrawerTitle, DrawerTrigger } from "../src/components/drawer";
 import { Dialog, DialogPopup, DialogTitle, DialogTrigger } from "../src/components/dialog";
 import { Input } from "../src/components/input";
 
@@ -49,4 +49,36 @@ test("drawer header and footer sit beside the scrolling content, not inside it",
   expect(content).not.toContainElement(screen.getByRole("button", { name: "完成" }));
   expect(screen.getByRole("button", { name: "完成" }).closest("[data-slot=drawer-footer]")?.parentElement).toBe(surface);
   expect(screen.getByText("筛选").closest("[data-slot=drawer-header]")?.parentElement).toBe(surface);
+});
+
+test.each(["down", "up", "left", "right"] as const)("inset in direction %s changes only the surface, not the dialog semantics or focus return", async direction => {
+  const user = userEvent.setup();
+  render(<Drawer swipeDirection={direction}><DrawerTrigger>打开</DrawerTrigger><DrawerPopup inset><DrawerTitle>面板</DrawerTitle><DrawerClose>关闭</DrawerClose></DrawerPopup></Drawer>);
+  await user.click(screen.getByRole("button", { name: "打开" }));
+  const surface = await screen.findByRole("dialog", { name: "面板" });
+  expect(surface).toHaveAttribute("data-inset");
+  expect(surface).toHaveAttribute("data-swipe-direction", direction);
+  expect(surface).toHaveAttribute("aria-modal", "true");
+  await user.click(screen.getByRole("button", { name: "关闭" }));
+  await waitFor(() => expect(screen.queryByRole("dialog")).toBeNull());
+  expect(screen.getByRole("button", { name: "打开" })).toHaveFocus();
+});
+
+test("without inset the surface carries no inset marker", async () => {
+  render(<Drawer defaultOpen><DrawerPopup><DrawerTitle>面板</DrawerTitle></DrawerPopup></Drawer>);
+  expect(await screen.findByRole("dialog", { name: "面板" })).not.toHaveAttribute("data-inset");
+});
+
+test("a drawer with snap points is still the same modal dialog (snap geometry itself needs a real browser)", async () => {
+  render(<Drawer defaultOpen snapPoints={[0.4, 1]} defaultSnapPoint={0.4}><DrawerPopup><DrawerTitle>面板</DrawerTitle><DrawerContent>内容</DrawerContent></DrawerPopup></Drawer>);
+  const surface = await screen.findByRole("dialog", { name: "面板" });
+  expect(surface).toHaveAttribute("aria-modal", "true");
+  expect(surface).toHaveAttribute("data-swipe-direction", "down");
+});
+
+test("the swipe area is a real part that opens the drawer's side without being a focusable control", () => {
+  render(<Drawer swipeDirection="left"><DrawerPrimitive.SwipeArea data-testid="edge" /><DrawerPopup><DrawerTitle>面板</DrawerTitle></DrawerPopup></Drawer>);
+  const area = screen.getByTestId("edge");
+  expect(area).not.toHaveAttribute("tabindex");
+  expect(screen.queryByRole("dialog")).toBeNull();
 });

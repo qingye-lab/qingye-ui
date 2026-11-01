@@ -309,7 +309,7 @@
       "component": "context-menu",
       "part": "ContextMenuRadioItem",
       "prop": "markerPosition",
-      "declaredAt": "packages/ui/src/components/menu.tsx:78",
+      "declaredAt": "packages/ui/src/components/menu.tsx:99",
       "viaComponent": "menu"
     },
     {

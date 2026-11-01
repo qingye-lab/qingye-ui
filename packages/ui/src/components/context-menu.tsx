@@ -1,6 +1,6 @@
 "use client";
 import { ContextMenu as ContextMenuPrimitive } from "@base-ui/react/context-menu";
-import { MenuCheckboxItem, MenuGroup, MenuGroupLabel, MenuItem, MenuLinkItem, MenuPopup, MenuPositioner, MenuRadioItem, MenuSeparator, MenuSubmenuTrigger, type MenuCheckboxItemProps, type MenuGroupProps, type MenuGroupLabelProps, type MenuItemProps, type MenuLinkItemProps, type MenuPopupProps, type MenuPositionerProps, type MenuRadioItemProps, type MenuSeparatorProps, type MenuSubmenuTriggerProps } from "./menu";
+import { MenuCheckboxItem, MenuGroup, MenuGroupLabel, MenuItem, MenuLinkItem, MenuPopup, MenuPositioner, MenuRadioItem, MenuSeparator, MenuSwitchItem, MenuSubmenuTrigger, type MenuCheckboxItemProps, type MenuGroupProps, type MenuGroupLabelProps, type MenuItemProps, type MenuLinkItemProps, type MenuPopupProps, type MenuPositionerProps, type MenuRadioItemProps, type MenuSeparatorProps, type MenuSwitchItemProps, type MenuSubmenuTriggerProps } from "./menu";
 import { cn } from "../utils";
 
 export type ContextMenuProps = ContextMenuPrimitive.Root.Props;
@@ -20,6 +20,7 @@ export function ContextMenuGroup(props: MenuGroupProps) { return <MenuGroup data
 export function ContextMenuGroupLabel(props: MenuGroupLabelProps) { return <MenuGroupLabel data-slot="context-menu-group-label" {...props} />; }
 export function ContextMenuSeparator(props: MenuSeparatorProps) { return <MenuSeparator data-slot="context-menu-separator" {...props} />; }
 export function ContextMenuCheckboxItem(props: MenuCheckboxItemProps) { return <MenuCheckboxItem data-slot="context-menu-checkbox-item" {...props} />; }
+export function ContextMenuSwitchItem(props: MenuSwitchItemProps) { return <MenuSwitchItem data-slot="context-menu-switch-item" {...props} />; }
 export function ContextMenuRadioItem(props: MenuRadioItemProps) { return <MenuRadioItem data-slot="context-menu-radio-item" {...props} />; }
 export function ContextMenuSubmenuTrigger(props: MenuSubmenuTriggerProps) { return <MenuSubmenuTrigger data-slot="context-menu-submenu-trigger" {...props} />; }
 export { ContextMenuPrimitive };
