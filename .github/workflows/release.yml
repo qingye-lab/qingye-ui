@@ -102,7 +102,7 @@ jobs:
             echo "$name@$version is already on npm"
           else
             tag=latest; case "$version" in *-*) tag=next;; esac
-            npm publish "dist-pack/qingye_lab-ui-$version.tgz" --access public --tag "$tag" --registry https://registry.npmjs.org
+            npm publish "./dist-pack/qingye_lab-ui-$version.tgz" --access public --tag "$tag" --registry https://registry.npmjs.org
           fi
       - name: Create release
         env:
