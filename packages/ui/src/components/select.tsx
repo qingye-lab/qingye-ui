@@ -187,7 +187,7 @@ export function SelectValue({ placeholder, className, style, render, children, .
     const ordered = values.map((item, position) => ({ item, position, rank: index.get(item)?.index ?? Number.POSITIVE_INFINITY }))
       .sort((a, b) => a.rank - b.rank || a.position - b.position);
     const names = ordered.map(({ item }) => index.get(item)?.label ?? itemToStringLabel?.(item) ?? String(item));
-    if (names.length <= PICKER_NAMED) return names.map((name, position) => <React.Fragment key={position}>{position > 0 ? messages.selectSeparator : null}{name}</React.Fragment>);
+    if (names.length <= PICKER_NAMED) return names.map((name, position) => <React.Fragment key={position}>{position > 0 ? messages.treeSelectSeparator : null}{name}</React.Fragment>);
     return <>{names[0]} {messages.selectMore(names.length - 1)}</>;
   };
   const summary = multiple && children == null ? summarize : undefined;
@@ -200,7 +200,7 @@ export function SelectValue({ placeholder, className, style, render, children, .
   // （以字数比长短，是近似；名称不是纯文字时不估计，宽度跟随内容）。
   const longest = labels.every(label => typeof label === "string" || typeof label === "number") ? labels.map(String).sort((a, b) => b.length - a.length) : [];
   const multipleSizers = longest.length === 0 ? [] : [
-    longest.slice(0, PICKER_NAMED).join(messages.selectSeparator),
+    longest.slice(0, PICKER_NAMED).join(messages.treeSelectSeparator),
     ...(longest.length > PICKER_NAMED ? [`${longest[0]} ${messages.selectMore(longest.length - 1)}`] : []),
   ];
   const sizers = children != null ? [] : multiple ? [...multipleSizers, ...placeholderSizer] : [...labels, ...placeholderSizer];

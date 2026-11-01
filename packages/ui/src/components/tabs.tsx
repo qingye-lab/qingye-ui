@@ -35,8 +35,14 @@ const tabsListFadeClassName = "[--qy-tabs-fade:var(--qy-fill-height)] [--qy-tabs
 export function TabsList({ className, ref, ...props }: TabsListProps) {
   const [listRef, edges] = useOverflowEdges<HTMLDivElement>(ref);
   const track = React.useContext(AppearanceContext) === "track";
-  // 轨道外观下，列表是 inline-flex：在纵排的根里要 self-start 才不被拉成整行；max-w-full 让放不下时仍是横向滚动，而不是撑破父级。
-  return <TabsPrimitive.List data-slot="tabs-list" {...props} ref={listRef} data-overflow-start={edges.start ? "" : undefined} data-overflow-end={edges.end ? "" : undefined} className={state => cn(track ? trackClassName("md") : navLineListClassName, state.orientation === "vertical" ? (track ? "flex-col items-stretch" : "flex-col gap-0 self-start border-b-0 border-s") : cn("overflow-x-auto overflow-y-hidden overscroll-x-contain", track && "self-start", tabsListFadeClassName), typeof className === "function" ? className(state) : className)} />;
+  const listClassName = (state: TabsPrimitive.List.State) => typeof className === "function" ? className(state) : className;
+  const scroll = cn("overflow-x-auto overflow-y-hidden overscroll-x-contain", tabsListFadeClassName);
+  const list = <TabsPrimitive.List data-slot="tabs-list" {...props} ref={listRef} data-overflow-start={edges.start ? "" : undefined} data-overflow-end={edges.end ? "" : undefined} className={state => track
+    ? cn("flex min-w-0 gap-(--qy-track-inset)", state.orientation === "vertical" ? "flex-col items-stretch" : scroll, listClassName(state))
+    : cn(navLineListClassName, state.orientation === "vertical" ? "flex-col gap-0 self-start border-b-0 border-s" : scroll, listClassName(state))} />;
+  // 轨道外观：轨道的边框与底面画在外层，滚动与渐隐留在里面的列表上，放不下时只有标签渐隐，轨道外框保持完整。
+  // 外层是 inline-flex，self-start 让它在纵排的根里不被拉成整行；max-w-full / min-w-0（trackClassName 自带）让放不下时由里面的列表横向滚动。
+  return track ? <div data-slot="tabs-track" className={cn(trackClassName("md"), "self-start")}>{list}</div> : list;
 }
 export type TabsTabProps = TabsPrimitive.Tab.Props;
 export function TabsTab({ className, ...props }: TabsTabProps) {

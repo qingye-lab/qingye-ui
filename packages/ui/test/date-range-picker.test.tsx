@@ -235,9 +235,9 @@ test("month granularity: a range is picked on the month grid, committed from the
   expect(new FormData(form).get("range.to")).toBe("2026-04-30");
 });
 
-test("period endpoints are typed as text, adopted on Enter, normalized to the period, and an unparsable text keeps the pair incomplete", async () => {
-  const change = vi.fn();
-  render(<UILocaleProvider locale={enUS}><DateRangePicker granularity="quarter" defaultValue={{ from: new Date(2026, 0, 1), to: new Date(2026, 5, 30) }} onValueChange={change} /><button>after</button></UILocaleProvider>);
+test("period endpoints are typed as text, adopted on Enter, normalized to the period, and an unparsable text is reported as unrecognized", async () => {
+  const change = vi.fn(), invalid = vi.fn();
+  render(<UILocaleProvider locale={enUS}><DateRangePicker granularity="quarter" defaultValue={{ from: new Date(2026, 0, 1), to: new Date(2026, 5, 30) }} onValueChange={change} onInvalid={invalid} /><button>after</button></UILocaleProvider>);
   const start = screen.getByRole("textbox", { name: /Start date/ }), end = screen.getByRole("textbox", { name: /End date/ });
   expect(start).toHaveValue("Q1 2026");
   expect(end).toHaveValue("Q2 2026");
@@ -253,6 +253,32 @@ test("period endpoints are typed as text, adopted on Enter, normalized to the pe
   expect(change).toHaveBeenCalledTimes(1);
   expect(start).toHaveValue("soon");
   expect(start).toHaveAttribute("aria-invalid", "true");
+  expect(invalid.mock.lastCall![1]).toBe("unrecognized");
+});
+
+test("period ranges obey the calendar's range rules: length over the whole normalized span, and excludeDisabled refuses a fully disabled period inside", async () => {
+  const change = vi.fn(), invalid = vi.fn();
+  // 二月整月禁用；三月只禁用一天，仍可选。
+  const disabled = [{ from: new Date(2026, 1, 1), to: new Date(2026, 1, 28) }, new Date(2026, 2, 10)];
+  render(<UILocaleProvider locale={enUS}><DateRangePicker granularity="month" calendarProps={{ max: 90, disabled, excludeDisabled: true }} onValueChange={change} onInvalid={invalid} /><button>after</button></UILocaleProvider>);
+  const start = screen.getByRole("textbox", { name: /Start date/ }), end = screen.getByRole("textbox", { name: /End date/ });
+  await userEvent.type(start, "3/2026{Enter}");
+  await userEvent.type(end, "4/2026{Enter}");
+  expect(change.mock.lastCall![0]).toEqual({ from: new Date(2026, 2, 1), to: new Date(2026, 3, 30) });
+  // 三月一日到五月三十一日相差 91 天，超过 90；一月一日到三月三十一日相差 89 天，不超过。
+  await userEvent.clear(end);
+  await userEvent.type(end, "5/2026{Enter}");
+  await userEvent.click(screen.getByRole("button", { name: "after" }));
+  expect(change).toHaveBeenCalledTimes(1);
+  expect(invalid.mock.lastCall![1]).toBe("length");
+  // 一月到三月跨过整月禁用的二月。
+  await userEvent.clear(start);
+  await userEvent.type(start, "1/2026{Enter}");
+  await userEvent.clear(end);
+  await userEvent.type(end, "3/2026{Enter}");
+  await userEvent.click(screen.getByRole("button", { name: "after" }));
+  expect(change).toHaveBeenCalledTimes(1);
+  expect(invalid.mock.lastCall![1]).toBe("disabled");
 });
 
 test("week granularity normalizes a controlled range to whole weeks and presets are normalized to the period", async () => {

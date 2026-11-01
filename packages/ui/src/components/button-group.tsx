@@ -4,6 +4,7 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
 import { isName, received } from "../require-name";
+import { borderedPadding, controlSizes } from "../control-size";
 import { cn } from "../utils";
 import { Inline, type InlineProps } from "./layout";
 import { Separator, type SeparatorProps } from "./separator";
@@ -23,12 +24,14 @@ export type ButtonGroupProps = Omit<InlineProps, "gap"> & {
  * 两条边框叠成一条；只有整组的首尾保留外侧圆角，其余相邻的角取直。
  * 压住一道线后，被压的那一边是后来者的边，所以悬停与聚焦的成员要升到上层（z-10），它的边线才完整可见；
  * 组上的 `isolate` 把这个层级关在组内，不与页面上其他层叠。
- * 压线只作用于「两个成员相邻」：中间隔着 ButtonGroupSeparator 时，分隔线自己占一道线，不再压。
+ * 压线只作用于「两个带边线的成员相邻」：两边都有线才有两条线可叠；任一侧没有边线（solid、quiet）时直接相贴，
+ * 压线反而会让无线的一方盖住对方一道宽度。中间隔着 ButtonGroupSeparator 时，分隔线自己占一道线，也不压。
  * 圆角取直用逻辑方向（rounded-s / rounded-e），RTL 下仍然是整组的外侧保留圆角。
  */
 // Tailwind 靠扫描源码里的完整字面量生成样式，所以这里不拼接字符串。
-const attachedHorizontal = "isolate gap-0! [&>*:not(:first-child)]:rounded-s-none [&>*:not(:last-child)]:rounded-e-none [&>:not([data-slot=button-group-separator])+:not([data-slot=button-group-separator])]:-ms-line";
-const attachedVertical = "isolate gap-0! [&>*:not(:first-child)]:rounded-t-none [&>*:not(:last-child)]:rounded-b-none [&>:not([data-slot=button-group-separator])+:not([data-slot=button-group-separator])]:-mt-line";
+// 带边线的成员：bordered 按钮（含 render 成 Button 的触发器）、Toggle、组内文字段、Select 触发器、输入框。
+const attachedHorizontal = "isolate gap-0! [&>*:not(:first-child)]:rounded-s-none [&>*:not(:last-child)]:rounded-e-none [&>:is([data-variant=bordered],[data-slot=toggle],[data-slot=button-group-text],[data-slot=select-trigger],[data-slot=input-control])+:is([data-variant=bordered],[data-slot=toggle],[data-slot=button-group-text],[data-slot=select-trigger],[data-slot=input-control])]:-ms-line";
+const attachedVertical = "isolate gap-0! [&>*:not(:first-child)]:rounded-t-none [&>*:not(:last-child)]:rounded-b-none [&>:is([data-variant=bordered],[data-slot=toggle],[data-slot=button-group-text],[data-slot=select-trigger],[data-slot=input-control])+:is([data-variant=bordered],[data-slot=toggle],[data-slot=button-group-text],[data-slot=select-trigger],[data-slot=input-control])]:-mt-line";
 const attachedRaise = "[&>*:is(:hover,:focus-visible,:focus-within)]:z-10";
 
 /** 动作共有一个范围与一个名称（role="group"），但各自保留名称、焦点、状态与禁用。
@@ -41,18 +44,10 @@ export function ButtonGroup({ orientation = "horizontal", attached = false, clas
 }
 
 /*
- * 静态文字段的几何跟按钮同档：同一档的最小高度、文字档、带框留白（bordered 的 --qy-control-*-padding-bordered）与圆角，
+ * 静态文字段的几何跟按钮同档：与 Button 读同一张尺寸表与带框留白（src/control-size.ts），
  * 所以与同档 bordered 按钮同高、同边线。它是静态内容，不是命令：用内嵌面（surface-inset）而不是按钮的卡片面，
  * 字为辅助色，没有悬停、按下和指针样式。内嵌面与字色是预设，没有关系推出它们——只有「静态区别于可点」这一条约束。
  */
-const textSizes = {
-  xs: "rounded-xs min-h-(--qy-control-xs-narrow) px-(--qy-control-xs-padding-bordered) text-control-xs-mobile sm:min-h-(--qy-control-xs) sm:text-control-xs [&_svg]:size-(--qy-control-xs-icon-narrow) sm:[&_svg]:size-(--qy-control-xs-icon)",
-  sm: "rounded-sm min-h-(--qy-control-sm-narrow) px-(--qy-control-sm-padding-bordered) text-control-sm-mobile sm:min-h-(--qy-control-sm) sm:text-control-sm [&_svg]:size-(--qy-control-sm-icon-narrow) sm:[&_svg]:size-(--qy-control-sm-icon)",
-  md: "rounded-(--qy-fill-radius) min-h-(--qy-fill-height-narrow) px-(--qy-fill-padding) text-control-md-mobile sm:min-h-(--qy-fill-height) sm:text-control-md [&_svg]:size-(--qy-fill-icon-narrow) sm:[&_svg]:size-(--qy-fill-icon)",
-  lg: "rounded-control min-h-(--qy-control-lg-narrow) px-(--qy-control-lg-padding-bordered) text-control-lg-mobile sm:min-h-(--qy-control-lg) sm:text-control-lg [&_svg]:size-(--qy-control-lg-icon-narrow) sm:[&_svg]:size-(--qy-control-lg-icon)",
-  xl: "rounded-control min-h-(--qy-control-xl-narrow) px-(--qy-control-xl-padding-bordered) text-control-xl-mobile sm:min-h-(--qy-control-xl) sm:text-control-xl [&_svg]:size-(--qy-control-xl-icon-narrow) sm:[&_svg]:size-(--qy-control-xl-icon)",
-};
-
 export type ButtonGroupTextProps = useRender.ComponentProps<"span"> & {
   /** 与同组按钮同一档。 */
   size?: NonNullable<ButtonProps["size"]>;
@@ -64,7 +59,7 @@ export function ButtonGroupText({ size = "md", render, className, ref, ...props 
     defaultTagName: "span", render, ref,
     props: mergeProps({
       "data-slot": "button-group-text",
-      className: cn("relative inline-flex max-w-full min-w-0 shrink-0 items-center justify-center gap-(--qy-control-content-gap) border border-(--qy-button-bordered-border) bg-surface-inset text-center font-medium text-muted-foreground [&_svg]:shrink-0", textSizes[size], className),
+      className: cn("relative inline-flex max-w-full min-w-0 shrink-0 items-center justify-center gap-(--qy-control-content-gap) border border-(--qy-button-bordered-border) bg-surface-inset text-center font-medium text-muted-foreground [&_svg]:shrink-0", controlSizes[size], borderedPadding[size], className),
     }, props),
   });
 }

@@ -5,6 +5,7 @@ import * as React from "react";
 import { popupOffset, useFloatingLayer } from "../floating-layer";
 import { Button, buttonVariants, type ButtonProps } from "./button";
 import { commandItemFrame, overlayItemClassName } from "../overlay-item";
+import { switchOffClassName, switchThumbGeometry, switchTrackGeometry, switchVariables } from "../switch-geometry";
 import { cn } from "../utils";
 
 export type MenuProps<Payload = unknown> = MenuPrimitive.Root.Props<Payload>;
@@ -75,22 +76,14 @@ export function MenuCheckboxItem({ size = "md", inset = false, markerPosition = 
 }
 export type MenuSwitchItemProps = MenuPrimitive.CheckboxItem.Props & MenuSizing;
 // 开关式的勾选项：语义仍是 menuitemcheckbox（原语的 CheckboxItem，data-checked 与 aria-checked 不变），只把尾部的对勾标记换成一条槽。
-// 槽是装饰（aria-hidden），读屏只听到「菜单项复选框，已勾选/未勾选」；它与 switch.tsx 的 Switch 同一套关系，但 switch.tsx 的类名无法在这里复用，
-// 所以几何在此照抄并保持一致——改 Switch 的槽/抓手几何时须同步这里：
-// 槽高一材（窄屏一材加一分）、长为高的两倍，圆角取控件圆角与槽高四分之一的较小者；抓手与槽等距内缩（焦点线宽 + 焦点环宽），圆角同心换算；
-// 抓手平移距离 = 槽高（几何恒等）；关闭是承载面 + 输入线 + 辅助色，开启是填充，与 Switch 同。
+// 槽是装饰（aria-hidden），读屏只听到「菜单项复选框，已勾选/未勾选」；槽与抓手的几何、关闭态画法与 Switch 读同一份（src/switch-geometry.ts），开启是填充，与 Switch 同。
 // 与 Switch 的唯一不同：菜单项的焦点是整行的高亮，槽内没有焦点环，所以没有 aria-invalid / readOnly / pending 的画法；内缩量仍取 Switch 的值，使两处的抓手大小一致。
 // 槽的开关由所在行的 data-checked 驱动（group/menu-switch），不另持状态。槽固定在行尾，所以不提供 markerPosition：行首的文字列不受它影响。
-const menuSwitchTrackVariables = {
-  "--qy-switch-height": "var(--qy-switch-size)",
-  "--qy-switch-height-narrow": "var(--qy-switch-size-narrow)",
-  "--qy-switch-inset": "calc(var(--qy-focus-quiet-width) + var(--qy-focus-ring-width))",
-} as React.CSSProperties;
 export function MenuSwitchItem({ size = "md", inset = false, className, children, ...props }: MenuSwitchItemProps) {
   return <MenuPrimitive.CheckboxItem data-slot="menu-switch-item" data-inset={inset || undefined} {...props} className={state => cn("group/menu-switch", buttonVariants({ variant: "quiet", size, shape: "label", tone: "neutral" }), overlayItemClassName, commandItemFrame[size], inset && itemInset[size], typeof className === "function" ? className(state) : className)}>
     <span className="min-w-0 flex-1">{children}</span>
-    <span data-slot="menu-switch-track" aria-hidden="true" style={menuSwitchTrackVariables} className="relative inline-flex shrink-0 items-center px-(--qy-switch-inset) h-(--qy-switch-height-narrow) w-[calc(2*var(--qy-switch-height-narrow))] sm:h-(--qy-switch-height) sm:w-[calc(2*var(--qy-switch-height))] rounded-[min(var(--qy-radius-control),calc(var(--qy-switch-height-narrow)*var(--qy-radius-cap-ratio)))] sm:rounded-[min(var(--qy-radius-control),calc(var(--qy-switch-height)*var(--qy-radius-cap-ratio)))] bg-surface-field text-muted-foreground inset-ring-(length:--qy-line-width) inset-ring-(--qy-border-input) transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) group-data-checked/menu-switch:bg-primary group-data-checked/menu-switch:text-primary-foreground group-data-checked/menu-switch:inset-ring-0 motion-reduce:transition-none">
-      <span data-slot="menu-switch-thumb" className="pointer-events-none relative block size-[calc(var(--qy-switch-height-narrow)-2*var(--qy-switch-inset))] sm:size-[calc(var(--qy-switch-height)-2*var(--qy-switch-inset))] rounded-[max(0px,calc(min(var(--qy-radius-control),calc(var(--qy-switch-height-narrow)*var(--qy-radius-cap-ratio)))-var(--qy-switch-inset)))] sm:rounded-[max(0px,calc(min(var(--qy-radius-control),calc(var(--qy-switch-height)*var(--qy-radius-cap-ratio)))-var(--qy-switch-inset)))] bg-current transition-transform duration-(--qy-duration-fast) ease-(--qy-ease-out) group-data-checked/menu-switch:translate-x-(--qy-switch-height-narrow) sm:group-data-checked/menu-switch:translate-x-(--qy-switch-height) rtl:group-data-checked/menu-switch:-translate-x-(--qy-switch-height-narrow) sm:rtl:group-data-checked/menu-switch:-translate-x-(--qy-switch-height) motion-reduce:transition-none" />
+    <span data-slot="menu-switch-track" aria-hidden="true" style={switchVariables} className={cn(switchTrackGeometry, switchOffClassName, "group-data-checked/menu-switch:bg-primary group-data-checked/menu-switch:text-primary-foreground group-data-checked/menu-switch:inset-ring-0 motion-reduce:transition-none")}>
+      <span data-slot="menu-switch-thumb" className={cn(switchThumbGeometry, "group-data-checked/menu-switch:translate-x-(--qy-switch-height-narrow) sm:group-data-checked/menu-switch:translate-x-(--qy-switch-height) rtl:group-data-checked/menu-switch:-translate-x-(--qy-switch-height-narrow) sm:rtl:group-data-checked/menu-switch:-translate-x-(--qy-switch-height)")} />
     </span>
   </MenuPrimitive.CheckboxItem>;
 }

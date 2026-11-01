@@ -758,7 +758,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1447,7 +1447,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1823,7 +1823,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2779,7 +2779,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -3643,7 +3643,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -4535,7 +4535,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -4919,20 +4919,20 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "onExecute",
@@ -4944,25 +4944,25 @@
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 288,
@@ -5001,44 +5001,44 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 288,
@@ -5061,7 +5061,7 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "count",
@@ -5073,14 +5073,14 @@
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "onClick",
@@ -5098,25 +5098,25 @@
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 287,
@@ -5138,19 +5138,19 @@
             {
               "part": "BulkActionBarExtend",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarExtend",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarExtend",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
@@ -5161,109 +5161,109 @@
             {
               "part": "BulkActionBarExtend",
               "prop": "shape",
-              "declaredAt": "packages/ui/src/components/button.tsx:87",
+              "declaredAt": "packages/ui/src/components/button.tsx:69",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarExtend",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "declaredAt": "packages/ui/src/components/button.tsx:68",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarExtend",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarExtend",
               "prop": "variant",
-              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "declaredAt": "packages/ui/src/components/button.tsx:66",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarAction",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarAction",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarAction",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarAction",
               "prop": "shape",
-              "declaredAt": "packages/ui/src/components/button.tsx:87",
+              "declaredAt": "packages/ui/src/components/button.tsx:69",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarAction",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "declaredAt": "packages/ui/src/components/button.tsx:68",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarAction",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarAction",
               "prop": "variant",
-              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "declaredAt": "packages/ui/src/components/button.tsx:66",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarClear",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarClear",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarClear",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarClear",
               "prop": "shape",
-              "declaredAt": "packages/ui/src/components/button.tsx:87",
+              "declaredAt": "packages/ui/src/components/button.tsx:69",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarClear",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "declaredAt": "packages/ui/src/components/button.tsx:68",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarClear",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             },
             {
               "part": "BulkActionBarClear",
               "prop": "variant",
-              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "declaredAt": "packages/ui/src/components/button.tsx:66",
               "viaComponent": "button"
             }
           ]
@@ -5499,7 +5499,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5835,44 +5835,44 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 288,
@@ -5911,25 +5911,25 @@
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:47"
+                "declaredAt": "packages/ui/src/components/button.tsx:29"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:45"
+                "declaredAt": "packages/ui/src/components/button.tsx:27"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:44"
+                "declaredAt": "packages/ui/src/components/button.tsx:26"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:37"
+                "declaredAt": "packages/ui/src/components/button.tsx:19"
               }
             ],
             "inheritedCount": 2,
@@ -5947,12 +5947,12 @@
             {
               "part": "Button",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82"
+              "declaredAt": "packages/ui/src/components/button.tsx:64"
             },
             {
               "part": "Button",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83"
+              "declaredAt": "packages/ui/src/components/button.tsx:65"
             }
           ]
         }
@@ -6060,7 +6060,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -6207,7 +6207,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/button.tsx",
-        "sha256": "60676cd107b7383351276a379d5f700b354ec3f3a66294e8b11945392783b1a4",
+        "sha256": "33bee148386b5e78157da9af6787ff6d23f8bb88bb47d5ae1aed705c86ef02df",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "按钮只触发动作，忙碌是它唯一的状态：忙碌时保留焦点并阻止重复触发。成功、失败与结果未知是另一件事实，由提示组件表达（就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError）；后果与确认属于 AlertDialog。色调不代表授权。",
@@ -6465,7 +6465,7 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "连体：相邻按钮的边合并成一条线，只保留整组外侧的圆角；横排纵排都成立。默认保持各自独立、带动作间隔。",
-                "declaredAt": "packages/ui/src/components/button-group.tsx:18"
+                "declaredAt": "packages/ui/src/components/button-group.tsx:19"
               },
               {
                 "name": "justify",
@@ -6478,7 +6478,7 @@
                 "name": "orientation",
                 "optional": true,
                 "type": "\"horizontal\" | \"vertical\"",
-                "declaredAt": "packages/ui/src/components/button-group.tsx:16"
+                "declaredAt": "packages/ui/src/components/button-group.tsx:17"
               },
               {
                 "name": "wrap",
@@ -6532,7 +6532,7 @@
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
                 "doc": "与同组按钮同一档。",
-                "declaredAt": "packages/ui/src/components/button-group.tsx:58"
+                "declaredAt": "packages/ui/src/components/button-group.tsx:53"
               }
             ],
             "inheritedCount": 281,
@@ -6700,7 +6700,7 @@
         "contexts": [
           {
             "name": "OrientationContext",
-            "declaredAt": "packages/ui/src/components/button-group.tsx:13",
+            "declaredAt": "packages/ui/src/components/button-group.tsx:14",
             "defaultValue": "\"horizontal\"",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -6818,7 +6818,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/button-group.tsx",
-        "sha256": "2f4dd719cf1870157eead31e1aef929258879c948157458f8751c2ad64463222",
+        "sha256": "482f8c3c4b02b0a94fda90ea51948d653098e2af0fdd48ec9f67312a43d0c4fb",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "共同名称说明范围，每个按钮仍说明自己的动作。ButtonGroup 不选择按钮、不传播禁用，也不建立工具栏键盘行为。连体（attached）只改变外形：相邻边合并成一条线，成员的名称、焦点与禁用不变；拆分按钮就是连体组里一个主操作加一个打开 Menu 的图标按钮。",
@@ -7276,7 +7276,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -8250,7 +8250,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -9487,7 +9487,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -10242,7 +10242,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/checkbox.tsx",
-        "sha256": "7d6a3498b9f9feee7e9501b2fcf70e8aa80200b70df5d458c62c84b748eef5de",
+        "sha256": "f5464ad5133223a687ea8729b9aa748caf203971a657f18cab57359212eeab47",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "多个独立选项用 Checkbox，立即切换设置用 Switch。部分选中由调用方根据子项计算。",
@@ -10750,19 +10750,17 @@
     {
       "name": "chip",
       "title": "标签片 Chip",
-      "description": "一枚可以被单独操作的小记号：可移除，或可开关。",
+      "description": "一枚可移除的小记号：已经选定的一项，可以单独去掉。",
       "category": "通用",
       "source": "local",
       "layer": "primitive",
       "import": "@qingye_lab/ui/components/chip",
       "exports": [
-        "Chip",
-        "ChipToggle"
+        "Chip"
       ],
       "docs": "/docs/components/chip",
       "notes": [
         "移除按钮的名称是「移除 X」，X 取记号文字，所以同一行里多个记号读屏时彼此可分。",
-        "ChipToggle 的名称不随按下与否变化，状态只由 aria-pressed 表达。",
         "移除之后焦点会随被移除的节点一起消失：由调用方把焦点移到相邻记号或它所在的容器。"
       ],
       "keywords": [
@@ -10808,32 +10806,6 @@
               "descriptionEn": "Composition entry points of the root span."
             }
           ]
-        },
-        {
-          "name": "ChipToggle",
-          "description": "可开关的记号：按钮加 aria-pressed。属性与 Toggle 相同，只是固定为 sm 档。",
-          "descriptionEn": "A toggleable mark: a button with aria-pressed. Same props as Toggle, fixed at the sm step.",
-          "props": [
-            {
-              "name": "pressed / defaultPressed",
-              "type": "boolean",
-              "description": "受控或初始的按下状态。",
-              "descriptionEn": "Controlled or initial pressed state."
-            },
-            {
-              "name": "onPressedChange",
-              "type": "(pressed: boolean, details) => void",
-              "description": "按下状态改变时调用。",
-              "descriptionEn": "Called when the pressed state changes."
-            },
-            {
-              "name": "disabled",
-              "type": "boolean",
-              "default": "false",
-              "description": "不可操作；按下的事实保留。",
-              "descriptionEn": "Inert; the pressed fact is kept."
-            }
-          ]
         }
       ],
       "apiStatus": "type-resolved",
@@ -10851,21 +10823,21 @@
                 "optional": false,
                 "type": "string",
                 "doc": "记号上的文字，同时决定移除动作的名称（「移除 X」）。",
-                "declaredAt": "packages/ui/src/components/chip.tsx:27"
+                "declaredAt": "packages/ui/src/components/chip.tsx:24"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
                 "doc": "禁用后移除按钮不可操作；记号本身仍显示。",
-                "declaredAt": "packages/ui/src/components/chip.tsx:31"
+                "declaredAt": "packages/ui/src/components/chip.tsx:28"
               },
               {
                 "name": "onRemove",
                 "optional": true,
                 "type": "(event: React.SyntheticEvent<HTMLElement>) => void",
                 "doc": "移除。给了它才出现移除按钮；点击、Enter、Space、Backspace、Delete 都会调用。",
-                "declaredAt": "packages/ui/src/components/chip.tsx:29"
+                "declaredAt": "packages/ui/src/components/chip.tsx:26"
               }
             ],
             "inheritedCount": 279,
@@ -10879,22 +10851,6 @@
                 "count": 1
               }
             ]
-          },
-          {
-            "name": "ChipToggle",
-            "status": "resolved",
-            "ownProps": [],
-            "inheritedCount": 292,
-            "inheritedFrom": [
-              {
-                "source": "@types/react",
-                "count": 283
-              },
-              {
-                "source": "@base-ui/react",
-                "count": 9
-              }
-            ]
           }
         ],
         "drift": {
@@ -10905,13 +10861,13 @@
       "keyboard": [
         {
           "keys": "Tab / Shift+Tab",
-          "description": "Chip 的移除按钮、ChipToggle 各是一个停靠点；记号文字本身不可聚焦。",
-          "descriptionEn": "Each remove button and each ChipToggle is one tab stop; the mark's text is not focusable."
+          "description": "每个移除按钮是一个停靠点；记号文字本身不可聚焦。",
+          "descriptionEn": "Each remove button is one tab stop; the mark's text is not focusable."
         },
         {
           "keys": "Enter / Space",
-          "description": "移除，或切换按下状态。",
-          "descriptionEn": "Remove, or toggle the pressed state."
+          "description": "移除该记号。",
+          "descriptionEn": "Remove the chip."
         },
         {
           "keys": "Backspace / Delete",
@@ -10940,48 +10896,17 @@
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
-        },
-        {
-          "name": "ChipToggle",
-          "kind": "function",
-          "owner": "chip",
-          "module": "@qingye_lab/ui/components/chip",
-          "propsType": "ChipToggleProps<Value>",
-          "signature": "ChipToggle(props: ChipToggleProps<Value>)",
-          "status": "PASS",
-          "declarationStatus": "PASS",
-          "typeResolution": "UNVERIFIED"
-        },
-        {
-          "name": "ChipToggleProps",
-          "kind": "type",
-          "owner": "chip",
-          "module": "@qingye_lab/ui/components/chip",
-          "signature": "Omit<ToggleProps<Value>, \"size\" | \"shape\">",
-          "status": "PASS",
-          "declarationStatus": "PASS",
-          "typeResolution": "UNVERIFIED"
         }
       ],
       "types": [
         {
           "name": "ChipProps",
           "definition": "export type ChipProps = Omit<useRender.ComponentProps<\"span\">, \"children\" | \"onClick\"> & {\n  /** 记号上的文字，同时决定移除动作的名称（「移除 X」）。 */\n  children: string;\n  /** 移除。给了它才出现移除按钮；点击、Enter、Space、Backspace、Delete 都会调用。 */\n  onRemove?: (event: React.SyntheticEvent<HTMLElement>) => void;\n  /** 禁用后移除按钮不可操作；记号本身仍显示。 */\n  disabled?: boolean;\n};"
-        },
-        {
-          "name": "ChipToggleProps",
-          "definition": "export type ChipToggleProps<Value extends string = string> = Omit<ToggleProps<Value>, \"size\" | \"shape\">;"
         }
       ],
       "usageImports": [
         {
           "name": "Chip",
-          "import": "@qingye_lab/ui/components/chip",
-          "owner": "chip",
-          "status": "PASS"
-        },
-        {
-          "name": "ChipToggle",
           "import": "@qingye_lab/ui/components/chip",
           "owner": "chip",
           "status": "PASS"
@@ -11007,7 +10932,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -11019,7 +10944,6 @@
           "@base-ui/react/button",
           "@base-ui/react/direction-provider",
           "@base-ui/react/merge-props",
-          "@base-ui/react/toggle",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -11039,19 +10963,6 @@
           "providers": [],
           "code": "import { useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Chip } from \"@qingye_lab/ui/components/chip\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"可移除\", titleEn: \"Removable\" };\n\nexport default function Demo() {\n  const { code } = useUILocale(); const en = code.startsWith(\"en\");\n  const all = en ? [\"Design\", \"Engineering\", \"Operations\", \"Finance\"] : [\"设计\", \"工程\", \"运营\", \"财务\"];\n  const [items, setItems] = useState(all.slice(0, 3));\n  const next = all.find(item => !items.includes(item));\n  return <div className=\"flex flex-wrap items-center gap-(--qy-space-2)\">\n    {items.map(item => <Chip key={item} onRemove={() => setItems(items.filter(other => other !== item))}>{item}</Chip>)}\n    <Button variant=\"bordered\" size=\"sm\" aria-disabled={next === undefined || undefined} onClick={() => { if (next !== undefined) setItems([...items, next]); }}>{en ? \"Add\" : \"添加\"}</Button>\n  </div>;\n}\n",
           "sha256": "7ef37709bf3afb8ecfa96f7eae85974a4a7da840a09d703f32b1e48e5890c7a8"
-        },
-        {
-          "id": "toggle",
-          "title": "可开关",
-          "source": "apps/docs/src/content/chip/demos/02-toggle.tsx",
-          "imports": [
-            "@qingye_lab/ui/components/chip",
-            "@qingye_lab/ui/locale",
-            "react"
-          ],
-          "providers": [],
-          "code": "import { useState } from \"react\";\nimport { ChipToggle } from \"@qingye_lab/ui/components/chip\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"可开关\", titleEn: \"Toggleable\" };\n\nexport default function Demo() {\n  const { code } = useUILocale(); const en = code.startsWith(\"en\");\n  const options = en ? [\"Unread\", \"Starred\", \"Attachments\", \"Mentions\"] : [\"未读\", \"加星\", \"含附件\", \"提到我\"];\n  const [pressed, setPressed] = useState<string[]>([options[0]!]);\n  return <div role=\"group\" aria-label={en ? \"Filters\" : \"筛选\"} className=\"flex flex-wrap gap-(--qy-space-2)\">\n    {options.map(option => <ChipToggle key={option} pressed={pressed.includes(option)} onPressedChange={next => setPressed(next ? [...pressed, option] : pressed.filter(other => other !== option))}>{option}</ChipToggle>)}\n    <ChipToggle disabled>{en ? \"Unavailable\" : \"不可用\"}</ChipToggle>\n  </div>;\n}\n",
-          "sha256": "5b59559afe4e6d0cb8383b29a8de3505f309ceb633c145eeceb0976dc108dbf0"
         }
       ],
       "design": {
@@ -11060,23 +10971,23 @@
           "相成相制"
         ],
         "whenToUse": [
-          "一组已选条件，每个都能单独去掉",
-          "一组筛选条件，每个都能单独开关"
+          "一组已选条件，每个都能单独去掉"
         ],
         "avoid": [
+          "可开关的筛选条件用 Toggle size=\"sm\"",
           "不可操作的状态标注用 Badge",
           "在输入框内收下的值用 TagInput",
           "互斥的几个选项用 RadioGroup 或 SegmentedControl"
         ],
         "composition": [
-          "多个 Chip 放进 flex-wrap 的行；ChipToggle 放进带名称的 group"
+          "多个 Chip 放进 flex-wrap 的行"
         ],
         "stateOwner": {
           "library": [
-            "ChipToggle 的非受控按下状态、焦点"
+            "移除按钮的焦点与键盘"
           ],
           "application": [
-            "Chip 的集合（移除后是否保留）、筛选条件的实际含义、移除后的焦点去向"
+            "Chip 的集合（移除后是否保留）、移除后的焦点去向"
           ]
         },
         "responsive": [
@@ -11088,19 +10999,18 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/chip.tsx",
-        "sha256": "ae7025a43fcc2e98d4398561f304ac091e583cefe053abf84781f07d3cf08df1",
+        "sha256": "ad815ca9b19efbfb70cada333d50c9e9579ef78c9f00f139f16251c246b090d6",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "Chip 与 Badge 不是一回事：Badge 是正文里一段静态的字，没有底、没有交互，用来标注状态或类别；Chip 有自己的边界，能被点击或移除，是对象而不是标注。要给一段不可操作的标注加移除按钮，说明它其实是 Chip。Chip 的两种形态不合并成一个带 mode 的组件：移除是单向动作，开关是可往返的状态，二者的读屏角色、键盘与名称规则都不同，所以是 Chip 与 ChipToggle 两个组件。编辑框里的标签（TagInput）与多选 Combobox 的已选项是边界内的项，几何由所在边界推出，不使用 Chip；Chip 是独立立着的记号，几何读 sm 控件档。",
+      "decisions": "Chip 与 Badge 不是一回事：Badge 是正文里一段静态的字，没有底、没有交互，用来标注状态或类别；Chip 有自己的边界，能被点击或移除，是对象而不是标注。要给一段不可操作的标注加移除按钮，说明它其实是 Chip。可开关的筛选条件不是 Chip：它是二态按钮（aria-pressed），直接用 Toggle size=\"sm\"；早先的 ChipToggle 只是 Toggle 固定 sm 档的同义包装，在发布前删除，避免同一件事有两个名字。编辑框里的标签（TagInput）与多选 Combobox 的已选项是边界内的项，几何由所在边界推出，不使用 Chip；Chip 是独立立着的记号，几何读 sm 控件档。",
       "localized": {
         "en": {
           "title": "Chip",
-          "description": "A small mark that can be acted on by itself: removable, or toggleable.",
+          "description": "A small removable mark: one chosen item that can be dropped on its own.",
           "category": "General",
-          "decisions": "Chip is not Badge. Badge is a static run of text in the body, with no surface and no interaction, used to annotate a status or category; Chip has its own boundary and can be clicked or removed, so it is an object rather than an annotation. If you want a remove button on an inert annotation, it was a Chip all along. The two forms are not merged into one component with a mode: removing is a one-way action and toggling is a reversible state, and their roles, keyboard and naming rules differ, so there are two components, Chip and ChipToggle. The tags in TagInput and the selected items of a multiple Combobox are items inside an edit frame whose geometry is derived from that frame, so they do not use Chip; Chip is a free-standing mark whose geometry reads the sm control step.",
+          "decisions": "Chip is not Badge. Badge is a static run of text in the body, with no surface and no interaction, used to annotate a status or category; Chip has its own boundary and can be clicked or removed, so it is an object rather than an annotation. If you want a remove button on an inert annotation, it was a Chip all along. A toggleable filter is not a Chip: it is a two-state button (aria-pressed), so use Toggle size=\"sm\". The earlier ChipToggle was only Toggle fixed at the sm step and was removed before release so that one thing does not carry two names. The tags in TagInput and the selected items of a multiple Combobox are items inside an edit frame whose geometry is derived from that frame, so they do not use Chip; Chip is a free-standing mark whose geometry reads the sm control step.",
           "notes": [
             "The remove button is named \"Remove X\" from the chip text, so several chips in one row are distinguishable to assistive technology.",
-            "A ChipToggle's name does not change with its pressed state; the state is carried only by aria-pressed.",
             "Focus disappears with the removed node: the caller moves it to a neighbouring chip or to the container."
           ],
           "api": [
@@ -11135,44 +11045,18 @@
                   "descriptionEn": "Composition entry points of the root span."
                 }
               ]
-            },
-            {
-              "name": "ChipToggle",
-              "description": "A toggleable mark: a button with aria-pressed. Same props as Toggle, fixed at the sm step.",
-              "descriptionEn": "A toggleable mark: a button with aria-pressed. Same props as Toggle, fixed at the sm step.",
-              "props": [
-                {
-                  "name": "pressed / defaultPressed",
-                  "type": "boolean",
-                  "description": "Controlled or initial pressed state.",
-                  "descriptionEn": "Controlled or initial pressed state."
-                },
-                {
-                  "name": "onPressedChange",
-                  "type": "(pressed: boolean, details) => void",
-                  "description": "Called when the pressed state changes.",
-                  "descriptionEn": "Called when the pressed state changes."
-                },
-                {
-                  "name": "disabled",
-                  "type": "boolean",
-                  "default": "false",
-                  "description": "Inert; the pressed fact is kept.",
-                  "descriptionEn": "Inert; the pressed fact is kept."
-                }
-              ]
             }
           ],
           "keyboard": [
             {
               "keys": "Tab / Shift+Tab",
-              "description": "Each remove button and each ChipToggle is one tab stop; the mark's text is not focusable.",
-              "descriptionEn": "Each remove button and each ChipToggle is one tab stop; the mark's text is not focusable."
+              "description": "Each remove button is one tab stop; the mark's text is not focusable.",
+              "descriptionEn": "Each remove button is one tab stop; the mark's text is not focusable."
             },
             {
               "keys": "Enter / Space",
-              "description": "Remove, or toggle the pressed state.",
-              "descriptionEn": "Remove, or toggle the pressed state."
+              "description": "Remove the chip.",
+              "descriptionEn": "Remove the chip."
             },
             {
               "keys": "Backspace / Delete",
@@ -11186,23 +11070,23 @@
               "Complementary roles and safeguards （相成相制）"
             ],
             "whenToUse": [
-              "A set of chosen conditions, each of which can be dropped on its own.",
-              "A set of filters, each of which can be switched on or off."
+              "A set of chosen conditions, each of which can be dropped on its own."
             ],
             "avoid": [
+              "Use Toggle size=\"sm\" for a filter that switches on and off.",
               "Use Badge for an inert status annotation.",
               "Use TagInput for values collected inside an input.",
               "Use RadioGroup or SegmentedControl for mutually exclusive options."
             ],
             "composition": [
-              "Place several Chips in a flex-wrap row; put ChipToggles in a named group."
+              "Place several Chips in a flex-wrap row."
             ],
             "stateOwner": {
               "library": [
-                "A ChipToggle's uncontrolled pressed state and focus."
+                "Focus and keyboard of the remove button."
               ],
               "application": [
-                "The collection of Chips (whether a removed one is kept), what a filter actually means, and where focus goes after removal."
+                "The collection of Chips (whether a removed one is kept) and where focus goes after removal."
               ]
             },
             "responsive": [
@@ -11458,7 +11342,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -12540,7 +12424,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13810,7 +13694,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -14974,7 +14858,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -15295,8 +15179,8 @@
       "docs": "/docs/components/composer",
       "notes": [
         "粘贴、拖放一律只收纯文字；复制与剪切输出纯文字，令牌写作“触发字符 + label”。",
-        "composerValueToText 默认把令牌写作“触发字符 + label”；composerValueFromText 可传入已知令牌，按字面匹配还原。",
-        "没有 name 与表单提交，也未接入 Field；需要时由应用在 onSubmit 里取值。",
+        "composerValueToText 默认把令牌写作“触发字符 + label”；composerValueFromText 可传入已知令牌，按字面匹配还原，且只在词的开头处还原（“a@Ann.com”“@Anna”不会变成令牌）。纯文字会丢掉令牌 id，要无损保存就存片段数组本身。",
+        "没有 name 与表单提交，也未接入 Field：值是片段数组，没有对应的表单字段形态，由应用在 onSubmit 里取值并发送（同类对话输入的通行做法）。",
         "jsdom 无法验证真实输入法、各浏览器 contenteditable 的光标与 beforeinput 差异、浮层碰撞翻转与 Range 坐标，需在真实浏览器中另验。"
       ],
       "keywords": [
@@ -15527,32 +15411,32 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 288,
@@ -15590,31 +15474,31 @@
             {
               "part": "ComposerSubmit",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "ComposerSubmit",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "ComposerSubmit",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "ComposerSubmit",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             },
             {
               "part": "ComposerSubmit",
               "prop": "variant",
-              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "declaredAt": "packages/ui/src/components/button.tsx:66",
               "viaComponent": "button"
             }
           ]
@@ -16039,7 +15923,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -16152,8 +16036,8 @@
           "decisions": "The editor is contenteditable because tokens must be inline atoms (deleted whole, unreachable by the caret, read by name), which a native text box cannot do. The value is an array of segments, not a string, so a token keeps a stable id and apps need not parse text back. The candidate popup follows the combobox pattern, but the editor's role is textbox since no multi-line combobox exists. Message lists and bubbles are not in the library.",
           "notes": [
             "Paste and drop accept plain text only; copy and cut emit plain text with a token written as trigger + label.",
-            "composerValueToText writes a token as trigger + label by default; composerValueFromText accepts known tokens and restores them by literal match.",
-            "There is no name or form submission and no Field integration; read the value in onSubmit.",
+            "composerValueToText writes a token as trigger + label by default; composerValueFromText accepts known tokens and restores them by literal match, only at the start of a word (\"a@Ann.com\" and \"@Anna\" stay text). Plain text drops token ids, so store the segment array itself for a lossless round trip.",
+            "There is no name or form submission and no Field integration: the value is an array of segments with no form-field form, so the app reads and sends it in onSubmit, as conversational inputs commonly do.",
             "jsdom cannot verify a real IME, per-browser contenteditable caret and beforeinput behavior, popup collision flipping or Range geometry; verify these in real browsers."
           ],
           "api": [
@@ -16567,7 +16451,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -17117,7 +17001,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -17514,19 +17398,19 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "markerPosition",
                 "optional": true,
                 "type": "\"start\" | \"end\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:71"
+                "declaredAt": "packages/ui/src/components/menu.tsx:72"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               }
             ],
             "inheritedCount": 285,
@@ -17565,13 +17449,13 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               }
             ],
             "inheritedCount": 278,
@@ -17594,19 +17478,19 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:57"
+                "declaredAt": "packages/ui/src/components/menu.tsx:58"
               }
             ],
             "inheritedCount": 282,
@@ -17629,13 +17513,13 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               }
             ],
             "inheritedCount": 288,
@@ -17727,19 +17611,19 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "markerPosition",
                 "optional": true,
                 "type": "\"start\" | \"end\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:99"
+                "declaredAt": "packages/ui/src/components/menu.tsx:92"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               }
             ],
             "inheritedCount": 283,
@@ -17790,13 +17674,13 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               }
             ],
             "inheritedCount": 284,
@@ -17819,13 +17703,13 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               }
             ],
             "inheritedCount": 285,
@@ -17863,61 +17747,61 @@
             {
               "part": "ContextMenuItem",
               "prop": "inset",
-              "declaredAt": "packages/ui/src/components/menu.tsx:26",
+              "declaredAt": "packages/ui/src/components/menu.tsx:27",
               "viaComponent": "menu"
             },
             {
               "part": "ContextMenuItem",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/menu.tsx:57",
+              "declaredAt": "packages/ui/src/components/menu.tsx:58",
               "viaComponent": "menu"
             },
             {
               "part": "ContextMenuLinkItem",
               "prop": "inset",
-              "declaredAt": "packages/ui/src/components/menu.tsx:26",
+              "declaredAt": "packages/ui/src/components/menu.tsx:27",
               "viaComponent": "menu"
             },
             {
               "part": "ContextMenuCheckboxItem",
               "prop": "inset",
-              "declaredAt": "packages/ui/src/components/menu.tsx:26",
+              "declaredAt": "packages/ui/src/components/menu.tsx:27",
               "viaComponent": "menu"
             },
             {
               "part": "ContextMenuCheckboxItem",
               "prop": "markerPosition",
-              "declaredAt": "packages/ui/src/components/menu.tsx:71",
+              "declaredAt": "packages/ui/src/components/menu.tsx:72",
               "viaComponent": "menu"
             },
             {
               "part": "ContextMenuRadioItem",
               "prop": "inset",
-              "declaredAt": "packages/ui/src/components/menu.tsx:26",
+              "declaredAt": "packages/ui/src/components/menu.tsx:27",
               "viaComponent": "menu"
             },
             {
               "part": "ContextMenuRadioItem",
               "prop": "markerPosition",
-              "declaredAt": "packages/ui/src/components/menu.tsx:99",
+              "declaredAt": "packages/ui/src/components/menu.tsx:92",
               "viaComponent": "menu"
             },
             {
               "part": "ContextMenuSubmenuTrigger",
               "prop": "inset",
-              "declaredAt": "packages/ui/src/components/menu.tsx:26",
+              "declaredAt": "packages/ui/src/components/menu.tsx:27",
               "viaComponent": "menu"
             },
             {
               "part": "ContextMenuGroupLabel",
               "prop": "inset",
-              "declaredAt": "packages/ui/src/components/menu.tsx:26",
+              "declaredAt": "packages/ui/src/components/menu.tsx:27",
               "viaComponent": "menu"
             },
             {
               "part": "ContextMenuGroupLabel",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/menu.tsx:26",
+              "declaredAt": "packages/ui/src/components/menu.tsx:27",
               "viaComponent": "menu"
             }
           ]
@@ -18570,20 +18454,20 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "onCopyError",
@@ -18601,13 +18485,13 @@
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "timeout",
@@ -18620,7 +18504,7 @@
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "value",
@@ -18632,7 +18516,7 @@
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 287,
@@ -18680,25 +18564,25 @@
             {
               "part": "CopyButton",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "CopyButton",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "CopyButton",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "CopyButton",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             }
           ]
@@ -18789,7 +18673,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19908,7 +19792,7 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "column",
@@ -19920,38 +19804,38 @@
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 288,
@@ -19983,43 +19867,43 @@
             {
               "part": "DataTableSortButton",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "DataTableSortButton",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "DataTableSortButton",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "DataTableSortButton",
               "prop": "shape",
-              "declaredAt": "packages/ui/src/components/button.tsx:87",
+              "declaredAt": "packages/ui/src/components/button.tsx:69",
               "viaComponent": "button"
             },
             {
               "part": "DataTableSortButton",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "declaredAt": "packages/ui/src/components/button.tsx:68",
               "viaComponent": "button"
             },
             {
               "part": "DataTableSortButton",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             },
             {
               "part": "DataTableSortButton",
               "prop": "variant",
-              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "declaredAt": "packages/ui/src/components/button.tsx:66",
               "viaComponent": "button"
             }
           ]
@@ -20332,7 +20216,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -20971,7 +20855,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -21079,7 +20963,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-picker.tsx",
-        "sha256": "2039377cc2572bc6c6e47fab6baf740d1b74cd2720bbbe2ff146f5b731864850",
+        "sha256": "2b68f004920e5e70f42e26e967d1b2afa357ac09e42f56e298adeceb1fb284a2",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是调用方持有的当地 Date。输入和日历选择只请求变更；清除请求 undefined，Escape 关闭日历并保留已接受值。",
@@ -21316,100 +21200,100 @@
                 "name": "calendarProps",
                 "optional": true,
                 "type": "Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\" | \"granularity\"> & { min?: number; max?: number; excludeDisabled?: boolean }",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:58"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:61"
               },
               {
                 "name": "defaultValue",
                 "optional": true,
                 "type": "DateRangeValue | undefined",
                 "doc": "非受控的初值，原生表单 reset 会回到它。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:34"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:37"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:53"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:56"
               },
               {
                 "name": "endInputProps",
                 "optional": true,
                 "type": "NativeInputProps",
                 "doc": "终点日期输入。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:57"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:60"
               },
               {
                 "name": "form",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:53"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:56"
               },
               {
                 "name": "granularity",
                 "optional": true,
                 "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
-                "doc": "选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）；\n两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n此时 `calendarProps.min` / `max`（天数限制）与 `excludeDisabled` 不再适用；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:50"
+                "doc": "选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）；\n两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n此时 `calendarProps.min` / `max`（天数限制）按规范后的整段天数计算，`excludeDisabled` 按周期判断（范围不得跨过整个被禁用的周期）；不提供多选；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。",
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:53"
               },
               {
                 "name": "inputProps",
                 "optional": true,
                 "type": "NativeInputProps",
                 "doc": "起点日期输入（也是 Field 标签指向的输入）。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:55"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:58"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "Date | undefined",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:44"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:47"
               },
               {
                 "name": "min",
                 "optional": true,
                 "type": "Date | undefined",
                 "doc": "可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:44"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:47"
               },
               {
                 "name": "name",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:53"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:56"
               },
               {
                 "name": "onInvalid",
                 "optional": true,
                 "type": "((draft: DateRangeDraft, reason: DateRangeInvalidReason) => void) | undefined",
                 "doc": "键入或选择得出的草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`）：键入是逐段的，\n填第二个日期之前只有一端、改终点时暂时早于起点，都是正常的中间状态。草稿变成可提交时，调用方会收到 `onValueChange`。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:42"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:45"
               },
               {
                 "name": "onValueChange",
                 "optional": true,
                 "type": "((value: DateRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined",
                 "doc": "只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:36"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:39"
               },
               {
                 "name": "presets",
                 "optional": true,
                 "type": "readonly DateRangePreset[] | undefined",
                 "doc": "常用范围，显示在弹层里日历旁；点击只写入草稿，仍须「应用」。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:52"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:55"
               },
               {
                 "name": "readOnly",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:53"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:56"
               },
               {
                 "name": "value",
                 "optional": true,
                 "type": "DateRangeValue | undefined",
                 "doc": "受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:32"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:35"
               }
             ],
             "inheritedCount": 277,
@@ -21463,7 +21347,7 @@
           "kind": "type",
           "owner": "date-range-picker",
           "module": "@qingye_lab/ui/components/date-range-picker",
-          "signature": "\"incomplete\" | \"order\" | \"bounds\" | \"length\" | \"disabled\"",
+          "signature": "\"incomplete\" | \"unrecognized\" | \"order\" | \"bounds\" | \"length\" | \"disabled\"",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -21484,7 +21368,7 @@
           "kind": "type",
           "owner": "date-range-picker",
           "module": "@qingye_lab/ui/components/date-range-picker",
-          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** 受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: DateRangeValue | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: DateRangeValue | undefined;\n  /** 只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。 */\n  onValueChange?: ((value: DateRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 键入或选择得出的草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n   * 只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`）：键入是逐段的，\n   * 填第二个日期之前只有一端、改终点时暂时早于起点，都是正常的中间状态。草稿变成可提交时，调用方会收到 `onValueChange`。\n   */\n  onInvalid?: ((draft: DateRangeDraft, reason: DateRangeInvalidReason) => void) | undefined;\n  /** 可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。 */\n  min?: Date | undefined; max?: Date | undefined;\n  /**\n   * 选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）；\n   * 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n   * 此时 `calendarProps.min` / `max`（天数限制）与 `excludeDisabled` 不再适用；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。\n   */\n  granularity?: DateGranularity;\n  /** 常用范围，显示在弹层里日历旁；点击只写入草稿，仍须「应用」。 */\n  presets?: readonly DateRangePreset[] | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  /** 起点日期输入（也是 Field 标签指向的输入）。 */\n  inputProps?: NativeInputProps;\n  /** 终点日期输入。 */\n  endInputProps?: NativeInputProps;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\" | \"granularity\"> & { min?: number; max?: number; excludeDisabled?: boolean };\n}",
+          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** 受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: DateRangeValue | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: DateRangeValue | undefined;\n  /** 只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。 */\n  onValueChange?: ((value: DateRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 键入或选择得出的草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n   * 只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`）：键入是逐段的，\n   * 填第二个日期之前只有一端、改终点时暂时早于起点，都是正常的中间状态。草稿变成可提交时，调用方会收到 `onValueChange`。\n   */\n  onInvalid?: ((draft: DateRangeDraft, reason: DateRangeInvalidReason) => void) | undefined;\n  /** 可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。 */\n  min?: Date | undefined; max?: Date | undefined;\n  /**\n   * 选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）；\n   * 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n   * 此时 `calendarProps.min` / `max`（天数限制）按规范后的整段天数计算，`excludeDisabled` 按周期判断（范围不得跨过整个被禁用的周期）；不提供多选；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。\n   */\n  granularity?: DateGranularity;\n  /** 常用范围，显示在弹层里日历旁；点击只写入草稿，仍须「应用」。 */\n  presets?: readonly DateRangePreset[] | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  /** 起点日期输入（也是 Field 标签指向的输入）。 */\n  inputProps?: NativeInputProps;\n  /** 终点日期输入。 */\n  endInputProps?: NativeInputProps;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\" | \"granularity\"> & { min?: number; max?: number; excludeDisabled?: boolean };\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -21521,7 +21405,7 @@
         },
         {
           "name": "DateRangeInvalidReason",
-          "definition": "export type DateRangeInvalidReason = \"incomplete\" | \"order\" | \"bounds\" | \"length\" | \"disabled\";"
+          "definition": "export type DateRangeInvalidReason = \"incomplete\" | \"unrecognized\" | \"order\" | \"bounds\" | \"length\" | \"disabled\";"
         },
         {
           "name": "DateRangePreset",
@@ -21529,7 +21413,7 @@
         },
         {
           "name": "DateRangePickerProps",
-          "definition": "export type DateRangePickerProps = Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** 受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: DateRangeValue | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: DateRangeValue | undefined;\n  /** 只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。 */\n  onValueChange?: ((value: DateRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 键入或选择得出的草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n   * 只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`）：键入是逐段的，\n   * 填第二个日期之前只有一端、改终点时暂时早于起点，都是正常的中间状态。草稿变成可提交时，调用方会收到 `onValueChange`。\n   */\n  onInvalid?: ((draft: DateRangeDraft, reason: DateRangeInvalidReason) => void) | undefined;\n  /** 可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。 */\n  min?: Date | undefined; max?: Date | undefined;\n  /**\n   * 选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）；\n   * 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n   * 此时 `calendarProps.min` / `max`（天数限制）与 `excludeDisabled` 不再适用；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。\n   */\n  granularity?: DateGranularity;\n  /** 常用范围，显示在弹层里日历旁；点击只写入草稿，仍须「应用」。 */\n  presets?: readonly DateRangePreset[] | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  /** 起点日期输入（也是 Field 标签指向的输入）。 */\n  inputProps?: NativeInputProps;\n  /** 终点日期输入。 */\n  endInputProps?: NativeInputProps;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\" | \"granularity\"> & { min?: number; max?: number; excludeDisabled?: boolean };\n};"
+          "definition": "export type DateRangePickerProps = Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\"> & {\n  /** 受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: DateRangeValue | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: DateRangeValue | undefined;\n  /** 只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。 */\n  onValueChange?: ((value: DateRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 键入或选择得出的草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n   * 只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`）：键入是逐段的，\n   * 填第二个日期之前只有一端、改终点时暂时早于起点，都是正常的中间状态。草稿变成可提交时，调用方会收到 `onValueChange`。\n   */\n  onInvalid?: ((draft: DateRangeDraft, reason: DateRangeInvalidReason) => void) | undefined;\n  /** 可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。 */\n  min?: Date | undefined; max?: Date | undefined;\n  /**\n   * 选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）；\n   * 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n   * 此时 `calendarProps.min` / `max`（天数限制）按规范后的整段天数计算，`excludeDisabled` 按周期判断（范围不得跨过整个被禁用的周期）；不提供多选；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。\n   */\n  granularity?: DateGranularity;\n  /** 常用范围，显示在弹层里日历旁；点击只写入草稿，仍须「应用」。 */\n  presets?: readonly DateRangePreset[] | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  /** 起点日期输入（也是 Field 标签指向的输入）。 */\n  inputProps?: NativeInputProps;\n  /** 终点日期输入。 */\n  endInputProps?: NativeInputProps;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\" | \"granularity\"> & { min?: number; max?: number; excludeDisabled?: boolean };\n};"
         }
       ],
       "usageImports": [
@@ -21561,7 +21445,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -21670,7 +21554,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-range-picker.tsx",
-        "sha256": "50954292790b2429d2da553a7f9594db52b6583300fc3f5e362a74118f17aad3",
+        "sha256": "c9f53914ae6dbf34b8adeda22967d3c04eebe3f9860819d4b718d66e96fc1dbf",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "只有完整且有序的 from/to 才是确认值。起止两个原生日期输入与弹层日历共用同一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid 并通过 onInvalid 交给应用说明，库不静默交换端点。日历里的选择与预设只写草稿，取消或 Escape 保留原确认值，应用才请求替换。",
@@ -22056,7 +21940,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -22584,7 +22468,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -23922,7 +23806,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -24765,7 +24649,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -26249,7 +26133,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -27092,20 +26976,20 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "maxFiles",
@@ -27139,19 +27023,19 @@
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "validate",
@@ -27164,7 +27048,7 @@
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 283,
@@ -27186,43 +27070,43 @@
             {
               "part": "FileTrigger",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "FileTrigger",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "FileTrigger",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "FileTrigger",
               "prop": "shape",
-              "declaredAt": "packages/ui/src/components/button.tsx:87",
+              "declaredAt": "packages/ui/src/components/button.tsx:69",
               "viaComponent": "button"
             },
             {
               "part": "FileTrigger",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "declaredAt": "packages/ui/src/components/button.tsx:68",
               "viaComponent": "button"
             },
             {
               "part": "FileTrigger",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             },
             {
               "part": "FileTrigger",
               "prop": "variant",
-              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "declaredAt": "packages/ui/src/components/button.tsx:66",
               "viaComponent": "button"
             }
           ]
@@ -27837,7 +27721,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -28293,44 +28177,44 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 288,
@@ -28353,44 +28237,44 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 288,
@@ -28413,44 +28297,44 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 288,
@@ -28504,127 +28388,127 @@
             {
               "part": "FilterBarApply",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarApply",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarApply",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarApply",
               "prop": "shape",
-              "declaredAt": "packages/ui/src/components/button.tsx:87",
+              "declaredAt": "packages/ui/src/components/button.tsx:69",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarApply",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "declaredAt": "packages/ui/src/components/button.tsx:68",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarApply",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarApply",
               "prop": "variant",
-              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "declaredAt": "packages/ui/src/components/button.tsx:66",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarCancel",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarCancel",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarCancel",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarCancel",
               "prop": "shape",
-              "declaredAt": "packages/ui/src/components/button.tsx:87",
+              "declaredAt": "packages/ui/src/components/button.tsx:69",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarCancel",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "declaredAt": "packages/ui/src/components/button.tsx:68",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarCancel",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarCancel",
               "prop": "variant",
-              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "declaredAt": "packages/ui/src/components/button.tsx:66",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarClear",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarClear",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarClear",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarClear",
               "prop": "shape",
-              "declaredAt": "packages/ui/src/components/button.tsx:87",
+              "declaredAt": "packages/ui/src/components/button.tsx:69",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarClear",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "declaredAt": "packages/ui/src/components/button.tsx:68",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarClear",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             },
             {
               "part": "FilterBarClear",
               "prop": "variant",
-              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "declaredAt": "packages/ui/src/components/button.tsx:66",
               "viaComponent": "button"
             }
           ]
@@ -28914,7 +28798,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -29849,7 +29733,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -30733,7 +30617,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -31103,7 +30987,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -31535,44 +31419,44 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 288,
@@ -31715,31 +31599,31 @@
             {
               "part": "InputGroupButton",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "InputGroupButton",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "InputGroupButton",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "InputGroupButton",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "declaredAt": "packages/ui/src/components/button.tsx:68",
               "viaComponent": "button"
             },
             {
               "part": "InputGroupButton",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             }
           ]
@@ -32007,7 +31891,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -32159,7 +32043,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/input-group.tsx",
-        "sha256": "530458e9b34572eef1cbb53633a7868f51f2c3434c6e0af3830647c262013a2f",
+        "sha256": "76c0479a8ae9237614a739ef522f54922af7646711cea7da0e1abc7ac9519260",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "InputGroupInput 复用 Input 的 unstyled 出口。静态附件不抢焦点；需要动作时用 InputGroupButton，它与输入共用同一条外边界、自己不画框，并保留动作自己的名称与状态。清空、显示密码这类动作不内置在输入框里，都由这里组合；SearchInput 与 PasswordInput 就是这样搭出来的。",
@@ -34838,7 +34722,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -35203,19 +35087,19 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "markerPosition",
                 "optional": true,
                 "type": "\"start\" | \"end\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:71"
+                "declaredAt": "packages/ui/src/components/menu.tsx:72"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               }
             ],
             "inheritedCount": 285,
@@ -35254,13 +35138,13 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               }
             ],
             "inheritedCount": 278,
@@ -35283,19 +35167,19 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:57"
+                "declaredAt": "packages/ui/src/components/menu.tsx:58"
               }
             ],
             "inheritedCount": 282,
@@ -35318,13 +35202,13 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               }
             ],
             "inheritedCount": 288,
@@ -35416,19 +35300,19 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "markerPosition",
                 "optional": true,
                 "type": "\"start\" | \"end\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:99"
+                "declaredAt": "packages/ui/src/components/menu.tsx:92"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               }
             ],
             "inheritedCount": 283,
@@ -35479,13 +35363,13 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               }
             ],
             "inheritedCount": 284,
@@ -35508,13 +35392,13 @@
                 "name": "inset",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/menu.tsx:26"
+                "declaredAt": "packages/ui/src/components/menu.tsx:27"
               }
             ],
             "inheritedCount": 285,
@@ -35552,17 +35436,17 @@
             {
               "part": "MenuItem",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/menu.tsx:57"
+              "declaredAt": "packages/ui/src/components/menu.tsx:58"
             },
             {
               "part": "MenuGroupLabel",
               "prop": "inset",
-              "declaredAt": "packages/ui/src/components/menu.tsx:26"
+              "declaredAt": "packages/ui/src/components/menu.tsx:27"
             },
             {
               "part": "MenuGroupLabel",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/menu.tsx:26"
+              "declaredAt": "packages/ui/src/components/menu.tsx:27"
             }
           ]
         }
@@ -36241,7 +36125,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/menu.tsx",
-        "sha256": "b92792b834d6c9f8884551bb4c8201109abd8ad265016f9a99028c3fa803cb28",
+        "sha256": "546a0cba3c3ecf2f2eaa2cc8170a08b6f49bfa8b6e1e81ff5a9d7eba89cd69a2",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "Menu 执行动作，LinkItem 导航。禁用不等于隐藏；原语可让禁用项聚焦，但禁止执行。",
@@ -36785,7 +36669,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -38716,7 +38600,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -39272,7 +39156,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -40285,44 +40169,44 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 288,
@@ -40412,44 +40296,44 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 288,
@@ -40471,85 +40355,85 @@
             {
               "part": "PaginationPrevious",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "PaginationPrevious",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "PaginationPrevious",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "PaginationPrevious",
               "prop": "shape",
-              "declaredAt": "packages/ui/src/components/button.tsx:87",
+              "declaredAt": "packages/ui/src/components/button.tsx:69",
               "viaComponent": "button"
             },
             {
               "part": "PaginationPrevious",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "declaredAt": "packages/ui/src/components/button.tsx:68",
               "viaComponent": "button"
             },
             {
               "part": "PaginationPrevious",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             },
             {
               "part": "PaginationPrevious",
               "prop": "variant",
-              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "declaredAt": "packages/ui/src/components/button.tsx:66",
               "viaComponent": "button"
             },
             {
               "part": "PaginationNext",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "PaginationNext",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "PaginationNext",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "PaginationNext",
               "prop": "shape",
-              "declaredAt": "packages/ui/src/components/button.tsx:87",
+              "declaredAt": "packages/ui/src/components/button.tsx:69",
               "viaComponent": "button"
             },
             {
               "part": "PaginationNext",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "declaredAt": "packages/ui/src/components/button.tsx:68",
               "viaComponent": "button"
             },
             {
               "part": "PaginationNext",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             },
             {
               "part": "PaginationNext",
               "prop": "variant",
-              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "declaredAt": "packages/ui/src/components/button.tsx:66",
               "viaComponent": "button"
             }
           ]
@@ -40869,7 +40753,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41377,7 +41261,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41757,7 +41641,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -43085,7 +42969,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -43479,7 +43363,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44288,7 +44172,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44758,7 +44642,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44837,7 +44721,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/rating.tsx",
-        "sha256": "a7cd9c1e28e860b80f120cc6e726424c6e186faf661a004c9bd2f823fc0b444d",
+        "sha256": "00742b70f6983cd7ca7c7c2e0844e5535bcdb5b26b28f5edc4350b580ea2ce1d",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "评分是单选组，不是滑块：分值是有限个互斥的整数，方向键移动即选中。半星没有提供——要更细的刻度就加大 max，而不是引入小数。只读时不保留单选语义，因为一串不能操作的 radio 对读屏是噪音；它是一个结论，所以读成一幅带分值的图。",
@@ -45982,7 +45866,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -46420,7 +46304,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -46719,7 +46603,7 @@
                 "name": "fade",
                 "optional": true,
                 "type": "boolean",
-                "doc": "边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。\n做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。",
+                "doc": "边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。\n做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。占位的原生滚动条不随之变淡：渐隐止于滚动条之前，滚动条所在条带整条不透明。",
                 "declaredAt": "packages/ui/src/components/scroll-area.tsx:15"
               }
             ],
@@ -46923,7 +46807,7 @@
           "kind": "type",
           "owner": "scroll-area",
           "module": "@qingye_lab/ui/components/scroll-area",
-          "signature": "useRender.ComponentProps<\"div\"> & {\n  /**\n   * 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。\n   * 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。\n   */\n  fade?: boolean;\n}",
+          "signature": "useRender.ComponentProps<\"div\"> & {\n  /**\n   * 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。\n   * 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。占位的原生滚动条不随之变淡：渐隐止于滚动条之前，滚动条所在条带整条不透明。\n   */\n  fade?: boolean;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -47016,7 +46900,7 @@
       "types": [
         {
           "name": "ScrollAreaProps",
-          "definition": "export type ScrollAreaProps = useRender.ComponentProps<\"div\"> & {\n  /**\n   * 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。\n   * 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。\n   */\n  fade?: boolean;\n};"
+          "definition": "export type ScrollAreaProps = useRender.ComponentProps<\"div\"> & {\n  /**\n   * 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。\n   * 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。占位的原生滚动条不随之变淡：渐隐止于滚动条之前，滚动条所在条带整条不透明。\n   */\n  fade?: boolean;\n};"
         },
         {
           "name": "ScrollAreaRootProps",
@@ -47195,7 +47079,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/scroll-area.tsx",
-        "sha256": "0c218779216ea4b66cb035254638ac261d96eb11e87a24e4a387f15bfc95526f",
+        "sha256": "b335bf0444c58f204e72dbb5eedf2a8220cd65fc03da091dccdd57ce6e8428d1",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "localized": {
@@ -47582,7 +47466,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -49638,7 +49522,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -49765,7 +49649,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/select.tsx",
-        "sha256": "048014d88e56b546956527bda606ecb30e6f1c2959f695e7e64def7b1a1a9ee5",
+        "sha256": "36f9c843a86f51d2ebe65054cf5577bd80a4a076d0de1d52326c66eee10acf7a",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "高亮表示当前位置，选取才改变值。未选择不会自动变为第一项；需要并置比较时用 RadioGroup。",
@@ -51037,13 +50921,13 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "handle",
@@ -51056,31 +50940,31 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 288,
@@ -51286,44 +51170,44 @@
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:82"
+                "declaredAt": "packages/ui/src/components/button.tsx:64"
               },
               {
                 "name": "data-slot",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/button.tsx:83"
+                "declaredAt": "packages/ui/src/components/button.tsx:65"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
-                "declaredAt": "packages/ui/src/components/button.tsx:90"
+                "declaredAt": "packages/ui/src/components/button.tsx:72"
               },
               {
                 "name": "shape",
                 "optional": true,
                 "type": "\"label\" | \"icon\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:87"
+                "declaredAt": "packages/ui/src/components/button.tsx:69"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:86"
+                "declaredAt": "packages/ui/src/components/button.tsx:68"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"danger\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:85"
+                "declaredAt": "packages/ui/src/components/button.tsx:67"
               },
               {
                 "name": "variant",
                 "optional": true,
                 "type": "\"solid\" | \"bordered\" | \"quiet\"",
-                "declaredAt": "packages/ui/src/components/button.tsx:84"
+                "declaredAt": "packages/ui/src/components/button.tsx:66"
               }
             ],
             "inheritedCount": 288,
@@ -51345,85 +51229,85 @@
             {
               "part": "SidebarToggle",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "SidebarToggle",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "SidebarToggle",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "SidebarToggle",
               "prop": "shape",
-              "declaredAt": "packages/ui/src/components/button.tsx:87",
+              "declaredAt": "packages/ui/src/components/button.tsx:69",
               "viaComponent": "button"
             },
             {
               "part": "SidebarToggle",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "declaredAt": "packages/ui/src/components/button.tsx:68",
               "viaComponent": "button"
             },
             {
               "part": "SidebarToggle",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             },
             {
               "part": "SidebarToggle",
               "prop": "variant",
-              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "declaredAt": "packages/ui/src/components/button.tsx:66",
               "viaComponent": "button"
             },
             {
               "part": "SidebarDrawerTrigger",
               "prop": "className",
-              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "declaredAt": "packages/ui/src/components/button.tsx:64",
               "viaComponent": "button"
             },
             {
               "part": "SidebarDrawerTrigger",
               "prop": "data-slot",
-              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "declaredAt": "packages/ui/src/components/button.tsx:65",
               "viaComponent": "button"
             },
             {
               "part": "SidebarDrawerTrigger",
               "prop": "loading",
-              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "declaredAt": "packages/ui/src/components/button.tsx:72",
               "viaComponent": "button"
             },
             {
               "part": "SidebarDrawerTrigger",
               "prop": "shape",
-              "declaredAt": "packages/ui/src/components/button.tsx:87",
+              "declaredAt": "packages/ui/src/components/button.tsx:69",
               "viaComponent": "button"
             },
             {
               "part": "SidebarDrawerTrigger",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/button.tsx:86",
+              "declaredAt": "packages/ui/src/components/button.tsx:68",
               "viaComponent": "button"
             },
             {
               "part": "SidebarDrawerTrigger",
               "prop": "tone",
-              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "declaredAt": "packages/ui/src/components/button.tsx:67",
               "viaComponent": "button"
             },
             {
               "part": "SidebarDrawerTrigger",
               "prop": "variant",
-              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "declaredAt": "packages/ui/src/components/button.tsx:66",
               "viaComponent": "button"
             },
             {
@@ -51939,7 +51823,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52561,7 +52445,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52894,7 +52778,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -53589,7 +53473,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -54145,7 +54029,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -54881,7 +54765,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -55289,7 +55173,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -55747,7 +55631,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -56009,7 +55893,7 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "立即生效的设置已发出请求、结果未到。事实由调用方持有；开关只表示「尚未确认」并挡住再次切换，不启动请求、不推断结果。\n抓手停在调用方给的 `checked`（通常是请求的目标值），抓手内出现与 Button loading 同一种等待记号。",
-                "declaredAt": "packages/ui/src/components/switch.tsx:11"
+                "declaredAt": "packages/ui/src/components/switch.tsx:12"
               }
             ],
             "inheritedCount": 289,
@@ -56195,7 +56079,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/switch.tsx",
-        "sha256": "9ae3686501e427f7139eb3d69d59eb31a0e6715add243ff1334b0fdfc6412e6a",
+        "sha256": "824244fef954f3b8bc97911a210e7e23e7554758faaad3f0d0f741a94dd345bc",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "只有当前设置立即改变时才用 Switch。条款同意、待提交选择和不可逆命令分别使用 Checkbox 或明确的动作与结果反馈。",
@@ -57307,7 +57191,7 @@
                 "optional": true,
                 "type": "\"visited\" | boolean",
                 "doc": "\"visited\"（默认）：第一次到达时才挂载，之后保留；true：一开始就全部挂载；false：离开即卸载。",
-                "declaredAt": "packages/ui/src/components/tabs.tsx:54"
+                "declaredAt": "packages/ui/src/components/tabs.tsx:60"
               }
             ],
             "inheritedCount": 279,
@@ -57619,7 +57503,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tabs.tsx",
-        "sha256": "96d314f6778de1535f266d5db4b31ef9a2cd5fc14b6ae7bb140fceaf3472e448",
+        "sha256": "fec95d44ade9b2245e569a1b91c9ddc6911c1af3b26f50a36521bb8a54d98137",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "默认手动激活、面板保留挂载；切换视角不等于批准或保存草稿。",
@@ -58096,7 +57980,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -58583,7 +58467,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -59661,7 +59545,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -60174,7 +60058,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -60725,7 +60609,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -61271,7 +61155,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -61892,7 +61776,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -64798,7 +64682,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -65309,7 +65193,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -65953,7 +65837,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -66560,7 +66444,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
+            "declaredAt": "packages/ui/src/locale.tsx:200",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -68000,7 +67884,7 @@
                 "optional": true,
                 "type": "React.Key",
                 "doc": "换页的标识（通常是路由路径）。变化时把滚动回到顶部、重放一次进场（`data-motion=\"rise-in\"`，调用方给了\n`data-motion` 时重放调用方的值）；首次挂载不动。地址的 `#锚点` 落在新内容里时滚到锚点而不是顶部。进场遵守 motion.css：键盘输入时不播，减少动效时只淡入。",
-                "declaredAt": "packages/ui/src/components/workspace.tsx:189"
+                "declaredAt": "packages/ui/src/components/workspace.tsx:184"
               }
             ],
             "inheritedCount": 281,
@@ -68039,7 +67923,7 @@
                 "name": "children",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/workspace.tsx:127"
+                "declaredAt": "packages/ui/src/components/workspace.tsx:122"
               }
             ],
             "inheritedCount": 0,
@@ -68411,15 +68295,6 @@
         "required": [],
         "contexts": [
           {
-            "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:199",
-            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
-            "withoutProvider": "default-value",
-            "providedBy": [
-              "UILocaleProvider"
-            ]
-          },
-          {
             "name": "SidebarHandleContext",
             "declaredAt": "packages/ui/src/sidebar-handle.ts:54",
             "defaultValue": "null",
@@ -68545,7 +68420,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/workspace.tsx",
-        "sha256": "ca2d713bc6ff9ae851eb0ec123c226f6252253cc01ad7d8ae069e974e119dc0a",
+        "sha256": "6877d9e405f7b45fb071620d63cc8ab3ef9ec775a6dec1aa609e10efac0ac84e",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "页面的名称、摘要与页面级操作在顶栏里，正文不再立第二个大标题。工作面四周一个 2 分的外边距，紧挨侧栏的一侧不另加：那道间隔是侧栏的内缘，侧栏与工作面之间读来只有一个间隔。窄屏工作面贴满视口，去掉外边距、圆角、线与阴影。路由页面用 WorkspaceHeaderPortal 把自己的标题与操作送进顶栏；顶栏在 DOM 里先于内容区，送上去的操作在 Tab 顺序里也先于正文。",

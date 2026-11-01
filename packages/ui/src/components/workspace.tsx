@@ -4,9 +4,9 @@ import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import * as React from "react";
 import { createPortal } from "react-dom";
-import { useUILocale } from "../locale";
 import { createSidebarDrawerHandle, SidebarHandleContext } from "../sidebar-handle";
 import { cn } from "../utils";
+import { SkipLink } from "./skip-link";
 import { Heading, type HeadingProps } from "./typography";
 
 /**
@@ -41,7 +41,6 @@ export type WorkspaceProps = useRender.ComponentProps<"div">;
  * 点击不改地址：preventDefault 后直接聚焦目标，hash 路由的应用不会因此换页。
  */
 export function Workspace({ render, className, children, ...props }: WorkspaceProps) {
-  const { messages } = useUILocale();
   const [outlet, setOutlet] = React.useState<HTMLElement | null>(null);
   const defaultContentId = React.useId();
   const [contentId, setContentId] = React.useState(defaultContentId);
@@ -60,11 +59,7 @@ export function Workspace({ render, className, children, ...props }: WorkspacePr
         className,
       ),
       children: <>
-        <a
-          data-slot="workspace-skip-link" href={`#${contentId}`}
-          onClick={event => { event.preventDefault(); event.currentTarget.ownerDocument.getElementById(contentId)?.focus(); }}
-          className="pointer-events-none fixed start-(--qy-space-2) top-(--qy-space-2) z-10 inline-flex min-h-(--qy-fill-height) items-center rounded-overlay border border-border bg-surface-raised px-(--qy-control-sm-padding) text-body text-foreground opacity-0 shadow-raised outline-none focus:pointer-events-auto focus:opacity-100 focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color)"
-        >{messages.skipToContent}</a>
+        <SkipLink data-slot="workspace-skip-link" href={`#${contentId}`} />
         {children}
       </>,
     }, props),

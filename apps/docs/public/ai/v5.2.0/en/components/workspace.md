@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
-Source SHA-256: ca2d713bc6ff9ae851eb0ec123c226f6252253cc01ad7d8ae069e974e119dc0a
+Source SHA-256: 6877d9e405f7b45fb071620d63cc8ab3ef9ec775a6dec1aa609e10efac0ac84e
 
 An application shell: a sidebar on the page ground beside one work surface, with the header inside the surface and the only scroll container below it.
 

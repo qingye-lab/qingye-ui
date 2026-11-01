@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: 0c218779216ea4b66cb035254638ac261d96eb11e87a24e4a387f15bfc95526f
+Source SHA-256: b335bf0444c58f204e72dbb5eedf2a8220cd65fc03da091dccdd57ce6e8428d1
 
 Native scrolling with an optional composition of draggable scrollbars.
 
@@ -51,7 +51,7 @@ Native scrolling with an optional composition of draggable scrollbars.
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### ScrollArea
-- `fade?`: `boolean`. 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。
+- `fade?`: `boolean`. 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。占位的原生滚动条不随之变淡：渐隐止于滚动条之前，滚动条所在条带整条不透明。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ScrollAreaContent

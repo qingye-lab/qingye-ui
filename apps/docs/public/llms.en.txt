@@ -29,7 +29,7 @@
 - [Chart](/en/docs/components/chart.md): Nine task-chosen forms—line, bar, area, area-stacked, area-share, bar-horizontal, bar-stacked, bar-share and donut—with a same-source plot, named axes and an on-demand data table.
 - [Checkbox](/en/docs/components/checkbox.md): Choose an independent yes/no value or multiple items in a set.
 - [CheckboxGroup](/en/docs/components/checkbox-group.md): Connect checkboxes to one collection and shared scope.
-- [Chip](/en/docs/components/chip.md): A small mark that can be acted on by itself: removable, or toggleable.
+- [Chip](/en/docs/components/chip.md): A small removable mark: one chosen item that can be dropped on its own.
 - [CodeBlock](/en/docs/components/code-block.md): Literal text with an optional title bar and actual copy results.
 - [Collapsible](/en/docs/components/collapsible.md): Reveal additional content for the same object.
 - [ColorPicker](/en/docs/components/color-picker.md): Choose a colour that belongs to the user's data, such as a label colour or a theme setting, and get a #rrggbb string.

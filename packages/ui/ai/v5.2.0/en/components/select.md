@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: 048014d88e56b546956527bda606ecb30e6f1c2959f695e7e64def7b1a1a9ee5
+Source SHA-256: 36f9c843a86f51d2ebe65054cf5577bd80a4a076d0de1d52326c66eee10acf7a
 
 Choose one value from a collapsible set of options.
 

@@ -35,14 +35,14 @@ export default {
   ],
   notes: [
     "粘贴、拖放一律只收纯文字；复制与剪切输出纯文字，令牌写作“触发字符 + label”。",
-    "composerValueToText 默认把令牌写作“触发字符 + label”；composerValueFromText 可传入已知令牌，按字面匹配还原。",
-    "没有 name 与表单提交，也未接入 Field；需要时由应用在 onSubmit 里取值。",
+    "composerValueToText 默认把令牌写作“触发字符 + label”；composerValueFromText 可传入已知令牌，按字面匹配还原，且只在词的开头处还原（“a@Ann.com”“@Anna”不会变成令牌）。纯文字会丢掉令牌 id，要无损保存就存片段数组本身。",
+    "没有 name 与表单提交，也未接入 Field：值是片段数组，没有对应的表单字段形态，由应用在 onSubmit 里取值并发送（同类对话输入的通行做法）。",
     "jsdom 无法验证真实输入法、各浏览器 contenteditable 的光标与 beforeinput 差异、浮层碰撞翻转与 Range 坐标，需在真实浏览器中另验。",
   ],
   notesEn: [
     "Paste and drop accept plain text only; copy and cut emit plain text with a token written as trigger + label.",
-    "composerValueToText writes a token as trigger + label by default; composerValueFromText accepts known tokens and restores them by literal match.",
-    "There is no name or form submission and no Field integration; read the value in onSubmit.",
+    "composerValueToText writes a token as trigger + label by default; composerValueFromText accepts known tokens and restores them by literal match, only at the start of a word (\"a@Ann.com\" and \"@Anna\" stay text). Plain text drops token ids, so store the segment array itself for a lossless round trip.",
+    "There is no name or form submission and no Field integration: the value is an array of segments with no form-field form, so the app reads and sends it in onSubmit, as conversational inputs commonly do.",
     "jsdom cannot verify a real IME, per-browser contenteditable caret and beforeinput behavior, popup collision flipping or Range geometry; verify these in real browsers.",
   ],
   design: { methods: ["名实相符", "相成相制", "进退相承"], whenToUse: ["对话式输入：多行文字夹带提及与命令"], avoid: ["单行短文本用 Input；纯多行文字用 Textarea；只能从候选选择用 Combobox"], composition: ["Composer + ComposerInput + ComposerToolbar + ComposerSubmit"], stateOwner: { library: ["非受控值、撤销栈、候选高亮与异步结果的新旧判断"], application: ["受控值、候选数据来源、提交后的清空与发送、消息列表"] }, responsive: ["一套几何，起始高与上限按行数换算，跟随密度轴"], customization: ["root render/ref；ComposerInput 的 className 作用于编辑区"] },

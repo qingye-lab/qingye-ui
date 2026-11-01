@@ -20,7 +20,7 @@ export type UILocaleMessages = {
   otpLengthExceeded: (length: number) => string; tagEmpty: string; removeTag: (tag: string) => string;
   notifications: string; anchoredNotifications: string; closeNotification: string;
   selectDate: string; clearDate: string; clearDateTime: string; clearDateRange: string; selectDateTime: string; time: string;
-  dateIncomplete: string; dateOutOfRange: string;
+  dateIncomplete: string; dateInvalid: string; dateOutOfRange: string;
   timeHour: string; timeMinute: string; timeSecond: string; timeDayPeriod: string; timeAm: string; timePm: string; timeEmpty: string; timeOutOfRange: string; timeIncomplete: string;
   startTime: string; endTime: string; timeRangeOrder: string; startDateTime: string; endDateTime: string; dateTimeRangeOrder: string; selectDateTimeRange: string; clearDateTimeRange: string;
   fieldOptional: string; fieldValidating: string;
@@ -74,6 +74,7 @@ export type UILocaleMessages = {
   cascaderSeparator: string; cascaderRetry: string; cascaderLoadFailed: string; cascaderBranch: string; cascaderPartial: string;
   commandEmpty: string;
   skipToContent: string; selectRowNamed: (name: string) => string; selectEmpty: string; moreNotifications: (count: number) => string;
+  /** 所有多选选择器（TreeSelect、Cascader、Select multiple 等）摘要里名称之间的分隔符；键名沿用首个使用者。 */
   treeSelectSeparator: string; treeSelectMore: (first: string, rest: number) => string;
   treeLoadFailed: string; treeRetry: string;
   treeMoveHint: string; treeMovePicked: (name: string) => string; treeMoved: (name: string, target: string, position: "before" | "after" | "inside") => string; treeMoveCancelled: string; treeMoveInvalid: string;
@@ -83,7 +84,7 @@ export type UILocaleMessages = {
   transferMoveTo: (count: number, title: string) => string; transferMoved: (count: number, title: string) => string;
   transferEmpty: string; transferNoMatch: string;
   composerSubmit: string;
-  selectSeparator: string; selectMore: (rest: number) => string;
+  selectMore: (rest: number) => string;
 };
 
 export type UILocale = { code: string; messages: UILocaleMessages };
@@ -105,7 +106,7 @@ export const zhCN: UILocale = {
     otpLengthExceeded: (length) => `最多输入 ${length} 个字符；本次输入未添加`, tagEmpty: "请输入非空标签", removeTag: (tag) => `移除 ${tag}`,
     notifications: "操作提示", anchoredNotifications: "就地提示", closeNotification: "关闭提示",
     selectDate: "选择日期", clearDate: "清除日期", clearDateTime: "清除日期和时间", clearDateRange: "清除日期范围", selectDateTime: "选择日期和时间", time: "时间",
-    dateIncomplete: "日期未填完整", dateOutOfRange: "日期超出可选范围",
+    dateIncomplete: "日期未填完整", dateInvalid: "无法识别的日期", dateOutOfRange: "日期超出可选范围",
     timeHour: "时", timeMinute: "分", timeSecond: "秒", timeDayPeriod: "上午或下午", timeAm: "上午", timePm: "下午", timeEmpty: "未填", timeOutOfRange: "时间超出可选范围", timeIncomplete: "时间未填完整",
     startTime: "开始时间", endTime: "结束时间", timeRangeOrder: "结束时间早于开始时间", startDateTime: "开始日期和时间", endDateTime: "结束日期和时间", dateTimeRangeOrder: "结束时刻早于开始时刻", selectDateTimeRange: "选择日期时间范围", clearDateTimeRange: "清除日期时间范围",
     fieldOptional: "选填", fieldValidating: "正在校验",
@@ -162,7 +163,7 @@ export const zhCN: UILocale = {
     transferMoveTo: (count, title) => `将所选 ${count.toLocaleString("zh-CN")} 项移到“${title}”`, transferMoved: (count, title) => `已移到“${title}” ${count.toLocaleString("zh-CN")} 项`,
     transferEmpty: "没有条目", transferNoMatch: "没有匹配项",
     composerSubmit: "发送",
-    selectSeparator: "、", selectMore: (rest) => `及其余 ${rest.toLocaleString("zh-CN")} 项`,
+    selectMore: (rest) => `及其余 ${rest.toLocaleString("zh-CN")} 项`,
   },
 };
 

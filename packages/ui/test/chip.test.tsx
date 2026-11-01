@@ -1,8 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { useState } from "react";
 import { expect, test, vi } from "vitest";
-import { Chip, ChipToggle } from "../src/components/chip";
+import { Chip } from "../src/components/chip";
 import { UILocaleProvider } from "../src/locale";
 import { enUS } from "../src/locales/en-US";
 
@@ -48,39 +47,4 @@ test("a disabled chip cannot be removed", async () => {
   expect(button).toBeDisabled();
   await user.click(button);
   expect(onRemove).not.toHaveBeenCalled();
-});
-
-test("a toggle chip exposes aria-pressed, uncontrolled", async () => {
-  const user = userEvent.setup();
-  const onPressedChange = vi.fn();
-  render(<ChipToggle onPressedChange={onPressedChange}>未读</ChipToggle>);
-  const chip = screen.getByRole("button", { name: "未读" });
-  expect(chip).toHaveAttribute("aria-pressed", "false");
-  await user.click(chip);
-  expect(chip).toHaveAttribute("aria-pressed", "true");
-  expect(onPressedChange).toHaveBeenLastCalledWith(true, expect.anything());
-  await user.keyboard("{Enter}");
-  expect(chip).toHaveAttribute("aria-pressed", "false");
-});
-
-test("a toggle chip follows its controlled pressed value", async () => {
-  const user = userEvent.setup();
-  function Controlled() {
-    const [pressed, setPressed] = useState(true);
-    return <><ChipToggle pressed={pressed} onPressedChange={setPressed}>未读</ChipToggle><output>{String(pressed)}</output></>;
-  }
-  render(<Controlled />);
-  const chip = screen.getByRole("button", { name: "未读" });
-  expect(chip).toHaveAttribute("aria-pressed", "true");
-  await user.click(chip);
-  expect(chip).toHaveAttribute("aria-pressed", "false");
-  expect(screen.getByRole("status")).toHaveTextContent("false");
-});
-
-test("a disabled toggle chip does not change", async () => {
-  const user = userEvent.setup();
-  render(<ChipToggle disabled>未读</ChipToggle>);
-  const chip = screen.getByRole("button", { name: "未读" });
-  await user.click(chip);
-  expect(chip).toHaveAttribute("aria-pressed", "false");
 });

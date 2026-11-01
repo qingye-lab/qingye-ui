@@ -28,7 +28,7 @@
 - [图表 Chart](components/chart.md): 九种由任务选定的形式——折线、柱状、面积、堆叠面积、占比面积、横向柱、堆叠柱、占比柱、环形；同源的图形、命名的轴与按需展开的数据表。
 - [复选框 Checkbox](components/checkbox.md): 选择独立的是/否或集合中的多个项。
 - [复选组 CheckboxGroup](components/checkbox-group.md): 把复选项接入同一个集合与共同范围。
-- [标签片 Chip](components/chip.md): 一枚可以被单独操作的小记号：可移除，或可开关。
+- [标签片 Chip](components/chip.md): 一枚可移除的小记号：已经选定的一项，可以单独去掉。
 - [代码 CodeBlock](components/code-block.md): 文本原样展示、可选标题栏与真实复制结果。
 - [单段展开 Collapsible](components/collapsible.md): 主动展开同一对象的补充内容。
 - [颜色选择 ColorPicker](components/color-picker.md): 选取用户数据里的颜色：标签颜色、主题配置取值，得到一个 #rrggbb。

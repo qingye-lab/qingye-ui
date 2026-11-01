@@ -1922,7 +1922,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
-Source SHA-256: 60676cd107b7383351276a379d5f700b354ec3f3a66294e8b11945392783b1a4
+Source SHA-256: 33bee148386b5e78157da9af6787ff6d23f8bb88bb47d5ae1aed705c86ef02df
 
 触发有明确对象与后果的动作；状态由调用方持有。
 
@@ -2048,7 +2048,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
-Source SHA-256: 2f4dd719cf1870157eead31e1aef929258879c948157458f8751c2ad64463222
+Source SHA-256: 482f8c3c4b02b0a94fda90ea51948d653098e2af0fdd48ec9f67312a43d0c4fb
 
 为同一范围的动作提供共同名称，可独立排列或连成一体。
 
@@ -2692,7 +2692,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
-Source SHA-256: 7d6a3498b9f9feee7e9501b2fcf70e8aa80200b70df5d458c62c84b748eef5de
+Source SHA-256: f5464ad5133223a687ea8729b9aa748caf203971a657f18cab57359212eeab47
 
 选择独立的是/否或集合中的多个项。
 
@@ -2895,29 +2895,28 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/chip
 Source: packages/ui/src/components/chip.tsx
-Source SHA-256: ae7025a43fcc2e98d4398561f304ac091e583cefe053abf84781f07d3cf08df1
+Source SHA-256: ad815ca9b19efbfb70cada333d50c9e9579ef78c9f00f139f16251c246b090d6
 
-一枚可以被单独操作的小记号：可移除，或可开关。
+一枚可移除的小记号：已经选定的一项，可以单独去掉。
 
 ### Decision
-Chip 与 Badge 不是一回事：Badge 是正文里一段静态的字，没有底、没有交互，用来标注状态或类别；Chip 有自己的边界，能被点击或移除，是对象而不是标注。要给一段不可操作的标注加移除按钮，说明它其实是 Chip。Chip 的两种形态不合并成一个带 mode 的组件：移除是单向动作，开关是可往返的状态，二者的读屏角色、键盘与名称规则都不同，所以是 Chip 与 ChipToggle 两个组件。编辑框里的标签（TagInput）与多选 Combobox 的已选项是边界内的项，几何由所在边界推出，不使用 Chip；Chip 是独立立着的记号，几何读 sm 控件档。
+Chip 与 Badge 不是一回事：Badge 是正文里一段静态的字，没有底、没有交互，用来标注状态或类别；Chip 有自己的边界，能被点击或移除，是对象而不是标注。要给一段不可操作的标注加移除按钮，说明它其实是 Chip。可开关的筛选条件不是 Chip：它是二态按钮（aria-pressed），直接用 Toggle size="sm"；早先的 ChipToggle 只是 Toggle 固定 sm 档的同义包装，在发布前删除，避免同一件事有两个名字。编辑框里的标签（TagInput）与多选 Combobox 的已选项是边界内的项，几何由所在边界推出，不使用 Chip；Chip 是独立立着的记号，几何读 sm 控件档。
 
 ### Notes
 - 移除按钮的名称是「移除 X」，X 取记号文字，所以同一行里多个记号读屏时彼此可分。
-- ChipToggle 的名称不随按下与否变化，状态只由 aria-pressed 表达。
 - 移除之后焦点会随被移除的节点一起消失：由调用方把焦点移到相邻记号或它所在的容器。
 
 ### Use and ownership
 - 一组已选条件，每个都能单独去掉
-- 一组筛选条件，每个都能单独开关
+- Avoid: 可开关的筛选条件用 Toggle size="sm"
 - Avoid: 不可操作的状态标注用 Badge
 - Avoid: 在输入框内收下的值用 TagInput
 - Avoid: 互斥的几个选项用 RadioGroup 或 SegmentedControl
-- Library: ChipToggle 的非受控按下状态、焦点
-- Application: Chip 的集合（移除后是否保留）、筛选条件的实际含义、移除后的焦点去向
+- Library: 移除按钮的焦点与键盘
+- Application: Chip 的集合（移除后是否保留）、移除后的焦点去向
 
 ### Composition
-- 多个 Chip 放进 flex-wrap 的行；ChipToggle 放进带名称的 group
+- 多个 Chip 放进 flex-wrap 的行
 
 ### Responsive behavior
 - 文字过长时截断，完整文字仍在 DOM；本批只做桌面检查
@@ -2928,8 +2927,6 @@ Chip 与 Badge 不是一回事：Badge 是正文里一段静态的字，没有�
 ### Current exports
 - Chip: function; owner chip; PASS; props: ChipProps
 - ChipProps: type; owner chip; PASS
-- ChipToggle: function; owner chip; PASS; props: ChipToggleProps<Value>
-- ChipToggleProps: type; owner chip; PASS
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
@@ -2939,10 +2936,6 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `disabled?`: `boolean`. 禁用后移除按钮不可操作；记号本身仍显示。
 - `onRemove?`: `(event: React.SyntheticEvent<HTMLElement>) => void`. 移除。给了它才出现移除按钮；点击、Enter、Space、Backspace、Delete 都会调用。
 - plus 279 inherited (@types/react 278, @base-ui/react 1); not expanded, see the installed declarations
-
-### ChipToggle
-- no props declared by this library
-- plus 292 inherited (@types/react 283, @base-ui/react 9); not expanded, see the installed declarations
 
 ### Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
@@ -2960,15 +2953,9 @@ Written descriptions; the list above is the type-resolved fact.
 - disabled: boolean; default false. 移除按钮不可操作，记号仍显示。
 - render / ref / className: Base UI composition. 根部位 span 的组合入口。
 
-#### ChipToggle
-可开关的记号：按钮加 aria-pressed。属性与 Toggle 相同，只是固定为 sm 档。
-- pressed / defaultPressed: boolean. 受控或初始的按下状态。
-- onPressedChange: (pressed: boolean, details) => void. 按下状态改变时调用。
-- disabled: boolean; default false. 不可操作；按下的事实保留。
-
 ### Keyboard
-- Tab / Shift+Tab: Chip 的移除按钮、ChipToggle 各是一个停靠点；记号文字本身不可聚焦。
-- Enter / Space: 移除，或切换按下状态。
+- Tab / Shift+Tab: 每个移除按钮是一个停靠点；记号文字本身不可聚焦。
+- Enter / Space: 移除该记号。
 - Backspace / Delete: 焦点在移除按钮上时移除该记号。
 
 ### Source example
@@ -2993,8 +2980,6 @@ export default function Demo() {
   </div>;
 }
 ```
-
-1 more examples: see the component page and its Markdown file.
 
 ## 代码 CodeBlock
 
@@ -3753,8 +3738,8 @@ Source SHA-256: 4acac907848fbc6389ee0d83b6f3e65e5f5daab6e8e704a343432f76724fee2b
 
 ### Notes
 - 粘贴、拖放一律只收纯文字；复制与剪切输出纯文字，令牌写作“触发字符 + label”。
-- composerValueToText 默认把令牌写作“触发字符 + label”；composerValueFromText 可传入已知令牌，按字面匹配还原。
-- 没有 name 与表单提交，也未接入 Field；需要时由应用在 onSubmit 里取值。
+- composerValueToText 默认把令牌写作“触发字符 + label”；composerValueFromText 可传入已知令牌，按字面匹配还原，且只在词的开头处还原（“a@Ann.com”“@Anna”不会变成令牌）。纯文字会丢掉令牌 id，要无损保存就存片段数组本身。
+- 没有 name 与表单提交，也未接入 Field：值是片段数组，没有对应的表单字段形态，由应用在 onSubmit 里取值并发送（同类对话输入的通行做法）。
 - jsdom 无法验证真实输入法、各浏览器 contenteditable 的光标与 beforeinput 差异、浮层碰撞翻转与 Range 坐标，需在真实浏览器中另验。
 
 ### Use and ownership
@@ -4692,7 +4677,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: 2039377cc2572bc6c6e47fab6baf740d1b74cd2720bbbe2ff146f5b731864850
+Source SHA-256: 2b68f004920e5e70f42e26e967d1b2afa357ac09e42f56e298adeceb1fb284a2
 
 编辑一个当地日期，或展开日历选择。
 
@@ -4789,7 +4774,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 50954292790b2429d2da553a7f9594db52b6583300fc3f5e362a74118f17aad3
+Source SHA-256: c9f53914ae6dbf34b8adeda22967d3c04eebe3f9860819d4b718d66e96fc1dbf
 
 键入或在日历中选择起止日期，完整且有序时才是确认值。
 
@@ -4834,7 +4819,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `disabled?`: `boolean`.
 - `endInputProps?`: `NativeInputProps`. 终点日期输入。
 - `form?`: `string | undefined`.
-- `granularity?`: `"day" | "week" | "month" | "quarter" | "year"`. 选择的粒度，默认 `"day"`。非 `"day"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）； 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。 此时 `calendarProps.min` / `max`（天数限制）与 `excludeDisabled` 不再适用；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。
+- `granularity?`: `"day" | "week" | "month" | "quarter" | "year"`. 选择的粒度，默认 `"day"`。非 `"day"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）； 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。 此时 `calendarProps.min` / `max`（天数限制）按规范后的整段天数计算，`excludeDisabled` 按周期判断（范围不得跨过整个被禁用的周期）；不提供多选；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。
 - `inputProps?`: `NativeInputProps`. 起点日期输入（也是 Field 标签指向的输入）。
 - `max?`: `Date | undefined`.
 - `min?`: `Date | undefined`. 可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。
@@ -6757,7 +6742,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
-Source SHA-256: 530458e9b34572eef1cbb53633a7868f51f2c3434c6e0af3830647c262013a2f
+Source SHA-256: 76c0479a8ae9237614a739ef522f54922af7646711cea7da0e1abc7ac9519260
 
 让输入与标记、单位或附属动作共用编辑边界。
 
@@ -7542,7 +7527,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
-Source SHA-256: b92792b834d6c9f8884551bb4c8201109abd8ad265016f9a99028c3fa803cb28
+Source SHA-256: 546a0cba3c3ecf2f2eaa2cc8170a08b6f49bfa8b6e1e81ff5a9d7eba89cd69a2
 
 与当前任务相关的临时命令和选择。
 
@@ -9395,7 +9380,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/rating
 Source: packages/ui/src/components/rating.tsx
-Source SHA-256: a7cd9c1e28e860b80f120cc6e726424c6e186faf661a004c9bd2f823fc0b444d
+Source SHA-256: 00742b70f6983cd7ca7c7c2e0844e5535bcdb5b26b28f5edc4350b580ea2ce1d
 
 在 1 到 max 之间给出一个整数分值，用一排星表示。
 
@@ -9845,7 +9830,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: 0c218779216ea4b66cb035254638ac261d96eb11e87a24e4a387f15bfc95526f
+Source SHA-256: b335bf0444c58f204e72dbb5eedf2a8220cd65fc03da091dccdd57ce6e8428d1
 
 真实原生滚动，或显式组合可拖动滚动条。
 
@@ -9893,7 +9878,7 @@ Source SHA-256: 0c218779216ea4b66cb035254638ac261d96eb11e87a24e4a387f15bfc95526f
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### ScrollArea
-- `fade?`: `boolean`. 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。
+- `fade?`: `boolean`. 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。占位的原生滚动条不随之变淡：渐隐止于滚动条之前，滚动条所在条带整条不透明。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ScrollAreaContent
@@ -10289,7 +10274,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: 048014d88e56b546956527bda606ecb30e6f1c2959f695e7e64def7b1a1a9ee5
+Source SHA-256: 36f9c843a86f51d2ebe65054cf5577bd80a4a076d0de1d52326c66eee10acf7a
 
 从可收起的候选列表中取一个值。
 
@@ -11600,7 +11585,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
-Source SHA-256: 9ae3686501e427f7139eb3d69d59eb31a0e6715add243ff1334b0fdfc6412e6a
+Source SHA-256: 824244fef954f3b8bc97911a210e7e23e7554758faaad3f0d0f741a94dd345bc
 
 立即改变当前设置的开/关状态。
 
@@ -11871,7 +11856,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: 96d314f6778de1535f266d5db4b31ef9a2cd5fc14b6ae7bb140fceaf3472e448
+Source SHA-256: fec95d44ade9b2245e569a1b91c9ddc6911c1af3b26f50a36521bb8a54d98137
 
 同一对象的不同视角，保留面板草稿。
 
@@ -14051,7 +14036,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
-Source SHA-256: ca2d713bc6ff9ae851eb0ec123c226f6252253cc01ad7d8ae069e974e119dc0a
+Source SHA-256: 6877d9e405f7b45fb071620d63cc8ab3ef9ec775a6dec1aa609e10efac0ac84e
 
 应用外壳：底纸上的侧栏旁放一张工作面，顶栏在工作面里，下面是唯一的滚动区。
 

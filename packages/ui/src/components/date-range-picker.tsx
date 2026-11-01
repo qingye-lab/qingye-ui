@@ -9,7 +9,7 @@ import { IconCalendar, IconX } from "@tabler/icons-react";
 import { dateMatchModifiers, rangeContainsModifiers } from "@daypicker/react";
 import * as React from "react";
 import { intersectNativeBounds, mergeCalendarBounds, readNativeEntry, useInputFacts, useInputRef, useTypingText, warnEmptyBounds } from "../input-facts";
-import { formatPeriod, parsePeriod, periodEnd, periodFullyDisabled, periodStart, periodWithinBounds, type DateGranularity, type PeriodGranularity } from "../date-granularity";
+import { addPeriods, formatPeriod, parsePeriod, periodEnd, periodFullyDisabled, periodStart, periodWithinBounds, type DateGranularity, type PeriodGranularity } from "../date-granularity";
 import { useUILocale } from "../locale";
 import { inputAdjunctClassName, withHiddenIndicator } from "../input-adjunct";
 import { InputGroupReadOnlyNote } from "../input-readonly-note";
@@ -22,8 +22,11 @@ import { Popover, PopoverPopup, PopoverTrigger } from "./popover";
 export type DateRangeValue = { from: Date; to: Date };
 /** 草稿的端点：键入或日历选择中，任何一端都可能还空着。 */
 export type DateRangeDraft = { from?: Date | undefined; to?: Date | undefined };
-/** 草稿不能提交的原因：只填了一端（`incomplete`）、起点晚于终点（`order`）、超出 `min` / `max`（`bounds`）。 */
-export type DateRangeInvalidReason = "incomplete" | "order" | "bounds" | "length" | "disabled";
+/**
+ * 草稿不能提交的原因：只填了一端（`incomplete`）、周期输入的文字无法识别（`unrecognized`）、起点晚于终点（`order`）、
+ * 超出 `min` / `max`（`bounds`）、天数超出 `calendarProps.min` / `max`（`length`）、碰到禁用日或禁用周期（`disabled`）。
+ */
+export type DateRangeInvalidReason = "incomplete" | "unrecognized" | "order" | "bounds" | "length" | "disabled";
 /** 一个常用范围。函数形式在每次打开弹层时求值，所以「近 7 日」不会因页面跨过午夜而陈旧。 */
 export type DateRangePreset = { label: string; value: DateRangeValue | (() => DateRangeValue) };
 type NativeInputProps = Omit<InputProps, "value" | "defaultValue" | "name" | "type" | "size" | "form" | "disabled" | "readOnly" | "onValueChange">;
@@ -45,7 +48,7 @@ export type DateRangePickerProps = Omit<useRender.ComponentProps<"div">, "childr
   /**
    * 选择的粒度，默认 `"day"`。非 `"day"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）；
    * 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。
-   * 此时 `calendarProps.min` / `max`（天数限制）与 `excludeDisabled` 不再适用；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。
+   * 此时 `calendarProps.min` / `max`（天数限制）按规范后的整段天数计算，`excludeDisabled` 按周期判断（范围不得跨过整个被禁用的周期）；不提供多选；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。
    */
   granularity?: DateGranularity;
   /** 常用范围，显示在弹层里日历旁；点击只写入草稿，仍须「应用」。 */
@@ -132,13 +135,22 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
     if (!target.from || !target.to) return "incomplete";
     if (dayText(target.from) > dayText(target.to)) return "order";
     if (!inBounds(target.from) || !inBounds(target.to)) return "bounds";
-    // 非按天：天数限制与区间内禁用日不适用（一个周期里总有可选的日子才可选）；只看两端的周期是否整个被禁用。
-    if (period) return calendarProps.disabled !== undefined && (periodFullyDisabled(target.from, period, rules, calendarProps.disabled) || periodFullyDisabled(target.to, period, rules, calendarProps.disabled)) ? "disabled" : null;
     // 日历点选时 DayPicker 执行的区间规则，键入同样执行：天数差（同 `addToRange`）与禁用日（同 `excludeDisabled`）。
-    const days = Math.round((Date.UTC(target.to.getFullYear(), target.to.getMonth(), target.to.getDate()) - Date.UTC(target.from.getFullYear(), target.from.getMonth(), target.from.getDate())) / 86_400_000);
+    // 非按天时两端已是首个周期的起点与末个周期的最后一天，天数差照算这一整段；禁用按周期判断：
+    // 一个周期里还有可选的日子就可选，`excludeDisabled` 则不许范围跨过整个被禁用的周期。
+    const first = period ? periodStart(target.from, period, rules) : target.from;
+    const last = period ? periodEnd(target.to, period, rules) : target.to;
+    const days = Math.round((Date.UTC(last.getFullYear(), last.getMonth(), last.getDate()) - Date.UTC(first.getFullYear(), first.getMonth(), first.getDate())) / 86_400_000);
     if ((calendarProps.max && calendarProps.max > 0 && days > calendarProps.max) || (calendarProps.min && calendarProps.min > 1 && days < calendarProps.min)) return "length";
     const off = calendarProps.disabled;
-    if (off !== undefined && (dateMatchModifiers(target.from, off) || dateMatchModifiers(target.to, off) || (calendarProps.excludeDisabled && rangeContainsModifiers({ from: target.from, to: target.to }, off)))) return "disabled";
+    if (off === undefined) return null;
+    if (period) {
+      const blocked = (date: Date) => periodFullyDisabled(date, period, rules, off);
+      if (blocked(first) || blocked(last)) return "disabled";
+      if (calendarProps.excludeDisabled) for (let at = addPeriods(first, period, 1, rules); at < periodStart(last, period, rules); at = addPeriods(at, period, 1, rules)) if (blocked(at)) return "disabled";
+      return null;
+    }
+    if (dateMatchModifiers(target.from, off) || dateMatchModifiers(target.to, off) || (calendarProps.excludeDisabled && rangeContainsModifiers({ from: target.from, to: target.to }, off))) return "disabled";
     return null;
   };
   // 键入得出完整、有序、在范围内的范围，就像 DatePicker 的键入一样立即请求变更，草稿不留：调用方拒绝时输入回到已确认值。
@@ -156,9 +168,9 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
   const [focusWithin, setFocusWithin] = React.useState(false);
   // 键入是逐段进行的（年份 0002、0020、0202、2026 都是有效中间态；改终点的「2」会暂时早于起点）：
   // 无效只在焦点离开整个字段、弹层也关闭之后判定与通知，键入过程中不闪烁、不逐键播报。
-  // 周期输入里还留着没解析成功的文字，就是没填完整（文字原样保留，等读者改正）。
+  // 周期输入里还留着没解析成功的文字，就是无法识别（文字原样保留，等读者改正）。
   const heldText = Boolean(period && (fromTyping.active || toTyping.active));
-  const invalid = focusWithin || open ? null : heldText ? "incomplete" : problem(draft);
+  const invalid = focusWithin || open ? null : heldText ? "unrecognized" : problem(draft);
   const pendingInvalid = React.useRef(onInvalid);
   pendingInvalid.current = onInvalid;
   const invalidKey = invalid ? `${invalid}:${valueKey}:${dayText(draft.from)}|${dayText(draft.to)}:${heldText}` : "";
@@ -176,7 +188,7 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
   });
   const named = (self: string, label: string) => wiring.label && self ? { "aria-label": label, "aria-labelledby": `${wiring.label} ${self}` } : { "aria-label": label };
 
-  // 周期输入的采纳：失焦或回车时解析，空文本是清除这一端，解析不了就让文字留着（上面的 heldText 把它标为未填完整）。
+  // 周期输入的采纳：失焦或回车时解析，空文本是清除这一端，解析不了就让文字留着（上面的 heldText 把它标为无法识别）。
   const commitText = (end: "from" | "to", raw: string, event: React.SyntheticEvent) => {
     if (!period) return;
     const typing = end === "from" ? fromTyping : toTyping;

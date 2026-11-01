@@ -7,13 +7,10 @@ import * as React from "react";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 import { Button } from "./button";
-import { Toggle, type ToggleProps } from "./toggle";
 
 /*
- * Chip：一枚可以被单独操作的小记号，且只做一件事。两件事不混在一个组件里（一个组件一件事）：
- *   - Chip       = 可移除的记号：一段文字 + 一个移除动作。它是「已经选定的一项」（已选条件、已加的收件人）。
- *   - ChipToggle = 可开关的记号：按下 / 未按下是它的事实（aria-pressed），用于一组条件里逐个启用（筛选）。
- * 二者不合并成一个带 mode 的组件：移除是单向动作，开关是可往返的状态，读屏的角色、键盘与名称规则都不同。
+ * Chip：可移除的记号——一段文字 + 一个移除动作。它是「已经选定的一项」（已选条件、已加的收件人）。
+ * 可开关的筛选条件不是 Chip：那是二态按钮，直接用 Toggle size="sm"（aria-pressed），不另包一层同义组件。
  *
  * 与 Badge 的分工：Badge 是正文里的一段静态文字（没有底、没有交互）；Chip 有自己的边界、能被点击或移除。
  * 不可操作的状态标注用 Badge，不要给 Badge 加移除按钮。
@@ -67,14 +64,4 @@ export function Chip({ children, onRemove, disabled = false, className, render, 
       </>,
     }),
   });
-}
-
-export type ChipToggleProps<Value extends string = string> = Omit<ToggleProps<Value>, "size" | "shape">;
-
-/**
- * 可开关的记号：Toggle 的 sm 档，按下与否由 aria-pressed 向读屏表达，名称保持稳定。
- * 按下态的画法（选中面 + 焦墨字，不借用主色实心）就是 Toggle 的画法——筛选条里的开关与独立的二态按钮是同一件事，不另画一套。
- */
-export function ChipToggle<Value extends string>(props: ChipToggleProps<Value>) {
-  return <Toggle size="sm" shape="label" {...props} data-slot="chip-toggle" />;
 }

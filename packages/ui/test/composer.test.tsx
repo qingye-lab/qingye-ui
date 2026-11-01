@@ -27,6 +27,10 @@ test("value helpers: serialize, restore, and tell empty from whitespace", () => 
   expect(composerValueToText(value)).toBe("你好 @林青\n谢谢");
   expect(composerValueFromText("你好 @林青\n谢谢", [{ type: "token", trigger: "@", id: "u1", label: "林青" }])).toEqual(value);
   expect(composerValueFromText("a")).toEqual([{ type: "text", text: "a" }]);
+  const ann = { type: "token", trigger: "@", id: "u2", label: "Ann" } as const;
+  expect(composerValueFromText("mail a@Ann.com", [ann])).toEqual([{ type: "text", text: "mail a@Ann.com" }]);
+  expect(composerValueFromText("@Anna", [ann])).toEqual([{ type: "text", text: "@Anna" }]);
+  expect(composerValueFromText("@Ann, hi", [ann])).toEqual([ann, { type: "text", text: ", hi" }]);
   expect(parseComposerValue("a")).toEqual([{ type: "text", text: "a" }]);
   expect(parseComposerValue(value)).toEqual(value);
   expect(isComposerValueEmpty([{ type: "text", text: " \n " }])).toBe(true);

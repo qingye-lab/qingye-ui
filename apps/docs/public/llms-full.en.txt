@@ -1577,7 +1577,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
-Source SHA-256: 60676cd107b7383351276a379d5f700b354ec3f3a66294e8b11945392783b1a4
+Source SHA-256: 33bee148386b5e78157da9af6787ff6d23f8bb88bb47d5ae1aed705c86ef02df
 
 Trigger a named action with a clear object and consequence. The caller owns its state.
 
@@ -1703,7 +1703,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
-Source SHA-256: 2f4dd719cf1870157eead31e1aef929258879c948157458f8751c2ad64463222
+Source SHA-256: 482f8c3c4b02b0a94fda90ea51948d653098e2af0fdd48ec9f67312a43d0c4fb
 
 Give actions in one scope a shared name, spaced apart or attached into one body.
 
@@ -2347,7 +2347,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
-Source SHA-256: 7d6a3498b9f9feee7e9501b2fcf70e8aa80200b70df5d458c62c84b748eef5de
+Source SHA-256: f5464ad5133223a687ea8729b9aa748caf203971a657f18cab57359212eeab47
 
 Choose an independent yes/no value or multiple items in a set.
 
@@ -2550,29 +2550,28 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/chip
 Source: packages/ui/src/components/chip.tsx
-Source SHA-256: ae7025a43fcc2e98d4398561f304ac091e583cefe053abf84781f07d3cf08df1
+Source SHA-256: ad815ca9b19efbfb70cada333d50c9e9579ef78c9f00f139f16251c246b090d6
 
-A small mark that can be acted on by itself: removable, or toggleable.
+A small removable mark: one chosen item that can be dropped on its own.
 
 ### Decision
-Chip is not Badge. Badge is a static run of text in the body, with no surface and no interaction, used to annotate a status or category; Chip has its own boundary and can be clicked or removed, so it is an object rather than an annotation. If you want a remove button on an inert annotation, it was a Chip all along. The two forms are not merged into one component with a mode: removing is a one-way action and toggling is a reversible state, and their roles, keyboard and naming rules differ, so there are two components, Chip and ChipToggle. The tags in TagInput and the selected items of a multiple Combobox are items inside an edit frame whose geometry is derived from that frame, so they do not use Chip; Chip is a free-standing mark whose geometry reads the sm control step.
+Chip is not Badge. Badge is a static run of text in the body, with no surface and no interaction, used to annotate a status or category; Chip has its own boundary and can be clicked or removed, so it is an object rather than an annotation. If you want a remove button on an inert annotation, it was a Chip all along. A toggleable filter is not a Chip: it is a two-state button (aria-pressed), so use Toggle size="sm". The earlier ChipToggle was only Toggle fixed at the sm step and was removed before release so that one thing does not carry two names. The tags in TagInput and the selected items of a multiple Combobox are items inside an edit frame whose geometry is derived from that frame, so they do not use Chip; Chip is a free-standing mark whose geometry reads the sm control step.
 
 ### Notes
 - The remove button is named "Remove X" from the chip text, so several chips in one row are distinguishable to assistive technology.
-- A ChipToggle's name does not change with its pressed state; the state is carried only by aria-pressed.
 - Focus disappears with the removed node: the caller moves it to a neighbouring chip or to the container.
 
 ### Use and ownership
 - A set of chosen conditions, each of which can be dropped on its own.
-- A set of filters, each of which can be switched on or off.
+- Avoid: Use Toggle size="sm" for a filter that switches on and off.
 - Avoid: Use Badge for an inert status annotation.
 - Avoid: Use TagInput for values collected inside an input.
 - Avoid: Use RadioGroup or SegmentedControl for mutually exclusive options.
-- Library: A ChipToggle's uncontrolled pressed state and focus.
-- Application: The collection of Chips (whether a removed one is kept), what a filter actually means, and where focus goes after removal.
+- Library: Focus and keyboard of the remove button.
+- Application: The collection of Chips (whether a removed one is kept) and where focus goes after removal.
 
 ### Composition
-- Place several Chips in a flex-wrap row; put ChipToggles in a named group.
+- Place several Chips in a flex-wrap row.
 
 ### Responsive behavior
 - Long text is truncated while the full text stays in the DOM; this batch checked desktop only.
@@ -2583,8 +2582,6 @@ Chip is not Badge. Badge is a static run of text in the body, with no surface an
 ### Current exports
 - Chip: function; owner chip; PASS; props: ChipProps
 - ChipProps: type; owner chip; PASS
-- ChipToggle: function; owner chip; PASS; props: ChipToggleProps<Value>
-- ChipToggleProps: type; owner chip; PASS
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
@@ -2594,10 +2591,6 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `disabled?`: `boolean`. 禁用后移除按钮不可操作；记号本身仍显示。
 - `onRemove?`: `(event: React.SyntheticEvent<HTMLElement>) => void`. 移除。给了它才出现移除按钮；点击、Enter、Space、Backspace、Delete 都会调用。
 - plus 279 inherited (@types/react 278, @base-ui/react 1); not expanded, see the installed declarations
-
-### ChipToggle
-- no props declared by this library
-- plus 292 inherited (@types/react 283, @base-ui/react 9); not expanded, see the installed declarations
 
 ### Dependencies and providers
 - Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
@@ -2615,15 +2608,9 @@ A removable mark: text plus a remove button. Without onRemove it is only text on
 - disabled: boolean; default false. The remove button is inert; the mark still shows.
 - render / ref / className: Base UI composition. Composition entry points of the root span.
 
-#### ChipToggle
-A toggleable mark: a button with aria-pressed. Same props as Toggle, fixed at the sm step.
-- pressed / defaultPressed: boolean. Controlled or initial pressed state.
-- onPressedChange: (pressed: boolean, details) => void. Called when the pressed state changes.
-- disabled: boolean; default false. Inert; the pressed fact is kept.
-
 ### Keyboard
-- Tab / Shift+Tab: Each remove button and each ChipToggle is one tab stop; the mark's text is not focusable.
-- Enter / Space: Remove, or toggle the pressed state.
+- Tab / Shift+Tab: Each remove button is one tab stop; the mark's text is not focusable.
+- Enter / Space: Remove the chip.
 - Backspace / Delete: With focus on the remove button, remove the chip.
 
 ### Source example
@@ -2648,8 +2635,6 @@ export default function Demo() {
   </div>;
 }
 ```
-
-1 more examples: see the component page and its Markdown file.
 
 ## CodeBlock
 
@@ -3408,8 +3393,8 @@ The editor is contenteditable because tokens must be inline atoms (deleted whole
 
 ### Notes
 - Paste and drop accept plain text only; copy and cut emit plain text with a token written as trigger + label.
-- composerValueToText writes a token as trigger + label by default; composerValueFromText accepts known tokens and restores them by literal match.
-- There is no name or form submission and no Field integration; read the value in onSubmit.
+- composerValueToText writes a token as trigger + label by default; composerValueFromText accepts known tokens and restores them by literal match, only at the start of a word ("a@Ann.com" and "@Anna" stay text). Plain text drops token ids, so store the segment array itself for a lossless round trip.
+- There is no name or form submission and no Field integration: the value is an array of segments with no form-field form, so the app reads and sends it in onSubmit, as conversational inputs commonly do.
 - jsdom cannot verify a real IME, per-browser contenteditable caret and beforeinput behavior, popup collision flipping or Range geometry; verify these in real browsers.
 
 ### Use and ownership
@@ -4347,7 +4332,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: 2039377cc2572bc6c6e47fab6baf740d1b74cd2720bbbe2ff146f5b731864850
+Source SHA-256: 2b68f004920e5e70f42e26e967d1b2afa357ac09e42f56e298adeceb1fb284a2
 
 Edit one local date or choose it from a calendar.
 
@@ -4444,7 +4429,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 50954292790b2429d2da553a7f9594db52b6583300fc3f5e362a74118f17aad3
+Source SHA-256: c9f53914ae6dbf34b8adeda22967d3c04eebe3f9860819d4b718d66e96fc1dbf
 
 Type or pick start and end dates; only a complete, ordered range is a confirmed value.
 
@@ -4489,7 +4474,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `disabled?`: `boolean`.
 - `endInputProps?`: `NativeInputProps`. 终点日期输入。
 - `form?`: `string | undefined`.
-- `granularity?`: `"day" | "week" | "month" | "quarter" | "year"`. 选择的粒度，默认 `"day"`。非 `"day"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）； 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。 此时 `calendarProps.min` / `max`（天数限制）与 `excludeDisabled` 不再适用；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。
+- `granularity?`: `"day" | "week" | "month" | "quarter" | "year"`. 选择的粒度，默认 `"day"`。非 `"day"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）； 两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。 此时 `calendarProps.min` / `max`（天数限制）按规范后的整段天数计算，`excludeDisabled` 按周期判断（范围不得跨过整个被禁用的周期）；不提供多选；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。
 - `inputProps?`: `NativeInputProps`. 起点日期输入（也是 Field 标签指向的输入）。
 - `max?`: `Date | undefined`.
 - `min?`: `Date | undefined`. 可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。
@@ -6412,7 +6397,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
-Source SHA-256: 530458e9b34572eef1cbb53633a7868f51f2c3434c6e0af3830647c262013a2f
+Source SHA-256: 76c0479a8ae9237614a739ef522f54922af7646711cea7da0e1abc7ac9519260
 
 Give an input and its markers, units or actions one editing boundary.
 
@@ -7197,7 +7182,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
-Source SHA-256: b92792b834d6c9f8884551bb4c8201109abd8ad265016f9a99028c3fa803cb28
+Source SHA-256: 546a0cba3c3ecf2f2eaa2cc8170a08b6f49bfa8b6e1e81ff5a9d7eba89cd69a2
 
 Temporary commands and choices related to the current task.
 
@@ -9050,7 +9035,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/rating
 Source: packages/ui/src/components/rating.tsx
-Source SHA-256: a7cd9c1e28e860b80f120cc6e726424c6e186faf661a004c9bd2f823fc0b444d
+Source SHA-256: 00742b70f6983cd7ca7c7c2e0844e5535bcdb5b26b28f5edc4350b580ea2ce1d
 
 Give an integer score from 1 to max, shown as a row of stars.
 
@@ -9500,7 +9485,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: 0c218779216ea4b66cb035254638ac261d96eb11e87a24e4a387f15bfc95526f
+Source SHA-256: b335bf0444c58f204e72dbb5eedf2a8220cd65fc03da091dccdd57ce6e8428d1
 
 Native scrolling with an optional composition of draggable scrollbars.
 
@@ -9548,7 +9533,7 @@ Native scrolling with an optional composition of draggable scrollbars.
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### ScrollArea
-- `fade?`: `boolean`. 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。
+- `fade?`: `boolean`. 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。占位的原生滚动条不随之变淡：渐隐止于滚动条之前，滚动条所在条带整条不透明。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ScrollAreaContent
@@ -9944,7 +9929,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: 048014d88e56b546956527bda606ecb30e6f1c2959f695e7e64def7b1a1a9ee5
+Source SHA-256: 36f9c843a86f51d2ebe65054cf5577bd80a4a076d0de1d52326c66eee10acf7a
 
 Choose one value from a collapsible set of options.
 
@@ -11255,7 +11240,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
-Source SHA-256: 9ae3686501e427f7139eb3d69d59eb31a0e6715add243ff1334b0fdfc6412e6a
+Source SHA-256: 824244fef954f3b8bc97911a210e7e23e7554758faaad3f0d0f741a94dd345bc
 
 Immediately change the on/off state of a current setting.
 
@@ -11526,7 +11511,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: 96d314f6778de1535f266d5db4b31ef9a2cd5fc14b6ae7bb140fceaf3472e448
+Source SHA-256: fec95d44ade9b2245e569a1b91c9ddc6911c1af3b26f50a36521bb8a54d98137
 
 Different views of one object with panel drafts retained.
 
@@ -13706,7 +13691,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
-Source SHA-256: ca2d713bc6ff9ae851eb0ec123c226f6252253cc01ad7d8ae069e974e119dc0a
+Source SHA-256: 6877d9e405f7b45fb071620d63cc8ab3ef9ec775a6dec1aa609e10efac0ac84e
 
 An application shell: a sidebar on the page ground beside one work surface, with the header inside the surface and the only scroll container below it.
 

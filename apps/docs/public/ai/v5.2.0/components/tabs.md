@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: 96d314f6778de1535f266d5db4b31ef9a2cd5fc14b6ae7bb140fceaf3472e448
+Source SHA-256: fec95d44ade9b2245e569a1b91c9ddc6911c1af3b26f50a36521bb8a54d98137
 
 同一对象的不同视角，保留面板草稿。
 

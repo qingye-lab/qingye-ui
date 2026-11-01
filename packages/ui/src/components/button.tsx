@@ -4,27 +4,9 @@ import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
 import * as React from "react";
 import { BusyMark } from "../busy-mark";
+import { borderedPadding, controlSizes } from "../control-size";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
-
-
-// 基础层 §1、§2、§8：位置选择尺寸与文字档，图标只是形态；留白由基础层换算。
-// 每档使用同名的文字档，高度与字号同步增长 —— 只涨高度不涨字号会让多出的
-// 空间全部变成纵向空白，文字占比反而下降（lg 曾用 md 的文字档，
-// 每侧留白由 6 跳到 8，文字占比从 62.5% 掉到 55.6%，比 xl 还低）。
-// xl 曾取 lg 的文字档，同一病因（每侧 8px），现在有自己的一档。
-const sizes = {
-  xs: "rounded-xs min-h-(--qy-control-xs-narrow) text-control-xs-mobile sm:min-h-(--qy-control-xs) sm:text-control-xs [&_svg]:size-(--qy-control-xs-icon-narrow) sm:[&_svg]:size-(--qy-control-xs-icon)",
-  sm: "rounded-sm min-h-(--qy-control-sm-narrow) text-control-sm-mobile sm:min-h-(--qy-control-sm) sm:text-control-sm [&_svg]:size-(--qy-control-sm-icon-narrow) sm:[&_svg]:size-(--qy-control-sm-icon)",
-  // md 与填值控件同行出现（工具条、筛选条、表单动作），二者的关系是「同高」。因此 md 的
-  // 几何读填值控件角色层而不是固定档位：默认密度下取值与原 md 完全相同，紧凑密度下随
-  // 输入框一起收紧——否则同一行里输入 28px、按钮 32px，外缘对不齐（评审 2026-10-05）。
-  // 文字仍是 md 文字档，与填值控件一样「紧凑只收几何，不缩文字」。其余四档是位置的显式
-  // 选择，不随密度改变。
-  md: "rounded-(--qy-fill-radius) min-h-(--qy-fill-height-narrow) text-control-md-mobile sm:min-h-(--qy-fill-height) sm:text-control-md [&_svg]:size-(--qy-fill-icon-narrow) sm:[&_svg]:size-(--qy-fill-icon)",
-  lg: "rounded-control min-h-(--qy-control-lg-narrow) text-control-lg-mobile sm:min-h-(--qy-control-lg) sm:text-control-lg [&_svg]:size-(--qy-control-lg-icon-narrow) sm:[&_svg]:size-(--qy-control-lg-icon)",
-  xl: "rounded-control min-h-(--qy-control-xl-narrow) text-control-xl-mobile sm:min-h-(--qy-control-xl) sm:text-control-xl [&_svg]:size-(--qy-control-xl-icon-narrow) sm:[&_svg]:size-(--qy-control-xl-icon)",
-};
 
 export const buttonVariants = cva(
   "qy-pressable touch-target relative inline-flex max-w-full min-w-0 cursor-pointer items-center justify-center gap-(--qy-control-content-gap) text-center font-medium outline-none focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color) disabled:cursor-not-allowed disabled:opacity-disabled aria-disabled:cursor-default [&_svg]:pointer-events-none [&_svg]:shrink-0",
@@ -42,7 +24,7 @@ export const buttonVariants = cva(
       // 色调只是色调（用户裁决 2026-10-10：功能要纯粹）。danger 说明这个动作有不可逆的后果，
       // 后果本身与确认不由按钮承载——用 AlertDialog / ConfirmAction，按钮只负责触发。
       tone: { neutral: "", danger: "" },
-      size: sizes,
+      size: controlSizes,
       // 图标形 = 边长等于外高的正方形，内容居中；不用留白去凑，放图标或放字都是同一个大小。
       shape: { label: "", icon: "shrink-0 p-0" },
     },
@@ -63,11 +45,11 @@ export const buttonVariants = cva(
       { shape: "label", variant: ["solid", "quiet"], size: "md", class: "px-[calc(var(--qy-fill-padding)+var(--qy-line-width))]" },
       { shape: "label", variant: ["solid", "quiet"], size: "lg", class: "px-(--qy-control-lg-padding)" },
       { shape: "label", variant: ["solid", "quiet"], size: "xl", class: "px-(--qy-control-xl-padding)" },
-      { shape: "label", variant: "bordered", size: "xs", class: "px-(--qy-control-xs-padding-bordered)" },
-      { shape: "label", variant: "bordered", size: "sm", class: "px-(--qy-control-sm-padding-bordered)" },
-      { shape: "label", variant: "bordered", size: "md", class: "px-(--qy-fill-padding)" },
-      { shape: "label", variant: "bordered", size: "lg", class: "px-(--qy-control-lg-padding-bordered)" },
-      { shape: "label", variant: "bordered", size: "xl", class: "px-(--qy-control-xl-padding-bordered)" },
+      { shape: "label", variant: "bordered", size: "xs", class: borderedPadding.xs },
+      { shape: "label", variant: "bordered", size: "sm", class: borderedPadding.sm },
+      { shape: "label", variant: "bordered", size: "md", class: borderedPadding.md },
+      { shape: "label", variant: "bordered", size: "lg", class: borderedPadding.lg },
+      { shape: "label", variant: "bordered", size: "xl", class: borderedPadding.xl },
       { shape: "icon", size: "xs", class: "w-(--qy-control-xs-narrow) sm:w-(--qy-control-xs)" },
       { shape: "icon", size: "sm", class: "w-(--qy-control-sm-narrow) sm:w-(--qy-control-sm)" },
       { shape: "icon", size: "md", class: "w-(--qy-fill-height-narrow) sm:w-(--qy-fill-height)" },

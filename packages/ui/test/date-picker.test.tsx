@@ -214,7 +214,7 @@ test("period text is held while typing, adopted on Enter or blur, and a blank te
   expect(input).toHaveValue("");
 });
 
-test("unparsable or out-of-bounds period text is rejected with the existing validity messages and the confirmed value stays", async () => {
+test("unparsable or out-of-bounds period text is rejected with its own validity message and the confirmed value stays", async () => {
   const onValueChange = vi.fn();
   render(<UILocaleProvider locale={enUS}><DatePicker granularity="year" inputProps={{ "aria-label": "年份" }} defaultValue={new Date(2026, 0, 1)} min={new Date(2020, 5, 1)} max={new Date(2030, 5, 1)} onValueChange={onValueChange} /></UILocaleProvider>);
   const input = screen.getByLabelText("年份") as HTMLInputElement;
@@ -223,7 +223,7 @@ test("unparsable or out-of-bounds period text is rejected with the existing vali
   await userEvent.tab();
   expect(onValueChange).not.toHaveBeenCalled();
   expect(input).toHaveAttribute("aria-invalid", "true");
-  expect(input.validationMessage).toBe("Date is incomplete");
+  expect(input.validationMessage).toBe("Date is not recognized");
   await userEvent.clear(input);
   await userEvent.type(input, "2040");
   await userEvent.tab();

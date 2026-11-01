@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
-Source SHA-256: 7d6a3498b9f9feee7e9501b2fcf70e8aa80200b70df5d458c62c84b748eef5de
+Source SHA-256: f5464ad5133223a687ea8729b9aa748caf203971a657f18cab57359212eeab47
 
 Choose an independent yes/no value or multiple items in a set.
 

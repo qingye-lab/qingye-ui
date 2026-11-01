@@ -12,8 +12,8 @@ Source SHA-256: 4acac907848fbc6389ee0d83b6f3e65e5f5daab6e8e704a343432f76724fee2b
 
 ## Notes
 - 粘贴、拖放一律只收纯文字；复制与剪切输出纯文字，令牌写作“触发字符 + label”。
-- composerValueToText 默认把令牌写作“触发字符 + label”；composerValueFromText 可传入已知令牌，按字面匹配还原。
-- 没有 name 与表单提交，也未接入 Field；需要时由应用在 onSubmit 里取值。
+- composerValueToText 默认把令牌写作“触发字符 + label”；composerValueFromText 可传入已知令牌，按字面匹配还原，且只在词的开头处还原（“a@Ann.com”“@Anna”不会变成令牌）。纯文字会丢掉令牌 id，要无损保存就存片段数组本身。
+- 没有 name 与表单提交，也未接入 Field：值是片段数组，没有对应的表单字段形态，由应用在 onSubmit 里取值并发送（同类对话输入的通行做法）。
 - jsdom 无法验证真实输入法、各浏览器 contenteditable 的光标与 beforeinput 差异、浮层碰撞翻转与 Range 坐标，需在真实浏览器中另验。
 
 ## Use and ownership

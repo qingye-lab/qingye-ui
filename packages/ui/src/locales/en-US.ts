@@ -18,7 +18,7 @@ export const enUS: UILocale = {
     otpLengthExceeded: (length) => `Use at most ${length} characters; this insertion was not added`, tagEmpty: "Enter a nonempty tag", removeTag: (tag) => `Remove ${tag}`,
     notifications: "Notifications", anchoredNotifications: "Inline notifications", closeNotification: "Dismiss notification",
     selectDate: "Select date", clearDate: "Clear date", clearDateTime: "Clear date and time", clearDateRange: "Clear date range", selectDateTime: "Select date and time", time: "Time",
-    dateIncomplete: "Date is incomplete", dateOutOfRange: "Date is outside the allowed range",
+    dateIncomplete: "Date is incomplete", dateInvalid: "Date is not recognized", dateOutOfRange: "Date is outside the allowed range",
     timeHour: "Hour", timeMinute: "Minute", timeSecond: "Second", timeDayPeriod: "AM or PM", timeAm: "AM", timePm: "PM", timeEmpty: "Empty", timeOutOfRange: "Time is outside the allowed range", timeIncomplete: "Time is incomplete",
     startTime: "Start time", endTime: "End time", timeRangeOrder: "End time is before start time", startDateTime: "Start date and time", endDateTime: "End date and time", dateTimeRangeOrder: "End is before start", selectDateTimeRange: "Select date and time range", clearDateTimeRange: "Clear date and time range",
     fieldOptional: "optional", fieldValidating: "Validating",
@@ -75,6 +75,6 @@ export const enUS: UILocale = {
     transferMoveTo: (count, title) => `Move ${count.toLocaleString("en-US")} selected to “${title}”`, transferMoved: (count, title) => `${count.toLocaleString("en-US")} moved to “${title}”`,
     transferEmpty: "No items", transferNoMatch: "No matches",
     composerSubmit: "Send",
-    selectSeparator: ", ", selectMore: (rest) => `and ${rest.toLocaleString("en-US")} more`,
+    selectMore: (rest) => `and ${rest.toLocaleString("en-US")} more`,
   },
 };

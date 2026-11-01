@@ -65,7 +65,7 @@ export function DatePicker(allProps: DatePickerProps) {
   const text = value ? (period ? formatPeriod(value, period, rules, messages) : formatLocalDate(value)) : "";
   const typing = useTypingText(text);
   // 未被采纳的键入（不完整或越界）在失焦时标为无效；只在键入仍未被采纳时有效，外部改值、清除、选日历、reset 后自然失效。
-  const [rejection, setRejection] = React.useState<"dateIncomplete" | "dateOutOfRange" | undefined>();
+  const [rejection, setRejection] = React.useState<"dateIncomplete" | "dateInvalid" | "dateOutOfRange" | undefined>();
   const invalidKind = typing.active ? rejection : undefined;
   useCustomValidity(inputRef, invalidKind ? messages[invalidKind] : "");
   const change = (next: Date | undefined, event: React.SyntheticEvent) => {
@@ -90,12 +90,12 @@ export function DatePicker(allProps: DatePickerProps) {
   warnEmptyBounds("DatePicker", native.min, native.max);
   const bounds = mergeCalendarBounds(calendarProps, min, max);
   // 周期输入：键入的是文本，不像原生日期输入那样逐段有效，所以不在每次按键时采纳（键入「2026 年 1」时不能先当成一月），
-  // 失焦或回车才解析；解析不了或与 min / max 没有交集，文字原样留着并标为无效（同按天的 dateIncomplete / dateOutOfRange）。
+  // 失焦或回车才解析；解析不了（dateInvalid）或与 min / max 没有交集（dateOutOfRange），文字原样留着并标为无效。
   const commitText = (raw: string, event: React.SyntheticEvent) => {
     if (!period) return;
     if (!raw.trim()) { typing.release(); setRejection(undefined); if (value) change(undefined, event); return; }
     const next = parsePeriod(raw, period, rules, messages);
-    if (!next) return setRejection("dateIncomplete");
+    if (!next) return setRejection("dateInvalid");
     if (!periodWithinBounds(next, period, rules, native.min ? parseLocalDate(native.min) : undefined, native.max ? parseLocalDate(native.max) : undefined)) return setRejection("dateOutOfRange");
     typing.release(); setRejection(undefined);
     if (!isSamePeriod(next, value, period, rules)) change(next, event);

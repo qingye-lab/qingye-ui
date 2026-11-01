@@ -12,8 +12,8 @@ The editor is contenteditable because tokens must be inline atoms (deleted whole
 
 ## Notes
 - Paste and drop accept plain text only; copy and cut emit plain text with a token written as trigger + label.
-- composerValueToText writes a token as trigger + label by default; composerValueFromText accepts known tokens and restores them by literal match.
-- There is no name or form submission and no Field integration; read the value in onSubmit.
+- composerValueToText writes a token as trigger + label by default; composerValueFromText accepts known tokens and restores them by literal match, only at the start of a word ("a@Ann.com" and "@Anna" stay text). Plain text drops token ids, so store the segment array itself for a lossless round trip.
+- There is no name or form submission and no Field integration: the value is an array of segments with no form-field form, so the app reads and sends it in onSubmit, as conversational inputs commonly do.
 - jsdom cannot verify a real IME, per-browser contenteditable caret and beforeinput behavior, popup collision flipping or Range geometry; verify these in real browsers.
 
 ## Use and ownership

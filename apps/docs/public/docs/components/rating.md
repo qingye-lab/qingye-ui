@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/rating
 Source: packages/ui/src/components/rating.tsx
-Source SHA-256: a7cd9c1e28e860b80f120cc6e726424c6e186faf661a004c9bd2f823fc0b444d
+Source SHA-256: 00742b70f6983cd7ca7c7c2e0844e5535bcdb5b26b28f5edc4350b580ea2ce1d
 
 在 1 到 max 之间给出一个整数分值，用一排星表示。
 

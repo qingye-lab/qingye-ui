@@ -92,7 +92,12 @@ export function composerValueToText(value: ComposerValue, serializeToken: (token
 /**
  * 从纯文字还原。默认整段当作文字；给出 known（已知令牌）时，文中字面等于 `trigger + label`
  * 的片段会还原成令牌（长的优先），其余保持文字。换行统一为 "\n"。
+ * 边界与触发规则（findComposerTrigger）一致：字面前一个字符不能是 ASCII 字母、数字、下划线或该触发字符，
+ * 所以 a@b.com 里的「@b」不会被还原；字面若以这类字符结尾，后一个字符也不能是它们，「@Ann」不会吞掉「@Anna」的前半。
+ * 纯文字本身无法区分「当时选中的令牌」与「碰巧打出的同样文字」，需要无损往返时保存片段数组，不要只存文字。
  */
+const WORD_CHAR = /[A-Za-z0-9_]/;
+
 export function composerValueFromText(text: string, known: readonly ComposerTokenSegment[] = []): ComposerSegment[] {
   const source = text.replace(/\r\n?/g, "\n");
   if (!source) return [];
@@ -105,7 +110,13 @@ export function composerValueFromText(text: string, known: readonly ComposerToke
   let buffer = "";
   let index = 0;
   while (index < source.length) {
-    const hit = candidates.find(({ literal }) => source.startsWith(literal, index));
+    const previous = index > 0 ? source[index - 1]! : "";
+    const hit = candidates.find(({ token, literal }) => {
+      if (!source.startsWith(literal, index)) return false;
+      if (WORD_CHAR.test(previous) || previous === token.trigger) return false;
+      const next = source[index + literal.length] ?? "";
+      return !(WORD_CHAR.test(literal.at(-1)!) && WORD_CHAR.test(next));
+    });
     if (hit) {
       if (buffer) out.push({ type: "text", text: buffer });
       buffer = "";
@@ -164,7 +175,7 @@ export function findComposerTrigger(value: ComposerValue, caret: number, rules: 
       const at = before.lastIndexOf(rule.char);
       if (at < 0) return;
       const previous = at > 0 ? before[at - 1]! : "";
-      if (rule.startOnly ? !(s === 0 && at === 0) : /[A-Za-z0-9_]/.test(previous) || previous === rule.char) return;
+      if (rule.startOnly ? !(s === 0 && at === 0) : WORD_CHAR.test(previous) || previous === rule.char) return;
       const query = before.slice(at + rule.char.length);
       if (/\s/.test(query)) return;
       if (!best || start + at > best.start) best = { index, start: start + at, end: caret, query };

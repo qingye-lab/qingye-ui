@@ -35,21 +35,21 @@
       "component": "bulk-action-bar",
       "part": "BulkActionBarExtend",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarExtend",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarExtend",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
@@ -62,139 +62,139 @@
       "component": "bulk-action-bar",
       "part": "BulkActionBarExtend",
       "prop": "shape",
-      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "declaredAt": "packages/ui/src/components/button.tsx:69",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarExtend",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "declaredAt": "packages/ui/src/components/button.tsx:68",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarExtend",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarExtend",
       "prop": "variant",
-      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "declaredAt": "packages/ui/src/components/button.tsx:66",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarAction",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarAction",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarAction",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarAction",
       "prop": "shape",
-      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "declaredAt": "packages/ui/src/components/button.tsx:69",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarAction",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "declaredAt": "packages/ui/src/components/button.tsx:68",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarAction",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarAction",
       "prop": "variant",
-      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "declaredAt": "packages/ui/src/components/button.tsx:66",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarClear",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarClear",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarClear",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarClear",
       "prop": "shape",
-      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "declaredAt": "packages/ui/src/components/button.tsx:69",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarClear",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "declaredAt": "packages/ui/src/components/button.tsx:68",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarClear",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "bulk-action-bar",
       "part": "BulkActionBarClear",
       "prop": "variant",
-      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "declaredAt": "packages/ui/src/components/button.tsx:66",
       "viaComponent": "button"
     },
     {
       "component": "button",
       "part": "Button",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82"
+      "declaredAt": "packages/ui/src/components/button.tsx:64"
     },
     {
       "component": "button",
       "part": "Button",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83"
+      "declaredAt": "packages/ui/src/components/button.tsx:65"
     },
     {
       "component": "button-group",
@@ -267,133 +267,133 @@
       "component": "composer",
       "part": "ComposerSubmit",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "composer",
       "part": "ComposerSubmit",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "composer",
       "part": "ComposerSubmit",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "composer",
       "part": "ComposerSubmit",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "composer",
       "part": "ComposerSubmit",
       "prop": "variant",
-      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "declaredAt": "packages/ui/src/components/button.tsx:66",
       "viaComponent": "button"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuItem",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:26",
+      "declaredAt": "packages/ui/src/components/menu.tsx:27",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuItem",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/menu.tsx:57",
+      "declaredAt": "packages/ui/src/components/menu.tsx:58",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuLinkItem",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:26",
+      "declaredAt": "packages/ui/src/components/menu.tsx:27",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuCheckboxItem",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:26",
+      "declaredAt": "packages/ui/src/components/menu.tsx:27",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuCheckboxItem",
       "prop": "markerPosition",
-      "declaredAt": "packages/ui/src/components/menu.tsx:71",
+      "declaredAt": "packages/ui/src/components/menu.tsx:72",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuRadioItem",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:26",
+      "declaredAt": "packages/ui/src/components/menu.tsx:27",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuRadioItem",
       "prop": "markerPosition",
-      "declaredAt": "packages/ui/src/components/menu.tsx:99",
+      "declaredAt": "packages/ui/src/components/menu.tsx:92",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuSubmenuTrigger",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:26",
+      "declaredAt": "packages/ui/src/components/menu.tsx:27",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuGroupLabel",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:26",
+      "declaredAt": "packages/ui/src/components/menu.tsx:27",
       "viaComponent": "menu"
     },
     {
       "component": "context-menu",
       "part": "ContextMenuGroupLabel",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/menu.tsx:26",
+      "declaredAt": "packages/ui/src/components/menu.tsx:27",
       "viaComponent": "menu"
     },
     {
       "component": "copy-button",
       "part": "CopyButton",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "copy-button",
       "part": "CopyButton",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "copy-button",
       "part": "CopyButton",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "copy-button",
       "part": "CopyButton",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
@@ -418,49 +418,49 @@
       "component": "data-table",
       "part": "DataTableSortButton",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "data-table",
       "part": "DataTableSortButton",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "data-table",
       "part": "DataTableSortButton",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "data-table",
       "part": "DataTableSortButton",
       "prop": "shape",
-      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "declaredAt": "packages/ui/src/components/button.tsx:69",
       "viaComponent": "button"
     },
     {
       "component": "data-table",
       "part": "DataTableSortButton",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "declaredAt": "packages/ui/src/components/button.tsx:68",
       "viaComponent": "button"
     },
     {
       "component": "data-table",
       "part": "DataTableSortButton",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "data-table",
       "part": "DataTableSortButton",
       "prop": "variant",
-      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "declaredAt": "packages/ui/src/components/button.tsx:66",
       "viaComponent": "button"
     },
     {
@@ -474,196 +474,196 @@
       "component": "file-trigger",
       "part": "FileTrigger",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "file-trigger",
       "part": "FileTrigger",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "file-trigger",
       "part": "FileTrigger",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "file-trigger",
       "part": "FileTrigger",
       "prop": "shape",
-      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "declaredAt": "packages/ui/src/components/button.tsx:69",
       "viaComponent": "button"
     },
     {
       "component": "file-trigger",
       "part": "FileTrigger",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "declaredAt": "packages/ui/src/components/button.tsx:68",
       "viaComponent": "button"
     },
     {
       "component": "file-trigger",
       "part": "FileTrigger",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "file-trigger",
       "part": "FileTrigger",
       "prop": "variant",
-      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "declaredAt": "packages/ui/src/components/button.tsx:66",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarApply",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarApply",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarApply",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarApply",
       "prop": "shape",
-      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "declaredAt": "packages/ui/src/components/button.tsx:69",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarApply",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "declaredAt": "packages/ui/src/components/button.tsx:68",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarApply",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarApply",
       "prop": "variant",
-      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "declaredAt": "packages/ui/src/components/button.tsx:66",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarCancel",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarCancel",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarCancel",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarCancel",
       "prop": "shape",
-      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "declaredAt": "packages/ui/src/components/button.tsx:69",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarCancel",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "declaredAt": "packages/ui/src/components/button.tsx:68",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarCancel",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarCancel",
       "prop": "variant",
-      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "declaredAt": "packages/ui/src/components/button.tsx:66",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarClear",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarClear",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarClear",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarClear",
       "prop": "shape",
-      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "declaredAt": "packages/ui/src/components/button.tsx:69",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarClear",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "declaredAt": "packages/ui/src/components/button.tsx:68",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarClear",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "filter-bar",
       "part": "FilterBarClear",
       "prop": "variant",
-      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "declaredAt": "packages/ui/src/components/button.tsx:66",
       "viaComponent": "button"
     },
     {
@@ -697,54 +697,54 @@
       "component": "input-group",
       "part": "InputGroupButton",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "input-group",
       "part": "InputGroupButton",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "input-group",
       "part": "InputGroupButton",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "input-group",
       "part": "InputGroupButton",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "declaredAt": "packages/ui/src/components/button.tsx:68",
       "viaComponent": "button"
     },
     {
       "component": "input-group",
       "part": "InputGroupButton",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "menu",
       "part": "MenuItem",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/menu.tsx:57"
+      "declaredAt": "packages/ui/src/components/menu.tsx:58"
     },
     {
       "component": "menu",
       "part": "MenuGroupLabel",
       "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:26"
+      "declaredAt": "packages/ui/src/components/menu.tsx:27"
     },
     {
       "component": "menu",
       "part": "MenuGroupLabel",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/menu.tsx:26"
+      "declaredAt": "packages/ui/src/components/menu.tsx:27"
     },
     {
       "component": "otp-field",
@@ -771,98 +771,98 @@
       "component": "pagination",
       "part": "PaginationPrevious",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "pagination",
       "part": "PaginationPrevious",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "pagination",
       "part": "PaginationPrevious",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "pagination",
       "part": "PaginationPrevious",
       "prop": "shape",
-      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "declaredAt": "packages/ui/src/components/button.tsx:69",
       "viaComponent": "button"
     },
     {
       "component": "pagination",
       "part": "PaginationPrevious",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "declaredAt": "packages/ui/src/components/button.tsx:68",
       "viaComponent": "button"
     },
     {
       "component": "pagination",
       "part": "PaginationPrevious",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "pagination",
       "part": "PaginationPrevious",
       "prop": "variant",
-      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "declaredAt": "packages/ui/src/components/button.tsx:66",
       "viaComponent": "button"
     },
     {
       "component": "pagination",
       "part": "PaginationNext",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "pagination",
       "part": "PaginationNext",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "pagination",
       "part": "PaginationNext",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "pagination",
       "part": "PaginationNext",
       "prop": "shape",
-      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "declaredAt": "packages/ui/src/components/button.tsx:69",
       "viaComponent": "button"
     },
     {
       "component": "pagination",
       "part": "PaginationNext",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "declaredAt": "packages/ui/src/components/button.tsx:68",
       "viaComponent": "button"
     },
     {
       "component": "pagination",
       "part": "PaginationNext",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "pagination",
       "part": "PaginationNext",
       "prop": "variant",
-      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "declaredAt": "packages/ui/src/components/button.tsx:66",
       "viaComponent": "button"
     },
     {
@@ -924,98 +924,98 @@
       "component": "sidebar",
       "part": "SidebarToggle",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "sidebar",
       "part": "SidebarToggle",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "sidebar",
       "part": "SidebarToggle",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "sidebar",
       "part": "SidebarToggle",
       "prop": "shape",
-      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "declaredAt": "packages/ui/src/components/button.tsx:69",
       "viaComponent": "button"
     },
     {
       "component": "sidebar",
       "part": "SidebarToggle",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "declaredAt": "packages/ui/src/components/button.tsx:68",
       "viaComponent": "button"
     },
     {
       "component": "sidebar",
       "part": "SidebarToggle",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "sidebar",
       "part": "SidebarToggle",
       "prop": "variant",
-      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "declaredAt": "packages/ui/src/components/button.tsx:66",
       "viaComponent": "button"
     },
     {
       "component": "sidebar",
       "part": "SidebarDrawerTrigger",
       "prop": "className",
-      "declaredAt": "packages/ui/src/components/button.tsx:82",
+      "declaredAt": "packages/ui/src/components/button.tsx:64",
       "viaComponent": "button"
     },
     {
       "component": "sidebar",
       "part": "SidebarDrawerTrigger",
       "prop": "data-slot",
-      "declaredAt": "packages/ui/src/components/button.tsx:83",
+      "declaredAt": "packages/ui/src/components/button.tsx:65",
       "viaComponent": "button"
     },
     {
       "component": "sidebar",
       "part": "SidebarDrawerTrigger",
       "prop": "loading",
-      "declaredAt": "packages/ui/src/components/button.tsx:90",
+      "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
     },
     {
       "component": "sidebar",
       "part": "SidebarDrawerTrigger",
       "prop": "shape",
-      "declaredAt": "packages/ui/src/components/button.tsx:87",
+      "declaredAt": "packages/ui/src/components/button.tsx:69",
       "viaComponent": "button"
     },
     {
       "component": "sidebar",
       "part": "SidebarDrawerTrigger",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/button.tsx:86",
+      "declaredAt": "packages/ui/src/components/button.tsx:68",
       "viaComponent": "button"
     },
     {
       "component": "sidebar",
       "part": "SidebarDrawerTrigger",
       "prop": "tone",
-      "declaredAt": "packages/ui/src/components/button.tsx:85",
+      "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
     },
     {
       "component": "sidebar",
       "part": "SidebarDrawerTrigger",
       "prop": "variant",
-      "declaredAt": "packages/ui/src/components/button.tsx:84",
+      "declaredAt": "packages/ui/src/components/button.tsx:66",
       "viaComponent": "button"
     },
     {

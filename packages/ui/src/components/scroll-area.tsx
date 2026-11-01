@@ -4,13 +4,13 @@ import * as React from "react";
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
 import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area";
-import { useOverflowEdges, useScrollable, type OverflowEdges } from "../hooks/use-scrollable";
+import { useOverflowEdges, useScrollable, useScrollbarGutter, type OverflowEdges, type ScrollbarGutter } from "../hooks/use-scrollable";
 import { cn } from "../utils";
 
 export type ScrollAreaProps = useRender.ComponentProps<"div"> & {
   /**
    * 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。
-   * 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。遮罩罩住整个盒子，所以盒内原生滚动条的该端也随之变淡。
+   * 做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。占位的原生滚动条不随之变淡：渐隐止于滚动条之前，滚动条所在条带整条不透明。
    */
   fade?: boolean;
 };
@@ -19,7 +19,9 @@ export type ScrollAreaProps = useRender.ComponentProps<"div"> & {
  * 渐隐宽度读 --qy-fill-height，与 TabsList 同一个预设（理由见 tabs.tsx：与一行同尺度、随密度变）；
  * 滚动区没有统一条目，取一个填值控件行高，是预设，不是推导。
  * 四端各一个宽度变量，没有被切掉的端为 0，该端渐变退化为不透明。
- * 两个方向的渐变用 mask-composite: intersect 叠成一张：任一方向透明处整体透明。mask 只取透明度，不引入颜色。
+ * 遮罩四层：竖向滚动条条带、横向滚动条条带、竖向渐变、横向渐变。两个渐变只铺在滚动条之外的区域，
+ * 以 intersect 叠成一张（任一方向透明处整体透明）；两条条带以 add 并上去，滚动条本身始终完整可见。
+ * 条带宽度由 useScrollbarGutter 量出（--qy-scrollbar-y / -x），覆盖式滚动条为 0。mask 只取透明度，不引入颜色。
  * 横向的物理方向随 rtl 翻转（起始端在右）；竖向无需翻转。
  * scroll-padding 取同一个宽度，使键盘把焦点移到被切掉的内容时，浏览器把它滚进渐隐之内，焦点环不被遮。
  * 渐隐只在有端点被切掉时才挂遮罩，不溢出的区域不付出遮罩的合成代价。
@@ -29,9 +31,11 @@ const fadeClassName = [
   "data-overflow-x-start:[--qy-scroll-fade-x-start:var(--qy-scroll-fade)] data-overflow-x-end:[--qy-scroll-fade-x-end:var(--qy-scroll-fade)]",
   "data-overflow-y-start:[--qy-scroll-fade-y-start:var(--qy-scroll-fade)] data-overflow-y-end:[--qy-scroll-fade-y-end:var(--qy-scroll-fade)]",
   "scroll-p-(--qy-scroll-fade)",
-  "[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-composite:intersect] [&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[-webkit-mask-composite:source-in]",
-  "[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-image:linear-gradient(to_bottom,transparent_0,currentcolor_var(--qy-scroll-fade-y-start),currentcolor_calc(100%-var(--qy-scroll-fade-y-end)),transparent_100%),linear-gradient(to_right,transparent_0,currentcolor_var(--qy-scroll-fade-x-start),currentcolor_calc(100%-var(--qy-scroll-fade-x-end)),transparent_100%)]",
-  "rtl:[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-image:linear-gradient(to_bottom,transparent_0,currentcolor_var(--qy-scroll-fade-y-start),currentcolor_calc(100%-var(--qy-scroll-fade-y-end)),transparent_100%),linear-gradient(to_left,transparent_0,currentcolor_var(--qy-scroll-fade-x-start),currentcolor_calc(100%-var(--qy-scroll-fade-x-end)),transparent_100%)]",
+  "[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-composite:add,add,intersect] [&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[-webkit-mask-composite:source-over,source-over,source-in] [&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-repeat:no-repeat]",
+  "[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-size:var(--qy-scrollbar-y)_100%,100%_var(--qy-scrollbar-x),calc(100%-var(--qy-scrollbar-y))_calc(100%-var(--qy-scrollbar-x)),calc(100%-var(--qy-scrollbar-y))_calc(100%-var(--qy-scrollbar-x))]",
+  "[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-position:right_top,left_bottom,left_top,left_top] rtl:[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-position:left_top,left_bottom,right_top,right_top]",
+  "[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-image:linear-gradient(currentcolor,currentcolor),linear-gradient(currentcolor,currentcolor),linear-gradient(to_bottom,transparent_0,currentcolor_var(--qy-scroll-fade-y-start),currentcolor_calc(100%-var(--qy-scroll-fade-y-end)),transparent_100%),linear-gradient(to_right,transparent_0,currentcolor_var(--qy-scroll-fade-x-start),currentcolor_calc(100%-var(--qy-scroll-fade-x-end)),transparent_100%)]",
+  "rtl:[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-image:linear-gradient(currentcolor,currentcolor),linear-gradient(currentcolor,currentcolor),linear-gradient(to_bottom,transparent_0,currentcolor_var(--qy-scroll-fade-y-start),currentcolor_calc(100%-var(--qy-scroll-fade-y-end)),transparent_100%),linear-gradient(to_left,transparent_0,currentcolor_var(--qy-scroll-fade-x-start),currentcolor_calc(100%-var(--qy-scroll-fade-x-end)),transparent_100%)]",
 ].join(" ");
 
 /**
@@ -52,22 +56,25 @@ function PlainScrollArea({ ref, ...props }: Omit<ScrollAreaProps, "fade">) {
 function FadingScrollArea({ ref, ...props }: Omit<ScrollAreaProps, "fade">) {
   const [verticalRef, vertical] = useOverflowEdges<HTMLElement>(ref as React.Ref<HTMLElement> | undefined, "y");
   const [horizontalRef, horizontal] = useOverflowEdges<HTMLElement>(verticalRef);
-  const [scrollRef, scrollable] = useScrollable<HTMLElement>(horizontalRef);
-  return <ScrollAreaView {...props} ref={scrollRef} scrollable={scrollable} edges={{ x: horizontal, y: vertical }} />;
+  const [gutterRef, gutter] = useScrollbarGutter<HTMLElement>(horizontalRef);
+  const [scrollRef, scrollable] = useScrollable<HTMLElement>(gutterRef);
+  return <ScrollAreaView {...props} ref={scrollRef} scrollable={scrollable} edges={{ x: horizontal, y: vertical }} gutter={gutter} />;
 }
 
 type ScrollAreaViewProps = Omit<ScrollAreaProps, "fade" | "ref"> & {
   ref: React.RefCallback<HTMLElement>;
   scrollable: boolean;
   edges?: { x: OverflowEdges; y: OverflowEdges };
+  gutter?: ScrollbarGutter;
 };
-function ScrollAreaView({ render, ref, className, tabIndex, scrollable, edges, ...props }: ScrollAreaViewProps) {
+function ScrollAreaView({ render, ref, className, tabIndex, scrollable, edges, gutter, ...props }: ScrollAreaViewProps) {
   return useRender({ defaultTagName: "div", render, ref, props: mergeProps({
     "data-slot": "scroll-area", ...(tabIndex !== undefined ? { tabIndex } : scrollable ? { tabIndex: 0 } : {}),
     ...(edges ? {
       "data-overflow-x-start": edges.x.start ? "" : undefined, "data-overflow-x-end": edges.x.end ? "" : undefined,
       "data-overflow-y-start": edges.y.start ? "" : undefined, "data-overflow-y-end": edges.y.end ? "" : undefined,
     } : {}),
+    ...(gutter ? { style: { "--qy-scrollbar-y": `${gutter.y}px`, "--qy-scrollbar-x": `${gutter.x}px` } as React.CSSProperties } : {}),
     className: cn("min-w-0 max-w-full overflow-auto outline-none focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-quiet-width)] focus-visible:ring-ring", edges && fadeClassName),
   }, props, { className: cn(className) }) });
 }

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
-Source SHA-256: 2f4dd719cf1870157eead31e1aef929258879c948157458f8751c2ad64463222
+Source SHA-256: 482f8c3c4b02b0a94fda90ea51948d653098e2af0fdd48ec9f67312a43d0c4fb
 
 为同一范围的动作提供共同名称，可独立排列或连成一体。
 

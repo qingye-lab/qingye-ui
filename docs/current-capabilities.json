@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-01T05:32:27.577Z",
-  "revision": "f4233bc7ee7f33fd34d4f1bc16702f7af30d04a3",
+  "generatedAt": "2026-11-01T06:18:43.371Z",
+  "revision": "242bdb2b7c9f2d0e9e282ea8182f60cc7cc5a3af",
   "fingerprint": {
-    "sha256": "68d6299ab67f88b1cf62887bda8c74362de2c8420e1deb104f09e4a32e986086",
+    "sha256": "1bb5a13999ed946c39cab06265fef72ac5fed5bac85d728ddb31db4e15823a21",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -84,7 +84,7 @@
       },
       {
         "path": "apps/docs/src/content/chip/meta.ts",
-        "sha256": "c570fb5c2ab24313c16872e3717ccffacac97f9bfe0631477193a08f6826097d"
+        "sha256": "d45e18104656f116f58cac22b0070b80f838cf7c0d8a34fcad1f69f3682e0b5e"
       },
       {
         "path": "apps/docs/src/content/code-block/meta.ts",
@@ -108,7 +108,7 @@
       },
       {
         "path": "apps/docs/src/content/composer/meta.ts",
-        "sha256": "ee845da78a42aeb07b916b82db73db8704e6c27d0dd66ff09199d88ae6fc7577"
+        "sha256": "e9e4f66cc59d8ddd719821dd3eebe1cd840d49a9b9b3a8c0c07f090f19e86e76"
       },
       {
         "path": "apps/docs/src/content/confirm-action/meta.ts",
@@ -476,7 +476,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "32705d1729c1642bd6f137b7551f1df8f8d341502f506cd2992f729710fad266"
+        "sha256": "6efb1098653dbe1e2ae34f6d8a4af2df620e7e090b1fc8836c4ee3d61681119d"
       },
       {
         "path": "packages/ui/motion.css",
@@ -532,11 +532,11 @@
       },
       {
         "path": "packages/ui/src/components/button-group.tsx",
-        "sha256": "2f4dd719cf1870157eead31e1aef929258879c948157458f8751c2ad64463222"
+        "sha256": "482f8c3c4b02b0a94fda90ea51948d653098e2af0fdd48ec9f67312a43d0c4fb"
       },
       {
         "path": "packages/ui/src/components/button.tsx",
-        "sha256": "60676cd107b7383351276a379d5f700b354ec3f3a66294e8b11945392783b1a4"
+        "sha256": "33bee148386b5e78157da9af6787ff6d23f8bb88bb47d5ae1aed705c86ef02df"
       },
       {
         "path": "packages/ui/src/components/calendar.tsx",
@@ -560,11 +560,11 @@
       },
       {
         "path": "packages/ui/src/components/checkbox.tsx",
-        "sha256": "7d6a3498b9f9feee7e9501b2fcf70e8aa80200b70df5d458c62c84b748eef5de"
+        "sha256": "f5464ad5133223a687ea8729b9aa748caf203971a657f18cab57359212eeab47"
       },
       {
         "path": "packages/ui/src/components/chip.tsx",
-        "sha256": "ae7025a43fcc2e98d4398561f304ac091e583cefe053abf84781f07d3cf08df1"
+        "sha256": "ad815ca9b19efbfb70cada333d50c9e9579ef78c9f00f139f16251c246b090d6"
       },
       {
         "path": "packages/ui/src/components/code-block.tsx",
@@ -616,11 +616,11 @@
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
-        "sha256": "2039377cc2572bc6c6e47fab6baf740d1b74cd2720bbbe2ff146f5b731864850"
+        "sha256": "2b68f004920e5e70f42e26e967d1b2afa357ac09e42f56e298adeceb1fb284a2"
       },
       {
         "path": "packages/ui/src/components/date-range-picker.tsx",
-        "sha256": "50954292790b2429d2da553a7f9594db52b6583300fc3f5e362a74118f17aad3"
+        "sha256": "c9f53914ae6dbf34b8adeda22967d3c04eebe3f9860819d4b718d66e96fc1dbf"
       },
       {
         "path": "packages/ui/src/components/date-time-picker.tsx",
@@ -684,7 +684,7 @@
       },
       {
         "path": "packages/ui/src/components/input-group.tsx",
-        "sha256": "530458e9b34572eef1cbb53633a7868f51f2c3434c6e0af3830647c262013a2f"
+        "sha256": "76c0479a8ae9237614a739ef522f54922af7646711cea7da0e1abc7ac9519260"
       },
       {
         "path": "packages/ui/src/components/input-modality-provider.tsx",
@@ -720,7 +720,7 @@
       },
       {
         "path": "packages/ui/src/components/menu.tsx",
-        "sha256": "b92792b834d6c9f8884551bb4c8201109abd8ad265016f9a99028c3fa803cb28"
+        "sha256": "546a0cba3c3ecf2f2eaa2cc8170a08b6f49bfa8b6e1e81ff5a9d7eba89cd69a2"
       },
       {
         "path": "packages/ui/src/components/meter.tsx",
@@ -780,7 +780,7 @@
       },
       {
         "path": "packages/ui/src/components/rating.tsx",
-        "sha256": "a7cd9c1e28e860b80f120cc6e726424c6e186faf661a004c9bd2f823fc0b444d"
+        "sha256": "00742b70f6983cd7ca7c7c2e0844e5535bcdb5b26b28f5edc4350b580ea2ce1d"
       },
       {
         "path": "packages/ui/src/components/resizable.tsx",
@@ -796,7 +796,7 @@
       },
       {
         "path": "packages/ui/src/components/scroll-area.tsx",
-        "sha256": "0c218779216ea4b66cb035254638ac261d96eb11e87a24e4a387f15bfc95526f"
+        "sha256": "b335bf0444c58f204e72dbb5eedf2a8220cd65fc03da091dccdd57ce6e8428d1"
       },
       {
         "path": "packages/ui/src/components/search-input.tsx",
@@ -812,7 +812,7 @@
       },
       {
         "path": "packages/ui/src/components/select.tsx",
-        "sha256": "048014d88e56b546956527bda606ecb30e6f1c2959f695e7e64def7b1a1a9ee5"
+        "sha256": "36f9c843a86f51d2ebe65054cf5577bd80a4a076d0de1d52326c66eee10acf7a"
       },
       {
         "path": "packages/ui/src/components/separator.tsx",
@@ -856,7 +856,7 @@
       },
       {
         "path": "packages/ui/src/components/switch.tsx",
-        "sha256": "9ae3686501e427f7139eb3d69d59eb31a0e6715add243ff1334b0fdfc6412e6a"
+        "sha256": "824244fef954f3b8bc97911a210e7e23e7554758faaad3f0d0f741a94dd345bc"
       },
       {
         "path": "packages/ui/src/components/table.tsx",
@@ -864,7 +864,7 @@
       },
       {
         "path": "packages/ui/src/components/tabs.tsx",
-        "sha256": "96d314f6778de1535f266d5db4b31ef9a2cd5fc14b6ae7bb140fceaf3472e448"
+        "sha256": "fec95d44ade9b2245e569a1b91c9ddc6911c1af3b26f50a36521bb8a54d98137"
       },
       {
         "path": "packages/ui/src/components/tag-input.tsx",
@@ -940,7 +940,7 @@
       },
       {
         "path": "packages/ui/src/components/workspace.tsx",
-        "sha256": "ca2d713bc6ff9ae851eb0ec123c226f6252253cc01ad7d8ae069e974e119dc0a"
+        "sha256": "6877d9e405f7b45fb071620d63cc8ab3ef9ec775a6dec1aa609e10efac0ac84e"
       },
       {
         "path": "packages/ui/src/index.ts",
@@ -1088,7 +1088,7 @@
   "counts": {
     "components": 113,
     "catalog": 113,
-    "dist": 102,
+    "dist": 113,
     "local": 113
   },
   "buildArtifacts": {
@@ -3002,9 +3002,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -4194,7 +4194,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/button-group.tsx",
-            "line": 36
+            "line": 39
           }
         },
         {
@@ -4202,7 +4202,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/button-group.tsx",
-            "line": 12
+            "line": 13
           }
         },
         {
@@ -4210,7 +4210,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/button-group.tsx",
-            "line": 15
+            "line": 16
           }
         },
         {
@@ -4218,7 +4218,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/button-group.tsx",
-            "line": 75
+            "line": 70
           }
         },
         {
@@ -4226,7 +4226,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/button-group.tsx",
-            "line": 72
+            "line": 67
           }
         },
         {
@@ -4234,7 +4234,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/button-group.tsx",
-            "line": 62
+            "line": 57
           }
         },
         {
@@ -4242,7 +4242,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/button-group.tsx",
-            "line": 56
+            "line": 51
           }
         }
       ],
@@ -4408,11 +4408,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button-group.tsx",
-              "line": 36
+              "line": 39
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button-group.tsx",
-              "line": 36
+              "line": 39
             },
             "status": "PRESENT"
           },
@@ -4421,11 +4421,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button-group.tsx",
-              "line": 62
+              "line": 57
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button-group.tsx",
-              "line": 62
+              "line": 57
             },
             "status": "PRESENT"
           },
@@ -4434,11 +4434,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button-group.tsx",
-              "line": 75
+              "line": 70
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button-group.tsx",
-              "line": 75
+              "line": 70
             },
             "status": "PRESENT"
           }
@@ -4477,7 +4477,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 93
+            "line": 75
           }
         },
         {
@@ -4486,7 +4486,7 @@
           "target": "Button",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 174
+            "line": 156
           }
         },
         {
@@ -4494,7 +4494,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 81
+            "line": 63
           }
         },
         {
@@ -4502,7 +4502,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/button.tsx",
-            "line": 29
+            "line": 11
           }
         }
       ],
@@ -4705,11 +4705,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 93
+              "line": 75
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 93
+              "line": 75
             },
             "status": "PRESENT"
           },
@@ -4718,11 +4718,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 174
+              "line": 156
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 174
+              "line": 156
             },
             "status": "PRESENT"
           },
@@ -4731,11 +4731,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 29
+              "line": 11
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button.tsx",
-              "line": 29
+              "line": 11
             },
             "status": "PRESENT"
           }
@@ -6381,7 +6381,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/checkbox.tsx",
-            "line": 17
+            "line": 18
           }
         },
         {
@@ -6390,7 +6390,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/checkbox/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/checkbox.tsx",
-            "line": 41
+            "line": 38
           }
         },
         {
@@ -6398,7 +6398,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/checkbox.tsx",
-            "line": 8
+            "line": 9
           }
         }
       ],
@@ -6567,11 +6567,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/checkbox.tsx",
-              "line": 17
+              "line": 18
             },
             "rootEntry": {
               "path": "packages/ui/src/components/checkbox.tsx",
-              "line": 17
+              "line": 18
             },
             "status": "PRESENT"
           },
@@ -6580,11 +6580,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/checkbox.tsx",
-              "line": 41
+              "line": 38
             },
             "rootEntry": {
               "path": "packages/ui/src/components/checkbox.tsx",
-              "line": 41
+              "line": 38
             },
             "status": "PRESENT"
           }
@@ -6623,7 +6623,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chip.tsx",
-            "line": 34
+            "line": 31
           }
         },
         {
@@ -6631,23 +6631,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chip.tsx",
-            "line": 25
-          }
-        },
-        {
-          "name": "ChipToggle",
-          "kind": "value",
-          "source": {
-            "path": "packages/ui/src/components/chip.tsx",
-            "line": 78
-          }
-        },
-        {
-          "name": "ChipToggleProps",
-          "kind": "type",
-          "source": {
-            "path": "packages/ui/src/components/chip.tsx",
-            "line": 72
+            "line": 22
           }
         }
       ],
@@ -6655,14 +6639,13 @@
         "path": "apps/docs/src/content/chip/meta.ts",
         "title": "标签片 Chip",
         "titleEn": "Chip",
-        "description": "一枚可以被单独操作的小记号：可移除，或可开关。",
-        "descriptionEn": "A small mark that can be acted on by itself: removable, or toggleable.",
+        "description": "一枚可移除的小记号：已经选定的一项，可以单独去掉。",
+        "descriptionEn": "A small removable mark: one chosen item that can be dropped on its own.",
         "category": "通用",
         "layer": "primitive",
         "source": "local",
         "exports": [
-          "Chip",
-          "ChipToggle"
+          "Chip"
         ],
         "keywords": [
           "chip",
@@ -6707,44 +6690,18 @@
                 "descriptionEn": "Composition entry points of the root span."
               }
             ]
-          },
-          {
-            "name": "ChipToggle",
-            "description": "可开关的记号：按钮加 aria-pressed。属性与 Toggle 相同，只是固定为 sm 档。",
-            "descriptionEn": "A toggleable mark: a button with aria-pressed. Same props as Toggle, fixed at the sm step.",
-            "props": [
-              {
-                "name": "pressed / defaultPressed",
-                "type": "boolean",
-                "description": "受控或初始的按下状态。",
-                "descriptionEn": "Controlled or initial pressed state."
-              },
-              {
-                "name": "onPressedChange",
-                "type": "(pressed: boolean, details) => void",
-                "description": "按下状态改变时调用。",
-                "descriptionEn": "Called when the pressed state changes."
-              },
-              {
-                "name": "disabled",
-                "type": "boolean",
-                "default": "false",
-                "description": "不可操作；按下的事实保留。",
-                "descriptionEn": "Inert; the pressed fact is kept."
-              }
-            ]
           }
         ],
         "keyboard": [
           {
             "keys": "Tab / Shift+Tab",
-            "description": "Chip 的移除按钮、ChipToggle 各是一个停靠点；记号文字本身不可聚焦。",
-            "descriptionEn": "Each remove button and each ChipToggle is one tab stop; the mark's text is not focusable."
+            "description": "每个移除按钮是一个停靠点；记号文字本身不可聚焦。",
+            "descriptionEn": "Each remove button is one tab stop; the mark's text is not focusable."
           },
           {
             "keys": "Enter / Space",
-            "description": "移除，或切换按下状态。",
-            "descriptionEn": "Remove, or toggle the pressed state."
+            "description": "移除该记号。",
+            "descriptionEn": "Remove the chip."
           },
           {
             "keys": "Backspace / Delete",
@@ -6754,39 +6711,37 @@
         ],
         "notes": [
           "移除按钮的名称是「移除 X」，X 取记号文字，所以同一行里多个记号读屏时彼此可分。",
-          "ChipToggle 的名称不随按下与否变化，状态只由 aria-pressed 表达。",
           "移除之后焦点会随被移除的节点一起消失：由调用方把焦点移到相邻记号或它所在的容器。"
         ],
         "notesEn": [
           "The remove button is named \"Remove X\" from the chip text, so several chips in one row are distinguishable to assistive technology.",
-          "A ChipToggle's name does not change with its pressed state; the state is carried only by aria-pressed.",
           "Focus disappears with the removed node: the caller moves it to a neighbouring chip or to the container."
         ],
-        "decisions": "Chip 与 Badge 不是一回事：Badge 是正文里一段静态的字，没有底、没有交互，用来标注状态或类别；Chip 有自己的边界，能被点击或移除，是对象而不是标注。要给一段不可操作的标注加移除按钮，说明它其实是 Chip。Chip 的两种形态不合并成一个带 mode 的组件：移除是单向动作，开关是可往返的状态，二者的读屏角色、键盘与名称规则都不同，所以是 Chip 与 ChipToggle 两个组件。编辑框里的标签（TagInput）与多选 Combobox 的已选项是边界内的项，几何由所在边界推出，不使用 Chip；Chip 是独立立着的记号，几何读 sm 控件档。",
-        "decisionsEn": "Chip is not Badge. Badge is a static run of text in the body, with no surface and no interaction, used to annotate a status or category; Chip has its own boundary and can be clicked or removed, so it is an object rather than an annotation. If you want a remove button on an inert annotation, it was a Chip all along. The two forms are not merged into one component with a mode: removing is a one-way action and toggling is a reversible state, and their roles, keyboard and naming rules differ, so there are two components, Chip and ChipToggle. The tags in TagInput and the selected items of a multiple Combobox are items inside an edit frame whose geometry is derived from that frame, so they do not use Chip; Chip is a free-standing mark whose geometry reads the sm control step.",
+        "decisions": "Chip 与 Badge 不是一回事：Badge 是正文里一段静态的字，没有底、没有交互，用来标注状态或类别；Chip 有自己的边界，能被点击或移除，是对象而不是标注。要给一段不可操作的标注加移除按钮，说明它其实是 Chip。可开关的筛选条件不是 Chip：它是二态按钮（aria-pressed），直接用 Toggle size=\"sm\"；早先的 ChipToggle 只是 Toggle 固定 sm 档的同义包装，在发布前删除，避免同一件事有两个名字。编辑框里的标签（TagInput）与多选 Combobox 的已选项是边界内的项，几何由所在边界推出，不使用 Chip；Chip 是独立立着的记号，几何读 sm 控件档。",
+        "decisionsEn": "Chip is not Badge. Badge is a static run of text in the body, with no surface and no interaction, used to annotate a status or category; Chip has its own boundary and can be clicked or removed, so it is an object rather than an annotation. If you want a remove button on an inert annotation, it was a Chip all along. A toggleable filter is not a Chip: it is a two-state button (aria-pressed), so use Toggle size=\"sm\". The earlier ChipToggle was only Toggle fixed at the sm step and was removed before release so that one thing does not carry two names. The tags in TagInput and the selected items of a multiple Combobox are items inside an edit frame whose geometry is derived from that frame, so they do not use Chip; Chip is a free-standing mark whose geometry reads the sm control step.",
         "design": {
           "methods": [
             "名实相符",
             "相成相制"
           ],
           "whenToUse": [
-            "一组已选条件，每个都能单独去掉",
-            "一组筛选条件，每个都能单独开关"
+            "一组已选条件，每个都能单独去掉"
           ],
           "avoid": [
+            "可开关的筛选条件用 Toggle size=\"sm\"",
             "不可操作的状态标注用 Badge",
             "在输入框内收下的值用 TagInput",
             "互斥的几个选项用 RadioGroup 或 SegmentedControl"
           ],
           "composition": [
-            "多个 Chip 放进 flex-wrap 的行；ChipToggle 放进带名称的 group"
+            "多个 Chip 放进 flex-wrap 的行"
           ],
           "stateOwner": {
             "library": [
-              "ChipToggle 的非受控按下状态、焦点"
+              "移除按钮的焦点与键盘"
             ],
             "application": [
-              "Chip 的集合（移除后是否保留）、筛选条件的实际含义、移除后的焦点去向"
+              "Chip 的集合（移除后是否保留）、移除后的焦点去向"
             ]
           },
           "responsive": [
@@ -6798,23 +6753,23 @@
         },
         "designEn": {
           "whenToUse": [
-            "A set of chosen conditions, each of which can be dropped on its own.",
-            "A set of filters, each of which can be switched on or off."
+            "A set of chosen conditions, each of which can be dropped on its own."
           ],
           "avoid": [
+            "Use Toggle size=\"sm\" for a filter that switches on and off.",
             "Use Badge for an inert status annotation.",
             "Use TagInput for values collected inside an input.",
             "Use RadioGroup or SegmentedControl for mutually exclusive options."
           ],
           "composition": [
-            "Place several Chips in a flex-wrap row; put ChipToggles in a named group."
+            "Place several Chips in a flex-wrap row."
           ],
           "stateOwner": {
             "library": [
-              "A ChipToggle's uncontrolled pressed state and focus."
+              "Focus and keyboard of the remove button."
             ],
             "application": [
-              "The collection of Chips (whether a removed one is kept), what a filter actually means, and where focus goes after removal."
+              "The collection of Chips (whether a removed one is kept) and where focus goes after removal."
             ]
           },
           "responsive": [
@@ -6830,24 +6785,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/chip.tsx",
-              "line": 34
+              "line": 31
             },
             "rootEntry": {
               "path": "packages/ui/src/components/chip.tsx",
-              "line": 34
-            },
-            "status": "PRESENT"
-          },
-          {
-            "name": "ChipToggle",
-            "kind": "value",
-            "componentEntry": {
-              "path": "packages/ui/src/components/chip.tsx",
-              "line": 78
-            },
-            "rootEntry": {
-              "path": "packages/ui/src/components/chip.tsx",
-              "line": 78
+              "line": 31
             },
             "status": "PRESENT"
           }
@@ -6867,9 +6809,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -9212,8 +9154,8 @@
               {
                 "name": "triggers",
                 "type": "readonly ComposerTrigger[]",
-                "description": "触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃。",
-                "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded."
+                "description": "触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃。候选项 ComposerItem 为 { id, label, group?, description?, icon?, disabled?, select? }：id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”；同名 group 归为一组，按首次出现顺序排列；select 覆盖触发项的 select（token 插入令牌，action 删掉触发文字、只回调 onSelect）。",
+                "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect)."
               },
               {
                 "name": "minRows / maxRows",
@@ -9221,31 +9163,6 @@
                 "default": "1 / 8",
                 "description": "起始行数与增长上限。超过上限在内部滚动，且不超过视口高度的一半。",
                 "descriptionEn": "Starting rows and growth cap. Beyond the cap the editor scrolls, and never exceeds half the viewport height."
-              }
-            ]
-          },
-          {
-            "name": "ComposerItem",
-            "description": "候选项。",
-            "descriptionEn": "A candidate.",
-            "props": [
-              {
-                "name": "id / label",
-                "type": "string",
-                "description": "id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”。",
-                "descriptionEn": "id is the token identity and label the display name; a token reads as trigger + label."
-              },
-              {
-                "name": "group / description / icon / disabled",
-                "type": "string / string / ReactNode / boolean",
-                "description": "同名 group 归为一组，按首次出现顺序排列。",
-                "descriptionEn": "Items with the same group are grouped in order of first appearance."
-              },
-              {
-                "name": "select",
-                "type": "'token' | 'action'",
-                "description": "覆盖触发项的 select：token 插入令牌；action 删掉触发文字，只回调 onSelect。",
-                "descriptionEn": "Overrides the trigger's select: token inserts a token; action removes the trigger text and only calls onSelect."
               }
             ]
           },
@@ -9298,14 +9215,14 @@
         ],
         "notes": [
           "粘贴、拖放一律只收纯文字；复制与剪切输出纯文字，令牌写作“触发字符 + label”。",
-          "composerValueToText 默认把令牌写作“触发字符 + label”；composerValueFromText 可传入已知令牌，按字面匹配还原。",
-          "没有 name 与表单提交，也未接入 Field；需要时由应用在 onSubmit 里取值。",
+          "composerValueToText 默认把令牌写作“触发字符 + label”；composerValueFromText 可传入已知令牌，按字面匹配还原，且只在词的开头处还原（“a@Ann.com”“@Anna”不会变成令牌）。纯文字会丢掉令牌 id，要无损保存就存片段数组本身。",
+          "没有 name 与表单提交，也未接入 Field：值是片段数组，没有对应的表单字段形态，由应用在 onSubmit 里取值并发送（同类对话输入的通行做法）。",
           "jsdom 无法验证真实输入法、各浏览器 contenteditable 的光标与 beforeinput 差异、浮层碰撞翻转与 Range 坐标，需在真实浏览器中另验。"
         ],
         "notesEn": [
           "Paste and drop accept plain text only; copy and cut emit plain text with a token written as trigger + label.",
-          "composerValueToText writes a token as trigger + label by default; composerValueFromText accepts known tokens and restores them by literal match.",
-          "There is no name or form submission and no Field integration; read the value in onSubmit.",
+          "composerValueToText writes a token as trigger + label by default; composerValueFromText accepts known tokens and restores them by literal match, only at the start of a word (\"a@Ann.com\" and \"@Anna\" stay text). Plain text drops token ids, so store the segment array itself for a lossless round trip.",
+          "There is no name or form submission and no Field integration: the value is an array of segments with no form-field form, so the app reads and sends it in onSubmit, as conversational inputs commonly do.",
           "jsdom cannot verify a real IME, per-browser contenteditable caret and beforeinput behavior, popup collision flipping or Range geometry; verify these in real browsers."
         ],
         "design": {
@@ -9523,9 +9440,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -11808,7 +11725,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 26
+            "line": 29
           }
         },
         {
@@ -11816,7 +11733,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 67
+            "line": 70
           }
         },
         {
@@ -11824,7 +11741,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 30
+            "line": 33
           }
         },
         {
@@ -11832,7 +11749,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 28
+            "line": 31
           }
         },
         {
@@ -12014,11 +11931,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/date-range-picker.tsx",
-              "line": 67
+              "line": 70
             },
             "rootEntry": {
               "path": "packages/ui/src/components/date-range-picker.tsx",
-              "line": 67
+              "line": 70
             },
             "status": "PRESENT"
           }
@@ -12477,9 +12394,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -16646,9 +16563,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -16665,7 +16582,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 55
+            "line": 59
           }
         },
         {
@@ -16673,7 +16590,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 89
+            "line": 93
           }
         },
         {
@@ -16689,7 +16606,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 149
+            "line": 153
           }
         },
         {
@@ -16697,7 +16614,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 144
+            "line": 148
           }
         },
         {
@@ -16705,7 +16622,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 114
+            "line": 118
           }
         },
         {
@@ -16721,7 +16638,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 131
+            "line": 135
           }
         },
         {
@@ -16745,7 +16662,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 140
+            "line": 144
           }
         },
         {
@@ -16761,7 +16678,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 102
+            "line": 106
           }
         },
         {
@@ -16769,7 +16686,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input-group.tsx",
-            "line": 123
+            "line": 127
           }
         },
         {
@@ -16992,11 +16909,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 55
+              "line": 59
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 55
+              "line": 59
             },
             "status": "PRESENT"
           },
@@ -17005,11 +16922,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 89
+              "line": 93
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 89
+              "line": 93
             },
             "status": "PRESENT"
           },
@@ -17018,11 +16935,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 102
+              "line": 106
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 102
+              "line": 106
             },
             "status": "PRESENT"
           },
@@ -17031,11 +16948,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 114
+              "line": 118
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 114
+              "line": 118
             },
             "status": "PRESENT"
           },
@@ -17044,11 +16961,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 123
+              "line": 127
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 123
+              "line": 127
             },
             "status": "PRESENT"
           },
@@ -17057,11 +16974,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 131
+              "line": 135
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 131
+              "line": 135
             },
             "status": "PRESENT"
           },
@@ -17070,11 +16987,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 140
+              "line": 144
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 140
+              "line": 144
             },
             "status": "PRESENT"
           },
@@ -17083,11 +17000,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 149
+              "line": 153
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input-group.tsx",
-              "line": 149
+              "line": 153
             },
             "status": "PRESENT"
           }
@@ -18898,7 +18815,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 11
+            "line": 12
           }
         },
         {
@@ -18906,7 +18823,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 72
+            "line": 73
           }
         },
         {
@@ -18914,7 +18831,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 71
+            "line": 72
           }
         },
         {
@@ -18922,7 +18839,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 66
+            "line": 67
           }
         },
         {
@@ -18930,7 +18847,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 68
+            "line": 69
           }
         },
         {
@@ -18938,7 +18855,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 67
+            "line": 68
           }
         },
         {
@@ -18946,7 +18863,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 65
+            "line": 66
           }
         },
         {
@@ -18954,7 +18871,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 58
+            "line": 59
           }
         },
         {
@@ -18962,7 +18879,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 57
+            "line": 58
           }
         },
         {
@@ -18970,7 +18887,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 55
+            "line": 56
           }
         },
         {
@@ -18978,7 +18895,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 62
+            "line": 63
           }
         },
         {
@@ -18986,7 +18903,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 61
+            "line": 62
           }
         },
         {
@@ -18994,7 +18911,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 27
+            "line": 28
           }
         },
         {
@@ -19002,7 +18919,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 23
+            "line": 24
           }
         },
         {
@@ -19010,7 +18927,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 21
+            "line": 22
           }
         },
         {
@@ -19018,7 +18935,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 12
+            "line": 13
           }
         },
         {
@@ -19026,7 +18943,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 17
+            "line": 18
           }
         },
         {
@@ -19034,7 +18951,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 16
+            "line": 17
           }
         },
         {
@@ -19043,7 +18960,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 108
+            "line": 101
           }
         },
         {
@@ -19051,7 +18968,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 10
+            "line": 11
           }
         },
         {
@@ -19059,7 +18976,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 98
+            "line": 91
           }
         },
         {
@@ -19067,7 +18984,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 97
+            "line": 90
           }
         },
         {
@@ -19075,7 +18992,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 100
+            "line": 93
           }
         },
         {
@@ -19083,7 +19000,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 99
+            "line": 92
           }
         },
         {
@@ -19091,7 +19008,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 70
+            "line": 71
           }
         },
         {
@@ -19099,7 +19016,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 69
+            "line": 70
           }
         },
         {
@@ -19107,7 +19024,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 13
+            "line": 14
           }
         },
         {
@@ -19115,7 +19032,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 105
+            "line": 98
           }
         },
         {
@@ -19123,7 +19040,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 104
+            "line": 97
           }
         },
         {
@@ -19131,7 +19048,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 89
+            "line": 82
           }
         },
         {
@@ -19139,7 +19056,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 76
+            "line": 77
           }
         },
         {
@@ -19147,7 +19064,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 15
+            "line": 16
           }
         },
         {
@@ -19155,7 +19072,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
-            "line": 14
+            "line": 15
           }
         }
       ],
@@ -19403,11 +19320,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 11
+              "line": 12
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 11
+              "line": 12
             },
             "status": "PRESENT"
           },
@@ -19416,11 +19333,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 12
+              "line": 13
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 12
+              "line": 13
             },
             "status": "PRESENT"
           },
@@ -19429,11 +19346,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 13
+              "line": 14
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 13
+              "line": 14
             },
             "status": "PRESENT"
           },
@@ -19442,11 +19359,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 15
+              "line": 16
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 15
+              "line": 16
             },
             "status": "PRESENT"
           },
@@ -19455,11 +19372,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 17
+              "line": 18
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 17
+              "line": 18
             },
             "status": "PRESENT"
           },
@@ -19468,11 +19385,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 23
+              "line": 24
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 23
+              "line": 24
             },
             "status": "PRESENT"
           },
@@ -19481,11 +19398,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 58
+              "line": 59
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 58
+              "line": 59
             },
             "status": "PRESENT"
           },
@@ -19494,11 +19411,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 62
+              "line": 63
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 62
+              "line": 63
             },
             "status": "PRESENT"
           },
@@ -19507,11 +19424,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 66
+              "line": 67
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 66
+              "line": 67
             },
             "status": "PRESENT"
           },
@@ -19520,11 +19437,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 68
+              "line": 69
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 68
+              "line": 69
             },
             "status": "PRESENT"
           },
@@ -19533,11 +19450,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 70
+              "line": 71
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 70
+              "line": 71
             },
             "status": "PRESENT"
           },
@@ -19546,11 +19463,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 72
+              "line": 73
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 72
+              "line": 73
             },
             "status": "PRESENT"
           },
@@ -19559,11 +19476,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 89
+              "line": 82
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 89
+              "line": 82
             },
             "status": "PRESENT"
           },
@@ -19572,11 +19489,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 98
+              "line": 91
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 98
+              "line": 91
             },
             "status": "PRESENT"
           },
@@ -19585,11 +19502,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 100
+              "line": 93
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 100
+              "line": 93
             },
             "status": "PRESENT"
           },
@@ -19598,11 +19515,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 105
+              "line": 98
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 105
+              "line": 98
             },
             "status": "PRESENT"
           },
@@ -19611,11 +19528,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 108
+              "line": 101
             },
             "rootEntry": {
               "path": "packages/ui/src/components/menu.tsx",
-              "line": 108
+              "line": 101
             },
             "status": "PRESENT"
           }
@@ -24200,9 +24117,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -24840,9 +24757,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -25074,7 +24991,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 43
+            "line": 47
           }
         },
         {
@@ -25082,7 +24999,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 87
+            "line": 94
           }
         },
         {
@@ -25090,7 +25007,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 86
+            "line": 93
           }
         },
         {
@@ -25098,7 +25015,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 112
+            "line": 119
           }
         },
         {
@@ -25106,7 +25023,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 111
+            "line": 118
           }
         },
         {
@@ -25115,7 +25032,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/scroll-area/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 116
+            "line": 123
           }
         },
         {
@@ -25131,7 +25048,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 77
+            "line": 84
           }
         },
         {
@@ -25139,7 +25056,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 76
+            "line": 83
           }
         },
         {
@@ -25147,7 +25064,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 92
+            "line": 99
           }
         },
         {
@@ -25155,7 +25072,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 91
+            "line": 98
           }
         },
         {
@@ -25163,7 +25080,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 103
+            "line": 110
           }
         },
         {
@@ -25171,7 +25088,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 102
+            "line": 109
           }
         },
         {
@@ -25179,7 +25096,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 82
+            "line": 89
           }
         },
         {
@@ -25187,7 +25104,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 81
+            "line": 88
           }
         }
       ],
@@ -25382,11 +25299,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 43
+              "line": 47
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 43
+              "line": 47
             },
             "status": "PRESENT"
           },
@@ -25395,11 +25312,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 77
+              "line": 84
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 77
+              "line": 84
             },
             "status": "PRESENT"
           },
@@ -25408,11 +25325,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 82
+              "line": 89
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 82
+              "line": 89
             },
             "status": "PRESENT"
           },
@@ -25421,11 +25338,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 87
+              "line": 94
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 87
+              "line": 94
             },
             "status": "PRESENT"
           },
@@ -25434,11 +25351,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 92
+              "line": 99
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 92
+              "line": 99
             },
             "status": "PRESENT"
           },
@@ -25447,11 +25364,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 103
+              "line": 110
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 103
+              "line": 110
             },
             "status": "PRESENT"
           },
@@ -25460,11 +25377,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 112
+              "line": 119
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 112
+              "line": 119
             },
             "status": "PRESENT"
           },
@@ -25473,11 +25390,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 116
+              "line": 123
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 116
+              "line": 123
             },
             "status": "PRESENT"
           }
@@ -28439,9 +28356,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -30018,7 +29935,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/switch.tsx",
-            "line": 18
+            "line": 19
           }
         },
         {
@@ -30027,7 +29944,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/switch/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/switch.tsx",
-            "line": 53
+            "line": 49
           }
         },
         {
@@ -30035,7 +29952,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/switch.tsx",
-            "line": 8
+            "line": 9
           }
         }
       ],
@@ -30205,11 +30122,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/switch.tsx",
-              "line": 18
+              "line": 19
             },
             "rootEntry": {
               "path": "packages/ui/src/components/switch.tsx",
-              "line": 18
+              "line": 19
             },
             "status": "PRESENT"
           },
@@ -30218,11 +30135,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/switch.tsx",
-              "line": 53
+              "line": 49
             },
             "rootEntry": {
               "path": "packages/ui/src/components/switch.tsx",
-              "line": 53
+              "line": 49
             },
             "status": "PRESENT"
           }
@@ -30760,7 +30677,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 63
+            "line": 69
           }
         },
         {
@@ -30768,7 +30685,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 50
+            "line": 56
           }
         },
         {
@@ -30777,7 +30694,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tabs/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 68
+            "line": 74
           }
         },
         {
@@ -30793,7 +30710,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 42
+            "line": 48
           }
         },
         {
@@ -30801,7 +30718,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 41
+            "line": 47
           }
         }
       ],
@@ -31007,11 +30924,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 42
+              "line": 48
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 42
+              "line": 48
             },
             "status": "PRESENT"
           },
@@ -31020,11 +30937,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 63
+              "line": 69
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 63
+              "line": 69
             },
             "status": "PRESENT"
           },
@@ -31033,11 +30950,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 68
+              "line": 74
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 68
+              "line": 74
             },
             "status": "PRESENT"
           }
@@ -32309,9 +32226,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -34847,9 +34764,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -35109,9 +35026,9 @@
         "source": "packages/ui/catalog.json"
       },
       "dist": {
-        "js": false,
-        "declarations": false,
-        "status": "NOT_RUN"
+        "js": true,
+        "declarations": true,
+        "status": "PRESENT"
       },
       "consistency": {
         "status": "PASS",
@@ -36217,7 +36134,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 169
+            "line": 164
           }
         },
         {
@@ -36225,7 +36142,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 163
+            "line": 158
           }
         },
         {
@@ -36233,7 +36150,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 200
+            "line": 195
           }
         },
         {
@@ -36241,7 +36158,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 184
+            "line": 179
           }
         },
         {
@@ -36249,7 +36166,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 115
+            "line": 110
           }
         },
         {
@@ -36257,7 +36174,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 133
+            "line": 128
           }
         },
         {
@@ -36265,7 +36182,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 127
+            "line": 122
           }
         },
         {
@@ -36273,7 +36190,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 103
+            "line": 98
           }
         },
         {
@@ -36289,7 +36206,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 153
+            "line": 148
           }
         },
         {
@@ -36297,7 +36214,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 148
+            "line": 143
           }
         },
         {
@@ -36305,7 +36222,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 88
+            "line": 83
           }
         },
         {
@@ -36313,7 +36230,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 76
+            "line": 71
           }
         },
         {
@@ -36321,7 +36238,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 144
+            "line": 139
           }
         },
         {
@@ -36329,7 +36246,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/workspace.tsx",
-            "line": 138
+            "line": 133
           }
         }
       ],
@@ -36591,11 +36508,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 88
+              "line": 83
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 88
+              "line": 83
             },
             "status": "PRESENT"
           },
@@ -36604,11 +36521,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 115
+              "line": 110
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 115
+              "line": 110
             },
             "status": "PRESENT"
           },
@@ -36617,11 +36534,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 144
+              "line": 139
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 144
+              "line": 139
             },
             "status": "PRESENT"
           },
@@ -36630,11 +36547,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 153
+              "line": 148
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 153
+              "line": 148
             },
             "status": "PRESENT"
           },
@@ -36643,11 +36560,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 169
+              "line": 164
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 169
+              "line": 164
             },
             "status": "PRESENT"
           },
@@ -36656,11 +36573,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 200
+              "line": 195
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 200
+              "line": 195
             },
             "status": "PRESENT"
           },
@@ -36669,11 +36586,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 133
+              "line": 128
             },
             "rootEntry": {
               "path": "packages/ui/src/components/workspace.tsx",
-              "line": 133
+              "line": 128
             },
             "status": "PRESENT"
           }
@@ -44746,31 +44663,31 @@
   "controlReferences": [
     {
       "name": "--qy-control-content-gap",
-      "componentSourceOccurrences": 20,
+      "componentSourceOccurrences": 22,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-lg",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 1,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-lg-icon",
-      "componentSourceOccurrences": 4,
+      "componentSourceOccurrences": 2,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-lg-icon-narrow",
-      "componentSourceOccurrences": 4,
+      "componentSourceOccurrences": 2,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-lg-narrow",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 1,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -44782,7 +44699,7 @@
     },
     {
       "name": "--qy-control-lg-padding-bordered",
-      "componentSourceOccurrences": 4,
+      "componentSourceOccurrences": 2,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -44830,61 +44747,61 @@
     },
     {
       "name": "--qy-control-sm",
-      "componentSourceOccurrences": 14,
+      "componentSourceOccurrences": 12,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-sm-icon",
-      "componentSourceOccurrences": 8,
+      "componentSourceOccurrences": 6,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-sm-icon-narrow",
-      "componentSourceOccurrences": 4,
+      "componentSourceOccurrences": 2,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-sm-narrow",
-      "componentSourceOccurrences": 7,
+      "componentSourceOccurrences": 5,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-sm-padding",
-      "componentSourceOccurrences": 25,
+      "componentSourceOccurrences": 24,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-sm-padding-bordered",
-      "componentSourceOccurrences": 4,
+      "componentSourceOccurrences": 2,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xl",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 1,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xl-icon",
-      "componentSourceOccurrences": 4,
+      "componentSourceOccurrences": 2,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xl-icon-narrow",
-      "componentSourceOccurrences": 4,
+      "componentSourceOccurrences": 2,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xl-narrow",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 1,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -44896,31 +44813,31 @@
     },
     {
       "name": "--qy-control-xl-padding-bordered",
-      "componentSourceOccurrences": 4,
+      "componentSourceOccurrences": 2,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xs",
-      "componentSourceOccurrences": 6,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xs-icon",
-      "componentSourceOccurrences": 4,
+      "componentSourceOccurrences": 2,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xs-icon-narrow",
-      "componentSourceOccurrences": 4,
+      "componentSourceOccurrences": 2,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xs-narrow",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 1,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -44932,7 +44849,7 @@
     },
     {
       "name": "--qy-control-xs-padding-bordered",
-      "componentSourceOccurrences": 4,
+      "componentSourceOccurrences": 2,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     }

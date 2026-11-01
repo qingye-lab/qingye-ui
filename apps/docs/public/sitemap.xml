@@ -191,6 +191,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/avatar"/>
   </url>
   <url>
+    <loc>https://ui.xflux.cc/docs/components/avatar-group</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/avatar-group"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/avatar-group"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/avatar-group</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/avatar-group"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/avatar-group"/>
+  </url>
+  <url>
     <loc>https://ui.xflux.cc/docs/components/badge</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/badge"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/badge"/>
@@ -301,6 +311,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/checkbox-group"/>
   </url>
   <url>
+    <loc>https://ui.xflux.cc/docs/components/chip</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/chip"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/chip"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/chip</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/chip"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/chip"/>
+  </url>
+  <url>
     <loc>https://ui.xflux.cc/docs/components/code-block</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/code-block"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/code-block"/>
@@ -349,6 +369,16 @@
     <loc>https://ui.xflux.cc/en/docs/components/command</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/command"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/command"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/composer</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/composer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/composer"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/composer</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/composer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/composer"/>
   </url>
   <url>
     <loc>https://ui.xflux.cc/docs/components/confirm</loc>
@@ -439,6 +469,16 @@
     <loc>https://ui.xflux.cc/en/docs/components/date-time-picker</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/date-time-picker"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/date-time-picker"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/date-time-range-picker</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/date-time-range-picker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/date-time-range-picker"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/date-time-range-picker</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/date-time-range-picker"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/date-time-range-picker"/>
   </url>
   <url>
     <loc>https://ui.xflux.cc/docs/components/description-list</loc>
@@ -559,6 +599,16 @@
     <loc>https://ui.xflux.cc/en/docs/components/hover-card</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/hover-card"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/hover-card"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/image-preview</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/image-preview"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/image-preview"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/image-preview</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/image-preview"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/image-preview"/>
   </url>
   <url>
     <loc>https://ui.xflux.cc/docs/components/input</loc>
@@ -801,6 +851,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/radio-group"/>
   </url>
   <url>
+    <loc>https://ui.xflux.cc/docs/components/rating</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/rating"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/rating"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/rating</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/rating"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/rating"/>
+  </url>
+  <url>
     <loc>https://ui.xflux.cc/docs/components/resizable</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/resizable"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/resizable"/>
@@ -809,6 +869,16 @@
     <loc>https://ui.xflux.cc/en/docs/components/resizable</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/resizable"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/resizable"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/result</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/result"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/result"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/result</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/result"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/result"/>
   </url>
   <url>
     <loc>https://ui.xflux.cc/docs/components/scatter-chart</loc>
@@ -909,6 +979,16 @@
     <loc>https://ui.xflux.cc/en/docs/components/skeleton</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/skeleton"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/skeleton"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/skip-link</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/skip-link"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/skip-link"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/skip-link</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/skip-link"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/skip-link"/>
   </url>
   <url>
     <loc>https://ui.xflux.cc/docs/components/slider</loc>
@@ -1031,6 +1111,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/time-field"/>
   </url>
   <url>
+    <loc>https://ui.xflux.cc/docs/components/time-range-field</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/time-range-field"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/time-range-field"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/time-range-field</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/time-range-field"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/time-range-field"/>
+  </url>
+  <url>
     <loc>https://ui.xflux.cc/docs/components/timeline</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/timeline"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/timeline"/>
@@ -1099,6 +1189,26 @@
     <loc>https://ui.xflux.cc/en/docs/components/tooltip</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/tooltip"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/tooltip"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/tour</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/tour"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/tour"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/tour</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/tour"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/tour"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/docs/components/transfer</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/transfer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/transfer"/>
+  </url>
+  <url>
+    <loc>https://ui.xflux.cc/en/docs/components/transfer</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://ui.xflux.cc/docs/components/transfer"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ui.xflux.cc/en/docs/components/transfer"/>
   </url>
   <url>
     <loc>https://ui.xflux.cc/docs/components/tree</loc>

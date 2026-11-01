@@ -13,6 +13,7 @@ import { expect, expectTypeOf, test, vi } from "vitest";
 import { cva } from "class-variance-authority";
 import * as icons from "@tabler/icons-react";
 import { BusyMark } from "../src/busy-mark";
+import { borderedPadding, controlSizes } from "../src/control-size";
 import { Button, ButtonPrimitive, type ButtonProps } from "../src/components/button";
 import { UILocaleProvider, useUILocale } from "../src/locale";
 import { enUS } from "../src/locales/en-US";
@@ -402,6 +403,7 @@ test.each(["neutral", "danger"] as const)("a %s button mounts when the runtime p
     "@tabler/icons-react": icons,
     react: React,
     "../busy-mark": { BusyMark },
+    "../control-size": { borderedPadding, controlSizes },
     "../locale": { useUILocale },
     "../utils": { cn },
   };

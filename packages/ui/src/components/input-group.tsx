@@ -42,11 +42,15 @@ export type InputGroupSelectTriggerProps = Omit<SelectTriggerProps, "unstyled">;
  * 附件与值同在一个编辑边界里，读作一体（https://qingye.dev、¥ 120）：二者之间是控件内间隔，
  * 与图标和文字、搜索图标和值同一关系；只有贴着边界的一侧保留填值留白（疏密有致）。
  * 只对行内附件成立：独占一行的 block 附件与值不在同一行，没有「贴着」可言，不参与。
- * 这些选择器按 DOM 相邻判断；要用 `align` 把附件放到与 DOM 次序不同的位置时，该侧的留白保持各自的默认值。
+ * 两套判断，互不重叠：
+ *   - 没写 align 的附件按 DOM 相邻判断（附件在值前或值后）；
+ *   - 写了 inline-start / inline-end 的附件按视觉位置判断：它排在所有成员之前（之后），贴着第一个（最后一个）文字成员，
+ *     与它在 DOM 里写在哪里无关。
+ * 类名必须是字面量：Tailwind 只扫描源码里的完整字符串，插值拼出来的类不会生成样式。
  */
-const inline = ":not([data-align^=block])";
-const adjacency = `[&>[data-slot=input-group-addon]${inline}:has(+[data-slot=input-control])]:pe-0 [&>[data-slot=input-group-addon]${inline}+[data-slot=input-control]_input]:ps-(--qy-control-content-gap) [&>[data-slot=input-control]+[data-slot=input-group-addon]${inline}]:ps-0 [&>[data-slot=input-control]:has(+[data-slot=input-group-addon]${inline})_input]:pe-(--qy-control-content-gap)`;
-const groupProfile = `rounded-(--qy-fill-radius) min-h-(--qy-fill-height-narrow) text-control-md-mobile sm:min-h-(--qy-fill-height) sm:text-control-md [--qy-input-group-padding:var(--qy-fill-padding)] ${adjacency}`;
+const adjacency = "[&>[data-slot=input-group-addon]:not([data-align]):has(+[data-slot=input-control])]:pe-0 [&>[data-slot=input-group-addon]:not([data-align])+[data-slot=input-control]_input]:ps-(--qy-control-content-gap) [&>[data-slot=input-control]+[data-slot=input-group-addon]:not([data-align])]:ps-0 [&>[data-slot=input-control]:has(+[data-slot=input-group-addon]:not([data-align]))_input]:pe-(--qy-control-content-gap)";
+const alignedAdjacency = "has-[>[data-slot=input-control]]:[&>[data-slot=input-group-addon][data-align=inline-start]]:pe-0 has-[>[data-slot=input-group-addon][data-align=inline-start]]:[&>[data-slot=input-control]:nth-child(1_of_[data-slot=input-control])_input]:ps-(--qy-control-content-gap) has-[>[data-slot=input-control]]:[&>[data-slot=input-group-addon][data-align=inline-end]]:ps-0 has-[>[data-slot=input-group-addon][data-align=inline-end]]:[&>[data-slot=input-control]:nth-last-child(1_of_[data-slot=input-control])_input]:pe-(--qy-control-content-gap)";
+const groupProfile = `rounded-(--qy-fill-radius) min-h-(--qy-fill-height-narrow) text-control-md-mobile sm:min-h-(--qy-fill-height) sm:text-control-md [--qy-input-group-padding:var(--qy-fill-padding)] ${adjacency} ${alignedAdjacency}`;
 
 /**
  * 编辑边界：可以装 Input、Textarea、NumberField、Select 触发器这几种成员。

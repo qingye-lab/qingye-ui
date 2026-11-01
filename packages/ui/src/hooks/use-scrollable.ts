@@ -54,3 +54,21 @@ const sameEdges = (a: OverflowEdges, b: OverflowEdges) => a.start === b.start &&
 export function useOverflowEdges<T extends HTMLElement>(forwardedRef?: React.Ref<T>, axis: "x" | "y" = "x"): [React.RefCallback<T>, OverflowEdges] {
   return useMeasured(forwardedRef, noEdges, axis === "x" ? readEdgesX : readEdgesY, sameEdges, true);
 }
+
+/*
+ * 原生滚动条占的条带（经典滚动条占位，覆盖式滚动条为 0）：竖向条带在行内末端（RTL 在左），横向条带在底端。
+ * 宽度从盒子外缘量起，含滚动条那一侧的边框，供遮罩把条带整条留成不透明；没有滚动条时为 0，边框照常随遮罩。
+ */
+export type ScrollbarGutter = { y: number; x: number };
+const noGutter: ScrollbarGutter = { y: 0, x: 0 };
+const readGutter = (element: HTMLElement): ScrollbarGutter => {
+  const style = getComputedStyle(element);
+  const left = parseFloat(style.borderLeftWidth) || 0, right = parseFloat(style.borderRightWidth) || 0;
+  const top = parseFloat(style.borderTopWidth) || 0, bottom = parseFloat(style.borderBottomWidth) || 0;
+  const barY = element.offsetWidth - element.clientWidth - left - right, barX = element.offsetHeight - element.clientHeight - top - bottom;
+  return { y: barY > 0 ? barY + (style.direction === "rtl" ? left : right) : 0, x: barX > 0 ? barX + bottom : 0 };
+};
+const sameGutter = (a: ScrollbarGutter, b: ScrollbarGutter) => a.y === b.y && a.x === b.x;
+export function useScrollbarGutter<T extends HTMLElement>(forwardedRef?: React.Ref<T>): [React.RefCallback<T>, ScrollbarGutter] {
+  return useMeasured(forwardedRef, noGutter, readGutter, sameGutter, false);
+}

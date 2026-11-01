@@ -48,7 +48,8 @@ export function Rating({ value: valueProp, defaultValue = 0, onValueChange, max 
 
   if (readOnly) {
     const summary = value === 0 ? messages.ratingNone : messages.ratingValue(value, max);
-    return <span data-slot="rating" data-readonly="" className={cn("inline-flex items-center gap-(--qy-space-2)", className)}>
+    // 只读时不渲染单选组，但 ref 与 id 仍落在同一个根上：调用方测量、定位或用 aria-describedby 指向它都不因只读而失效。
+    return <div data-slot="rating" data-readonly="" ref={ref} id={props.id} className={cn("inline-flex items-center gap-(--qy-space-2)", className)}>
       <span role="img" aria-label={summary} className="inline-flex items-center gap-(--qy-space-1)">
         {stars.map(star => star <= value
           ? <IconStarFilled key={star} aria-hidden="true" className={cn(icon, "text-foreground")} />
@@ -57,7 +58,7 @@ export function Rating({ value: valueProp, defaultValue = 0, onValueChange, max 
       {/* 图已经带着完整名称，可见的数字只给眼睛，避免读两遍。 */}
       <span aria-hidden="true" className="text-support-mobile text-muted-foreground tabular-nums sm:text-support">{value} / {max}</span>
       {name !== undefined && value > 0 && <input type="hidden" name={name} value={value} disabled={disabled} />}
-    </span>;
+    </div>;
   }
 
   return <RadioGroupPrimitive<number>
