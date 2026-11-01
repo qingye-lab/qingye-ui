@@ -73,3 +73,18 @@ Avatar 的尺寸是身份图像的显示大小，Stat 的尺寸是读数字号�
 | ScrollArea 渐隐 | 渐隐止于原生滚动条之前，滚动条所在条带整条不透明（实测条带宽度，覆盖式滚动条为 0） | 滚动条是操作部件，不应随内容一起变淡 | `scroll-area.tsx`、`hooks/use-scrollable.ts` |
 | Tabs 轨道外观 | 轨道外框画在外层 `tabs-track`，滚动与渐隐留在里面的列表上 | 放不下时只渐隐标签，轨道外框保持完整 | `tabs.tsx` |
 | Workspace 跳转链接 | 复用 SkipLink | 同一能力只在一处实现；SkipLink 会给没有 tabindex 的目标补上并滚动到位 | `workspace.tsx` |
+
+## 实施状态（2026-11-01 收尾）
+
+待实施清单六项与上两张裁决表全部落地，各项所在提交：
+
+| 清单项 | 落地 |
+|---|---|
+| 1 区间类 | 周、月、季、年粒度 `7899c4b`；TimeRangeField 与 DateTimeRangePicker `187dac0`；数字区间由 InputGroup 组合两个 NumberField 给出（InputGroup 示例「数值区间」），不另设组件 |
+| 2 联合控件 | InputGroup 成员与附加区位置 `a142e3a`；ButtonGroup 连体 `8c2ecb2` |
+| 3 Select 多选、轨道外观 | `a142e3a`、`8c2ecb2`；`tabs.tsx`、`nav-line.ts` 头注释与组件文档已改，基础层 §6「并列候选的轨道」「导航线」两段在本次收尾同步 |
+| 4 整件第一档 | Transfer、Rating `add2380`；AvatarGroup、ImagePreview `7b88375` |
+| 5 小能力补丁 | OtpField、ScrollArea 渐隐、Drawer 离边、MenuSwitchItem / ContextMenuSwitchItem `10c412b`；CornerMark 角位 `7b88375`；Cascader 多选、TreeSelect 搜索、Tree 按需加载与拖拽 `52b2921`；NumberField 拖动调值、忙碌标记（`src/busy-mark.tsx`）与 Autocomplete `loading` `a142e3a` |
+| 6 整件第二档 | Composer `653fe54`；Tour `ab95dc5`；Chip `add2380`；Result、SkipLink `7b88375` |
+| 主 agent 裁决的示例 | Card 嵌套组合（Card 示例「嵌套」）；可点击的头像（Avatar 示例「可点击的头像」） |
+| 待裁决项 | `bd6ca2b` |
