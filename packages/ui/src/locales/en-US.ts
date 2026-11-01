@@ -56,5 +56,6 @@ export const enUS: UILocale = {
     cascaderSeparator: " / ", cascaderRetry: "Retry", cascaderLoadFailed: "Failed to load", cascaderBranch: "Has subitems",
     commandEmpty: "No matches",
     treeSelectSeparator: ", ", treeSelectMore: (first, rest) => `${first} and ${rest.toLocaleString("en-US")} more`,
+    composerSubmit: "Send",
   },
 };

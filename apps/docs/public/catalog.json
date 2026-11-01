@@ -758,7 +758,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1447,7 +1447,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1823,7 +1823,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2748,7 +2748,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -4135,7 +4135,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5099,7 +5099,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5660,7 +5660,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -6569,7 +6569,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -7489,7 +7489,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -8706,7 +8706,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -10226,7 +10226,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -11308,7 +11308,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -12570,7 +12570,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13728,7 +13728,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -14020,6 +14020,1104 @@
       }
     },
     {
+      "name": "composer",
+      "title": "对话输入框 Composer",
+      "description": "多行输入，支持 @ 提及、/ 命令与原子令牌，值是文字与令牌片段的数组。",
+      "category": "表单",
+      "source": "local",
+      "layer": "pattern",
+      "import": "@qingye_lab/ui/components/composer",
+      "exports": [
+        "Composer",
+        "ComposerInput",
+        "ComposerToolbar",
+        "ComposerSubmit",
+        "composerValueToText",
+        "composerValueFromText",
+        "parseComposerValue",
+        "normalizeComposerValue",
+        "composerValueLength",
+        "isComposerValueEmpty",
+        "emptyComposerValue"
+      ],
+      "docs": "/docs/components/composer",
+      "notes": [
+        "粘贴、拖放一律只收纯文字；复制与剪切输出纯文字，令牌写作“触发字符 + label”。",
+        "composerValueToText 默认把令牌写作“触发字符 + label”；composerValueFromText 可传入已知令牌，按字面匹配还原。",
+        "没有 name 与表单提交，也未接入 Field；需要时由应用在 onSubmit 里取值。",
+        "jsdom 无法验证真实输入法、各浏览器 contenteditable 的光标与 beforeinput 差异、浮层碰撞翻转与 Range 坐标，需在真实浏览器中另验。"
+      ],
+      "keywords": [
+        "composer",
+        "chat",
+        "对话",
+        "输入框",
+        "mention",
+        "提及",
+        "slash",
+        "命令",
+        "token",
+        "令牌",
+        "contenteditable"
+      ],
+      "api": [
+        {
+          "name": "Composer",
+          "description": "根：填值边界与状态，持有值、提交与禁用/只读。",
+          "descriptionEn": "Root: fill-control frame and state; owns value, submit and disabled/readOnly.",
+          "props": [
+            {
+              "name": "value / defaultValue",
+              "type": "readonly ComposerSegment[]",
+              "default": "defaultValue: []",
+              "description": "受控/非受控值；文字片段 { type: 'text', text } 与令牌片段 { type: 'token', trigger, id, label }。相邻文字片段会被合并。",
+              "descriptionEn": "Controlled/uncontrolled value: text segments and token segments. Adjacent text segments are merged."
+            },
+            {
+              "name": "onValueChange",
+              "type": "(value: ComposerSegment[], details: ComposerChangeDetails) => void",
+              "description": "details.reason 为 input/paste/cut/newline/token/action/delete-token/undo/redo/clear；cancel() 拒绝这次改动，编辑区随即恢复。",
+              "descriptionEn": "details.reason is input/paste/cut/newline/token/action/delete-token/undo/redo/clear. cancel() rejects the change and the editor reverts."
+            },
+            {
+              "name": "onSubmit",
+              "type": "(value: ComposerSegment[], details: { event, clear }) => void",
+              "description": "Enter（或 ComposerSubmit）触发；没有令牌且文字全是空白时不调用。clear() 经 onValueChange 把值清空。",
+              "descriptionEn": "Fired by Enter or ComposerSubmit; not called when there is no token and the text is whitespace only. clear() empties the value through onValueChange."
+            },
+            {
+              "name": "submitOn",
+              "type": "'enter' | 'mod-enter'",
+              "default": "'enter'",
+              "description": "enter：Enter 提交，Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交，Enter 换行。",
+              "descriptionEn": "enter: Enter submits and Shift+Enter breaks the line. mod-enter: Ctrl/Cmd+Enter submits and Enter breaks the line."
+            },
+            {
+              "name": "disabled / readOnly",
+              "type": "boolean",
+              "default": "false",
+              "description": "都不可编辑、不提交、不开候选；只读可聚焦与复制。",
+              "descriptionEn": "Neither edits, submits nor opens candidates; read-only stays focusable and copyable."
+            }
+          ]
+        },
+        {
+          "name": "ComposerInput",
+          "description": "编辑区与候选浮层。",
+          "descriptionEn": "The editor and candidate popup.",
+          "props": [
+            {
+              "name": "aria-label / aria-labelledby",
+              "type": "string",
+              "description": "必填其一，否则抛错。",
+              "descriptionEn": "One is required, otherwise it throws."
+            },
+            {
+              "name": "placeholder",
+              "type": "string",
+              "description": "空时显示，同时写入 aria-placeholder。",
+              "descriptionEn": "Shown when empty and exposed as aria-placeholder."
+            },
+            {
+              "name": "triggers",
+              "type": "readonly ComposerTrigger[]",
+              "description": "触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃。",
+              "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded."
+            },
+            {
+              "name": "minRows / maxRows",
+              "type": "number",
+              "default": "1 / 8",
+              "description": "起始行数与增长上限。超过上限在内部滚动，且不超过视口高度的一半。",
+              "descriptionEn": "Starting rows and growth cap. Beyond the cap the editor scrolls, and never exceeds half the viewport height."
+            }
+          ]
+        },
+        {
+          "name": "ComposerItem",
+          "description": "候选项。",
+          "descriptionEn": "A candidate.",
+          "props": [
+            {
+              "name": "id / label",
+              "type": "string",
+              "description": "id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”。",
+              "descriptionEn": "id is the token identity and label the display name; a token reads as trigger + label."
+            },
+            {
+              "name": "group / description / icon / disabled",
+              "type": "string / string / ReactNode / boolean",
+              "description": "同名 group 归为一组，按首次出现顺序排列。",
+              "descriptionEn": "Items with the same group are grouped in order of first appearance."
+            },
+            {
+              "name": "select",
+              "type": "'token' | 'action'",
+              "description": "覆盖触发项的 select：token 插入令牌；action 删掉触发文字，只回调 onSelect。",
+              "descriptionEn": "Overrides the trigger's select: token inserts a token; action removes the trigger text and only calls onSelect."
+            }
+          ]
+        },
+        {
+          "name": "ComposerToolbar / ComposerSubmit",
+          "description": "工具条放 xs 按钮；ComposerSubmit 在内容为空、禁用或只读时不可用。",
+          "descriptionEn": "The toolbar holds xs buttons; ComposerSubmit is unavailable when empty, disabled or read-only.",
+          "props": [
+            {
+              "name": "ComposerSubmit aria-label",
+              "type": "string",
+              "default": "messages.composerSubmit",
+              "description": "默认“发送”。",
+              "descriptionEn": "Defaults to “Send”."
+            }
+          ]
+        }
+      ],
+      "apiStatus": "type-resolved-with-drift",
+      "typeApi": {
+        "status": "PASS",
+        "checker": "typescript@5.9.3",
+        "ownRule": "A property is own when at least one declaration is inside packages/ui/src; everything else is counted by origin package and not expanded.",
+        "parts": [
+          {
+            "name": "Composer",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "defaultValue",
+                "optional": true,
+                "type": "ComposerValue | undefined",
+                "declaredAt": "packages/ui/src/components/composer.tsx:108"
+              },
+              {
+                "name": "disabled",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/composer.tsx:114"
+              },
+              {
+                "name": "onSubmit",
+                "optional": true,
+                "type": "((value: ComposerSegment[], details: ComposerSubmitDetails) => void) | undefined",
+                "doc": "提交（Enter 或 ComposerSubmit）。内容为空（没有令牌且文字全是空白）时不会调用。",
+                "declaredAt": "packages/ui/src/components/composer.tsx:111"
+              },
+              {
+                "name": "onValueChange",
+                "optional": true,
+                "type": "((value: ComposerSegment[], details: ComposerChangeDetails) => void) | undefined",
+                "declaredAt": "packages/ui/src/components/composer.tsx:109"
+              },
+              {
+                "name": "readOnly",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/composer.tsx:115"
+              },
+              {
+                "name": "submitOn",
+                "optional": true,
+                "type": "\"enter\" | \"mod-enter\"",
+                "doc": "enter：Enter 提交、Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交、Enter 换行。",
+                "declaredAt": "packages/ui/src/components/composer.tsx:113"
+              },
+              {
+                "name": "value",
+                "optional": true,
+                "type": "ComposerValue | undefined",
+                "doc": "受控值。片段数组：文字片段与令牌片段。",
+                "declaredAt": "packages/ui/src/components/composer.tsx:107"
+              }
+            ],
+            "inheritedCount": 278,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 277
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "name": "ComposerInput",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "aria-label",
+                "optional": false,
+                "type": "string",
+                "declaredAt": "packages/ui/src/components/composer.tsx:178"
+              },
+              {
+                "name": "aria-labelledby",
+                "optional": true,
+                "type": "string | undefined",
+                "declaredAt": "packages/ui/src/components/composer.tsx:178"
+              },
+              {
+                "name": "maxRows",
+                "optional": true,
+                "type": "number | undefined",
+                "doc": "增长上限，行数（默认 8）。超过后在输入区内滚动，不再撑高。\n上限同时不超过视口高度的一半（50dvh）：输入区不能把它所回应的内容挤出视野。\n两个数都是预设（见组件内注释），不是由理念推出的。",
+                "declaredAt": "packages/ui/src/components/composer.tsx:193"
+              },
+              {
+                "name": "minRows",
+                "optional": true,
+                "type": "number | undefined",
+                "doc": "起始行数（默认 1）。几何读填值控件角色层：一行 = 一个填值控件高，\n之后每多一行加一个行高（--qy-fill-text-leading），与 Textarea 的 rows 同一换算。",
+                "declaredAt": "packages/ui/src/components/composer.tsx:187"
+              },
+              {
+                "name": "placeholder",
+                "optional": true,
+                "type": "string | undefined",
+                "declaredAt": "packages/ui/src/components/composer.tsx:181"
+              },
+              {
+                "name": "triggers",
+                "optional": true,
+                "type": "readonly ComposerTrigger[] | undefined",
+                "declaredAt": "packages/ui/src/components/composer.tsx:182"
+              }
+            ],
+            "inheritedCount": 274,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 274
+              }
+            ]
+          },
+          {
+            "name": "ComposerSubmit",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "className",
+                "optional": true,
+                "type": "string",
+                "declaredAt": "packages/ui/src/components/button.tsx:82"
+              },
+              {
+                "name": "data-slot",
+                "optional": true,
+                "type": "string",
+                "declaredAt": "packages/ui/src/components/button.tsx:83"
+              },
+              {
+                "name": "loading",
+                "optional": true,
+                "type": "boolean",
+                "doc": "这个动作正在执行。事实由调用方持有；按钮只表示忙碌并挡住重复触发，不启动请求、不推断完成。\n成功、失败与结果未知不是按钮的事：就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError。",
+                "declaredAt": "packages/ui/src/components/button.tsx:90"
+              },
+              {
+                "name": "tone",
+                "optional": true,
+                "type": "\"neutral\" | \"danger\"",
+                "declaredAt": "packages/ui/src/components/button.tsx:85"
+              },
+              {
+                "name": "variant",
+                "optional": true,
+                "type": "\"solid\" | \"bordered\" | \"quiet\"",
+                "declaredAt": "packages/ui/src/components/button.tsx:84"
+              }
+            ],
+            "inheritedCount": 288,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 285
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 3
+              }
+            ]
+          },
+          {
+            "name": "ComposerToolbar",
+            "status": "resolved",
+            "ownProps": [],
+            "inheritedCount": 281,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 280
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "drift": {
+          "documentedButMissing": [
+            {
+              "part": "ComposerItem",
+              "prop": null,
+              "written": "ComposerItem",
+              "reason": "part-not-exported",
+              "metaPath": "apps/docs/src/content/composer/meta.ts",
+              "metaLine": 24
+            }
+          ],
+          "undocumented": [
+            {
+              "part": "ComposerSubmit",
+              "prop": "className",
+              "declaredAt": "packages/ui/src/components/button.tsx:82",
+              "viaComponent": "button"
+            },
+            {
+              "part": "ComposerSubmit",
+              "prop": "data-slot",
+              "declaredAt": "packages/ui/src/components/button.tsx:83",
+              "viaComponent": "button"
+            },
+            {
+              "part": "ComposerSubmit",
+              "prop": "loading",
+              "declaredAt": "packages/ui/src/components/button.tsx:90",
+              "viaComponent": "button"
+            },
+            {
+              "part": "ComposerSubmit",
+              "prop": "tone",
+              "declaredAt": "packages/ui/src/components/button.tsx:85",
+              "viaComponent": "button"
+            },
+            {
+              "part": "ComposerSubmit",
+              "prop": "variant",
+              "declaredAt": "packages/ui/src/components/button.tsx:84",
+              "viaComponent": "button"
+            }
+          ]
+        }
+      },
+      "keyboard": [
+        {
+          "keys": "Enter / Shift+Enter",
+          "description": "按 submitOn 提交或换行；组字中（isComposing 或 keyCode 229）不处理。",
+          "descriptionEn": "Submit or break the line per submitOn; ignored during composition (isComposing or keyCode 229)."
+        },
+        {
+          "keys": "ArrowDown / ArrowUp",
+          "description": "候选打开时移动高亮，循环并跳过禁用项。",
+          "descriptionEn": "Move the highlight while candidates are open, wrapping and skipping disabled items."
+        },
+        {
+          "keys": "Enter / Tab",
+          "description": "候选打开且有高亮时选中，不提交。",
+          "descriptionEn": "Select the highlight while candidates are open, without submitting."
+        },
+        {
+          "keys": "Escape",
+          "description": "关闭候选，保留已输入的文字。",
+          "descriptionEn": "Close the candidates and keep the typed text."
+        },
+        {
+          "keys": "Backspace / Delete",
+          "description": "光标紧邻令牌时整体删除。",
+          "descriptionEn": "Delete an adjacent token as a whole."
+        },
+        {
+          "keys": "Ctrl/⌘+Z、Ctrl/⌘+Shift+Z",
+          "description": "撤销与重做，用组件自己的快照栈。",
+          "descriptionEn": "Undo and redo using the component's own snapshot stack."
+        }
+      ],
+      "actualExports": [
+        {
+          "name": "Composer",
+          "kind": "function",
+          "owner": "composer",
+          "module": "@qingye_lab/ui/components/composer",
+          "propsType": "ComposerProps",
+          "signature": "Composer({\n  value: valueProp, defaultValue, onValueChange, onSubmit, submitOn = \"enter\", disabled = false, readOnly = false,\n  className, render, ref, children, ...props\n}: ComposerProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerChangeDetails",
+          "kind": "type",
+          "owner": "composer",
+          "module": "@qingye_lab/ui/components/composer",
+          "signature": "{\n  reason: ComposerChangeReason;\n  event: Event | React.SyntheticEvent | undefined;\n  cancel: () => void;\n  readonly isCanceled: boolean;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerChangeReason",
+          "kind": "type",
+          "owner": "composer",
+          "module": "@qingye_lab/ui/components/composer",
+          "signature": "\"input\" | \"paste\" | \"cut\" | \"newline\" | \"token\" | \"action\" | \"delete-token\" | \"undo\" | \"redo\" | \"clear\"",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerInput",
+          "kind": "function",
+          "owner": "composer",
+          "module": "@qingye_lab/ui/components/composer",
+          "propsType": "ComposerInputProps",
+          "signature": "ComposerInput({\n  placeholder, triggers = NO_TRIGGERS, minRows = 1, maxRows = 8, className, style, ref,\n  onKeyDown, onInput, onPaste, onCopy, onCut, onDrop, onDragStart, onCompositionStart, onCompositionEnd, onBlur, tabIndex,\n  ...props\n}: ComposerInputProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerInputProps",
+          "kind": "type",
+          "owner": "composer",
+          "module": "@qingye_lab/ui/components/composer",
+          "signature": "Omit<React.ComponentPropsWithRef<\"div\">, \"children\" | \"contentEditable\" | \"role\" | \"aria-label\" | \"aria-labelledby\" | \"defaultValue\"> & ComposerInputName & {\n  placeholder?: string | undefined;\n  triggers?: readonly ComposerTrigger[] | undefined;\n  /**\n   * 起始行数（默认 1）。几何读填值控件角色层：一行 = 一个填值控件高，\n   * 之后每多一行加一个行高（--qy-fill-text-leading），与 Textarea 的 rows 同一换算。\n   */\n  minRows?: number | undefined;\n  /**\n   * 增长上限，行数（默认 8）。超过后在输入区内滚动，不再撑高。\n   * 上限同时不超过视口高度的一半（50dvh）：输入区不能把它所回应的内容挤出视野。\n   * 两个数都是预设（见组件内注释），不是由理念推出的。\n   */\n  maxRows?: number | undefined;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerItem",
+          "kind": "type",
+          "owner": "composer",
+          "module": "@qingye_lab/ui/components/composer",
+          "signature": "{\n  /** 稳定标识（业务对象 id）；令牌以它为身份。 */\n  id: string;\n  /** 显示名；令牌显示为 `触发字符 + label`，读屏同。 */\n  label: string;\n  /** 候选项里的第二行说明（不进入令牌）。 */\n  description?: string | undefined;\n  icon?: React.ReactNode | undefined;\n  /** 分组名；同名的项归为一组，组按首次出现的顺序排列。 */\n  group?: string | undefined;\n  disabled?: boolean | undefined;\n  /** 覆盖触发项的 select：该项插入令牌，还是直接执行（删掉触发文字并回调 onSelect）。 */\n  select?: \"token\" | \"action\" | undefined;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerProps",
+          "kind": "type",
+          "owner": "composer",
+          "module": "@qingye_lab/ui/components/composer",
+          "signature": "Omit<useRender.ComponentProps<\"div\">, \"defaultValue\" | \"onChange\" | \"onSubmit\"> & {\n  /** 受控值。片段数组：文字片段与令牌片段。 */\n  value?: ComposerValue | undefined;\n  defaultValue?: ComposerValue | undefined;\n  onValueChange?: ((value: ComposerSegment[], details: ComposerChangeDetails) => void) | undefined;\n  /** 提交（Enter 或 ComposerSubmit）。内容为空（没有令牌且文字全是空白）时不会调用。 */\n  onSubmit?: ((value: ComposerSegment[], details: ComposerSubmitDetails) => void) | undefined;\n  /** enter：Enter 提交、Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交、Enter 换行。 */\n  submitOn?: \"enter\" | \"mod-enter\" | undefined;\n  disabled?: boolean | undefined;\n  readOnly?: boolean | undefined;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerSegment",
+          "kind": "type",
+          "owner": null,
+          "module": "@qingye_lab/ui",
+          "signature": "ComposerTextSegment | ComposerTokenSegment",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerSubmit",
+          "kind": "function",
+          "owner": "composer",
+          "module": "@qingye_lab/ui/components/composer",
+          "propsType": "ComposerSubmitProps",
+          "signature": "ComposerSubmit({ className, children, onClick, \"aria-label\": ariaLabel, variant = \"solid\", ...props }: ComposerSubmitProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerSubmitDetails",
+          "kind": "type",
+          "owner": "composer",
+          "module": "@qingye_lab/ui/components/composer",
+          "signature": "{\n  event: Event | React.SyntheticEvent | undefined;\n  /** 把值清空（经 onValueChange，reason 为 \"clear\"）。受控时由应用决定是否真的清。 */\n  clear: () => void;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerSubmitProps",
+          "kind": "type",
+          "owner": "composer",
+          "module": "@qingye_lab/ui/components/composer",
+          "signature": "Omit<ButtonProps, \"size\" | \"shape\">",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerTextSegment",
+          "kind": "type",
+          "owner": null,
+          "module": "@qingye_lab/ui",
+          "signature": "{ type: \"text\"; text: string }",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerTokenSegment",
+          "kind": "type",
+          "owner": null,
+          "module": "@qingye_lab/ui",
+          "signature": "{\n  type: \"token\";\n  /** 触发它的字符，例如 \"@\"、\"/\"。 */\n  trigger: string;\n  /** 稳定标识；业务对象的 id，不是显示名。 */\n  id: string;\n  /** 显示名，读屏读出的就是 `trigger + label`。 */\n  label: string;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerToolbar",
+          "kind": "function",
+          "owner": "composer",
+          "module": "@qingye_lab/ui/components/composer",
+          "propsType": "ComposerToolbarProps",
+          "signature": "ComposerToolbar({ className, render, ref, ...props }: ComposerToolbarProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerToolbarProps",
+          "kind": "type",
+          "owner": "composer",
+          "module": "@qingye_lab/ui/components/composer",
+          "signature": "useRender.ComponentProps<\"div\">",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerTrigger",
+          "kind": "type",
+          "owner": "composer",
+          "module": "@qingye_lab/ui/components/composer",
+          "signature": "{\n  /** 触发字符，例如 \"@\"、\"/\"。每个触发项的字符应互不相同。 */\n  char: string;\n  /**\n   * 候选来源。同步返回数组即时显示；返回 Promise 时显示「正在加载」，\n   * 结果到达时若查询已变（或浮层已关）就丢弃，不会覆盖更新的结果。\n   * signal 在查询变化或浮层关闭时被中止，可传给 fetch。\n   */\n  getItems: (query: string, context: { signal: AbortSignal }) => readonly ComposerItem[] | PromiseLike<readonly ComposerItem[]>;\n  /** 选中后的默认行为：token（默认）插入令牌；action 删掉触发文字、不留痕迹，由 onSelect 执行。 */\n  select?: \"token\" | \"action\" | undefined;\n  /** 选中后回调（token 与 action 都会调用，details.mode 区分）。action 的动作写在这里。 */\n  onSelect?: ((item: ComposerItem, details: { mode: \"token\" | \"action\" }) => void) | undefined;\n  /** 只在输入的最开头认这个触发字符（命令 \"/\" 的常见约定）。默认任意词首。 */\n  startOnly?: boolean | undefined;\n  /** 候选列表的可访问名称；缺省沿用输入框的名称。 */\n  label?: string | undefined;\n  /** 查询已完成而没有候选时的文案；缺省用内置的「没有可选项」。 */\n  emptyText?: string | undefined;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ComposerValue",
+          "kind": "type",
+          "owner": null,
+          "module": "@qingye_lab/ui",
+          "signature": "readonly ComposerSegment[]",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "composerValueFromText",
+          "kind": "function",
+          "owner": null,
+          "module": "@qingye_lab/ui",
+          "propsType": "string",
+          "signature": "composerValueFromText(text: string, known: readonly ComposerTokenSegment[] = []): ComposerSegment[]",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "composerValueLength",
+          "kind": "function",
+          "owner": null,
+          "module": "@qingye_lab/ui",
+          "propsType": "ComposerValue",
+          "signature": "composerValueLength(value: ComposerValue): number",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "composerValueToText",
+          "kind": "function",
+          "owner": null,
+          "module": "@qingye_lab/ui",
+          "propsType": "ComposerValue",
+          "signature": "composerValueToText(value: ComposerValue, serializeToken: (token: ComposerTokenSegment) => string = (token) => token.trigger + token.label): string",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "emptyComposerValue",
+          "kind": "const",
+          "owner": null,
+          "module": "@qingye_lab/ui",
+          "signature": "ComposerValue",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "isComposerValueEmpty",
+          "kind": "function",
+          "owner": null,
+          "module": "@qingye_lab/ui",
+          "propsType": "ComposerValue",
+          "signature": "isComposerValueEmpty(value: ComposerValue): boolean",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "normalizeComposerValue",
+          "kind": "function",
+          "owner": null,
+          "module": "@qingye_lab/ui",
+          "propsType": "ComposerValue",
+          "signature": "normalizeComposerValue(value: ComposerValue): ComposerSegment[]",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "parseComposerValue",
+          "kind": "function",
+          "owner": null,
+          "module": "@qingye_lab/ui",
+          "propsType": "string | ComposerValue | null | undefined",
+          "signature": "parseComposerValue(input: string | ComposerValue | null | undefined, known?: readonly ComposerTokenSegment[]): ComposerSegment[]",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "ComposerItem",
+          "definition": "export type ComposerItem = {\n  /** 稳定标识（业务对象 id）；令牌以它为身份。 */\n  id: string;\n  /** 显示名；令牌显示为 `触发字符 + label`，读屏同。 */\n  label: string;\n  /** 候选项里的第二行说明（不进入令牌）。 */\n  description?: string | undefined;\n  icon?: React.ReactNode | undefined;\n  /** 分组名；同名的项归为一组，组按首次出现的顺序排列。 */\n  group?: string | undefined;\n  disabled?: boolean | undefined;\n  /** 覆盖触发项的 select：该项插入令牌，还是直接执行（删掉触发文字并回调 onSelect）。 */\n  select?: \"token\" | \"action\" | undefined;\n};"
+        },
+        {
+          "name": "ComposerTrigger",
+          "definition": "export type ComposerTrigger = {\n  /** 触发字符，例如 \"@\"、\"/\"。每个触发项的字符应互不相同。 */\n  char: string;\n  /**\n   * 候选来源。同步返回数组即时显示；返回 Promise 时显示「正在加载」，\n   * 结果到达时若查询已变（或浮层已关）就丢弃，不会覆盖更新的结果。\n   * signal 在查询变化或浮层关闭时被中止，可传给 fetch。\n   */\n  getItems: (query: string, context: { signal: AbortSignal }) => readonly ComposerItem[] | PromiseLike<readonly ComposerItem[]>;\n  /** 选中后的默认行为：token（默认）插入令牌；action 删掉触发文字、不留痕迹，由 onSelect 执行。 */\n  select?: \"token\" | \"action\" | undefined;\n  /** 选中后回调（token 与 action 都会调用，details.mode 区分）。action 的动作写在这里。 */\n  onSelect?: ((item: ComposerItem, details: { mode: \"token\" | \"action\" }) => void) | undefined;\n  /** 只在输入的最开头认这个触发字符（命令 \"/\" 的常见约定）。默认任意词首。 */\n  startOnly?: boolean | undefined;\n  /** 候选列表的可访问名称；缺省沿用输入框的名称。 */\n  label?: string | undefined;\n  /** 查询已完成而没有候选时的文案；缺省用内置的「没有可选项」。 */\n  emptyText?: string | undefined;\n};"
+        },
+        {
+          "name": "ComposerChangeReason",
+          "definition": "export type ComposerChangeReason = \"input\" | \"paste\" | \"cut\" | \"newline\" | \"token\" | \"action\" | \"delete-token\" | \"undo\" | \"redo\" | \"clear\";"
+        },
+        {
+          "name": "ComposerChangeDetails",
+          "definition": "export type ComposerChangeDetails = {\n  reason: ComposerChangeReason;\n  event: Event | React.SyntheticEvent | undefined;\n  cancel: () => void;\n  readonly isCanceled: boolean;\n};"
+        },
+        {
+          "name": "ComposerSubmitDetails",
+          "definition": "export type ComposerSubmitDetails = {\n  event: Event | React.SyntheticEvent | undefined;\n  /** 把值清空（经 onValueChange，reason 为 \"clear\"）。受控时由应用决定是否真的清。 */\n  clear: () => void;\n};"
+        },
+        {
+          "name": "ComposerProps",
+          "definition": "export type ComposerProps = Omit<useRender.ComponentProps<\"div\">, \"defaultValue\" | \"onChange\" | \"onSubmit\"> & {\n  /** 受控值。片段数组：文字片段与令牌片段。 */\n  value?: ComposerValue | undefined;\n  defaultValue?: ComposerValue | undefined;\n  onValueChange?: ((value: ComposerSegment[], details: ComposerChangeDetails) => void) | undefined;\n  /** 提交（Enter 或 ComposerSubmit）。内容为空（没有令牌且文字全是空白）时不会调用。 */\n  onSubmit?: ((value: ComposerSegment[], details: ComposerSubmitDetails) => void) | undefined;\n  /** enter：Enter 提交、Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交、Enter 换行。 */\n  submitOn?: \"enter\" | \"mod-enter\" | undefined;\n  disabled?: boolean | undefined;\n  readOnly?: boolean | undefined;\n};"
+        },
+        {
+          "name": "ComposerInputProps",
+          "definition": "export type ComposerInputProps = Omit<React.ComponentPropsWithRef<\"div\">, \"children\" | \"contentEditable\" | \"role\" | \"aria-label\" | \"aria-labelledby\" | \"defaultValue\"> & ComposerInputName & {\n  placeholder?: string | undefined;\n  triggers?: readonly ComposerTrigger[] | undefined;\n  /**\n   * 起始行数（默认 1）。几何读填值控件角色层：一行 = 一个填值控件高，\n   * 之后每多一行加一个行高（--qy-fill-text-leading），与 Textarea 的 rows 同一换算。\n   */\n  minRows?: number | undefined;\n  /**\n   * 增长上限，行数（默认 8）。超过后在输入区内滚动，不再撑高。\n   * 上限同时不超过视口高度的一半（50dvh）：输入区不能把它所回应的内容挤出视野。\n   * 两个数都是预设（见组件内注释），不是由理念推出的。\n   */\n  maxRows?: number | undefined;\n};"
+        },
+        {
+          "name": "ComposerToolbarProps",
+          "definition": "export type ComposerToolbarProps = useRender.ComponentProps<\"div\">;"
+        },
+        {
+          "name": "ComposerSubmitProps",
+          "definition": "export type ComposerSubmitProps = Omit<ButtonProps, \"size\" | \"shape\">;"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "Composer",
+          "import": "@qingye_lab/ui/components/composer",
+          "owner": "composer",
+          "status": "PASS"
+        },
+        {
+          "name": "ComposerInput",
+          "import": "@qingye_lab/ui/components/composer",
+          "owner": "composer",
+          "status": "PASS"
+        },
+        {
+          "name": "ComposerToolbar",
+          "import": "@qingye_lab/ui/components/composer",
+          "owner": "composer",
+          "status": "PASS"
+        },
+        {
+          "name": "ComposerSubmit",
+          "import": "@qingye_lab/ui/components/composer",
+          "owner": "composer",
+          "status": "PASS"
+        },
+        {
+          "name": "composerValueToText",
+          "import": "@qingye_lab/ui/components/composer",
+          "owner": null,
+          "status": "PASS"
+        },
+        {
+          "name": "composerValueFromText",
+          "import": "@qingye_lab/ui/components/composer",
+          "owner": null,
+          "status": "PASS"
+        },
+        {
+          "name": "parseComposerValue",
+          "import": "@qingye_lab/ui/components/composer",
+          "owner": null,
+          "status": "PASS"
+        },
+        {
+          "name": "normalizeComposerValue",
+          "import": "@qingye_lab/ui/components/composer",
+          "owner": null,
+          "status": "PASS"
+        },
+        {
+          "name": "composerValueLength",
+          "import": "@qingye_lab/ui/components/composer",
+          "owner": null,
+          "status": "PASS"
+        },
+        {
+          "name": "isComposerValueEmpty",
+          "import": "@qingye_lab/ui/components/composer",
+          "owner": null,
+          "status": "PASS"
+        },
+        {
+          "name": "emptyComposerValue",
+          "import": "@qingye_lab/ui/components/composer",
+          "owner": null,
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "@tabler/icons-react",
+          "class-variance-authority",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "usesLocale": true,
+        "usesTheme": false,
+        "required": [],
+        "contexts": [
+          {
+            "name": "ComposerContext",
+            "declaredAt": "packages/ui/src/components/composer.tsx:98",
+            "defaultValue": "null",
+            "withoutProvider": "throws",
+            "providedBy": [
+              "Composer"
+            ]
+          },
+          {
+            "name": "LocaleContext",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
+            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "UILocaleProvider"
+            ]
+          }
+        ],
+        "baseUi": [
+          "@base-ui/react/button",
+          "@base-ui/react/direction-provider",
+          "@base-ui/react/merge-props",
+          "@base-ui/react/popover",
+          "@base-ui/react/use-render"
+        ],
+        "status": "PASS",
+        "scope": "Static: React context reads and useUILocale/useTheme calls in the local import closure. useUILocale has a default locale, so a missing UILocaleProvider is tolerated."
+      },
+      "examples": [
+        {
+          "id": "basic",
+          "title": "输入与提交",
+          "source": "apps/docs/src/content/composer/demos/01-basic.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/composer",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { Composer, ComposerInput, ComposerSubmit, ComposerToolbar, composerValueToText, type ComposerSegment } from \"@qingye_lab/ui/components/composer\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"输入与提交\", titleEn: \"Input and submit\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  const [sent, setSent] = useState<string[]>([]);\n  return <div className=\"flex w-full flex-col gap-(--qy-space-3)\">\n    <Composer onSubmit={(value: ComposerSegment[], { clear }) => { setSent((list) => [...list, composerValueToText(value)]); clear(); }}>\n      <ComposerInput aria-label=\"消息\" placeholder=\"Enter 发送，Shift+Enter 换行\" />\n      <ComposerToolbar><ComposerSubmit /></ComposerToolbar>\n    </Composer>\n    {sent.length > 0 && <ul className=\"m-0 flex list-none flex-col gap-(--qy-space-1) p-0 whitespace-pre-wrap\">{sent.map((text, index) => <li key={index}>{text}</li>)}</ul>}\n  </div>;\n}\n",
+          "sha256": "1afb5b1117e4482c26da894f25eee03054280c597b1dc363f5fe4a64a5cb30a8"
+        },
+        {
+          "id": "triggers",
+          "title": "提及与命令",
+          "source": "apps/docs/src/content/composer/demos/02-triggers.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/composer"
+          ],
+          "providers": [],
+          "code": "import { Composer, ComposerInput, ComposerSubmit, ComposerToolbar, type ComposerItem, type ComposerTrigger } from \"@qingye_lab/ui/components/composer\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"提及与命令\", titleEn: \"Mentions and commands\" } satisfies DemoMeta;\n\nconst people: ComposerItem[] = [\n  { id: \"u1\", label: \"林青\", group: \"成员\", description: \"设计\" },\n  { id: \"u2\", label: \"苏野\", group: \"成员\", description: \"前端\" },\n  { id: \"t1\", label: \"设计组\", group: \"团队\" },\n];\n\nconst mention: ComposerTrigger = {\n  char: \"@\",\n  getItems: (query) => people.filter((item) => item.label.includes(query)),\n};\n\nconst commands: ComposerItem[] = [\n  { id: \"clear\", label: \"清空\", description: \"/clear\" },\n  { id: \"topic\", label: \"话题\", description: \"/topic\", select: \"token\" },\n];\n\nconst command: ComposerTrigger = {\n  char: \"/\",\n  startOnly: true,\n  select: \"action\",\n  getItems: (query) => commands.filter((item) => item.label.includes(query) || item.description?.includes(query)),\n};\n\nexport default function Demo() {\n  return <Composer className=\"w-full\">\n    <ComposerInput aria-label=\"消息\" placeholder=\"@ 提及，/ 命令\" triggers={[mention, command]} />\n    <ComposerToolbar><ComposerSubmit /></ComposerToolbar>\n  </Composer>;\n}\n",
+          "sha256": "02e14306cf8180a1b402532e63e2ed3f4c746c228dca9f1d41d7d744f140ebf6"
+        },
+        {
+          "id": "async",
+          "title": "异步候选",
+          "source": "apps/docs/src/content/composer/demos/03-async.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/composer"
+          ],
+          "providers": [],
+          "code": "import { Composer, ComposerInput, ComposerSubmit, ComposerToolbar, type ComposerTrigger } from \"@qingye_lab/ui/components/composer\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"异步候选\", titleEn: \"Async candidates\" } satisfies DemoMeta;\n\nconst names = [\"林青\", \"林野\", \"苏青\", \"苏野\", \"顾远\", \"周衡\"];\n\nconst mention: ComposerTrigger = {\n  char: \"@\",\n  getItems: (query, { signal }) => new Promise((resolve) => {\n    const timer = setTimeout(() => resolve(names.filter((name) => name.includes(query)).map((name) => ({ id: name, label: name }))), 600);\n    signal.addEventListener(\"abort\", () => clearTimeout(timer));\n  }),\n};\n\nexport default function Demo() {\n  return <Composer className=\"w-full\">\n    <ComposerInput aria-label=\"消息\" placeholder=\"@ 后稍候显示结果\" triggers={[mention]} />\n    <ComposerToolbar><ComposerSubmit /></ComposerToolbar>\n  </Composer>;\n}\n",
+          "sha256": "8ccab75b78af6654ad42b9324ca624c62bc10721091dda060e361f623eaeefef"
+        },
+        {
+          "id": "states",
+          "title": "状态与行数",
+          "source": "apps/docs/src/content/composer/demos/04-states.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/composer"
+          ],
+          "providers": [],
+          "code": "import { Composer, ComposerInput, ComposerSubmit, ComposerToolbar, type ComposerSegment } from \"@qingye_lab/ui/components/composer\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"状态与行数\", titleEn: \"States and rows\" } satisfies DemoMeta;\n\nconst filled: ComposerSegment[] = [\n  { type: \"text\", text: \"请 \" },\n  { type: \"token\", trigger: \"@\", id: \"u1\", label: \"林青\" },\n  { type: \"text\", text: \" 看一下这份稿子。\" },\n];\n\nexport default function Demo() {\n  return <div className=\"grid w-full grid-cols-1 gap-(--qy-space-4) sm:grid-cols-2\">\n    <Composer defaultValue={filled} readOnly><ComposerInput aria-label=\"只读\" /></Composer>\n    <Composer defaultValue={filled} disabled><ComposerInput aria-label=\"禁用\" /><ComposerToolbar><ComposerSubmit /></ComposerToolbar></Composer>\n    <Composer><ComposerInput aria-label=\"三行起始，最多五行\" placeholder=\"三行起始，最多五行\" minRows={3} maxRows={5} /></Composer>\n    <Composer submitOn=\"mod-enter\"><ComposerInput aria-label=\"Ctrl/⌘+Enter 发送\" placeholder=\"Ctrl/⌘+Enter 发送\" /><ComposerToolbar><ComposerSubmit /></ComposerToolbar></Composer>\n  </div>;\n}\n",
+          "sha256": "c6a61027ca6d8311d6d0ebaa421d86050e1d405c960256d167fbc49aea1e8cc0"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "相成相制",
+          "进退相承"
+        ],
+        "whenToUse": [
+          "对话式输入：多行文字夹带提及与命令"
+        ],
+        "avoid": [
+          "单行短文本用 Input；纯多行文字用 Textarea；只能从候选选择用 Combobox"
+        ],
+        "composition": [
+          "Composer + ComposerInput + ComposerToolbar + ComposerSubmit"
+        ],
+        "stateOwner": {
+          "library": [
+            "非受控值、撤销栈、候选高亮与异步结果的新旧判断"
+          ],
+          "application": [
+            "受控值、候选数据来源、提交后的清空与发送、消息列表"
+          ]
+        },
+        "responsive": [
+          "一套几何，起始高与上限按行数换算，跟随密度轴"
+        ],
+        "customization": [
+          "root render/ref；ComposerInput 的 className 作用于编辑区"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/composer.tsx",
+        "sha256": "4acac907848fbc6389ee0d83b6f3e65e5f5daab6e8e704a343432f76724fee2b",
+        "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
+      },
+      "decisions": "编辑区是 contenteditable，因为令牌必须是行内原子对象（整体删除、光标进不去、读屏读名字），原生文本框做不到。值是片段数组而不是字符串：令牌带稳定 id，应用不必从文字里反解。候选浮层按 combobox 模式接线，但编辑区的角色是 textbox（多行的 combobox 不存在）。消息列表与气泡不在库内。",
+      "localized": {
+        "en": {
+          "title": "Composer",
+          "description": "Multi-line input with @ mentions, / commands and atomic tokens; its value is an array of text and token segments.",
+          "category": "Forms",
+          "decisions": "The editor is contenteditable because tokens must be inline atoms (deleted whole, unreachable by the caret, read by name), which a native text box cannot do. The value is an array of segments, not a string, so a token keeps a stable id and apps need not parse text back. The candidate popup follows the combobox pattern, but the editor's role is textbox since no multi-line combobox exists. Message lists and bubbles are not in the library.",
+          "notes": [
+            "Paste and drop accept plain text only; copy and cut emit plain text with a token written as trigger + label.",
+            "composerValueToText writes a token as trigger + label by default; composerValueFromText accepts known tokens and restores them by literal match.",
+            "There is no name or form submission and no Field integration; read the value in onSubmit.",
+            "jsdom cannot verify a real IME, per-browser contenteditable caret and beforeinput behavior, popup collision flipping or Range geometry; verify these in real browsers."
+          ],
+          "api": [
+            {
+              "name": "Composer",
+              "description": "Root: fill-control frame and state; owns value, submit and disabled/readOnly.",
+              "descriptionEn": "Root: fill-control frame and state; owns value, submit and disabled/readOnly.",
+              "props": [
+                {
+                  "name": "value / defaultValue",
+                  "type": "readonly ComposerSegment[]",
+                  "default": "defaultValue: []",
+                  "description": "Controlled/uncontrolled value: text segments and token segments. Adjacent text segments are merged.",
+                  "descriptionEn": "Controlled/uncontrolled value: text segments and token segments. Adjacent text segments are merged."
+                },
+                {
+                  "name": "onValueChange",
+                  "type": "(value: ComposerSegment[], details: ComposerChangeDetails) => void",
+                  "description": "details.reason is input/paste/cut/newline/token/action/delete-token/undo/redo/clear. cancel() rejects the change and the editor reverts.",
+                  "descriptionEn": "details.reason is input/paste/cut/newline/token/action/delete-token/undo/redo/clear. cancel() rejects the change and the editor reverts."
+                },
+                {
+                  "name": "onSubmit",
+                  "type": "(value: ComposerSegment[], details: { event, clear }) => void",
+                  "description": "Fired by Enter or ComposerSubmit; not called when there is no token and the text is whitespace only. clear() empties the value through onValueChange.",
+                  "descriptionEn": "Fired by Enter or ComposerSubmit; not called when there is no token and the text is whitespace only. clear() empties the value through onValueChange."
+                },
+                {
+                  "name": "submitOn",
+                  "type": "'enter' | 'mod-enter'",
+                  "default": "'enter'",
+                  "description": "enter: Enter submits and Shift+Enter breaks the line. mod-enter: Ctrl/Cmd+Enter submits and Enter breaks the line.",
+                  "descriptionEn": "enter: Enter submits and Shift+Enter breaks the line. mod-enter: Ctrl/Cmd+Enter submits and Enter breaks the line."
+                },
+                {
+                  "name": "disabled / readOnly",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Neither edits, submits nor opens candidates; read-only stays focusable and copyable.",
+                  "descriptionEn": "Neither edits, submits nor opens candidates; read-only stays focusable and copyable."
+                }
+              ]
+            },
+            {
+              "name": "ComposerInput",
+              "description": "The editor and candidate popup.",
+              "descriptionEn": "The editor and candidate popup.",
+              "props": [
+                {
+                  "name": "aria-label / aria-labelledby",
+                  "type": "string",
+                  "description": "One is required, otherwise it throws.",
+                  "descriptionEn": "One is required, otherwise it throws."
+                },
+                {
+                  "name": "placeholder",
+                  "type": "string",
+                  "description": "Shown when empty and exposed as aria-placeholder.",
+                  "descriptionEn": "Shown when empty and exposed as aria-placeholder."
+                },
+                {
+                  "name": "triggers",
+                  "type": "readonly ComposerTrigger[]",
+                  "description": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded.",
+                  "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded."
+                },
+                {
+                  "name": "minRows / maxRows",
+                  "type": "number",
+                  "default": "1 / 8",
+                  "description": "Starting rows and growth cap. Beyond the cap the editor scrolls, and never exceeds half the viewport height.",
+                  "descriptionEn": "Starting rows and growth cap. Beyond the cap the editor scrolls, and never exceeds half the viewport height."
+                }
+              ]
+            },
+            {
+              "name": "ComposerItem",
+              "description": "A candidate.",
+              "descriptionEn": "A candidate.",
+              "props": [
+                {
+                  "name": "id / label",
+                  "type": "string",
+                  "description": "id is the token identity and label the display name; a token reads as trigger + label.",
+                  "descriptionEn": "id is the token identity and label the display name; a token reads as trigger + label."
+                },
+                {
+                  "name": "group / description / icon / disabled",
+                  "type": "string / string / ReactNode / boolean",
+                  "description": "Items with the same group are grouped in order of first appearance.",
+                  "descriptionEn": "Items with the same group are grouped in order of first appearance."
+                },
+                {
+                  "name": "select",
+                  "type": "'token' | 'action'",
+                  "description": "Overrides the trigger's select: token inserts a token; action removes the trigger text and only calls onSelect.",
+                  "descriptionEn": "Overrides the trigger's select: token inserts a token; action removes the trigger text and only calls onSelect."
+                }
+              ]
+            },
+            {
+              "name": "ComposerToolbar / ComposerSubmit",
+              "description": "The toolbar holds xs buttons; ComposerSubmit is unavailable when empty, disabled or read-only.",
+              "descriptionEn": "The toolbar holds xs buttons; ComposerSubmit is unavailable when empty, disabled or read-only.",
+              "props": [
+                {
+                  "name": "ComposerSubmit aria-label",
+                  "type": "string",
+                  "default": "messages.composerSubmit",
+                  "description": "Defaults to “Send”.",
+                  "descriptionEn": "Defaults to “Send”."
+                }
+              ]
+            }
+          ],
+          "keyboard": [
+            {
+              "keys": "Enter / Shift+Enter",
+              "description": "Submit or break the line per submitOn; ignored during composition (isComposing or keyCode 229).",
+              "descriptionEn": "Submit or break the line per submitOn; ignored during composition (isComposing or keyCode 229)."
+            },
+            {
+              "keys": "ArrowDown / ArrowUp",
+              "description": "Move the highlight while candidates are open, wrapping and skipping disabled items.",
+              "descriptionEn": "Move the highlight while candidates are open, wrapping and skipping disabled items."
+            },
+            {
+              "keys": "Enter / Tab",
+              "description": "Select the highlight while candidates are open, without submitting.",
+              "descriptionEn": "Select the highlight while candidates are open, without submitting."
+            },
+            {
+              "keys": "Escape",
+              "description": "Close the candidates and keep the typed text.",
+              "descriptionEn": "Close the candidates and keep the typed text."
+            },
+            {
+              "keys": "Backspace / Delete",
+              "description": "Delete an adjacent token as a whole.",
+              "descriptionEn": "Delete an adjacent token as a whole."
+            },
+            {
+              "keys": "Ctrl/⌘+Z、Ctrl/⌘+Shift+Z",
+              "description": "Undo and redo using the component's own snapshot stack.",
+              "descriptionEn": "Undo and redo using the component's own snapshot stack."
+            }
+          ],
+          "design": {
+            "methods": [
+              "Name matches substance （名实相符）",
+              "Complementary roles and safeguards （相成相制）",
+              "Continuity through change （进退相承）"
+            ],
+            "whenToUse": [
+              "Conversational input: multi-line text with mentions and commands."
+            ],
+            "avoid": [
+              "Use Input for short single-line text, Textarea for plain multi-line text, and Combobox when values must come from candidates."
+            ],
+            "composition": [
+              "Composer + ComposerInput + ComposerToolbar + ComposerSubmit"
+            ],
+            "stateOwner": {
+              "library": [
+                "Uncontrolled value, undo stack, candidate highlight and stale-result discarding."
+              ],
+              "application": [
+                "Controlled value, candidate sources, clearing and sending after submit, the message list."
+              ]
+            },
+            "responsive": [
+              "One geometry; starting height and cap derive from rows and follow the density axis."
+            ],
+            "customization": [
+              "Root render/ref; ComposerInput className applies to the editor."
+            ]
+          },
+          "providerGuidance": []
+        }
+      }
+    },
+    {
       "name": "confirm",
       "title": "异步确认 Confirm",
       "description": "等待一次明确决定，再由调用方继续执行。",
@@ -14276,7 +15374,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -14826,7 +15924,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -16410,7 +17508,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -17885,7 +18983,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -18505,7 +19603,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19055,7 +20153,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19524,7 +20622,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -20849,7 +21947,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -21671,7 +22769,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -23104,7 +24202,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -24692,7 +25790,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -25769,7 +26867,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -26704,7 +27802,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -27659,7 +28757,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -31031,7 +32129,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -32863,7 +33961,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -34626,7 +35724,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -35109,7 +36207,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -36673,7 +37771,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37175,7 +38273,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37549,7 +38647,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -38877,7 +39975,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -39271,7 +40369,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -40080,7 +41178,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41223,7 +42321,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -42349,7 +43447,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44356,7 +45454,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -46612,7 +47710,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -47234,7 +48332,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -47988,7 +49086,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -48544,7 +49642,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -49280,7 +50378,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -49688,7 +50786,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50146,7 +51244,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52430,7 +53528,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52883,7 +53981,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -53948,7 +55046,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -54505,7 +55603,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -55051,7 +56149,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -55672,7 +56770,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -58598,7 +59696,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -59133,7 +60231,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -60955,7 +62053,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -61294,6 +62392,7 @@
     "color-picker",
     "combobox",
     "command",
+    "composer",
     "confirm",
     "confirm-action",
     "context-menu",

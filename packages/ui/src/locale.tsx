@@ -63,6 +63,7 @@ export type UILocaleMessages = {
   commandEmpty: string;
   skipToContent: string; selectRowNamed: (name: string) => string; selectEmpty: string; moreNotifications: (count: number) => string;
   treeSelectSeparator: string; treeSelectMore: (first: string, rest: number) => string;
+  composerSubmit: string;
 };
 
 export type UILocale = { code: string; messages: UILocaleMessages };
@@ -122,6 +123,7 @@ export const zhCN: UILocale = {
     cascaderSeparator: " / ", cascaderRetry: "重试", cascaderLoadFailed: "加载失败", cascaderBranch: "有下级",
     commandEmpty: "没有匹配项",
     treeSelectSeparator: "、", treeSelectMore: (first, rest) => `${first} 及其余 ${rest.toLocaleString("zh-CN")} 项`,
+    composerSubmit: "发送",
   },
 };
 
