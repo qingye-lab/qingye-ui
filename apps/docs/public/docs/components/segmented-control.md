@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
-Source SHA-256: 681855132b1ff4c75ee3955936c2caef73ac618dd912975a375c30d858ea52f2
+Source SHA-256: 366d8d92678c1a91950609486d0435c80e07d89f95621d0781bab30f0ba37a09
 
 从并列的少量候选中输入一个值。
 
 ## Decision
-SegmentedControl 产生一个新值。切换内容面板用 Tabs；允许全部取消的工具切换用 ToggleGroup。选中段是选中面（清染）加焦墨字，不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它；要调整，改系统的选中面 --qy-surface-selected（全库的选中一起变；--qy-track-selected 只是它的别名）与 --qy-track-selected-foreground。
+SegmentedControl 产生一个新值。切换内容面板用 Tabs（Tabs 也可以用 appearance 设为 track 画成同一条轨道，外观不决定语义）；允许全部取消的工具切换用 ToggleGroup。选中段是选中面（清染）加焦墨字，不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它；要调整，改系统的选中面 --qy-surface-selected（全库的选中一起变；--qy-track-selected 只是它的别名）与 --qy-track-selected-foreground。
 
 ## Notes
 - 放在 Field 内时，整组的名称、描述与错误落在 radiogroup；每一段自己开标签作用域，id 各不相同，名称仍是段内文字，不会被 Field 的标签接管。

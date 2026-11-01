@@ -5956,13 +5956,15 @@
     {
       "name": "button-group",
       "title": "动作组 ButtonGroup",
-      "description": "为同一范围的动作提供共同名称与间隔。",
+      "description": "为同一范围的动作提供共同名称，可独立排列或连成一体。",
       "category": "通用",
       "source": "local",
       "layer": "primitive",
       "import": "@qingye_lab/ui/components/button-group",
       "exports": [
-        "ButtonGroup"
+        "ButtonGroup",
+        "ButtonGroupText",
+        "ButtonGroupSeparator"
       ],
       "docs": "/docs/components/button-group",
       "keywords": [
@@ -5990,11 +5992,53 @@
               "descriptionEn": "Layout direction."
             },
             {
+              "name": "attached",
+              "type": "boolean",
+              "default": "false",
+              "description": "连体：相邻按钮的边合并为一条线，只保留整组外侧的圆角，横排纵排都成立；聚焦或悬停的成员升到上层，边线完整可见。连体时不换行。",
+              "descriptionEn": "Attach members: adjacent edges merge into one line and only the outer corners of the whole group stay rounded, horizontal or vertical. The hovered or focused member is raised so its edge shows in full. Attached groups do not wrap."
+            },
+            {
               "name": "align / wrap / render / ref / 原生属性",
               "nameEn": "align / wrap / render / ref / native props",
               "type": "ButtonGroupProps",
               "description": "沿用 Group 的组合入口，间隔默认 action-gap。",
               "descriptionEn": "Uses Group composition props with action spacing."
+            }
+          ]
+        },
+        {
+          "name": "ButtonGroupText",
+          "description": "组内静态文字段，与同档 bordered 按钮同高、同边线，不可点击也不进焦点顺序。",
+          "descriptionEn": "A static text segment in the group, as tall as a bordered button of the same size with the same outline; not clickable and outside the tab order.",
+          "props": [
+            {
+              "name": "size",
+              "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+              "default": "\"md\"",
+              "description": "与同组按钮同一档。",
+              "descriptionEn": "The same size as the buttons in the group."
+            },
+            {
+              "name": "render / ref / 原生属性",
+              "nameEn": "render / ref / native props",
+              "type": "useRender props",
+              "description": "默认 span。",
+              "descriptionEn": "A span by default."
+            }
+          ]
+        },
+        {
+          "name": "ButtonGroupSeparator",
+          "description": "成员之间的分隔线，方向与组相反；非连体组里同样可用。",
+          "descriptionEn": "A divider between members, perpendicular to the group axis; also usable in groups that are not attached.",
+          "props": [
+            {
+              "name": "decorative",
+              "type": "boolean",
+              "default": "true",
+              "description": "分界已由成员表达，默认只是装饰；设为 false 时是带方向的 separator。",
+              "descriptionEn": "Members already express the boundary, so it is decorative by default; false exposes an oriented separator."
             }
           ]
         }
@@ -6017,6 +6061,13 @@
                 "declaredAt": "packages/ui/src/components/layout.tsx:42"
               },
               {
+                "name": "attached",
+                "optional": true,
+                "type": "boolean",
+                "doc": "连体：相邻按钮的边合并成一条线，只保留整组外侧的圆角；横排纵排都成立。默认保持各自独立、带动作间隔。",
+                "declaredAt": "packages/ui/src/components/button-group.tsx:18"
+              },
+              {
                 "name": "justify",
                 "optional": true,
                 "type": "\"center\" | \"start\" | \"end\" | \"between\" | \"around\" | \"evenly\"",
@@ -6027,13 +6078,61 @@
                 "name": "orientation",
                 "optional": true,
                 "type": "\"horizontal\" | \"vertical\"",
-                "declaredAt": "packages/ui/src/components/button-group.tsx:7"
+                "declaredAt": "packages/ui/src/components/button-group.tsx:16"
               },
               {
                 "name": "wrap",
                 "optional": true,
                 "type": "boolean",
                 "declaredAt": "packages/ui/src/components/layout.tsx:47"
+              }
+            ],
+            "inheritedCount": 281,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 280
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "name": "ButtonGroupSeparator",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "decorative",
+                "optional": true,
+                "type": "boolean",
+                "doc": "已有文字/结构表达分界时，线条仅作装饰。",
+                "declaredAt": "packages/ui/src/components/separator.tsx:9"
+              }
+            ],
+            "inheritedCount": 278,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 275
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 3
+              }
+            ]
+          },
+          {
+            "name": "ButtonGroupText",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "size",
+                "optional": true,
+                "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+                "doc": "与同组按钮同一档。",
+                "declaredAt": "packages/ui/src/components/button-group.tsx:58"
               }
             ],
             "inheritedCount": 281,
@@ -6075,7 +6174,17 @@
           "owner": "button-group",
           "module": "@qingye_lab/ui/components/button-group",
           "propsType": "ButtonGroupProps",
-          "signature": "ButtonGroup({ orientation = \"horizontal\", className, ...props }: ButtonGroupProps)",
+          "signature": "ButtonGroup({ orientation = \"horizontal\", attached = false, className, ...props }: ButtonGroupProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ButtonGroupOrientation",
+          "kind": "type",
+          "owner": "button-group",
+          "module": "@qingye_lab/ui/components/button-group",
+          "signature": "\"horizontal\" | \"vertical\"",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -6085,7 +6194,49 @@
           "kind": "type",
           "owner": "button-group",
           "module": "@qingye_lab/ui/components/button-group",
-          "signature": "Omit<InlineProps, \"gap\"> & { orientation?: \"horizontal\" | \"vertical\" }",
+          "signature": "Omit<InlineProps, \"gap\"> & {\n  orientation?: ButtonGroupOrientation;\n  /** 连体：相邻按钮的边合并成一条线，只保留整组外侧的圆角；横排纵排都成立。默认保持各自独立、带动作间隔。 */\n  attached?: boolean;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ButtonGroupSeparator",
+          "kind": "function",
+          "owner": "button-group",
+          "module": "@qingye_lab/ui/components/button-group",
+          "propsType": "ButtonGroupSeparatorProps",
+          "signature": "ButtonGroupSeparator({ decorative = true, className, ...props }: ButtonGroupSeparatorProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ButtonGroupSeparatorProps",
+          "kind": "type",
+          "owner": "button-group",
+          "module": "@qingye_lab/ui/components/button-group",
+          "signature": "Omit<SeparatorProps, \"orientation\">",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ButtonGroupText",
+          "kind": "function",
+          "owner": "button-group",
+          "module": "@qingye_lab/ui/components/button-group",
+          "propsType": "ButtonGroupTextProps",
+          "signature": "ButtonGroupText({ size = \"md\", render, className, ref, ...props }: ButtonGroupTextProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ButtonGroupTextProps",
+          "kind": "type",
+          "owner": "button-group",
+          "module": "@qingye_lab/ui/components/button-group",
+          "signature": "useRender.ComponentProps<\"span\"> & {\n  /** 与同组按钮同一档。 */\n  size?: NonNullable<ButtonProps[\"size\"]>;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -6093,8 +6244,20 @@
       ],
       "types": [
         {
+          "name": "ButtonGroupOrientation",
+          "definition": "export type ButtonGroupOrientation = \"horizontal\" | \"vertical\";"
+        },
+        {
           "name": "ButtonGroupProps",
-          "definition": "export type ButtonGroupProps = Omit<InlineProps, \"gap\"> & { orientation?: \"horizontal\" | \"vertical\" };"
+          "definition": "export type ButtonGroupProps = Omit<InlineProps, \"gap\"> & {\n  orientation?: ButtonGroupOrientation;\n  /** 连体：相邻按钮的边合并成一条线，只保留整组外侧的圆角；横排纵排都成立。默认保持各自独立、带动作间隔。 */\n  attached?: boolean;\n};"
+        },
+        {
+          "name": "ButtonGroupTextProps",
+          "definition": "export type ButtonGroupTextProps = useRender.ComponentProps<\"span\"> & {\n  /** 与同组按钮同一档。 */\n  size?: NonNullable<ButtonProps[\"size\"]>;\n};"
+        },
+        {
+          "name": "ButtonGroupSeparatorProps",
+          "definition": "export type ButtonGroupSeparatorProps = Omit<SeparatorProps, \"orientation\">;"
         }
       ],
       "usageImports": [
@@ -6103,12 +6266,27 @@
           "import": "@qingye_lab/ui/components/button-group",
           "owner": "button-group",
           "status": "PASS"
+        },
+        {
+          "name": "ButtonGroupText",
+          "import": "@qingye_lab/ui/components/button-group",
+          "owner": "button-group",
+          "status": "PASS"
+        },
+        {
+          "name": "ButtonGroupSeparator",
+          "import": "@qingye_lab/ui/components/button-group",
+          "owner": "button-group",
+          "status": "PASS"
         }
       ],
       "dependencies": {
         "runtime": [
           "@base-ui/react",
+          "@tabler/icons-react",
+          "class-variance-authority",
           "clsx",
+          "react",
           "tailwind-merge"
         ],
         "optionalPeers": []
@@ -6116,12 +6294,25 @@
       "providers": {
         "exports": [],
         "guidance": [],
-        "usesLocale": false,
+        "usesLocale": true,
         "usesTheme": false,
         "required": [],
-        "contexts": [],
+        "contexts": [
+          {
+            "name": "OrientationContext",
+            "declaredAt": "packages/ui/src/components/button-group.tsx:13",
+            "defaultValue": "\"horizontal\"",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "ButtonGroup"
+            ]
+          }
+        ],
         "baseUi": [
+          "@base-ui/react/button",
+          "@base-ui/react/direction-provider",
           "@base-ui/react/merge-props",
+          "@base-ui/react/separator",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -6151,6 +6342,47 @@
           "providers": [],
           "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { ButtonGroup } from \"@qingye_lab/ui/components/button-group\";\n\nexport const meta = { title: \"纵向\", titleEn: \"Vertical\" };\nexport default function Demo() {\n  return <ButtonGroup aria-label=\"编辑\" orientation=\"vertical\" align=\"start\"><Button>应用</Button><Button variant=\"bordered\">重置</Button></ButtonGroup>;\n}\n",
           "sha256": "5a2310ba126c7eb367b0c6973302cfd3280d2014d9575e3930bc3c53a42a85a5"
+        },
+        {
+          "id": "attached",
+          "title": "连体",
+          "source": "apps/docs/src/content/button-group/demos/03-attached.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/button-group"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { ButtonGroup } from \"@qingye_lab/ui/components/button-group\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"连体\", titleEn: \"Attached\" } satisfies DemoMeta;\nexport default function Demo() {\n  return <div className=\"flex flex-wrap items-start gap-(--qy-section-gap)\">\n    <ButtonGroup aria-label=\"视图\" attached><Button variant=\"bordered\">列表</Button><Button variant=\"bordered\">网格</Button><Button variant=\"bordered\">时间线</Button></ButtonGroup>\n    <ButtonGroup aria-label=\"排序\" attached orientation=\"vertical\" align=\"start\"><Button variant=\"bordered\">按名称</Button><Button variant=\"bordered\">按时间</Button><Button variant=\"bordered\">按大小</Button></ButtonGroup>\n  </div>;\n}\n",
+          "sha256": "595d835993b3617e48234d2ce147c73bd0d6017db3dd11343f7a9f3a83b7649c"
+        },
+        {
+          "id": "split",
+          "title": "拆分按钮",
+          "source": "apps/docs/src/content/button-group/demos/04-split.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/button-group",
+            "@qingye_lab/ui/components/menu",
+            "@tabler/icons-react"
+          ],
+          "providers": [],
+          "code": "import { IconChevronDown } from \"@tabler/icons-react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { ButtonGroup } from \"@qingye_lab/ui/components/button-group\";\nimport { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuTrigger } from \"@qingye_lab/ui/components/menu\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"拆分按钮\", titleEn: \"Split button\" } satisfies DemoMeta;\nexport default function Demo() {\n  return <ButtonGroup aria-label=\"发布\" attached>\n    <Button variant=\"bordered\">发布</Button>\n    <Menu><MenuTrigger render={<Button variant=\"bordered\" shape=\"icon\" aria-label=\"更多发布方式\" />}><IconChevronDown aria-hidden=\"true\" /></MenuTrigger><MenuPortal><MenuPositioner align=\"end\"><MenuPopup>\n      <MenuItem>定时发布</MenuItem><MenuItem>存为草稿</MenuItem>\n    </MenuPopup></MenuPositioner></MenuPortal></Menu>\n  </ButtonGroup>;\n}\n",
+          "sha256": "7ab25070d13f25c0f4961373709678574ce0b6a355dced445aa952dc823c8621"
+        },
+        {
+          "id": "text",
+          "title": "文字段与分隔",
+          "source": "apps/docs/src/content/button-group/demos/05-text.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/button-group"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from \"@qingye_lab/ui/components/button-group\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"文字段与分隔\", titleEn: \"Text segment and separator\" } satisfies DemoMeta;\nexport default function Demo() {\n  return <div className=\"flex flex-wrap items-start gap-(--qy-section-gap)\">\n    <ButtonGroup aria-label=\"分页\" attached><Button variant=\"bordered\">上一页</Button><ButtonGroupText>3 / 12</ButtonGroupText><Button variant=\"bordered\">下一页</Button></ButtonGroup>\n    <ButtonGroup aria-label=\"文本样式\"><Button variant=\"quiet\">加粗</Button><ButtonGroupSeparator /><Button variant=\"quiet\">斜体</Button><ButtonGroupSeparator /><Button variant=\"quiet\">下划线</Button></ButtonGroup>\n  </div>;\n}\n",
+          "sha256": "200052e0687a8d1e3300ccda738ab16e90721cd96b3dee8649e407117cf3624d"
         }
       ],
       "design": {
@@ -6166,7 +6398,8 @@
           "用动作组替代单选、多选或工具栏。"
         ],
         "composition": [
-          "复用 Group 和 action-gap；成员使用 Button，真实状态仍在成员处表达。"
+          "复用 Group 和 action-gap；成员使用 Button，真实状态仍在成员处表达。",
+          "静态文字段用 ButtonGroupText，成员之间的分隔线用 ButtonGroupSeparator；拆分按钮的图标按钮必须有可访问名称。"
         ],
         "stateOwner": {
           "library": [
@@ -6177,7 +6410,7 @@
           ]
         },
         "responsive": [
-          "横向默认换行，也可纵向；不合并成员轮廓。"
+          "横向默认换行，也可纵向；连体时不换行，相邻边合并。"
         ],
         "customization": [
           "className 与 render 属于组；不统一改写子按钮。"
@@ -6185,16 +6418,16 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/button-group.tsx",
-        "sha256": "d9725a9ff2481d2491417226306c5483fad4bc0cb660400d03af2ccd4989fb23",
+        "sha256": "2f4dd719cf1870157eead31e1aef929258879c948157458f8751c2ad64463222",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "共同名称说明范围，每个按钮仍说明自己的动作。ButtonGroup 不选择按钮、不传播禁用，也不建立工具栏键盘行为。",
+      "decisions": "共同名称说明范围，每个按钮仍说明自己的动作。ButtonGroup 不选择按钮、不传播禁用，也不建立工具栏键盘行为。连体（attached）只改变外形：相邻边合并成一条线，成员的名称、焦点与禁用不变；拆分按钮就是连体组里一个主操作加一个打开 Menu 的图标按钮。",
       "localized": {
         "en": {
           "title": "ButtonGroup",
-          "description": "Give actions in one scope a shared name and spacing.",
+          "description": "Give actions in one scope a shared name, spaced apart or attached into one body.",
           "category": "General",
-          "decisions": "The shared name identifies the scope; each button still names its action. ButtonGroup adds no selection, disabled propagation or toolbar keyboard behavior.",
+          "decisions": "The shared name identifies the scope; each button still names its action. ButtonGroup adds no selection, disabled propagation or toolbar keyboard behavior. Attached only changes the outline: adjacent edges merge into one line while each member keeps its name, focus and disabled state. A split button is an attached group with a primary action and an icon button that opens a Menu.",
           "notes": [],
           "api": [
             {
@@ -6216,11 +6449,53 @@
                   "descriptionEn": "Layout direction."
                 },
                 {
+                  "name": "attached",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Attach members: adjacent edges merge into one line and only the outer corners of the whole group stay rounded, horizontal or vertical. The hovered or focused member is raised so its edge shows in full. Attached groups do not wrap.",
+                  "descriptionEn": "Attach members: adjacent edges merge into one line and only the outer corners of the whole group stay rounded, horizontal or vertical. The hovered or focused member is raised so its edge shows in full. Attached groups do not wrap."
+                },
+                {
                   "name": "align / wrap / render / ref / native props",
                   "nameEn": "align / wrap / render / ref / native props",
                   "type": "ButtonGroupProps",
                   "description": "Uses Group composition props with action spacing.",
                   "descriptionEn": "Uses Group composition props with action spacing."
+                }
+              ]
+            },
+            {
+              "name": "ButtonGroupText",
+              "description": "A static text segment in the group, as tall as a bordered button of the same size with the same outline; not clickable and outside the tab order.",
+              "descriptionEn": "A static text segment in the group, as tall as a bordered button of the same size with the same outline; not clickable and outside the tab order.",
+              "props": [
+                {
+                  "name": "size",
+                  "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+                  "default": "\"md\"",
+                  "description": "The same size as the buttons in the group.",
+                  "descriptionEn": "The same size as the buttons in the group."
+                },
+                {
+                  "name": "render / ref / native props",
+                  "nameEn": "render / ref / native props",
+                  "type": "useRender props",
+                  "description": "A span by default.",
+                  "descriptionEn": "A span by default."
+                }
+              ]
+            },
+            {
+              "name": "ButtonGroupSeparator",
+              "description": "A divider between members, perpendicular to the group axis; also usable in groups that are not attached.",
+              "descriptionEn": "A divider between members, perpendicular to the group axis; also usable in groups that are not attached.",
+              "props": [
+                {
+                  "name": "decorative",
+                  "type": "boolean",
+                  "default": "true",
+                  "description": "Members already express the boundary, so it is decorative by default; false exposes an oriented separator.",
+                  "descriptionEn": "Members already express the boundary, so it is decorative by default; false exposes an oriented separator."
                 }
               ]
             }
@@ -6245,7 +6520,8 @@
               "Replacing single/multiple selection or a toolbar with an action group."
             ],
             "composition": [
-              "Use Group and action-gap; Button members retain their own actual states."
+              "Use Group and action-gap; Button members retain their own actual states.",
+              "Use ButtonGroupText for a static text segment and ButtonGroupSeparator between members; the icon button of a split button needs an accessible name."
             ],
             "stateOwner": {
               "library": [
@@ -6256,7 +6532,7 @@
               ]
             },
             "responsive": [
-              "Horizontal groups wrap by default; vertical groups are available. Member contours stay independent."
+              "Horizontal groups wrap by default; vertical groups are available. Attached groups do not wrap and their adjacent edges merge."
             ],
             "customization": [
               "className and render belong to the group; do not rewrite every child Button."
@@ -33404,6 +33680,13 @@
               "descriptionEn": "Expanded groups may be controlled or uncontrolled; cancellation retains the current value."
             },
             {
+              "name": "appearance",
+              "type": "\"line\" | \"track\"",
+              "description": "顶栏目的地的外观，设在 NavigationMenu 上整组生效。line 是导航线；track 是围在轨道里的选中面，当前项（active）为选中，带下拉的触发器同样成立。下拉面板里的链接不受影响；外观不改变链接与 aria-current 的语义。",
+              "descriptionEn": "Appearance of the top-level destinations, set on NavigationMenu for the whole set. line is the navigation line; track puts the selected face inside a track, with the active item selected, and dropdown triggers fit as well. Links inside the dropdown panel are unaffected, and appearance never changes link or aria-current semantics.",
+              "default": "\"line\""
+            },
+            {
               "name": "render / ref / native props",
               "type": "Base UI part props",
               "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
@@ -33472,7 +33755,15 @@
           {
             "name": "NavigationMenu",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "appearance",
+                "optional": true,
+                "type": "\"track\" | \"line\"",
+                "doc": "顶栏目的地的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，当前项（active）为选中。下拉面板里的链接不受影响。",
+                "declaredAt": "packages/ui/src/components/navigation-menu.tsx:20"
+              }
+            ],
             "inheritedCount": 286,
             "inheritedFrom": [
               {
@@ -33557,7 +33848,7 @@
                 "name": "description",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/navigation-menu.tsx:21"
+                "declaredAt": "packages/ui/src/components/navigation-menu.tsx:43"
               }
             ],
             "inheritedCount": 288,
@@ -33687,7 +33978,17 @@
           "owner": "navigation-menu",
           "module": "@qingye_lab/ui/components/navigation-menu",
           "propsType": "NavigationMenuProps<Value>",
-          "signature": "NavigationMenu({ className, ...props }: NavigationMenuProps<Value>)",
+          "signature": "NavigationMenu({ className, appearance = \"line\", ...props }: NavigationMenuProps<Value>)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "NavigationMenuAppearance",
+          "kind": "type",
+          "owner": "navigation-menu",
+          "module": "@qingye_lab/ui/components/navigation-menu",
+          "signature": "\"line\" | \"track\"",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -33698,7 +33999,7 @@
           "owner": "navigation-menu",
           "module": "@qingye_lab/ui/components/navigation-menu",
           "propsType": "NavigationMenuContentProps",
-          "signature": "NavigationMenuContent({ className, ...props }: NavigationMenuContentProps)",
+          "signature": "NavigationMenuContent({ className, children, ...props }: NavigationMenuContentProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -33883,7 +34184,7 @@
           "kind": "type",
           "owner": "navigation-menu",
           "module": "@qingye_lab/ui/components/navigation-menu",
-          "signature": "NavigationMenuPrimitive.Root.Props<Value>",
+          "signature": "NavigationMenuPrimitive.Root.Props<Value> & {\n  /** 顶栏目的地的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，当前项（active）为选中。下拉面板里的链接不受影响。 */\n  appearance?: NavigationMenuAppearance;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -33933,8 +34234,12 @@
       ],
       "types": [
         {
+          "name": "NavigationMenuAppearance",
+          "definition": "export type NavigationMenuAppearance = \"line\" | \"track\";"
+        },
+        {
           "name": "NavigationMenuProps",
-          "definition": "export type NavigationMenuProps<Value = string> = NavigationMenuPrimitive.Root.Props<Value>;"
+          "definition": "export type NavigationMenuProps<Value = string> = NavigationMenuPrimitive.Root.Props<Value> & {\n  /** 顶栏目的地的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，当前项（active）为选中。下拉面板里的链接不受影响。 */\n  appearance?: NavigationMenuAppearance;\n};"
         },
         {
           "name": "NavigationMenuListProps",
@@ -34061,6 +34366,7 @@
         "runtime": [
           "@base-ui/react",
           "@tabler/icons-react",
+          "class-variance-authority",
           "clsx",
           "react",
           "tailwind-merge"
@@ -34070,10 +34376,20 @@
       "providers": {
         "exports": [],
         "guidance": [],
-        "usesLocale": false,
+        "usesLocale": true,
         "usesTheme": false,
         "required": [],
         "contexts": [
+          {
+            "name": "AppearanceContext",
+            "declaredAt": "packages/ui/src/components/navigation-menu.tsx:17",
+            "defaultValue": "\"line\"",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "NavigationMenu",
+              "NavigationMenuContent"
+            ]
+          },
           {
             "name": "FloatingLayerContext",
             "declaredAt": "packages/ui/src/floating-layer.tsx:8",
@@ -34085,8 +34401,11 @@
           }
         ],
         "baseUi": [
+          "@base-ui/react/button",
+          "@base-ui/react/direction-provider",
           "@base-ui/react/merge-props",
           "@base-ui/react/navigation-menu",
+          "@base-ui/react/toggle",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -34104,6 +34423,18 @@
           "providers": [],
           "code": "import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuLink, NavigationMenuContent, NavigationMenuGroup, NavigationMenuGroupLabel, NavigationMenuPortal, NavigationMenuPositioner, NavigationMenuPopup, NavigationMenuViewport } from \"@qingye_lab/ui/components/navigation-menu\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"真实目的地与分组\", titleEn: \"Real destinations, grouped\" } satisfies DemoMeta;\nexport default function Demo() {\n  return <NavigationMenu aria-label=\"组件导航\"><NavigationMenuList><NavigationMenuItem value=\"current\"><NavigationMenuLink href=\"/components/navigation-menu\" active>导航菜单</NavigationMenuLink></NavigationMenuItem><NavigationMenuItem value=\"inputs\"><NavigationMenuTrigger>输入</NavigationMenuTrigger><NavigationMenuContent>\n    <NavigationMenuGroup>\n      <NavigationMenuGroupLabel>文本</NavigationMenuGroupLabel>\n      <NavigationMenuLink href=\"/components/input\" description=\"单行文本与附属动作\">文本输入</NavigationMenuLink>\n      <NavigationMenuLink href=\"/components/field\">字段</NavigationMenuLink>\n    </NavigationMenuGroup>\n    <NavigationMenuGroup>\n      <NavigationMenuGroupLabel>选择</NavigationMenuGroupLabel>\n      <NavigationMenuLink href=\"/components/select\">选择框</NavigationMenuLink>\n    </NavigationMenuGroup>\n  </NavigationMenuContent></NavigationMenuItem><NavigationMenuItem value=\"table\"><NavigationMenuLink href=\"/components/table\">比较表</NavigationMenuLink></NavigationMenuItem></NavigationMenuList><NavigationMenuPortal><NavigationMenuPositioner><NavigationMenuPopup><NavigationMenuViewport /></NavigationMenuPopup></NavigationMenuPositioner></NavigationMenuPortal></NavigationMenu>;\n}\n",
           "sha256": "4dfb0b78610156669aa75704c267f683450ecab8ae7fa33ad31dc6ffcb042e82"
+        },
+        {
+          "id": "track",
+          "title": "轨道外观",
+          "source": "apps/docs/src/content/navigation-menu/demos/02-track.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/navigation-menu"
+          ],
+          "providers": [],
+          "code": "import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from \"@qingye_lab/ui/components/navigation-menu\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"轨道外观\", titleEn: \"Track appearance\" } satisfies DemoMeta;\nexport default function Demo() {\n  return <NavigationMenu aria-label=\"站点\" appearance=\"track\"><NavigationMenuList>\n    <NavigationMenuItem value=\"overview\"><NavigationMenuLink href=\"/components/navigation-menu\" active>概览</NavigationMenuLink></NavigationMenuItem>\n    <NavigationMenuItem value=\"tabs\"><NavigationMenuLink href=\"/components/tabs\">标签页</NavigationMenuLink></NavigationMenuItem>\n    <NavigationMenuItem value=\"table\"><NavigationMenuLink href=\"/components/table\">比较表</NavigationMenuLink></NavigationMenuItem>\n  </NavigationMenuList></NavigationMenu>;\n}\n",
+          "sha256": "8847c39cb3e5203f87c66a49ff709a3764160e93e777a9b90f45c74de45e414e"
         }
       ],
       "design": {
@@ -34141,7 +34472,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/navigation-menu.tsx",
-        "sha256": "abc91fdc8bbf4ab987c0cc35f6b9e5e35ba590dd845c7cc556000d16d97acf10",
+        "sha256": "c3608883416f4df54beb12ab8b53eff90781fec1dfcac588351999b0269008b4",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "active 是应用提供的页面事实，库不读 URL 或把命令推断成导航。",
@@ -34165,6 +34496,13 @@
                   "type": "Base UI Root props",
                   "description": "Expanded groups may be controlled or uncontrolled; cancellation retains the current value.",
                   "descriptionEn": "Expanded groups may be controlled or uncontrolled; cancellation retains the current value."
+                },
+                {
+                  "name": "appearance",
+                  "type": "\"line\" | \"track\"",
+                  "description": "Appearance of the top-level destinations, set on NavigationMenu for the whole set. line is the navigation line; track puts the selected face inside a track, with the active item selected, and dropdown triggers fit as well. Links inside the dropdown panel are unaffected, and appearance never changes link or aria-current semantics.",
+                  "descriptionEn": "Appearance of the top-level destinations, set on NavigationMenu for the whole set. line is the navigation line; track puts the selected face inside a track, with the active item selected, and dropdown triggers fit as well. Links inside the dropdown panel are unaffected, and appearance never changes link or aria-current semantics.",
+                  "default": "\"line\""
                 },
                 {
                   "name": "render / ref / native props",
@@ -43236,7 +43574,7 @@
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/segmented-control.tsx:13"
+                "declaredAt": "packages/ui/src/components/segmented-control.tsx:12"
               }
             ],
             "inheritedCount": 287,
@@ -43259,7 +43597,7 @@
                 "name": "size",
                 "optional": true,
                 "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
-                "declaredAt": "packages/ui/src/components/segmented-control.tsx:14"
+                "declaredAt": "packages/ui/src/components/segmented-control.tsx:13"
               }
             ],
             "inheritedCount": 284,
@@ -43471,7 +43809,7 @@
           },
           {
             "name": "SegmentSize",
-            "declaredAt": "packages/ui/src/components/segmented-control.tsx:15",
+            "declaredAt": "packages/ui/src/components/segmented-control.tsx:14",
             "defaultValue": "\"md\"",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -43552,16 +43890,16 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/segmented-control.tsx",
-        "sha256": "681855132b1ff4c75ee3955936c2caef73ac618dd912975a375c30d858ea52f2",
+        "sha256": "366d8d92678c1a91950609486d0435c80e07d89f95621d0781bab30f0ba37a09",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "SegmentedControl 产生一个新值。切换内容面板用 Tabs；允许全部取消的工具切换用 ToggleGroup。选中段是选中面（清染）加焦墨字，不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它；要调整，改系统的选中面 --qy-surface-selected（全库的选中一起变；--qy-track-selected 只是它的别名）与 --qy-track-selected-foreground。",
+      "decisions": "SegmentedControl 产生一个新值。切换内容面板用 Tabs（Tabs 也可以用 appearance 设为 track 画成同一条轨道，外观不决定语义）；允许全部取消的工具切换用 ToggleGroup。选中段是选中面（清染）加焦墨字，不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它；要调整，改系统的选中面 --qy-surface-selected（全库的选中一起变；--qy-track-selected 只是它的别名）与 --qy-track-selected-foreground。",
       "localized": {
         "en": {
           "title": "SegmentedControl",
           "description": "Enter one value from a small set of visible segments.",
           "category": "Forms",
-          "decisions": "SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup for tools whose toggles may all be released. The selected segment is a light ink wash with ink text, not the primary action fill, so overriding --qy-primary does not change it. To adjust it, change the system selected surface --qy-surface-selected (every selected state follows; --qy-track-selected is only its alias) and --qy-track-selected-foreground.",
+          "decisions": "SegmentedControl produces a value. Use Tabs for content panels (Tabs can also be drawn as the same track with appearance set to track; appearance does not decide semantics) and ToggleGroup for tools whose toggles may all be released. The selected segment is a light ink wash with ink text, not the primary action fill, so overriding --qy-primary does not change it. To adjust it, change the system selected surface --qy-surface-selected (every selected state follows; --qy-track-selected is only its alias) and --qy-track-selected-foreground.",
           "notes": [
             "Inside a Field, the group's name, description, and error land on the radiogroup. Each segment opens its own label scope, so ids are distinct and its name stays the segment text instead of being taken over by the Field label.",
             "Arrow keys follow writing direction: with UILocaleProvider dir=\"rtl\", → moves to the previous segment."
@@ -51566,6 +51904,7 @@
       ],
       "docs": "/docs/components/tabs",
       "notes": [
+        "导航线与轨道是两种外观，表达的都是「几个并列的去处」；用哪一种与条目从哪来无关。切换面板用 Tabs，跳转路由用 NavigationMenu 或链接，产生一个值用 SegmentedControl，三者都可以画成轨道，各自的语义不变。",
         "横向放不下时标签栏可滑动，只在还有标签被切掉的那一端渐隐（data-overflow-start / data-overflow-end，随滚动与尺寸实测，RTL 下起止端互换）；滚到头不带动页面。",
         "到达过的隐藏面板仍挂载但退出可访问树；没到达过的面板不在 DOM 里。不要把切换当成保存成功。"
       ],
@@ -51587,6 +51926,13 @@
               "type": "Base UI Root props",
               "description": "值由应用或原语持有；取消不切换。",
               "descriptionEn": "The application or primitive owns the value; cancellation prevents a switch."
+            },
+            {
+              "name": "appearance",
+              "type": "\"line\" | \"track\"",
+              "description": "标签栏外观，设在 Tabs 上整组生效。line 是导航线，track 是围在轨道里的选中面，横纵都成立。外观不改变 tablist / tab / tabpanel 的语义。",
+              "descriptionEn": "Appearance of the tab list, set on Tabs for the whole set. line is the navigation line; track puts the selected face inside a track, horizontal or vertical. Appearance never changes the tablist / tab / tabpanel semantics.",
+              "default": "\"line\""
             },
             {
               "name": "activateOnFocus",
@@ -51652,7 +51998,15 @@
           {
             "name": "Tabs",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "appearance",
+                "optional": true,
+                "type": "\"track\" | \"line\"",
+                "doc": "标签栏的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，横纵都成立。",
+                "declaredAt": "packages/ui/src/components/tabs.tsx:16"
+              }
+            ],
             "inheritedCount": 282,
             "inheritedFrom": [
               {
@@ -51690,7 +52044,7 @@
                 "optional": true,
                 "type": "\"visited\" | boolean",
                 "doc": "\"visited\"（默认）：第一次到达时才挂载，之后保留；true：一开始就全部挂载；false：离开即卸载。",
-                "declaredAt": "packages/ui/src/components/tabs.tsx:35"
+                "declaredAt": "packages/ui/src/components/tabs.tsx:54"
               }
             ],
             "inheritedCount": 279,
@@ -51751,7 +52105,17 @@
           "owner": "tabs",
           "module": "@qingye_lab/ui/components/tabs",
           "propsType": "TabsProps",
-          "signature": "Tabs({ className, ...props }: TabsProps)",
+          "signature": "Tabs({ className, appearance = \"line\", ...props }: TabsProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "TabsAppearance",
+          "kind": "type",
+          "owner": "tabs",
+          "module": "@qingye_lab/ui/components/tabs",
+          "signature": "\"line\" | \"track\"",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -51812,7 +52176,7 @@
           "kind": "type",
           "owner": "tabs",
           "module": "@qingye_lab/ui/components/tabs",
-          "signature": "TabsPrimitive.Root.Props",
+          "signature": "TabsPrimitive.Root.Props & {\n  /** 标签栏的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，横纵都成立。 */\n  appearance?: TabsAppearance;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -51841,8 +52205,12 @@
       ],
       "types": [
         {
+          "name": "TabsAppearance",
+          "definition": "export type TabsAppearance = \"line\" | \"track\";"
+        },
+        {
           "name": "TabsProps",
-          "definition": "export type TabsProps = TabsPrimitive.Root.Props;"
+          "definition": "export type TabsProps = TabsPrimitive.Root.Props & {\n  /** 标签栏的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，横纵都成立。 */\n  appearance?: TabsAppearance;\n};"
         },
         {
           "name": "TabsListProps",
@@ -51892,6 +52260,8 @@
       "dependencies": {
         "runtime": [
           "@base-ui/react",
+          "@tabler/icons-react",
+          "class-variance-authority",
           "clsx",
           "react",
           "tailwind-merge"
@@ -51901,12 +52271,25 @@
       "providers": {
         "exports": [],
         "guidance": [],
-        "usesLocale": false,
+        "usesLocale": true,
         "usesTheme": false,
         "required": [],
-        "contexts": [],
+        "contexts": [
+          {
+            "name": "AppearanceContext",
+            "declaredAt": "packages/ui/src/components/tabs.tsx:13",
+            "defaultValue": "\"line\"",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "Tabs"
+            ]
+          }
+        ],
         "baseUi": [
-          "@base-ui/react/tabs"
+          "@base-ui/react/button",
+          "@base-ui/react/direction-provider",
+          "@base-ui/react/tabs",
+          "@base-ui/react/toggle"
         ],
         "status": "PASS",
         "scope": "Static: React context reads and useUILocale/useTheme calls in the local import closure. useUILocale has a default locale, so a missing UILocaleProvider is tolerated."
@@ -51925,6 +52308,18 @@
           "providers": [],
           "code": "import { Tabs, TabsList, TabsPanel, TabsTab } from \"@qingye_lab/ui/components/tabs\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Input } from \"@qingye_lab/ui/components/input\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"同一条目的两个视角\", titleEn: \"Two views of one item\" } satisfies DemoMeta;\nexport default function Demo() { return <Tabs defaultValue=\"text\"><TabsList aria-label=\"条目视角\"><TabsTab value=\"text\">名称</TabsTab><TabsTab value=\"facts\">事实</TabsTab><TabsTab value=\"unused\" disabled>历史</TabsTab></TabsList><TabsPanel value=\"text\"><Field><FieldLabel>名称草稿</FieldLabel><Input defaultValue=\"同步与导出\" /></Field></TabsPanel><TabsPanel value=\"facts\"><dl className=\"m-0 text-body\"><dt>标识</dt><dd className=\"m-0\">exports</dd><dt>记录数</dt><dd className=\"m-0\">0</dd></dl></TabsPanel></Tabs>; }\n",
           "sha256": "86cc8b8bfd9ee5459a6716a75ed5f4d3d73ef22f0dcde87c0a6446205a1831dc"
+        },
+        {
+          "id": "track",
+          "title": "轨道外观",
+          "source": "apps/docs/src/content/tabs/demos/02-track.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/tabs"
+          ],
+          "providers": [],
+          "code": "import { Tabs, TabsList, TabsPanel, TabsTab } from \"@qingye_lab/ui/components/tabs\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"轨道外观\", titleEn: \"Track appearance\" } satisfies DemoMeta;\nexport default function Demo() {\n  return <Tabs appearance=\"track\" defaultValue=\"day\"><TabsList aria-label=\"统计周期\"><TabsTab value=\"day\">日</TabsTab><TabsTab value=\"week\">周</TabsTab><TabsTab value=\"month\">月</TabsTab></TabsList><TabsPanel value=\"day\">今日 12 条</TabsPanel><TabsPanel value=\"week\">本周 84 条</TabsPanel><TabsPanel value=\"month\">本月 361 条</TabsPanel></Tabs>;\n}\n",
+          "sha256": "63e0ece7f80c7fa915463d1a2aaa95eb938f29d2fc04b701780117d226c14e76"
         }
       ],
       "design": {
@@ -51961,7 +52356,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tabs.tsx",
-        "sha256": "cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e",
+        "sha256": "96d314f6778de1535f266d5db4b31ef9a2cd5fc14b6ae7bb140fceaf3472e448",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "默认手动激活、面板保留挂载；切换视角不等于批准或保存草稿。",
@@ -51972,6 +52367,7 @@
           "category": "Navigation",
           "decisions": "Manual activation and mounted panels are defaults; switching views does not approve or save a draft.",
           "notes": [
+            "The navigation line and the track are two appearances of the same relation, several parallel destinations; which one is used does not depend on where the items come from. Tabs switch panels, NavigationMenu or links change routes and SegmentedControl produces a value; each can be drawn as a track and keeps its own semantics.",
             "When tabs do not fit horizontally the list scrolls and fades only the end that still hides tabs (data-overflow-start / data-overflow-end, measured on scroll and resize, start and end swap in RTL); reaching either end does not scroll the page.",
             "Visited hidden panels remain mounted but leave the accessibility tree; unvisited panels are not in the DOM. Switching is never reported as saving."
           ],
@@ -51986,6 +52382,13 @@
                   "type": "Base UI Root props",
                   "description": "The application or primitive owns the value; cancellation prevents a switch.",
                   "descriptionEn": "The application or primitive owns the value; cancellation prevents a switch."
+                },
+                {
+                  "name": "appearance",
+                  "type": "\"line\" | \"track\"",
+                  "description": "Appearance of the tab list, set on Tabs for the whole set. line is the navigation line; track puts the selected face inside a track, horizontal or vertical. Appearance never changes the tablist / tab / tabpanel semantics.",
+                  "descriptionEn": "Appearance of the tab list, set on Tabs for the whole set. line is the navigation line; track puts the selected face inside a track, horizontal or vertical. Appearance never changes the tablist / tab / tabpanel semantics.",
+                  "default": "\"line\""
                 },
                 {
                   "name": "activateOnFocus",

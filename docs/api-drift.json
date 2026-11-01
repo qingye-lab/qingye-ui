@@ -18,9 +18,9 @@
     "undocumented": 145,
     "undocumentedDeclaredInThisComponentsFile": 28,
     "unresolved": 0,
-    "uncheckedWrittenNames": 194,
+    "uncheckedWrittenNames": 195,
     "uncheckedByReason": {
-      "generic": 133,
+      "generic": 134,
       "part-not-applicable": 33,
       "no-resolved-part-in-group": 13,
       "unparsed": 10,
@@ -1258,6 +1258,13 @@
       "component": "button-group",
       "part": "ButtonGroup",
       "written": "align / wrap / render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "button-group",
+      "part": "ButtonGroupText",
+      "written": "render / ref / 原生属性",
       "token": "原生属性",
       "reason": "generic"
     },

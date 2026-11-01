@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e
+Source SHA-256: 96d314f6778de1535f266d5db4b31ef9a2cd5fc14b6ae7bb140fceaf3472e448
 
 Different views of one object with panel drafts retained.
 
@@ -11,6 +11,7 @@ Different views of one object with panel drafts retained.
 Manual activation and mounted panels are defaults; switching views does not approve or save a draft.
 
 ## Notes
+- The navigation line and the track are two appearances of the same relation, several parallel destinations; which one is used does not depend on where the items come from. Tabs switch panels, NavigationMenu or links change routes and SegmentedControl produces a value; each can be drawn as a track and keeps its own semantics.
 - When tabs do not fit horizontally the list scrolls and fades only the end that still hides tabs (data-overflow-start / data-overflow-end, measured on scroll and resize, start and end swap in RTL); reaching either end does not scroll the page.
 - Visited hidden panels remain mounted but leave the accessibility tree; unvisited panels are not in the DOM. Switching is never reported as saving.
 
@@ -33,6 +34,7 @@ Manual activation and mounted panels are defaults; switching views does not appr
 
 ## Current exports
 - Tabs: function; owner tabs; PASS; props: TabsProps
+- TabsAppearance: type; owner tabs; PASS
 - TabsList: function; owner tabs; PASS; props: TabsListProps
 - TabsListProps: type; owner tabs; PASS
 - TabsPanel: function; owner tabs; PASS; props: TabsPanelProps
@@ -46,7 +48,7 @@ Manual activation and mounted panels are defaults; switching views does not appr
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Tabs
-- no props declared by this library
+- `appearance?`: `"track" | "line"`. 标签栏的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，横纵都成立。
 - plus 282 inherited (@types/react 275, @base-ui/react 7); not expanded, see the installed declarations
 
 ### TabsList
@@ -62,10 +64,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 289 inherited (@types/react 283, @base-ui/react 6); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context AppearanceContext: without a provider default-value; provided by Tabs
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -73,6 +76,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### Tabs / TabsList
 The current view and a manually activated list.
 - value / defaultValue / onValueChange / orientation: Base UI Root props. The application or primitive owns the value; cancellation prevents a switch.
+- appearance: "line" | "track"; default "line". Appearance of the tab list, set on Tabs for the whole set. line is the navigation line; track puts the selected face inside a track, horizontal or vertical. Appearance never changes the tablist / tab / tabpanel semantics.
 - activateOnFocus: boolean; default false. Focus movement does not activate by default; consumers may explicitly opt in.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
@@ -100,4 +104,15 @@ import { Input } from "@qingye_lab/ui/components/input";
 import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "同一条目的两个视角", titleEn: "Two views of one item" } satisfies DemoMeta;
 export default function Demo() { return <Tabs defaultValue="text"><TabsList aria-label="条目视角"><TabsTab value="text">名称</TabsTab><TabsTab value="facts">事实</TabsTab><TabsTab value="unused" disabled>历史</TabsTab></TabsList><TabsPanel value="text"><Field><FieldLabel>名称草稿</FieldLabel><Input defaultValue="同步与导出" /></Field></TabsPanel><TabsPanel value="facts"><dl className="m-0 text-body"><dt>标识</dt><dd className="m-0">exports</dd><dt>记录数</dt><dd className="m-0">0</dd></dl></TabsPanel></Tabs>; }
+```
+
+### 轨道外观
+Source: apps/docs/src/content/tabs/demos/02-track.tsx
+```tsx
+import { Tabs, TabsList, TabsPanel, TabsTab } from "@qingye_lab/ui/components/tabs";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "轨道外观", titleEn: "Track appearance" } satisfies DemoMeta;
+export default function Demo() {
+  return <Tabs appearance="track" defaultValue="day"><TabsList aria-label="统计周期"><TabsTab value="day">日</TabsTab><TabsTab value="week">周</TabsTab><TabsTab value="month">月</TabsTab></TabsList><TabsPanel value="day">今日 12 条</TabsPanel><TabsPanel value="week">本周 84 条</TabsPanel><TabsPanel value="month">本月 361 条</TabsPanel></Tabs>;
+}
 ```

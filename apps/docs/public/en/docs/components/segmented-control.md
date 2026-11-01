@@ -3,12 +3,12 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
-Source SHA-256: 681855132b1ff4c75ee3955936c2caef73ac618dd912975a375c30d858ea52f2
+Source SHA-256: 366d8d92678c1a91950609486d0435c80e07d89f95621d0781bab30f0ba37a09
 
 Enter one value from a small set of visible segments.
 
 ## Decision
-SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup for tools whose toggles may all be released. The selected segment is a light ink wash with ink text, not the primary action fill, so overriding --qy-primary does not change it. To adjust it, change the system selected surface --qy-surface-selected (every selected state follows; --qy-track-selected is only its alias) and --qy-track-selected-foreground.
+SegmentedControl produces a value. Use Tabs for content panels (Tabs can also be drawn as the same track with appearance set to track; appearance does not decide semantics) and ToggleGroup for tools whose toggles may all be released. The selected segment is a light ink wash with ink text, not the primary action fill, so overriding --qy-primary does not change it. To adjust it, change the system selected surface --qy-surface-selected (every selected state follows; --qy-track-selected is only its alias) and --qy-track-selected-foreground.
 
 ## Notes
 - Inside a Field, the group's name, description, and error land on the radiogroup. Each segment opens its own label scope, so ids are distinct and its name stays the segment text instead of being taken over by the Field label.

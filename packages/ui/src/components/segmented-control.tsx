@@ -5,8 +5,7 @@ import { RadioGroup as SegmentedControlPrimitive } from "@base-ui/react/radio-gr
 import * as React from "react";
 import { OptionScope } from "../labelable-scope";
 import { cn } from "../utils";
-import { trackClassName, trackItemClassName } from "../track";
-import { buttonVariants } from "./button";
+import { trackClassName, trackItemFaceClassName } from "../track";
 import type { ToggleSize } from "./toggle";
 
 export type SegmentedControlSize = ToggleSize;
@@ -38,14 +37,10 @@ export function SegmentedControlItem<Value>({ size, className, render = <button 
   // 两态都是 quiet：焦点是段内一条 1px 线（焦墨），选中段不再是实底，不需要反色焦点线。
   return <OptionScope><SegmentedControlItemPrimitive.Root data-slot="segmented-control-item" data-size={resolvedSize} {...props} render={render} nativeButton={nativeButton}
     className={(state) => cn(
-      buttonVariants({ size: resolvedSize, shape: "label", tone: "neutral", variant: "quiet" }),
-      // 候选高与圆角由轨道倒推（src/track.ts），覆盖按钮自己的几何。
-      trackItemClassName,
-      // 状态叠加（基础层 §19）：悬停是当前状态自己的悬停。选中段悬停不变；未选段字为浓墨，
-      // 悬停回到焦墨、按下出现按下面（--qy-surface-active）。未选段的悬停样式只在未选时出现，不靠类名先后覆盖。
-      state.checked
-        ? "bg-track-selected text-track-selected-foreground not-aria-disabled:hover:bg-track-selected not-aria-disabled:active:bg-track-selected"
-        : "text-muted-foreground not-aria-disabled:hover:text-foreground not-aria-disabled:active:bg-(--qy-surface-active)",
+      // 条目的面（按钮 quiet 面 + 轨道倒推的候选高与圆角 + 选中/未选的墨色）与 Tabs、NavigationMenu 的轨道外观
+      // 共用一份：src/track.ts 的 trackItemFaceClassName。悬停是当前状态自己的悬停：选中段悬停不变，
+      // 未选段字回到焦墨、按下出现按下面。
+      trackItemFaceClassName(state.checked, resolvedSize),
       state.disabled && "cursor-not-allowed opacity-disabled",
       state.readOnly && "cursor-default",
       typeof className === "function" ? className(state) : className,

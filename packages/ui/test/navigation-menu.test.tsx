@@ -24,4 +24,17 @@ describe("NavigationMenu", () => {
     expect(screen.queryByRole("link", { name: "本地集合" })).toBeNull();
     expect(screen.getByRole("link", { name: "成员" })).toBeInTheDocument();
   });
+  it("keeps links, aria-current and the dropdown under the track appearance", async () => {
+    const user = userEvent.setup();
+    render(<NavigationMenu aria-label="导航" appearance="track" delay={0}><NavigationMenuList>
+      <NavigationMenuItem value="home"><NavigationMenuLink active href="#home">首页</NavigationMenuLink></NavigationMenuItem>
+      <NavigationMenuItem value="group"><NavigationMenuTrigger>集合</NavigationMenuTrigger><NavigationMenuContent><NavigationMenuLink href="#members">成员</NavigationMenuLink></NavigationMenuContent></NavigationMenuItem>
+    </NavigationMenuList><NavigationMenuPortal><NavigationMenuPositioner><NavigationMenuPopup><NavigationMenuViewport /></NavigationMenuPopup></NavigationMenuPositioner></NavigationMenuPortal></NavigationMenu>);
+    expect(screen.getByRole("navigation", { name: "导航" })).toHaveAttribute("data-appearance", "track");
+    expect(screen.getByRole("link", { name: "首页" })).toHaveAttribute("aria-current", "page");
+    await user.click(screen.getByRole("button", { name: "集合" }));
+    const members = await screen.findByRole("link", { name: "成员" });
+    expect(members).toHaveAttribute("href", "#members");
+    expect(members).not.toHaveAttribute("aria-current");
+  });
 });

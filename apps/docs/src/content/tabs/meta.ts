@@ -30,6 +30,13 @@ export default {
           "descriptionEn": "The application or primitive owns the value; cancellation prevents a switch."
         },
         {
+          "name": "appearance",
+          "type": "\"line\" | \"track\"",
+          "description": "标签栏外观，设在 Tabs 上整组生效。line 是导航线，track 是围在轨道里的选中面，横纵都成立。外观不改变 tablist / tab / tabpanel 的语义。",
+          "descriptionEn": "Appearance of the tab list, set on Tabs for the whole set. line is the navigation line; track puts the selected face inside a track, horizontal or vertical. Appearance never changes the tablist / tab / tabpanel semantics.",
+          "default": "\"line\""
+        },
+        {
           "name": "activateOnFocus",
           "type": "boolean",
           "description": "默认焦点移动不自动切换；消费者可明确选择自动激活。",
@@ -85,10 +92,12 @@ export default {
     }
   ],
   "notes": [
+    "导航线与轨道是两种外观，表达的都是「几个并列的去处」；用哪一种与条目从哪来无关。切换面板用 Tabs，跳转路由用 NavigationMenu 或链接，产生一个值用 SegmentedControl，三者都可以画成轨道，各自的语义不变。",
     "横向放不下时标签栏可滑动，只在还有标签被切掉的那一端渐隐（data-overflow-start / data-overflow-end，随滚动与尺寸实测，RTL 下起止端互换）；滚到头不带动页面。",
     "到达过的隐藏面板仍挂载但退出可访问树；没到达过的面板不在 DOM 里。不要把切换当成保存成功。"
   ],
   "notesEn": [
+    "The navigation line and the track are two appearances of the same relation, several parallel destinations; which one is used does not depend on where the items come from. Tabs switch panels, NavigationMenu or links change routes and SegmentedControl produces a value; each can be drawn as a track and keeps its own semantics.",
     "When tabs do not fit horizontally the list scrolls and fades only the end that still hides tabs (data-overflow-start / data-overflow-end, measured on scroll and resize, start and end swap in RTL); reaching either end does not scroll the page.",
     "Visited hidden panels remain mounted but leave the accessibility tree; unvisited panels are not in the DOM. Switching is never reported as saving."
   ],

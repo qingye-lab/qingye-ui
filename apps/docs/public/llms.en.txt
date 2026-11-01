@@ -21,7 +21,7 @@
 - [Breadcrumb](/en/docs/components/breadcrumb.md): Parent links and an explicit current location.
 - [BulkActionBar](/en/docs/components/bulk-action-bar.md): Shared actions with explicit targets, versions and scope.
 - [Button](/en/docs/components/button.md): Trigger a named action with a clear object and consequence. The caller owns its state.
-- [ButtonGroup](/en/docs/components/button-group.md): Give actions in one scope a shared name and spacing.
+- [ButtonGroup](/en/docs/components/button-group.md): Give actions in one scope a shared name, spaced apart or attached into one body.
 - [Calendar](/en/docs/components/calendar.md): Navigate a local calendar and select a day, multiple dates, or a range.
 - [Card](/en/docs/components/card.md): Bound an independently identifiable object.
 - [Cascader](/en/docs/components/cascader.md): Choose one value along a root-to-leaf path, with each level's candidates in its own column.

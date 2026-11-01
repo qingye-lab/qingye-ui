@@ -32,6 +32,25 @@ describe("Tabs", () => {
     expect(screen.getByLabelText("b").closest("[data-slot=tabs-panel]")).toHaveAttribute("hidden");
     expect(mounts).toEqual(["a", "c", "b", "d"]);
   });
+  it("keeps tab semantics and manual activation under the track appearance, horizontal and vertical", async () => {
+    const user = userEvent.setup();
+    const { unmount } = render(<Tabs appearance="track" defaultValue="a"><TabsList aria-label="视角"><TabsTab value="a">A</TabsTab><TabsTab value="b">B</TabsTab></TabsList><TabsPanel value="a">面板 A</TabsPanel><TabsPanel value="b">面板 B</TabsPanel></Tabs>);
+    expect(screen.getByRole("tablist", { name: "视角" })).toBeInTheDocument();
+    expect(document.querySelector("[data-slot=tabs]")).toHaveAttribute("data-appearance", "track");
+    expect(screen.getByRole("tab", { name: "A" })).toHaveAttribute("aria-selected", "true");
+    await user.click(screen.getByRole("tab", { name: "B" }));
+    expect(screen.getByRole("tab", { name: "B" })).toHaveAttribute("aria-selected", "true");
+    expect(screen.getByText("面板 B").closest("[role=tabpanel]")).not.toHaveAttribute("hidden");
+    unmount();
+    render(<Tabs appearance="track" orientation="vertical" defaultValue="a"><TabsList aria-label="视角"><TabsTab value="a">A</TabsTab><TabsTab value="b">B</TabsTab></TabsList><TabsPanel value="a">面板 A</TabsPanel><TabsPanel value="b">面板 B</TabsPanel></Tabs>);
+    expect(screen.getByRole("tablist")).toHaveAttribute("aria-orientation", "vertical");
+    await user.tab(); await user.keyboard("{ArrowDown}");
+    expect(screen.getByRole("tab", { name: "B" })).toHaveFocus();
+  });
+  it("defaults to the line appearance", () => {
+    render(<Tabs defaultValue="a"><TabsList aria-label="视角"><TabsTab value="a">A</TabsTab></TabsList><TabsPanel value="a">A</TabsPanel></Tabs>);
+    expect(document.querySelector("[data-slot=tabs]")).toHaveAttribute("data-appearance", "line");
+  });
   describe("overflow edges", () => {
     afterEach(() => vi.restoreAllMocks());
     function stubMetrics(scrollWidth: number, clientWidth: number) {

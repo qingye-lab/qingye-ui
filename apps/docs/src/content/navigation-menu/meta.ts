@@ -38,6 +38,13 @@ export default {
           "descriptionEn": "Expanded groups may be controlled or uncontrolled; cancellation retains the current value."
         },
         {
+          "name": "appearance",
+          "type": "\"line\" | \"track\"",
+          "description": "顶栏目的地的外观，设在 NavigationMenu 上整组生效。line 是导航线；track 是围在轨道里的选中面，当前项（active）为选中，带下拉的触发器同样成立。下拉面板里的链接不受影响；外观不改变链接与 aria-current 的语义。",
+          "descriptionEn": "Appearance of the top-level destinations, set on NavigationMenu for the whole set. line is the navigation line; track puts the selected face inside a track, with the active item selected, and dropdown triggers fit as well. Links inside the dropdown panel are unaffected, and appearance never changes link or aria-current semantics.",
+          "default": "\"line\""
+        },
+        {
           "name": "render / ref / native props",
           "type": "Base UI part props",
           "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",

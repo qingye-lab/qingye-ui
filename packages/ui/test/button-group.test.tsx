@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { createRef } from "react";
 import { expect, test, vi } from "vitest";
 import { Button } from "../src/components/button";
-import { ButtonGroup } from "../src/components/button-group";
+import { ButtonGroup, ButtonGroupSeparator, ButtonGroupText } from "../src/components/button-group";
 
 test("a named action group preserves each action and its native tab order", async () => {
   const user = userEvent.setup();
@@ -43,4 +43,31 @@ test("a missing or blank group name fails explicitly, an aria-labelledby name is
   expect(() => render(<ButtonGroup aria-label=" "><Button>应用</Button></ButtonGroup>)).toThrow(/aria-label/);
   render(<><span id="scope">编辑</span><ButtonGroup aria-labelledby="scope"><Button>应用</Button></ButtonGroup></>);
   expect(screen.getByRole("group", { name: "编辑" })).toBeInTheDocument();
+});
+
+test("an attached group keeps its name, member focus order and the caller's role override", async () => {
+  const user = userEvent.setup();
+  render(<ButtonGroup aria-label="分页" attached><Button variant="bordered">上一页</Button><ButtonGroupText>3 / 12</ButtonGroupText><Button variant="bordered">下一页</Button></ButtonGroup>);
+  const group = screen.getByRole("group", { name: "分页" });
+  expect(group).toHaveAttribute("data-attached");
+  await user.tab();
+  expect(screen.getByRole("button", { name: "上一页" })).toHaveFocus();
+  await user.tab();
+  // 静态文字段不进焦点顺序，也不是按钮。
+  expect(screen.getByRole("button", { name: "下一页" })).toHaveFocus();
+  expect(screen.getByText("3 / 12")).toHaveAttribute("data-slot", "button-group-text");
+  expect(screen.queryByRole("button", { name: "3 / 12" })).toBeNull();
+});
+
+test("a group is not attached unless asked, and the separator follows the group's axis", () => {
+  const { rerender } = render(<ButtonGroup aria-label="操作"><Button>应用</Button><ButtonGroupSeparator decorative={false} /><Button>重置</Button></ButtonGroup>);
+  expect(screen.getByRole("group", { name: "操作" })).not.toHaveAttribute("data-attached");
+  expect(screen.getByRole("separator")).toHaveAttribute("aria-orientation", "vertical");
+  rerender(<ButtonGroup aria-label="操作" orientation="vertical"><Button>应用</Button><ButtonGroupSeparator decorative={false} /><Button>重置</Button></ButtonGroup>);
+  expect(screen.getByRole("separator")).toHaveAttribute("aria-orientation", "horizontal");
+});
+
+test("a separator is decorative by default and leaves the accessibility tree", () => {
+  render(<ButtonGroup aria-label="操作" attached><Button>应用</Button><ButtonGroupSeparator /><Button>重置</Button></ButtonGroup>);
+  expect(screen.queryByRole("separator")).toBeNull();
 });
