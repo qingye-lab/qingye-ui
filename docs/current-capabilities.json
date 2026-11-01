@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-01T05:16:08.061Z",
-  "revision": "d05dca33183fac855f1fd7a5f8ea52abbb1acd57",
+  "generatedAt": "2026-11-01T05:19:20.733Z",
+  "revision": "ef0cf8a1e8c8ac76de1ef266d4ee2ef386db7bd1",
   "fingerprint": {
-    "sha256": "53037536dec569d868ecefe411498b887d3b5f1aa070e47ec40b8a1aefae9dcc",
+    "sha256": "a6869c573007f9789752f0583d95563f2a7333aa50a82be7890be953ba10ad38",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -48,7 +48,7 @@
       },
       {
         "path": "apps/docs/src/content/button-group/meta.ts",
-        "sha256": "105def784b772fd41c32c8e813ff8b143b30ba768cfbfcb3e74c90ebb6370a96"
+        "sha256": "c23a929c9305be53e8c7c6499588e3ae36b2e467272d6a49bdcf3e799faa942b"
       },
       {
         "path": "apps/docs/src/content/button/meta.ts",
@@ -232,7 +232,7 @@
       },
       {
         "path": "apps/docs/src/content/navigation-menu/meta.ts",
-        "sha256": "fac66a489781447cc5d459a902d56a0f22ad2d67862d4cee6d9825b1750faa6a"
+        "sha256": "cfc9c99aecef962e76db63354383d7d314913a1a9cb17a258e1688af2838fff9"
       },
       {
         "path": "apps/docs/src/content/number-field/meta.ts",
@@ -300,7 +300,7 @@
       },
       {
         "path": "apps/docs/src/content/segmented-control/meta.ts",
-        "sha256": "4b6474239a311588da3810b4ab320e478ce6d0484f7ef4c5ffa500db1e49f12f"
+        "sha256": "ded746934f809d92f2e6cea63525c25126039726ebfb656b6873fb70a0fc633e"
       },
       {
         "path": "apps/docs/src/content/select/meta.ts",
@@ -352,7 +352,7 @@
       },
       {
         "path": "apps/docs/src/content/tabs/meta.ts",
-        "sha256": "74040fb760391c3b4492b2088df0acbdf208b5ea4d37ab38def2ed92f6ec7892"
+        "sha256": "70fa5a305a0e5c2f0fd716f70e30fc46dcc92950cc8ebc7d0f657b23fcd38b8d"
       },
       {
         "path": "apps/docs/src/content/tag-input/meta.ts",
@@ -432,7 +432,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "3fc3dd1e87bd8cf39c99ba82f8a6da7c089e50aee9586ab0e60e05ef79420039"
+        "sha256": "57201ba5ea35d8524d448370333b0c1df2aa12f6277460b451ab588edf6d6235"
       },
       {
         "path": "packages/ui/motion.css",
@@ -484,7 +484,7 @@
       },
       {
         "path": "packages/ui/src/components/button-group.tsx",
-        "sha256": "d9725a9ff2481d2491417226306c5483fad4bc0cb660400d03af2ccd4989fb23"
+        "sha256": "2f4dd719cf1870157eead31e1aef929258879c948157458f8751c2ad64463222"
       },
       {
         "path": "packages/ui/src/components/button.tsx",
@@ -668,7 +668,7 @@
       },
       {
         "path": "packages/ui/src/components/navigation-menu.tsx",
-        "sha256": "abc91fdc8bbf4ab987c0cc35f6b9e5e35ba590dd845c7cc556000d16d97acf10"
+        "sha256": "c3608883416f4df54beb12ab8b53eff90781fec1dfcac588351999b0269008b4"
       },
       {
         "path": "packages/ui/src/components/number-field.tsx",
@@ -736,7 +736,7 @@
       },
       {
         "path": "packages/ui/src/components/segmented-control.tsx",
-        "sha256": "681855132b1ff4c75ee3955936c2caef73ac618dd912975a375c30d858ea52f2"
+        "sha256": "366d8d92678c1a91950609486d0435c80e07d89f95621d0781bab30f0ba37a09"
       },
       {
         "path": "packages/ui/src/components/select.tsx",
@@ -788,7 +788,7 @@
       },
       {
         "path": "packages/ui/src/components/tabs.tsx",
-        "sha256": "cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e"
+        "sha256": "96d314f6778de1535f266d5db4b31ef9a2cd5fc14b6ae7bb140fceaf3472e448"
       },
       {
         "path": "packages/ui/src/components/tag-input.tsx",
@@ -3913,7 +3913,15 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/button-group.tsx",
-            "line": 11
+            "line": 36
+          }
+        },
+        {
+          "name": "ButtonGroupOrientation",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/button-group.tsx",
+            "line": 12
           }
         },
         {
@@ -3921,7 +3929,39 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/button-group.tsx",
-            "line": 7
+            "line": 15
+          }
+        },
+        {
+          "name": "ButtonGroupSeparator",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/button-group.tsx",
+            "line": 75
+          }
+        },
+        {
+          "name": "ButtonGroupSeparatorProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/button-group.tsx",
+            "line": 72
+          }
+        },
+        {
+          "name": "ButtonGroupText",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/button-group.tsx",
+            "line": 62
+          }
+        },
+        {
+          "name": "ButtonGroupTextProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/button-group.tsx",
+            "line": 56
           }
         }
       ],
@@ -3929,21 +3969,23 @@
         "path": "apps/docs/src/content/button-group/meta.ts",
         "title": "动作组 ButtonGroup",
         "titleEn": "ButtonGroup",
-        "description": "为同一范围的动作提供共同名称与间隔。",
-        "descriptionEn": "Give actions in one scope a shared name and spacing.",
+        "description": "为同一范围的动作提供共同名称，可独立排列或连成一体。",
+        "descriptionEn": "Give actions in one scope a shared name, spaced apart or attached into one body.",
         "category": "通用",
         "layer": "primitive",
         "source": "local",
         "exports": [
-          "ButtonGroup"
+          "ButtonGroup",
+          "ButtonGroupText",
+          "ButtonGroupSeparator"
         ],
         "keywords": [
           "button-group",
           "动作组",
           "按钮组"
         ],
-        "decisions": "共同名称说明范围，每个按钮仍说明自己的动作。ButtonGroup 不选择按钮、不传播禁用，也不建立工具栏键盘行为。",
-        "decisionsEn": "The shared name identifies the scope; each button still names its action. ButtonGroup adds no selection, disabled propagation or toolbar keyboard behavior.",
+        "decisions": "共同名称说明范围，每个按钮仍说明自己的动作。ButtonGroup 不选择按钮、不传播禁用，也不建立工具栏键盘行为。连体（attached）只改变外形：相邻边合并成一条线，成员的名称、焦点与禁用不变；拆分按钮就是连体组里一个主操作加一个打开 Menu 的图标按钮。",
+        "decisionsEn": "The shared name identifies the scope; each button still names its action. ButtonGroup adds no selection, disabled propagation or toolbar keyboard behavior. Attached only changes the outline: adjacent edges merge into one line while each member keeps its name, focus and disabled state. A split button is an attached group with a primary action and an icon button that opens a Menu.",
         "design": {
           "methods": [
             "名实相符",
@@ -3957,7 +3999,8 @@
             "用动作组替代单选、多选或工具栏。"
           ],
           "composition": [
-            "复用 Group 和 action-gap；成员使用 Button，真实状态仍在成员处表达。"
+            "复用 Group 和 action-gap；成员使用 Button，真实状态仍在成员处表达。",
+            "静态文字段用 ButtonGroupText，成员之间的分隔线用 ButtonGroupSeparator；拆分按钮的图标按钮必须有可访问名称。"
           ],
           "stateOwner": {
             "library": [
@@ -3968,7 +4011,7 @@
             ]
           },
           "responsive": [
-            "横向默认换行，也可纵向；不合并成员轮廓。"
+            "横向默认换行，也可纵向；连体时不换行，相邻边合并。"
           ],
           "customization": [
             "className 与 render 属于组；不统一改写子按钮。"
@@ -3982,7 +4025,8 @@
             "Replacing single/multiple selection or a toolbar with an action group."
           ],
           "composition": [
-            "Use Group and action-gap; Button members retain their own actual states."
+            "Use Group and action-gap; Button members retain their own actual states.",
+            "Use ButtonGroupText for a static text segment and ButtonGroupSeparator between members; the icon button of a split button needs an accessible name."
           ],
           "stateOwner": {
             "library": [
@@ -3993,7 +4037,7 @@
             ]
           },
           "responsive": [
-            "Horizontal groups wrap by default; vertical groups are available. Member contours stay independent."
+            "Horizontal groups wrap by default; vertical groups are available. Attached groups do not wrap and their adjacent edges merge."
           ],
           "customization": [
             "className and render belong to the group; do not rewrite every child Button."
@@ -4019,11 +4063,53 @@
                 "descriptionEn": "Layout direction."
               },
               {
+                "name": "attached",
+                "type": "boolean",
+                "default": "false",
+                "description": "连体：相邻按钮的边合并为一条线，只保留整组外侧的圆角，横排纵排都成立；聚焦或悬停的成员升到上层，边线完整可见。连体时不换行。",
+                "descriptionEn": "Attach members: adjacent edges merge into one line and only the outer corners of the whole group stay rounded, horizontal or vertical. The hovered or focused member is raised so its edge shows in full. Attached groups do not wrap."
+              },
+              {
                 "name": "align / wrap / render / ref / 原生属性",
                 "nameEn": "align / wrap / render / ref / native props",
                 "type": "ButtonGroupProps",
                 "description": "沿用 Group 的组合入口，间隔默认 action-gap。",
                 "descriptionEn": "Uses Group composition props with action spacing."
+              }
+            ]
+          },
+          {
+            "name": "ButtonGroupText",
+            "description": "组内静态文字段，与同档 bordered 按钮同高、同边线，不可点击也不进焦点顺序。",
+            "descriptionEn": "A static text segment in the group, as tall as a bordered button of the same size with the same outline; not clickable and outside the tab order.",
+            "props": [
+              {
+                "name": "size",
+                "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+                "default": "\"md\"",
+                "description": "与同组按钮同一档。",
+                "descriptionEn": "The same size as the buttons in the group."
+              },
+              {
+                "name": "render / ref / 原生属性",
+                "nameEn": "render / ref / native props",
+                "type": "useRender props",
+                "description": "默认 span。",
+                "descriptionEn": "A span by default."
+              }
+            ]
+          },
+          {
+            "name": "ButtonGroupSeparator",
+            "description": "成员之间的分隔线，方向与组相反；非连体组里同样可用。",
+            "descriptionEn": "A divider between members, perpendicular to the group axis; also usable in groups that are not attached.",
+            "props": [
+              {
+                "name": "decorative",
+                "type": "boolean",
+                "default": "true",
+                "description": "分界已由成员表达，默认只是装饰；设为 false 时是带方向的 separator。",
+                "descriptionEn": "Members already express the boundary, so it is decorative by default; false exposes an oriented separator."
               }
             ]
           }
@@ -4041,11 +4127,37 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/button-group.tsx",
-              "line": 11
+              "line": 36
             },
             "rootEntry": {
               "path": "packages/ui/src/components/button-group.tsx",
-              "line": 11
+              "line": 36
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ButtonGroupText",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/button-group.tsx",
+              "line": 62
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/button-group.tsx",
+              "line": 62
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ButtonGroupSeparator",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/button-group.tsx",
+              "line": 75
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/button-group.tsx",
+              "line": 75
             },
             "status": "PRESENT"
           }
@@ -18128,67 +18240,11 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 12
+            "line": 22
           }
         },
         {
-          "name": "NavigationMenuContent",
-          "kind": "value",
-          "source": {
-            "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 52
-          }
-        },
-        {
-          "name": "NavigationMenuContentProps",
-          "kind": "type",
-          "source": {
-            "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 51
-          }
-        },
-        {
-          "name": "NavigationMenuGroup",
-          "kind": "value",
-          "source": {
-            "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 43
-          }
-        },
-        {
-          "name": "NavigationMenuGroupLabel",
-          "kind": "value",
-          "source": {
-            "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 48
-          }
-        },
-        {
-          "name": "NavigationMenuGroupLabelProps",
-          "kind": "type",
-          "source": {
-            "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 46
-          }
-        },
-        {
-          "name": "NavigationMenuGroupProps",
-          "kind": "type",
-          "source": {
-            "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 38
-          }
-        },
-        {
-          "name": "NavigationMenuItem",
-          "kind": "value",
-          "source": {
-            "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 17
-          }
-        },
-        {
-          "name": "NavigationMenuItemProps",
+          "name": "NavigationMenuAppearance",
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
@@ -18196,11 +18252,75 @@
           }
         },
         {
+          "name": "NavigationMenuContent",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/navigation-menu.tsx",
+            "line": 75
+          }
+        },
+        {
+          "name": "NavigationMenuContentProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/navigation-menu.tsx",
+            "line": 74
+          }
+        },
+        {
+          "name": "NavigationMenuGroup",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/navigation-menu.tsx",
+            "line": 66
+          }
+        },
+        {
+          "name": "NavigationMenuGroupLabel",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/navigation-menu.tsx",
+            "line": 71
+          }
+        },
+        {
+          "name": "NavigationMenuGroupLabelProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/navigation-menu.tsx",
+            "line": 69
+          }
+        },
+        {
+          "name": "NavigationMenuGroupProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/navigation-menu.tsx",
+            "line": 61
+          }
+        },
+        {
+          "name": "NavigationMenuItem",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/navigation-menu.tsx",
+            "line": 31
+          }
+        },
+        {
+          "name": "NavigationMenuItemProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/navigation-menu.tsx",
+            "line": 30
+          }
+        },
+        {
           "name": "NavigationMenuLink",
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 29
+            "line": 51
           }
         },
         {
@@ -18208,7 +18328,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 21
+            "line": 43
           }
         },
         {
@@ -18216,7 +18336,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 15
+            "line": 25
           }
         },
         {
@@ -18224,7 +18344,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 14
+            "line": 24
           }
         },
         {
@@ -18232,7 +18352,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 59
+            "line": 82
           }
         },
         {
@@ -18240,7 +18360,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 58
+            "line": 81
           }
         },
         {
@@ -18248,7 +18368,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 13
+            "line": 23
           }
         },
         {
@@ -18256,7 +18376,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 54
+            "line": 77
           }
         },
         {
@@ -18264,7 +18384,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 53
+            "line": 76
           }
         },
         {
@@ -18273,7 +18393,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/navigation-menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 62
+            "line": 85
           }
         },
         {
@@ -18281,7 +18401,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 11
+            "line": 18
           }
         },
         {
@@ -18289,7 +18409,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 20
+            "line": 38
           }
         },
         {
@@ -18297,7 +18417,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 18
+            "line": 36
           }
         },
         {
@@ -18305,7 +18425,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 61
+            "line": 84
           }
         },
         {
@@ -18313,7 +18433,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
-            "line": 60
+            "line": 83
           }
         }
       ],
@@ -18362,6 +18482,13 @@
                 "type": "Base UI Root props",
                 "description": "展开分组受控或非受控；取消保留当前值。",
                 "descriptionEn": "Expanded groups may be controlled or uncontrolled; cancellation retains the current value."
+              },
+              {
+                "name": "appearance",
+                "type": "\"line\" | \"track\"",
+                "description": "顶栏目的地的外观，设在 NavigationMenu 上整组生效。line 是导航线；track 是围在轨道里的选中面，当前项（active）为选中，带下拉的触发器同样成立。下拉面板里的链接不受影响；外观不改变链接与 aria-current 的语义。",
+                "descriptionEn": "Appearance of the top-level destinations, set on NavigationMenu for the whole set. line is the navigation line; track puts the selected face inside a track, with the active item selected, and dropdown triggers fit as well. Links inside the dropdown panel are unaffected, and appearance never changes link or aria-current semantics.",
+                "default": "\"line\""
               },
               {
                 "name": "render / ref / native props",
@@ -18484,11 +18611,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 12
+              "line": 22
             },
             "rootEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 12
+              "line": 22
             },
             "status": "PRESENT"
           },
@@ -18497,11 +18624,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 13
+              "line": 23
             },
             "rootEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 13
+              "line": 23
             },
             "status": "PRESENT"
           },
@@ -18510,11 +18637,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 15
+              "line": 25
             },
             "rootEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 15
+              "line": 25
             },
             "status": "PRESENT"
           },
@@ -18523,11 +18650,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 17
+              "line": 31
             },
             "rootEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 17
+              "line": 31
             },
             "status": "PRESENT"
           },
@@ -18536,11 +18663,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 20
+              "line": 38
             },
             "rootEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 20
+              "line": 38
             },
             "status": "PRESENT"
           },
@@ -18549,11 +18676,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 29
+              "line": 51
             },
             "rootEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 29
+              "line": 51
             },
             "status": "PRESENT"
           },
@@ -18562,11 +18689,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 52
+              "line": 75
             },
             "rootEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 52
+              "line": 75
             },
             "status": "PRESENT"
           },
@@ -18575,11 +18702,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 43
+              "line": 66
             },
             "rootEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 43
+              "line": 66
             },
             "status": "PRESENT"
           },
@@ -18588,11 +18715,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 48
+              "line": 71
             },
             "rootEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 48
+              "line": 71
             },
             "status": "PRESENT"
           },
@@ -18601,11 +18728,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 54
+              "line": 77
             },
             "rootEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 54
+              "line": 77
             },
             "status": "PRESENT"
           },
@@ -18614,11 +18741,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 59
+              "line": 82
             },
             "rootEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 59
+              "line": 82
             },
             "status": "PRESENT"
           },
@@ -18627,11 +18754,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 61
+              "line": 84
             },
             "rootEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 61
+              "line": 84
             },
             "status": "PRESENT"
           },
@@ -18640,11 +18767,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 62
+              "line": 85
             },
             "rootEntry": {
               "path": "packages/ui/src/components/navigation-menu.tsx",
-              "line": 62
+              "line": 85
             },
             "status": "PRESENT"
           }
@@ -23386,7 +23513,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/segmented-control.tsx",
-            "line": 18
+            "line": 17
           }
         },
         {
@@ -23394,7 +23521,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/segmented-control.tsx",
-            "line": 31
+            "line": 30
           }
         },
         {
@@ -23403,7 +23530,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/radio/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/segmented-control.tsx",
-            "line": 56
+            "line": 51
           }
         },
         {
@@ -23411,7 +23538,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/segmented-control.tsx",
-            "line": 14
+            "line": 13
           }
         },
         {
@@ -23420,7 +23547,7 @@
           "target": "RadioGroup",
           "source": {
             "path": "packages/ui/src/components/segmented-control.tsx",
-            "line": 56
+            "line": 51
           }
         },
         {
@@ -23428,7 +23555,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/segmented-control.tsx",
-            "line": 13
+            "line": 12
           }
         },
         {
@@ -23436,7 +23563,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/segmented-control.tsx",
-            "line": 12
+            "line": 11
           }
         }
       ],
@@ -23559,8 +23686,8 @@
           "Inside a Field, the group's name, description, and error land on the radiogroup. Each segment opens its own label scope, so ids are distinct and its name stays the segment text instead of being taken over by the Field label.",
           "Arrow keys follow writing direction: with UILocaleProvider dir=\"rtl\", → moves to the previous segment."
         ],
-        "decisions": "SegmentedControl 产生一个新值。切换内容面板用 Tabs；允许全部取消的工具切换用 ToggleGroup。选中段是选中面（清染）加焦墨字，不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它；要调整，改系统的选中面 --qy-surface-selected（全库的选中一起变；--qy-track-selected 只是它的别名）与 --qy-track-selected-foreground。",
-        "decisionsEn": "SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup for tools whose toggles may all be released. The selected segment is a light ink wash with ink text, not the primary action fill, so overriding --qy-primary does not change it. To adjust it, change the system selected surface --qy-surface-selected (every selected state follows; --qy-track-selected is only its alias) and --qy-track-selected-foreground.",
+        "decisions": "SegmentedControl 产生一个新值。切换内容面板用 Tabs（Tabs 也可以用 appearance 设为 track 画成同一条轨道，外观不决定语义）；允许全部取消的工具切换用 ToggleGroup。选中段是选中面（清染）加焦墨字，不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它；要调整，改系统的选中面 --qy-surface-selected（全库的选中一起变；--qy-track-selected 只是它的别名）与 --qy-track-selected-foreground。",
+        "decisionsEn": "SegmentedControl produces a value. Use Tabs for content panels (Tabs can also be drawn as the same track with appearance set to track; appearance does not decide semantics) and ToggleGroup for tools whose toggles may all be released. The selected segment is a light ink wash with ink text, not the primary action fill, so overriding --qy-primary does not change it. To adjust it, change the system selected surface --qy-surface-selected (every selected state follows; --qy-track-selected is only its alias) and --qy-track-selected-foreground.",
         "design": {
           "methods": [
             "名实相符",
@@ -23626,11 +23753,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/segmented-control.tsx",
-              "line": 18
+              "line": 17
             },
             "rootEntry": {
               "path": "packages/ui/src/components/segmented-control.tsx",
-              "line": 18
+              "line": 17
             },
             "status": "PRESENT"
           },
@@ -23639,11 +23766,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/segmented-control.tsx",
-              "line": 31
+              "line": 30
             },
             "rootEntry": {
               "path": "packages/ui/src/components/segmented-control.tsx",
-              "line": 31
+              "line": 30
             },
             "status": "PRESENT"
           },
@@ -23652,11 +23779,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/segmented-control.tsx",
-              "line": 56
+              "line": 51
             },
             "rootEntry": {
               "path": "packages/ui/src/components/segmented-control.tsx",
-              "line": 56
+              "line": 51
             },
             "status": "PRESENT"
           },
@@ -23665,11 +23792,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/segmented-control.tsx",
-              "line": 56
+              "line": 51
             },
             "rootEntry": {
               "path": "packages/ui/src/components/segmented-control.tsx",
-              "line": 56
+              "line": 51
             },
             "status": "PRESENT"
           }
@@ -27878,7 +28005,15 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 8
+            "line": 18
+          }
+        },
+        {
+          "name": "TabsAppearance",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/tabs.tsx",
+            "line": 12
           }
         },
         {
@@ -27886,7 +28021,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 25
+            "line": 35
           }
         },
         {
@@ -27894,7 +28029,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 9
+            "line": 19
           }
         },
         {
@@ -27902,7 +28037,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 44
+            "line": 63
           }
         },
         {
@@ -27910,7 +28045,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 31
+            "line": 50
           }
         },
         {
@@ -27919,7 +28054,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tabs/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 49
+            "line": 68
           }
         },
         {
@@ -27927,7 +28062,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 7
+            "line": 14
           }
         },
         {
@@ -27935,7 +28070,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 30
+            "line": 42
           }
         },
         {
@@ -27943,7 +28078,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 29
+            "line": 41
           }
         }
       ],
@@ -27983,6 +28118,13 @@
                 "type": "Base UI Root props",
                 "description": "值由应用或原语持有；取消不切换。",
                 "descriptionEn": "The application or primitive owns the value; cancellation prevents a switch."
+              },
+              {
+                "name": "appearance",
+                "type": "\"line\" | \"track\"",
+                "description": "标签栏外观，设在 Tabs 上整组生效。line 是导航线，track 是围在轨道里的选中面，横纵都成立。外观不改变 tablist / tab / tabpanel 的语义。",
+                "descriptionEn": "Appearance of the tab list, set on Tabs for the whole set. line is the navigation line; track puts the selected face inside a track, horizontal or vertical. Appearance never changes the tablist / tab / tabpanel semantics.",
+                "default": "\"line\""
               },
               {
                 "name": "activateOnFocus",
@@ -28040,10 +28182,12 @@
           }
         ],
         "notes": [
+          "导航线与轨道是两种外观，表达的都是「几个并列的去处」；用哪一种与条目从哪来无关。切换面板用 Tabs，跳转路由用 NavigationMenu 或链接，产生一个值用 SegmentedControl，三者都可以画成轨道，各自的语义不变。",
           "横向放不下时标签栏可滑动，只在还有标签被切掉的那一端渐隐（data-overflow-start / data-overflow-end，随滚动与尺寸实测，RTL 下起止端互换）；滚到头不带动页面。",
           "到达过的隐藏面板仍挂载但退出可访问树；没到达过的面板不在 DOM 里。不要把切换当成保存成功。"
         ],
         "notesEn": [
+          "The navigation line and the track are two appearances of the same relation, several parallel destinations; which one is used does not depend on where the items come from. Tabs switch panels, NavigationMenu or links change routes and SegmentedControl produces a value; each can be drawn as a track and keeps its own semantics.",
           "When tabs do not fit horizontally the list scrolls and fades only the end that still hides tabs (data-overflow-start / data-overflow-end, measured on scroll and resize, start and end swap in RTL); reaching either end does not scroll the page.",
           "Visited hidden panels remain mounted but leave the accessibility tree; unvisited panels are not in the DOM. Switching is never reported as saving."
         ],
@@ -28114,11 +28258,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 8
+              "line": 18
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 8
+              "line": 18
             },
             "status": "PRESENT"
           },
@@ -28127,11 +28271,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 25
+              "line": 35
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 25
+              "line": 35
             },
             "status": "PRESENT"
           },
@@ -28140,11 +28284,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 30
+              "line": 42
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 30
+              "line": 42
             },
             "status": "PRESENT"
           },
@@ -28153,11 +28297,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 44
+              "line": 63
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 44
+              "line": 63
             },
             "status": "PRESENT"
           },
@@ -28166,11 +28310,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 49
+              "line": 68
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 49
+              "line": 68
             },
             "status": "PRESENT"
           }
@@ -41096,31 +41240,31 @@
   "controlReferences": [
     {
       "name": "--qy-control-content-gap",
-      "componentSourceOccurrences": 15,
+      "componentSourceOccurrences": 16,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-lg",
-      "componentSourceOccurrences": 2,
+      "componentSourceOccurrences": 3,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-lg-icon",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-lg-icon-narrow",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-lg-narrow",
-      "componentSourceOccurrences": 2,
+      "componentSourceOccurrences": 3,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -41132,7 +41276,7 @@
     },
     {
       "name": "--qy-control-lg-padding-bordered",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -41180,25 +41324,25 @@
     },
     {
       "name": "--qy-control-sm",
-      "componentSourceOccurrences": 12,
+      "componentSourceOccurrences": 13,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-sm-icon",
-      "componentSourceOccurrences": 7,
+      "componentSourceOccurrences": 8,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-sm-icon-narrow",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-sm-narrow",
-      "componentSourceOccurrences": 5,
+      "componentSourceOccurrences": 6,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -41210,31 +41354,31 @@
     },
     {
       "name": "--qy-control-sm-padding-bordered",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xl",
-      "componentSourceOccurrences": 2,
+      "componentSourceOccurrences": 3,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xl-icon",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xl-icon-narrow",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xl-narrow",
-      "componentSourceOccurrences": 2,
+      "componentSourceOccurrences": 3,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -41246,31 +41390,31 @@
     },
     {
       "name": "--qy-control-xl-padding-bordered",
-      "componentSourceOccurrences": 3,
-      "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
-      "runtimeStatus": "NOT_RUN"
-    },
-    {
-      "name": "--qy-control-xs",
       "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
+      "name": "--qy-control-xs",
+      "componentSourceOccurrences": 5,
+      "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
+      "runtimeStatus": "NOT_RUN"
+    },
+    {
       "name": "--qy-control-xs-icon",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xs-icon-narrow",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
     {
       "name": "--qy-control-xs-narrow",
-      "componentSourceOccurrences": 2,
+      "componentSourceOccurrences": 3,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -41282,7 +41426,7 @@
     },
     {
       "name": "--qy-control-xs-padding-bordered",
-      "componentSourceOccurrences": 3,
+      "componentSourceOccurrences": 4,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     }

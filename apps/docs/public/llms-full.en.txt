@@ -1611,12 +1611,12 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
-Source SHA-256: d9725a9ff2481d2491417226306c5483fad4bc0cb660400d03af2ccd4989fb23
+Source SHA-256: 2f4dd719cf1870157eead31e1aef929258879c948157458f8751c2ad64463222
 
-Give actions in one scope a shared name and spacing.
+Give actions in one scope a shared name, spaced apart or attached into one body.
 
 ### Decision
-The shared name identifies the scope; each button still names its action. ButtonGroup adds no selection, disabled propagation or toolbar keyboard behavior.
+The shared name identifies the scope; each button still names its action. ButtonGroup adds no selection, disabled propagation or toolbar keyboard behavior. Attached only changes the outline: adjacent edges merge into one line while each member keeps its name, focus and disabled state. A split button is an attached group with a primary action and an icon button that opens a Menu.
 
 ### Use and ownership
 - Several actions share a named scope.
@@ -1626,32 +1626,48 @@ The shared name identifies the scope; each button still names its action. Button
 
 ### Composition
 - Use Group and action-gap; Button members retain their own actual states.
+- Use ButtonGroupText for a static text segment and ButtonGroupSeparator between members; the icon button of a split button needs an accessible name.
 
 ### Responsive behavior
-- Horizontal groups wrap by default; vertical groups are available. Member contours stay independent.
+- Horizontal groups wrap by default; vertical groups are available. Attached groups do not wrap and their adjacent edges merge.
 
 ### Customization
 - className and render belong to the group; do not rewrite every child Button.
 
 ### Current exports
 - ButtonGroup: function; owner button-group; PASS; props: ButtonGroupProps
+- ButtonGroupOrientation: type; owner button-group; PASS
 - ButtonGroupProps: type; owner button-group; PASS
+- ButtonGroupSeparator: function; owner button-group; PASS; props: ButtonGroupSeparatorProps
+- ButtonGroupSeparatorProps: type; owner button-group; PASS
+- ButtonGroupText: function; owner button-group; PASS; props: ButtonGroupTextProps
+- ButtonGroupTextProps: type; owner button-group; PASS
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### ButtonGroup
 - `align?`: `"center" | "start" | "end" | "stretch" | "baseline"`. 交叉轴对齐（Stack 为横向，Inline 为纵向）。
+- `attached?`: `boolean`. 连体：相邻按钮的边合并成一条线，只保留整组外侧的圆角；横排纵排都成立。默认保持各自独立、带动作间隔。
 - `justify?`: `"center" | "start" | "end" | "between" | "around" | "evenly"`. 主轴分布（Stack 为纵向，Inline 为横向）。纵向分布需要容器高于内容才看得出。
 - `orientation?`: `"horizontal" | "vertical"`.
 - `wrap?`: `boolean`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
+### ButtonGroupSeparator
+- `decorative?`: `boolean`. 已有文字/结构表达分界时，线条仅作装饰。
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### ButtonGroupText
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`. 与同组按钮同一档。
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
 ### Dependencies and providers
-- Runtime: @base-ui/react, clsx, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context OrientationContext: without a provider default-value; provided by ButtonGroup
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -1660,7 +1676,17 @@ Written descriptions; the list above is the type-resolved fact.
 An open action relationship with role=group by default.
 - aria-label / aria-labelledby: string. One is required: the shared scope name, separate from action names. A missing or blank name throws.
 - orientation: "horizontal" | "vertical"; default "horizontal". Layout direction.
+- attached: boolean; default false. Attach members: adjacent edges merge into one line and only the outer corners of the whole group stay rounded, horizontal or vertical. The hovered or focused member is raised so its edge shows in full. Attached groups do not wrap.
 - align / wrap / render / ref / native props: ButtonGroupProps. Uses Group composition props with action spacing.
+
+#### ButtonGroupText
+A static text segment in the group, as tall as a bordered button of the same size with the same outline; not clickable and outside the tab order.
+- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". The same size as the buttons in the group.
+- render / ref / native props: useRender props. A span by default.
+
+#### ButtonGroupSeparator
+A divider between members, perpendicular to the group axis; also usable in groups that are not attached.
+- decorative: boolean; default true. Members already express the boundary, so it is decorative by default; false exposes an oriented separator.
 
 ### Keyboard
 - Tab / Shift+Tab: Visit each available action; disabled actions leave the tab order.
@@ -1678,7 +1704,7 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+4 more examples: see the component page and its Markdown file.
 
 ## Calendar
 
@@ -6966,7 +6992,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
-Source SHA-256: abc91fdc8bbf4ab987c0cc35f6b9e5e35ba590dd845c7cc556000d16d97acf10
+Source SHA-256: c3608883416f4df54beb12ab8b53eff90781fec1dfcac588351999b0269008b4
 
 Real links, expandable navigation groups, and in-panel group names with descriptions.
 
@@ -6996,6 +7022,7 @@ Active is an application-owned page fact; the library never infers it from URLs 
 
 ### Current exports
 - NavigationMenu: function; owner navigation-menu; PASS; props: NavigationMenuProps<Value>
+- NavigationMenuAppearance: type; owner navigation-menu; PASS
 - NavigationMenuContent: function; owner navigation-menu; PASS; props: NavigationMenuContentProps
 - NavigationMenuContentProps: type; owner navigation-menu; PASS
 - NavigationMenuGroup: function; owner navigation-menu; PASS; props: NavigationMenuGroupProps
@@ -7024,7 +7051,7 @@ Active is an application-owned page fact; the library never infers it from URLs 
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### NavigationMenu
-- no props declared by this library
+- `appearance?`: `"track" | "line"`. 顶栏目的地的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，当前项（active）为选中。下拉面板里的链接不受影响。
 - plus 286 inherited (@types/react 275, @base-ui/react 11); not expanded, see the installed declarations
 
 ### NavigationMenuContent
@@ -7072,10 +7099,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ### Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context AppearanceContext: without a provider default-value; provided by NavigationMenu, NavigationMenuContent
 - Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 
 ### Curated API
@@ -7084,6 +7112,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### NavigationMenu / NavigationMenuList / NavigationMenuItem
 A nav, ul and navigation items with stable values.
 - value / defaultValue / onValueChange: Base UI Root props. Expanded groups may be controlled or uncontrolled; cancellation retains the current value.
+- appearance: "line" | "track"; default "line". Appearance of the top-level destinations, set on NavigationMenu for the whole set. line is the navigation line; track puts the selected face inside a track, with the active item selected, and dropdown triggers fit as well. Links inside the dropdown panel are unaffected, and appearance never changes link or aria-current semantics.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 #### NavigationMenuTrigger / NavigationMenuLink
@@ -7123,6 +7152,8 @@ export default function Demo() {
   </NavigationMenuContent></NavigationMenuItem><NavigationMenuItem value="table"><NavigationMenuLink href="/components/table">比较表</NavigationMenuLink></NavigationMenuItem></NavigationMenuList><NavigationMenuPortal><NavigationMenuPositioner><NavigationMenuPopup><NavigationMenuViewport /></NavigationMenuPopup></NavigationMenuPositioner></NavigationMenuPortal></NavigationMenu>;
 }
 ```
+
+1 more examples: see the component page and its Markdown file.
 
 ## NumberField
 
@@ -8951,12 +8982,12 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
-Source SHA-256: 681855132b1ff4c75ee3955936c2caef73ac618dd912975a375c30d858ea52f2
+Source SHA-256: 366d8d92678c1a91950609486d0435c80e07d89f95621d0781bab30f0ba37a09
 
 Enter one value from a small set of visible segments.
 
 ### Decision
-SegmentedControl produces a value. Use Tabs for content panels and ToggleGroup for tools whose toggles may all be released. The selected segment is a light ink wash with ink text, not the primary action fill, so overriding --qy-primary does not change it. To adjust it, change the system selected surface --qy-surface-selected (every selected state follows; --qy-track-selected is only its alias) and --qy-track-selected-foreground.
+SegmentedControl produces a value. Use Tabs for content panels (Tabs can also be drawn as the same track with appearance set to track; appearance does not decide semantics) and ToggleGroup for tools whose toggles may all be released. The selected segment is a light ink wash with ink text, not the primary action fill, so overriding --qy-primary does not change it. To adjust it, change the system selected surface --qy-surface-selected (every selected state follows; --qy-track-selected is only its alias) and --qy-track-selected-foreground.
 
 ### Notes
 - Inside a Field, the group's name, description, and error land on the radiogroup. Each segment opens its own label scope, so ids are distinct and its name stays the segment text instead of being taken over by the Field label.
@@ -10555,7 +10586,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e
+Source SHA-256: 96d314f6778de1535f266d5db4b31ef9a2cd5fc14b6ae7bb140fceaf3472e448
 
 Different views of one object with panel drafts retained.
 
@@ -10563,6 +10594,7 @@ Different views of one object with panel drafts retained.
 Manual activation and mounted panels are defaults; switching views does not approve or save a draft.
 
 ### Notes
+- The navigation line and the track are two appearances of the same relation, several parallel destinations; which one is used does not depend on where the items come from. Tabs switch panels, NavigationMenu or links change routes and SegmentedControl produces a value; each can be drawn as a track and keeps its own semantics.
 - When tabs do not fit horizontally the list scrolls and fades only the end that still hides tabs (data-overflow-start / data-overflow-end, measured on scroll and resize, start and end swap in RTL); reaching either end does not scroll the page.
 - Visited hidden panels remain mounted but leave the accessibility tree; unvisited panels are not in the DOM. Switching is never reported as saving.
 
@@ -10585,6 +10617,7 @@ Manual activation and mounted panels are defaults; switching views does not appr
 
 ### Current exports
 - Tabs: function; owner tabs; PASS; props: TabsProps
+- TabsAppearance: type; owner tabs; PASS
 - TabsList: function; owner tabs; PASS; props: TabsListProps
 - TabsListProps: type; owner tabs; PASS
 - TabsPanel: function; owner tabs; PASS; props: TabsPanelProps
@@ -10598,7 +10631,7 @@ Manual activation and mounted panels are defaults; switching views does not appr
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Tabs
-- no props declared by this library
+- `appearance?`: `"track" | "line"`. 标签栏的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，横纵都成立。
 - plus 282 inherited (@types/react 275, @base-ui/react 7); not expanded, see the installed declarations
 
 ### TabsList
@@ -10614,10 +10647,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 289 inherited (@types/react 283, @base-ui/react 6); not expanded, see the installed declarations
 
 ### Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context AppearanceContext: without a provider default-value; provided by Tabs
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -10625,6 +10659,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### Tabs / TabsList
 The current view and a manually activated list.
 - value / defaultValue / onValueChange / orientation: Base UI Root props. The application or primitive owns the value; cancellation prevents a switch.
+- appearance: "line" | "track"; default "line". Appearance of the tab list, set on Tabs for the whole set. line is the navigation line; track puts the selected face inside a track, horizontal or vertical. Appearance never changes the tablist / tab / tabpanel semantics.
 - activateOnFocus: boolean; default false. Focus movement does not activate by default; consumers may explicitly opt in.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
@@ -10653,6 +10688,8 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "同一条目的两个视角", titleEn: "Two views of one item" } satisfies DemoMeta;
 export default function Demo() { return <Tabs defaultValue="text"><TabsList aria-label="条目视角"><TabsTab value="text">名称</TabsTab><TabsTab value="facts">事实</TabsTab><TabsTab value="unused" disabled>历史</TabsTab></TabsList><TabsPanel value="text"><Field><FieldLabel>名称草稿</FieldLabel><Input defaultValue="同步与导出" /></Field></TabsPanel><TabsPanel value="facts"><dl className="m-0 text-body"><dt>标识</dt><dd className="m-0">exports</dd><dt>记录数</dt><dd className="m-0">0</dd></dl></TabsPanel></Tabs>; }
 ```
+
+1 more examples: see the component page and its Markdown file.
 
 ## TagInput
 

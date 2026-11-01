@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
-Source SHA-256: abc91fdc8bbf4ab987c0cc35f6b9e5e35ba590dd845c7cc556000d16d97acf10
+Source SHA-256: c3608883416f4df54beb12ab8b53eff90781fec1dfcac588351999b0269008b4
 
 Real links, expandable navigation groups, and in-panel group names with descriptions.
 
@@ -33,6 +33,7 @@ Active is an application-owned page fact; the library never infers it from URLs 
 
 ## Current exports
 - NavigationMenu: function; owner navigation-menu; PASS; props: NavigationMenuProps<Value>
+- NavigationMenuAppearance: type; owner navigation-menu; PASS
 - NavigationMenuContent: function; owner navigation-menu; PASS; props: NavigationMenuContentProps
 - NavigationMenuContentProps: type; owner navigation-menu; PASS
 - NavigationMenuGroup: function; owner navigation-menu; PASS; props: NavigationMenuGroupProps
@@ -61,7 +62,7 @@ Active is an application-owned page fact; the library never infers it from URLs 
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### NavigationMenu
-- no props declared by this library
+- `appearance?`: `"track" | "line"`. 顶栏目的地的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，当前项（active）为选中。下拉面板里的链接不受影响。
 - plus 286 inherited (@types/react 275, @base-ui/react 11); not expanded, see the installed declarations
 
 ### NavigationMenuContent
@@ -109,10 +110,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context AppearanceContext: without a provider default-value; provided by NavigationMenu, NavigationMenuContent
 - Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 
 ## Curated API
@@ -121,6 +123,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### NavigationMenu / NavigationMenuList / NavigationMenuItem
 A nav, ul and navigation items with stable values.
 - value / defaultValue / onValueChange: Base UI Root props. Expanded groups may be controlled or uncontrolled; cancellation retains the current value.
+- appearance: "line" | "track"; default "line". Appearance of the top-level destinations, set on NavigationMenu for the whole set. line is the navigation line; track puts the selected face inside a track, with the active item selected, and dropdown triggers fit as well. Links inside the dropdown panel are unaffected, and appearance never changes link or aria-current semantics.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 ### NavigationMenuTrigger / NavigationMenuLink
@@ -158,5 +161,20 @@ export default function Demo() {
       <NavigationMenuLink href="/components/select">选择框</NavigationMenuLink>
     </NavigationMenuGroup>
   </NavigationMenuContent></NavigationMenuItem><NavigationMenuItem value="table"><NavigationMenuLink href="/components/table">比较表</NavigationMenuLink></NavigationMenuItem></NavigationMenuList><NavigationMenuPortal><NavigationMenuPositioner><NavigationMenuPopup><NavigationMenuViewport /></NavigationMenuPopup></NavigationMenuPositioner></NavigationMenuPortal></NavigationMenu>;
+}
+```
+
+### 轨道外观
+Source: apps/docs/src/content/navigation-menu/demos/02-track.tsx
+```tsx
+import { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuLink } from "@qingye_lab/ui/components/navigation-menu";
+import type { DemoMeta } from "@/lib/types";
+export const meta = { title: "轨道外观", titleEn: "Track appearance" } satisfies DemoMeta;
+export default function Demo() {
+  return <NavigationMenu aria-label="站点" appearance="track"><NavigationMenuList>
+    <NavigationMenuItem value="overview"><NavigationMenuLink href="/components/navigation-menu" active>概览</NavigationMenuLink></NavigationMenuItem>
+    <NavigationMenuItem value="tabs"><NavigationMenuLink href="/components/tabs">标签页</NavigationMenuLink></NavigationMenuItem>
+    <NavigationMenuItem value="table"><NavigationMenuLink href="/components/table">比较表</NavigationMenuLink></NavigationMenuItem>
+  </NavigationMenuList></NavigationMenu>;
 }
 ```

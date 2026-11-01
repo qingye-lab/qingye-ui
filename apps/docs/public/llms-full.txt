@@ -1956,12 +1956,12 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
-Source SHA-256: d9725a9ff2481d2491417226306c5483fad4bc0cb660400d03af2ccd4989fb23
+Source SHA-256: 2f4dd719cf1870157eead31e1aef929258879c948157458f8751c2ad64463222
 
-为同一范围的动作提供共同名称与间隔。
+为同一范围的动作提供共同名称，可独立排列或连成一体。
 
 ### Decision
-共同名称说明范围，每个按钮仍说明自己的动作。ButtonGroup 不选择按钮、不传播禁用，也不建立工具栏键盘行为。
+共同名称说明范围，每个按钮仍说明自己的动作。ButtonGroup 不选择按钮、不传播禁用，也不建立工具栏键盘行为。连体（attached）只改变外形：相邻边合并成一条线，成员的名称、焦点与禁用不变；拆分按钮就是连体组里一个主操作加一个打开 Menu 的图标按钮。
 
 ### Use and ownership
 - 几个动作属于同一可命名的范围。
@@ -1971,32 +1971,48 @@ Source SHA-256: d9725a9ff2481d2491417226306c5483fad4bc0cb660400d03af2ccd4989fb23
 
 ### Composition
 - 复用 Group 和 action-gap；成员使用 Button，真实状态仍在成员处表达。
+- 静态文字段用 ButtonGroupText，成员之间的分隔线用 ButtonGroupSeparator；拆分按钮的图标按钮必须有可访问名称。
 
 ### Responsive behavior
-- 横向默认换行，也可纵向；不合并成员轮廓。
+- 横向默认换行，也可纵向；连体时不换行，相邻边合并。
 
 ### Customization
 - className 与 render 属于组；不统一改写子按钮。
 
 ### Current exports
 - ButtonGroup: function; owner button-group; PASS; props: ButtonGroupProps
+- ButtonGroupOrientation: type; owner button-group; PASS
 - ButtonGroupProps: type; owner button-group; PASS
+- ButtonGroupSeparator: function; owner button-group; PASS; props: ButtonGroupSeparatorProps
+- ButtonGroupSeparatorProps: type; owner button-group; PASS
+- ButtonGroupText: function; owner button-group; PASS; props: ButtonGroupTextProps
+- ButtonGroupTextProps: type; owner button-group; PASS
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### ButtonGroup
 - `align?`: `"center" | "start" | "end" | "stretch" | "baseline"`. 交叉轴对齐（Stack 为横向，Inline 为纵向）。
+- `attached?`: `boolean`. 连体：相邻按钮的边合并成一条线，只保留整组外侧的圆角；横排纵排都成立。默认保持各自独立、带动作间隔。
 - `justify?`: `"center" | "start" | "end" | "between" | "around" | "evenly"`. 主轴分布（Stack 为纵向，Inline 为横向）。纵向分布需要容器高于内容才看得出。
 - `orientation?`: `"horizontal" | "vertical"`.
 - `wrap?`: `boolean`.
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
+### ButtonGroupSeparator
+- `decorative?`: `boolean`. 已有文字/结构表达分界时，线条仅作装饰。
+- plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
+
+### ButtonGroupText
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`. 与同组按钮同一档。
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
 ### Dependencies and providers
-- Runtime: @base-ui/react, clsx, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context OrientationContext: without a provider default-value; provided by ButtonGroup
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -2005,7 +2021,17 @@ Written descriptions; the list above is the type-resolved fact.
 默认 role=group 的开放动作关系。
 - aria-label / aria-labelledby: string. 必填其一：动作范围的共同名称，不替代按钮名称；缺失或为空时抛错。
 - orientation: "horizontal" | "vertical"; default "horizontal". 布局方向。
+- attached: boolean; default false. 连体：相邻按钮的边合并为一条线，只保留整组外侧的圆角，横排纵排都成立；聚焦或悬停的成员升到上层，边线完整可见。连体时不换行。
 - align / wrap / render / ref / 原生属性: ButtonGroupProps. 沿用 Group 的组合入口，间隔默认 action-gap。
+
+#### ButtonGroupText
+组内静态文字段，与同档 bordered 按钮同高、同边线，不可点击也不进焦点顺序。
+- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". 与同组按钮同一档。
+- render / ref / 原生属性: useRender props. 默认 span。
+
+#### ButtonGroupSeparator
+成员之间的分隔线，方向与组相反；非连体组里同样可用。
+- decorative: boolean; default true. 分界已由成员表达，默认只是装饰；设为 false 时是带方向的 separator。
 
 ### Keyboard
 - Tab / Shift+Tab: 依次访问每个可用按钮，禁用按钮不进入焦点顺序。
@@ -2023,7 +2049,7 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+4 more examples: see the component page and its Markdown file.
 
 ## 日历 Calendar
 
@@ -7311,7 +7337,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
-Source SHA-256: abc91fdc8bbf4ab987c0cc35f6b9e5e35ba590dd845c7cc556000d16d97acf10
+Source SHA-256: c3608883416f4df54beb12ab8b53eff90781fec1dfcac588351999b0269008b4
 
 真实链接、可展开的导航分组与面板内的组名、说明。
 
@@ -7341,6 +7367,7 @@ active 是应用提供的页面事实，库不读 URL 或把命令推断成导�
 
 ### Current exports
 - NavigationMenu: function; owner navigation-menu; PASS; props: NavigationMenuProps<Value>
+- NavigationMenuAppearance: type; owner navigation-menu; PASS
 - NavigationMenuContent: function; owner navigation-menu; PASS; props: NavigationMenuContentProps
 - NavigationMenuContentProps: type; owner navigation-menu; PASS
 - NavigationMenuGroup: function; owner navigation-menu; PASS; props: NavigationMenuGroupProps
@@ -7369,7 +7396,7 @@ active 是应用提供的页面事实，库不读 URL 或把命令推断成导�
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### NavigationMenu
-- no props declared by this library
+- `appearance?`: `"track" | "line"`. 顶栏目的地的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，当前项（active）为选中。下拉面板里的链接不受影响。
 - plus 286 inherited (@types/react 275, @base-ui/react 11); not expanded, see the installed declarations
 
 ### NavigationMenuContent
@@ -7417,10 +7444,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ### Dependencies and providers
-- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context AppearanceContext: without a provider default-value; provided by NavigationMenu, NavigationMenuContent
 - Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 
 ### Curated API
@@ -7429,6 +7457,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### NavigationMenu / NavigationMenuList / NavigationMenuItem
 nav、ul 与稳定 value 的导航项。
 - value / defaultValue / onValueChange: Base UI Root props. 展开分组受控或非受控；取消保留当前值。
+- appearance: "line" | "track"; default "line". 顶栏目的地的外观，设在 NavigationMenu 上整组生效。line 是导航线；track 是围在轨道里的选中面，当前项（active）为选中，带下拉的触发器同样成立。下拉面板里的链接不受影响；外观不改变链接与 aria-current 的语义。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 #### NavigationMenuTrigger / NavigationMenuLink
@@ -7468,6 +7497,8 @@ export default function Demo() {
   </NavigationMenuContent></NavigationMenuItem><NavigationMenuItem value="table"><NavigationMenuLink href="/components/table">比较表</NavigationMenuLink></NavigationMenuItem></NavigationMenuList><NavigationMenuPortal><NavigationMenuPositioner><NavigationMenuPopup><NavigationMenuViewport /></NavigationMenuPopup></NavigationMenuPositioner></NavigationMenuPortal></NavigationMenu>;
 }
 ```
+
+1 more examples: see the component page and its Markdown file.
 
 ## 数值输入 NumberField
 
@@ -9296,12 +9327,12 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
-Source SHA-256: 681855132b1ff4c75ee3955936c2caef73ac618dd912975a375c30d858ea52f2
+Source SHA-256: 366d8d92678c1a91950609486d0435c80e07d89f95621d0781bab30f0ba37a09
 
 从并列的少量候选中输入一个值。
 
 ### Decision
-SegmentedControl 产生一个新值。切换内容面板用 Tabs；允许全部取消的工具切换用 ToggleGroup。选中段是选中面（清染）加焦墨字，不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它；要调整，改系统的选中面 --qy-surface-selected（全库的选中一起变；--qy-track-selected 只是它的别名）与 --qy-track-selected-foreground。
+SegmentedControl 产生一个新值。切换内容面板用 Tabs（Tabs 也可以用 appearance 设为 track 画成同一条轨道，外观不决定语义）；允许全部取消的工具切换用 ToggleGroup。选中段是选中面（清染）加焦墨字，不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它；要调整，改系统的选中面 --qy-surface-selected（全库的选中一起变；--qy-track-selected 只是它的别名）与 --qy-track-selected-foreground。
 
 ### Notes
 - 放在 Field 内时，整组的名称、描述与错误落在 radiogroup；每一段自己开标签作用域，id 各不相同，名称仍是段内文字，不会被 Field 的标签接管。
@@ -10900,7 +10931,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e
+Source SHA-256: 96d314f6778de1535f266d5db4b31ef9a2cd5fc14b6ae7bb140fceaf3472e448
 
 同一对象的不同视角，保留面板草稿。
 
@@ -10908,6 +10939,7 @@ Source SHA-256: cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e
 默认手动激活、面板保留挂载；切换视角不等于批准或保存草稿。
 
 ### Notes
+- 导航线与轨道是两种外观，表达的都是「几个并列的去处」；用哪一种与条目从哪来无关。切换面板用 Tabs，跳转路由用 NavigationMenu 或链接，产生一个值用 SegmentedControl，三者都可以画成轨道，各自的语义不变。
 - 横向放不下时标签栏可滑动，只在还有标签被切掉的那一端渐隐（data-overflow-start / data-overflow-end，随滚动与尺寸实测，RTL 下起止端互换）；滚到头不带动页面。
 - 到达过的隐藏面板仍挂载但退出可访问树；没到达过的面板不在 DOM 里。不要把切换当成保存成功。
 
@@ -10930,6 +10962,7 @@ Source SHA-256: cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e
 
 ### Current exports
 - Tabs: function; owner tabs; PASS; props: TabsProps
+- TabsAppearance: type; owner tabs; PASS
 - TabsList: function; owner tabs; PASS; props: TabsListProps
 - TabsListProps: type; owner tabs; PASS
 - TabsPanel: function; owner tabs; PASS; props: TabsPanelProps
@@ -10943,7 +10976,7 @@ Source SHA-256: cc7434516a6c1bec275199521f52727ceebc7087956b91bf159e0a9dab95864e
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Tabs
-- no props declared by this library
+- `appearance?`: `"track" | "line"`. 标签栏的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，横纵都成立。
 - plus 282 inherited (@types/react 275, @base-ui/react 7); not expanded, see the installed declarations
 
 ### TabsList
@@ -10959,10 +10992,11 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 289 inherited (@types/react 283, @base-ui/react 6); not expanded, see the installed declarations
 
 ### Dependencies and providers
-- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
 - Required providers: none
-- Locale: does not read UILocale
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context AppearanceContext: without a provider default-value; provided by Tabs
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -10970,6 +11004,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### Tabs / TabsList
 当前视角与手动激活列表。
 - value / defaultValue / onValueChange / orientation: Base UI Root props. 值由应用或原语持有；取消不切换。
+- appearance: "line" | "track"; default "line". 标签栏外观，设在 Tabs 上整组生效。line 是导航线，track 是围在轨道里的选中面，横纵都成立。外观不改变 tablist / tab / tabpanel 的语义。
 - activateOnFocus: boolean; default false. 默认焦点移动不自动切换；消费者可明确选择自动激活。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
@@ -10998,6 +11033,8 @@ import type { DemoMeta } from "@/lib/types";
 export const meta = { title: "同一条目的两个视角", titleEn: "Two views of one item" } satisfies DemoMeta;
 export default function Demo() { return <Tabs defaultValue="text"><TabsList aria-label="条目视角"><TabsTab value="text">名称</TabsTab><TabsTab value="facts">事实</TabsTab><TabsTab value="unused" disabled>历史</TabsTab></TabsList><TabsPanel value="text"><Field><FieldLabel>名称草稿</FieldLabel><Input defaultValue="同步与导出" /></Field></TabsPanel><TabsPanel value="facts"><dl className="m-0 text-body"><dt>标识</dt><dd className="m-0">exports</dd><dt>记录数</dt><dd className="m-0">0</dd></dl></TabsPanel></Tabs>; }
 ```
+
+1 more examples: see the component page and its Markdown file.
 
 ## 标签集合 TagInput
 

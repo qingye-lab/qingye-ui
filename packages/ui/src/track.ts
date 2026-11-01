@@ -1,4 +1,6 @@
+import { buttonVariants } from "./components/button";
 import type { ToggleSize } from "./components/toggle";
+import { cn } from "./utils";
 
 /*
  * 并列候选的轨道（分段控件、切换组）共用的几何。基础层 §6。
@@ -33,3 +35,28 @@ export function trackClassName(size: TrackSize = "md") {
  */
 export const trackItemClassName =
   "min-h-[calc(var(--qy-track-outer)-2*var(--qy-track-inset)-2*var(--qy-line-width))] sm:min-h-[calc(var(--qy-track-outer)-2*var(--qy-track-inset)-2*var(--qy-line-width))] rounded-(--qy-radius-track-item) data-[shape=icon]:w-[calc(var(--qy-track-outer)-2*var(--qy-track-inset)-2*var(--qy-line-width))] sm:data-[shape=icon]:w-[calc(var(--qy-track-outer)-2*var(--qy-track-inset)-2*var(--qy-line-width))] data-[shape=icon]:p-0 sm:data-[shape=icon]:p-0";
+
+/*
+ * 轨道外观（2026-11-01 用户裁决）：轨道表达的是「几个并列的去处或取值」，不限定条目从哪来——
+ * 分段控件（一个值）、标签页（一个面板）、导航菜单（一个路由）都可以围在这条轨道里。
+ * 具体是值、面板还是路由由所用组件的语义承担（radio / tab / 链接与 aria-current），这里只给画法。
+ *
+ * 条目的面 = 按钮的 quiet / neutral / label（悬停面、按下面、焦点线都沿用）+ 轨道倒推的几何 +
+ * 当前与否的两套墨色：当前段 = 选中面（--qy-track-selected）+ 焦墨字；其余段无面、浓墨字，
+ * 悬停回到焦墨。字重不变，整排不跳动；填充已划出范围，不加阴影（NG11）。
+ * 当前项（选中值、当前面板、当前路由）是同一个角色，所以三种语义共用这一对状态类，不各写一份。
+ */
+export const trackItemSelectedClassName =
+  "bg-track-selected text-track-selected-foreground not-aria-disabled:hover:bg-track-selected not-aria-disabled:active:bg-track-selected";
+
+export const trackItemRestClassName =
+  "text-muted-foreground not-aria-disabled:hover:text-foreground not-aria-disabled:active:bg-(--qy-surface-active)";
+
+/** 完整的条目：按钮面 + 轨道几何 + 当前/非当前的墨色。 */
+export function trackItemFaceClassName(current: boolean, size: TrackSize = "md") {
+  return cn(
+    buttonVariants({ size, shape: "label", tone: "neutral", variant: "quiet" }),
+    trackItemClassName,
+    current ? trackItemSelectedClassName : trackItemRestClassName,
+  );
+}
