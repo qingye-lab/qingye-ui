@@ -10,17 +10,17 @@
     "union": "Props that are a union (Calendar mode) contribute the properties of every member."
   },
   "summary": {
-    "components": 105,
+    "components": 107,
     "byStatus": {
-      "type-resolved": 105
+      "type-resolved": 107
     },
     "documentedButMissing": 0,
     "undocumented": 145,
     "undocumentedDeclaredInThisComponentsFile": 28,
     "unresolved": 0,
-    "uncheckedWrittenNames": 195,
+    "uncheckedWrittenNames": 199,
     "uncheckedByReason": {
-      "generic": 134,
+      "generic": 138,
       "part-not-applicable": 33,
       "no-resolved-part-in-group": 13,
       "unparsed": 10,
@@ -1563,6 +1563,20 @@
       "reason": "generic"
     },
     {
+      "component": "date-time-range-picker",
+      "part": "DateTimeRangePicker",
+      "written": "render / ref / className / style / ARIA / events",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "date-time-range-picker",
+      "part": "DateTimeRangePicker",
+      "written": "render / ref / className / style / ARIA / events",
+      "token": "events",
+      "reason": "generic"
+    },
+    {
       "component": "description-list",
       "part": "DescriptionList",
       "written": "children / render / ref / native props",
@@ -2296,6 +2310,20 @@
       "written": "TextareaPrimitive",
       "token": "(whole part)",
       "reason": "part-not-applicable"
+    },
+    {
+      "component": "time-range-field",
+      "part": "TimeRangeField",
+      "written": "ref / className / style / ARIA / events",
+      "token": "ARIA",
+      "reason": "generic"
+    },
+    {
+      "component": "time-range-field",
+      "part": "TimeRangeField",
+      "written": "ref / className / style / ARIA / events",
+      "token": "events",
+      "reason": "generic"
     },
     {
       "component": "timeline",

@@ -758,7 +758,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1447,7 +1447,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1823,7 +1823,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2748,7 +2748,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -4135,7 +4135,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5099,7 +5099,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5660,7 +5660,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -6845,7 +6845,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -7765,7 +7765,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -8982,7 +8982,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -10502,7 +10502,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -10953,7 +10953,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -12035,7 +12035,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13297,7 +13297,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -14455,7 +14455,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -15003,7 +15003,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -15553,7 +15553,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -17137,7 +17137,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -18612,7 +18612,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19232,7 +19232,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19782,7 +19782,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -20251,7 +20251,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -20453,6 +20453,537 @@
             ],
             "customization": [
               "inputProps, calendarProps, composition root, and existing theme."
+            ]
+          },
+          "providerGuidance": []
+        }
+      }
+    },
+    {
+      "name": "date-time-range-picker",
+      "title": "日期时间范围 DateTimeRangePicker",
+      "description": "键入或在弹层里选起止日期和时间，完整且有序时才是确认值。",
+      "category": "日期与时间",
+      "source": "local",
+      "layer": "pattern",
+      "import": "@qingye_lab/ui/components/date-time-range-picker",
+      "exports": [
+        "DateTimeRangePicker"
+      ],
+      "docs": "/docs/components/date-time-range-picker",
+      "notes": [
+        "只选日期区间用 DateRangePicker；一个日期加一个时刻用 DateTimePicker；一天之内的两个时刻用 TimeRangeField。",
+        "两个日期时间输入是原生输入，显示格式随浏览器；键入与弹层是两条等价路径，弹层每次打开从输入当前内容建立。",
+        "弹层里只选了一天时，起止按同一天处理；没有默认的开始或结束时刻，也没有自动纠正。"
+      ],
+      "keywords": [
+        "datetime range",
+        "日期时间范围",
+        "时间区间",
+        "起止",
+        "预订",
+        "calendar",
+        "time"
+      ],
+      "api": [
+        {
+          "name": "DateTimeRangePicker",
+          "description": "起止两个原生日期时间输入、弹层里的日历区间与两个时间输入、明确的应用动作的组合。",
+          "descriptionEn": "A composition of two native date-time inputs, a calendar range with two time inputs in a popup, and an explicit Apply.",
+          "props": [
+            {
+              "name": "value / defaultValue / onValueChange",
+              "type": "{ from: string; to: string } | undefined / same / (value, event) => void",
+              "description": "from / to 是 DateTimePicker 同形的无时区本地文本。传了 value 属性（含 value={undefined}）即受控；不传则非受控，defaultValue 是初值，原生表单 reset 回到它。起点须不晚于终点，否则抛 RangeError；清除请求 undefined，不生成缺端点的提交值。",
+              "descriptionEn": "from / to are zone-free local text shaped like DateTimePicker's value. Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, and native form reset returns to it. Start after end throws a RangeError; clearing requests undefined and a partial range never submits."
+            },
+            {
+              "name": "onInvalid",
+              "type": "(draft: { from?: string; to?: string }, reason: \"incomplete\" | \"order\" | \"bounds\") => void",
+              "description": "草稿无法提交：只填一端（incomplete）、起点晚于终点（order）、超出 min / max（bounds）。只在焦点离开整个字段且弹层关闭后通知，同时两个输入标 aria-invalid；键入是逐段进行的，过程中的暂时状态不算。库不写文案，应用用 FieldError 说明。",
+              "descriptionEn": "The draft cannot be submitted: one end only (incomplete), start after end (order), outside min / max (bounds). Reported only after focus has left the whole field and the popup is closed, with both inputs marked aria-invalid; typing is segment by segment, so transient states do not count. The library writes no copy; the application explains with FieldError."
+            },
+            {
+              "name": "min / max",
+              "type": "string",
+              "description": "一处声明最早 / 最晚时刻（无时区文本），同时写入两个原生输入、日历的禁用范围，并让落在边界那一天的时间输入带上对应的时刻边界。与 inputProps.min/max、calendarProps.disabled 并存，取交集；交集为空时开发环境警告。",
+              "descriptionEn": "Declare the earliest and latest moment once (zone-free text); it sets both native inputs and the calendar's disabled range, and a time input whose day is the boundary day gets the matching time bound. It coexists with inputProps.min/max and calendarProps.disabled; the intersection applies, and an empty one warns in development."
+            },
+            {
+              "name": "name / form",
+              "type": "string",
+              "description": "确认的起止序列化为 name.from 与 name.to（与 DateRangePicker 同名规则），值是同样的本地文本。Field 可提供 name；两个输入本身不提交，草稿不入表单。",
+              "descriptionEn": "The confirmed ends submit under name.from and name.to (the same naming as DateRangePicker), as the same local text. Field may provide the name; the two inputs do not submit and the draft never reaches the form."
+            },
+            {
+              "name": "disabled / readOnly",
+              "type": "boolean",
+              "default": "false",
+              "description": "禁用阻止一切；只读时两个输入可聚焦、读屏读出值，但不能改值，弹层入口也不开。Field 禁用同样约束附属动作。只读确认值仍提交，禁用排除。确认值非空且可编辑时，边界内有清除动作，清除后焦点回到起点输入。",
+              "descriptionEn": "Disabled blocks everything. Read-only keeps both inputs focusable and readable but the value cannot change and the popup entry does not open. Field disabled blocks the same actions. Read-only values still submit; disabled values are excluded. With a confirmed value and while editable, the boundary has a clear action; focus returns to the start input after clearing."
+            },
+            {
+              "name": "calendarProps",
+              "type": "CalendarProps except owned selection props",
+              "description": "日历的其余属性（默认月份、禁用日等）；mode 固定 range。键入的值不受日历禁用日约束，只受 min / max 约束。",
+              "descriptionEn": "The remaining calendar props (default month, disabled days and so on); mode is range. A typed value is not held to the calendar's disabled days, only to min / max."
+            },
+            {
+              "name": "inputProps / endInputProps",
+              "type": "Input props",
+              "description": "起点输入（Field 标签指向它）与终点输入的 ref/render/ARIA/events/step 等；step 同时带到弹层里的时间输入。两个输入默认名称是「Field 标签 + 开始 / 结束日期和时间」。",
+              "descriptionEn": "ref, render, ARIA, events, step and so on for the start input (the one a Field label points to) and the end input; step is carried to the popup's time inputs. By default the two names are the Field label plus Start / End date and time."
+            },
+            {
+              "name": "render / ref / className / style / ARIA / events",
+              "type": "div composition props",
+              "description": "属于组合根；输入命名与错误由 Field 公共组合提供。",
+              "descriptionEn": "Applied to the composition root; Field provides input naming and errors."
+            }
+          ]
+        }
+      ],
+      "apiStatus": "type-resolved",
+      "typeApi": {
+        "status": "PASS",
+        "checker": "typescript@5.9.3",
+        "ownRule": "A property is own when at least one declaration is inside packages/ui/src; everything else is counted by origin package and not expanded.",
+        "parts": [
+          {
+            "name": "DateTimeRangePicker",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "calendarProps",
+                "optional": true,
+                "type": "Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">",
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:47"
+              },
+              {
+                "name": "defaultValue",
+                "optional": true,
+                "type": "DateTimeRangeValue | undefined",
+                "doc": "非受控的初值，原生表单 reset 会回到它。",
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:32"
+              },
+              {
+                "name": "disabled",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:42"
+              },
+              {
+                "name": "endInputProps",
+                "optional": true,
+                "type": "NativeInputProps",
+                "doc": "终点输入。",
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:46"
+              },
+              {
+                "name": "form",
+                "optional": true,
+                "type": "string | undefined",
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:42"
+              },
+              {
+                "name": "inputProps",
+                "optional": true,
+                "type": "NativeInputProps",
+                "doc": "起点输入（也是 Field 标签指向的输入）。",
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:44"
+              },
+              {
+                "name": "max",
+                "optional": true,
+                "type": "string | undefined",
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:41"
+              },
+              {
+                "name": "min",
+                "optional": true,
+                "type": "string | undefined",
+                "doc": "可选的最早 / 最晚时刻（无时区文本），一处声明同时约束两个原生输入、日历的可选日与边界日的时间输入。",
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:41"
+              },
+              {
+                "name": "name",
+                "optional": true,
+                "type": "string | undefined",
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:42"
+              },
+              {
+                "name": "onInvalid",
+                "optional": true,
+                "type": "((draft: DateTimeRangeDraft, reason: DateTimeRangeInvalidReason) => void) | undefined",
+                "doc": "草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`、挂原生校验信息），原因同 DateRangePicker。",
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:39"
+              },
+              {
+                "name": "onValueChange",
+                "optional": true,
+                "type": "((value: DateTimeRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined",
+                "doc": "只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。起止相同是有效的零长度范围。",
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:34"
+              },
+              {
+                "name": "readOnly",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:42"
+              },
+              {
+                "name": "value",
+                "optional": true,
+                "type": "DateTimeRangeValue | undefined",
+                "doc": "受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。",
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:30"
+              }
+            ],
+            "inheritedCount": 277,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 276
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "drift": {
+          "documentedButMissing": [],
+          "undocumented": []
+        }
+      },
+      "keyboard": [
+        {
+          "keys": "Tab / Shift+Tab",
+          "description": "起点、终点、弹层入口，展开后到日历、开始时间、结束时间，再到应用、取消、清除；起止没选全、时间没填、或顺序错误时不能应用。键入不必经过弹层。",
+          "descriptionEn": "Start, end, the popup entry; once open, the calendar, the start time, the end time, then Apply, Cancel and Clear. Apply is unavailable until both days and both times are filled and the order is right. Typing never needs the popup."
+        },
+        {
+          "keys": "Calendar keys",
+          "description": "在真实网格中选择起止日期。",
+          "descriptionEn": "Select the start and end days in the real calendar grid."
+        },
+        {
+          "keys": "Escape",
+          "description": "关闭弹层并返回触发入口，保留确认值。",
+          "descriptionEn": "Close the popup and return to its trigger, preserving the confirmed value."
+        }
+      ],
+      "actualExports": [
+        {
+          "name": "DateTimeRangeDraft",
+          "kind": "type",
+          "owner": "date-time-range-picker",
+          "module": "@qingye_lab/ui/components/date-time-range-picker",
+          "signature": "{ from?: string | undefined; to?: string | undefined }",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "DateTimeRangeInvalidReason",
+          "kind": "type",
+          "owner": "date-time-range-picker",
+          "module": "@qingye_lab/ui/components/date-time-range-picker",
+          "signature": "\"incomplete\" | \"order\" | \"bounds\"",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "DateTimeRangePicker",
+          "kind": "function",
+          "owner": "date-time-range-picker",
+          "module": "@qingye_lab/ui/components/date-time-range-picker",
+          "propsType": "DateTimeRangePickerProps",
+          "signature": "DateTimeRangePicker(allProps: DateTimeRangePickerProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "DateTimeRangePickerProps",
+          "kind": "type",
+          "owner": "date-time-range-picker",
+          "module": "@qingye_lab/ui/components/date-time-range-picker",
+          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\" | \"onInvalid\"> & {\n  /** 受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: DateTimeRangeValue | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: DateTimeRangeValue | undefined;\n  /** 只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。起止相同是有效的零长度范围。 */\n  onValueChange?: ((value: DateTimeRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n   * 只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`、挂原生校验信息），原因同 DateRangePicker。\n   */\n  onInvalid?: ((draft: DateTimeRangeDraft, reason: DateTimeRangeInvalidReason) => void) | undefined;\n  /** 可选的最早 / 最晚时刻（无时区文本），一处声明同时约束两个原生输入、日历的可选日与边界日的时间输入。 */\n  min?: string | undefined; max?: string | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  /** 起点输入（也是 Field 标签指向的输入）。 */\n  inputProps?: NativeInputProps;\n  /** 终点输入。 */\n  endInputProps?: NativeInputProps;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "DateTimeRangeValue",
+          "kind": "type",
+          "owner": "date-time-range-picker",
+          "module": "@qingye_lab/ui/components/date-time-range-picker",
+          "signature": "{ from: string; to: string }",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "DateTimeRangeValue",
+          "definition": "export type DateTimeRangeValue = { from: string; to: string };"
+        },
+        {
+          "name": "DateTimeRangeDraft",
+          "definition": "export type DateTimeRangeDraft = { from?: string | undefined; to?: string | undefined };"
+        },
+        {
+          "name": "DateTimeRangeInvalidReason",
+          "definition": "export type DateTimeRangeInvalidReason = \"incomplete\" | \"order\" | \"bounds\";"
+        },
+        {
+          "name": "DateTimeRangePickerProps",
+          "definition": "export type DateTimeRangePickerProps = Omit<useRender.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\" | \"onInvalid\"> & {\n  /** 受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。 */\n  value?: DateTimeRangeValue | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: DateTimeRangeValue | undefined;\n  /** 只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。起止相同是有效的零长度范围。 */\n  onValueChange?: ((value: DateTimeRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined;\n  /**\n   * 草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n   * 只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`、挂原生校验信息），原因同 DateRangePicker。\n   */\n  onInvalid?: ((draft: DateTimeRangeDraft, reason: DateTimeRangeInvalidReason) => void) | undefined;\n  /** 可选的最早 / 最晚时刻（无时区文本），一处声明同时约束两个原生输入、日历的可选日与边界日的时间输入。 */\n  min?: string | undefined; max?: string | undefined;\n  name?: string | undefined; form?: string | undefined; disabled?: boolean; readOnly?: boolean;\n  /** 起点输入（也是 Field 标签指向的输入）。 */\n  inputProps?: NativeInputProps;\n  /** 终点输入。 */\n  endInputProps?: NativeInputProps;\n  calendarProps?: Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">;\n};"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "DateTimeRangePicker",
+          "import": "@qingye_lab/ui/components/date-time-range-picker",
+          "owner": "date-time-range-picker",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "@daypicker/react",
+          "@tabler/icons-react",
+          "class-variance-authority",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "usesLocale": true,
+        "usesTheme": false,
+        "required": [],
+        "contexts": [
+          {
+            "name": "LocaleContext",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
+            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "UILocaleProvider"
+            ]
+          }
+        ],
+        "baseUi": [
+          "@base-ui/react/button",
+          "@base-ui/react/direction-provider",
+          "@base-ui/react/input",
+          "@base-ui/react/merge-props",
+          "@base-ui/react/popover",
+          "@base-ui/react/use-render"
+        ],
+        "status": "PASS",
+        "scope": "Static: React context reads and useUILocale/useTheme calls in the local import closure. useUILocale has a default locale, so a missing UILocaleProvider is tolerated."
+      },
+      "examples": [
+        {
+          "id": "range",
+          "title": "起止日期时间",
+          "source": "apps/docs/src/content/date-time-range-picker/demos/01-range.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/date-time-range-picker",
+            "@qingye_lab/ui/components/field",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { DateTimeRangePicker, type DateTimeRangeValue } from \"@qingye_lab/ui/components/date-time-range-picker\";\nimport { Field, FieldDescription, FieldLabel } from \"@qingye_lab/ui/components/field\";\n\nexport const meta = { title: \"起止日期时间\", titleEn: \"Date and time endpoints\" };\n\nexport default function Demo() {\n  const [value, setValue] = useState<DateTimeRangeValue | undefined>({ from: \"2026-10-03T09:30\", to: \"2026-10-05T17:00\" });\n  return <form><Field name=\"slot\"><FieldLabel>活动时段</FieldLabel><DateTimeRangePicker value={value} onValueChange={setValue} calendarProps={{ defaultMonth: new Date(2026, 9, 1) }} /><FieldDescription>当地时间</FieldDescription></Field></form>;\n}\n",
+          "sha256": "5303eca3c2808d89d0f354fbd09b4b208d928538024c82314e72642138ba1228"
+        },
+        {
+          "id": "bounds",
+          "title": "可选范围与无效说明",
+          "source": "apps/docs/src/content/date-time-range-picker/demos/02-bounds.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/date-time-range-picker",
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/locale",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { DateTimeRangePicker, type DateTimeRangeInvalidReason, type DateTimeRangeValue } from \"@qingye_lab/ui/components/date-time-range-picker\";\nimport { Field, FieldError, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"可选范围与无效说明\", titleEn: \"Bounds and the invalid note\" };\n\nexport default function Demo() {\n  const { code } = useUILocale();\n  const en = code.startsWith(\"en\");\n  const [value, setValue] = useState<DateTimeRangeValue | undefined>();\n  const [reason, setReason] = useState<DateTimeRangeInvalidReason | null>(null);\n  // 草稿无法提交时库只通知原因，说明文字由应用用 FieldError 给出。\n  const note = reason === \"order\" ? (en ? \"End is before start\" : \"结束早于开始\") : reason === \"bounds\" ? (en ? \"Outside the bookable window\" : \"不在可预订的时间内\") : reason ? (en ? \"Fill in both ends\" : \"起止都要填\") : \"\";\n  return (\n    <form>\n      <Field name=\"booking\" invalid={reason !== null}>\n        <FieldLabel>{en ? \"Booking window\" : \"预订时段\"}</FieldLabel>\n        <DateTimeRangePicker value={value} onValueChange={next => { setValue(next); setReason(null); }} onInvalid={(_, why) => setReason(why)}\n          min=\"2026-10-05T09:00\" max=\"2026-10-09T18:00\" calendarProps={{ defaultMonth: new Date(2026, 9, 1) }} />\n        <FieldError match={reason !== null}>{note}</FieldError>\n      </Field>\n    </form>\n  );\n}\n",
+          "sha256": "bc90a504178bf3b682f453ed8aeacfa4011b977b7a165a8aae98d2d89406b066"
+        },
+        {
+          "id": "states",
+          "title": "只读与禁用",
+          "source": "apps/docs/src/content/date-time-range-picker/demos/03-states.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/date-time-range-picker",
+            "@qingye_lab/ui/components/field"
+          ],
+          "providers": [],
+          "code": "import { DateTimeRangePicker } from \"@qingye_lab/ui/components/date-time-range-picker\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\n\nexport const meta = { title: \"只读与禁用\", titleEn: \"Read-only and disabled\" };\n\nconst value = { from: \"2026-10-03T09:30\", to: \"2026-10-05T17:00\" };\n\nexport default function Demo() {\n  return <div className=\"grid gap-(--qy-field-group-gap)\"><Field><FieldLabel>只读时段</FieldLabel><DateTimeRangePicker value={value} onValueChange={() => {}} readOnly /></Field><Field disabled><FieldLabel>禁用时段</FieldLabel><DateTimeRangePicker value={value} onValueChange={() => {}} /></Field></div>;\n}\n",
+          "sha256": "9de0dc91ec73773750c0a06a95262daa432573401279237b1b3f8d30045e2c0a"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "进退相承",
+          "相成相制"
+        ],
+        "whenToUse": [
+          "键入或在弹层里选起止日期和时间，完整且有序时才是确认值。"
+        ],
+        "avoid": [
+          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+        ],
+        "composition": [
+          "Field + FieldLabel + DateTimeRangePicker + FieldDescription / FieldError"
+        ],
+        "stateOwner": {
+          "library": [
+            "展开、本次范围草稿、弹层里的日期与时间草稿、键入中间态、焦点返回"
+          ],
+          "application": [
+            "完整确认范围、允许的时刻、无效时的说明、提交结果"
+          ]
+        },
+        "responsive": [
+          "一套几何，跟随密度轴，紧凑不缩小文字；日历粗指针单元采用真实触摸尺寸"
+        ],
+        "customization": [
+          "calendarProps、inputProps / endInputProps、组合根与集中主题"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/date-time-range-picker.tsx",
+        "sha256": "72ee3961e280d14bb29cfc38510d642b184c1b1539b2dc22c22570af8ab197b2",
+        "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
+      },
+      "decisions": "值是 { from, to }，两端各是 DateTimePicker 的值（无时区的本地文本 YYYY-MM-DDTHH:mm[:ss[.SSS]]），而不是 DateRangePicker 的 Date：时间不能放进只含日期的 Date，也不会因此猜一个时区。只有完整且有序的 from/to 才是确认值；起止相同是有效的零长度范围。两个原生 datetime-local 输入共用一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid，起点输入带原生校验信息让表单提交被拦下，并通过 onInvalid 交给应用说明。弹层里是日历区间加两个时间输入，同一天时结束时刻早于开始时刻会在弹层里提示并不能应用；取消或 Escape 保留原确认值。",
+      "localized": {
+        "en": {
+          "title": "DateTimeRangePicker",
+          "description": "Type or pick a start and an end date and time; only a complete, ordered range is a confirmed value.",
+          "category": "Date and time",
+          "decisions": "The value is { from, to }; each end is a DateTimePicker value (zone-free local text YYYY-MM-DDTHH:mm[:ss[.SSS]]) rather than DateRangePicker's Date, because a time cannot live in a date-only Date and no time zone is guessed. Only a complete, ordered from/to is a confirmed value; equal ends are a valid zero-length range. The two native datetime-local inputs share one draft: typing a complete ordered range requests the change at once; one end alone, a reversed range or one out of bounds is not submitted, and after focus leaves both inputs are marked aria-invalid, the start input carries a native validity message so form submission is blocked, and onInvalid hands the explanation to the application. The popup holds a calendar range and two time inputs; on one day an end time before the start time is flagged in the popup and cannot be applied. Cancel or Escape keeps the confirmed value.",
+          "notes": [
+            "Use DateRangePicker to pick dates only, DateTimePicker for one date plus one time, and TimeRangeField for two times within a day.",
+            "The two date-time inputs are native, so the display format follows the browser. Typing and the popup are two equivalent paths; the popup starts from what the inputs currently hold each time it opens.",
+            "With only one day chosen in the popup, both ends fall on that day. There is no default start or end time and no automatic repair."
+          ],
+          "api": [
+            {
+              "name": "DateTimeRangePicker",
+              "description": "A composition of two native date-time inputs, a calendar range with two time inputs in a popup, and an explicit Apply.",
+              "descriptionEn": "A composition of two native date-time inputs, a calendar range with two time inputs in a popup, and an explicit Apply.",
+              "props": [
+                {
+                  "name": "value / defaultValue / onValueChange",
+                  "type": "{ from: string; to: string } | undefined / same / (value, event) => void",
+                  "description": "from / to are zone-free local text shaped like DateTimePicker's value. Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, and native form reset returns to it. Start after end throws a RangeError; clearing requests undefined and a partial range never submits.",
+                  "descriptionEn": "from / to are zone-free local text shaped like DateTimePicker's value. Passing the value prop (including value={undefined}) makes it controlled; without it the component is uncontrolled, defaultValue is the initial value, and native form reset returns to it. Start after end throws a RangeError; clearing requests undefined and a partial range never submits."
+                },
+                {
+                  "name": "onInvalid",
+                  "type": "(draft: { from?: string; to?: string }, reason: \"incomplete\" | \"order\" | \"bounds\") => void",
+                  "description": "The draft cannot be submitted: one end only (incomplete), start after end (order), outside min / max (bounds). Reported only after focus has left the whole field and the popup is closed, with both inputs marked aria-invalid; typing is segment by segment, so transient states do not count. The library writes no copy; the application explains with FieldError.",
+                  "descriptionEn": "The draft cannot be submitted: one end only (incomplete), start after end (order), outside min / max (bounds). Reported only after focus has left the whole field and the popup is closed, with both inputs marked aria-invalid; typing is segment by segment, so transient states do not count. The library writes no copy; the application explains with FieldError."
+                },
+                {
+                  "name": "min / max",
+                  "type": "string",
+                  "description": "Declare the earliest and latest moment once (zone-free text); it sets both native inputs and the calendar's disabled range, and a time input whose day is the boundary day gets the matching time bound. It coexists with inputProps.min/max and calendarProps.disabled; the intersection applies, and an empty one warns in development.",
+                  "descriptionEn": "Declare the earliest and latest moment once (zone-free text); it sets both native inputs and the calendar's disabled range, and a time input whose day is the boundary day gets the matching time bound. It coexists with inputProps.min/max and calendarProps.disabled; the intersection applies, and an empty one warns in development."
+                },
+                {
+                  "name": "name / form",
+                  "type": "string",
+                  "description": "The confirmed ends submit under name.from and name.to (the same naming as DateRangePicker), as the same local text. Field may provide the name; the two inputs do not submit and the draft never reaches the form.",
+                  "descriptionEn": "The confirmed ends submit under name.from and name.to (the same naming as DateRangePicker), as the same local text. Field may provide the name; the two inputs do not submit and the draft never reaches the form."
+                },
+                {
+                  "name": "disabled / readOnly",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Disabled blocks everything. Read-only keeps both inputs focusable and readable but the value cannot change and the popup entry does not open. Field disabled blocks the same actions. Read-only values still submit; disabled values are excluded. With a confirmed value and while editable, the boundary has a clear action; focus returns to the start input after clearing.",
+                  "descriptionEn": "Disabled blocks everything. Read-only keeps both inputs focusable and readable but the value cannot change and the popup entry does not open. Field disabled blocks the same actions. Read-only values still submit; disabled values are excluded. With a confirmed value and while editable, the boundary has a clear action; focus returns to the start input after clearing."
+                },
+                {
+                  "name": "calendarProps",
+                  "type": "CalendarProps except owned selection props",
+                  "description": "The remaining calendar props (default month, disabled days and so on); mode is range. A typed value is not held to the calendar's disabled days, only to min / max.",
+                  "descriptionEn": "The remaining calendar props (default month, disabled days and so on); mode is range. A typed value is not held to the calendar's disabled days, only to min / max."
+                },
+                {
+                  "name": "inputProps / endInputProps",
+                  "type": "Input props",
+                  "description": "ref, render, ARIA, events, step and so on for the start input (the one a Field label points to) and the end input; step is carried to the popup's time inputs. By default the two names are the Field label plus Start / End date and time.",
+                  "descriptionEn": "ref, render, ARIA, events, step and so on for the start input (the one a Field label points to) and the end input; step is carried to the popup's time inputs. By default the two names are the Field label plus Start / End date and time."
+                },
+                {
+                  "name": "render / ref / className / style / ARIA / events",
+                  "type": "div composition props",
+                  "description": "Applied to the composition root; Field provides input naming and errors.",
+                  "descriptionEn": "Applied to the composition root; Field provides input naming and errors."
+                }
+              ]
+            }
+          ],
+          "keyboard": [
+            {
+              "keys": "Tab / Shift+Tab",
+              "description": "Start, end, the popup entry; once open, the calendar, the start time, the end time, then Apply, Cancel and Clear. Apply is unavailable until both days and both times are filled and the order is right. Typing never needs the popup.",
+              "descriptionEn": "Start, end, the popup entry; once open, the calendar, the start time, the end time, then Apply, Cancel and Clear. Apply is unavailable until both days and both times are filled and the order is right. Typing never needs the popup."
+            },
+            {
+              "keys": "Calendar keys",
+              "description": "Select the start and end days in the real calendar grid.",
+              "descriptionEn": "Select the start and end days in the real calendar grid."
+            },
+            {
+              "keys": "Escape",
+              "description": "Close the popup and return to its trigger, preserving the confirmed value.",
+              "descriptionEn": "Close the popup and return to its trigger, preserving the confirmed value."
+            }
+          ],
+          "design": {
+            "methods": [
+              "Name matches substance （名实相符）",
+              "Continuity through change （进退相承）",
+              "Complementary roles and safeguards （相成相制）"
+            ],
+            "whenToUse": [
+              "Type or pick a start and an end date and time; only a complete, ordered range is a confirmed value."
+            ],
+            "avoid": [
+              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+            ],
+            "composition": [
+              "Field + FieldLabel + DateTimeRangePicker + FieldDescription / FieldError"
+            ],
+            "stateOwner": {
+              "library": [
+                "Opening, the current range draft, the popup's date and time draft, in-between typing, and focus return."
+              ],
+              "application": [
+                "The complete confirmed range, the permitted moments, the explanation when invalid, and submission outcomes."
+              ]
+            },
+            "responsive": [
+              "One geometry that follows the density axis and keeps the text size when compact; coarse-pointer calendar cells have actual touch dimensions."
+            ],
+            "customization": [
+              "calendarProps, inputProps / endInputProps, the composition root, and the central theme."
             ]
           },
           "providerGuidance": []
@@ -21576,7 +22107,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -22398,7 +22929,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -23831,7 +24362,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -25419,7 +25950,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -26496,7 +27027,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -27431,7 +27962,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -28386,7 +28917,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -31758,7 +32289,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -33590,7 +34121,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -35415,7 +35946,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -35898,7 +36429,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37463,7 +37994,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37967,7 +38498,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -38341,7 +38872,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -39669,7 +40200,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -40063,7 +40594,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -40872,7 +41403,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41342,7 +41873,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -42461,7 +42992,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -43587,7 +44118,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -45594,7 +46125,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -47850,7 +48381,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -48472,7 +49003,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -49226,7 +49757,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -49782,7 +50313,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50518,7 +51049,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50926,7 +51457,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -51384,7 +51915,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -53733,7 +54264,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -54186,7 +54717,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -55251,7 +55782,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -55462,6 +55993,513 @@
             ],
             "customization": [
               "Root className, style and ref, existing theme roles, granularity, hourCycle, and min / max."
+            ]
+          },
+          "providerGuidance": []
+        }
+      }
+    },
+    {
+      "name": "time-range-field",
+      "title": "时间段 TimeRangeField",
+      "description": "在一个编辑边界里填起止两个时刻，如营业时间、班次。",
+      "category": "日期与时间",
+      "source": "local",
+      "layer": "pattern",
+      "import": "@qingye_lab/ui/components/time-range-field",
+      "exports": [
+        "TimeRangeField"
+      ],
+      "docs": "/docs/components/time-range-field",
+      "notes": [
+        "单个时刻用 TimeField；连日期一起选一个区间用 DateTimeRangePicker，只选日期区间用 DateRangePicker；一个日期加一个时刻用 DateTimePicker。",
+        "起止是同一个时段的两端，所以放在一个边界里读作一体；它们之间是控件内间隔，不是两个并排的字段。",
+        "跨零点是明确的选择，不是自动纠正：库从不交换起止，也不在顺序错误时替人改值。"
+      ],
+      "keywords": [
+        "time range",
+        "时间段",
+        "时段",
+        "营业时间",
+        "班次",
+        "起止",
+        "start end"
+      ],
+      "api": [
+        {
+          "name": "TimeRangeField",
+          "description": "两个 TimeField 加一个分隔符，共用一个编辑边界；整组由 Field 的标签命名，起止各有自己的名称（开始时间、结束时间）。",
+          "descriptionEn": "Two TimeFields and a separator in one edit boundary. The Field label names the whole group; the start and end each have their own name (Start time, End time).",
+          "props": [
+            {
+              "name": "value / defaultValue / onValueChange",
+              "type": "{ start: string | null; end: string | null } / same / (value) => void",
+              "description": "传了 value 属性即受控：调用方接受回调才改变事实，不接受时分段回到已接受的值。不传则非受控，defaultValue 是初值，原生表单 reset 回到它。每一端的中间态（还差几段）不上报。",
+              "descriptionEn": "Passing the value prop makes it controlled: only an accepted callback changes the value, and a rejected change snaps the segments back. Without it the component is uncontrolled, defaultValue is the initial value, and native form reset returns to it. In-between states of either end are not reported."
+            },
+            {
+              "name": "allowCrossMidnight",
+              "type": "boolean",
+              "default": "false",
+              "description": "允许结束早于开始，此时结束落在次日。相等永远有效，且跨零点时同样按零长度，不解释成整整 24 小时。默认不允许：结束早于开始标为无效并拦下提交。",
+              "descriptionEn": "Allow the end to be before the start, in which case the end falls on the next day. Equal is always valid and counts as zero length even across midnight; it is never read as a full 24 hours. By default it is not allowed: an end before the start is marked invalid and blocks submission."
+            },
+            {
+              "name": "granularity / hourCycle",
+              "type": "\"minute\" | \"second\" / 12 | 24",
+              "description": "分段粒度与小时制，起止两端相同；含义同 TimeField。",
+              "descriptionEn": "Segment granularity and hour cycle, the same for both ends; meaning as in TimeField."
+            },
+            {
+              "name": "min / max",
+              "type": "string",
+              "description": "起止各自的最早 / 最晚时刻（同 TimeField）。与「结束早于开始」是两件事：两者都成立才有效。",
+              "descriptionEn": "The earliest and latest time for each end (as in TimeField). This is separate from end-before-start: both must hold for the range to be valid."
+            },
+            {
+              "name": "name / form",
+              "type": "string",
+              "description": "提交两个值：name.start 与 name.end（同 DateRangePicker 的 name.from / name.to，不提交 name 本身）；某端未填完整时该项提交空串。Field 可提供 name。顺序错误时整个表单提交被拦下。",
+              "descriptionEn": "Submits two values: name.start and name.end (as DateRangePicker submits name.from / name.to; name itself is not submitted). An end that is not complete submits an empty string. Field may provide the name. A wrong order blocks form submission."
+            },
+            {
+              "name": "disabled / readOnly / required",
+              "type": "boolean",
+              "default": "false",
+              "description": "禁用阻止一切且不提交；只读时两端可聚焦、读屏读出值，但不能改值，值仍提交，边界末尾给出一处「只读」说明；required 要求起止都填。Field 禁用同样约束两端。",
+              "descriptionEn": "Disabled blocks everything and does not submit. Read-only keeps both ends focusable and readable but the value cannot change; it still submits and shows one Read only note at the end of the boundary. Required asks for both ends. Field disabled applies to both ends as well."
+            },
+            {
+              "name": "ref / className / style / ARIA / events",
+              "type": "div props",
+              "description": "属于外层 role=group 的边界；必须有可访问名称：放进带 FieldLabel 的 Field，或传 aria-label / aria-labelledby，否则抛错（同 TimeField）。",
+              "descriptionEn": "Applied to the outer role=group boundary. An accessible name is required: put it in a Field with a FieldLabel, or pass aria-label / aria-labelledby, otherwise it throws (as TimeField does)."
+            }
+          ]
+        }
+      ],
+      "apiStatus": "type-resolved",
+      "typeApi": {
+        "status": "PASS",
+        "checker": "typescript@5.9.3",
+        "ownRule": "A property is own when at least one declaration is inside packages/ui/src; everything else is counted by origin package and not expanded.",
+        "parts": [
+          {
+            "name": "TimeRangeField",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "allowCrossMidnight",
+                "optional": true,
+                "type": "boolean",
+                "doc": "允许结束早于开始，此时结束落在次日（22:00–06:00）。默认不允许：结束早于开始标为无效，并让表单提交被拦下。\n相等永远有效（零长度）；跨零点时相等同样按零长度，不解释成整整 24 小时。",
+                "declaredAt": "packages/ui/src/components/time-range-field.tsx:28"
+              },
+              {
+                "name": "defaultValue",
+                "optional": true,
+                "type": "TimeRangeValue | undefined",
+                "doc": "非受控的初值，原生表单 reset 会回到它。",
+                "declaredAt": "packages/ui/src/components/time-range-field.tsx:21"
+              },
+              {
+                "name": "disabled",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/time-range-field.tsx:35"
+              },
+              {
+                "name": "form",
+                "optional": true,
+                "type": "string | undefined",
+                "declaredAt": "packages/ui/src/components/time-range-field.tsx:34"
+              },
+              {
+                "name": "granularity",
+                "optional": true,
+                "type": "\"minute\" | \"second\"",
+                "doc": "分段粒度与小时制，起止两端相同；含义同 TimeField。",
+                "declaredAt": "packages/ui/src/components/time-range-field.tsx:30"
+              },
+              {
+                "name": "hourCycle",
+                "optional": true,
+                "type": "12 | 24",
+                "declaredAt": "packages/ui/src/components/time-range-field.tsx:30"
+              },
+              {
+                "name": "max",
+                "optional": true,
+                "type": "string | undefined",
+                "declaredAt": "packages/ui/src/components/time-range-field.tsx:32"
+              },
+              {
+                "name": "min",
+                "optional": true,
+                "type": "string | undefined",
+                "doc": "起止各自的最早 / 最晚时刻（同 TimeField）；与「结束早于开始」是两件事，两者都成立才有效。",
+                "declaredAt": "packages/ui/src/components/time-range-field.tsx:32"
+              },
+              {
+                "name": "name",
+                "optional": true,
+                "type": "string | undefined",
+                "doc": "提交两个值：`${name}.start` 与 `${name}.end`（同 DateRangePicker 的 `.from` / `.to`）；某端未填完整时该项提交空串。",
+                "declaredAt": "packages/ui/src/components/time-range-field.tsx:34"
+              },
+              {
+                "name": "onValueChange",
+                "optional": true,
+                "type": "((value: TimeRangeValue) => void) | undefined",
+                "doc": "任一端填完整或被清掉时请求变更，值是两端的当前内容；还差几段的中间态不上报（同 TimeField）。",
+                "declaredAt": "packages/ui/src/components/time-range-field.tsx:23"
+              },
+              {
+                "name": "readOnly",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/time-range-field.tsx:35"
+              },
+              {
+                "name": "required",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/time-range-field.tsx:35"
+              },
+              {
+                "name": "value",
+                "optional": true,
+                "type": "TimeRangeValue | undefined",
+                "doc": "受控的起止；任一端可为 `null`。**传了 `value` 这个属性**才是受控，不传才是非受控。",
+                "declaredAt": "packages/ui/src/components/time-range-field.tsx:19"
+              }
+            ],
+            "inheritedCount": 276,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 276
+              }
+            ]
+          }
+        ],
+        "drift": {
+          "documentedButMissing": [],
+          "undocumented": []
+        }
+      },
+      "keyboard": [
+        {
+          "keys": "Tab / Shift+Tab",
+          "description": "开始时间、结束时间两组之间移动，各组内的第一个分段是入口。",
+          "descriptionEn": "Moves between the start group and the end group; the first segment of each is the entry."
+        },
+        {
+          "keys": "ArrowLeft / ArrowRight",
+          "description": "在同一端的分段之间移动。",
+          "descriptionEn": "Moves between the segments of one end."
+        },
+        {
+          "keys": "ArrowUp / ArrowDown / 数字键",
+          "description": "改变当前分段，键入逐段进行（同 TimeField）。",
+          "descriptionEn": "Changes the current segment; typing goes segment by segment (as in TimeField)."
+        },
+        {
+          "keys": "Backspace / Delete",
+          "description": "清除当前分段；把一个完整的端点清掉时上报该端为 null。",
+          "descriptionEn": "Clears the current segment; clearing a complete end reports it as null."
+        }
+      ],
+      "actualExports": [
+        {
+          "name": "TimeRangeField",
+          "kind": "function",
+          "owner": "time-range-field",
+          "module": "@qingye_lab/ui/components/time-range-field",
+          "propsType": "TimeRangeFieldProps",
+          "signature": "TimeRangeField(allProps: TimeRangeFieldProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "TimeRangeFieldProps",
+          "kind": "type",
+          "owner": "time-range-field",
+          "module": "@qingye_lab/ui/components/time-range-field",
+          "signature": "Omit<React.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\" | \"role\" | \"render\"> & {\n  /** 受控的起止；任一端可为 `null`。**传了 `value` 这个属性**才是受控，不传才是非受控。 */\n  value?: TimeRangeValue | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: TimeRangeValue | undefined;\n  /** 任一端填完整或被清掉时请求变更，值是两端的当前内容；还差几段的中间态不上报（同 TimeField）。 */\n  onValueChange?: ((value: TimeRangeValue) => void) | undefined;\n  /**\n   * 允许结束早于开始，此时结束落在次日（22:00–06:00）。默认不允许：结束早于开始标为无效，并让表单提交被拦下。\n   * 相等永远有效（零长度）；跨零点时相等同样按零长度，不解释成整整 24 小时。\n   */\n  allowCrossMidnight?: boolean;\n  /** 分段粒度与小时制，起止两端相同；含义同 TimeField。 */\n  granularity?: TimeFieldProps[\"granularity\"] | undefined; hourCycle?: TimeFieldProps[\"hourCycle\"] | undefined;\n  /** 起止各自的最早 / 最晚时刻（同 TimeField）；与「结束早于开始」是两件事，两者都成立才有效。 */\n  min?: string | undefined; max?: string | undefined;\n  /** 提交两个值：`${name}.start` 与 `${name}.end`（同 DateRangePicker 的 `.from` / `.to`）；某端未填完整时该项提交空串。 */\n  name?: string | undefined; form?: string | undefined;\n  disabled?: boolean; readOnly?: boolean; required?: boolean;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "TimeRangeValue",
+          "kind": "type",
+          "owner": "time-range-field",
+          "module": "@qingye_lab/ui/components/time-range-field",
+          "signature": "{ start: string | null; end: string | null }",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "TimeRangeValue",
+          "definition": "export type TimeRangeValue = { start: string | null; end: string | null };"
+        },
+        {
+          "name": "TimeRangeFieldProps",
+          "definition": "export type TimeRangeFieldProps = Omit<React.ComponentProps<\"div\">, \"children\" | \"defaultValue\" | \"onChange\" | \"role\" | \"render\"> & {\n  /** 受控的起止；任一端可为 `null`。**传了 `value` 这个属性**才是受控，不传才是非受控。 */\n  value?: TimeRangeValue | undefined;\n  /** 非受控的初值，原生表单 reset 会回到它。 */\n  defaultValue?: TimeRangeValue | undefined;\n  /** 任一端填完整或被清掉时请求变更，值是两端的当前内容；还差几段的中间态不上报（同 TimeField）。 */\n  onValueChange?: ((value: TimeRangeValue) => void) | undefined;\n  /**\n   * 允许结束早于开始，此时结束落在次日（22:00–06:00）。默认不允许：结束早于开始标为无效，并让表单提交被拦下。\n   * 相等永远有效（零长度）；跨零点时相等同样按零长度，不解释成整整 24 小时。\n   */\n  allowCrossMidnight?: boolean;\n  /** 分段粒度与小时制，起止两端相同；含义同 TimeField。 */\n  granularity?: TimeFieldProps[\"granularity\"] | undefined; hourCycle?: TimeFieldProps[\"hourCycle\"] | undefined;\n  /** 起止各自的最早 / 最晚时刻（同 TimeField）；与「结束早于开始」是两件事，两者都成立才有效。 */\n  min?: string | undefined; max?: string | undefined;\n  /** 提交两个值：`${name}.start` 与 `${name}.end`（同 DateRangePicker 的 `.from` / `.to`）；某端未填完整时该项提交空串。 */\n  name?: string | undefined; form?: string | undefined;\n  disabled?: boolean; readOnly?: boolean; required?: boolean;\n};"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "TimeRangeField",
+          "import": "@qingye_lab/ui/components/time-range-field",
+          "owner": "time-range-field",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "@daypicker/react",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "usesLocale": true,
+        "usesTheme": false,
+        "required": [],
+        "contexts": [
+          {
+            "name": "InField",
+            "declaredAt": "packages/ui/src/labelable-scope.tsx:22",
+            "defaultValue": "false",
+            "withoutProvider": "default-value"
+          },
+          {
+            "name": "InFieldItem",
+            "declaredAt": "packages/ui/src/labelable-scope.tsx:20",
+            "defaultValue": "false",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "OptionScope"
+            ]
+          },
+          {
+            "name": "LocaleContext",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
+            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "UILocaleProvider"
+            ]
+          }
+        ],
+        "baseUi": [
+          "@base-ui/react/direction-provider",
+          "@base-ui/react/field",
+          "@base-ui/react/input"
+        ],
+        "status": "PASS",
+        "scope": "Static: React context reads and useUILocale/useTheme calls in the local import closure. useUILocale has a default locale, so a missing UILocaleProvider is tolerated."
+      },
+      "examples": [
+        {
+          "id": "basic",
+          "title": "起止时间",
+          "source": "apps/docs/src/content/time-range-field/demos/01-basic.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/time-range-field",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { Field, FieldDescription, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { TimeRangeField, type TimeRangeValue } from \"@qingye_lab/ui/components/time-range-field\";\n\nexport const meta = { title: \"起止时间\", titleEn: \"Start and end\" };\n\nexport default function Demo() {\n  const [value, setValue] = useState<TimeRangeValue>({ start: \"09:00\", end: \"18:00\" });\n  return <form><Field name=\"hours\"><FieldLabel>营业时间</FieldLabel><TimeRangeField value={value} onValueChange={setValue} /><FieldDescription>当天内的起止</FieldDescription></Field></form>;\n}\n",
+          "sha256": "ddaee879026b9bf8aab72f1922adb3797ec33a33a22cea49803f05ef6f0b0773"
+        },
+        {
+          "id": "cross-midnight",
+          "title": "跨零点与顺序",
+          "source": "apps/docs/src/content/time-range-field/demos/02-cross-midnight.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/time-range-field",
+            "@qingye_lab/ui/locale",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useState } from \"react\";\nimport { Field, FieldError, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { TimeRangeField, type TimeRangeValue } from \"@qingye_lab/ui/components/time-range-field\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\n\nexport const meta = { title: \"跨零点与顺序\", titleEn: \"Crossing midnight and order\" };\n\nexport default function Demo() {\n  const { code } = useUILocale();\n  const en = code.startsWith(\"en\");\n  const [day, setDay] = useState<TimeRangeValue>({ start: \"18:00\", end: \"09:00\" });\n  const [night, setNight] = useState<TimeRangeValue>({ start: \"22:00\", end: \"06:00\" });\n  // 结束早于开始时，组件把整组标为无效并拦下提交；说明文字由应用用 FieldError 给出。\n  const reversed = day.start !== null && day.end !== null && day.end < day.start;\n  return (\n    <form>\n      <FieldGroup>\n        <Field name=\"day\" invalid={reversed}>\n          <FieldLabel>{en ? \"Opening hours\" : \"营业时间\"}</FieldLabel>\n          <TimeRangeField value={day} onValueChange={setDay} />\n          <FieldError>{en ? \"End is before start\" : \"结束早于开始\"}</FieldError>\n        </Field>\n        <Field name=\"night\">\n          <FieldLabel>{en ? \"Night shift (ends the next day)\" : \"夜班（结束在次日）\"}</FieldLabel>\n          <TimeRangeField value={night} onValueChange={setNight} allowCrossMidnight />\n        </Field>\n      </FieldGroup>\n    </form>\n  );\n}\n",
+          "sha256": "435d71131b9f966ca28eae72e3090619870f989d908b6a438d50c448c4b4f242"
+        },
+        {
+          "id": "states",
+          "title": "只读与禁用",
+          "source": "apps/docs/src/content/time-range-field/demos/03-states.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/time-range-field"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { TimeRangeField } from \"@qingye_lab/ui/components/time-range-field\";\n\nexport const meta = { title: \"只读与禁用\", titleEn: \"Read-only and disabled\" };\n\nconst value = { start: \"09:00\", end: \"12:30\" };\n\nexport default function Demo() {\n  return <div className=\"grid gap-(--qy-field-group-gap) sm:grid-cols-2\"><Field><FieldLabel>只读时段</FieldLabel><TimeRangeField defaultValue={value} readOnly /></Field><Field disabled><FieldLabel>禁用时段</FieldLabel><TimeRangeField defaultValue={value} /></Field></div>;\n}\n",
+          "sha256": "99871b44dc6324b0d1e8e431732dc6d3c92ee445d5021a3bcf44a3400d8c6827"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "相成相制"
+        ],
+        "whenToUse": [
+          "在一个编辑边界里填起止两个时刻，如营业时间、班次。"
+        ],
+        "avoid": [
+          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+        ],
+        "composition": [
+          "Field + FieldLabel + TimeRangeField + FieldDescription / FieldError"
+        ],
+        "stateOwner": {
+          "library": [
+            "各端的分段草稿与键入缓冲、焦点所在分段、顺序的原生校验"
+          ],
+          "application": [
+            "起止的值、是否允许跨零点、顺序错误时的说明、提交结果"
+          ]
+        },
+        "responsive": [
+          "外框与 TimeField / Input 同一套几何，跟随密度轴，不带 size；粗指针下取真实触摸尺寸"
+        ],
+        "customization": [
+          "组合根的 className、granularity / hourCycle、集中主题"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/time-range-field.tsx",
+        "sha256": "c39fe59d6990ae7bb22f03e31bc6ceccc0d6e0ad00e14cd867631e29a3534bf3",
+        "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
+      },
+      "decisions": "值是 { start, end }，两端各是 TimeField 的值（无时区 HH:mm[:ss] 文本，空为 null）；任何一端填完整或被清掉就上报整个对象，另一端原样带上。结束早于开始默认无效：整组标 aria-invalid，并让表单提交被拦下，说明文字由应用用 FieldError 给出；起止相同是有效的零长度时段。需要「22:00 到次日 06:00」时显式传 allowCrossMidnight，此时结束落在次日。它只管一天之内的两个时刻；要连日期一起选，用 DateTimeRangePicker，要单个时刻，用 TimeField。",
+      "localized": {
+        "en": {
+          "title": "TimeRangeField",
+          "description": "Fill in a start and an end time of day in one edit boundary, such as opening hours or a shift.",
+          "category": "Date and time",
+          "decisions": "The value is { start, end }; each end is a TimeField value (zone-free HH:mm[:ss] text, null when empty). Whenever either end becomes complete or is cleared the whole object is reported, with the other end carried as it was. End before start is invalid by default: the group is marked aria-invalid and form submission is blocked, and the application states the reason with FieldError. Equal start and end is a valid zero-length span. For \"22:00 to 06:00 the next day\" pass allowCrossMidnight, and the end then falls on the next day. It covers two times within one day; to pick dates as well use DateTimeRangePicker, and for a single time use TimeField.",
+          "notes": [
+            "Use TimeField for a single time; DateTimeRangePicker to pick an interval with dates, DateRangePicker for a date interval only, and DateTimePicker for one date plus one time.",
+            "Start and end are the two ends of one span, so they sit in one boundary and read as a unit. What separates them is the in-control gap, not two side-by-side fields.",
+            "Crossing midnight is an explicit choice, not an automatic repair: the library never swaps the ends or edits a value when the order is wrong."
+          ],
+          "api": [
+            {
+              "name": "TimeRangeField",
+              "description": "Two TimeFields and a separator in one edit boundary. The Field label names the whole group; the start and end each have their own name (Start time, End time).",
+              "descriptionEn": "Two TimeFields and a separator in one edit boundary. The Field label names the whole group; the start and end each have their own name (Start time, End time).",
+              "props": [
+                {
+                  "name": "value / defaultValue / onValueChange",
+                  "type": "{ start: string | null; end: string | null } / same / (value) => void",
+                  "description": "Passing the value prop makes it controlled: only an accepted callback changes the value, and a rejected change snaps the segments back. Without it the component is uncontrolled, defaultValue is the initial value, and native form reset returns to it. In-between states of either end are not reported.",
+                  "descriptionEn": "Passing the value prop makes it controlled: only an accepted callback changes the value, and a rejected change snaps the segments back. Without it the component is uncontrolled, defaultValue is the initial value, and native form reset returns to it. In-between states of either end are not reported."
+                },
+                {
+                  "name": "allowCrossMidnight",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Allow the end to be before the start, in which case the end falls on the next day. Equal is always valid and counts as zero length even across midnight; it is never read as a full 24 hours. By default it is not allowed: an end before the start is marked invalid and blocks submission.",
+                  "descriptionEn": "Allow the end to be before the start, in which case the end falls on the next day. Equal is always valid and counts as zero length even across midnight; it is never read as a full 24 hours. By default it is not allowed: an end before the start is marked invalid and blocks submission."
+                },
+                {
+                  "name": "granularity / hourCycle",
+                  "type": "\"minute\" | \"second\" / 12 | 24",
+                  "description": "Segment granularity and hour cycle, the same for both ends; meaning as in TimeField.",
+                  "descriptionEn": "Segment granularity and hour cycle, the same for both ends; meaning as in TimeField."
+                },
+                {
+                  "name": "min / max",
+                  "type": "string",
+                  "description": "The earliest and latest time for each end (as in TimeField). This is separate from end-before-start: both must hold for the range to be valid.",
+                  "descriptionEn": "The earliest and latest time for each end (as in TimeField). This is separate from end-before-start: both must hold for the range to be valid."
+                },
+                {
+                  "name": "name / form",
+                  "type": "string",
+                  "description": "Submits two values: name.start and name.end (as DateRangePicker submits name.from / name.to; name itself is not submitted). An end that is not complete submits an empty string. Field may provide the name. A wrong order blocks form submission.",
+                  "descriptionEn": "Submits two values: name.start and name.end (as DateRangePicker submits name.from / name.to; name itself is not submitted). An end that is not complete submits an empty string. Field may provide the name. A wrong order blocks form submission."
+                },
+                {
+                  "name": "disabled / readOnly / required",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Disabled blocks everything and does not submit. Read-only keeps both ends focusable and readable but the value cannot change; it still submits and shows one Read only note at the end of the boundary. Required asks for both ends. Field disabled applies to both ends as well.",
+                  "descriptionEn": "Disabled blocks everything and does not submit. Read-only keeps both ends focusable and readable but the value cannot change; it still submits and shows one Read only note at the end of the boundary. Required asks for both ends. Field disabled applies to both ends as well."
+                },
+                {
+                  "name": "ref / className / style / ARIA / events",
+                  "type": "div props",
+                  "description": "Applied to the outer role=group boundary. An accessible name is required: put it in a Field with a FieldLabel, or pass aria-label / aria-labelledby, otherwise it throws (as TimeField does).",
+                  "descriptionEn": "Applied to the outer role=group boundary. An accessible name is required: put it in a Field with a FieldLabel, or pass aria-label / aria-labelledby, otherwise it throws (as TimeField does)."
+                }
+              ]
+            }
+          ],
+          "keyboard": [
+            {
+              "keys": "Tab / Shift+Tab",
+              "description": "Moves between the start group and the end group; the first segment of each is the entry.",
+              "descriptionEn": "Moves between the start group and the end group; the first segment of each is the entry."
+            },
+            {
+              "keys": "ArrowLeft / ArrowRight",
+              "description": "Moves between the segments of one end.",
+              "descriptionEn": "Moves between the segments of one end."
+            },
+            {
+              "keys": "ArrowUp / ArrowDown / 数字键",
+              "description": "Changes the current segment; typing goes segment by segment (as in TimeField).",
+              "descriptionEn": "Changes the current segment; typing goes segment by segment (as in TimeField)."
+            },
+            {
+              "keys": "Backspace / Delete",
+              "description": "Clears the current segment; clearing a complete end reports it as null.",
+              "descriptionEn": "Clears the current segment; clearing a complete end reports it as null."
+            }
+          ],
+          "design": {
+            "methods": [
+              "Name matches substance （名实相符）",
+              "Complementary roles and safeguards （相成相制）"
+            ],
+            "whenToUse": [
+              "Fill in a start and an end time of day in one edit boundary, such as opening hours or a shift."
+            ],
+            "avoid": [
+              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+            ],
+            "composition": [
+              "Field + FieldLabel + TimeRangeField + FieldDescription / FieldError"
+            ],
+            "stateOwner": {
+              "library": [
+                "Each end's segment draft and typing buffer, the focused segment, and the native check of the order."
+              ],
+              "application": [
+                "The start and end values, whether crossing midnight is allowed, the explanation when the order is wrong, and submission outcomes."
+              ]
+            },
+            "responsive": [
+              "The boundary shares the geometry of TimeField and Input and follows the density axis with no size; coarse pointers get the real touch dimension."
+            ],
+            "customization": [
+              "The root className, granularity / hourCycle, and the central theme."
             ]
           },
           "providerGuidance": []
@@ -55808,7 +56846,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -56354,7 +57392,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -56975,7 +58013,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -59856,7 +60894,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -60409,7 +61447,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -60944,7 +61982,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -62766,7 +63804,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:171",
+            "declaredAt": "packages/ui/src/locale.tsx:173",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -63115,6 +64153,7 @@
     "date-picker",
     "date-range-picker",
     "date-time-picker",
+    "date-time-range-picker",
     "description-list",
     "dialog",
     "drawer",
@@ -63175,6 +64214,7 @@
     "textarea",
     "theme-provider",
     "time-field",
+    "time-range-field",
     "timeline",
     "toast",
     "toc",
