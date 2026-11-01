@@ -56,5 +56,9 @@ export const enUS: UILocale = {
     cascaderSeparator: " / ", cascaderRetry: "Retry", cascaderLoadFailed: "Failed to load", cascaderBranch: "Has subitems",
     commandEmpty: "No matches",
     treeSelectSeparator: ", ", treeSelectMore: (first, rest) => `${first} and ${rest.toLocaleString("en-US")} more`,
+    rating: "Rating", ratingStar: (score) => (score === 1 ? "1 star" : `${score} stars`), ratingValue: (score, max) => `Rating ${score} of ${max}`, ratingNone: "Not rated",
+    transferSource: "Available", transferTarget: "Selected", transferSelectAll: "Select all", transferFilter: (title) => `Filter ${title.toLowerCase()}`,
+    transferMoveTo: (count, title) => `Move ${count.toLocaleString("en-US")} selected to “${title}”`, transferMoved: (count, title) => `${count.toLocaleString("en-US")} moved to “${title}”`,
+    transferEmpty: "No items", transferNoMatch: "No matches",
   },
 };

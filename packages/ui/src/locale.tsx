@@ -63,6 +63,11 @@ export type UILocaleMessages = {
   commandEmpty: string;
   skipToContent: string; selectRowNamed: (name: string) => string; selectEmpty: string; moreNotifications: (count: number) => string;
   treeSelectSeparator: string; treeSelectMore: (first: string, rest: number) => string;
+  // Rating, Transfer
+  rating: string; ratingStar: (score: number) => string; ratingValue: (score: number, max: number) => string; ratingNone: string;
+  transferSource: string; transferTarget: string; transferSelectAll: string; transferFilter: (title: string) => string;
+  transferMoveTo: (count: number, title: string) => string; transferMoved: (count: number, title: string) => string;
+  transferEmpty: string; transferNoMatch: string;
 };
 
 export type UILocale = { code: string; messages: UILocaleMessages };
@@ -122,6 +127,10 @@ export const zhCN: UILocale = {
     cascaderSeparator: " / ", cascaderRetry: "重试", cascaderLoadFailed: "加载失败", cascaderBranch: "有下级",
     commandEmpty: "没有匹配项",
     treeSelectSeparator: "、", treeSelectMore: (first, rest) => `${first} 及其余 ${rest.toLocaleString("zh-CN")} 项`,
+    rating: "评分", ratingStar: (score) => `${score} 星`, ratingValue: (score, max) => `评分 ${score} / ${max}`, ratingNone: "未评分",
+    transferSource: "候选", transferTarget: "已选", transferSelectAll: "全选", transferFilter: (title) => `筛选${title}`,
+    transferMoveTo: (count, title) => `将所选 ${count.toLocaleString("zh-CN")} 项移到“${title}”`, transferMoved: (count, title) => `已移到“${title}” ${count.toLocaleString("zh-CN")} 项`,
+    transferEmpty: "没有条目", transferNoMatch: "没有匹配项",
   },
 };
 
