@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: b3e18fa576f40383fd77be798ea019d7739657d559ffb2d518f6b4de961d3f8b
+Source SHA-256: 370b73798943cd2ff871be03abe1d3c97151e00056204a61e37fd22d39e415f5
 
 从可收起的候选列表中取一个值。
 
@@ -37,7 +37,7 @@ Source SHA-256: b3e18fa576f40383fd77be798ea019d7739657d559ffb2d518f6b4de961d3f8b
 - 同档文字和控件尺寸、bordered padding、角色颜色、Portal container
 
 ## Current exports
-- Select: function; owner select; PASS; props: SelectProps<Value>
+- Select: function; owner select; PASS; props: SelectProps<Value, Multiple>
 - SelectGroup: function; owner select; PASS; props: React.ComponentProps<typeof SelectPrimitive.Group>
 - SelectGroupLabel: function; owner select; PASS; props: React.ComponentProps<typeof SelectPrimitive.GroupLabel>
 - SelectItem: function; owner select; PASS; props: SelectItemProps
@@ -57,7 +57,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### Select
 - `error?`: `React.ReactNode`. 取候选失败时由应用提供的内容（说明与重试动作）；候选面以 role="alert" 摆放，组件不推断失败、不写原因。
 - `loading?`: `boolean`. 应用正在取候选这一事实：触发器与候选面标 aria-busy，候选面显示等待记号与「正在加载」。组件不发请求、不推断结果。
-- plus 23 inherited (@base-ui/react 23); not expanded, see the installed declarations
+- plus 24 inherited (@base-ui/react 24); not expanded, see the installed declarations
 
 ### SelectGroup
 - no props declared by this library
@@ -77,7 +77,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 285 inherited (@types/react 274, @base-ui/react 11); not expanded, see the installed declarations
 
 ### SelectTrigger
-- no props declared by this library
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。
 - plus 289 inherited (@types/react 283, @base-ui/react 6); not expanded, see the installed declarations
 
 ### SelectValue
@@ -92,13 +92,15 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Context EmptyValueLabel: without a provider nullable; provided by Select
 - Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 - Context ItemLabels: without a provider default-value; provided by Select
+- Context MultipleState: without a provider default-value; provided by Select
 - Context SourceState: without a provider default-value; provided by Select
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
 
 ### Select
-单值状态与表单语义。
+单值（或 multiple 多值）状态与表单语义。
+- multiple: boolean; default false. 多选：值是数组，空数组是未选择。不带搜索；选择不关闭候选面，再选一次即取消。每个已选值在表单里各提交一项（同名多值）。触发器按候选顺序列出名称：至多 2 项用分隔符连接，更多时显示「第一项及其余 N 项」，让触发器始终回答「选了什么」而不是「选了几个」。没有独立的清除件，取消勾选或受控地置为 []。
 - value / defaultValue: Value | null. 受控值或真实初值，null 是未选择。省略初值不会选第一项。
 - items: Record<string, ReactNode> | {value, label}[] | Group[]. 值到名称的映射；显式空字符串候选也要提供可读 label。触发器宽度由其中最长的名称决定，选另一项时不会伸缩。
 - onValueChange: (value, eventDetails) => void. 选择变化，可取消；不因高亮移动而改变值。
@@ -113,6 +115,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### SelectTrigger
 有边框的选择入口，与 Input 同档。
 - children: ReactNode. 省略时提供 SelectValue；内含展开图标。
+- unstyled: boolean; default false. 交给 InputGroup 画边框与状态时使用（见 InputGroupSelectTrigger）；触发器保留几何与原生语义。
 - render / ref / className / style / ARIA: Base UI composition. 保留真实触发器的事件、名称和样式入口。
 
 ### SelectValue
@@ -138,13 +141,14 @@ Portal、定位、面板与可滚动 List 的共同组合。
 语义分组与组名称；组名画法与 ComboboxGroupLabel、AutocompleteGroupLabel 同一来源。
 
 ### SelectPrimitive
-完整 Base UI Select 原语出口；公共 Select 接口始终为单值。
+完整 Base UI Select 原语出口。
 
 ## Keyboard
 - Tab: 进入触发器。
 - Enter / Space / ↑ / ↓: 打开候选；展开后方向键移动高亮，Enter/Space 选择。
 - Home / End: 展开时移动到首/尾候选。
 - 文字键: 类型搜索；展开时高亮匹配项，关闭时原语可直接选择匹配值。
+- Enter / Space（multiple）: 在高亮项上切换选中，候选面保持展开；Esc 关闭。
 - Esc: 关闭并回到触发器，保留原值。
 
 ## Source examples
@@ -312,6 +316,44 @@ export default function Demo() {
         </Field>
       ))}
     </div>
+  );
+}
+```
+
+### 多选
+Source: apps/docs/src/content/select/demos/04-multiple.tsx
+```tsx
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Select, SelectItem, SelectPopup, SelectTrigger } from "@qingye_lab/ui/components/select";
+
+export const meta = { title: "多选", titleEn: "Multiple" };
+
+const labels = [
+  { value: "design", label: "设计" },
+  { value: "frontend", label: "前端" },
+  { value: "backend", label: "后端" },
+  { value: "ops", label: "运维" },
+  { value: "docs", label: "文档" },
+];
+
+export default function Demo() {
+  return (
+    <FieldGroup className="grid w-full items-start sm:grid-cols-2">
+      <Field name="area">
+        <FieldLabel>负责范围</FieldLabel>
+        <Select multiple items={labels} defaultValue={["frontend", "docs"]}>
+          <SelectTrigger />
+          <SelectPopup>{labels.map(item => <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>)}</SelectPopup>
+        </Select>
+      </Field>
+      <Field name="involved">
+        <FieldLabel>参与范围</FieldLabel>
+        <Select multiple items={labels} defaultValue={["design", "frontend", "backend", "docs"]}>
+          <SelectTrigger />
+          <SelectPopup>{labels.map(item => <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>)}</SelectPopup>
+        </Select>
+      </Field>
+    </FieldGroup>
   );
 }
 ```

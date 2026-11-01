@@ -1201,7 +1201,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: c9469aa067c4e7bbd8046ee4d1a1fc56a84185b145e02885cea990b6b19ce968
+Source SHA-256: 49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7
 
 编辑自由文本，候选作为可接受的建议。
 
@@ -1255,6 +1255,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### Autocomplete
 - `items?`: `readonly Value[] | readonly AutocompleteItemGroup<Value>[] | undefined`.
+- `loading?`: `boolean`. 候选正在取回：与 ComboboxSelect 的 `loading` 同名同义，同一套候选状态。 输入框末端出现忙碌标记（与 Button、InputGroup 同一个），输入与列表写 `aria-busy`； 「正在加载」由 AutocompleteStatus 播报（一件事实一个播报者），此时 AutocompleteEmpty 不出声—— 等待与「没有结果」是两件事，应用此刻并不知道后者。输入始终可用，等待不禁用输入。
 - plus 32 inherited (@base-ui/react 32); not expanded, see the installed declarations
 
 ### AutocompleteClear
@@ -1266,7 +1267,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 1 inherited (@base-ui/react 1); not expanded, see the installed declarations
 
 ### AutocompleteControl
-- no props declared by this library
+- `loading?`: `boolean`. 等待：边界末端出现忙碌标记，根上写 `aria-busy`，并向读屏播报「正在加载」。 与 Button、Select 的 `loading` 同名同义：只说明「这个控件在等」，不替换输入、不禁用输入。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### AutocompleteEmpty
@@ -1319,6 +1320,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 - Context InControl: without a provider default-value; provided by AutocompleteControl
+- Context Loading: without a provider default-value; provided by Autocomplete
 - Context ReadOnly: without a provider default-value; provided by Autocomplete
 
 ### Curated API
@@ -1329,6 +1331,7 @@ Base UI 文本建议上下文，固定 list 模式。
 - value / defaultValue / onValueChange: string / string / (value, details) => void. 受控或非受控自由文本；details.cancel() 可拒绝编辑或接受建议请求。
 - items / itemToStringValue / filter: readonly Value[] / Base UI public props. 提供平坦建议数组、建议文字与过滤规则；对象建议显式定义文本。分组建议用 { value: 组名, items } 形态，配合 AutocompleteGroup。
 - name / form / required / disabled / readOnly: Base UI Root props. 实际 Input 与 Field 注册一次，FormData 提交自由文本；只读提交、禁用排除。
+- loading: boolean; default false. 建议正在取回的事实，与 ComboboxSelect 同一套候选状态：输入框末端出现忙碌标记，输入与列表标 aria-busy，AutocompleteStatus 播报「正在加载」，AutocompleteEmpty 此时不出声（等待不是「没有结果」）。输入始终可用；组件不发请求。
 - open / defaultOpen / onOpenChange: Base UI open props. 展开可控；文本、动作与建议项共用一套几何，跟随密度轴。
 
 #### AutocompleteInput / AutocompleteTrigger / AutocompleteClear
@@ -1370,7 +1373,7 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+2 more examples: see the component page and its Markdown file.
 
 ## 身份图像 Avatar
 
@@ -1830,7 +1833,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
-Source SHA-256: efadf9e44ee6436dc2cd200d69a73a5661622e54e45b8b168bb4c0d53c0f3eaa
+Source SHA-256: 60676cd107b7383351276a379d5f700b354ec3f3a66294e8b11945392783b1a4
 
 触发有明确对象与后果的动作；状态由调用方持有。
 
@@ -3167,7 +3170,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 1 inherited (@base-ui/react 1); not expanded, see the installed declarations
 
 ### ComboboxControl
-- no props declared by this library
+- `loading?`: `boolean`. 等待：边界末端出现忙碌标记，根上写 `aria-busy`，并向读屏播报「正在加载」。 与 Button、Select 的 `loading` 同名同义：只说明「这个控件在等」，不替换输入、不禁用输入。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ComboboxEmpty
@@ -6157,7 +6160,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
-Source SHA-256: d338b8110a12bb8dbae442444295b626ad5f63680e8fbb1d2bd4a26ab1c54e02
+Source SHA-256: 530458e9b34572eef1cbb53633a7868f51f2c3434c6e0af3830647c262013a2f
 
 让输入与标记、单位或附属动作共用编辑边界。
 
@@ -6165,6 +6168,7 @@ Source SHA-256: d338b8110a12bb8dbae442444295b626ad5f63680e8fbb1d2bd4a26ab1c54e02
 InputGroupInput 复用 Input 的 unstyled 出口。静态附件不抢焦点；需要动作时用 InputGroupButton，它与输入共用同一条外边界、自己不画框，并保留动作自己的名称与状态。清空、显示密码这类动作不内置在输入框里，都由这里组合；SearchInput 与 PasswordInput 就是这样搭出来的。
 
 ### Notes
+- 多个数值成员并置时（如区间），每个输入各自有可访问名称（aria-label），组的整体名称由外层 group 的 aria-labelledby 给出；分隔符用 InputGroupText，它对读屏是普通文字而非名称。
 - FieldControl 注册组合时传 InputGroupInput nativeInput，避免重复注册。
 - 禁用输入不意味着禁用任意附属动作；应用应声明每个动作的真实状态。
 
@@ -6191,17 +6195,24 @@ InputGroupInput 复用 Input 的 unstyled 出口。静态附件不抢焦点；�
 - InputGroupButtonProps: type; owner input-group; PASS
 - InputGroupInput: function; owner input-group; PASS; props: InputGroupInputProps
 - InputGroupInputProps: type; owner input-group; PASS
+- InputGroupNumberField: function; owner input-group; PASS; props: InputGroupNumberFieldProps
+- InputGroupNumberFieldProps: type; owner input-group; PASS
 - InputGroupProps: type; owner input-group; PASS
+- InputGroupSelectTrigger: function; owner input-group; PASS; props: InputGroupSelectTriggerProps
+- InputGroupSelectTriggerProps: type; owner input-group; PASS
+- InputGroupText: function; owner input-group; PASS; props: useRender.ComponentProps<"span">
+- InputGroupTextarea: function; owner input-group; PASS; props: InputGroupTextareaProps
+- InputGroupTextareaProps: type; owner input-group; PASS
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### InputGroup
-- no props declared by this library
+- `loading?`: `boolean`. 等待：边界末端出现忙碌标记，根上写 `aria-busy`，并向读屏播报「正在加载」。 与 Button、Select 的 `loading` 同名同义：只说明「这个控件在等」，不替换输入、不禁用输入。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### InputGroupAddon
-- no props declared by this library
+- `align?`: `"inline-start" | "inline-end" | "block-start" | "block-end"`. 附件在边界里的位置。省略时按 DOM 顺序排布（既有行为）； `inline-start` / `inline-end` 固定在行首 / 行尾；`block-start` / `block-end` 独占一整行，在全部成员之上 / 之下。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### InputGroupButton
@@ -6219,6 +6230,22 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `nativeInput?`: `boolean`. 已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。
 - plus 309 inherited (@types/react 303, @base-ui/react 6); not expanded, see the installed declarations
 
+### InputGroupNumberField
+- no props declared by this library
+- plus 296 inherited (@types/react 273, @base-ui/react 23); not expanded, see the installed declarations
+
+### InputGroupSelectTrigger
+- no props declared by this library
+- plus 289 inherited (@types/react 283, @base-ui/react 6); not expanded, see the installed declarations
+
+### InputGroupText
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### InputGroupTextarea
+- `controlClassName?`: `string`. 外层容器的样式入口；className / style / render 始终属于真实的 textarea。
+- plus 296 inherited (@types/react 292, @base-ui/react 4); not expanded, see the installed declarations
+
 ### Dependencies and providers
 - Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
 - Optional peers: none recorded
@@ -6230,7 +6257,12 @@ Written descriptions; the list above is the type-resolved fact.
 
 #### InputGroup
 共同编辑边界，不自动建立另一个字段角色。
+- loading: boolean; default false. 组内内容正在取回或校验的事实：行尾出现与 Button 同一个忙碌标记，根节点标 aria-busy，并以礼貌的实时区域播报 locale 的「正在加载」。输入不被禁用；组件不发请求。
 - render / ref / 原生属性: useRender.ComponentProps<div>. 共同边界组合入口。
+
+#### InputGroupTextarea / InputGroupNumberField / InputGroupSelectTrigger
+Textarea、NumberField、SelectTrigger 的 unstyled 组合：成员保留原生语义与几何，边框与焦点、悬停、无效、禁用、只读的状态由组统一承担。
+- TextareaProps / NumberFieldProps / SelectTriggerProps（除 unstyled）: InputGroupTextareaProps / InputGroupNumberFieldProps / InputGroupSelectTriggerProps. 与独立使用时相同。数值成员内部用 NumberFieldGroup unstyled；选择成员的宽度随候选名称，需要占满剩余宽度时传 className="flex-1"。
 
 #### InputGroupInput
 Input 的 unstyled 组合，尺寸来自组。
@@ -6238,7 +6270,12 @@ Input 的 unstyled 组合，尺寸来自组。
 
 #### InputGroupAddon
 默认静态 span；不添加 tabIndex、聚焦处理或自动名称。
+- align: "inline-start" | "inline-end" | "block-start" | "block-end". 附件相对成员的位置。省略时按 DOM 顺序在行内排列（与此前一致）；inline-* 把附件固定在行首/行尾；block-* 独占一行，置于成员之上/之下，高度不小于边界内高，用于多行成员的页眉与页脚。
 - render / ref / 原生属性: useRender.ComponentProps<span>. 单位、前缀、图标等静态内容的承载位。
+
+#### InputGroupText
+附件内的静态文字（单位、分隔、计数）：只承担文字样式，不抢焦点。
+- render / ref / 原生属性: useRender.ComponentProps<span>. 文字承载位。
 
 #### InputGroupButton
 编辑边界内的动作：不画自己的框，铺满边界内高；图标形为内高见方。
@@ -6261,7 +6298,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+6 more examples: see the component page and its Markdown file.
 
 ## 输入方式 InputModalityProvider
 
@@ -7474,7 +7511,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: d656d62d2d752adb834014978b03ac9638b9ee413e2c725146fd6925956c1660
+Source SHA-256: dff96cde72e893230e62af74be7b834f9fbe557e58f8c71442fbea516644a727
 
 编辑可为空的数值，并按指定步长增减。
 
@@ -7507,17 +7544,20 @@ Source SHA-256: d656d62d2d752adb834014978b03ac9638b9ee413e2c725146fd6925956c1660
 ### Current exports
 - NumberField: function; owner number-field; PASS; props: NumberFieldProps
 - NumberFieldDecrement: function; owner number-field; PASS; props: NumberFieldPrimitive.Decrement.Props & React.RefAttributes<HTMLButtonElement>
-- NumberFieldGroup: function; owner number-field; PASS; props: NumberFieldPrimitive.Group.Props & React.RefAttributes<HTMLDivElement>
+- NumberFieldGroup: function; owner number-field; PASS; props: NumberFieldGroupProps
+- NumberFieldGroupProps: type; owner number-field; PASS
 - NumberFieldIncrement: function; owner number-field; PASS; props: NumberFieldPrimitive.Increment.Props & React.RefAttributes<HTMLButtonElement>
 - NumberFieldInput: function; owner number-field; PASS; props: NumberFieldPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>
 - NumberFieldPrimitive: reexport; owner number-field; UNVERIFIED
 - NumberFieldProps: type; owner number-field; PASS
+- NumberFieldScrubArea: function; owner number-field; PASS; props: NumberFieldScrubAreaProps
+- NumberFieldScrubAreaProps: type; owner number-field; PASS
 
 ### Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### NumberField
-- no props declared by this library
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不带默认宽度与边界外的只读说明（外框承担），数值几何与语义不变。
 - plus 296 inherited (@types/react 273, @base-ui/react 23); not expanded, see the installed declarations
 
 ### NumberFieldDecrement
@@ -7525,7 +7565,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
 
 ### NumberFieldGroup
-- no props declared by this library
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ### NumberFieldIncrement
@@ -7535,6 +7575,10 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### NumberFieldInput
 - no props declared by this library
 - plus 308 inherited (@types/react 304, @base-ui/react 4); not expanded, see the installed declarations
+
+### NumberFieldScrubArea
+- no props declared by this library
+- plus 281 inherited (@types/react 275, @base-ui/react 6); not expanded, see the installed declarations
 
 ### Dependencies and providers
 - Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
@@ -7552,10 +7596,11 @@ Written descriptions; the list above is the type-resolved fact.
 - snapOnStep / smallStep / largeStep: boolean / number / number; default false / 0.1 / 10. 是否吸附与 Alt/Shift 步长是独立的显式选项。
 - onValueCommitted: (value, details) => void. blur 或步进提交回调，只描述编辑结束，不代表已保存。
 - name / form / required / disabled / readOnly: Base UI Root props. 原生表单与语义入口；只读继续参与提交，禁用不提交。
+- unstyled: boolean; default false. 交给 InputGroup 承担边框与状态时使用（见 InputGroupNumberField）：去掉默认宽度与只读提示，其余行为不变。
 - locale / format: Intl.LocalesArgument / Intl.NumberFormatOptions. 显式数字格式；未指定精度时不因聚焦/失焦丢弃外部数值精度。
 
 #### NumberFieldGroup
-输入与两个步进共享的边界；render/ref/样式与状态透传。
+输入与两个步进共享的边界；render/ref/样式与状态透传。unstyled 时由外层（InputGroup）画边框。
 
 #### NumberFieldInput
 复用 Input 的原生出口，由数值原语注册一次 Field。
@@ -7563,6 +7608,11 @@ Written descriptions; the list above is the type-resolved fact.
 
 #### NumberFieldDecrement / NumberFieldIncrement
 减少/增加原语复用 quiet Button；内建名称来自 locale，按钮不提交表单。
+
+#### NumberFieldScrubArea
+按住并横向（或纵向）拖动调整数值的区域，通常包住标签。拖动是步进之外的补充，键盘与步进按钮仍是主路径；禁用与只读时不响应拖动，光标也不提示可拖。拖动期间指针被锁定并显示方向光标。
+- direction: "horizontal" | "vertical"; default "horizontal". 拖动方向。
+- 其余 Base UI ScrubArea 属性: NumberFieldPrimitive.ScrubArea.Props. pixelSensitivity、teleportDistance、render、className 等原语属性透传。
 
 #### NumberFieldPrimitive
 所用 Base UI NumberField 命名空间。
@@ -7594,7 +7644,7 @@ export default function Demo() {
 }
 ```
 
-1 more examples: see the component page and its Markdown file.
+2 more examples: see the component page and its Markdown file.
 
 ## 分段文本 OtpField
 
@@ -8196,7 +8246,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `anchor?`: `PopoverPrimitive.Positioner.Props["anchor"]`.
 - `portalProps?`: `PopoverPrimitive.Portal.Props`.
 - `positionerProps?`: `PopoverPrimitive.Positioner.Props`.
-- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `side?`: `"inline-start" | "inline-end" | "top" | "bottom" | "left" | "right"`.
 - `sideOffset?`: `PopoverPrimitive.Positioner.Props["sideOffset"]`.
 - `viewportProps?`: `PopoverPrimitive.Viewport.Props`.
 - plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
@@ -8214,7 +8264,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `anchor?`: `PopoverPrimitive.Positioner.Props["anchor"]`.
 - `portalProps?`: `PopoverPrimitive.Portal.Props`.
 - `positionerProps?`: `PopoverPrimitive.Positioner.Props`.
-- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `side?`: `"inline-start" | "inline-end" | "top" | "bottom" | "left" | "right"`.
 - `sideOffset?`: `PopoverPrimitive.Positioner.Props["sideOffset"]`.
 - `viewportProps?`: `PopoverPrimitive.Viewport.Props`.
 - plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
@@ -9404,7 +9454,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: b3e18fa576f40383fd77be798ea019d7739657d559ffb2d518f6b4de961d3f8b
+Source SHA-256: 370b73798943cd2ff871be03abe1d3c97151e00056204a61e37fd22d39e415f5
 
 从可收起的候选列表中取一个值。
 
@@ -9438,7 +9488,7 @@ Source SHA-256: b3e18fa576f40383fd77be798ea019d7739657d559ffb2d518f6b4de961d3f8b
 - 同档文字和控件尺寸、bordered padding、角色颜色、Portal container
 
 ### Current exports
-- Select: function; owner select; PASS; props: SelectProps<Value>
+- Select: function; owner select; PASS; props: SelectProps<Value, Multiple>
 - SelectGroup: function; owner select; PASS; props: React.ComponentProps<typeof SelectPrimitive.Group>
 - SelectGroupLabel: function; owner select; PASS; props: React.ComponentProps<typeof SelectPrimitive.GroupLabel>
 - SelectItem: function; owner select; PASS; props: SelectItemProps
@@ -9458,7 +9508,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### Select
 - `error?`: `React.ReactNode`. 取候选失败时由应用提供的内容（说明与重试动作）；候选面以 role="alert" 摆放，组件不推断失败、不写原因。
 - `loading?`: `boolean`. 应用正在取候选这一事实：触发器与候选面标 aria-busy，候选面显示等待记号与「正在加载」。组件不发请求、不推断结果。
-- plus 23 inherited (@base-ui/react 23); not expanded, see the installed declarations
+- plus 24 inherited (@base-ui/react 24); not expanded, see the installed declarations
 
 ### SelectGroup
 - no props declared by this library
@@ -9478,7 +9528,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 285 inherited (@types/react 274, @base-ui/react 11); not expanded, see the installed declarations
 
 ### SelectTrigger
-- no props declared by this library
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。
 - plus 289 inherited (@types/react 283, @base-ui/react 6); not expanded, see the installed declarations
 
 ### SelectValue
@@ -9493,13 +9543,15 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Context EmptyValueLabel: without a provider nullable; provided by Select
 - Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 - Context ItemLabels: without a provider default-value; provided by Select
+- Context MultipleState: without a provider default-value; provided by Select
 - Context SourceState: without a provider default-value; provided by Select
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
 
 #### Select
-单值状态与表单语义。
+单值（或 multiple 多值）状态与表单语义。
+- multiple: boolean; default false. 多选：值是数组，空数组是未选择。不带搜索；选择不关闭候选面，再选一次即取消。每个已选值在表单里各提交一项（同名多值）。触发器按候选顺序列出名称：至多 2 项用分隔符连接，更多时显示「第一项及其余 N 项」，让触发器始终回答「选了什么」而不是「选了几个」。没有独立的清除件，取消勾选或受控地置为 []。
 - value / defaultValue: Value | null. 受控值或真实初值，null 是未选择。省略初值不会选第一项。
 - items: Record<string, ReactNode> | {value, label}[] | Group[]. 值到名称的映射；显式空字符串候选也要提供可读 label。触发器宽度由其中最长的名称决定，选另一项时不会伸缩。
 - onValueChange: (value, eventDetails) => void. 选择变化，可取消；不因高亮移动而改变值。
@@ -9514,6 +9566,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### SelectTrigger
 有边框的选择入口，与 Input 同档。
 - children: ReactNode. 省略时提供 SelectValue；内含展开图标。
+- unstyled: boolean; default false. 交给 InputGroup 画边框与状态时使用（见 InputGroupSelectTrigger）；触发器保留几何与原生语义。
 - render / ref / className / style / ARIA: Base UI composition. 保留真实触发器的事件、名称和样式入口。
 
 #### SelectValue
@@ -9539,13 +9592,14 @@ Portal、定位、面板与可滚动 List 的共同组合。
 语义分组与组名称；组名画法与 ComboboxGroupLabel、AutocompleteGroupLabel 同一来源。
 
 #### SelectPrimitive
-完整 Base UI Select 原语出口；公共 Select 接口始终为单值。
+完整 Base UI Select 原语出口。
 
 ### Keyboard
 - Tab: 进入触发器。
 - Enter / Space / ↑ / ↓: 打开候选；展开后方向键移动高亮，Enter/Space 选择。
 - Home / End: 展开时移动到首/尾候选。
 - 文字键: 类型搜索；展开时高亮匹配项，关闭时原语可直接选择匹配值。
+- Enter / Space（multiple）: 在高亮项上切换选中，候选面保持展开；Esc 关闭。
 - Esc: 关闭并回到触发器，保留原值。
 
 ### Source example
@@ -9584,7 +9638,7 @@ export default function Demo() {
 }
 ```
 
-2 more examples: see the component page and its Markdown file.
+3 more examples: see the component page and its Markdown file.
 
 ## 分隔线 Separator
 
@@ -11116,7 +11170,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
-Source SHA-256: e17aa1a2bb422890f4e878b8ee3c084761443fa726bedc4c314a857df2913db9
+Source SHA-256: 25df3fcdf4732439bfe2d07f9abeb78fe822bd05e42808917dbc84a20b03d4aa
 
 编辑备注、消息等多行文本。
 
@@ -11154,7 +11208,8 @@ Source SHA-256: e17aa1a2bb422890f4e878b8ee3c084761443fa726bedc4c314a857df2913db9
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Textarea
-- no props declared by this library
+- `controlClassName?`: `string`. 外层容器的样式入口；className / style / render 始终属于真实的 textarea。
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。
 - plus 296 inherited (@types/react 292, @base-ui/react 4); not expanded, see the installed declarations
 
 ### Dependencies and providers
@@ -11174,6 +11229,8 @@ Written descriptions; the list above is the type-resolved fact.
 - aria-invalid: boolean | 'true' | 'false'. 调用方声明的错误事实；也可由 Field invalid 传入。
 - disabled / readOnly: boolean; default false. 禁用不参与 Tab/提交；只读仍可聚焦和提交，显示已有 locale 的只读文案。
 - maxLength: number. 浏览器执行的字符长度上限，不由计数文案实施限制。
+- unstyled: boolean; default false. 交给 InputGroup 画边框与状态时使用（见 InputGroupTextarea）：不画框、不显示只读提示，保留自动增高与原生编辑。
+- controlClassName: string. 外层控制容器的样式入口；className 仍属于实际 textarea。
 - render / ref / className / style: Base UI render / textarea ref / state-aware styling. 真实 textarea 的组合与样式入口；render 必须保留 textarea 语义、属性及事件。
 
 #### TextareaPrimitive
@@ -12183,7 +12240,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `anchor?`: `TooltipPrimitive.Positioner.Props["anchor"]`.
 - `portalProps?`: `TooltipPrimitive.Portal.Props`.
 - `positionerProps?`: `TooltipPrimitive.Positioner.Props`.
-- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `side?`: `"inline-start" | "inline-end" | "top" | "bottom" | "left" | "right"`.
 - `sideOffset?`: `TooltipPrimitive.Positioner.Props["sideOffset"]`.
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
@@ -12196,7 +12253,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `anchor?`: `TooltipPrimitive.Positioner.Props["anchor"]`.
 - `portalProps?`: `TooltipPrimitive.Portal.Props`.
 - `positionerProps?`: `TooltipPrimitive.Positioner.Props`.
-- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `side?`: `"inline-start" | "inline-end" | "top" | "bottom" | "left" | "right"`.
 - `sideOffset?`: `TooltipPrimitive.Positioner.Props["sideOffset"]`.
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 

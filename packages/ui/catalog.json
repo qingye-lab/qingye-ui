@@ -758,7 +758,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1447,7 +1447,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1823,7 +1823,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2058,6 +2058,13 @@
               "descriptionEn": "The actual input registers Field once and submits free text. Read-only submits; disabled is excluded."
             },
             {
+              "name": "loading",
+              "type": "boolean",
+              "default": "false",
+              "description": "建议正在取回的事实，与 ComboboxSelect 同一套候选状态：输入框末端出现忙碌标记，输入与列表标 aria-busy，AutocompleteStatus 播报「正在加载」，AutocompleteEmpty 此时不出声（等待不是「没有结果」）。输入始终可用；组件不发请求。",
+              "descriptionEn": "The fact that suggestions are being fetched, using the same candidate status as ComboboxSelect: a busy mark appears at the end of the input, the input and list carry aria-busy, AutocompleteStatus announces the loading text, and AutocompleteEmpty stays silent meanwhile (waiting is not no results). Input stays usable; the component sends no request."
+            },
+            {
               "name": "open / defaultOpen / onOpenChange",
               "type": "Base UI open props",
               "description": "展开可控；文本、动作与建议项共用一套几何，跟随密度轴。",
@@ -2118,7 +2125,14 @@
                 "name": "items",
                 "optional": true,
                 "type": "readonly Value[] | readonly AutocompleteItemGroup<Value>[] | undefined",
-                "declaredAt": "packages/ui/src/components/autocomplete.tsx:21"
+                "declaredAt": "packages/ui/src/components/autocomplete.tsx:24"
+              },
+              {
+                "name": "loading",
+                "optional": true,
+                "type": "boolean",
+                "doc": "候选正在取回：与 ComboboxSelect 的 `loading` 同名同义，同一套候选状态。\n输入框末端出现忙碌标记（与 Button、InputGroup 同一个），输入与列表写 `aria-busy`；\n「正在加载」由 AutocompleteStatus 播报（一件事实一个播报者），此时 AutocompleteEmpty 不出声——\n等待与「没有结果」是两件事，应用此刻并不知道后者。输入始终可用，等待不禁用输入。",
+                "declaredAt": "packages/ui/src/components/autocomplete.tsx:31"
               }
             ],
             "inheritedCount": 32,
@@ -2160,7 +2174,15 @@
           {
             "name": "AutocompleteControl",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "loading",
+                "optional": true,
+                "type": "boolean",
+                "doc": "等待：边界末端出现忙碌标记，根上写 `aria-busy`，并向读屏播报「正在加载」。\n与 Button、Select 的 `loading` 同名同义：只说明「这个控件在等」，不替换输入、不禁用输入。",
+                "declaredAt": "packages/ui/src/components/input-group.tsx:22"
+              }
+            ],
             "inheritedCount": 281,
             "inheritedFrom": [
               {
@@ -2277,13 +2299,13 @@
                 "name": "container",
                 "optional": true,
                 "type": "AutocompletePrimitive.Portal.Props[\"container\"]",
-                "declaredAt": "packages/ui/src/components/autocomplete.tsx:48"
+                "declaredAt": "packages/ui/src/components/autocomplete.tsx:65"
               },
               {
                 "name": "positionerProps",
                 "optional": true,
                 "type": "AutocompletePrimitive.Positioner.Props",
-                "declaredAt": "packages/ui/src/components/autocomplete.tsx:48"
+                "declaredAt": "packages/ui/src/components/autocomplete.tsx:65"
               }
             ],
             "inheritedCount": 280,
@@ -2403,7 +2425,7 @@
           "owner": "autocomplete",
           "module": "@qingye_lab/ui/components/autocomplete",
           "propsType": "AutocompleteProps<Value>",
-          "signature": "Autocomplete({ readOnly = false, ...props }: AutocompleteProps<Value>)",
+          "signature": "Autocomplete({ readOnly = false, loading = false, ...props }: AutocompleteProps<Value>)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -2434,7 +2456,7 @@
           "owner": "autocomplete",
           "module": "@qingye_lab/ui/components/autocomplete",
           "propsType": "InputGroupProps",
-          "signature": "AutocompleteControl({ className, ...props }: InputGroupProps)",
+          "signature": "AutocompleteControl({ className, children, ...props }: InputGroupProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -2550,7 +2572,7 @@
           "kind": "type",
           "owner": "autocomplete",
           "module": "@qingye_lab/ui/components/autocomplete",
-          "signature": "Omit<AutocompletePrimitive.Root.Props<Value>, \"mode\" | \"items\"> & { items?: readonly Value[] | readonly AutocompleteItemGroup<Value>[] | undefined }",
+          "signature": "Omit<AutocompletePrimitive.Root.Props<Value>, \"mode\" | \"items\"> & {\n  items?: readonly Value[] | readonly AutocompleteItemGroup<Value>[] | undefined;\n  /**\n   * 候选正在取回：与 ComboboxSelect 的 `loading` 同名同义，同一套候选状态。\n   * 输入框末端出现忙碌标记（与 Button、InputGroup 同一个），输入与列表写 `aria-busy`；\n   * 「正在加载」由 AutocompleteStatus 播报（一件事实一个播报者），此时 AutocompleteEmpty 不出声——\n   * 等待与「没有结果」是两件事，应用此刻并不知道后者。输入始终可用，等待不禁用输入。\n   */\n  loading?: boolean;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -2606,7 +2628,7 @@
         },
         {
           "name": "AutocompleteProps",
-          "definition": "export type AutocompleteProps<Value = string> = Omit<AutocompletePrimitive.Root.Props<Value>, \"mode\" | \"items\"> & { items?: readonly Value[] | readonly AutocompleteItemGroup<Value>[] | undefined };"
+          "definition": "export type AutocompleteProps<Value = string> = Omit<AutocompletePrimitive.Root.Props<Value>, \"mode\" | \"items\"> & {\n  items?: readonly Value[] | readonly AutocompleteItemGroup<Value>[] | undefined;\n  /**\n   * 候选正在取回：与 ComboboxSelect 的 `loading` 同名同义，同一套候选状态。\n   * 输入框末端出现忙碌标记（与 Button、InputGroup 同一个），输入与列表写 `aria-busy`；\n   * 「正在加载」由 AutocompleteStatus 播报（一件事实一个播报者），此时 AutocompleteEmpty 不出声——\n   * 等待与「没有结果」是两件事，应用此刻并不知道后者。输入始终可用，等待不禁用输入。\n   */\n  loading?: boolean;\n};"
         },
         {
           "name": "AutocompletePopupProps",
@@ -2739,7 +2761,7 @@
           },
           {
             "name": "InControl",
-            "declaredAt": "packages/ui/src/components/autocomplete.tsx:18",
+            "declaredAt": "packages/ui/src/components/autocomplete.tsx:19",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2747,8 +2769,17 @@
             ]
           },
           {
+            "name": "Loading",
+            "declaredAt": "packages/ui/src/components/autocomplete.tsx:20",
+            "defaultValue": "false",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "Autocomplete"
+            ]
+          },
+          {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2757,7 +2788,7 @@
           },
           {
             "name": "ReadOnly",
-            "declaredAt": "packages/ui/src/components/autocomplete.tsx:17",
+            "declaredAt": "packages/ui/src/components/autocomplete.tsx:18",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2769,8 +2800,11 @@
           "@base-ui/react/autocomplete",
           "@base-ui/react/button",
           "@base-ui/react/direction-provider",
+          "@base-ui/react/field",
           "@base-ui/react/input",
           "@base-ui/react/merge-props",
+          "@base-ui/react/number-field",
+          "@base-ui/react/select",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -2801,6 +2835,19 @@
           "providers": [],
           "code": "import { Autocomplete, AutocompleteControl, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteTrigger } from \"@qingye_lab/ui/components/autocomplete\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\n\nexport const meta = { title: \"密度与只读\", titleEn: \"Density and read-only\" };\n\nconst items = [\"3 号楼东侧\", \"3 号楼西侧\", \"4 号楼南门\"];\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full grid-cols-3 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"紧凑\" : \"默认\"}</FieldLabel>\n            <Autocomplete items={items} defaultValue=\"3 号楼东侧\">\n              <AutocompleteControl><AutocompleteInput /><AutocompleteTrigger /></AutocompleteControl>\n              <AutocompletePopup><AutocompleteList>{(item: string) => <AutocompleteItem key={item} value={item}>{item}</AutocompleteItem>}</AutocompleteList></AutocompletePopup>\n            </Autocomplete>\n          </Field>\n        </div>\n      ))}\n      <Field><FieldLabel>只读文本</FieldLabel><Autocomplete readOnly items={items} defaultValue=\"3 号楼东侧\"><AutocompleteControl><AutocompleteInput /><AutocompleteTrigger /></AutocompleteControl></Autocomplete></Field>\n    </div>\n  );\n}\n",
           "sha256": "33e781ffbb2c980ef899d1bb814862a51bef2e0139167b1974455cea0f4788cc"
+        },
+        {
+          "id": "loading",
+          "title": "候选加载中",
+          "source": "apps/docs/src/content/autocomplete/demos/03-loading.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/autocomplete",
+            "@qingye_lab/ui/components/field",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { useEffect, useState } from \"react\";\nimport { Autocomplete, AutocompleteControl, AutocompleteEmpty, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteStatus } from \"@qingye_lab/ui/components/autocomplete\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\n\nexport const meta = { title: \"候选加载中\", titleEn: \"Loading suggestions\" };\n\nconst all = [\"青叶\", \"青山\", \"青云\", \"白云\", \"白鹭\"];\n\nexport default function Demo() {\n  const [value, setValue] = useState(\"\");\n  const [loading, setLoading] = useState(false);\n  const [items, setItems] = useState<string[]>([]);\n  useEffect(() => {\n    if (value === \"\") { setItems([]); setLoading(false); return; }\n    setLoading(true);\n    const timer = window.setTimeout(() => { setItems(all.filter(item => item.includes(value))); setLoading(false); }, 900);\n    return () => window.clearTimeout(timer);\n  }, [value]);\n  return (\n    <Field className=\"w-full max-w-sm\">\n      <FieldLabel>项目</FieldLabel>\n      <Autocomplete items={items} filter={null} value={value} onValueChange={setValue} loading={loading}>\n        <AutocompleteControl><AutocompleteInput /></AutocompleteControl>\n        <AutocompletePopup>\n          <AutocompleteStatus />\n          <AutocompleteList>{(item: string) => <AutocompleteItem key={item} value={item}>{item}</AutocompleteItem>}</AutocompleteList>\n          <AutocompleteEmpty>没有名称含「{value}」的项目</AutocompleteEmpty>\n        </AutocompletePopup>\n      </Autocomplete>\n    </Field>\n  );\n}\n",
+          "sha256": "65eeef015e2f33eb6757cee75c7e4584dab3d67ccebb33ceb084f6fc8d491970"
         }
       ],
       "design": {
@@ -2835,7 +2882,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/autocomplete.tsx",
-        "sha256": "c9469aa067c4e7bbd8046ee4d1a1fc56a84185b145e02885cea990b6b19ce968",
+        "sha256": "49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "输入文字本身就是值。移动候选高亮不改变文本；确认建议才请求替换，文本无需匹配候选也可提交。",
@@ -2874,6 +2921,13 @@
                   "type": "Base UI Root props",
                   "description": "The actual input registers Field once and submits free text. Read-only submits; disabled is excluded.",
                   "descriptionEn": "The actual input registers Field once and submits free text. Read-only submits; disabled is excluded."
+                },
+                {
+                  "name": "loading",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "The fact that suggestions are being fetched, using the same candidate status as ComboboxSelect: a busy mark appears at the end of the input, the input and list carry aria-busy, AutocompleteStatus announces the loading text, and AutocompleteEmpty stays silent meanwhile (waiting is not no results). Input stays usable; the component sends no request.",
+                  "descriptionEn": "The fact that suggestions are being fetched, using the same candidate status as ComboboxSelect: a busy mark appears at the end of the input, the input and list carry aria-busy, AutocompleteStatus announces the loading text, and AutocompleteEmpty stays silent meanwhile (waiting is not no results). Input stays usable; the component sends no request."
                 },
                 {
                   "name": "open / defaultOpen / onOpenChange",
@@ -4135,7 +4189,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5099,7 +5153,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5660,7 +5714,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5807,7 +5861,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/button.tsx",
-        "sha256": "efadf9e44ee6436dc2cd200d69a73a5661622e54e45b8b168bb4c0d53c0f3eaa",
+        "sha256": "60676cd107b7383351276a379d5f700b354ec3f3a66294e8b11945392783b1a4",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "按钮只触发动作，忙碌是它唯一的状态：忙碌时保留焦点并阻止重复触发。成功、失败与结果未知是另一件事实，由提示组件表达（就地说明用 Alert，短暂反馈用 Toast，字段错误用 FieldError）；后果与确认属于 AlertDialog。色调不代表授权。",
@@ -6569,7 +6623,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -7489,7 +7543,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -8706,7 +8760,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -10226,7 +10280,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -11308,7 +11362,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -11814,7 +11868,15 @@
           {
             "name": "ComboboxControl",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "loading",
+                "optional": true,
+                "type": "boolean",
+                "doc": "等待：边界末端出现忙碌标记，根上写 `aria-busy`，并向读屏播报「正在加载」。\n与 Button、Select 的 `loading` 同名同义：只说明「这个控件在等」，不替换输入、不禁用输入。",
+                "declaredAt": "packages/ui/src/components/input-group.tsx:22"
+              }
+            ],
             "inheritedCount": 281,
             "inheritedFrom": [
               {
@@ -12570,7 +12632,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -12600,8 +12662,11 @@
           "@base-ui/react/button",
           "@base-ui/react/combobox",
           "@base-ui/react/direction-provider",
+          "@base-ui/react/field",
           "@base-ui/react/input",
           "@base-ui/react/merge-props",
+          "@base-ui/react/number-field",
+          "@base-ui/react/select",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -13728,7 +13793,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13759,8 +13824,11 @@
           "@base-ui/react/button",
           "@base-ui/react/dialog",
           "@base-ui/react/direction-provider",
+          "@base-ui/react/field",
           "@base-ui/react/input",
           "@base-ui/react/merge-props",
+          "@base-ui/react/number-field",
+          "@base-ui/react/select",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -14276,7 +14344,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -14826,7 +14894,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -16410,7 +16478,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -17885,7 +17953,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -18505,7 +18573,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -18516,9 +18584,12 @@
         "baseUi": [
           "@base-ui/react/button",
           "@base-ui/react/direction-provider",
+          "@base-ui/react/field",
           "@base-ui/react/input",
           "@base-ui/react/merge-props",
+          "@base-ui/react/number-field",
           "@base-ui/react/popover",
+          "@base-ui/react/select",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -19055,7 +19126,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19066,9 +19137,12 @@
         "baseUi": [
           "@base-ui/react/button",
           "@base-ui/react/direction-provider",
+          "@base-ui/react/field",
           "@base-ui/react/input",
           "@base-ui/react/merge-props",
+          "@base-ui/react/number-field",
           "@base-ui/react/popover",
+          "@base-ui/react/select",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -19524,7 +19598,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19535,9 +19609,12 @@
         "baseUi": [
           "@base-ui/react/button",
           "@base-ui/react/direction-provider",
+          "@base-ui/react/field",
           "@base-ui/react/input",
           "@base-ui/react/merge-props",
+          "@base-ui/react/number-field",
           "@base-ui/react/popover",
+          "@base-ui/react/select",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -20849,7 +20926,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -21671,7 +21748,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -23104,7 +23181,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -24692,7 +24769,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -25769,7 +25846,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -26704,7 +26781,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -27659,7 +27736,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -27897,11 +27974,16 @@
       "exports": [
         "InputGroup",
         "InputGroupAddon",
+        "InputGroupText",
         "InputGroupInput",
+        "InputGroupTextarea",
+        "InputGroupNumberField",
+        "InputGroupSelectTrigger",
         "InputGroupButton"
       ],
       "docs": "/docs/components/input-group",
       "notes": [
+        "多个数值成员并置时（如区间），每个输入各自有可访问名称（aria-label），组的整体名称由外层 group 的 aria-labelledby 给出；分隔符用 InputGroupText，它对读屏是普通文字而非名称。",
         "FieldControl 注册组合时传 InputGroupInput nativeInput，避免重复注册。",
         "禁用输入不意味着禁用任意附属动作；应用应声明每个动作的真实状态。"
       ],
@@ -27918,11 +28000,32 @@
           "descriptionEn": "A shared editing boundary with no extra field role.",
           "props": [
             {
+              "name": "loading",
+              "type": "boolean",
+              "default": "false",
+              "description": "组内内容正在取回或校验的事实：行尾出现与 Button 同一个忙碌标记，根节点标 aria-busy，并以礼貌的实时区域播报 locale 的「正在加载」。输入不被禁用；组件不发请求。",
+              "descriptionEn": "The fact that content in the group is being fetched or validated: the same busy mark as Button appears at the inline end, the root is marked aria-busy, and the locale's loading text is announced through a polite live region. Inputs stay enabled; the component sends no request."
+            },
+            {
               "name": "render / ref / 原生属性",
               "nameEn": "render / ref / native props",
               "type": "useRender.ComponentProps<div>",
               "description": "共同边界组合入口。",
               "descriptionEn": "Composition props for the common boundary."
+            }
+          ]
+        },
+        {
+          "name": "InputGroupTextarea / InputGroupNumberField / InputGroupSelectTrigger",
+          "description": "Textarea、NumberField、SelectTrigger 的 unstyled 组合：成员保留原生语义与几何，边框与焦点、悬停、无效、禁用、只读的状态由组统一承担。",
+          "descriptionEn": "Unstyled compositions of Textarea, NumberField and SelectTrigger: members keep their native semantics and geometry while the group draws the border and the focus, hover, invalid, disabled and read-only states.",
+          "props": [
+            {
+              "name": "TextareaProps / NumberFieldProps / SelectTriggerProps（除 unstyled）",
+              "nameEn": "TextareaProps / NumberFieldProps / SelectTriggerProps (except unstyled)",
+              "type": "InputGroupTextareaProps / InputGroupNumberFieldProps / InputGroupSelectTriggerProps",
+              "description": "与独立使用时相同。数值成员内部用 NumberFieldGroup unstyled；选择成员的宽度随候选名称，需要占满剩余宽度时传 className=\"flex-1\"。",
+              "descriptionEn": "Same as standalone use. A number member holds NumberFieldGroup unstyled; a select member's width follows its candidate names, pass className=\"flex-1\" to fill the remaining width."
             }
           ]
         },
@@ -27946,11 +28049,31 @@
           "descriptionEn": "A static span by default, with no tabIndex, focus redirection or automatic name.",
           "props": [
             {
+              "name": "align",
+              "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
+              "description": "附件相对成员的位置。省略时按 DOM 顺序在行内排列（与此前一致）；inline-* 把附件固定在行首/行尾；block-* 独占一行，置于成员之上/之下，高度不小于边界内高，用于多行成员的页眉与页脚。",
+              "descriptionEn": "Where the addon sits relative to the members. Omitted, it follows DOM order inline (unchanged); inline-* pins it to the line start/end; block-* takes a full row above/below the members with at least the inner height, for headers and footers of multiline members."
+            },
+            {
               "name": "render / ref / 原生属性",
               "nameEn": "render / ref / native props",
               "type": "useRender.ComponentProps<span>",
               "description": "单位、前缀、图标等静态内容的承载位。",
               "descriptionEn": "A position for static content: units, prefixes, icons."
+            }
+          ]
+        },
+        {
+          "name": "InputGroupText",
+          "description": "附件内的静态文字（单位、分隔、计数）：只承担文字样式，不抢焦点。",
+          "descriptionEn": "Static text inside an addon (unit, separator, count): carries text styling only and never takes focus.",
+          "props": [
+            {
+              "name": "render / ref / 原生属性",
+              "nameEn": "render / ref / native props",
+              "type": "useRender.ComponentProps<span>",
+              "description": "文字承载位。",
+              "descriptionEn": "Carrier for the text."
             }
           ]
         },
@@ -27992,7 +28115,15 @@
           {
             "name": "InputGroup",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "loading",
+                "optional": true,
+                "type": "boolean",
+                "doc": "等待：边界末端出现忙碌标记，根上写 `aria-busy`，并向读屏播报「正在加载」。\n与 Button、Select 的 `loading` 同名同义：只说明「这个控件在等」，不替换输入、不禁用输入。",
+                "declaredAt": "packages/ui/src/components/input-group.tsx:22"
+              }
+            ],
             "inheritedCount": 281,
             "inheritedFrom": [
               {
@@ -28008,7 +28139,15 @@
           {
             "name": "InputGroupAddon",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "align",
+                "optional": true,
+                "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
+                "doc": "附件在边界里的位置。省略时按 DOM 顺序排布（既有行为）；\n`inline-start` / `inline-end` 固定在行首 / 行尾；`block-start` / `block-end` 独占一整行，在全部成员之上 / 之下。",
+                "declaredAt": "packages/ui/src/components/input-group.tsx:29"
+              }
+            ],
             "inheritedCount": 281,
             "inheritedFrom": [
               {
@@ -28111,11 +28250,89 @@
                 "count": 6
               }
             ]
+          },
+          {
+            "name": "InputGroupNumberField",
+            "status": "resolved",
+            "ownProps": [],
+            "inheritedCount": 296,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 273
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 23
+              }
+            ]
+          },
+          {
+            "name": "InputGroupSelectTrigger",
+            "status": "resolved",
+            "ownProps": [],
+            "inheritedCount": 289,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 283
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 6
+              }
+            ]
+          },
+          {
+            "name": "InputGroupText",
+            "status": "resolved",
+            "ownProps": [],
+            "inheritedCount": 281,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 280
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "name": "InputGroupTextarea",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "controlClassName",
+                "optional": true,
+                "type": "string",
+                "doc": "外层容器的样式入口；className / style / render 始终属于真实的 textarea。",
+                "declaredAt": "packages/ui/src/components/textarea.tsx:12"
+              }
+            ],
+            "inheritedCount": 296,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 292
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 4
+              }
+            ]
           }
         ],
         "drift": {
           "documentedButMissing": [],
           "undocumented": [
+            {
+              "part": "InputGroupTextarea",
+              "prop": "controlClassName",
+              "declaredAt": "packages/ui/src/components/textarea.tsx:12",
+              "viaComponent": "textarea"
+            },
             {
               "part": "InputGroupInput",
               "prop": "controlClassName",
@@ -28169,7 +28386,7 @@
           "owner": "input-group",
           "module": "@qingye_lab/ui/components/input-group",
           "propsType": "InputGroupProps",
-          "signature": "InputGroup({ className, render, ref, ...props }: InputGroupProps)",
+          "signature": "InputGroup({ className, render, ref, loading = false, children, ...props }: InputGroupProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -28180,7 +28397,7 @@
           "owner": "input-group",
           "module": "@qingye_lab/ui/components/input-group",
           "propsType": "InputGroupAddonProps",
-          "signature": "InputGroupAddon({ className, render, ref, ...props }: InputGroupAddonProps)",
+          "signature": "InputGroupAddon({ className, render, ref, align, ...props }: InputGroupAddonProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -28190,7 +28407,7 @@
           "kind": "type",
           "owner": "input-group",
           "module": "@qingye_lab/ui/components/input-group",
-          "signature": "useRender.ComponentProps<\"span\">",
+          "signature": "useRender.ComponentProps<\"span\"> & {\n  /**\n   * 附件在边界里的位置。省略时按 DOM 顺序排布（既有行为）；\n   * `inline-start` / `inline-end` 固定在行首 / 行尾；`block-start` / `block-end` 独占一整行，在全部成员之上 / 之下。\n   */\n  align?: \"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\";\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -28238,11 +28455,85 @@
           "typeResolution": "UNVERIFIED"
         },
         {
+          "name": "InputGroupNumberField",
+          "kind": "function",
+          "owner": "input-group",
+          "module": "@qingye_lab/ui/components/input-group",
+          "propsType": "InputGroupNumberFieldProps",
+          "signature": "InputGroupNumberField({ className, ...props }: InputGroupNumberFieldProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "InputGroupNumberFieldProps",
+          "kind": "type",
+          "owner": "input-group",
+          "module": "@qingye_lab/ui/components/input-group",
+          "signature": "Omit<NumberFieldProps, \"unstyled\">",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
           "name": "InputGroupProps",
           "kind": "type",
           "owner": "input-group",
           "module": "@qingye_lab/ui/components/input-group",
-          "signature": "useRender.ComponentProps<\"div\">",
+          "signature": "useRender.ComponentProps<\"div\"> & {\n  /**\n   * 等待：边界末端出现忙碌标记，根上写 `aria-busy`，并向读屏播报「正在加载」。\n   * 与 Button、Select 的 `loading` 同名同义：只说明「这个控件在等」，不替换输入、不禁用输入。\n   */\n  loading?: boolean;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "InputGroupSelectTrigger",
+          "kind": "function",
+          "owner": "input-group",
+          "module": "@qingye_lab/ui/components/input-group",
+          "propsType": "InputGroupSelectTriggerProps",
+          "signature": "InputGroupSelectTrigger(props: InputGroupSelectTriggerProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "InputGroupSelectTriggerProps",
+          "kind": "type",
+          "owner": "input-group",
+          "module": "@qingye_lab/ui/components/input-group",
+          "signature": "Omit<SelectTriggerProps, \"unstyled\">",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "InputGroupText",
+          "kind": "function",
+          "owner": "input-group",
+          "module": "@qingye_lab/ui/components/input-group",
+          "propsType": "useRender.ComponentProps<\"span\">",
+          "signature": "InputGroupText({ className, render, ref, ...props }: useRender.ComponentProps<\"span\">)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "InputGroupTextarea",
+          "kind": "function",
+          "owner": "input-group",
+          "module": "@qingye_lab/ui/components/input-group",
+          "propsType": "InputGroupTextareaProps",
+          "signature": "InputGroupTextarea({ controlClassName, ...props }: InputGroupTextareaProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "InputGroupTextareaProps",
+          "kind": "type",
+          "owner": "input-group",
+          "module": "@qingye_lab/ui/components/input-group",
+          "signature": "Omit<TextareaProps, \"unstyled\">",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -28251,15 +28542,27 @@
       "types": [
         {
           "name": "InputGroupProps",
-          "definition": "export type InputGroupProps = useRender.ComponentProps<\"div\">;"
+          "definition": "export type InputGroupProps = useRender.ComponentProps<\"div\"> & {\n  /**\n   * 等待：边界末端出现忙碌标记，根上写 `aria-busy`，并向读屏播报「正在加载」。\n   * 与 Button、Select 的 `loading` 同名同义：只说明「这个控件在等」，不替换输入、不禁用输入。\n   */\n  loading?: boolean;\n};"
         },
         {
           "name": "InputGroupAddonProps",
-          "definition": "export type InputGroupAddonProps = useRender.ComponentProps<\"span\">;"
+          "definition": "export type InputGroupAddonProps = useRender.ComponentProps<\"span\"> & {\n  /**\n   * 附件在边界里的位置。省略时按 DOM 顺序排布（既有行为）；\n   * `inline-start` / `inline-end` 固定在行首 / 行尾；`block-start` / `block-end` 独占一整行，在全部成员之上 / 之下。\n   */\n  align?: \"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\";\n};"
         },
         {
           "name": "InputGroupInputProps",
           "definition": "export type InputGroupInputProps = Omit<InputProps, \"size\" | \"unstyled\">;"
+        },
+        {
+          "name": "InputGroupTextareaProps",
+          "definition": "export type InputGroupTextareaProps = Omit<TextareaProps, \"unstyled\">;"
+        },
+        {
+          "name": "InputGroupNumberFieldProps",
+          "definition": "export type InputGroupNumberFieldProps = Omit<NumberFieldProps, \"unstyled\">;"
+        },
+        {
+          "name": "InputGroupSelectTriggerProps",
+          "definition": "export type InputGroupSelectTriggerProps = Omit<SelectTriggerProps, \"unstyled\">;"
         },
         {
           "name": "InputGroupButtonProps",
@@ -28280,7 +28583,31 @@
           "status": "PASS"
         },
         {
+          "name": "InputGroupText",
+          "import": "@qingye_lab/ui/components/input-group",
+          "owner": "input-group",
+          "status": "PASS"
+        },
+        {
           "name": "InputGroupInput",
+          "import": "@qingye_lab/ui/components/input-group",
+          "owner": "input-group",
+          "status": "PASS"
+        },
+        {
+          "name": "InputGroupTextarea",
+          "import": "@qingye_lab/ui/components/input-group",
+          "owner": "input-group",
+          "status": "PASS"
+        },
+        {
+          "name": "InputGroupNumberField",
+          "import": "@qingye_lab/ui/components/input-group",
+          "owner": "input-group",
+          "status": "PASS"
+        },
+        {
+          "name": "InputGroupSelectTrigger",
           "import": "@qingye_lab/ui/components/input-group",
           "owner": "input-group",
           "status": "PASS"
@@ -28310,12 +28637,25 @@
         "usesLocale": true,
         "usesTheme": false,
         "required": [],
-        "contexts": [],
+        "contexts": [
+          {
+            "name": "LocaleContext",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
+            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "UILocaleProvider"
+            ]
+          }
+        ],
         "baseUi": [
           "@base-ui/react/button",
           "@base-ui/react/direction-provider",
+          "@base-ui/react/field",
           "@base-ui/react/input",
           "@base-ui/react/merge-props",
+          "@base-ui/react/number-field",
+          "@base-ui/react/select",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -28360,6 +28700,61 @@
           "providers": [],
           "code": "import { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { InputGroup, InputGroupButton, InputGroupInput } from \"@qingye_lab/ui/components/input-group\";\nimport { IconX } from \"@tabler/icons-react\";\nimport { useRef, useState } from \"react\";\n\nexport const meta = { title: \"可清空的输入\", titleEn: \"A clearable input\" };\n\nexport default function Demo() {\n  const [value, setValue] = useState(\"季度复盘\");\n  const input = useRef<HTMLInputElement>(null);\n  return (\n    <Field className=\"w-full max-w-sm\">\n      <FieldLabel>标题</FieldLabel>\n      <InputGroup>\n        <InputGroupInput ref={input} value={value} onChange={event => setValue(event.target.value)} />\n        {value !== \"\" && <InputGroupButton shape=\"icon\" aria-label=\"清空标题\" onClick={() => { setValue(\"\"); input.current?.focus(); }}><IconX aria-hidden=\"true\" /></InputGroupButton>}\n      </InputGroup>\n    </Field>\n  );\n}\n",
           "sha256": "dc9a6d0d34485bd037cce371984da9e2bca9cf5b32c4cab22864e9f94c84e9d2"
+        },
+        {
+          "id": "align",
+          "title": "附件的位置",
+          "source": "apps/docs/src/content/input-group/demos/04-align.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/input-group",
+            "@tabler/icons-react",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText, InputGroupTextarea } from \"@qingye_lab/ui/components/input-group\";\nimport { IconMail } from \"@tabler/icons-react\";\nimport { useState } from \"react\";\n\nexport const meta = { title: \"附件的位置\", titleEn: \"Addon placement\" };\n\nexport default function Demo() {\n  const [note, setNote] = useState(\"\");\n  return (\n    <div className=\"grid w-full max-w-md gap-(--qy-field-group-gap)\">\n      <Field>\n        <FieldLabel>邮箱</FieldLabel>\n        <InputGroup>\n          <InputGroupInput type=\"email\" />\n          <InputGroupAddon align=\"inline-start\"><IconMail aria-hidden=\"true\" /></InputGroupAddon>\n          <InputGroupAddon align=\"inline-end\"><InputGroupText>@qingye.dev</InputGroupText></InputGroupAddon>\n        </InputGroup>\n      </Field>\n      <Field>\n        <FieldLabel>备注</FieldLabel>\n        <InputGroup>\n          <InputGroupAddon align=\"block-start\"><InputGroupText>给审阅人的话</InputGroupText></InputGroupAddon>\n          <InputGroupTextarea rows={3} value={note} maxLength={200} onChange={event => setNote(event.target.value)} />\n          <InputGroupAddon align=\"block-end\"><InputGroupText>{note.length} / 200</InputGroupText></InputGroupAddon>\n        </InputGroup>\n      </Field>\n    </div>\n  );\n}\n",
+          "sha256": "eb760a431c9bb189a8bafdd4724515d9f275cf83e3b22dfe5b5ef3e9b34443b7"
+        },
+        {
+          "id": "members",
+          "title": "选择与数值成员",
+          "source": "apps/docs/src/content/input-group/demos/05-members.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/input-group",
+            "@qingye_lab/ui/components/number-field",
+            "@qingye_lab/ui/components/select"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { InputGroup, InputGroupAddon, InputGroupInput, InputGroupNumberField, InputGroupSelectTrigger, InputGroupText } from \"@qingye_lab/ui/components/input-group\";\nimport { NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from \"@qingye_lab/ui/components/number-field\";\nimport { Select, SelectItem, SelectPopup } from \"@qingye_lab/ui/components/select\";\n\nexport const meta = { title: \"选择与数值成员\", titleEn: \"Select and number members\" };\n\nconst currencies = [{ value: \"cny\", label: \"人民币\" }, { value: \"usd\", label: \"美元\" }, { value: \"eur\", label: \"欧元\" }];\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full max-w-md gap-(--qy-field-group-gap)\">\n      <Field name=\"amount\">\n        <FieldLabel>金额</FieldLabel>\n        <InputGroup>\n          <Select name=\"currency\" items={currencies} defaultValue=\"cny\">\n            <InputGroupSelectTrigger aria-label=\"币种\" />\n            <SelectPopup>{currencies.map(item => <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>)}</SelectPopup>\n          </Select>\n          <InputGroupInput inputMode=\"decimal\" />\n        </InputGroup>\n      </Field>\n      <Field>\n        <FieldLabel>数量</FieldLabel>\n        <InputGroup>\n          <InputGroupNumberField name=\"quantity\" defaultValue={2} min={0} max={99}>\n            <NumberFieldGroup unstyled><NumberFieldDecrement /><NumberFieldInput /><NumberFieldIncrement /></NumberFieldGroup>\n          </InputGroupNumberField>\n          <InputGroupAddon><InputGroupText>件</InputGroupText></InputGroupAddon>\n        </InputGroup>\n      </Field>\n    </div>\n  );\n}\n",
+          "sha256": "24049b4abee2612110c1a33706bf92c260af22d0ec3a62ed8ba7bc99e1dc4f06"
+        },
+        {
+          "id": "loading",
+          "title": "等待",
+          "source": "apps/docs/src/content/input-group/demos/06-loading.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/input-group",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { InputGroup, InputGroupInput } from \"@qingye_lab/ui/components/input-group\";\nimport { useEffect, useState } from \"react\";\n\nexport const meta = { title: \"等待\", titleEn: \"Waiting\" };\n\nexport default function Demo() {\n  const [query, setQuery] = useState(\"青叶\");\n  const [searching, setSearching] = useState(false);\n  useEffect(() => {\n    if (!searching) return;\n    const timer = window.setTimeout(() => setSearching(false), 1600);\n    return () => window.clearTimeout(timer);\n  }, [searching]);\n  return (\n    <div className=\"flex w-full max-w-md items-end gap-(--qy-space-3)\">\n      <Field className=\"flex-1\">\n        <FieldLabel>项目</FieldLabel>\n        <InputGroup loading={searching}>\n          <InputGroupInput value={query} onChange={event => setQuery(event.target.value)} />\n        </InputGroup>\n      </Field>\n      <Button variant=\"bordered\" onClick={() => setSearching(true)} disabled={searching}>查找</Button>\n    </div>\n  );\n}\n",
+          "sha256": "6dbc937f6c130fe59c114ea820316e848f845f822c93a1d3a906b94982c3ea49"
+        },
+        {
+          "id": "range",
+          "title": "数值区间",
+          "source": "apps/docs/src/content/input-group/demos/07-range.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/input-group",
+            "@qingye_lab/ui/components/number-field"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { InputGroup, InputGroupAddon, InputGroupNumberField, InputGroupText } from \"@qingye_lab/ui/components/input-group\";\nimport { NumberFieldGroup, NumberFieldInput } from \"@qingye_lab/ui/components/number-field\";\n\nexport const meta = { title: \"数值区间\", titleEn: \"Number range\" };\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-sm\" name=\"price\" role=\"group\" aria-labelledby=\"price-range-label\">\n      <FieldLabel id=\"price-range-label\" nativeLabel={false} render={<span />}>价格</FieldLabel>\n      <InputGroup>\n        <InputGroupNumberField name=\"priceMin\" defaultValue={100} min={0}>\n          <NumberFieldGroup unstyled><NumberFieldInput aria-label=\"最低价\" /></NumberFieldGroup>\n        </InputGroupNumberField>\n        <InputGroupAddon><InputGroupText>至</InputGroupText></InputGroupAddon>\n        <InputGroupNumberField name=\"priceMax\" defaultValue={500} min={0}>\n          <NumberFieldGroup unstyled><NumberFieldInput aria-label=\"最高价\" /></NumberFieldGroup>\n        </InputGroupNumberField>\n      </InputGroup>\n    </Field>\n  );\n}\n",
+          "sha256": "ea558732ee9b20a5f10f1587eb0713bfa92a205005d209d111f8d7635eb63372"
         }
       ],
       "design": {
@@ -28394,7 +28789,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/input-group.tsx",
-        "sha256": "d338b8110a12bb8dbae442444295b626ad5f63680e8fbb1d2bd4a26ab1c54e02",
+        "sha256": "530458e9b34572eef1cbb53633a7868f51f2c3434c6e0af3830647c262013a2f",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "InputGroupInput 复用 Input 的 unstyled 出口。静态附件不抢焦点；需要动作时用 InputGroupButton，它与输入共用同一条外边界、自己不画框，并保留动作自己的名称与状态。清空、显示密码这类动作不内置在输入框里，都由这里组合；SearchInput 与 PasswordInput 就是这样搭出来的。",
@@ -28405,6 +28800,7 @@
           "category": "Forms",
           "decisions": "InputGroupInput uses Input's unstyled outlet. Static addons do not redirect focus; use InputGroupButton for actions: it shares the outer boundary, draws no frame of its own, and keeps its own name and state. Clearing and password visibility are not built into Input; they are composed here, which is how SearchInput and PasswordInput are built.",
           "notes": [
+            "When several number members sit side by side (a range), each input has its own accessible name (aria-label) and the outer group supplies the collective name through aria-labelledby; the separator is an InputGroupText, plain text to assistive technology rather than a name.",
             "Use InputGroupInput nativeInput when FieldControl registers the composition, avoiding duplicate registration.",
             "Disabling the input does not disable arbitrary addon actions; the application declares each action's real state."
           ],
@@ -28415,11 +28811,32 @@
               "descriptionEn": "A shared editing boundary with no extra field role.",
               "props": [
                 {
+                  "name": "loading",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "The fact that content in the group is being fetched or validated: the same busy mark as Button appears at the inline end, the root is marked aria-busy, and the locale's loading text is announced through a polite live region. Inputs stay enabled; the component sends no request.",
+                  "descriptionEn": "The fact that content in the group is being fetched or validated: the same busy mark as Button appears at the inline end, the root is marked aria-busy, and the locale's loading text is announced through a polite live region. Inputs stay enabled; the component sends no request."
+                },
+                {
                   "name": "render / ref / native props",
                   "nameEn": "render / ref / native props",
                   "type": "useRender.ComponentProps<div>",
                   "description": "Composition props for the common boundary.",
                   "descriptionEn": "Composition props for the common boundary."
+                }
+              ]
+            },
+            {
+              "name": "InputGroupTextarea / InputGroupNumberField / InputGroupSelectTrigger",
+              "description": "Unstyled compositions of Textarea, NumberField and SelectTrigger: members keep their native semantics and geometry while the group draws the border and the focus, hover, invalid, disabled and read-only states.",
+              "descriptionEn": "Unstyled compositions of Textarea, NumberField and SelectTrigger: members keep their native semantics and geometry while the group draws the border and the focus, hover, invalid, disabled and read-only states.",
+              "props": [
+                {
+                  "name": "TextareaProps / NumberFieldProps / SelectTriggerProps (except unstyled)",
+                  "nameEn": "TextareaProps / NumberFieldProps / SelectTriggerProps (except unstyled)",
+                  "type": "InputGroupTextareaProps / InputGroupNumberFieldProps / InputGroupSelectTriggerProps",
+                  "description": "Same as standalone use. A number member holds NumberFieldGroup unstyled; a select member's width follows its candidate names, pass className=\"flex-1\" to fill the remaining width.",
+                  "descriptionEn": "Same as standalone use. A number member holds NumberFieldGroup unstyled; a select member's width follows its candidate names, pass className=\"flex-1\" to fill the remaining width."
                 }
               ]
             },
@@ -28443,11 +28860,31 @@
               "descriptionEn": "A static span by default, with no tabIndex, focus redirection or automatic name.",
               "props": [
                 {
+                  "name": "align",
+                  "type": "\"inline-start\" | \"inline-end\" | \"block-start\" | \"block-end\"",
+                  "description": "Where the addon sits relative to the members. Omitted, it follows DOM order inline (unchanged); inline-* pins it to the line start/end; block-* takes a full row above/below the members with at least the inner height, for headers and footers of multiline members.",
+                  "descriptionEn": "Where the addon sits relative to the members. Omitted, it follows DOM order inline (unchanged); inline-* pins it to the line start/end; block-* takes a full row above/below the members with at least the inner height, for headers and footers of multiline members."
+                },
+                {
                   "name": "render / ref / native props",
                   "nameEn": "render / ref / native props",
                   "type": "useRender.ComponentProps<span>",
                   "description": "A position for static content: units, prefixes, icons.",
                   "descriptionEn": "A position for static content: units, prefixes, icons."
+                }
+              ]
+            },
+            {
+              "name": "InputGroupText",
+              "description": "Static text inside an addon (unit, separator, count): carries text styling only and never takes focus.",
+              "descriptionEn": "Static text inside an addon (unit, separator, count): carries text styling only and never takes focus.",
+              "props": [
+                {
+                  "name": "render / ref / native props",
+                  "nameEn": "render / ref / native props",
+                  "type": "useRender.ComponentProps<span>",
+                  "description": "Carrier for the text.",
+                  "descriptionEn": "Carrier for the text."
                 }
               ]
             },
@@ -31031,7 +31468,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -32863,7 +33300,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -34278,6 +34715,7 @@
         "NumberFieldInput",
         "NumberFieldDecrement",
         "NumberFieldIncrement",
+        "NumberFieldScrubArea",
         "NumberFieldPrimitive"
       ],
       "docs": "/docs/components/number-field",
@@ -34334,6 +34772,13 @@
               "descriptionEn": "Native form semantics. Read-only values submit; disabled values do not."
             },
             {
+              "name": "unstyled",
+              "type": "boolean",
+              "default": "false",
+              "description": "交给 InputGroup 承担边框与状态时使用（见 InputGroupNumberField）：去掉默认宽度与只读提示，其余行为不变。",
+              "descriptionEn": "Used when an InputGroup carries the border and states (see InputGroupNumberField): drops the default width and the read-only note; behavior is otherwise unchanged."
+            },
+            {
               "name": "locale / format",
               "type": "Intl.LocalesArgument / Intl.NumberFormatOptions",
               "description": "显式数字格式；未指定精度时不因聚焦/失焦丢弃外部数值精度。",
@@ -34343,8 +34788,8 @@
         },
         {
           "name": "NumberFieldGroup",
-          "description": "输入与两个步进共享的边界；render/ref/样式与状态透传。",
-          "descriptionEn": "Shared boundary for the input and two steppers; forwards render, refs, styling, and state."
+          "description": "输入与两个步进共享的边界；render/ref/样式与状态透传。unstyled 时由外层（InputGroup）画边框。",
+          "descriptionEn": "Shared boundary for the input and two steppers; forwards render, refs, styling, and state. With unstyled the outer InputGroup draws the border."
         },
         {
           "name": "NumberFieldInput",
@@ -34365,6 +34810,27 @@
           "descriptionEn": "Decrease/increase primitives compose quiet Button. Locale names and non-submitting buttons."
         },
         {
+          "name": "NumberFieldScrubArea",
+          "description": "按住并横向（或纵向）拖动调整数值的区域，通常包住标签。拖动是步进之外的补充，键盘与步进按钮仍是主路径；禁用与只读时不响应拖动，光标也不提示可拖。拖动期间指针被锁定并显示方向光标。",
+          "descriptionEn": "A region where holding and dragging horizontally (or vertically) adjusts the value, usually wrapping the label. Scrubbing supplements stepping; keyboard and step buttons remain the primary path. Disabled and read-only fields ignore dragging and the cursor does not suggest it. The pointer is locked during a drag with a direction cursor.",
+          "props": [
+            {
+              "name": "direction",
+              "type": "\"horizontal\" | \"vertical\"",
+              "default": "\"horizontal\"",
+              "description": "拖动方向。",
+              "descriptionEn": "Drag direction."
+            },
+            {
+              "name": "其余 Base UI ScrubArea 属性",
+              "nameEn": "Other Base UI ScrubArea props",
+              "type": "NumberFieldPrimitive.ScrubArea.Props",
+              "description": "pixelSensitivity、teleportDistance、render、className 等原语属性透传。",
+              "descriptionEn": "pixelSensitivity, teleportDistance, render, className and the other primitive props are forwarded."
+            }
+          ]
+        },
+        {
           "name": "NumberFieldPrimitive",
           "description": "所用 Base UI NumberField 命名空间。",
           "descriptionEn": "The installed Base UI NumberField namespace."
@@ -34379,7 +34845,15 @@
           {
             "name": "NumberField",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "unstyled",
+                "optional": true,
+                "type": "boolean",
+                "doc": "由 InputGroup 提供共同边界时使用：不带默认宽度与边界外的只读说明（外框承担），数值几何与语义不变。",
+                "declaredAt": "packages/ui/src/components/number-field.tsx:14"
+              }
+            ],
             "inheritedCount": 296,
             "inheritedFrom": [
               {
@@ -34411,7 +34885,15 @@
           {
             "name": "NumberFieldGroup",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "unstyled",
+                "optional": true,
+                "type": "boolean",
+                "doc": "由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。",
+                "declaredAt": "packages/ui/src/components/number-field.tsx:63"
+              }
+            ],
             "inheritedCount": 278,
             "inheritedFrom": [
               {
@@ -34460,6 +34942,22 @@
             "name": "NumberFieldPrimitive",
             "status": "not-applicable",
             "reason": "export is not a function (a Base UI / DayPicker namespace re-export or a plain value)"
+          },
+          {
+            "name": "NumberFieldScrubArea",
+            "status": "resolved",
+            "ownProps": [],
+            "inheritedCount": 281,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 275
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 6
+              }
+            ]
           }
         ],
         "drift": {
@@ -34492,7 +34990,7 @@
           "owner": "number-field",
           "module": "@qingye_lab/ui/components/number-field",
           "propsType": "NumberFieldProps",
-          "signature": "NumberField({ className, style, value: valueProp, defaultValue, onValueChange, inputRef, children, ...props }: NumberFieldProps)",
+          "signature": "NumberField({ className, style, unstyled = false, value: valueProp, defaultValue, onValueChange, inputRef, children, ...props }: NumberFieldProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -34513,8 +35011,18 @@
           "kind": "function",
           "owner": "number-field",
           "module": "@qingye_lab/ui/components/number-field",
-          "propsType": "NumberFieldPrimitive.Group.Props & React.RefAttributes<HTMLDivElement>",
-          "signature": "NumberFieldGroup({ className, ...props }: NumberFieldPrimitive.Group.Props & React.RefAttributes<HTMLDivElement>)",
+          "propsType": "NumberFieldGroupProps",
+          "signature": "NumberFieldGroup({ className, unstyled = false, ...props }: NumberFieldGroupProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "NumberFieldGroupProps",
+          "kind": "type",
+          "owner": "number-field",
+          "module": "@qingye_lab/ui/components/number-field",
+          "signature": "NumberFieldPrimitive.Group.Props & React.RefAttributes<HTMLDivElement> & {\n  /** 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。 */\n  unstyled?: boolean;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -34555,7 +35063,28 @@
           "kind": "type",
           "owner": "number-field",
           "module": "@qingye_lab/ui/components/number-field",
-          "signature": "Omit<NumberFieldPrimitive.Root.Props, \"allowOutOfRange\"> & React.RefAttributes<HTMLDivElement>",
+          "signature": "Omit<NumberFieldPrimitive.Root.Props, \"allowOutOfRange\"> & React.RefAttributes<HTMLDivElement> & {\n  /** 由 InputGroup 提供共同边界时使用：不带默认宽度与边界外的只读说明（外框承担），数值几何与语义不变。 */\n  unstyled?: boolean;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "NumberFieldScrubArea",
+          "kind": "function",
+          "owner": "number-field",
+          "module": "@qingye_lab/ui/components/number-field",
+          "propsType": "NumberFieldScrubAreaProps",
+          "signature": "NumberFieldScrubArea({ className, direction = \"horizontal\", children, ...props }: NumberFieldScrubAreaProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "NumberFieldScrubAreaProps",
+          "kind": "type",
+          "owner": "number-field",
+          "module": "@qingye_lab/ui/components/number-field",
+          "signature": "NumberFieldPrimitive.ScrubArea.Props & React.RefAttributes<HTMLSpanElement>",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -34564,7 +35093,15 @@
       "types": [
         {
           "name": "NumberFieldProps",
-          "definition": "export type NumberFieldProps = Omit<NumberFieldPrimitive.Root.Props, \"allowOutOfRange\"> & React.RefAttributes<HTMLDivElement>;"
+          "definition": "export type NumberFieldProps = Omit<NumberFieldPrimitive.Root.Props, \"allowOutOfRange\"> & React.RefAttributes<HTMLDivElement> & {\n  /** 由 InputGroup 提供共同边界时使用：不带默认宽度与边界外的只读说明（外框承担），数值几何与语义不变。 */\n  unstyled?: boolean;\n};"
+        },
+        {
+          "name": "NumberFieldGroupProps",
+          "definition": "export type NumberFieldGroupProps = NumberFieldPrimitive.Group.Props & React.RefAttributes<HTMLDivElement> & {\n  /** 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。 */\n  unstyled?: boolean;\n};"
+        },
+        {
+          "name": "NumberFieldScrubAreaProps",
+          "definition": "export type NumberFieldScrubAreaProps = NumberFieldPrimitive.ScrubArea.Props & React.RefAttributes<HTMLSpanElement>;"
         }
       ],
       "usageImports": [
@@ -34599,6 +35136,12 @@
           "status": "PASS"
         },
         {
+          "name": "NumberFieldScrubArea",
+          "import": "@qingye_lab/ui/components/number-field",
+          "owner": "number-field",
+          "status": "PASS"
+        },
+        {
           "name": "NumberFieldPrimitive",
           "import": "@qingye_lab/ui/components/number-field",
           "owner": "number-field",
@@ -34626,7 +35169,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -34671,6 +35214,18 @@
           "providers": [],
           "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { NumberField, NumberFieldDecrement, NumberFieldGroup, NumberFieldIncrement, NumberFieldInput } from \"@qingye_lab/ui/components/number-field\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <div data-density={density} key={density}>\n          <Field>\n            <FieldLabel>{density === \"compact\" ? \"并发上限\" : \"重试次数\"}</FieldLabel>\n            <NumberField defaultValue={3}>\n              <NumberFieldGroup><NumberFieldDecrement /><NumberFieldInput /><NumberFieldIncrement /></NumberFieldGroup>\n            </NumberField>\n          </Field>\n        </div>\n      ))}\n    </FieldGroup>\n  );\n}\n",
           "sha256": "3f9fcdf8327d95c8484751df3b869af8652319a4ee183c6259b1129b868a69d0"
+        },
+        {
+          "id": "scrub",
+          "title": "拖动调值",
+          "source": "apps/docs/src/content/number-field/demos/03-scrub.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/number-field"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { NumberField, NumberFieldGroup, NumberFieldInput, NumberFieldScrubArea } from \"@qingye_lab/ui/components/number-field\";\n\nexport const meta = { title: \"拖动调值\", titleEn: \"Scrub to adjust\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full grid-cols-1 gap-(--qy-field-group-gap) sm:grid-cols-3\">\n      {([[\"可用\", {}], [\"只读\", { readOnly: true }], [\"禁用\", { disabled: true }]] as const).map(([name, state]) => (\n        <NumberField key={name} defaultValue={12} min={0} max={100} {...state}>\n          <Field>\n            <NumberFieldScrubArea><FieldLabel>{`间距（${name}）`}</FieldLabel></NumberFieldScrubArea>\n            <NumberFieldGroup><NumberFieldInput /></NumberFieldGroup>\n          </Field>\n        </NumberField>\n      ))}\n    </div>\n  );\n}\n",
+          "sha256": "c6223b6004cb6021d0420e55ba963e8251eb8bc7c04d7bcc271a6df34af2ef97"
         }
       ],
       "design": {
@@ -34705,7 +35260,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/number-field.tsx",
-        "sha256": "d656d62d2d752adb834014978b03ac9638b9ee413e2c725146fd6925956c1660",
+        "sha256": "dff96cde72e893230e62af74be7b834f9fbe557e58f8c71442fbea516644a727",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "直接编辑超出范围时保留原值，提交由浏览器范围约束检查；步进仍限制在 min/max。空、负号和未完成小数不会被替换为 0。",
@@ -34762,6 +35317,13 @@
                   "descriptionEn": "Native form semantics. Read-only values submit; disabled values do not."
                 },
                 {
+                  "name": "unstyled",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Used when an InputGroup carries the border and states (see InputGroupNumberField): drops the default width and the read-only note; behavior is otherwise unchanged.",
+                  "descriptionEn": "Used when an InputGroup carries the border and states (see InputGroupNumberField): drops the default width and the read-only note; behavior is otherwise unchanged."
+                },
+                {
                   "name": "locale / format",
                   "type": "Intl.LocalesArgument / Intl.NumberFormatOptions",
                   "description": "Explicit number formatting. Without rounding options, focus and blur preserve external precision.",
@@ -34771,8 +35333,8 @@
             },
             {
               "name": "NumberFieldGroup",
-              "description": "Shared boundary for the input and two steppers; forwards render, refs, styling, and state.",
-              "descriptionEn": "Shared boundary for the input and two steppers; forwards render, refs, styling, and state."
+              "description": "Shared boundary for the input and two steppers; forwards render, refs, styling, and state. With unstyled the outer InputGroup draws the border.",
+              "descriptionEn": "Shared boundary for the input and two steppers; forwards render, refs, styling, and state. With unstyled the outer InputGroup draws the border."
             },
             {
               "name": "NumberFieldInput",
@@ -34791,6 +35353,27 @@
               "name": "NumberFieldDecrement / NumberFieldIncrement",
               "description": "Decrease/increase primitives compose quiet Button. Locale names and non-submitting buttons.",
               "descriptionEn": "Decrease/increase primitives compose quiet Button. Locale names and non-submitting buttons."
+            },
+            {
+              "name": "NumberFieldScrubArea",
+              "description": "A region where holding and dragging horizontally (or vertically) adjusts the value, usually wrapping the label. Scrubbing supplements stepping; keyboard and step buttons remain the primary path. Disabled and read-only fields ignore dragging and the cursor does not suggest it. The pointer is locked during a drag with a direction cursor.",
+              "descriptionEn": "A region where holding and dragging horizontally (or vertically) adjusts the value, usually wrapping the label. Scrubbing supplements stepping; keyboard and step buttons remain the primary path. Disabled and read-only fields ignore dragging and the cursor does not suggest it. The pointer is locked during a drag with a direction cursor.",
+              "props": [
+                {
+                  "name": "direction",
+                  "type": "\"horizontal\" | \"vertical\"",
+                  "default": "\"horizontal\"",
+                  "description": "Drag direction.",
+                  "descriptionEn": "Drag direction."
+                },
+                {
+                  "name": "Other Base UI ScrubArea props",
+                  "nameEn": "Other Base UI ScrubArea props",
+                  "type": "NumberFieldPrimitive.ScrubArea.Props",
+                  "description": "pixelSensitivity, teleportDistance, render, className and the other primitive props are forwarded.",
+                  "descriptionEn": "pixelSensitivity, teleportDistance, render, className and the other primitive props are forwarded."
+                }
+              ]
             },
             {
               "name": "NumberFieldPrimitive",
@@ -35109,7 +35692,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -36673,7 +37256,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37175,7 +37758,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37186,8 +37769,11 @@
         "baseUi": [
           "@base-ui/react/button",
           "@base-ui/react/direction-provider",
+          "@base-ui/react/field",
           "@base-ui/react/input",
           "@base-ui/react/merge-props",
+          "@base-ui/react/number-field",
+          "@base-ui/react/select",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -37549,7 +38135,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37882,7 +38468,7 @@
               {
                 "name": "side",
                 "optional": true,
-                "type": "\"top\" | \"bottom\" | \"left\" | \"right\" | \"inline-end\" | \"inline-start\"",
+                "type": "\"inline-start\" | \"inline-end\" | \"top\" | \"bottom\" | \"left\" | \"right\"",
                 "declaredAt": "packages/ui/src/components/popover.tsx:51"
               },
               {
@@ -37970,7 +38556,7 @@
               {
                 "name": "side",
                 "optional": true,
-                "type": "\"top\" | \"bottom\" | \"left\" | \"right\" | \"inline-end\" | \"inline-start\"",
+                "type": "\"inline-start\" | \"inline-end\" | \"top\" | \"bottom\" | \"left\" | \"right\"",
                 "declaredAt": "packages/ui/src/components/popover.tsx:51"
               },
               {
@@ -38877,7 +39463,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -39271,7 +39857,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -40080,7 +40666,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41223,7 +41809,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -42349,7 +42935,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -42360,8 +42946,11 @@
         "baseUi": [
           "@base-ui/react/button",
           "@base-ui/react/direction-provider",
+          "@base-ui/react/field",
           "@base-ui/react/input",
           "@base-ui/react/merge-props",
+          "@base-ui/react/number-field",
+          "@base-ui/react/select",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -43735,9 +44324,16 @@
       "api": [
         {
           "name": "Select",
-          "description": "单值状态与表单语义。",
-          "descriptionEn": "Single-value state and form semantics.",
+          "description": "单值（或 multiple 多值）状态与表单语义。",
+          "descriptionEn": "Single-value (or multiple) state and form semantics.",
           "props": [
+            {
+              "name": "multiple",
+              "type": "boolean",
+              "default": "false",
+              "description": "多选：值是数组，空数组是未选择。不带搜索；选择不关闭候选面，再选一次即取消。每个已选值在表单里各提交一项（同名多值）。触发器按候选顺序列出名称：至多 2 项用分隔符连接，更多时显示「第一项及其余 N 项」，让触发器始终回答「选了什么」而不是「选了几个」。没有独立的清除件，取消勾选或受控地置为 []。",
+              "descriptionEn": "Multiple selection: the value is an array and an empty array means no selection. No search; choosing does not close the popup and choosing again deselects. Each selected value submits as its own form entry (repeated name). The trigger lists names in candidate order: up to 2 joined by the separator, beyond that \"first and N more\", so the trigger keeps answering what is chosen rather than how many. There is no separate clear part: deselect items or reset a controlled value to []."
+            },
             {
               "name": "value / defaultValue",
               "type": "Value | null",
@@ -43813,6 +44409,13 @@
               "type": "ReactNode",
               "description": "省略时提供 SelectValue；内含展开图标。",
               "descriptionEn": "Defaults to SelectValue with a disclosure icon."
+            },
+            {
+              "name": "unstyled",
+              "type": "boolean",
+              "default": "false",
+              "description": "交给 InputGroup 画边框与状态时使用（见 InputGroupSelectTrigger）；触发器保留几何与原生语义。",
+              "descriptionEn": "Used when an InputGroup draws the border and states (see InputGroupSelectTrigger); the trigger keeps its geometry and native semantics."
             },
             {
               "name": "render / ref / className / style / ARIA",
@@ -43914,8 +44517,8 @@
         },
         {
           "name": "SelectPrimitive",
-          "description": "完整 Base UI Select 原语出口；公共 Select 接口始终为单值。",
-          "descriptionEn": "The complete public Base UI Select primitive; public Select remains single-value."
+          "description": "完整 Base UI Select 原语出口。",
+          "descriptionEn": "The complete public Base UI Select primitive."
         }
       ],
       "apiStatus": "type-resolved",
@@ -43943,11 +44546,11 @@
                 "declaredAt": "packages/ui/src/components/select.tsx:19"
               }
             ],
-            "inheritedCount": 23,
+            "inheritedCount": 24,
             "inheritedFrom": [
               {
                 "source": "@base-ui/react",
-                "count": 23
+                "count": 24
               }
             ]
           },
@@ -44008,13 +44611,13 @@
                 "optional": true,
                 "type": "React.ReactNode",
                 "doc": "没有子项时的说法；省略时用内置的「没有可选项」。应用若要说明查询对象，在这里给出。",
-                "declaredAt": "packages/ui/src/components/select.tsx:31"
+                "declaredAt": "packages/ui/src/components/select.tsx:34"
               },
               {
                 "name": "positionerProps",
                 "optional": true,
                 "type": "SelectPrimitive.Positioner.Props",
-                "declaredAt": "packages/ui/src/components/select.tsx:29"
+                "declaredAt": "packages/ui/src/components/select.tsx:32"
               }
             ],
             "inheritedCount": 285,
@@ -44037,7 +44640,15 @@
           {
             "name": "SelectTrigger",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "unstyled",
+                "optional": true,
+                "type": "boolean",
+                "doc": "由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。",
+                "declaredAt": "packages/ui/src/components/select.tsx:25"
+              }
+            ],
             "inheritedCount": 289,
             "inheritedFrom": [
               {
@@ -44095,6 +44706,12 @@
           "descriptionEn": "Typeahead highlights matches while open; the closed primitive may select a matching value directly."
         },
         {
+          "keys": "Enter / Space（multiple）",
+          "keysEn": "Enter / Space (multiple)",
+          "description": "在高亮项上切换选中，候选面保持展开；Esc 关闭。",
+          "descriptionEn": "Toggle the highlighted item while the popup stays open; Esc closes."
+        },
+        {
           "keys": "Esc",
           "description": "关闭并回到触发器，保留原值。",
           "descriptionEn": "Close and return to the trigger, retaining the original value."
@@ -44106,8 +44723,8 @@
           "kind": "function",
           "owner": "select",
           "module": "@qingye_lab/ui/components/select",
-          "propsType": "SelectProps<Value>",
-          "signature": "Select({ modal = false, loading = false, error, ...props }: SelectProps<Value>)",
+          "propsType": "SelectProps<Value, Multiple>",
+          "signature": "Select({ modal = false, loading = false, error, ...props }: SelectProps<Value, Multiple>)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -44190,7 +44807,7 @@
           "kind": "type",
           "owner": "select",
           "module": "@qingye_lab/ui/components/select",
-          "signature": "Omit<SelectPrimitive.Root.Props<Value, false>, \"multiple\"> & {\n  /** 应用正在取候选这一事实：触发器与候选面标 aria-busy，候选面显示等待记号与「正在加载」。组件不发请求、不推断结果。 */\n  loading?: boolean | undefined;\n  /** 取候选失败时由应用提供的内容（说明与重试动作）；候选面以 role=\"alert\" 摆放，组件不推断失败、不写原因。 */\n  error?: React.ReactNode;\n}",
+          "signature": "SelectPrimitive.Root.Props<Value, Multiple> & {\n  /** 应用正在取候选这一事实：触发器与候选面标 aria-busy，候选面显示等待记号与「正在加载」。组件不发请求、不推断结果。 */\n  loading?: boolean | undefined;\n  /** 取候选失败时由应用提供的内容（说明与重试动作）；候选面以 role=\"alert\" 摆放，组件不推断失败、不写原因。 */\n  error?: React.ReactNode;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -44201,7 +44818,7 @@
           "owner": "select",
           "module": "@qingye_lab/ui/components/select",
           "propsType": "SelectTriggerProps",
-          "signature": "SelectTrigger({ children, className, style, render, \"aria-label\": ariaLabel, \"aria-labelledby\": ariaLabelledBy, ...props }: SelectTriggerProps)",
+          "signature": "SelectTrigger({ children, className, style, render, unstyled = false, \"aria-label\": ariaLabel, \"aria-labelledby\": ariaLabelledBy, ...props }: SelectTriggerProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -44211,7 +44828,7 @@
           "kind": "type",
           "owner": "select",
           "module": "@qingye_lab/ui/components/select",
-          "signature": "React.ComponentProps<typeof SelectPrimitive.Trigger>",
+          "signature": "React.ComponentProps<typeof SelectPrimitive.Trigger> & {\n  /** 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。 */\n  unstyled?: boolean;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -44241,11 +44858,11 @@
       "types": [
         {
           "name": "SelectProps",
-          "definition": "export type SelectProps<Value = unknown> = Omit<SelectPrimitive.Root.Props<Value, false>, \"multiple\"> & {\n  /** 应用正在取候选这一事实：触发器与候选面标 aria-busy，候选面显示等待记号与「正在加载」。组件不发请求、不推断结果。 */\n  loading?: boolean | undefined;\n  /** 取候选失败时由应用提供的内容（说明与重试动作）；候选面以 role=\"alert\" 摆放，组件不推断失败、不写原因。 */\n  error?: React.ReactNode;\n};"
+          "definition": "export type SelectProps<Value = unknown, Multiple extends boolean | undefined = false> = SelectPrimitive.Root.Props<Value, Multiple> & {\n  /** 应用正在取候选这一事实：触发器与候选面标 aria-busy，候选面显示等待记号与「正在加载」。组件不发请求、不推断结果。 */\n  loading?: boolean | undefined;\n  /** 取候选失败时由应用提供的内容（说明与重试动作）；候选面以 role=\"alert\" 摆放，组件不推断失败、不写原因。 */\n  error?: React.ReactNode;\n};"
         },
         {
           "name": "SelectTriggerProps",
-          "definition": "export type SelectTriggerProps = React.ComponentProps<typeof SelectPrimitive.Trigger>;"
+          "definition": "export type SelectTriggerProps = React.ComponentProps<typeof SelectPrimitive.Trigger> & {\n  /** 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。 */\n  unstyled?: boolean;\n};"
         },
         {
           "name": "SelectValueProps",
@@ -44329,7 +44946,7 @@
         "contexts": [
           {
             "name": "EmptyValueLabel",
-            "declaredAt": "packages/ui/src/components/select.tsx:38",
+            "declaredAt": "packages/ui/src/components/select.tsx:41",
             "defaultValue": "undefined",
             "withoutProvider": "nullable",
             "providedBy": [
@@ -44347,7 +44964,7 @@
           },
           {
             "name": "ItemLabels",
-            "declaredAt": "packages/ui/src/components/select.tsx:40",
+            "declaredAt": "packages/ui/src/components/select.tsx:43",
             "defaultValue": "[]",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44356,7 +44973,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44364,8 +44981,17 @@
             ]
           },
           {
+            "name": "MultipleState",
+            "declaredAt": "packages/ui/src/components/select.tsx:76",
+            "defaultValue": "{ multiple: false, index: new Map(), itemToStringLabel: und…",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "Select"
+            ]
+          },
+          {
             "name": "SourceState",
-            "declaredAt": "packages/ui/src/components/select.tsx:58",
+            "declaredAt": "packages/ui/src/components/select.tsx:80",
             "defaultValue": "{ loading: false, error: undefined, readOnly: false }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44420,6 +45046,18 @@
           "providers": [],
           "code": "import { useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Select, SelectItem, SelectPopup, SelectTrigger } from \"@qingye_lab/ui/components/select\";\n\nexport const meta = { title: \"候选的来源\", titleEn: \"Where candidates come from\" };\n\ntype Source = \"ready\" | \"loading\" | \"failed\" | \"none\";\nconst sources: { id: Source; label: string }[] = [\n  { id: \"ready\", label: \"有候选\" },\n  { id: \"loading\", label: \"加载中\" },\n  { id: \"failed\", label: \"取得失败\" },\n  { id: \"none\", label: \"没有候选\" },\n];\nconst regions = [{ value: \"cn\", label: \"中国大陆\" }, { value: \"hk\", label: \"中国香港\" }, { value: \"sg\", label: \"新加坡\" }];\n\nexport default function Demo() {\n  const [retried, setRetried] = useState(0);\n  return (\n    <div className=\"grid w-full grid-cols-4 items-start gap-(--qy-space-4)\">\n      {sources.map(source => (\n        <Field key={source.id}>\n          <FieldLabel>{source.label}</FieldLabel>\n          <Select\n            items={source.id === \"ready\" ? regions : []}\n            loading={source.id === \"loading\"}\n            error={source.id === \"failed\" ? <><span>区域列表没有取到。</span><Button size=\"sm\" variant=\"quiet\" onClick={() => setRetried(count => count + 1)}>重试{retried > 0 ? `（${retried}）` : \"\"}</Button></> : undefined}\n          >\n            <SelectTrigger />\n            <SelectPopup>\n              {source.id === \"ready\" && regions.map(region => <SelectItem key={region.value} value={region.value}>{region.label}</SelectItem>)}\n            </SelectPopup>\n          </Select>\n        </Field>\n      ))}\n    </div>\n  );\n}\n",
           "sha256": "1585fbe38cac7af5c5b4bca9a10d9ae6ca6593a1420312c14450afd45ead712e"
+        },
+        {
+          "id": "multiple",
+          "title": "多选",
+          "source": "apps/docs/src/content/select/demos/04-multiple.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/select"
+          ],
+          "providers": [],
+          "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Select, SelectItem, SelectPopup, SelectTrigger } from \"@qingye_lab/ui/components/select\";\n\nexport const meta = { title: \"多选\", titleEn: \"Multiple\" };\n\nconst labels = [\n  { value: \"design\", label: \"设计\" },\n  { value: \"frontend\", label: \"前端\" },\n  { value: \"backend\", label: \"后端\" },\n  { value: \"ops\", label: \"运维\" },\n  { value: \"docs\", label: \"文档\" },\n];\n\nexport default function Demo() {\n  return (\n    <FieldGroup className=\"grid w-full items-start sm:grid-cols-2\">\n      <Field name=\"area\">\n        <FieldLabel>负责范围</FieldLabel>\n        <Select multiple items={labels} defaultValue={[\"frontend\", \"docs\"]}>\n          <SelectTrigger />\n          <SelectPopup>{labels.map(item => <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>)}</SelectPopup>\n        </Select>\n      </Field>\n      <Field name=\"involved\">\n        <FieldLabel>参与范围</FieldLabel>\n        <Select multiple items={labels} defaultValue={[\"design\", \"frontend\", \"backend\", \"docs\"]}>\n          <SelectTrigger />\n          <SelectPopup>{labels.map(item => <SelectItem key={item.value} value={item.value}>{item.label}</SelectItem>)}</SelectPopup>\n        </Select>\n      </Field>\n    </FieldGroup>\n  );\n}\n",
+          "sha256": "80d87d4cbfadae862d9c24922b5a9284cce1ef013d7d0a48edaf0bd4d46c6e5e"
         }
       ],
       "design": {
@@ -44458,7 +45096,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/select.tsx",
-        "sha256": "b3e18fa576f40383fd77be798ea019d7739657d559ffb2d518f6b4de961d3f8b",
+        "sha256": "370b73798943cd2ff871be03abe1d3c97151e00056204a61e37fd22d39e415f5",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "高亮表示当前位置，选取才改变值。未选择不会自动变为第一项；需要并置比较时用 RadioGroup。",
@@ -44479,9 +45117,16 @@
           "api": [
             {
               "name": "Select",
-              "description": "Single-value state and form semantics.",
-              "descriptionEn": "Single-value state and form semantics.",
+              "description": "Single-value (or multiple) state and form semantics.",
+              "descriptionEn": "Single-value (or multiple) state and form semantics.",
               "props": [
+                {
+                  "name": "multiple",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Multiple selection: the value is an array and an empty array means no selection. No search; choosing does not close the popup and choosing again deselects. Each selected value submits as its own form entry (repeated name). The trigger lists names in candidate order: up to 2 joined by the separator, beyond that \"first and N more\", so the trigger keeps answering what is chosen rather than how many. There is no separate clear part: deselect items or reset a controlled value to [].",
+                  "descriptionEn": "Multiple selection: the value is an array and an empty array means no selection. No search; choosing does not close the popup and choosing again deselects. Each selected value submits as its own form entry (repeated name). The trigger lists names in candidate order: up to 2 joined by the separator, beyond that \"first and N more\", so the trigger keeps answering what is chosen rather than how many. There is no separate clear part: deselect items or reset a controlled value to []."
+                },
                 {
                   "name": "value / defaultValue",
                   "type": "Value | null",
@@ -44557,6 +45202,13 @@
                   "type": "ReactNode",
                   "description": "Defaults to SelectValue with a disclosure icon.",
                   "descriptionEn": "Defaults to SelectValue with a disclosure icon."
+                },
+                {
+                  "name": "unstyled",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Used when an InputGroup draws the border and states (see InputGroupSelectTrigger); the trigger keeps its geometry and native semantics.",
+                  "descriptionEn": "Used when an InputGroup draws the border and states (see InputGroupSelectTrigger); the trigger keeps its geometry and native semantics."
                 },
                 {
                   "name": "render / ref / className / style / ARIA",
@@ -44658,8 +45310,8 @@
             },
             {
               "name": "SelectPrimitive",
-              "description": "The complete public Base UI Select primitive; public Select remains single-value.",
-              "descriptionEn": "The complete public Base UI Select primitive; public Select remains single-value."
+              "description": "The complete public Base UI Select primitive.",
+              "descriptionEn": "The complete public Base UI Select primitive."
             }
           ],
           "keyboard": [
@@ -44683,6 +45335,12 @@
               "keysEn": "Typing",
               "description": "Typeahead highlights matches while open; the closed primitive may select a matching value directly.",
               "descriptionEn": "Typeahead highlights matches while open; the closed primitive may select a matching value directly."
+            },
+            {
+              "keys": "Enter / Space (multiple)",
+              "keysEn": "Enter / Space (multiple)",
+              "description": "Toggle the highlighted item while the popup stays open; Esc closes.",
+              "descriptionEn": "Toggle the highlighted item while the popup stays open; Esc closes."
             },
             {
               "keys": "Esc",
@@ -46612,7 +47270,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -47234,7 +47892,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -47988,7 +48646,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -48544,7 +49202,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -49280,7 +49938,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -49688,7 +50346,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50146,7 +50804,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52430,7 +53088,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52441,8 +53099,11 @@
         "baseUi": [
           "@base-ui/react/button",
           "@base-ui/react/direction-provider",
+          "@base-ui/react/field",
           "@base-ui/react/input",
           "@base-ui/react/merge-props",
+          "@base-ui/react/number-field",
+          "@base-ui/react/select",
           "@base-ui/react/use-render"
         ],
         "status": "PASS",
@@ -52755,6 +53416,19 @@
               "descriptionEn": "Browser-enforced maximum text length; count text does not enforce it."
             },
             {
+              "name": "unstyled",
+              "type": "boolean",
+              "default": "false",
+              "description": "交给 InputGroup 画边框与状态时使用（见 InputGroupTextarea）：不画框、不显示只读提示，保留自动增高与原生编辑。",
+              "descriptionEn": "Used when an InputGroup draws the border and states (see InputGroupTextarea): no frame and no read-only note, while auto-grow and native editing stay."
+            },
+            {
+              "name": "controlClassName",
+              "type": "string",
+              "description": "外层控制容器的样式入口；className 仍属于实际 textarea。",
+              "descriptionEn": "Styling entry for the outer control wrapper; className still belongs to the actual textarea."
+            },
+            {
               "name": "render / ref / className / style",
               "type": "Base UI render / textarea ref / state-aware styling",
               "description": "真实 textarea 的组合与样式入口；render 必须保留 textarea 语义、属性及事件。",
@@ -52777,7 +53451,22 @@
           {
             "name": "Textarea",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "controlClassName",
+                "optional": true,
+                "type": "string",
+                "doc": "外层容器的样式入口；className / style / render 始终属于真实的 textarea。",
+                "declaredAt": "packages/ui/src/components/textarea.tsx:12"
+              },
+              {
+                "name": "unstyled",
+                "optional": true,
+                "type": "boolean",
+                "doc": "由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。",
+                "declaredAt": "packages/ui/src/components/textarea.tsx:14"
+              }
+            ],
             "inheritedCount": 296,
             "inheritedFrom": [
               {
@@ -52820,7 +53509,7 @@
           "owner": "textarea",
           "module": "@qingye_lab/ui/components/textarea",
           "propsType": "TextareaProps",
-          "signature": "Textarea({ rows = 3, className, style, render, ref, ...props }: TextareaProps)",
+          "signature": "Textarea({ rows = 3, className, controlClassName, unstyled = false, style, render, ref, ...props }: TextareaProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -52839,7 +53528,7 @@
           "kind": "type",
           "owner": "textarea",
           "module": "@qingye_lab/ui/components/textarea",
-          "signature": "Omit<React.ComponentPropsWithRef<\"textarea\">, \"className\" | \"style\"> &\n  Pick<TextareaPrimitive.Control.Props, \"className\" | \"style\" | \"render\" | \"onValueChange\">",
+          "signature": "Omit<React.ComponentPropsWithRef<\"textarea\">, \"className\" | \"style\"> &\n  Pick<TextareaPrimitive.Control.Props, \"className\" | \"style\" | \"render\" | \"onValueChange\"> & {\n    /** 外层容器的样式入口；className / style / render 始终属于真实的 textarea。 */\n    controlClassName?: string;\n    /** 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。 */\n    unstyled?: boolean;\n  }",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -52848,7 +53537,7 @@
       "types": [
         {
           "name": "TextareaProps",
-          "definition": "export type TextareaProps = Omit<React.ComponentPropsWithRef<\"textarea\">, \"className\" | \"style\"> &\n  Pick<TextareaPrimitive.Control.Props, \"className\" | \"style\" | \"render\" | \"onValueChange\">;"
+          "definition": "export type TextareaProps = Omit<React.ComponentPropsWithRef<\"textarea\">, \"className\" | \"style\"> &\n  Pick<TextareaPrimitive.Control.Props, \"className\" | \"style\" | \"render\" | \"onValueChange\"> & {\n    /** 外层容器的样式入口；className / style / render 始终属于真实的 textarea。 */\n    controlClassName?: string;\n    /** 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。 */\n    unstyled?: boolean;\n  };"
         }
       ],
       "usageImports": [
@@ -52883,7 +53572,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52970,7 +53659,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/textarea.tsx",
-        "sha256": "e17aa1a2bb422890f4e878b8ee3c084761443fa726bedc4c314a857df2913db9",
+        "sha256": "25df3fcdf4732439bfe2d07f9abeb78fe822bd05e42808917dbc84a20b03d4aa",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "字符计数只描述当前值。限制由 maxLength 或应用规则执行；错误内容不会让 Textarea 自行判定 invalid。",
@@ -53029,6 +53718,19 @@
                   "type": "number",
                   "description": "Browser-enforced maximum text length; count text does not enforce it.",
                   "descriptionEn": "Browser-enforced maximum text length; count text does not enforce it."
+                },
+                {
+                  "name": "unstyled",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Used when an InputGroup draws the border and states (see InputGroupTextarea): no frame and no read-only note, while auto-grow and native editing stay.",
+                  "descriptionEn": "Used when an InputGroup draws the border and states (see InputGroupTextarea): no frame and no read-only note, while auto-grow and native editing stay."
+                },
+                {
+                  "name": "controlClassName",
+                  "type": "string",
+                  "description": "Styling entry for the outer control wrapper; className still belongs to the actual textarea.",
+                  "descriptionEn": "Styling entry for the outer control wrapper; className still belongs to the actual textarea."
                 },
                 {
                   "name": "render / ref / className / style",
@@ -53948,7 +54650,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -54505,7 +55207,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -55051,7 +55753,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -55672,7 +56374,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -57646,7 +58348,7 @@
               {
                 "name": "side",
                 "optional": true,
-                "type": "\"top\" | \"bottom\" | \"left\" | \"right\" | \"inline-end\" | \"inline-start\"",
+                "type": "\"inline-start\" | \"inline-end\" | \"top\" | \"bottom\" | \"left\" | \"right\"",
                 "declaredAt": "packages/ui/src/components/tooltip.tsx:94"
               },
               {
@@ -57712,7 +58414,7 @@
               {
                 "name": "side",
                 "optional": true,
-                "type": "\"top\" | \"bottom\" | \"left\" | \"right\" | \"inline-end\" | \"inline-start\"",
+                "type": "\"inline-start\" | \"inline-end\" | \"top\" | \"bottom\" | \"left\" | \"right\"",
                 "declaredAt": "packages/ui/src/components/tooltip.tsx:94"
               },
               {
@@ -58598,7 +59300,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -59133,7 +59835,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -60955,7 +61657,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:158",
+            "declaredAt": "packages/ui/src/locale.tsx:160",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [

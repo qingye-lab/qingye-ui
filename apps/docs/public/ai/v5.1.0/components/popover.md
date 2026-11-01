@@ -62,7 +62,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `anchor?`: `PopoverPrimitive.Positioner.Props["anchor"]`.
 - `portalProps?`: `PopoverPrimitive.Portal.Props`.
 - `positionerProps?`: `PopoverPrimitive.Positioner.Props`.
-- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `side?`: `"inline-start" | "inline-end" | "top" | "bottom" | "left" | "right"`.
 - `sideOffset?`: `PopoverPrimitive.Positioner.Props["sideOffset"]`.
 - `viewportProps?`: `PopoverPrimitive.Viewport.Props`.
 - plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
@@ -80,7 +80,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `anchor?`: `PopoverPrimitive.Positioner.Props["anchor"]`.
 - `portalProps?`: `PopoverPrimitive.Portal.Props`.
 - `positionerProps?`: `PopoverPrimitive.Positioner.Props`.
-- `side?`: `"top" | "bottom" | "left" | "right" | "inline-end" | "inline-start"`.
+- `side?`: `"inline-start" | "inline-end" | "top" | "bottom" | "left" | "right"`.
 - `sideOffset?`: `PopoverPrimitive.Positioner.Props["sideOffset"]`.
 - `viewportProps?`: `PopoverPrimitive.Viewport.Props`.
 - plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations

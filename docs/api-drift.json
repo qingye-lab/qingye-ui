@@ -15,12 +15,12 @@
       "type-resolved": 102
     },
     "documentedButMissing": 0,
-    "undocumented": 145,
+    "undocumented": 146,
     "undocumentedDeclaredInThisComponentsFile": 28,
     "unresolved": 0,
-    "uncheckedWrittenNames": 194,
+    "uncheckedWrittenNames": 199,
     "uncheckedByReason": {
-      "generic": 133,
+      "generic": 138,
       "part-not-applicable": 33,
       "no-resolved-part-in-group": 13,
       "unparsed": 10,
@@ -639,6 +639,13 @@
     },
     {
       "component": "input-group",
+      "part": "InputGroupTextarea",
+      "prop": "controlClassName",
+      "declaredAt": "packages/ui/src/components/textarea.tsx:12",
+      "viaComponent": "textarea"
+    },
+    {
+      "component": "input-group",
       "part": "InputGroupInput",
       "prop": "controlClassName",
       "declaredAt": "packages/ui/src/components/input.tsx:15",
@@ -1021,6 +1028,13 @@
   ],
   "undocumentedParts": [
     {
+      "component": "autocomplete",
+      "part": "AutocompleteControl",
+      "ownProps": [
+        "loading"
+      ]
+    },
+    {
       "component": "chart",
       "part": "AxisTick",
       "ownProps": [
@@ -1125,6 +1139,13 @@
     },
     {
       "component": "combobox",
+      "part": "ComboboxControl",
+      "ownProps": [
+        "loading"
+      ]
+    },
+    {
+      "component": "combobox",
       "part": "ComboboxPopup",
       "ownProps": [
         "container",
@@ -1136,6 +1157,13 @@
       "part": "FieldSeparator",
       "ownProps": [
         "decorative"
+      ]
+    },
+    {
+      "component": "number-field",
+      "part": "NumberFieldGroup",
+      "ownProps": [
+        "unstyled"
       ]
     },
     {
@@ -1669,6 +1697,27 @@
     },
     {
       "component": "input-group",
+      "part": "InputGroupTextarea / InputGroupNumberField / InputGroupSelectTrigger",
+      "written": "TextareaProps / NumberFieldProps / SelectTriggerProps（除 unstyled）",
+      "token": "TextareaProps",
+      "reason": "generic"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroupTextarea / InputGroupNumberField / InputGroupSelectTrigger",
+      "written": "TextareaProps / NumberFieldProps / SelectTriggerProps（除 unstyled）",
+      "token": "NumberFieldProps",
+      "reason": "generic"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroupTextarea / InputGroupNumberField / InputGroupSelectTrigger",
+      "written": "TextareaProps / NumberFieldProps / SelectTriggerProps（除 unstyled）",
+      "token": "SelectTriggerProps（除 unstyled）",
+      "reason": "generic"
+    },
+    {
+      "component": "input-group",
       "part": "InputGroupInput",
       "written": "InputProps（除 size / unstyled）",
       "token": "InputProps（除 size / unstyled）",
@@ -1677,6 +1726,13 @@
     {
       "component": "input-group",
       "part": "InputGroupAddon",
+      "written": "render / ref / 原生属性",
+      "token": "原生属性",
+      "reason": "generic"
+    },
+    {
+      "component": "input-group",
+      "part": "InputGroupText",
       "written": "render / ref / 原生属性",
       "token": "原生属性",
       "reason": "generic"
@@ -1868,6 +1924,13 @@
       "part": "NumberFieldInput",
       "written": "render / ref / className / style / ARIA / events",
       "token": "events",
+      "reason": "generic"
+    },
+    {
+      "component": "number-field",
+      "part": "NumberFieldScrubArea",
+      "written": "其余 Base UI ScrubArea 属性",
+      "token": "其余 Base UI ScrubArea 属性",
       "reason": "generic"
     },
     {

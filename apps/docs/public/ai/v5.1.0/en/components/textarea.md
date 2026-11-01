@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
-Source SHA-256: e17aa1a2bb422890f4e878b8ee3c084761443fa726bedc4c314a857df2913db9
+Source SHA-256: 25df3fcdf4732439bfe2d07f9abeb78fe822bd05e42808917dbc84a20b03d4aa
 
 Edit multiline notes and messages.
 
@@ -41,7 +41,8 @@ Character counts describe the current value only. maxLength or application rules
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Textarea
-- no props declared by this library
+- `controlClassName?`: `string`. 外层容器的样式入口；className / style / render 始终属于真实的 textarea。
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。
 - plus 296 inherited (@types/react 292, @base-ui/react 4); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -61,6 +62,8 @@ A native textarea composable with Field.
 - aria-invalid: boolean | 'true' | 'false'. Caller-declared error fact, also available from Field invalid.
 - disabled / readOnly: boolean; default false. Disabled excludes tabbing/submission; read-only retains focus/submission and existing localized read-only text.
 - maxLength: number. Browser-enforced maximum text length; count text does not enforce it.
+- unstyled: boolean; default false. Used when an InputGroup draws the border and states (see InputGroupTextarea): no frame and no read-only note, while auto-grow and native editing stay.
+- controlClassName: string. Styling entry for the outer control wrapper; className still belongs to the actual textarea.
 - render / ref / className / style: Base UI render / textarea ref / state-aware styling. Actual textarea composition/styling; render must retain textarea semantics, attributes, and events.
 
 ### TextareaPrimitive

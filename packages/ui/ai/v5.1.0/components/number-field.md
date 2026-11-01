@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: d656d62d2d752adb834014978b03ac9638b9ee413e2c725146fd6925956c1660
+Source SHA-256: dff96cde72e893230e62af74be7b834f9fbe557e58f8c71442fbea516644a727
 
 编辑可为空的数值，并按指定步长增减。
 
@@ -36,17 +36,20 @@ Source SHA-256: d656d62d2d752adb834014978b03ac9638b9ee413e2c725146fd6925956c1660
 ## Current exports
 - NumberField: function; owner number-field; PASS; props: NumberFieldProps
 - NumberFieldDecrement: function; owner number-field; PASS; props: NumberFieldPrimitive.Decrement.Props & React.RefAttributes<HTMLButtonElement>
-- NumberFieldGroup: function; owner number-field; PASS; props: NumberFieldPrimitive.Group.Props & React.RefAttributes<HTMLDivElement>
+- NumberFieldGroup: function; owner number-field; PASS; props: NumberFieldGroupProps
+- NumberFieldGroupProps: type; owner number-field; PASS
 - NumberFieldIncrement: function; owner number-field; PASS; props: NumberFieldPrimitive.Increment.Props & React.RefAttributes<HTMLButtonElement>
 - NumberFieldInput: function; owner number-field; PASS; props: NumberFieldPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>
 - NumberFieldPrimitive: reexport; owner number-field; UNVERIFIED
 - NumberFieldProps: type; owner number-field; PASS
+- NumberFieldScrubArea: function; owner number-field; PASS; props: NumberFieldScrubAreaProps
+- NumberFieldScrubAreaProps: type; owner number-field; PASS
 
 ## Props declared by this library
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### NumberField
-- no props declared by this library
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不带默认宽度与边界外的只读说明（外框承担），数值几何与语义不变。
 - plus 296 inherited (@types/react 273, @base-ui/react 23); not expanded, see the installed declarations
 
 ### NumberFieldDecrement
@@ -54,7 +57,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 289 inherited (@types/react 285, @base-ui/react 4); not expanded, see the installed declarations
 
 ### NumberFieldGroup
-- no props declared by this library
+- `unstyled?`: `boolean`. 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ### NumberFieldIncrement
@@ -64,6 +67,10 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 ### NumberFieldInput
 - no props declared by this library
 - plus 308 inherited (@types/react 304, @base-ui/react 4); not expanded, see the installed declarations
+
+### NumberFieldScrubArea
+- no props declared by this library
+- plus 281 inherited (@types/react 275, @base-ui/react 6); not expanded, see the installed declarations
 
 ## Dependencies and providers
 - Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
@@ -81,10 +88,11 @@ Written descriptions; the list above is the type-resolved fact.
 - snapOnStep / smallStep / largeStep: boolean / number / number; default false / 0.1 / 10. 是否吸附与 Alt/Shift 步长是独立的显式选项。
 - onValueCommitted: (value, details) => void. blur 或步进提交回调，只描述编辑结束，不代表已保存。
 - name / form / required / disabled / readOnly: Base UI Root props. 原生表单与语义入口；只读继续参与提交，禁用不提交。
+- unstyled: boolean; default false. 交给 InputGroup 承担边框与状态时使用（见 InputGroupNumberField）：去掉默认宽度与只读提示，其余行为不变。
 - locale / format: Intl.LocalesArgument / Intl.NumberFormatOptions. 显式数字格式；未指定精度时不因聚焦/失焦丢弃外部数值精度。
 
 ### NumberFieldGroup
-输入与两个步进共享的边界；render/ref/样式与状态透传。
+输入与两个步进共享的边界；render/ref/样式与状态透传。unstyled 时由外层（InputGroup）画边框。
 
 ### NumberFieldInput
 复用 Input 的原生出口，由数值原语注册一次 Field。
@@ -92,6 +100,11 @@ Written descriptions; the list above is the type-resolved fact.
 
 ### NumberFieldDecrement / NumberFieldIncrement
 减少/增加原语复用 quiet Button；内建名称来自 locale，按钮不提交表单。
+
+### NumberFieldScrubArea
+按住并横向（或纵向）拖动调整数值的区域，通常包住标签。拖动是步进之外的补充，键盘与步进按钮仍是主路径；禁用与只读时不响应拖动，光标也不提示可拖。拖动期间指针被锁定并显示方向光标。
+- direction: "horizontal" | "vertical"; default "horizontal". 拖动方向。
+- 其余 Base UI ScrubArea 属性: NumberFieldPrimitive.ScrubArea.Props. pixelSensitivity、teleportDistance、render、className 等原语属性透传。
 
 ### NumberFieldPrimitive
 所用 Base UI NumberField 命名空间。
@@ -146,6 +159,30 @@ export default function Demo() {
         </div>
       ))}
     </FieldGroup>
+  );
+}
+```
+
+### 拖动调值
+Source: apps/docs/src/content/number-field/demos/03-scrub.tsx
+```tsx
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+import { NumberField, NumberFieldGroup, NumberFieldInput, NumberFieldScrubArea } from "@qingye_lab/ui/components/number-field";
+
+export const meta = { title: "拖动调值", titleEn: "Scrub to adjust" };
+
+export default function Demo() {
+  return (
+    <div className="grid w-full grid-cols-1 gap-(--qy-field-group-gap) sm:grid-cols-3">
+      {([["可用", {}], ["只读", { readOnly: true }], ["禁用", { disabled: true }]] as const).map(([name, state]) => (
+        <NumberField key={name} defaultValue={12} min={0} max={100} {...state}>
+          <Field>
+            <NumberFieldScrubArea><FieldLabel>{`间距（${name}）`}</FieldLabel></NumberFieldScrubArea>
+            <NumberFieldGroup><NumberFieldInput /></NumberFieldGroup>
+          </Field>
+        </NumberField>
+      ))}
+    </div>
   );
 }
 ```

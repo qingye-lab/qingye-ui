@@ -14,13 +14,16 @@ import { popupOffset, useFloatingLayer } from "../floating-layer";
 // Keep Node's ambient types out of the browser library; process may be absent.
 declare const process: { env: { NODE_ENV?: string } };
 
-export type SelectProps<Value = unknown> = Omit<SelectPrimitive.Root.Props<Value, false>, "multiple"> & {
+export type SelectProps<Value = unknown, Multiple extends boolean | undefined = false> = SelectPrimitive.Root.Props<Value, Multiple> & {
   /** 应用正在取候选这一事实：触发器与候选面标 aria-busy，候选面显示等待记号与「正在加载」。组件不发请求、不推断结果。 */
   loading?: boolean | undefined;
   /** 取候选失败时由应用提供的内容（说明与重试动作）；候选面以 role="alert" 摆放，组件不推断失败、不写原因。 */
   error?: React.ReactNode;
 };
-export type SelectTriggerProps = React.ComponentProps<typeof SelectPrimitive.Trigger>;
+export type SelectTriggerProps = React.ComponentProps<typeof SelectPrimitive.Trigger> & {
+  /** 由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。 */
+  unstyled?: boolean;
+};
 export type SelectValueProps = React.ComponentProps<typeof SelectPrimitive.Value>;
 export type SelectItemProps = React.ComponentProps<typeof SelectPrimitive.Item>;
 export type SelectPopupProps = React.ComponentProps<typeof SelectPrimitive.Popup> &
@@ -53,6 +56,25 @@ function itemLabels(items: unknown): React.ReactNode[] {
   }
   return labels;
 }
+// 值 → 名称与次序（来自 Select 的 `items`）。多选的触发器要把已选的值说成名称，并按候选的次序摆放，
+// 而不是按点击的先后——同一组已选项无论怎么选到的，说法一致。
+type ItemIndex = ReadonlyMap<unknown, { label: React.ReactNode; index: number }>;
+function itemIndex(items: unknown): ItemIndex {
+  const map = new Map<unknown, { label: React.ReactNode; index: number }>();
+  if (items === undefined || items === null) return map;
+  const entries: Array<[unknown, React.ReactNode]> = Array.isArray(items)
+    ? (items as Array<{ value?: unknown; label?: React.ReactNode; items?: Array<{ value?: unknown; label?: React.ReactNode }> }>)
+        .flatMap(item => "items" in item && item.items ? item.items : [item])
+        .map(item => [item.value, item.label] as [unknown, React.ReactNode])
+    : Object.entries(items as Record<string, React.ReactNode>);
+  for (const [value, label] of entries) if (!map.has(value)) map.set(value, { label, index: map.size });
+  return map;
+}
+// 多选的触发器最多点名几项；超出写「首项 及其余 N 项」。预设：与 TreeSelect 的 NAMED 同一取值，
+// 两个名字在常见触发器宽度内通常不被截断；要换时两处一起换。
+const NAMED = 2;
+const MultipleState = React.createContext<{ multiple: boolean; index: ItemIndex; itemToStringLabel: ((value: unknown) => string) | undefined }>({ multiple: false, index: new Map(), itemToStringLabel: undefined });
+
 // 候选来源的三种非常态（M2）：加载、失败、空。前两者是应用告知的事实，经 Select 根传到触发器与候选面；
 // 空则是候选面自己看得见的事实（没有可渲染的子项）。三者互斥地占「第一项的位置」，不并存。
 const SourceState = React.createContext<{ loading: boolean; error: React.ReactNode; readOnly: boolean }>({ loading: false, error: undefined, readOnly: false });
@@ -78,7 +100,7 @@ function ValueElement({ elementProps, state, render }: { elementProps: React.Com
 }
 
 /** 单值选择，null 是未选择。展开列表默认不阻断其余字段。 */
-export function Select<Value>({ modal = false, loading = false, error, ...props }: SelectProps<Value>) {
+export function Select<Value, Multiple extends boolean | undefined = false>({ modal = false, loading = false, error, ...props }: SelectProps<Value, Multiple>) {
   // Base UI 1.7 把序列化为 "" 的值视为占位。这里只修正空字符串的名称与占位表达，
   // 值、隐藏 input、键盘及校验仍由原语拥有，不伪造另一套选择状态。
   const items = props.items;
@@ -98,11 +120,15 @@ export function Select<Value>({ modal = false, loading = false, error, ...props 
   const { readOnly, onOpenChange } = props;
   const source = React.useMemo(() => ({ loading, error, readOnly: Boolean(readOnly) }), [loading, error, readOnly]);
   const labels = React.useMemo(() => itemLabels(items), [items]);
-  return <EmptyValueLabel.Provider value={emptyLabel}><ItemLabels.Provider value={labels}><SourceState.Provider value={source}><SelectPrimitive.Root {...props} multiple={false} modal={modal}
-    onOpenChange={(open, details) => { if (open && readOnly) { details.cancel(); return; } onOpenChange?.(open, details); }} /></SourceState.Provider></ItemLabels.Provider></EmptyValueLabel.Provider>;
+  const multiple = Boolean(props.multiple);
+  const itemToStringLabel = props.itemToStringLabel as ((value: unknown) => string) | undefined;
+  const index = React.useMemo(() => itemIndex(items), [items]);
+  const multipleState = React.useMemo(() => ({ multiple, index, itemToStringLabel }), [multiple, index, itemToStringLabel]);
+  return <EmptyValueLabel.Provider value={emptyLabel}><ItemLabels.Provider value={labels}><MultipleState.Provider value={multipleState}><SourceState.Provider value={source}><SelectPrimitive.Root {...props as SelectPrimitive.Root.Props<Value, Multiple>} modal={modal}
+    onOpenChange={(open, details) => { if (open && readOnly) { details.cancel(); return; } onOpenChange?.(open, details); }} /></SourceState.Provider></MultipleState.Provider></ItemLabels.Provider></EmptyValueLabel.Provider>;
 }
 
-export function SelectTrigger({ children, className, style, render, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, ...props }: SelectTriggerProps) {
+export function SelectTrigger({ children, className, style, render, unstyled = false, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, ...props }: SelectTriggerProps) {
   const variables = {
     "--qy-select-height": "var(--qy-fill-height)",
     "--qy-select-height-narrow": "var(--qy-fill-height-narrow)",
@@ -126,12 +152,16 @@ export function SelectTrigger({ children, className, style, render, "aria-label"
       // 「跟着值走」指跟着这一组候选，不是跟着当前所选的那一个：选另一项时触发器不应伸缩，
       // 把周围的版面推来推去。宽度因此由最长的候选名称撑出（SelectValue 里的隐形占位，名称来自 `items`）。
       // 要拉满时由调用方给 className（如 `w-full`），这属于版式决定，不是控件默认。
-      "inline-flex w-fit max-w-full items-center justify-between gap-(--qy-field-gap) min-h-(--qy-select-height-narrow) sm:min-h-(--qy-select-height) pointer-coarse:min-h-(--qy-touch-target) rounded-(--qy-fill-radius) border border-input bg-surface-field px-(--qy-select-padding) text-foreground outline-none transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground not-data-disabled:not-data-readonly:not-focus-visible:not-aria-invalid:hover:border-border-strong",
+      "inline-flex w-fit max-w-full items-center justify-between gap-(--qy-field-gap) px-(--qy-select-padding) text-foreground outline-none",
+      unstyled
+        // 边线、底色与状态由外框（InputGroup）承担；最小高度 = 外高 − 上下两道线（--qy-line-width），与 Input 的 unstyled 同一关系。
+        ? "min-h-[calc(var(--qy-select-height-narrow)-2*var(--qy-line-width))] sm:min-h-[calc(var(--qy-select-height)-2*var(--qy-line-width))] pointer-coarse:min-h-[calc(var(--qy-touch-target)-2*var(--qy-line-width))] rounded-[max(0px,calc(var(--qy-fill-radius)-var(--qy-line-width)))] data-disabled:cursor-not-allowed data-disabled:text-muted-foreground"
+        : "min-h-(--qy-select-height-narrow) sm:min-h-(--qy-select-height) pointer-coarse:min-h-(--qy-touch-target) rounded-(--qy-fill-radius) border border-input bg-surface-field transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground not-data-disabled:not-data-readonly:not-focus-visible:not-aria-invalid:hover:border-border-strong",
       "min-w-[calc(var(--qy-select-padding)*2+var(--qy-select-icon)+var(--qy-field-gap)+var(--qy-field-min-text))]",
       textProfile,
       // 基础层 §5、§9（2026-10-05 打磨）：只读保留可读的底，禁用才用不活跃承载面。
-      fillStateByData,
-      state.disabled && "bg-surface-inset text-muted-foreground",
+      !unstyled && fillStateByData,
+      !unstyled && state.disabled && "bg-surface-inset text-muted-foreground",
       typeof className === "function" ? className(triggerState(state)) : className,
     )}
     style={(state) => ({ ...variables, ...(typeof style === "function" ? style(triggerState(state)) : style) })}
@@ -148,18 +178,40 @@ export function SelectValue({ placeholder, className, style, render, children, .
   const { messages } = useUILocale();
   const emptyLabel = React.useContext(EmptyValueLabel);
   const labels = React.useContext(ItemLabels);
+  const { multiple, index, itemToStringLabel } = React.useContext(MultipleState);
   const shownPlaceholder = placeholder ?? messages.selectPlaceholder;
+  // 多选的触发器是已确认值的摘要，不是列表（名实相符：说出选了什么，也说出还有多少没点名）：
+  // 不超过 NAMED 项逐个点名并用顿号相连，更多则「首项 及其余 N 项」。没有选择时回到占位文字。
+  // 点名的次序是候选的次序，不是点击的先后。完整的已选项由打开后的候选面（每项的勾）呈现。
+  const summarize = (value: unknown): React.ReactNode => {
+    const values = Array.isArray(value) ? value : [];
+    if (values.length === 0) return shownPlaceholder;
+    const ordered = values.map((item, position) => ({ item, position, rank: index.get(item)?.index ?? Number.POSITIVE_INFINITY }))
+      .sort((a, b) => a.rank - b.rank || a.position - b.position);
+    const names = ordered.map(({ item }) => index.get(item)?.label ?? itemToStringLabel?.(item) ?? String(item));
+    if (names.length <= NAMED) return names.map((name, position) => <React.Fragment key={position}>{position > 0 ? messages.selectSeparator : null}{name}</React.Fragment>);
+    return <>{names[0]} {messages.selectMore(names.length - 1)}</>;
+  };
+  const summary = multiple && children == null ? summarize : undefined;
   const valueState = (state: SelectPrimitive.Value.State) => state.value === "" ? { ...state, placeholder: false } : state;
   // 稳定宽度：当前值与全部候选（及占位文字）叠在同一个网格格子里，格子宽 = 其中最长者；隐形的那些不占高度、不进读屏。
   // 字符串名称用 `content: attr()` 画，不在 DOM 里留第二份文字（文本查询与复制都只见真实的那一份）；
   // 其余节点（带图标的名称等）原样放入。调用方自带 children 时，显示什么由它负责，不做占位。
-  const sizers = children == null ? [...labels, ...(typeof shownPlaceholder === "string" || typeof shownPlaceholder === "number" ? [shownPlaceholder] : [])] : [];
+  const placeholderSizer = typeof shownPlaceholder === "string" || typeof shownPlaceholder === "number" ? [shownPlaceholder] : [];
+  // 多选的说法是几个名字的组合，不是单个名称：宽度按「最长的两个名字相连」与「最长的名字 及其余 N 项」两种上界估计
+  // （以字数比长短，是近似；名称不是纯文字时不估计，宽度跟随内容）。
+  const longest = labels.every(label => typeof label === "string" || typeof label === "number") ? labels.map(String).sort((a, b) => b.length - a.length) : [];
+  const multipleSizers = longest.length === 0 ? [] : [
+    longest.slice(0, NAMED).join(messages.selectSeparator),
+    ...(longest.length > NAMED ? [`${longest[0]} ${messages.selectMore(longest.length - 1)}`] : []),
+  ];
+  const sizers = children != null ? [] : multiple ? [...multipleSizers, ...placeholderSizer] : [...labels, ...placeholderSizer];
   const value = <SelectPrimitive.Value
     data-slot="select-value" {...props} placeholder={shownPlaceholder}
     className={(state) => cn("col-start-1 row-start-1 min-w-0 text-start whitespace-normal wrap-break-word data-placeholder:text-muted-foreground", typeof className === "function" ? className(valueState(state)) : className)}
     style={typeof style === "function" ? (state) => style(valueState(state)) : style}
     render={(elementProps, state) => <ValueElement elementProps={state.value === "" && children == null ? { ...elementProps, children: emptyLabel ?? "" } : elementProps} state={valueState(state)} render={render} />}
-  >{children}</SelectPrimitive.Value>;
+  >{children ?? summary}</SelectPrimitive.Value>;
   if (!sizers.length) return value;
   return <span data-slot="select-value-box" className="inline-grid min-w-0">
     {value}

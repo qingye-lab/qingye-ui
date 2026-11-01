@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.1.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: c9469aa067c4e7bbd8046ee4d1a1fc56a84185b145e02885cea990b6b19ce968
+Source SHA-256: 49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7
 
 编辑自由文本，候选作为可接受的建议。
 
@@ -57,6 +57,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### Autocomplete
 - `items?`: `readonly Value[] | readonly AutocompleteItemGroup<Value>[] | undefined`.
+- `loading?`: `boolean`. 候选正在取回：与 ComboboxSelect 的 `loading` 同名同义，同一套候选状态。 输入框末端出现忙碌标记（与 Button、InputGroup 同一个），输入与列表写 `aria-busy`； 「正在加载」由 AutocompleteStatus 播报（一件事实一个播报者），此时 AutocompleteEmpty 不出声—— 等待与「没有结果」是两件事，应用此刻并不知道后者。输入始终可用，等待不禁用输入。
 - plus 32 inherited (@base-ui/react 32); not expanded, see the installed declarations
 
 ### AutocompleteClear
@@ -68,7 +69,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 1 inherited (@base-ui/react 1); not expanded, see the installed declarations
 
 ### AutocompleteControl
-- no props declared by this library
+- `loading?`: `boolean`. 等待：边界末端出现忙碌标记，根上写 `aria-busy`，并向读屏播报「正在加载」。 与 Button、Select 的 `loading` 同名同义：只说明「这个控件在等」，不替换输入、不禁用输入。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### AutocompleteEmpty
@@ -121,6 +122,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context FloatingLayerContext: without a provider default-value; provided by FloatingLayerScope
 - Context InControl: without a provider default-value; provided by AutocompleteControl
+- Context Loading: without a provider default-value; provided by Autocomplete
 - Context ReadOnly: without a provider default-value; provided by Autocomplete
 
 ## Curated API
@@ -131,6 +133,7 @@ Base UI 文本建议上下文，固定 list 模式。
 - value / defaultValue / onValueChange: string / string / (value, details) => void. 受控或非受控自由文本；details.cancel() 可拒绝编辑或接受建议请求。
 - items / itemToStringValue / filter: readonly Value[] / Base UI public props. 提供平坦建议数组、建议文字与过滤规则；对象建议显式定义文本。分组建议用 { value: 组名, items } 形态，配合 AutocompleteGroup。
 - name / form / required / disabled / readOnly: Base UI Root props. 实际 Input 与 Field 注册一次，FormData 提交自由文本；只读提交、禁用排除。
+- loading: boolean; default false. 建议正在取回的事实，与 ComboboxSelect 同一套候选状态：输入框末端出现忙碌标记，输入与列表标 aria-busy，AutocompleteStatus 播报「正在加载」，AutocompleteEmpty 此时不出声（等待不是「没有结果」）。输入始终可用；组件不发请求。
 - open / defaultOpen / onOpenChange: Base UI open props. 展开可控；文本、动作与建议项共用一套几何，跟随密度轴。
 
 ### AutocompleteInput / AutocompleteTrigger / AutocompleteClear
@@ -198,6 +201,43 @@ export default function Demo() {
       ))}
       <Field><FieldLabel>只读文本</FieldLabel><Autocomplete readOnly items={items} defaultValue="3 号楼东侧"><AutocompleteControl><AutocompleteInput /><AutocompleteTrigger /></AutocompleteControl></Autocomplete></Field>
     </div>
+  );
+}
+```
+
+### 候选加载中
+Source: apps/docs/src/content/autocomplete/demos/03-loading.tsx
+```tsx
+import { useEffect, useState } from "react";
+import { Autocomplete, AutocompleteControl, AutocompleteEmpty, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteStatus } from "@qingye_lab/ui/components/autocomplete";
+import { Field, FieldLabel } from "@qingye_lab/ui/components/field";
+
+export const meta = { title: "候选加载中", titleEn: "Loading suggestions" };
+
+const all = ["青叶", "青山", "青云", "白云", "白鹭"];
+
+export default function Demo() {
+  const [value, setValue] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [items, setItems] = useState<string[]>([]);
+  useEffect(() => {
+    if (value === "") { setItems([]); setLoading(false); return; }
+    setLoading(true);
+    const timer = window.setTimeout(() => { setItems(all.filter(item => item.includes(value))); setLoading(false); }, 900);
+    return () => window.clearTimeout(timer);
+  }, [value]);
+  return (
+    <Field className="w-full max-w-sm">
+      <FieldLabel>项目</FieldLabel>
+      <Autocomplete items={items} filter={null} value={value} onValueChange={setValue} loading={loading}>
+        <AutocompleteControl><AutocompleteInput /></AutocompleteControl>
+        <AutocompletePopup>
+          <AutocompleteStatus />
+          <AutocompleteList>{(item: string) => <AutocompleteItem key={item} value={item}>{item}</AutocompleteItem>}</AutocompleteList>
+          <AutocompleteEmpty>没有名称含「{value}」的项目</AutocompleteEmpty>
+        </AutocompletePopup>
+      </Autocomplete>
+    </Field>
   );
 }
 ```

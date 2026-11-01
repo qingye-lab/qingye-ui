@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef, useState } from "react";
 import { expect, test, vi } from "vitest";
-import { Autocomplete, AutocompleteClear, AutocompleteCollection, AutocompleteEmpty, AutocompleteGroup, AutocompleteGroupLabel, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteStatus } from "../src/components/autocomplete";
+import { Autocomplete, AutocompleteControl, AutocompleteClear, AutocompleteCollection, AutocompleteEmpty, AutocompleteGroup, AutocompleteGroupLabel, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteStatus } from "../src/components/autocomplete";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../src/components/field";
 
 const items = ["青叶", "青山", "白云"];
@@ -65,4 +65,21 @@ test("an empty suggestion list without application wording falls back to the sha
   rerender(<Autocomplete items={[]} open><AutocompleteInput aria-label="位置" /><AutocompletePopup><AutocompleteEmpty>没有匹配项</AutocompleteEmpty><AutocompleteList>{() => null}</AutocompleteList></AutocompletePopup></Autocomplete>);
   expect(await screen.findByText("没有匹配项")).toBeInTheDocument();
   expect(screen.queryByText("没有可选项")).toBeNull();
+});
+
+test("loading: the control shows one busy mark, input and list are busy, Status speaks and Empty stays silent", async () => {
+  const { container, rerender } = render(<Autocomplete items={[]} loading open><AutocompleteControl><AutocompleteInput aria-label="搜索" /></AutocompleteControl><AutocompletePopup><AutocompleteStatus /><AutocompleteList>{(item: string) => <AutocompleteItem key={item} value={item}>{item}</AutocompleteItem>}</AutocompleteList><AutocompleteEmpty /></AutocompletePopup></Autocomplete>);
+  const input = screen.getByRole("combobox", { name: "搜索" });
+  expect(input).toHaveAttribute("aria-busy", "true");
+  expect(container.querySelectorAll("[data-slot=autocomplete-busy]")).toHaveLength(1);
+  expect(await screen.findByText("正在加载")).toBeInTheDocument();
+  // 等待不是「没有结果」。
+  expect(screen.queryByText("没有可选项")).toBeNull();
+  // 等待不禁用输入。
+  await userEvent.type(input, "青");
+  expect(input).toHaveValue("青");
+  rerender(<Autocomplete items={[]} open><AutocompleteControl><AutocompleteInput aria-label="搜索" /></AutocompleteControl><AutocompletePopup><AutocompleteStatus /><AutocompleteList>{(item: string) => <AutocompleteItem key={item} value={item}>{item}</AutocompleteItem>}</AutocompleteList><AutocompleteEmpty /></AutocompletePopup></Autocomplete>);
+  expect(input).not.toHaveAttribute("aria-busy");
+  expect(container.querySelector("[data-slot=autocomplete-busy]")).toBeNull();
+  expect(await screen.findByText("没有可选项")).toBeInTheDocument();
 });
