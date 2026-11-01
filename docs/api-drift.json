@@ -12,10 +12,9 @@
   "summary": {
     "components": 113,
     "byStatus": {
-      "type-resolved": 112,
-      "type-resolved-with-drift": 1
+      "type-resolved": 113
     },
-    "documentedButMissing": 1,
+    "documentedButMissing": 0,
     "undocumented": 152,
     "undocumentedDeclaredInThisComponentsFile": 28,
     "unresolved": 0,
@@ -29,16 +28,7 @@
     }
   },
   "gate": "documented-but-missing and unresolved must not exceed docs/api-drift.baseline.json; undocumented is report-only.",
-  "documentedButMissing": [
-    {
-      "component": "composer",
-      "part": "ComposerItem",
-      "prop": null,
-      "written": "ComposerItem",
-      "reason": "part-not-exported",
-      "meta": "apps/docs/src/content/composer/meta.ts:24"
-    }
-  ],
+  "documentedButMissing": [],
   "unresolved": [],
   "undocumented": [
     {

@@ -3854,14 +3854,8 @@ Written descriptions; the list above is the type-resolved fact.
 编辑区与候选浮层。
 - aria-label / aria-labelledby: string. 必填其一，否则抛错。
 - placeholder: string. 空时显示，同时写入 aria-placeholder。
-- triggers: readonly ComposerTrigger[]. 触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃。
+- triggers: readonly ComposerTrigger[]. 触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃。候选项 ComposerItem 为 { id, label, group?, description?, icon?, disabled?, select? }：id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”；同名 group 归为一组，按首次出现顺序排列；select 覆盖触发项的 select（token 插入令牌，action 删掉触发文字、只回调 onSelect）。
 - minRows / maxRows: number; default 1 / 8. 起始行数与增长上限。超过上限在内部滚动，且不超过视口高度的一半。
-
-#### ComposerItem
-候选项。
-- id / label: string. id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”。
-- group / description / icon / disabled: string / string / ReactNode / boolean. 同名 group 归为一组，按首次出现顺序排列。
-- select: 'token' | 'action'. 覆盖触发项的 select：token 插入令牌；action 删掉触发文字，只回调 onSelect。
 
 #### ComposerToolbar / ComposerSubmit
 工具条放 xs 按钮；ComposerSubmit 在内容为空、禁用或只读时不可用。

@@ -15373,8 +15373,8 @@
             {
               "name": "triggers",
               "type": "readonly ComposerTrigger[]",
-              "description": "触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃。",
-              "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded."
+              "description": "触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃。候选项 ComposerItem 为 { id, label, group?, description?, icon?, disabled?, select? }：id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”；同名 group 归为一组，按首次出现顺序排列；select 覆盖触发项的 select（token 插入令牌，action 删掉触发文字、只回调 onSelect）。",
+              "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect)."
             },
             {
               "name": "minRows / maxRows",
@@ -15382,31 +15382,6 @@
               "default": "1 / 8",
               "description": "起始行数与增长上限。超过上限在内部滚动，且不超过视口高度的一半。",
               "descriptionEn": "Starting rows and growth cap. Beyond the cap the editor scrolls, and never exceeds half the viewport height."
-            }
-          ]
-        },
-        {
-          "name": "ComposerItem",
-          "description": "候选项。",
-          "descriptionEn": "A candidate.",
-          "props": [
-            {
-              "name": "id / label",
-              "type": "string",
-              "description": "id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”。",
-              "descriptionEn": "id is the token identity and label the display name; a token reads as trigger + label."
-            },
-            {
-              "name": "group / description / icon / disabled",
-              "type": "string / string / ReactNode / boolean",
-              "description": "同名 group 归为一组，按首次出现顺序排列。",
-              "descriptionEn": "Items with the same group are grouped in order of first appearance."
-            },
-            {
-              "name": "select",
-              "type": "'token' | 'action'",
-              "description": "覆盖触发项的 select：token 插入令牌；action 删掉触发文字，只回调 onSelect。",
-              "descriptionEn": "Overrides the trigger's select: token inserts a token; action removes the trigger text and only calls onSelect."
             }
           ]
         },
@@ -15425,7 +15400,7 @@
           ]
         }
       ],
-      "apiStatus": "type-resolved-with-drift",
+      "apiStatus": "type-resolved",
       "typeApi": {
         "status": "PASS",
         "checker": "typescript@5.9.3",
@@ -15610,16 +15585,7 @@
           }
         ],
         "drift": {
-          "documentedButMissing": [
-            {
-              "part": "ComposerItem",
-              "prop": null,
-              "written": "ComposerItem",
-              "reason": "part-not-exported",
-              "metaPath": "apps/docs/src/content/composer/meta.ts",
-              "metaLine": 24
-            }
-          ],
+          "documentedButMissing": [],
           "undocumented": [
             {
               "part": "ComposerSubmit",
@@ -16251,8 +16217,8 @@
                 {
                   "name": "triggers",
                   "type": "readonly ComposerTrigger[]",
-                  "description": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded.",
-                  "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded."
+                  "description": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect).",
+                  "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect)."
                 },
                 {
                   "name": "minRows / maxRows",
@@ -16260,31 +16226,6 @@
                   "default": "1 / 8",
                   "description": "Starting rows and growth cap. Beyond the cap the editor scrolls, and never exceeds half the viewport height.",
                   "descriptionEn": "Starting rows and growth cap. Beyond the cap the editor scrolls, and never exceeds half the viewport height."
-                }
-              ]
-            },
-            {
-              "name": "ComposerItem",
-              "description": "A candidate.",
-              "descriptionEn": "A candidate.",
-              "props": [
-                {
-                  "name": "id / label",
-                  "type": "string",
-                  "description": "id is the token identity and label the display name; a token reads as trigger + label.",
-                  "descriptionEn": "id is the token identity and label the display name; a token reads as trigger + label."
-                },
-                {
-                  "name": "group / description / icon / disabled",
-                  "type": "string / string / ReactNode / boolean",
-                  "description": "Items with the same group are grouped in order of first appearance.",
-                  "descriptionEn": "Items with the same group are grouped in order of first appearance."
-                },
-                {
-                  "name": "select",
-                  "type": "'token' | 'action'",
-                  "description": "Overrides the trigger's select: token inserts a token; action removes the trigger text and only calls onSelect.",
-                  "descriptionEn": "Overrides the trigger's select: token inserts a token; action removes the trigger text and only calls onSelect."
                 }
               ]
             },

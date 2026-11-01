@@ -3509,14 +3509,8 @@ Root: fill-control frame and state; owns value, submit and disabled/readOnly.
 The editor and candidate popup.
 - aria-label / aria-labelledby: string. One is required, otherwise it throws.
 - placeholder: string. Shown when empty and exposed as aria-placeholder.
-- triggers: readonly ComposerTrigger[]. Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded.
+- triggers: readonly ComposerTrigger[]. Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect).
 - minRows / maxRows: number; default 1 / 8. Starting rows and growth cap. Beyond the cap the editor scrolls, and never exceeds half the viewport height.
-
-#### ComposerItem
-A candidate.
-- id / label: string. id is the token identity and label the display name; a token reads as trigger + label.
-- group / description / icon / disabled: string / string / ReactNode / boolean. Items with the same group are grouped in order of first appearance.
-- select: 'token' | 'action'. Overrides the trigger's select: token inserts a token; action removes the trigger text and only calls onSelect.
 
 #### ComposerToolbar / ComposerSubmit
 The toolbar holds xs buttons; ComposerSubmit is unavailable when empty, disabled or read-only.
