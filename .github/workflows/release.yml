@@ -1,7 +1,7 @@
 name: Release
 
-# Push an explicitly approved version tag to build the package and attach the tarball to a
-# GitHub release. Consumers download and install the latest release with:
+# Push an explicitly approved version tag to build the package, publish it to npm through
+# Trusted Publishing (GitHub OIDC, no token or local 2FA) and attach the tarball to a GitHub release. Consumers download and install the latest release with:
 #   gh release download --repo qingye-lab/qingye-ui --pattern 'qingye_lab-ui-*.tgz' --output qingye-ui.tgz --clobber && pnpm add ./qingye-ui.tgz
 on:
   push:
@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  id-token: write
 
 jobs:
   release:
@@ -90,6 +91,19 @@ jobs:
             test-results/packed-tooling/**/report.json
             test-results/packed-tooling/**/*.log
           if-no-files-found: warn
+      - name: Publish to npm
+        run: |
+          # Trusted Publishing needs npm >= 11.5.1; the package page on npmjs.com must name this
+          # repository and release.yml as its trusted publisher.
+          npm install -g npm@^11.5.1
+          name=$(node -p "require('./packages/ui/package.json').name")
+          version=$(node -p "require('./packages/ui/package.json').version")
+          if npm view "$name@$version" version --registry https://registry.npmjs.org >/dev/null 2>&1; then
+            echo "$name@$version is already on npm"
+          else
+            tag=latest; case "$version" in *-*) tag=next;; esac
+            npm publish "dist-pack/qingye_lab-ui-$version.tgz" --access public --tag "$tag" --registry https://registry.npmjs.org
+          fi
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
