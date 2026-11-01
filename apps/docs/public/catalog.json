@@ -15952,8 +15952,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { useState } from \"react\";\nimport { Composer, ComposerInput, ComposerSubmit, ComposerToolbar, composerValueToText, type ComposerSegment } from \"@qingye_lab/ui/components/composer\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"输入与提交\", titleEn: \"Input and submit\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  const [sent, setSent] = useState<string[]>([]);\n  return <div className=\"flex w-full flex-col gap-(--qy-space-3)\">\n    <Composer onSubmit={(value: ComposerSegment[], { clear }) => { setSent((list) => [...list, composerValueToText(value)]); clear(); }}>\n      <ComposerInput aria-label=\"消息\" placeholder=\"Enter 发送，Shift+Enter 换行\" />\n      <ComposerToolbar><ComposerSubmit /></ComposerToolbar>\n    </Composer>\n    {sent.length > 0 && <ul className=\"m-0 flex list-none flex-col gap-(--qy-space-1) p-0 whitespace-pre-wrap\">{sent.map((text, index) => <li key={index}>{text}</li>)}</ul>}\n  </div>;\n}\n",
-          "sha256": "1afb5b1117e4482c26da894f25eee03054280c597b1dc363f5fe4a64a5cb30a8"
+          "code": "import { useState } from \"react\";\nimport { Composer, ComposerInput, ComposerSubmit, ComposerToolbar, composerValueToText, type ComposerSegment } from \"@qingye_lab/ui/components/composer\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"输入与提交\", titleEn: \"Input and submit\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  const [sent, setSent] = useState<string[]>([]);\n  return <div className=\"flex w-full flex-col gap-(--qy-space-3)\">\n    <Composer onSubmit={(value: ComposerSegment[], { clear }) => { setSent((list) => [...list, composerValueToText(value)]); clear(); }}>\n      <ComposerInput aria-label=\"消息\" placeholder=\"写点什么\" />\n      <ComposerToolbar><ComposerSubmit /></ComposerToolbar>\n    </Composer>\n    {sent.length > 0 && <ul className=\"m-0 flex list-none flex-col gap-(--qy-space-1) p-0 whitespace-pre-wrap\">{sent.map((text, index) => <li key={index}>{text}</li>)}</ul>}\n  </div>;\n}\n",
+          "sha256": "c0ff0c50405416bf2cb7388de04775ecb98a908f4f1128c04a41e301bdf038a8"
         },
         {
           "id": "triggers",
@@ -15976,8 +15976,8 @@
             "@qingye_lab/ui/components/composer"
           ],
           "providers": [],
-          "code": "import { Composer, ComposerInput, ComposerSubmit, ComposerToolbar, type ComposerTrigger } from \"@qingye_lab/ui/components/composer\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"异步候选\", titleEn: \"Async candidates\" } satisfies DemoMeta;\n\nconst names = [\"林青\", \"林野\", \"苏青\", \"苏野\", \"顾远\", \"周衡\"];\n\nconst mention: ComposerTrigger = {\n  char: \"@\",\n  getItems: (query, { signal }) => new Promise((resolve) => {\n    const timer = setTimeout(() => resolve(names.filter((name) => name.includes(query)).map((name) => ({ id: name, label: name }))), 600);\n    signal.addEventListener(\"abort\", () => clearTimeout(timer));\n  }),\n};\n\nexport default function Demo() {\n  return <Composer className=\"w-full\">\n    <ComposerInput aria-label=\"消息\" placeholder=\"@ 后稍候显示结果\" triggers={[mention]} />\n    <ComposerToolbar><ComposerSubmit /></ComposerToolbar>\n  </Composer>;\n}\n",
-          "sha256": "8ccab75b78af6654ad42b9324ca624c62bc10721091dda060e361f623eaeefef"
+          "code": "import { Composer, ComposerInput, ComposerSubmit, ComposerToolbar, type ComposerTrigger } from \"@qingye_lab/ui/components/composer\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"异步候选\", titleEn: \"Async candidates\" } satisfies DemoMeta;\n\nconst names = [\"林青\", \"林野\", \"苏青\", \"苏野\", \"顾远\", \"周衡\"];\n\nconst mention: ComposerTrigger = {\n  char: \"@\",\n  getItems: (query, { signal }) => new Promise((resolve) => {\n    const timer = setTimeout(() => resolve(names.filter((name) => name.includes(query)).map((name) => ({ id: name, label: name }))), 600);\n    signal.addEventListener(\"abort\", () => clearTimeout(timer));\n  }),\n};\n\nexport default function Demo() {\n  return <Composer className=\"w-full\">\n    <ComposerInput aria-label=\"消息\" placeholder=\"@ 提及\" triggers={[mention]} />\n    <ComposerToolbar><ComposerSubmit /></ComposerToolbar>\n  </Composer>;\n}\n",
+          "sha256": "22cffcac2749fa4bc1f4dce8cb7a075b7e7110f31bc6dcd19b480b17d80cad0a"
         },
         {
           "id": "states",
@@ -20963,7 +20963,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-picker.tsx",
-        "sha256": "2b68f004920e5e70f42e26e967d1b2afa357ac09e42f56e298adeceb1fb284a2",
+        "sha256": "f7a4c6d63df4dd08e95bb0da89d430426236ec6d84728930a43011e90709b663",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是调用方持有的当地 Date。输入和日历选择只请求变更；清除请求 undefined，Escape 关闭日历并保留已接受值。",
@@ -21554,7 +21554,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-range-picker.tsx",
-        "sha256": "c9f53914ae6dbf34b8adeda22967d3c04eebe3f9860819d4b718d66e96fc1dbf",
+        "sha256": "9ba2abc7c00e37716a489e1ef61f4ed8a5d9d2e353db9accee0fd37f4a61c98c",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "只有完整且有序的 from/to 才是确认值。起止两个原生日期输入与弹层日历共用同一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid 并通过 onInvalid 交给应用说明，库不静默交换端点。日历里的选择与预设只写草稿，取消或 Escape 保留原确认值，应用才请求替换。",
@@ -22035,7 +22035,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-time-picker.tsx",
-        "sha256": "3540578e75987160e761639eee05f8895e2bfa22419f6962796887499b39d8b1",
+        "sha256": "55e12b48559b0a46cd8fbe9121ed6a7c1d92b14d4031bfe344d4ffbf9af52d65",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是 YYYY-MM-DDTHH:mm[:ss[.SSS]] 的无时区 wall-clock 文本。它不表示 UTC 瞬间；时区、DST、业务可用时段由应用决定。空时间不会自动补当前时间。",
@@ -22565,7 +22565,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-time-range-picker.tsx",
-        "sha256": "8cb029363deef75facbb9396698e8df450e0b4987a10625bfd36729d52ccb54c",
+        "sha256": "f0bf1dd0084422c8188b26900c7152b6394fe65411b1f5a8a794b68f18a53142",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "值是 { from, to }，两端各是 DateTimePicker 的值（无时区的本地文本 YYYY-MM-DDTHH:mm[:ss[.SSS]]），而不是 DateRangePicker 的 Date：时间不能放进只含日期的 Date，也不会因此猜一个时区。只有完整且有序的 from/to 才是确认值；起止相同是有效的零长度范围。两个原生 datetime-local 输入共用一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid，起点输入带原生校验信息让表单提交被拦下，并通过 onInvalid 交给应用说明。弹层里是日历区间加两个时间输入，同一天时结束时刻早于开始时刻会在弹层里提示并不能应用；取消或 Escape 保留原确认值。",
@@ -30851,28 +30851,28 @@
                 "optional": true,
                 "type": "string",
                 "doc": "编辑边界的样式入口；className / style / render 始终属于真实输入。",
-                "declaredAt": "packages/ui/src/components/input.tsx:15"
+                "declaredAt": "packages/ui/src/components/input.tsx:16"
               },
               {
                 "name": "nativeInput",
                 "optional": true,
                 "type": "boolean",
                 "doc": "已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。",
-                "declaredAt": "packages/ui/src/components/input.tsx:19"
+                "declaredAt": "packages/ui/src/components/input.tsx:20"
               },
               {
                 "name": "size",
                 "optional": true,
                 "type": "number | undefined",
                 "doc": "原生 input.size 的字符宽度含义；与呈现无关，由原生属性承担。",
-                "declaredAt": "packages/ui/src/components/input.tsx:13"
+                "declaredAt": "packages/ui/src/components/input.tsx:14"
               },
               {
                 "name": "unstyled",
                 "optional": true,
                 "type": "boolean",
                 "doc": "由 InputGroup 提供共同边界时使用，不移除输入几何和原生语义。",
-                "declaredAt": "packages/ui/src/components/input.tsx:17"
+                "declaredAt": "packages/ui/src/components/input.tsx:18"
               }
             ],
             "inheritedCount": 309,
@@ -30910,7 +30910,7 @@
             {
               "part": "Input",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/input.tsx:13"
+              "declaredAt": "packages/ui/src/components/input.tsx:14"
             }
           ]
         }
@@ -30929,7 +30929,7 @@
           "owner": "input",
           "module": "@qingye_lab/ui/components/input",
           "propsType": "InputProps",
-          "signature": "Input({\n  size,\n  className,\n  controlClassName,\n  unstyled = false,\n  nativeInput = false,\n  type = \"text\",\n  ref,\n  ...props\n}: InputProps): React.ReactElement",
+          "signature": "Input({\n  size,\n  className,\n  controlClassName,\n  unstyled = false,\n  nativeInput = false,\n  type = \"text\",\n  placeholder,\n  ref,\n  ...props\n}: InputProps): React.ReactElement",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -31100,7 +31100,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/input.tsx",
-        "sha256": "0e11564ab354356c394ea528a2c250a6bea9ce2b4894506a9e727c0c5e98391c",
+        "sha256": "1276c09d538105d1b2f715ed2df7d99bff636526763bba4c200346a7823104a7",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "输入框只做一件事：承载一个值的输入。清空、搜索图标与显示密码是附在编辑边界上的另一件事，由 SearchInput、PasswordInput 或 InputGroup 组合出来，输入框不内置。Placeholder 不能代替持续可见的名称。",
@@ -31480,14 +31480,14 @@
                 "optional": true,
                 "type": "string",
                 "doc": "编辑边界的样式入口；className / style / render 始终属于真实输入。",
-                "declaredAt": "packages/ui/src/components/input.tsx:15"
+                "declaredAt": "packages/ui/src/components/input.tsx:16"
               },
               {
                 "name": "nativeInput",
                 "optional": true,
                 "type": "boolean",
                 "doc": "已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。",
-                "declaredAt": "packages/ui/src/components/input.tsx:19"
+                "declaredAt": "packages/ui/src/components/input.tsx:20"
               }
             ],
             "inheritedCount": 309,
@@ -31587,13 +31587,13 @@
             {
               "part": "InputGroupInput",
               "prop": "controlClassName",
-              "declaredAt": "packages/ui/src/components/input.tsx:15",
+              "declaredAt": "packages/ui/src/components/input.tsx:16",
               "viaComponent": "input"
             },
             {
               "part": "InputGroupInput",
               "prop": "nativeInput",
-              "declaredAt": "packages/ui/src/components/input.tsx:19",
+              "declaredAt": "packages/ui/src/components/input.tsx:20",
               "viaComponent": "input"
             },
             {
@@ -32043,7 +32043,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/input-group.tsx",
-        "sha256": "76c0479a8ae9237614a739ef522f54922af7646711cea7da0e1abc7ac9519260",
+        "sha256": "f88486029dc36fd228d2cee9649a1d29061e04dae1e4fc3998238074ca90e72c",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "InputGroupInput 复用 Input 的 unstyled 出口。静态附件不抢焦点；需要动作时用 InputGroupButton，它与输入共用同一条外边界、自己不画框，并保留动作自己的名称与状态。清空、显示密码这类动作不内置在输入框里，都由这里组合；SearchInput 与 PasswordInput 就是这样搭出来的。",
@@ -38983,7 +38983,7 @@
                 "optional": true,
                 "type": "string",
                 "doc": "编辑边界的样式入口；className / style / render 始终属于真实输入。",
-                "declaredAt": "packages/ui/src/components/input.tsx:15"
+                "declaredAt": "packages/ui/src/components/input.tsx:16"
               },
               {
                 "name": "defaultValue",
@@ -39017,7 +39017,7 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。",
-                "declaredAt": "packages/ui/src/components/input.tsx:19"
+                "declaredAt": "packages/ui/src/components/input.tsx:20"
               },
               {
                 "name": "normalizeValue",
@@ -39037,7 +39037,7 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "由 InputGroup 提供共同边界时使用，不移除输入几何和原生语义。",
-                "declaredAt": "packages/ui/src/components/input.tsx:17"
+                "declaredAt": "packages/ui/src/components/input.tsx:18"
               },
               {
                 "name": "value",
@@ -39065,13 +39065,13 @@
             {
               "part": "OtpField",
               "prop": "nativeInput",
-              "declaredAt": "packages/ui/src/components/input.tsx:19",
+              "declaredAt": "packages/ui/src/components/input.tsx:20",
               "viaComponent": "input"
             },
             {
               "part": "OtpField",
               "prop": "unstyled",
-              "declaredAt": "packages/ui/src/components/input.tsx:17",
+              "declaredAt": "packages/ui/src/components/input.tsx:18",
               "viaComponent": "input"
             }
           ]
@@ -39184,8 +39184,8 @@
             "@qingye_lab/ui/components/otp-field"
           ],
           "providers": [],
-          "code": "import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { OtpField } from \"@qingye_lab/ui/components/otp-field\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"文本\", titleEn: \"Text\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <FieldGroup className=\"grid w-full grid-cols-1 sm:grid-cols-2\">\n    <Field className=\"sm:col-span-2\"><FieldLabel>编码</FieldLabel><OtpField length={6} inputMode=\"numeric\" defaultValue=\"0012\" name=\"code\" /><FieldDescription>6 个字符；可直接粘贴 123 456</FieldDescription></Field>\n    <Field><FieldLabel>字符编号</FieldLabel><OtpField length={4} defaultValue=\"A01\" /><FieldDescription>4 个字符</FieldDescription></Field>\n    <Field invalid><FieldLabel>待核对</FieldLabel><OtpField length={4} defaultValue=\"0012\" /><FieldError>编码尚未核对。</FieldError></Field>\n    <Field><FieldLabel>只读</FieldLabel><OtpField length={4} defaultValue=\"0012\" readOnly /></Field>\n    <Field disabled><FieldLabel>禁用</FieldLabel><OtpField length={4} defaultValue=\"0012\" /></Field>\n  </FieldGroup>;\n}\n",
-          "sha256": "62230174896f9f3fbf09cab92c9b972b8a0204c61a050308bec73ad31fdcc2b0"
+          "code": "import { Field, FieldError, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { OtpField } from \"@qingye_lab/ui/components/otp-field\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"文本\", titleEn: \"Text\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <FieldGroup className=\"grid w-full grid-cols-1 sm:grid-cols-2\">\n    <Field className=\"sm:col-span-2\"><FieldLabel>编码</FieldLabel><OtpField length={6} inputMode=\"numeric\" defaultValue=\"0012\" name=\"code\" /></Field>\n    <Field><FieldLabel>字符编号</FieldLabel><OtpField length={4} defaultValue=\"A01\" /></Field>\n    <Field invalid><FieldLabel>待核对</FieldLabel><OtpField length={4} defaultValue=\"0012\" /><FieldError>编码尚未核对。</FieldError></Field>\n    <Field><FieldLabel>只读</FieldLabel><OtpField length={4} defaultValue=\"0012\" readOnly /></Field>\n    <Field disabled><FieldLabel>禁用</FieldLabel><OtpField length={4} defaultValue=\"0012\" /></Field>\n  </FieldGroup>;\n}\n",
+          "sha256": "8836e536e0aa71d388490b65cfa5eb6e8a0f3f910415a1e50e3addd966102e40"
         },
         {
           "id": "density",
@@ -39210,8 +39210,8 @@
             "@qingye_lab/ui/components/otp-field"
           ],
           "providers": [],
-          "code": "import { Field, FieldDescription, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { OtpField } from \"@qingye_lab/ui/components/otp-field\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"分组、占位与遮蔽\", titleEn: \"Groups, placeholder and mask\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <FieldGroup className=\"grid w-full grid-cols-1 sm:grid-cols-2\">\n    <Field><FieldLabel>验证码</FieldLabel><OtpField length={6} groups={[3, 3]} inputMode=\"numeric\" placeholder=\"·\" defaultValue=\"123\" /><FieldDescription>3 + 3 分组；读屏仍是一个输入框</FieldDescription></Field>\n    <Field><FieldLabel>序列号</FieldLabel><OtpField length={8} groups={[2, 3, 3]} placeholder=\"_\" /><FieldDescription>2 + 3 + 3 分组</FieldDescription></Field>\n    <Field><FieldLabel>恢复码</FieldLabel><OtpField length={6} mask inputMode=\"numeric\" defaultValue=\"4821\" /><FieldDescription>已输入的字符以圆点显示；值与粘贴不变</FieldDescription></Field>\n  </FieldGroup>;\n}\n",
-          "sha256": "f5e831aa2318ad7a014b6afa55a0e7c538e466fbf314f37a1b8f0233f977e675"
+          "code": "import { Field, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { OtpField } from \"@qingye_lab/ui/components/otp-field\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"分组、占位与遮蔽\", titleEn: \"Groups, placeholder and mask\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <FieldGroup className=\"grid w-full grid-cols-1 sm:grid-cols-2\">\n    <Field><FieldLabel>验证码</FieldLabel><OtpField length={6} groups={[3, 3]} inputMode=\"numeric\" placeholder=\"·\" defaultValue=\"123\" /></Field>\n    <Field><FieldLabel>序列号</FieldLabel><OtpField length={8} groups={[2, 3, 3]} placeholder=\"_\" /></Field>\n    <Field><FieldLabel>恢复码</FieldLabel><OtpField length={6} mask inputMode=\"numeric\" defaultValue=\"4821\" /></Field>\n  </FieldGroup>;\n}\n",
+          "sha256": "5b2406c7de4a83f8505a2ddc880262443041fd7a1ebe3fa2ad3e8320894e253b"
         }
       ],
       "design": {
@@ -41117,7 +41117,7 @@
                 "optional": true,
                 "type": "string",
                 "doc": "编辑边界的样式入口；className / style / render 始终属于真实输入。",
-                "declaredAt": "packages/ui/src/components/input.tsx:15"
+                "declaredAt": "packages/ui/src/components/input.tsx:16"
               },
               {
                 "name": "defaultVisible",
@@ -41130,7 +41130,7 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。",
-                "declaredAt": "packages/ui/src/components/input.tsx:19"
+                "declaredAt": "packages/ui/src/components/input.tsx:20"
               },
               {
                 "name": "onVisibleChange",
@@ -41150,7 +41150,7 @@
                 "optional": true,
                 "type": "number | undefined",
                 "doc": "原生 input.size 的字符宽度含义；与呈现无关，由原生属性承担。",
-                "declaredAt": "packages/ui/src/components/input.tsx:13"
+                "declaredAt": "packages/ui/src/components/input.tsx:14"
               },
               {
                 "name": "visible",
@@ -41179,13 +41179,13 @@
             {
               "part": "PasswordInput",
               "prop": "nativeInput",
-              "declaredAt": "packages/ui/src/components/input.tsx:19",
+              "declaredAt": "packages/ui/src/components/input.tsx:20",
               "viaComponent": "input"
             },
             {
               "part": "PasswordInput",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/input.tsx:13",
+              "declaredAt": "packages/ui/src/components/input.tsx:14",
               "viaComponent": "input"
             }
           ]
@@ -47329,7 +47329,7 @@
                 "optional": true,
                 "type": "string",
                 "doc": "编辑边界的样式入口；className / style / render 始终属于真实输入。",
-                "declaredAt": "packages/ui/src/components/input.tsx:15"
+                "declaredAt": "packages/ui/src/components/input.tsx:16"
               },
               {
                 "name": "loading",
@@ -47343,7 +47343,7 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "已由 FieldControl 等原语注册时，直接渲染原生输入，避免重复注册。",
-                "declaredAt": "packages/ui/src/components/input.tsx:19"
+                "declaredAt": "packages/ui/src/components/input.tsx:20"
               },
               {
                 "name": "onClear",
@@ -47357,7 +47357,7 @@
                 "optional": true,
                 "type": "number | undefined",
                 "doc": "原生 input.size 的字符宽度含义；与呈现无关，由原生属性承担。",
-                "declaredAt": "packages/ui/src/components/input.tsx:13"
+                "declaredAt": "packages/ui/src/components/input.tsx:14"
               }
             ],
             "inheritedCount": 308,
@@ -47379,13 +47379,13 @@
             {
               "part": "SearchInput",
               "prop": "nativeInput",
-              "declaredAt": "packages/ui/src/components/input.tsx:19",
+              "declaredAt": "packages/ui/src/components/input.tsx:20",
               "viaComponent": "input"
             },
             {
               "part": "SearchInput",
               "prop": "size",
-              "declaredAt": "packages/ui/src/components/input.tsx:13",
+              "declaredAt": "packages/ui/src/components/input.tsx:14",
               "viaComponent": "input"
             }
           ]
@@ -58015,8 +58015,8 @@
             "@qingye_lab/ui/components/tag-input"
           ],
           "providers": [],
-          "code": "import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { TagInput } from \"@qingye_lab/ui/components/tag-input\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"集合与草稿\", titleEn: \"Collection and draft\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <FieldGroup className=\"grid w-full grid-cols-1 sm:grid-cols-2\">\n    <Field><FieldLabel>分类</FieldLabel><TagInput name=\"tags\" defaultValue={[\"React\", \"TypeScript\"]} /><FieldDescription>Enter 确认，区分大小写去重</FieldDescription></Field>\n    <Field invalid><FieldLabel>待核对</FieldLabel><TagInput defaultValue={[\"界面\"]} defaultDraft=\"交互\" /><FieldError>分类尚未核对。</FieldError></Field>\n    <Field><FieldLabel>只读</FieldLabel><TagInput defaultValue={[\"React\", \"TypeScript\"]} readOnly /></Field>\n    <Field disabled><FieldLabel>禁用</FieldLabel><TagInput defaultValue={[\"React\", \"TypeScript\"]} defaultDraft=\"草稿\" /></Field>\n  </FieldGroup>;\n}\n",
-          "sha256": "fbf6a6bd6cfb90342d3797a2c41014804726cec660fe12db68500ac1f67dd8bf"
+          "code": "import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { TagInput } from \"@qingye_lab/ui/components/tag-input\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"集合与草稿\", titleEn: \"Collection and draft\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <FieldGroup className=\"grid w-full grid-cols-1 sm:grid-cols-2\">\n    <Field><FieldLabel>分类</FieldLabel><TagInput name=\"tags\" defaultValue={[\"React\", \"TypeScript\"]} /><FieldDescription>区分大小写去重</FieldDescription></Field>\n    <Field invalid><FieldLabel>待核对</FieldLabel><TagInput defaultValue={[\"界面\"]} defaultDraft=\"交互\" /><FieldError>分类尚未核对。</FieldError></Field>\n    <Field><FieldLabel>只读</FieldLabel><TagInput defaultValue={[\"React\", \"TypeScript\"]} readOnly /></Field>\n    <Field disabled><FieldLabel>禁用</FieldLabel><TagInput defaultValue={[\"React\", \"TypeScript\"]} defaultDraft=\"草稿\" /></Field>\n  </FieldGroup>;\n}\n",
+          "sha256": "428a80c4292695fad84a56adce44d9329393df3423652090f7efede73c9df1f0"
         },
         {
           "id": "density",
@@ -64774,7 +64774,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tour.tsx",
-        "sha256": "8ab262e1964ac7f2f31c5ad26259096418c3a8a81bba0f3f3fd5dff85e561c6e",
+        "sha256": "add2cb8a6f949f9311df5c9e87450d71245d3caf1742edad83564a2edcb9e35b",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "引导只指路，不替用户完成任务，也不阻断页面：遮罩不拦截指针，只有 Esc 是退出。找不到锚点的步骤会被跳过，「第 N / M 步」的 M 只数实际能走的步数；结束后是否不再提示由应用记录。",
@@ -68378,8 +68378,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { useMemo, useState } from \"react\";\nimport type { DemoMeta } from \"@/lib/types\";\nimport { Alert, AlertDescription } from \"@qingye_lab/ui/components/alert\";\nimport { DataTablePattern, type DataTablePatternColumn, type DataTablePatternState } from \"@qingye_lab/ui/components/data-table\";\nimport { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from \"@qingye_lab/ui/components/description-list\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { SearchInput } from \"@qingye_lab/ui/components/search-input\";\nimport { Textarea } from \"@qingye_lab/ui/components/textarea\";\nimport { Toggle } from \"@qingye_lab/ui/components/toggle\";\nimport { Workspace, WorkspaceActions, WorkspaceContent, WorkspaceHeader, WorkspaceSummary, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\n\nexport const meta = { title: \"列表与详情\", titleEn: \"List and detail\", flush: true } satisfies DemoMeta;\n\ntype RecordItem = { id: string; name: string; owner: string; count: number; updated: string };\nconst records: RecordItem[] = Array.from({ length: 36 }, (_, index) => ({\n  id: `record-${index + 1}`,\n  name: index === 0 ? \"桑园采叶与跨区域运输交接记录（含东区、西区及临时库房的长名称核对）\" : `${[\"蚕室温湿度\", \"桑园采叶\", \"上簇批次\", \"茧质抽检\", \"饲料入库\", \"消毒巡检\"][index % 6]} · ${index + 1} 号`,\n  owner: [\"陈致远\", \"林晚\", \"周禾\"][index % 3]!, count: 120 + index * 17, updated: `今天 ${String(8 + index % 3).padStart(2, \"0\")}:${String(index % 60).padStart(2, \"0\")}`,\n}));\nconst columns: DataTablePatternColumn<RecordItem>[] = [\n  { id: \"name\", header: \"记录\", accessor: row => row.name, rowHeader: true, sortable: true, cell: row => <span className=\"text-start whitespace-normal wrap-anywhere\">{row.name}</span> },\n  { id: \"owner\", header: \"负责人\", accessor: row => row.owner },\n  { id: \"count\", header: \"条目\", accessor: row => row.count, numeric: true, sortable: true },\n  { id: \"updated\", header: \"更新时间\", accessor: row => row.updated, cell: row => <span className=\"whitespace-nowrap text-muted-foreground\">{row.updated}</span> },\n];\nconst initialState: DataTablePatternState = { sorting: [], pagination: { page: 1, pageSize: 10 }, rowSelection: {}, activeRowId: records[0]!.id };\n\n/**\n * 可复制的应用组合：Header 固定，WorkspaceContent 是唯一纵向滚动 owner；\n * 表格只拥有横向溢出。详情随页面滚动，不再建立一组嵌套的纵向滚动区。\n * 2:1 是此参考页面对列表比较与备注编辑容量的选择；表格 32 材最小宽度也是\n * 此页面四列比较与勾选列的阅读容量预设，窄屏由 TableContainer 横向滚动，不是库的默认列宽。\n */\n/**\n * embedded：放在文档页的演示里（标题降为 h3、高度固定、不立地标）。\n * insideMain：放在站点的示例查看页里——外层已有 <main>，内容区改用 div，标题仍是 h1、高度铺满。\n */\nexport function RecordsWorkspace({ embedded = false, insideMain = false }: { embedded?: boolean; insideMain?: boolean }) {\n  const [query, setQuery] = useState(\"\");\n  const [state, setState] = useState(initialState);\n  const [details, setDetails] = useState(true);\n  const [compact, setCompact] = useState(false);\n  const [drafts, setDrafts] = useState<Record<string, string>>({});\n  const filtered = useMemo(() => records.filter(row => row.name.includes(query.trim()) || row.owner.includes(query.trim())), [query]);\n  const active = records.find(row => row.id === state.activeRowId);\n  const selectedCount = Object.values(state.rowSelection).filter(Boolean).length;\n  return <div className={embedded ? \"h-[calc(30*var(--qy-cai))]\" : \"h-full\"} data-density={compact ? \"compact\" : \"default\"}>\n    <Workspace>\n      <WorkspaceSurface>\n        <WorkspaceHeader render={embedded ? <div /> : <header />} className=\"h-auto min-h-(--qy-row-default) flex-wrap gap-y-(--qy-field-gap) py-(--qy-field-gap)\">\n          <WorkspaceTitle level={embedded ? 3 : 1}>采集记录</WorkspaceTitle>\n          <WorkspaceSummary className=\"max-sm:hidden\">{filtered.length} 份记录，已选 {selectedCount} 份</WorkspaceSummary>\n          <WorkspaceActions className=\"flex-wrap\"><Toggle pressed={compact} onPressedChange={setCompact}>紧凑</Toggle><Toggle pressed={details} onPressedChange={setDetails}>详情</Toggle></WorkspaceActions>\n        </WorkspaceHeader>\n        <WorkspaceContent render={embedded || insideMain ? <div /> : <main />} id={embedded || insideMain ? undefined : \"main\"}>\n          <Stack gap=\"panel\" className=\"p-(--qy-page-gutter)\">\n            <Inline gap=\"panel\"><SearchInput aria-label=\"搜索采集记录\" placeholder=\"搜索记录或负责人\" value={query} onValueChange={next => {\n              setQuery(next); setState(previous => ({ ...previous, pagination: { ...previous.pagination, page: 1 } }));\n            }} controlClassName=\"w-full sm:max-w-[calc(16*var(--qy-cai))]\" /><span className=\"text-support text-muted-foreground\">已选 {selectedCount} 份（含其他页）</span></Inline>\n            <div className={details ? \"grid min-w-0 items-start gap-(--qy-section-gap) xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]\" : \"min-w-0\"}>\n              <DataTablePattern data={filtered} columns={columns} getRowId={row => row.id} state={state} onStateChange={setState}\n                pagination={{ pageSizeOptions: [10, 20, 50], \"aria-label\": \"采集记录分页\" }}\n                selection={{ label: \"选择本页记录\", rowLabel: row => `选择${row.name}` }} activeRow={{ columnId: \"name\" }}\n                tableProps={{ \"aria-label\": \"采集记录\", className: \"min-w-[calc(32*var(--qy-cai))]\", containerProps: { framed: false } }}\n                emptyContent={<span className=\"text-muted-foreground\">没有匹配的记录</span>} />\n              {details && active && <Stack render={<aside aria-label=\"记录详情\" lang=\"zh-CN\" />} gap=\"panel\">\n                <h2 className=\"m-0 text-heading wrap-anywhere\">{active.name}</h2>\n                {!filtered.some(row => row.id === active.id) && <Alert tone=\"info\"><AlertDescription>这份记录不在当前筛选结果中，备注仍保留。</AlertDescription></Alert>}\n                <DescriptionList><DescriptionListItem><DescriptionListTerm>编号</DescriptionListTerm><DescriptionListDetail>{active.id}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>负责人</DescriptionListTerm><DescriptionListDetail>{active.owner}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>条目</DescriptionListTerm><DescriptionListDetail className=\"numeric\">{active.count}</DescriptionListDetail></DescriptionListItem></DescriptionList>\n                <Field><FieldLabel>本地备注</FieldLabel><Textarea value={drafts[active.id] ?? \"\"} onValueChange={next => setDrafts(previous => ({ ...previous, [active.id]: next }))} placeholder=\"写下待核对事项\" /></Field>\n                <p className=\"m-0 text-support text-muted-foreground\">备注仅保留在当前页面，离开页面后清除。</p>\n              </Stack>}\n            </div>\n          </Stack>\n        </WorkspaceContent>\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n\nexport default function Demo() { return <><RecordsWorkspace embedded /><p className=\"m-0 p-(--qy-panel-padding-sm) text-support\"><a href=\"/examples/records\" className=\"text-foreground underline underline-offset-4\">打开完整工作台</a></p></>; }\n",
-          "sha256": "7491d51f66c62afc83cf271670d0b77f8d3fa3e22c7ee70964d5fec18f77fc66"
+          "code": "import { useMemo, useState } from \"react\";\nimport type { DemoMeta } from \"@/lib/types\";\nimport { Alert, AlertDescription } from \"@qingye_lab/ui/components/alert\";\nimport { DataTablePattern, type DataTablePatternColumn, type DataTablePatternState } from \"@qingye_lab/ui/components/data-table\";\nimport { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from \"@qingye_lab/ui/components/description-list\";\nimport { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { SearchInput } from \"@qingye_lab/ui/components/search-input\";\nimport { Textarea } from \"@qingye_lab/ui/components/textarea\";\nimport { Toggle } from \"@qingye_lab/ui/components/toggle\";\nimport { Workspace, WorkspaceActions, WorkspaceContent, WorkspaceHeader, WorkspaceSummary, WorkspaceSurface, WorkspaceTitle } from \"@qingye_lab/ui/components/workspace\";\n\nexport const meta = { title: \"列表与详情\", titleEn: \"List and detail\", flush: true } satisfies DemoMeta;\n\ntype RecordItem = { id: string; name: string; owner: string; count: number; updated: string };\nconst records: RecordItem[] = Array.from({ length: 36 }, (_, index) => ({\n  id: `record-${index + 1}`,\n  name: index === 0 ? \"桑园采叶与跨区域运输交接记录（含东区、西区及临时库房的长名称核对）\" : `${[\"蚕室温湿度\", \"桑园采叶\", \"上簇批次\", \"茧质抽检\", \"饲料入库\", \"消毒巡检\"][index % 6]} · ${index + 1} 号`,\n  owner: [\"陈致远\", \"林晚\", \"周禾\"][index % 3]!, count: 120 + index * 17, updated: `今天 ${String(8 + index % 3).padStart(2, \"0\")}:${String(index % 60).padStart(2, \"0\")}`,\n}));\nconst columns: DataTablePatternColumn<RecordItem>[] = [\n  { id: \"name\", header: \"记录\", accessor: row => row.name, rowHeader: true, sortable: true, cell: row => <span className=\"text-start whitespace-normal wrap-anywhere\">{row.name}</span> },\n  { id: \"owner\", header: \"负责人\", accessor: row => row.owner },\n  { id: \"count\", header: \"条目\", accessor: row => row.count, numeric: true, sortable: true },\n  { id: \"updated\", header: \"更新时间\", accessor: row => row.updated, cell: row => <span className=\"whitespace-nowrap text-muted-foreground\">{row.updated}</span> },\n];\nconst initialState: DataTablePatternState = { sorting: [], pagination: { page: 1, pageSize: 10 }, rowSelection: {}, activeRowId: records[0]!.id };\n\n/**\n * 可复制的应用组合：Header 固定，WorkspaceContent 是唯一纵向滚动 owner；\n * 表格只拥有横向溢出。详情随页面滚动，不再建立一组嵌套的纵向滚动区。\n * 2:1 是此参考页面对列表比较与备注编辑容量的选择；表格 32 材最小宽度也是\n * 此页面四列比较与勾选列的阅读容量预设，窄屏由 TableContainer 横向滚动，不是库的默认列宽。\n */\n/**\n * embedded：放在文档页的演示里（标题降为 h3、高度固定、不立地标）。\n * insideMain：放在站点的示例查看页里——外层已有 <main>，内容区改用 div，标题仍是 h1、高度铺满。\n */\nexport function RecordsWorkspace({ embedded = false, insideMain = false }: { embedded?: boolean; insideMain?: boolean }) {\n  const [query, setQuery] = useState(\"\");\n  const [state, setState] = useState(initialState);\n  const [details, setDetails] = useState(true);\n  const [compact, setCompact] = useState(false);\n  const [drafts, setDrafts] = useState<Record<string, string>>({});\n  const filtered = useMemo(() => records.filter(row => row.name.includes(query.trim()) || row.owner.includes(query.trim())), [query]);\n  const active = records.find(row => row.id === state.activeRowId);\n  const selectedCount = Object.values(state.rowSelection).filter(Boolean).length;\n  return <div className={embedded ? \"h-[calc(30*var(--qy-cai))]\" : \"h-full\"} data-density={compact ? \"compact\" : \"default\"}>\n    <Workspace>\n      <WorkspaceSurface>\n        <WorkspaceHeader render={embedded ? <div /> : <header />} className=\"h-auto min-h-(--qy-row-default) flex-wrap gap-y-(--qy-field-gap) py-(--qy-field-gap)\">\n          <WorkspaceTitle level={embedded ? 3 : 1}>采集记录</WorkspaceTitle>\n          <WorkspaceSummary className=\"max-sm:hidden\">{filtered.length} 份记录，已选 {selectedCount} 份</WorkspaceSummary>\n          <WorkspaceActions className=\"flex-wrap\"><Toggle pressed={compact} onPressedChange={setCompact}>紧凑</Toggle><Toggle pressed={details} onPressedChange={setDetails}>详情</Toggle></WorkspaceActions>\n        </WorkspaceHeader>\n        <WorkspaceContent render={embedded || insideMain ? <div /> : <main />} id={embedded || insideMain ? undefined : \"main\"}>\n          <Stack gap=\"panel\" className=\"p-(--qy-page-gutter)\">\n            <Inline gap=\"panel\"><SearchInput aria-label=\"搜索采集记录\" placeholder=\"搜索记录或负责人\" value={query} onValueChange={next => {\n              setQuery(next); setState(previous => ({ ...previous, pagination: { ...previous.pagination, page: 1 } }));\n            }} controlClassName=\"w-full sm:max-w-[calc(16*var(--qy-cai))]\" />{selectedCount > 0 && <span className=\"text-support text-muted-foreground\">已选 {selectedCount} 份（含其他页）</span>}</Inline>\n            <div className={details ? \"grid min-w-0 items-start gap-(--qy-section-gap) xl:grid-cols-[minmax(0,2fr)_minmax(0,1fr)]\" : \"min-w-0\"}>\n              <DataTablePattern data={filtered} columns={columns} getRowId={row => row.id} state={state} onStateChange={setState}\n                pagination={{ pageSizeOptions: [10, 20, 50], \"aria-label\": \"采集记录分页\" }}\n                selection={{ label: \"选择本页记录\", rowLabel: row => `选择${row.name}` }} activeRow={{ columnId: \"name\" }}\n                tableProps={{ \"aria-label\": \"采集记录\", className: \"min-w-[calc(32*var(--qy-cai))]\", containerProps: { framed: false } }}\n                emptyContent={<span className=\"text-muted-foreground\">没有匹配的记录</span>} />\n              {details && active && <Stack render={<aside aria-label=\"记录详情\" lang=\"zh-CN\" />} gap=\"panel\">\n                <h2 className=\"m-0 text-heading wrap-anywhere\">{active.name}</h2>\n                {!filtered.some(row => row.id === active.id) && <Alert tone=\"info\"><AlertDescription>这份记录不在当前筛选结果中，备注仍保留。</AlertDescription></Alert>}\n                <DescriptionList><DescriptionListItem><DescriptionListTerm>编号</DescriptionListTerm><DescriptionListDetail>{active.id}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>负责人</DescriptionListTerm><DescriptionListDetail>{active.owner}</DescriptionListDetail></DescriptionListItem><DescriptionListItem><DescriptionListTerm>条目</DescriptionListTerm><DescriptionListDetail className=\"numeric\">{active.count}</DescriptionListDetail></DescriptionListItem></DescriptionList>\n                <Field><FieldLabel>本地备注</FieldLabel><Textarea value={drafts[active.id] ?? \"\"} onValueChange={next => setDrafts(previous => ({ ...previous, [active.id]: next }))} placeholder=\"写下待核对事项\" /></Field>\n                <p className=\"m-0 text-support text-muted-foreground\">备注仅保留在当前页面，离开页面后清除。</p>\n              </Stack>}\n            </div>\n          </Stack>\n        </WorkspaceContent>\n      </WorkspaceSurface>\n    </Workspace>\n  </div>;\n}\n\nexport default function Demo() { return <><RecordsWorkspace embedded /><p className=\"m-0 p-(--qy-panel-padding-sm) text-support\"><a href=\"/examples/records\" className=\"text-foreground underline underline-offset-4\">打开完整工作台</a></p></>; }\n",
+          "sha256": "127c23bc4c6d14d3573ace65b3b6f13ea87b030f4e983c96976f734130f2279e"
         }
       ],
       "design": {

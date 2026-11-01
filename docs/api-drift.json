@@ -670,7 +670,7 @@
       "component": "input",
       "part": "Input",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/input.tsx:13"
+      "declaredAt": "packages/ui/src/components/input.tsx:14"
     },
     {
       "component": "input-group",
@@ -683,14 +683,14 @@
       "component": "input-group",
       "part": "InputGroupInput",
       "prop": "controlClassName",
-      "declaredAt": "packages/ui/src/components/input.tsx:15",
+      "declaredAt": "packages/ui/src/components/input.tsx:16",
       "viaComponent": "input"
     },
     {
       "component": "input-group",
       "part": "InputGroupInput",
       "prop": "nativeInput",
-      "declaredAt": "packages/ui/src/components/input.tsx:19",
+      "declaredAt": "packages/ui/src/components/input.tsx:20",
       "viaComponent": "input"
     },
     {
@@ -750,14 +750,14 @@
       "component": "otp-field",
       "part": "OtpField",
       "prop": "nativeInput",
-      "declaredAt": "packages/ui/src/components/input.tsx:19",
+      "declaredAt": "packages/ui/src/components/input.tsx:20",
       "viaComponent": "input"
     },
     {
       "component": "otp-field",
       "part": "OtpField",
       "prop": "unstyled",
-      "declaredAt": "packages/ui/src/components/input.tsx:17",
+      "declaredAt": "packages/ui/src/components/input.tsx:18",
       "viaComponent": "input"
     },
     {
@@ -869,14 +869,14 @@
       "component": "password-input",
       "part": "PasswordInput",
       "prop": "nativeInput",
-      "declaredAt": "packages/ui/src/components/input.tsx:19",
+      "declaredAt": "packages/ui/src/components/input.tsx:20",
       "viaComponent": "input"
     },
     {
       "component": "password-input",
       "part": "PasswordInput",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/input.tsx:13",
+      "declaredAt": "packages/ui/src/components/input.tsx:14",
       "viaComponent": "input"
     },
     {
@@ -896,14 +896,14 @@
       "component": "search-input",
       "part": "SearchInput",
       "prop": "nativeInput",
-      "declaredAt": "packages/ui/src/components/input.tsx:19",
+      "declaredAt": "packages/ui/src/components/input.tsx:20",
       "viaComponent": "input"
     },
     {
       "component": "search-input",
       "part": "SearchInput",
       "prop": "size",
-      "declaredAt": "packages/ui/src/components/input.tsx:13",
+      "declaredAt": "packages/ui/src/components/input.tsx:14",
       "viaComponent": "input"
     },
     {

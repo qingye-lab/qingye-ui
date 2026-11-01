@@ -84,7 +84,7 @@ Input 的分段呈现，Field 注册一次。
 ### 文本
 Source: apps/docs/src/content/otp-field/demos/01-input.tsx
 ```tsx
-import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Field, FieldError, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
 import { OtpField } from "@qingye_lab/ui/components/otp-field";
 import type { DemoMeta } from "@/lib/types";
 
@@ -92,8 +92,8 @@ export const meta = { title: "文本", titleEn: "Text" } satisfies DemoMeta;
 
 export default function Demo() {
   return <FieldGroup className="grid w-full grid-cols-1 sm:grid-cols-2">
-    <Field className="sm:col-span-2"><FieldLabel>编码</FieldLabel><OtpField length={6} inputMode="numeric" defaultValue="0012" name="code" /><FieldDescription>6 个字符；可直接粘贴 123 456</FieldDescription></Field>
-    <Field><FieldLabel>字符编号</FieldLabel><OtpField length={4} defaultValue="A01" /><FieldDescription>4 个字符</FieldDescription></Field>
+    <Field className="sm:col-span-2"><FieldLabel>编码</FieldLabel><OtpField length={6} inputMode="numeric" defaultValue="0012" name="code" /></Field>
+    <Field><FieldLabel>字符编号</FieldLabel><OtpField length={4} defaultValue="A01" /></Field>
     <Field invalid><FieldLabel>待核对</FieldLabel><OtpField length={4} defaultValue="0012" /><FieldError>编码尚未核对。</FieldError></Field>
     <Field><FieldLabel>只读</FieldLabel><OtpField length={4} defaultValue="0012" readOnly /></Field>
     <Field disabled><FieldLabel>禁用</FieldLabel><OtpField length={4} defaultValue="0012" /></Field>
@@ -129,7 +129,7 @@ export default function Demo() {
 ### 分组、占位与遮蔽
 Source: apps/docs/src/content/otp-field/demos/03-groups-mask.tsx
 ```tsx
-import { Field, FieldDescription, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Field, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
 import { OtpField } from "@qingye_lab/ui/components/otp-field";
 import type { DemoMeta } from "@/lib/types";
 
@@ -137,9 +137,9 @@ export const meta = { title: "分组、占位与遮蔽", titleEn: "Groups, place
 
 export default function Demo() {
   return <FieldGroup className="grid w-full grid-cols-1 sm:grid-cols-2">
-    <Field><FieldLabel>验证码</FieldLabel><OtpField length={6} groups={[3, 3]} inputMode="numeric" placeholder="·" defaultValue="123" /><FieldDescription>3 + 3 分组；读屏仍是一个输入框</FieldDescription></Field>
-    <Field><FieldLabel>序列号</FieldLabel><OtpField length={8} groups={[2, 3, 3]} placeholder="_" /><FieldDescription>2 + 3 + 3 分组</FieldDescription></Field>
-    <Field><FieldLabel>恢复码</FieldLabel><OtpField length={6} mask inputMode="numeric" defaultValue="4821" /><FieldDescription>已输入的字符以圆点显示；值与粘贴不变</FieldDescription></Field>
+    <Field><FieldLabel>验证码</FieldLabel><OtpField length={6} groups={[3, 3]} inputMode="numeric" placeholder="·" defaultValue="123" /></Field>
+    <Field><FieldLabel>序列号</FieldLabel><OtpField length={8} groups={[2, 3, 3]} placeholder="_" /></Field>
+    <Field><FieldLabel>恢复码</FieldLabel><OtpField length={6} mask inputMode="numeric" defaultValue="4821" /></Field>
   </FieldGroup>;
 }
 ```

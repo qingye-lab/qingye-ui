@@ -142,7 +142,7 @@ export default function Demo() {
   const [sent, setSent] = useState<string[]>([]);
   return <div className="flex w-full flex-col gap-(--qy-space-3)">
     <Composer onSubmit={(value: ComposerSegment[], { clear }) => { setSent((list) => [...list, composerValueToText(value)]); clear(); }}>
-      <ComposerInput aria-label="消息" placeholder="Enter 发送，Shift+Enter 换行" />
+      <ComposerInput aria-label="消息" placeholder="写点什么" />
       <ComposerToolbar><ComposerSubmit /></ComposerToolbar>
     </Composer>
     {sent.length > 0 && <ul className="m-0 flex list-none flex-col gap-(--qy-space-1) p-0 whitespace-pre-wrap">{sent.map((text, index) => <li key={index}>{text}</li>)}</ul>}
@@ -209,7 +209,7 @@ const mention: ComposerTrigger = {
 
 export default function Demo() {
   return <Composer className="w-full">
-    <ComposerInput aria-label="消息" placeholder="@ 后稍候显示结果" triggers={[mention]} />
+    <ComposerInput aria-label="消息" placeholder="@ 提及" triggers={[mention]} />
     <ComposerToolbar><ComposerSubmit /></ComposerToolbar>
   </Composer>;
 }

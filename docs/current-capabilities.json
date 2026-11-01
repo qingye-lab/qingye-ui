@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-01T08:46:39.120Z",
-  "revision": "5a35d62064e535c853178872e6c5094b13ef6d66",
+  "generatedAt": "2026-11-01T11:19:39.325Z",
+  "revision": "9387212c0134441470393aa3f37ca02826551665",
   "fingerprint": {
-    "sha256": "85a364b1ea3daf082b3de05c99dc47b8c56a0ad7cfe9b08f50ce37d5edd3c075",
+    "sha256": "ec292a37df1cc6c2d027ecf505c448635c23a4e3a15d1bc6618226d38d975ae1",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -476,7 +476,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "563a5d4ec29488af0ce91c46cb54d933d831e66670342acde1b60d27caffd28f"
+        "sha256": "af197a6f4c2d00fd19ef4b72b64c24caf9316f7a315ba3631d433010d591376a"
       },
       {
         "path": "packages/ui/motion.css",
@@ -488,7 +488,7 @@
       },
       {
         "path": "packages/ui/prose.css",
-        "sha256": "422d048285e6f5309948d00ad2da7475cf7f374f07bf852c0e6fb70d2ea270be"
+        "sha256": "aef757dcf9a9af949bdf83c4264ea1f8e7b13b0c640a8dfcb9d341d9ba724126"
       },
       {
         "path": "packages/ui/src/components/accordion.tsx",
@@ -616,19 +616,19 @@
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
-        "sha256": "2b68f004920e5e70f42e26e967d1b2afa357ac09e42f56e298adeceb1fb284a2"
+        "sha256": "f7a4c6d63df4dd08e95bb0da89d430426236ec6d84728930a43011e90709b663"
       },
       {
         "path": "packages/ui/src/components/date-range-picker.tsx",
-        "sha256": "c9f53914ae6dbf34b8adeda22967d3c04eebe3f9860819d4b718d66e96fc1dbf"
+        "sha256": "9ba2abc7c00e37716a489e1ef61f4ed8a5d9d2e353db9accee0fd37f4a61c98c"
       },
       {
         "path": "packages/ui/src/components/date-time-picker.tsx",
-        "sha256": "3540578e75987160e761639eee05f8895e2bfa22419f6962796887499b39d8b1"
+        "sha256": "55e12b48559b0a46cd8fbe9121ed6a7c1d92b14d4031bfe344d4ffbf9af52d65"
       },
       {
         "path": "packages/ui/src/components/date-time-range-picker.tsx",
-        "sha256": "8cb029363deef75facbb9396698e8df450e0b4987a10625bfd36729d52ccb54c"
+        "sha256": "f0bf1dd0084422c8188b26900c7152b6394fe65411b1f5a8a794b68f18a53142"
       },
       {
         "path": "packages/ui/src/components/description-list.tsx",
@@ -684,7 +684,7 @@
       },
       {
         "path": "packages/ui/src/components/input-group.tsx",
-        "sha256": "76c0479a8ae9237614a739ef522f54922af7646711cea7da0e1abc7ac9519260"
+        "sha256": "f88486029dc36fd228d2cee9649a1d29061e04dae1e4fc3998238074ca90e72c"
       },
       {
         "path": "packages/ui/src/components/input-modality-provider.tsx",
@@ -692,7 +692,7 @@
       },
       {
         "path": "packages/ui/src/components/input.tsx",
-        "sha256": "0e11564ab354356c394ea528a2c250a6bea9ce2b4894506a9e727c0c5e98391c"
+        "sha256": "1276c09d538105d1b2f715ed2df7d99bff636526763bba4c200346a7823104a7"
       },
       {
         "path": "packages/ui/src/components/item.tsx",
@@ -916,7 +916,7 @@
       },
       {
         "path": "packages/ui/src/components/tour.tsx",
-        "sha256": "8ab262e1964ac7f2f31c5ad26259096418c3a8a81bba0f3f3fd5dff85e561c6e"
+        "sha256": "add2cb8a6f949f9311df5c9e87450d71245d3caf1742edad83564a2edcb9e35b"
       },
       {
         "path": "packages/ui/src/components/transfer.tsx",
@@ -17223,7 +17223,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/input.tsx",
-            "line": 94
+            "line": 95
           }
         },
         {
@@ -17232,7 +17232,7 @@
           "target": "Input",
           "source": {
             "path": "packages/ui/src/components/input.tsx",
-            "line": 156
+            "line": 171
           }
         },
         {
@@ -17240,7 +17240,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/input.tsx",
-            "line": 11
+            "line": 12
           }
         }
       ],
@@ -17403,11 +17403,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/input.tsx",
-              "line": 94
+              "line": 95
             },
             "rootEntry": {
               "path": "packages/ui/src/components/input.tsx",
-              "line": 94
+              "line": 95
             },
             "status": "PRESENT"
           }

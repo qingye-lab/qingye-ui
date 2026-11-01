@@ -3868,7 +3868,7 @@ export default function Demo() {
   const [sent, setSent] = useState<string[]>([]);
   return <div className="flex w-full flex-col gap-(--qy-space-3)">
     <Composer onSubmit={(value: ComposerSegment[], { clear }) => { setSent((list) => [...list, composerValueToText(value)]); clear(); }}>
-      <ComposerInput aria-label="消息" placeholder="Enter 发送，Shift+Enter 换行" />
+      <ComposerInput aria-label="消息" placeholder="写点什么" />
       <ComposerToolbar><ComposerSubmit /></ComposerToolbar>
     </Composer>
     {sent.length > 0 && <ul className="m-0 flex list-none flex-col gap-(--qy-space-1) p-0 whitespace-pre-wrap">{sent.map((text, index) => <li key={index}>{text}</li>)}</ul>}
@@ -4677,7 +4677,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: 2b68f004920e5e70f42e26e967d1b2afa357ac09e42f56e298adeceb1fb284a2
+Source SHA-256: f7a4c6d63df4dd08e95bb0da89d430426236ec6d84728930a43011e90709b663
 
 编辑一个当地日期，或展开日历选择。
 
@@ -4774,7 +4774,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: c9f53914ae6dbf34b8adeda22967d3c04eebe3f9860819d4b718d66e96fc1dbf
+Source SHA-256: 9ba2abc7c00e37716a489e1ef61f4ed8a5d9d2e353db9accee0fd37f4a61c98c
 
 键入或在日历中选择起止日期，完整且有序时才是确认值。
 
@@ -4879,7 +4879,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: 3540578e75987160e761639eee05f8895e2bfa22419f6962796887499b39d8b1
+Source SHA-256: 55e12b48559b0a46cd8fbe9121ed6a7c1d92b14d4031bfe344d4ffbf9af52d65
 
 编辑完整的当地墙上日期与时间，或应用日历与时间草稿。
 
@@ -4972,7 +4972,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/date-time-range-picker
 Source: packages/ui/src/components/date-time-range-picker.tsx
-Source SHA-256: 8cb029363deef75facbb9396698e8df450e0b4987a10625bfd36729d52ccb54c
+Source SHA-256: f0bf1dd0084422c8188b26900c7152b6394fe65411b1f5a8a794b68f18a53142
 
 键入或在弹层里选起止日期和时间，完整且有序时才是确认值。
 
@@ -6651,7 +6651,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
-Source SHA-256: 0e11564ab354356c394ea528a2c250a6bea9ce2b4894506a9e727c0c5e98391c
+Source SHA-256: 1276c09d538105d1b2f715ed2df7d99bff636526763bba4c200346a7823104a7
 
 输入一个文本值。
 
@@ -6742,7 +6742,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
-Source SHA-256: 76c0479a8ae9237614a739ef522f54922af7646711cea7da0e1abc7ac9519260
+Source SHA-256: f88486029dc36fd228d2cee9649a1d29061e04dae1e4fc3998238074ca90e72c
 
 让输入与标记、单位或附属动作共用编辑边界。
 
@@ -8332,7 +8332,7 @@ Input 的分段呈现，Field 注册一次。
 #### 文本
 Source: apps/docs/src/content/otp-field/demos/01-input.tsx
 ```tsx
-import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { Field, FieldError, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
 import { OtpField } from "@qingye_lab/ui/components/otp-field";
 import type { DemoMeta } from "@/lib/types";
 
@@ -8340,8 +8340,8 @@ export const meta = { title: "文本", titleEn: "Text" } satisfies DemoMeta;
 
 export default function Demo() {
   return <FieldGroup className="grid w-full grid-cols-1 sm:grid-cols-2">
-    <Field className="sm:col-span-2"><FieldLabel>编码</FieldLabel><OtpField length={6} inputMode="numeric" defaultValue="0012" name="code" /><FieldDescription>6 个字符；可直接粘贴 123 456</FieldDescription></Field>
-    <Field><FieldLabel>字符编号</FieldLabel><OtpField length={4} defaultValue="A01" /><FieldDescription>4 个字符</FieldDescription></Field>
+    <Field className="sm:col-span-2"><FieldLabel>编码</FieldLabel><OtpField length={6} inputMode="numeric" defaultValue="0012" name="code" /></Field>
+    <Field><FieldLabel>字符编号</FieldLabel><OtpField length={4} defaultValue="A01" /></Field>
     <Field invalid><FieldLabel>待核对</FieldLabel><OtpField length={4} defaultValue="0012" /><FieldError>编码尚未核对。</FieldError></Field>
     <Field><FieldLabel>只读</FieldLabel><OtpField length={4} defaultValue="0012" readOnly /></Field>
     <Field disabled><FieldLabel>禁用</FieldLabel><OtpField length={4} defaultValue="0012" /></Field>
@@ -12064,7 +12064,7 @@ export const meta = { title: "集合与草稿", titleEn: "Collection and draft" 
 
 export default function Demo() {
   return <FieldGroup className="grid w-full grid-cols-1 sm:grid-cols-2">
-    <Field><FieldLabel>分类</FieldLabel><TagInput name="tags" defaultValue={["React", "TypeScript"]} /><FieldDescription>Enter 确认，区分大小写去重</FieldDescription></Field>
+    <Field><FieldLabel>分类</FieldLabel><TagInput name="tags" defaultValue={["React", "TypeScript"]} /><FieldDescription>区分大小写去重</FieldDescription></Field>
     <Field invalid><FieldLabel>待核对</FieldLabel><TagInput defaultValue={["界面"]} defaultDraft="交互" /><FieldError>分类尚未核对。</FieldError></Field>
     <Field><FieldLabel>只读</FieldLabel><TagInput defaultValue={["React", "TypeScript"]} readOnly /></Field>
     <Field disabled><FieldLabel>禁用</FieldLabel><TagInput defaultValue={["React", "TypeScript"]} defaultDraft="草稿" /></Field>
@@ -13349,7 +13349,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/tour
 Source: packages/ui/src/components/tour.tsx
-Source SHA-256: 8ab262e1964ac7f2f31c5ad26259096418c3a8a81bba0f3f3fd5dff85e561c6e
+Source SHA-256: add2cb8a6f949f9311df5c9e87450d71245d3caf1742edad83564a2edcb9e35b
 
 依次指向页面上的元素并逐步说明的非阻断引导，可选聚光遮罩。
 

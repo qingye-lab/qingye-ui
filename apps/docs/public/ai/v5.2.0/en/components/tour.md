@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/tour
 Source: packages/ui/src/components/tour.tsx
-Source SHA-256: 8ab262e1964ac7f2f31c5ad26259096418c3a8a81bba0f3f3fd5dff85e561c6e
+Source SHA-256: add2cb8a6f949f9311df5c9e87450d71245d3caf1742edad83564a2edcb9e35b
 
 A non-modal, step-by-step guide that points at page elements one after another, with an optional spotlight.
 
