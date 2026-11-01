@@ -42,6 +42,7 @@
 - [DatePicker](/en/docs/components/date-picker.md): Edit one local date or choose it from a calendar.
 - [DateRangePicker](/en/docs/components/date-range-picker.md): Type or pick start and end dates; only a complete, ordered range is a confirmed value.
 - [DateTimePicker](/en/docs/components/date-time-picker.md): Edit complete local wall-clock date/time, or apply calendar and time drafts.
+- [DateTimeRangePicker](/en/docs/components/date-time-range-picker.md): Type or pick a start and an end date and time; only a complete, ordered range is a confirmed value.
 - [DescriptionList](/en/docs/components/description-list.md): Native relationships between names and values.
 - [Dialog](/en/docs/components/dialog.md): Take over the work surface for an edit or decision, then return.
 - [Drawer](/en/docs/components/drawer.md): Enter an edge-aligned work surface and return to its entry point.
@@ -101,6 +102,7 @@
 - [Textarea](/en/docs/components/textarea.md): Edit multiline notes and messages.
 - [ThemeProvider](/en/docs/components/theme-provider.md): Remember the user's choice of light, dark, or system mode for the whole document. ThemeProvider follows system preference changes and applies the resolved mode to <html>. Mount it once at the app root and use useTheme to read or change the mode.
 - [TimeField](/en/docs/components/time-field.md): Fill in a time of day alone, segment by segment: hour, minute, second.
+- [TimeRangeField](/en/docs/components/time-range-field.md): Fill in a start and an end time of day in one edit boundary, such as opening hours or a shift.
 - [Timeline](/en/docs/components/timeline.md): Preserve input order and actual times.
 - [Toast](/en/docs/components/toast.md): Report recoverable, non-critical facts while the current work continues.
 - [Toc](/en/docs/components/toc.md): A vertical in-page table of contents for moving between sections; the current location deepens its own segment of an existing thin line instead of adding a new shape.

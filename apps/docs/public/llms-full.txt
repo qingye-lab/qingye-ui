@@ -708,7 +708,7 @@ ThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.d
 
 Examples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.
 
-# 第三部分 组件 (102)
+# 第三部分 组件 (104)
 
 ## 分组展开 Accordion
 
@@ -4566,6 +4566,107 @@ export const meta = { title: "日期与时间", titleEn: "Date and time" };
 export default function Demo() {
   const [value, setValue] = useState<string | undefined>();
   return <form><Field name="datetime"><FieldLabel>日期与时间</FieldLabel><DateTimePicker value={value} onValueChange={setValue} calendarProps={{ defaultMonth: new Date(2026, 9, 1) }} /></Field></form>;
+}
+```
+
+2 more examples: see the component page and its Markdown file.
+
+## 日期时间范围 DateTimeRangePicker
+
+Package: @qingye_lab/ui@5.1.0
+Import: @qingye_lab/ui/components/date-time-range-picker
+Source: packages/ui/src/components/date-time-range-picker.tsx
+Source SHA-256: 72ee3961e280d14bb29cfc38510d642b184c1b1539b2dc22c22570af8ab197b2
+
+键入或在弹层里选起止日期和时间，完整且有序时才是确认值。
+
+### Decision
+值是 { from, to }，两端各是 DateTimePicker 的值（无时区的本地文本 YYYY-MM-DDTHH:mm[:ss[.SSS]]），而不是 DateRangePicker 的 Date：时间不能放进只含日期的 Date，也不会因此猜一个时区。只有完整且有序的 from/to 才是确认值；起止相同是有效的零长度范围。两个原生 datetime-local 输入共用一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid，起点输入带原生校验信息让表单提交被拦下，并通过 onInvalid 交给应用说明。弹层里是日历区间加两个时间输入，同一天时结束时刻早于开始时刻会在弹层里提示并不能应用；取消或 Escape 保留原确认值。
+
+### Notes
+- 只选日期区间用 DateRangePicker；一个日期加一个时刻用 DateTimePicker；一天之内的两个时刻用 TimeRangeField。
+- 两个日期时间输入是原生输入，显示格式随浏览器；键入与弹层是两条等价路径，弹层每次打开从输入当前内容建立。
+- 弹层里只选了一天时，起止按同一天处理；没有默认的开始或结束时刻，也没有自动纠正。
+
+### Use and ownership
+- 键入或在弹层里选起止日期和时间，完整且有序时才是确认值。
+- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
+- Library: 展开、本次范围草稿、弹层里的日期与时间草稿、键入中间态、焦点返回
+- Application: 完整确认范围、允许的时刻、无效时的说明、提交结果
+
+### Composition
+- Field + FieldLabel + DateTimeRangePicker + FieldDescription / FieldError
+
+### Responsive behavior
+- 一套几何，跟随密度轴，紧凑不缩小文字；日历粗指针单元采用真实触摸尺寸
+
+### Customization
+- calendarProps、inputProps / endInputProps、组合根与集中主题
+
+### Current exports
+- DateTimeRangeDraft: type; owner date-time-range-picker; PASS
+- DateTimeRangeInvalidReason: type; owner date-time-range-picker; PASS
+- DateTimeRangePicker: function; owner date-time-range-picker; PASS; props: DateTimeRangePickerProps
+- DateTimeRangePickerProps: type; owner date-time-range-picker; PASS
+- DateTimeRangeValue: type; owner date-time-range-picker; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### DateTimeRangePicker
+- `calendarProps?`: `Omit<CalendarProps, "mode" | "selected" | "onSelect" | "required">`.
+- `defaultValue?`: `DateTimeRangeValue | undefined`. 非受控的初值，原生表单 reset 会回到它。
+- `disabled?`: `boolean`.
+- `endInputProps?`: `NativeInputProps`. 终点输入。
+- `form?`: `string | undefined`.
+- `inputProps?`: `NativeInputProps`. 起点输入（也是 Field 标签指向的输入）。
+- `max?`: `string | undefined`.
+- `min?`: `string | undefined`. 可选的最早 / 最晚时刻（无时区文本），一处声明同时约束两个原生输入、日历的可选日与边界日的时间输入。
+- `name?`: `string | undefined`.
+- `onInvalid?`: `((draft: DateTimeRangeDraft, reason: DateTimeRangeInvalidReason) => void) | undefined`. 草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。 只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`、挂原生校验信息），原因同 DateRangePicker。
+- `onValueChange?`: `((value: DateTimeRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined`. 只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。起止相同是有效的零长度范围。
+- `readOnly?`: `boolean`.
+- `value?`: `DateTimeRangeValue | undefined`. 受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。
+- plus 277 inherited (@types/react 276, @base-ui/react 1); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @daypicker/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### DateTimeRangePicker
+起止两个原生日期时间输入、弹层里的日历区间与两个时间输入、明确的应用动作的组合。
+- value / defaultValue / onValueChange: { from: string; to: string } | undefined / same / (value, event) => void. from / to 是 DateTimePicker 同形的无时区本地文本。传了 value 属性（含 value={undefined}）即受控；不传则非受控，defaultValue 是初值，原生表单 reset 回到它。起点须不晚于终点，否则抛 RangeError；清除请求 undefined，不生成缺端点的提交值。
+- onInvalid: (draft: { from?: string; to?: string }, reason: "incomplete" | "order" | "bounds") => void. 草稿无法提交：只填一端（incomplete）、起点晚于终点（order）、超出 min / max（bounds）。只在焦点离开整个字段且弹层关闭后通知，同时两个输入标 aria-invalid；键入是逐段进行的，过程中的暂时状态不算。库不写文案，应用用 FieldError 说明。
+- min / max: string. 一处声明最早 / 最晚时刻（无时区文本），同时写入两个原生输入、日历的禁用范围，并让落在边界那一天的时间输入带上对应的时刻边界。与 inputProps.min/max、calendarProps.disabled 并存，取交集；交集为空时开发环境警告。
+- name / form: string. 确认的起止序列化为 name.from 与 name.to（与 DateRangePicker 同名规则），值是同样的本地文本。Field 可提供 name；两个输入本身不提交，草稿不入表单。
+- disabled / readOnly: boolean; default false. 禁用阻止一切；只读时两个输入可聚焦、读屏读出值，但不能改值，弹层入口也不开。Field 禁用同样约束附属动作。只读确认值仍提交，禁用排除。确认值非空且可编辑时，边界内有清除动作，清除后焦点回到起点输入。
+- calendarProps: CalendarProps except owned selection props. 日历的其余属性（默认月份、禁用日等）；mode 固定 range。键入的值不受日历禁用日约束，只受 min / max 约束。
+- inputProps / endInputProps: Input props. 起点输入（Field 标签指向它）与终点输入的 ref/render/ARIA/events/step 等；step 同时带到弹层里的时间输入。两个输入默认名称是「Field 标签 + 开始 / 结束日期和时间」。
+- render / ref / className / style / ARIA / events: div composition props. 属于组合根；输入命名与错误由 Field 公共组合提供。
+
+### Keyboard
+- Tab / Shift+Tab: 起点、终点、弹层入口，展开后到日历、开始时间、结束时间，再到应用、取消、清除；起止没选全、时间没填、或顺序错误时不能应用。键入不必经过弹层。
+- Calendar keys: 在真实网格中选择起止日期。
+- Escape: 关闭弹层并返回触发入口，保留确认值。
+
+### Source example
+#### 起止日期时间
+Source: apps/docs/src/content/date-time-range-picker/demos/01-range.tsx
+```tsx
+import { useState } from "react";
+import { DateTimeRangePicker, type DateTimeRangeValue } from "@qingye_lab/ui/components/date-time-range-picker";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+
+export const meta = { title: "起止日期时间", titleEn: "Date and time endpoints" };
+
+export default function Demo() {
+  const [value, setValue] = useState<DateTimeRangeValue | undefined>({ from: "2026-10-03T09:30", to: "2026-10-05T17:00" });
+  return <form><Field name="slot"><FieldLabel>活动时段</FieldLabel><DateTimeRangePicker value={value} onValueChange={setValue} calendarProps={{ defaultMonth: new Date(2026, 9, 1) }} /><FieldDescription>当地时间</FieldDescription></Field></form>;
 }
 ```
 
@@ -11452,6 +11553,107 @@ export default function Demo() {
 ```
 
 1 more examples: see the component page and its Markdown file.
+
+## 时间段 TimeRangeField
+
+Package: @qingye_lab/ui@5.1.0
+Import: @qingye_lab/ui/components/time-range-field
+Source: packages/ui/src/components/time-range-field.tsx
+Source SHA-256: c39fe59d6990ae7bb22f03e31bc6ceccc0d6e0ad00e14cd867631e29a3534bf3
+
+在一个编辑边界里填起止两个时刻，如营业时间、班次。
+
+### Decision
+值是 { start, end }，两端各是 TimeField 的值（无时区 HH:mm[:ss] 文本，空为 null）；任何一端填完整或被清掉就上报整个对象，另一端原样带上。结束早于开始默认无效：整组标 aria-invalid，并让表单提交被拦下，说明文字由应用用 FieldError 给出；起止相同是有效的零长度时段。需要「22:00 到次日 06:00」时显式传 allowCrossMidnight，此时结束落在次日。它只管一天之内的两个时刻；要连日期一起选，用 DateTimeRangePicker，要单个时刻，用 TimeField。
+
+### Notes
+- 单个时刻用 TimeField；连日期一起选一个区间用 DateTimeRangePicker，只选日期区间用 DateRangePicker；一个日期加一个时刻用 DateTimePicker。
+- 起止是同一个时段的两端，所以放在一个边界里读作一体；它们之间是控件内间隔，不是两个并排的字段。
+- 跨零点是明确的选择，不是自动纠正：库从不交换起止，也不在顺序错误时替人改值。
+
+### Use and ownership
+- 在一个编辑边界里填起止两个时刻，如营业时间、班次。
+- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
+- Library: 各端的分段草稿与键入缓冲、焦点所在分段、顺序的原生校验
+- Application: 起止的值、是否允许跨零点、顺序错误时的说明、提交结果
+
+### Composition
+- Field + FieldLabel + TimeRangeField + FieldDescription / FieldError
+
+### Responsive behavior
+- 外框与 TimeField / Input 同一套几何，跟随密度轴，不带 size；粗指针下取真实触摸尺寸
+
+### Customization
+- 组合根的 className、granularity / hourCycle、集中主题
+
+### Current exports
+- TimeRangeField: function; owner time-range-field; PASS; props: TimeRangeFieldProps
+- TimeRangeFieldProps: type; owner time-range-field; PASS
+- TimeRangeValue: type; owner time-range-field; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### TimeRangeField
+- `allowCrossMidnight?`: `boolean`. 允许结束早于开始，此时结束落在次日（22:00–06:00）。默认不允许：结束早于开始标为无效，并让表单提交被拦下。 相等永远有效（零长度）；跨零点时相等同样按零长度，不解释成整整 24 小时。
+- `defaultValue?`: `TimeRangeValue | undefined`. 非受控的初值，原生表单 reset 会回到它。
+- `disabled?`: `boolean`.
+- `form?`: `string | undefined`.
+- `granularity?`: `"minute" | "second"`. 分段粒度与小时制，起止两端相同；含义同 TimeField。
+- `hourCycle?`: `12 | 24`.
+- `max?`: `string | undefined`.
+- `min?`: `string | undefined`. 起止各自的最早 / 最晚时刻（同 TimeField）；与「结束早于开始」是两件事，两者都成立才有效。
+- `name?`: `string | undefined`. 提交两个值：`${name}.start` 与 `${name}.end`（同 DateRangePicker 的 `.from` / `.to`）；某端未填完整时该项提交空串。
+- `onValueChange?`: `((value: TimeRangeValue) => void) | undefined`. 任一端填完整或被清掉时请求变更，值是两端的当前内容；还差几段的中间态不上报（同 TimeField）。
+- `readOnly?`: `boolean`.
+- `required?`: `boolean`.
+- `value?`: `TimeRangeValue | undefined`. 受控的起止；任一端可为 `null`。**传了 `value` 这个属性**才是受控，不传才是非受控。
+- plus 276 inherited (@types/react 276); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @daypicker/react, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context InField: without a provider default-value
+- Context InFieldItem: without a provider default-value; provided by OptionScope
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### TimeRangeField
+两个 TimeField 加一个分隔符，共用一个编辑边界；整组由 Field 的标签命名，起止各有自己的名称（开始时间、结束时间）。
+- value / defaultValue / onValueChange: { start: string | null; end: string | null } / same / (value) => void. 传了 value 属性即受控：调用方接受回调才改变事实，不接受时分段回到已接受的值。不传则非受控，defaultValue 是初值，原生表单 reset 回到它。每一端的中间态（还差几段）不上报。
+- allowCrossMidnight: boolean; default false. 允许结束早于开始，此时结束落在次日。相等永远有效，且跨零点时同样按零长度，不解释成整整 24 小时。默认不允许：结束早于开始标为无效并拦下提交。
+- granularity / hourCycle: "minute" | "second" / 12 | 24. 分段粒度与小时制，起止两端相同；含义同 TimeField。
+- min / max: string. 起止各自的最早 / 最晚时刻（同 TimeField）。与「结束早于开始」是两件事：两者都成立才有效。
+- name / form: string. 提交两个值：name.start 与 name.end（同 DateRangePicker 的 name.from / name.to，不提交 name 本身）；某端未填完整时该项提交空串。Field 可提供 name。顺序错误时整个表单提交被拦下。
+- disabled / readOnly / required: boolean; default false. 禁用阻止一切且不提交；只读时两端可聚焦、读屏读出值，但不能改值，值仍提交，边界末尾给出一处「只读」说明；required 要求起止都填。Field 禁用同样约束两端。
+- ref / className / style / ARIA / events: div props. 属于外层 role=group 的边界；必须有可访问名称：放进带 FieldLabel 的 Field，或传 aria-label / aria-labelledby，否则抛错（同 TimeField）。
+
+### Keyboard
+- Tab / Shift+Tab: 开始时间、结束时间两组之间移动，各组内的第一个分段是入口。
+- ArrowLeft / ArrowRight: 在同一端的分段之间移动。
+- ArrowUp / ArrowDown / 数字键: 改变当前分段，键入逐段进行（同 TimeField）。
+- Backspace / Delete: 清除当前分段；把一个完整的端点清掉时上报该端为 null。
+
+### Source example
+#### 起止时间
+Source: apps/docs/src/content/time-range-field/demos/01-basic.tsx
+```tsx
+import { useState } from "react";
+import { Field, FieldDescription, FieldLabel } from "@qingye_lab/ui/components/field";
+import { TimeRangeField, type TimeRangeValue } from "@qingye_lab/ui/components/time-range-field";
+
+export const meta = { title: "起止时间", titleEn: "Start and end" };
+
+export default function Demo() {
+  const [value, setValue] = useState<TimeRangeValue>({ start: "09:00", end: "18:00" });
+  return <form><Field name="hours"><FieldLabel>营业时间</FieldLabel><TimeRangeField value={value} onValueChange={setValue} /><FieldDescription>当天内的起止</FieldDescription></Field></form>;
+}
+```
+
+2 more examples: see the component page and its Markdown file.
 
 ## 时间序列 Timeline
 

@@ -19,6 +19,7 @@ export const enUS: UILocale = {
     selectDate: "Select date", clearDate: "Clear date", clearDateTime: "Clear date and time", clearDateRange: "Clear date range", selectDateTime: "Select date and time", time: "Time",
     dateIncomplete: "Date is incomplete", dateOutOfRange: "Date is outside the allowed range",
     timeHour: "Hour", timeMinute: "Minute", timeSecond: "Second", timeDayPeriod: "AM or PM", timeAm: "AM", timePm: "PM", timeEmpty: "Empty", timeOutOfRange: "Time is outside the allowed range", timeIncomplete: "Time is incomplete",
+    startTime: "Start time", endTime: "End time", timeRangeOrder: "End time is before start time", startDateTime: "Start date and time", endDateTime: "End date and time", dateTimeRangeOrder: "End is before start", selectDateTimeRange: "Select date and time range", clearDateTimeRange: "Clear date and time range",
     fieldOptional: "optional", fieldValidating: "Validating",
     showPassword: "Show password", clearSearch: "Clear search", searching: "Searching",
     colorArea: "Saturation and brightness", colorSaturation: "Saturation", colorBrightness: "Brightness", colorHue: "Hue", colorHex: "Hex color", colorInvalid: "Use the #rrggbb format", colorChoose: "Choose color", colorPresets: "Preset colors",

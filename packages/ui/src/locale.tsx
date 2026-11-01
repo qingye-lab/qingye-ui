@@ -19,6 +19,7 @@ export type UILocaleMessages = {
   selectDate: string; clearDate: string; clearDateTime: string; clearDateRange: string; selectDateTime: string; time: string;
   dateIncomplete: string; dateOutOfRange: string;
   timeHour: string; timeMinute: string; timeSecond: string; timeDayPeriod: string; timeAm: string; timePm: string; timeEmpty: string; timeOutOfRange: string; timeIncomplete: string;
+  startTime: string; endTime: string; timeRangeOrder: string; startDateTime: string; endDateTime: string; dateTimeRangeOrder: string; selectDateTimeRange: string; clearDateTimeRange: string;
   fieldOptional: string; fieldValidating: string;
   showPassword: string; clearSearch: string; searching: string;
   colorArea: string; colorSaturation: string; colorBrightness: string; colorHue: string; colorHex: string; colorInvalid: string; colorChoose: string; colorPresets: string;
@@ -85,6 +86,7 @@ export const zhCN: UILocale = {
     selectDate: "选择日期", clearDate: "清除日期", clearDateTime: "清除日期和时间", clearDateRange: "清除日期范围", selectDateTime: "选择日期和时间", time: "时间",
     dateIncomplete: "日期未填完整", dateOutOfRange: "日期超出可选范围",
     timeHour: "时", timeMinute: "分", timeSecond: "秒", timeDayPeriod: "上午或下午", timeAm: "上午", timePm: "下午", timeEmpty: "未填", timeOutOfRange: "时间超出可选范围", timeIncomplete: "时间未填完整",
+    startTime: "开始时间", endTime: "结束时间", timeRangeOrder: "结束时间早于开始时间", startDateTime: "开始日期和时间", endDateTime: "结束日期和时间", dateTimeRangeOrder: "结束时刻早于开始时刻", selectDateTimeRange: "选择日期时间范围", clearDateTimeRange: "清除日期时间范围",
     fieldOptional: "选填", fieldValidating: "正在校验",
     showPassword: "显示密码", clearSearch: "清除搜索", searching: "正在搜索",
     colorArea: "饱和度与明度", colorSaturation: "饱和度", colorBrightness: "明度", colorHue: "色相", colorHex: "十六进制色值", colorInvalid: "颜色格式应为 #rrggbb", colorChoose: "选择颜色", colorPresets: "预设颜色",

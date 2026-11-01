@@ -41,6 +41,7 @@
 - [日期输入 DatePicker](components/date-picker.md): 编辑一个当地日期，或展开日历选择。
 - [日期范围 DateRangePicker](components/date-range-picker.md): 键入或在日历中选择起止日期，完整且有序时才是确认值。
 - [日期时间 DateTimePicker](components/date-time-picker.md): 编辑完整的当地墙上日期与时间，或应用日历与时间草稿。
+- [日期时间范围 DateTimeRangePicker](components/date-time-range-picker.md): 键入或在弹层里选起止日期和时间，完整且有序时才是确认值。
 - [名称与值 DescriptionList](components/description-list.md): 名称和值的原生关系。
 - [对话框 Dialog](components/dialog.md): 接管整个工作面，完成当前编辑或决定后返回。
 - [边缘工作面 Drawer](components/drawer.md): 从边缘进入工作面，再返回入口。
@@ -100,6 +101,7 @@
 - [多行输入 Textarea](components/textarea.md): 编辑备注、消息等多行文本。
 - [主题 ThemeProvider](components/theme-provider.md): 管理整个文档的浅色 / 深色 / 跟随系统：记住用户的选择，跟随系统偏好变化，并把结果写到 <html> 上。在应用根部挂载一次，用 useTheme 读写。
 - [时间输入 TimeField](components/time-field.md): 只填一个时刻，按时、分、秒分段输入。
+- [时间段 TimeRangeField](components/time-range-field.md): 在一个编辑边界里填起止两个时刻，如营业时间、班次。
 - [时间序列 Timeline](components/timeline.md): 保留输入顺序与真实时间。
 - [通知 Toast](components/toast.md): 补充可恢复、非关键的操作事实，保持当前工作不中断。
 - [阅读目录 Toc](components/toc.md): 本页内几个段落之间走动的纵向目录：当前位置把一条清墨基线上自己那一段加深为焦墨，不新增形状。
