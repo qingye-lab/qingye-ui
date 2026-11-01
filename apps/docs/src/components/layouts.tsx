@@ -1,5 +1,6 @@
 import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
 import { Skeleton, SkeletonBlock, SkeletonLine } from "@qingye_lab/ui/components/skeleton";
+import { SkipLink } from "@qingye_lab/ui/components/skip-link";
 import { Suspense, useRef, type ReactNode } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useRouteEffects } from "@/lib/use-route-effects";
@@ -13,22 +14,9 @@ import { DocsBreadcrumbs } from "./docs-breadcrumbs";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { routeVisitKey } from "@/lib/paths";
 
-function SkipLink() {
+function DocsSkipLink() {
   const en = useDocsLocale() === "en";
-  return (
-    <a
-      className="docs-skip-link focus-ring fixed start-3 top-3 -translate-y-[200%] rounded-item border border-border bg-surface-raised px-(--qy-panel-padding-sm) py-(--qy-field-gap) text-body-strong focus-visible:translate-y-0"
-      href="#main"
-      onClick={(event) => {
-        event.preventDefault();
-        const main = document.getElementById("main");
-        main?.focus({ preventScroll: true });
-        main?.scrollIntoView({ block: "start" });
-      }}
-    >
-      {en ? "Skip to content" : "跳到正文"}
-    </a>
-  );
+  return <SkipLink href="#main" className="docs-skip-link">{en ? "Skip to content" : "跳到正文"}</SkipLink>;
 }
 
 /**
@@ -52,7 +40,7 @@ export function SiteShell() {
   useRouteEffects();
   return (
     <SearchProvider>
-      <SkipLink />
+      <DocsSkipLink />
       <SiteHeader />
       <Suspense fallback={<RouteFallback />}>
         <Outlet />

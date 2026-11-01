@@ -758,7 +758,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1447,7 +1447,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1823,7 +1823,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2748,7 +2748,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -3265,6 +3265,21 @@
           "providers": [],
           "code": "import { Avatar, AvatarFallback, AvatarImage } from \"@qingye_lab/ui/components/avatar\";\nimport { Inline } from \"@qingye_lab/ui/components/layout\";\n\nexport const meta = { title: \"图片与回退\", titleEn: \"Image and fallback\" };\n\nconst sample = \"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect width='40' height='40' fill='black'/%3E%3Ccircle cx='20' cy='20' r='11' fill='white'/%3E%3C/svg%3E\";\n\n// 回退显示的是**这个人的名字的第一个字**，不是「图」——回退态也要让人认得出是谁。\n// 首字由调用方给出：组件不知道某个字符串是不是人名，也不从可访问名称里猜。\nexport default function Demo() {\n  return <Inline>\n    {([\"xs\", \"sm\", \"md\", \"lg\", \"xl\"] as const).map(size => <Avatar key={size} label=\"陈致远\" size={size}><AvatarFallback>陈</AvatarFallback></Avatar>)}\n    <Avatar label=\"李一鸣\"><AvatarFallback>李</AvatarFallback></Avatar>\n    <Avatar label=\"Wen Zhang\"><AvatarFallback>W</AvatarFallback></Avatar>\n    <Avatar label=\"有头像的成员\"><AvatarImage src={sample} /><AvatarFallback>有</AvatarFallback></Avatar>\n  </Inline>;\n}\n",
           "sha256": "d9f215e957e0b3ef3eb107d567fec2df9459ddaaafaadfa5d7a7a9519b090ccb"
+        },
+        {
+          "id": "interactive",
+          "title": "可点击的头像",
+          "source": "apps/docs/src/content/avatar/demos/02-interactive.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/avatar",
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/layout",
+            "@qingye_lab/ui/components/link"
+          ],
+          "providers": [],
+          "code": "import { Avatar, AvatarFallback } from \"@qingye_lab/ui/components/avatar\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Inline } from \"@qingye_lab/ui/components/layout\";\nimport { Link } from \"@qingye_lab/ui/components/link\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"可点击的头像\", titleEn: \"A clickable avatar\" } satisfies DemoMeta;\n\n// 头像本身不可交互：点击是外层按钮或链接的事。名称来自头像的 label（读作「陈致远」），\n// 外层需要说明动作时再给 aria-label（此时它取代头像的名称）。\nexport default function Demo() {\n  return <Inline gap=\"panel\">\n    <Button variant=\"quiet\" shape=\"icon\"><Avatar label=\"陈致远\"><AvatarFallback>陈</AvatarFallback></Avatar></Button>\n    <Button variant=\"quiet\" shape=\"icon\" aria-label=\"打开李一鸣的资料\"><Avatar label=\"李一鸣\"><AvatarFallback>李</AvatarFallback></Avatar></Button>\n    <Link href=\"#profile\" className=\"inline-flex rounded-full\"><Avatar label=\"王一\"><AvatarFallback>王</AvatarFallback></Avatar></Link>\n  </Inline>;\n}\n",
+          "sha256": "0a7804a894e41417b38ba00406565fcee67e1fa883f67e976224d3c3cd1addd8"
         }
       ],
       "design": {
@@ -3301,13 +3316,13 @@
         "sha256": "d6ca137a87d7eeb1a3ec766553246ed453cbcd78fdce9980f091bd27a21f417a",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "不要虚构姓名或让 initials 代替可访问名称。",
+      "decisions": "不要虚构姓名或让 initials 代替可访问名称。头像本身不可交互；要点击，就用 Button（或链接）包住它：可访问名称仍来自头像的 label，焦点、键盘和禁用状态归外层，头像不加 tabindex、不加 onClick。要换名称时给外层 aria-label。一组相关的人用 AvatarGroup。",
       "localized": {
         "en": {
           "title": "Avatar",
           "description": "An image with one named identity and a fallback.",
           "category": "Data display",
-          "decisions": "Do not invent a name or let initials replace an accessible name.",
+          "decisions": "Do not invent a name or let initials replace an accessible name. An avatar is not interactive itself; to make it clickable, wrap it in a Button (or link): the accessible name still comes from the avatar's label, while focus, keyboard and disabled state belong to the outer element, and the avatar gets no tabindex or onClick. Give the outer element an aria-label to change the name. Use AvatarGroup for a set of related people.",
           "notes": [],
           "api": [
             {
@@ -3393,6 +3408,334 @@
             ],
             "customization": [
               "Public render/refs, ARIA, events, and styles; keep theme axes independent."
+            ]
+          },
+          "providerGuidance": []
+        }
+      }
+    },
+    {
+      "name": "avatar-group",
+      "title": "头像组 AvatarGroup",
+      "description": "一组相关的人，叠放并收起多余的成员。",
+      "category": "数据展示",
+      "source": "local",
+      "layer": "pattern",
+      "import": "@qingye_lab/ui/components/avatar-group",
+      "exports": [
+        "AvatarGroup"
+      ],
+      "docs": "/docs/components/avatar-group",
+      "notes": [
+        "「+N」的名称由 locale 提供（avatarGroupMore），列出被收起的全部名称。"
+      ],
+      "keywords": [
+        "avatar group",
+        "stacked avatars",
+        "members",
+        "头像组",
+        "成员",
+        "协作者"
+      ],
+      "api": [
+        {
+          "name": "AvatarGroup",
+          "description": "role=group 的 div，必须有 aria-label 或 aria-labelledby。",
+          "descriptionEn": "A role=group div that requires aria-label or aria-labelledby.",
+          "props": [
+            {
+              "name": "items",
+              "type": "{ key?, label, src?, fallback? }[]",
+              "description": "成员；label 必填，fallback 省略时取名称的第一个字。",
+              "descriptionEn": "Members; label is required, and fallback defaults to the first character of the name."
+            },
+            {
+              "name": "max",
+              "type": "number",
+              "default": "5",
+              "description": "最多露出几个头像，其余收进末尾的「+N」。",
+              "descriptionEn": "How many avatars to show before the rest collapse into a trailing \"+N\"."
+            },
+            {
+              "name": "size",
+              "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+              "default": "\"md\"",
+              "description": "与 Avatar 同一组档位。",
+              "descriptionEn": "The same steps as Avatar."
+            },
+            {
+              "name": "className / native props",
+              "type": "React.ComponentProps<div>",
+              "description": "其余属性透传到根元素。",
+              "descriptionEn": "Remaining attributes forward to the root."
+            }
+          ]
+        }
+      ],
+      "apiStatus": "type-resolved",
+      "typeApi": {
+        "status": "PASS",
+        "checker": "typescript@5.9.3",
+        "ownRule": "A property is own when at least one declaration is inside packages/ui/src; everything else is counted by origin package and not expanded.",
+        "parts": [
+          {
+            "name": "AvatarGroup",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "items",
+                "optional": false,
+                "type": "readonly AvatarGroupItem[]",
+                "declaredAt": "packages/ui/src/components/avatar-group.tsx:19"
+              },
+              {
+                "name": "max",
+                "optional": true,
+                "type": "number",
+                "doc": "最多露出几个头像，其余收进末尾的「+N」。默认 5。",
+                "declaredAt": "packages/ui/src/components/avatar-group.tsx:21"
+              },
+              {
+                "name": "size",
+                "optional": true,
+                "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+                "declaredAt": "packages/ui/src/components/avatar-group.tsx:22"
+              }
+            ],
+            "inheritedCount": 279,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 279
+              }
+            ]
+          }
+        ],
+        "drift": {
+          "documentedButMissing": [],
+          "undocumented": []
+        }
+      },
+      "keyboard": [],
+      "actualExports": [
+        {
+          "name": "AvatarGroup",
+          "kind": "function",
+          "owner": "avatar-group",
+          "module": "@qingye_lab/ui/components/avatar-group",
+          "propsType": "AvatarGroupProps",
+          "signature": "AvatarGroup({ items, max = 5, size = \"md\", className, ...props }: AvatarGroupProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "AvatarGroupItem",
+          "kind": "type",
+          "owner": "avatar-group",
+          "module": "@qingye_lab/ui/components/avatar-group",
+          "signature": "{\n  /** 稳定标识；省略时用位置。两个人可以同名，标识不可以重复。 */\n  key?: string;\n  /** 这个人的名称，必填：头像是图形，名称是它唯一的文字身份。 */\n  label: string;\n  src?: string;\n  /** 图片缺失或加载失败时显示的字。省略时取名称的第一个字。 */\n  fallback?: React.ReactNode;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "AvatarGroupProps",
+          "kind": "type",
+          "owner": "avatar-group",
+          "module": "@qingye_lab/ui/components/avatar-group",
+          "signature": "Omit<React.ComponentProps<\"div\">, \"children\"> & {\n  items: readonly AvatarGroupItem[];\n  /** 最多露出几个头像，其余收进末尾的「+N」。默认 5。 */\n  max?: number;\n  size?: AvatarSize;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "AvatarGroupItem",
+          "definition": "export type AvatarGroupItem = {\n  /** 稳定标识；省略时用位置。两个人可以同名，标识不可以重复。 */\n  key?: string;\n  /** 这个人的名称，必填：头像是图形，名称是它唯一的文字身份。 */\n  label: string;\n  src?: string;\n  /** 图片缺失或加载失败时显示的字。省略时取名称的第一个字。 */\n  fallback?: React.ReactNode;\n};"
+        },
+        {
+          "name": "AvatarGroupProps",
+          "definition": "export type AvatarGroupProps = Omit<React.ComponentProps<\"div\">, \"children\"> & {\n  items: readonly AvatarGroupItem[];\n  /** 最多露出几个头像，其余收进末尾的「+N」。默认 5。 */\n  max?: number;\n  size?: AvatarSize;\n};"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "AvatarGroup",
+          "import": "@qingye_lab/ui/components/avatar-group",
+          "owner": "avatar-group",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "usesLocale": true,
+        "usesTheme": false,
+        "required": [],
+        "contexts": [
+          {
+            "name": "LocaleContext",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "UILocaleProvider"
+            ]
+          }
+        ],
+        "baseUi": [
+          "@base-ui/react/avatar",
+          "@base-ui/react/direction-provider"
+        ],
+        "status": "PASS",
+        "scope": "Static: React context reads and useUILocale/useTheme calls in the local import closure. useUILocale has a default locale, so a missing UILocaleProvider is tolerated."
+      },
+      "examples": [
+        {
+          "id": "members",
+          "title": "成员与收起",
+          "source": "apps/docs/src/content/avatar-group/demos/01-members.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/avatar-group",
+            "@qingye_lab/ui/components/layout"
+          ],
+          "providers": [],
+          "code": "import { AvatarGroup } from \"@qingye_lab/ui/components/avatar-group\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"成员与收起\", titleEn: \"Members and overflow\" } satisfies DemoMeta;\n\nconst people = [{ label: \"陈致远\" }, { label: \"李一鸣\" }, { label: \"王一\" }, { label: \"周宁\" }, { label: \"赵清\" }, { label: \"孙墨\" }, { label: \"吴桐\" }];\n\nexport default function Demo() {\n  return <Stack gap=\"panel\">\n    <AvatarGroup aria-label=\"全部成员\" max={7} items={people} />\n    <AvatarGroup aria-label=\"项目成员\" max={4} items={people} />\n    <Inline gap=\"panel\">\n      {([\"xs\", \"sm\", \"md\", \"lg\", \"xl\"] as const).map(size => <AvatarGroup key={size} aria-label={`成员（${size}）`} size={size} max={3} items={people} />)}\n    </Inline>\n  </Stack>;\n}\n",
+          "sha256": "403f5e0c747f119e6817f9ed238b6b066a4925b21f32d06b8331662055ec5c6e"
+        },
+        {
+          "id": "clickable",
+          "title": "整组作为入口",
+          "source": "apps/docs/src/content/avatar-group/demos/02-clickable.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/avatar-group",
+            "@qingye_lab/ui/components/link"
+          ],
+          "providers": [],
+          "code": "import { AvatarGroup } from \"@qingye_lab/ui/components/avatar-group\";\nimport { Link } from \"@qingye_lab/ui/components/link\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"整组作为入口\", titleEn: \"The group as one entry\" } satisfies DemoMeta;\n\n// 整组本身不可点击；要进入成员名单，就把它放进链接（链接里可以放 div，按钮里不行）。名称与焦点归外层链接。\nexport default function Demo() {\n  return <Link href=\"#members\" aria-label=\"查看 5 位成员\" className=\"inline-flex\">\n    <AvatarGroup aria-label=\"成员\" max={3} items={[{ label: \"陈致远\" }, { label: \"李一鸣\" }, { label: \"王一\" }, { label: \"周宁\" }, { label: \"赵清\" }]} />\n  </Link>;\n}\n",
+          "sha256": "5c20eef396dc5ab80c0631b72f6d2eb892fd31f4ee97713a0af6162389569924"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "相成相制"
+        ],
+        "whenToUse": [
+          "表达一件事涉及哪几个人，且空间只够窄窄一行。"
+        ],
+        "avoid": [
+          "一个人的身份用 Avatar；需要逐个操作成员时用列表，不用叠放。"
+        ],
+        "composition": [
+          "整组 role=group 必须有名称；每个头像仍是自己的图形与名称，末尾的「+N」是一个独立头像。"
+        ],
+        "stateOwner": {
+          "library": [
+            "叠放、截断与整组命名。"
+          ],
+          "application": [
+            "成员事实、顺序与每个人的真实名称。"
+          ]
+        },
+        "responsive": [
+          "叠放量随头像档位等比，不随容器宽度变化；收起数量由 max 决定。"
+        ],
+        "customization": [
+          "size 取头像五档之一；其余用 className。"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/avatar-group.tsx",
+        "sha256": "806282f5521b596540a007ca559299a7d312a09eca028fd5e9f8a9591375ea51",
+        "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
+      },
+      "decisions": "叠放量取头像直径的四分之一，字始终露在外面；被收起的人不会消失，「+N」的可访问名称列出他们全部的名称。整组不可点击，要点击就放进按钮或链接。",
+      "localized": {
+        "en": {
+          "title": "AvatarGroup",
+          "description": "A set of related people, overlapped, with the surplus collapsed.",
+          "category": "Data display",
+          "decisions": "The overlap is a quarter of the avatar diameter so the initials always stay clear; collapsed people do not disappear: the accessible name of \"+N\" lists all of them. The group itself is not clickable; to make it so, put it inside a button or link.",
+          "notes": [
+            "The name of \"+N\" comes from the locale (avatarGroupMore) and lists every collapsed name."
+          ],
+          "api": [
+            {
+              "name": "AvatarGroup",
+              "description": "A role=group div that requires aria-label or aria-labelledby.",
+              "descriptionEn": "A role=group div that requires aria-label or aria-labelledby.",
+              "props": [
+                {
+                  "name": "items",
+                  "type": "{ key?, label, src?, fallback? }[]",
+                  "description": "Members; label is required, and fallback defaults to the first character of the name.",
+                  "descriptionEn": "Members; label is required, and fallback defaults to the first character of the name."
+                },
+                {
+                  "name": "max",
+                  "type": "number",
+                  "default": "5",
+                  "description": "How many avatars to show before the rest collapse into a trailing \"+N\".",
+                  "descriptionEn": "How many avatars to show before the rest collapse into a trailing \"+N\"."
+                },
+                {
+                  "name": "size",
+                  "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+                  "default": "\"md\"",
+                  "description": "The same steps as Avatar.",
+                  "descriptionEn": "The same steps as Avatar."
+                },
+                {
+                  "name": "className / native props",
+                  "type": "React.ComponentProps<div>",
+                  "description": "Remaining attributes forward to the root.",
+                  "descriptionEn": "Remaining attributes forward to the root."
+                }
+              ]
+            }
+          ],
+          "keyboard": [],
+          "design": {
+            "methods": [
+              "Name matches substance （名实相符）",
+              "Complementary roles and safeguards （相成相制）"
+            ],
+            "whenToUse": [
+              "Show which people a thing involves when there is room for only a narrow row."
+            ],
+            "avoid": [
+              "Use Avatar for one identity; use a list, not an overlap, when members must be acted on individually."
+            ],
+            "composition": [
+              "The group is role=group and must be named; each avatar remains its own graphic with its own name, and the trailing \"+N\" is a separate avatar."
+            ],
+            "stateOwner": {
+              "library": [
+                "Overlap, truncation and naming of the whole group."
+              ],
+              "application": [
+                "Membership facts, order and each person's real name."
+              ]
+            },
+            "responsive": [
+              "The overlap scales with the avatar size step, not with container width; max decides how many collapse."
+            ],
+            "customization": [
+              "size takes one of the five avatar steps; use className for the rest."
             ]
           },
           "providerGuidance": []
@@ -4135,7 +4478,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5099,7 +5442,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5660,7 +6003,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -6845,7 +7188,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -7265,6 +7608,19 @@
           "providers": [],
           "code": "import { Card } from \"@qingye_lab/ui/components/card\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Heading, Text } from \"@qingye_lab/ui/components/typography\";\n\nexport const meta = { title: \"密度\", titleEn: \"Density\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full grid-cols-2 gap-(--qy-section-gap)\">\n      {([\"default\", \"compact\"] as const).map((density) => (\n        <section data-density={density} key={density}>\n          <Card>\n            <Stack gap=\"panel\" className=\"p-(--qy-panel-padding)\">\n              <Heading level={3}>{density === \"compact\" ? \"紧凑\" : \"默认\"}</Heading>\n              <Text>青野 · Qingye</Text>\n            </Stack>\n          </Card>\n        </section>\n      ))}\n    </div>\n  );\n}\n",
           "sha256": "1afa6d4a7a91b36f509101182a0b4151c42d73902c9bc27005610feed54c1cbb"
+        },
+        {
+          "id": "nested",
+          "title": "嵌套",
+          "source": "apps/docs/src/content/card/demos/05-nested.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/card",
+            "@qingye_lab/ui/components/layout",
+            "@qingye_lab/ui/components/typography"
+          ],
+          "providers": [],
+          "code": "import { Card } from \"@qingye_lab/ui/components/card\";\nimport { Grid, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Heading, Text } from \"@qingye_lab/ui/components/typography\";\n\nexport const meta = { title: \"嵌套\", titleEn: \"Nested\" };\n\n/*\n * 同心：外圆角 R = 面板圆角（4 分）。内层卡片离外轮廓的等距内缩 d = 3 分，\n * 所以内层圆角 r = R − d = 4 分 − 3 分 = 1 分。两条轮廓的圆心重合，转角处两线之间的距离处处等于 d。\n * 内缩必须小于外圆角：面板内边距（不低于 5 分）大于 R，若用它做内缩，r 为负，内层只能是直角，\n * 同心关系也就无从谈起。因此内层卡片的内缩取 3 分，标题行与说明行再补足到面板内边距，\n * 文字仍与其它 Card 的文字起点对齐。圆角与内缩都由外圆角显式推导，不覆盖 Card 本身的取值。\n */\nexport default function Demo() {\n  return (\n    <Card className=\"w-full max-w-xl\">\n      <Stack gap=\"panel\" className=\"p-[calc(3*var(--qy-fen))]\">\n        <header className=\"p-[calc(var(--qy-panel-padding)-3*var(--qy-fen))]\"><Heading level={3}>本周</Heading></header>\n        <Grid columns={3} gap=\"panel\">\n          {[\"已完成\", \"进行中\", \"待安排\"].map((name, index) => (\n            <Card key={name} className=\"rounded-[calc(var(--qy-radius-panel)-3*var(--qy-fen))]\">\n              <Stack gap=\"pair\" className=\"p-(--qy-panel-padding)\">\n                <Text>{name}</Text>\n                <Heading level={3}>{[12, 5, 3][index]}</Heading>\n              </Stack>\n            </Card>\n          ))}\n        </Grid>\n        <footer className=\"p-[calc(var(--qy-panel-padding)-3*var(--qy-fen))]\"><Text>数据每小时更新一次。</Text></footer>\n      </Stack>\n    </Card>\n  );\n}\n",
+          "sha256": "6d61373f995dbbec75e899cebe25775cd8c79941508d17d37929d702209231b6"
         }
       ],
       "design": {
@@ -7765,7 +8121,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -8982,7 +9338,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -10502,7 +10858,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -10953,7 +11309,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -12035,7 +12391,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13297,7 +13653,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -14455,7 +14811,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -15003,7 +15359,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -15553,7 +15909,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -17137,7 +17493,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -17373,8 +17729,8 @@
       "api": [
         {
           "name": "CornerMark",
-          "description": "包裹宿主内容，角标钉在宿主的右上角。",
-          "descriptionEn": "Wraps the host content; the mark is pinned to the host's top-right corner.",
+          "description": "包裹宿主内容，角标钉在宿主的一角（默认行末上角）。",
+          "descriptionEn": "Wraps the host content; the mark is pinned to one of the host's corners (end-top by default).",
           "props": [
             {
               "name": "count / max",
@@ -17401,6 +17757,13 @@
               "descriptionEn": "Defaults to ink; success and danger are existing semantic categories, never hue without meaning."
             },
             {
+              "name": "placement / hostShape",
+              "type": "\"top-end\" | \"bottom-end\" | \"top-start\" | \"bottom-start\" / \"square\" | \"circle\"",
+              "default": "\"top-end\" / \"square\"",
+              "description": "角用逻辑方向（end 是行末，从右向左排版时自动在左），不用 left/right。宿主是圆形（头像）时设 hostShape=\"circle\"，角标落在圆周上 45° 的点，否则会悬在圆外。",
+              "descriptionEn": "Corners use logical directions (end is the line end, so it sits on the left under right-to-left), never left/right. For a circular host (an avatar) set hostShape=\"circle\" so the mark sits on the circle at 45 degrees instead of floating outside it."
+            },
+            {
               "name": "className / wrapperClassName",
               "type": "string",
               "description": "className 作用于角标本身（例如覆盖纸色圈，使其匹配实际承载面）；wrapperClassName 作用于外层定位容器。",
@@ -17423,49 +17786,61 @@
                 "name": "children",
                 "optional": false,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/corner-mark.tsx:9"
+                "declaredAt": "packages/ui/src/components/corner-mark.tsx:13"
               },
               {
                 "name": "className",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/corner-mark.tsx:9"
+                "declaredAt": "packages/ui/src/components/corner-mark.tsx:13"
               },
               {
                 "name": "count",
                 "optional": false,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/corner-mark.tsx:11"
+                "declaredAt": "packages/ui/src/components/corner-mark.tsx:15"
               },
               {
                 "name": "dot",
                 "optional": true,
                 "type": "never",
-                "declaredAt": "packages/ui/src/components/corner-mark.tsx:11"
+                "declaredAt": "packages/ui/src/components/corner-mark.tsx:15"
+              },
+              {
+                "name": "hostShape",
+                "optional": true,
+                "type": "\"circle\" | \"square\"",
+                "declaredAt": "packages/ui/src/components/corner-mark.tsx:13"
               },
               {
                 "name": "label",
                 "optional": false,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/corner-mark.tsx:11"
+                "declaredAt": "packages/ui/src/components/corner-mark.tsx:15"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/corner-mark.tsx:11"
+                "declaredAt": "packages/ui/src/components/corner-mark.tsx:15"
+              },
+              {
+                "name": "placement",
+                "optional": true,
+                "type": "\"top-end\" | \"bottom-end\" | \"top-start\" | \"bottom-start\"",
+                "declaredAt": "packages/ui/src/components/corner-mark.tsx:13"
               },
               {
                 "name": "tone",
                 "optional": true,
                 "type": "\"neutral\" | \"info\" | \"warning\" | \"danger\" | \"success\"",
-                "declaredAt": "packages/ui/src/components/corner-mark.tsx:9"
+                "declaredAt": "packages/ui/src/components/corner-mark.tsx:13"
               },
               {
                 "name": "wrapperClassName",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/corner-mark.tsx:9"
+                "declaredAt": "packages/ui/src/components/corner-mark.tsx:13"
               }
             ],
             "inheritedCount": 0,
@@ -17478,7 +17853,7 @@
             {
               "part": "CornerMark",
               "prop": "children",
-              "declaredAt": "packages/ui/src/components/corner-mark.tsx:9"
+              "declaredAt": "packages/ui/src/components/corner-mark.tsx:13"
             }
           ]
         }
@@ -17492,6 +17867,26 @@
           "module": "@qingye_lab/ui/components/corner-mark",
           "propsType": "CornerMarkProps",
           "signature": "CornerMark(props: CornerMarkProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "CornerMarkHostShape",
+          "kind": "type",
+          "owner": "corner-mark",
+          "module": "@qingye_lab/ui/components/corner-mark",
+          "signature": "\"square\" | \"circle\"",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "CornerMarkPlacement",
+          "kind": "type",
+          "owner": "corner-mark",
+          "module": "@qingye_lab/ui/components/corner-mark",
+          "signature": "\"top-end\" | \"bottom-end\" | \"top-start\" | \"bottom-start\"",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -17521,6 +17916,14 @@
         {
           "name": "CornerMarkTone",
           "definition": "export type CornerMarkTone = \"neutral\" | Tone;"
+        },
+        {
+          "name": "CornerMarkPlacement",
+          "definition": "export type CornerMarkPlacement = \"top-end\" | \"bottom-end\" | \"top-start\" | \"bottom-start\";"
+        },
+        {
+          "name": "CornerMarkHostShape",
+          "definition": "export type CornerMarkHostShape = \"square\" | \"circle\";"
         },
         {
           "name": "CornerMarkProps",
@@ -17567,8 +17970,22 @@
             "@tabler/icons-react"
           ],
           "providers": [],
-          "code": "import { Avatar, AvatarFallback } from \"@qingye_lab/ui/components/avatar\";\nimport { CornerMark } from \"@qingye_lab/ui/components/corner-mark\";\nimport { Inline } from \"@qingye_lab/ui/components/layout\";\nimport { IconBell } from \"@tabler/icons-react\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"未读数与在线点\", titleEn: \"Unread count and an online dot\" } satisfies DemoMeta;\nexport default function Demo() {\n  return <Inline gap=\"panel\">\n    <CornerMark count={3} label=\"3 条未读\"><span className=\"inline-flex size-(--qy-fill-height) items-center justify-center rounded-item bg-surface-inset text-foreground\"><IconBell aria-hidden=\"true\" /></span></CornerMark>\n    <CornerMark count={142} max={99} label=\"142 条未读\"><span className=\"inline-flex size-(--qy-fill-height) items-center justify-center rounded-item bg-surface-inset text-foreground\"><IconBell aria-hidden=\"true\" /></span></CornerMark>\n    <CornerMark dot tone=\"success\" label=\"在线\"><Avatar label=\"陈致远\"><AvatarFallback>陈</AvatarFallback></Avatar></CornerMark>\n  </Inline>;\n}\n",
-          "sha256": "d1b2020732092db904be9ab763a39a13953c42a5e0883163310b8b7aa4f7d009"
+          "code": "import { Avatar, AvatarFallback } from \"@qingye_lab/ui/components/avatar\";\nimport { CornerMark } from \"@qingye_lab/ui/components/corner-mark\";\nimport { Inline } from \"@qingye_lab/ui/components/layout\";\nimport { IconBell } from \"@tabler/icons-react\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"未读数与在线点\", titleEn: \"Unread count and an online dot\" } satisfies DemoMeta;\nexport default function Demo() {\n  return <Inline gap=\"panel\">\n    <CornerMark count={3} label=\"3 条未读\"><span className=\"inline-flex size-(--qy-fill-height) items-center justify-center rounded-item bg-surface-inset text-foreground\"><IconBell aria-hidden=\"true\" /></span></CornerMark>\n    <CornerMark count={142} max={99} label=\"142 条未读\"><span className=\"inline-flex size-(--qy-fill-height) items-center justify-center rounded-item bg-surface-inset text-foreground\"><IconBell aria-hidden=\"true\" /></span></CornerMark>\n    <CornerMark dot tone=\"success\" placement=\"bottom-end\" hostShape=\"circle\" label=\"在线\"><Avatar label=\"陈致远\"><AvatarFallback>陈</AvatarFallback></Avatar></CornerMark>\n  </Inline>;\n}\n",
+          "sha256": "e1838e0c2a8e162112ec4e2265963b017f5e692a1752b139b60d1bb5b48c135f"
+        },
+        {
+          "id": "placement",
+          "title": "头像右下角的在线点",
+          "source": "apps/docs/src/content/corner-mark/demos/02-placement.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/avatar",
+            "@qingye_lab/ui/components/corner-mark",
+            "@qingye_lab/ui/components/layout"
+          ],
+          "providers": [],
+          "code": "import { Avatar, AvatarFallback } from \"@qingye_lab/ui/components/avatar\";\nimport { CornerMark } from \"@qingye_lab/ui/components/corner-mark\";\nimport { Inline } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"头像右下角的在线点\", titleEn: \"An online dot at an avatar's bottom end\" } satisfies DemoMeta;\n\n// 头像是圆，所以 hostShape=\"circle\"：在线点落在圆周 45° 处，而不是悬在方框的角外。\nexport default function Demo() {\n  return <Inline gap=\"panel\">\n    <CornerMark dot tone=\"success\" placement=\"bottom-end\" hostShape=\"circle\" label=\"在线\"><Avatar label=\"陈致远\"><AvatarFallback>陈</AvatarFallback></Avatar></CornerMark>\n    <CornerMark dot tone=\"neutral\" placement=\"bottom-end\" hostShape=\"circle\" label=\"离线\"><Avatar label=\"李一鸣\"><AvatarFallback>李</AvatarFallback></Avatar></CornerMark>\n    <CornerMark count={3} placement=\"top-start\" label=\"3 条未读\"><Avatar label=\"王一\"><AvatarFallback>王</AvatarFallback></Avatar></CornerMark>\n  </Inline>;\n}\n",
+          "sha256": "bb1887c12e938c4b8a329cdb1deb67caaba14d858b55eaf287d4f59416e5d8f4"
         }
       ],
       "design": {
@@ -17584,7 +18001,7 @@
           "正文里的一段标注文字用 Badge；要被直接读到的状态名称用 StatusDot。"
         ],
         "composition": [
-          "CornerMark：包裹宿主内容，角标钉在宿主的右上角。"
+          "CornerMark：包裹宿主内容，角标钉在宿主的一角（默认行末上角）。"
         ],
         "stateOwner": {
           "library": [
@@ -17603,7 +18020,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/corner-mark.tsx",
-        "sha256": "2ab94e2f89fda39bfa2f8751be6394fa346a22d2de902c123d38e012e59c9ac6",
+        "sha256": "ac8892bd3e844d1037659b14d1fa362244bb04e8b5091d156c8d33fc39096a5a",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "角标本身是装饰性的：数字必须经宿主的可访问名称，或 label（视觉隐藏文字）才能被读屏听到；零计数直接隐藏，不留空壳。与 Badge（正文里的一段字）、StatusDot（彩色圆点 + 墨色名称）各管各的边界。",
@@ -17619,8 +18036,8 @@
           "api": [
             {
               "name": "CornerMark",
-              "description": "Wraps the host content; the mark is pinned to the host's top-right corner.",
-              "descriptionEn": "Wraps the host content; the mark is pinned to the host's top-right corner.",
+              "description": "Wraps the host content; the mark is pinned to one of the host's corners (end-top by default).",
+              "descriptionEn": "Wraps the host content; the mark is pinned to one of the host's corners (end-top by default).",
               "props": [
                 {
                   "name": "count / max",
@@ -17647,6 +18064,13 @@
                   "descriptionEn": "Defaults to ink; success and danger are existing semantic categories, never hue without meaning."
                 },
                 {
+                  "name": "placement / hostShape",
+                  "type": "\"top-end\" | \"bottom-end\" | \"top-start\" | \"bottom-start\" / \"square\" | \"circle\"",
+                  "default": "\"top-end\" / \"square\"",
+                  "description": "Corners use logical directions (end is the line end, so it sits on the left under right-to-left), never left/right. For a circular host (an avatar) set hostShape=\"circle\" so the mark sits on the circle at 45 degrees instead of floating outside it.",
+                  "descriptionEn": "Corners use logical directions (end is the line end, so it sits on the left under right-to-left), never left/right. For a circular host (an avatar) set hostShape=\"circle\" so the mark sits on the circle at 45 degrees instead of floating outside it."
+                },
+                {
                   "name": "className / wrapperClassName",
                   "type": "string",
                   "description": "className targets the mark itself (for example overriding the paper-colored ring to match the actual surface); wrapperClassName targets the outer positioning wrapper.",
@@ -17669,7 +18093,7 @@
               "Use Badge for an inline annotation in running text, and StatusDot for a status name meant to be read directly."
             ],
             "composition": [
-              "CornerMark: Wraps the host content; the mark is pinned to the host's top-right corner."
+              "CornerMark: Wraps the host content; the mark is pinned to one of the host's corners (end-top by default)."
             ],
             "stateOwner": {
               "library": [
@@ -18612,7 +19036,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19232,7 +19656,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19782,7 +20206,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -20251,7 +20675,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -20774,7 +21198,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -22107,7 +22531,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -22929,7 +23353,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -24362,7 +24786,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -25950,7 +26374,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -27027,7 +27451,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -27962,7 +28386,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -28686,6 +29110,305 @@
       }
     },
     {
+      "name": "image-preview",
+      "title": "图片预览 ImagePreview",
+      "description": "缩略图打开大图，可在同组图片间切换并放大。",
+      "category": "数据展示",
+      "source": "local",
+      "layer": "pattern",
+      "import": "@qingye_lab/ui/components/image-preview",
+      "exports": [
+        "ImagePreview"
+      ],
+      "docs": "/docs/components/image-preview",
+      "notes": [
+        "键盘：左右方向键切图（从右向左排版时对调）、+ / - 缩放、0 适应窗口；到头即止，不循环。"
+      ],
+      "keywords": [
+        "image preview",
+        "lightbox",
+        "gallery",
+        "zoom",
+        "图片预览",
+        "大图",
+        "放大"
+      ],
+      "api": [
+        {
+          "name": "ImagePreview",
+          "description": "一排缩略图按钮，打开 Dialog 中的大图。",
+          "descriptionEn": "A row of thumbnail buttons that open the large view in a Dialog.",
+          "props": [
+            {
+              "name": "images",
+              "type": "{ src, alt, thumbnailSrc? }[]",
+              "description": "同一组图片；alt 必填，thumbnailSrc 省略时缩略图也读 src。单张图传一项。",
+              "descriptionEn": "One set of images; alt is required and thumbnailSrc falls back to src. Pass one item for a single image."
+            },
+            {
+              "name": "thumbnailClassName",
+              "type": "string",
+              "description": "作用于每个缩略图按钮。",
+              "descriptionEn": "Applies to every thumbnail button."
+            },
+            {
+              "name": "className / native props",
+              "type": "React.ComponentProps<div>",
+              "description": "其余属性透传到根元素。",
+              "descriptionEn": "Remaining attributes forward to the root."
+            }
+          ]
+        }
+      ],
+      "apiStatus": "type-resolved",
+      "typeApi": {
+        "status": "PASS",
+        "checker": "typescript@5.9.3",
+        "ownRule": "A property is own when at least one declaration is inside packages/ui/src; everything else is counted by origin package and not expanded.",
+        "parts": [
+          {
+            "name": "ImagePreview",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "images",
+                "optional": false,
+                "type": "readonly ImagePreviewImage[]",
+                "doc": "同一组图片：缩略图并排，大图里可以在它们之间前后切换。单张图传一项。",
+                "declaredAt": "packages/ui/src/components/image-preview.tsx:21"
+              },
+              {
+                "name": "thumbnailClassName",
+                "optional": true,
+                "type": "string",
+                "declaredAt": "packages/ui/src/components/image-preview.tsx:22"
+              }
+            ],
+            "inheritedCount": 279,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 279
+              }
+            ]
+          }
+        ],
+        "drift": {
+          "documentedButMissing": [],
+          "undocumented": []
+        }
+      },
+      "keyboard": [],
+      "actualExports": [
+        {
+          "name": "ImagePreview",
+          "kind": "function",
+          "owner": "image-preview",
+          "module": "@qingye_lab/ui/components/image-preview",
+          "propsType": "ImagePreviewProps",
+          "signature": "ImagePreview({ images, thumbnailClassName, className, ...props }: ImagePreviewProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ImagePreviewImage",
+          "kind": "type",
+          "owner": "image-preview",
+          "module": "@qingye_lab/ui/components/image-preview",
+          "signature": "{\n  src: string;\n  /** 必填：缩略图按钮的名称、大图的名称、加载失败时唯一能读到的文字，都是它。 */\n  alt: string;\n  /** 缩略图用的小图；省略时缩略图也读 src。 */\n  thumbnailSrc?: string;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ImagePreviewProps",
+          "kind": "type",
+          "owner": "image-preview",
+          "module": "@qingye_lab/ui/components/image-preview",
+          "signature": "Omit<React.ComponentProps<\"div\">, \"children\"> & {\n  /** 同一组图片：缩略图并排，大图里可以在它们之间前后切换。单张图传一项。 */\n  images: readonly ImagePreviewImage[];\n  thumbnailClassName?: string;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "ImagePreviewImage",
+          "definition": "export type ImagePreviewImage = {\n  src: string;\n  /** 必填：缩略图按钮的名称、大图的名称、加载失败时唯一能读到的文字，都是它。 */\n  alt: string;\n  /** 缩略图用的小图；省略时缩略图也读 src。 */\n  thumbnailSrc?: string;\n};"
+        },
+        {
+          "name": "ImagePreviewProps",
+          "definition": "export type ImagePreviewProps = Omit<React.ComponentProps<\"div\">, \"children\"> & {\n  /** 同一组图片：缩略图并排，大图里可以在它们之间前后切换。单张图传一项。 */\n  images: readonly ImagePreviewImage[];\n  thumbnailClassName?: string;\n};"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "ImagePreview",
+          "import": "@qingye_lab/ui/components/image-preview",
+          "owner": "image-preview",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "@tabler/icons-react",
+          "class-variance-authority",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "usesLocale": true,
+        "usesTheme": false,
+        "required": [],
+        "contexts": [
+          {
+            "name": "LocaleContext",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "UILocaleProvider"
+            ]
+          }
+        ],
+        "baseUi": [
+          "@base-ui/react/button",
+          "@base-ui/react/dialog",
+          "@base-ui/react/direction-provider",
+          "@base-ui/react/merge-props",
+          "@base-ui/react/use-render"
+        ],
+        "status": "PASS",
+        "scope": "Static: React context reads and useUILocale/useTheme calls in the local import closure. useUILocale has a default locale, so a missing UILocaleProvider is tolerated."
+      },
+      "examples": [
+        {
+          "id": "set",
+          "title": "同组图片与单张",
+          "source": "apps/docs/src/content/image-preview/demos/01-set.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/image-preview",
+            "@qingye_lab/ui/components/layout"
+          ],
+          "providers": [],
+          "code": "import { ImagePreview } from \"@qingye_lab/ui/components/image-preview\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"同组图片与单张\", titleEn: \"A set and a single image\" } satisfies DemoMeta;\n\nconst svg = (fill: string, label: string) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><rect width='800' height='500' fill='${fill}'/><text x='400' y='270' font-size='64' text-anchor='middle' fill='white'>${label}</text></svg>`)}`;\n\nexport default function Demo() {\n  return <Stack gap=\"panel\">\n    <ImagePreview images={[\n      { src: svg(\"#475569\", \"一\"), alt: \"第一张：石板色\" },\n      { src: svg(\"#57534e\", \"二\"), alt: \"第二张：褐石色\" },\n      { src: svg(\"#44403c\", \"三\"), alt: \"第三张：深褐色\" },\n    ]} />\n    <ImagePreview images={[{ src: svg(\"#52525b\", \"单\"), alt: \"单张图片\" }]} />\n  </Stack>;\n}\n",
+          "sha256": "24d7ac8e81342e3116f412dea0c063690183d1158ba83322902838a3b7c2b3c3"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "应物象形"
+        ],
+        "whenToUse": [
+          "图片是内容的一部分，且需要放大看细节或在同组中浏览。"
+        ],
+        "avoid": [
+          "装饰性图片不需要预览；只展示一张固定大小的图用普通 img。"
+        ],
+        "composition": [
+          "缩略图是按钮；大图在阻断式对话框里，页脚是位置、前后切换与缩放。"
+        ],
+        "stateOwner": {
+          "library": [
+            "开合、当前图、缩放级别、键盘与焦点归还。"
+          ],
+          "application": [
+            "图片来源、alt 文案与分组。"
+          ]
+        },
+        "responsive": [
+          "舞台宽度有上限，高度取视口的 70%；窄屏下收窄到视口内。"
+        ],
+        "customization": [
+          "thumbnailClassName 调整缩略图；其余用 className。"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/image-preview.tsx",
+        "sha256": "23741daf38ba1fbc21c80c4eae46b218445b975188b4bbc3e6691bfd6a20803e",
+        "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
+      },
+      "decisions": "复用 Dialog：焦点困住、Esc 关闭、背景阻断都来自它。alt 必填，它同时是缩略图按钮、大图和加载失败时唯一能读到的文字。放大后舞台可滚动并获得焦点，此时方向键归滚动、不切图。关闭后焦点回到打开的那张缩略图，即使已切到别的图。",
+      "localized": {
+        "en": {
+          "title": "ImagePreview",
+          "description": "Thumbnails open a large view with switching within the set and zoom.",
+          "category": "Data display",
+          "decisions": "Built on Dialog, which supplies the focus trap, Esc to close and the blocking backdrop. alt is required and is the only text available for the thumbnail button, the large view and a load failure. When zoomed, the stage scrolls and takes focus, and the arrow keys then scroll instead of switching images. After closing, focus returns to the thumbnail that opened it, even after switching to another image.",
+          "notes": [
+            "Keyboard: Left/Right switch images (swapped under right-to-left), +/- zoom, 0 fits; stops at the ends, no looping."
+          ],
+          "api": [
+            {
+              "name": "ImagePreview",
+              "description": "A row of thumbnail buttons that open the large view in a Dialog.",
+              "descriptionEn": "A row of thumbnail buttons that open the large view in a Dialog.",
+              "props": [
+                {
+                  "name": "images",
+                  "type": "{ src, alt, thumbnailSrc? }[]",
+                  "description": "One set of images; alt is required and thumbnailSrc falls back to src. Pass one item for a single image.",
+                  "descriptionEn": "One set of images; alt is required and thumbnailSrc falls back to src. Pass one item for a single image."
+                },
+                {
+                  "name": "thumbnailClassName",
+                  "type": "string",
+                  "description": "Applies to every thumbnail button.",
+                  "descriptionEn": "Applies to every thumbnail button."
+                },
+                {
+                  "name": "className / native props",
+                  "type": "React.ComponentProps<div>",
+                  "description": "Remaining attributes forward to the root.",
+                  "descriptionEn": "Remaining attributes forward to the root."
+                }
+              ]
+            }
+          ],
+          "keyboard": [],
+          "design": {
+            "methods": [
+              "Name matches substance （名实相符）",
+              "应物象形"
+            ],
+            "whenToUse": [
+              "Images are part of the content and details need zooming, or browsing within a set."
+            ],
+            "avoid": [
+              "Decorative images need no preview; a single fixed-size image can be a plain img."
+            ],
+            "composition": [
+              "Thumbnails are buttons; the large view sits in a blocking dialog whose footer carries position, previous/next and zoom."
+            ],
+            "stateOwner": {
+              "library": [
+                "Open state, current image, zoom level, keyboard handling and focus return."
+              ],
+              "application": [
+                "Image sources, alt text and grouping."
+              ]
+            },
+            "responsive": [
+              "The stage has a maximum width and a height of 70% of the viewport, narrowing to fit on small screens."
+            ],
+            "customization": [
+              "thumbnailClassName adjusts thumbnails; use className for the rest."
+            ]
+          },
+          "providerGuidance": []
+        }
+      }
+    },
+    {
       "name": "input",
       "title": "输入框 Input",
       "description": "输入一个文本值。",
@@ -28917,7 +29640,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -32289,7 +33012,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -34121,7 +34844,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -35946,7 +36669,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -36429,7 +37152,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37994,7 +38717,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -38498,7 +39221,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -38872,7 +39595,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -40200,7 +40923,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -40594,7 +41317,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41403,7 +42126,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41873,7 +42596,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -42733,6 +43456,549 @@
       }
     },
     {
+      "name": "result",
+      "title": "结果 Result",
+      "description": "一次操作的结局：标记、标题、说明与去向。",
+      "category": "反馈",
+      "source": "local",
+      "layer": "pattern",
+      "import": "@qingye_lab/ui/components/result",
+      "exports": [
+        "Result",
+        "ResultTitle",
+        "ResultDescription",
+        "ResultActions"
+      ],
+      "docs": "/docs/components/result",
+      "notes": [
+        "非成败的结局（例如没有权限）没有单独的 status；用 tone 加自己的 icon。"
+      ],
+      "keywords": [
+        "result",
+        "outcome",
+        "success page",
+        "error page",
+        "结果",
+        "提交成功",
+        "操作失败",
+        "没有权限"
+      ],
+      "api": [
+        {
+          "name": "Result",
+          "description": "div，类别由调用方声明。",
+          "descriptionEn": "A div whose tone the caller declares.",
+          "props": [
+            {
+              "name": "tone",
+              "type": "\"neutral\" | \"info\" | \"success\" | \"warning\" | \"danger\"",
+              "default": "\"neutral\"",
+              "description": "结局的类别，按真实事件声明；组件不从文字猜成败。",
+              "descriptionEn": "The outcome's category, declared from the real event; the component never guesses from text."
+            },
+            {
+              "name": "icon",
+              "type": "React.ReactNode | false",
+              "description": "省略时按 tone 给默认图标（neutral 没有）；传节点则替换；false 不放标记。",
+              "descriptionEn": "Defaults to the tone's icon (neutral has none); a node replaces it; false removes the mark."
+            },
+            {
+              "name": "children / render / ref / native props",
+              "type": "useRender.ComponentProps<div>",
+              "description": "不自动成为 alert 或 status。",
+              "descriptionEn": "Not automatically an alert or status."
+            }
+          ]
+        },
+        {
+          "name": "ResultTitle",
+          "description": "复用 Heading。",
+          "descriptionEn": "A Heading composition.",
+          "props": [
+            {
+              "name": "level / step / Heading props",
+              "type": "HeadingProps",
+              "description": "标题层级由文档关系决定。",
+              "descriptionEn": "Document relationships determine heading level."
+            }
+          ]
+        },
+        {
+          "name": "ResultDescription / ResultActions",
+          "description": "p 说明与 div 去向。",
+          "descriptionEn": "p explanation and div destinations.",
+          "props": [
+            {
+              "name": "children / render / ref / native props",
+              "type": "useRender.ComponentProps<p | div>",
+              "description": "动作复用公共组件。",
+              "descriptionEn": "Compose public controls for actions."
+            }
+          ]
+        }
+      ],
+      "apiStatus": "type-resolved",
+      "typeApi": {
+        "status": "PASS",
+        "checker": "typescript@5.9.3",
+        "ownRule": "A property is own when at least one declaration is inside packages/ui/src; everything else is counted by origin package and not expanded.",
+        "parts": [
+          {
+            "name": "Result",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "icon",
+                "optional": true,
+                "type": "React.ReactNode | false",
+                "doc": "状态标记。省略时按 tone 给默认图标（neutral 没有）；传节点则用它；`false` 不放标记。",
+                "declaredAt": "packages/ui/src/components/result.tsx:20"
+              },
+              {
+                "name": "tone",
+                "optional": true,
+                "type": "\"neutral\" | \"info\" | \"warning\" | \"danger\" | \"success\"",
+                "doc": "这次操作的结果类别，由调用方按真实事件声明；组件不从文字或数值猜成败。\n「没有权限」这类不是成败的结果，用 neutral 或 warning 加自己的 icon，类别仍由调用方判断。",
+                "declaredAt": "packages/ui/src/components/result.tsx:18"
+              }
+            ],
+            "inheritedCount": 281,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 280
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "name": "ResultActions",
+            "status": "resolved",
+            "ownProps": [],
+            "inheritedCount": 281,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 280
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "name": "ResultDescription",
+            "status": "resolved",
+            "ownProps": [],
+            "inheritedCount": 281,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 280
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 1
+              }
+            ]
+          },
+          {
+            "name": "ResultTitle",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "level",
+                "optional": true,
+                "type": "1 | 2 | 3 | 4 | 5 | 6",
+                "doc": "Document outline, independent of the visual text step.",
+                "declaredAt": "packages/ui/src/components/typography.tsx:64"
+              },
+              {
+                "name": "numeric",
+                "optional": true,
+                "type": "boolean",
+                "declaredAt": "packages/ui/src/components/typography.tsx:61"
+              },
+              {
+                "name": "step",
+                "optional": true,
+                "type": "\"body\" | \"caption\" | \"label\" | \"title\" | \"display-xl\" | \"display-lg\" | \"display\" | \"chapter\" | \"heading\" | \"body-strong\" | \"reading\" | \"prose\" | \"prose-strong\" | \"prose-h1\" | \"prose-h2\" | \"prose-h3\" | \"support\" | \"support-mobile\" | \"support-strong\" | \"support-strong-mobile\" | \"dense\" | \"dense-mobile\" | \"dense-strong\" | \"dense-strong-mobile\" | \"caption-strong\" | \"label-mobile\" | \"metric\" | \"metric-lg\" | \"micro\" | \"control-xs\" | \"control-xs-mobile\" | \"control-sm\" | \"control-sm…",
+                "typeTruncated": true,
+                "declaredAt": "packages/ui/src/components/typography.tsx:61"
+              }
+            ],
+            "inheritedCount": 281,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 280
+              },
+              {
+                "source": "@base-ui/react",
+                "count": 1
+              }
+            ]
+          }
+        ],
+        "drift": {
+          "documentedButMissing": [],
+          "undocumented": [
+            {
+              "part": "ResultTitle",
+              "prop": "numeric",
+              "declaredAt": "packages/ui/src/components/typography.tsx:61",
+              "viaComponent": "typography"
+            }
+          ]
+        }
+      },
+      "keyboard": [],
+      "actualExports": [
+        {
+          "name": "Result",
+          "kind": "function",
+          "owner": "result",
+          "module": "@qingye_lab/ui/components/result",
+          "propsType": "ResultProps",
+          "signature": "Result({ tone = \"neutral\", icon, children, className, render, ...props }: ResultProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ResultActions",
+          "kind": "function",
+          "owner": "result",
+          "module": "@qingye_lab/ui/components/result",
+          "propsType": "ResultActionsProps",
+          "signature": "ResultActions({ render, className, ...props }: ResultActionsProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ResultActionsProps",
+          "kind": "type",
+          "owner": "result",
+          "module": "@qingye_lab/ui/components/result",
+          "signature": "useRender.ComponentProps<\"div\">",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ResultDescription",
+          "kind": "function",
+          "owner": "result",
+          "module": "@qingye_lab/ui/components/result",
+          "propsType": "ResultDescriptionProps",
+          "signature": "ResultDescription({ render, className, ...props }: ResultDescriptionProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ResultDescriptionProps",
+          "kind": "type",
+          "owner": "result",
+          "module": "@qingye_lab/ui/components/result",
+          "signature": "useRender.ComponentProps<\"p\">",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ResultProps",
+          "kind": "type",
+          "owner": "result",
+          "module": "@qingye_lab/ui/components/result",
+          "signature": "useRender.ComponentProps<\"div\"> & {\n  /**\n   * 这次操作的结果类别，由调用方按真实事件声明；组件不从文字或数值猜成败。\n   * 「没有权限」这类不是成败的结果，用 neutral 或 warning 加自己的 icon，类别仍由调用方判断。\n   */\n  tone?: ResultTone;\n  /** 状态标记。省略时按 tone 给默认图标（neutral 没有）；传节点则用它；`false` 不放标记。 */\n  icon?: React.ReactNode | false;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ResultTitle",
+          "kind": "function",
+          "owner": "result",
+          "module": "@qingye_lab/ui/components/result",
+          "propsType": "ResultTitleProps",
+          "signature": "ResultTitle({ className, ...props }: ResultTitleProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ResultTitleProps",
+          "kind": "type",
+          "owner": "result",
+          "module": "@qingye_lab/ui/components/result",
+          "signature": "HeadingProps",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "ResultTone",
+          "kind": "type",
+          "owner": "result",
+          "module": "@qingye_lab/ui/components/result",
+          "signature": "\"neutral\" | \"info\" | \"success\" | \"warning\" | \"danger\"",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "ResultTone",
+          "definition": "export type ResultTone = \"neutral\" | \"info\" | \"success\" | \"warning\" | \"danger\";"
+        },
+        {
+          "name": "ResultProps",
+          "definition": "export type ResultProps = useRender.ComponentProps<\"div\"> & {\n  /**\n   * 这次操作的结果类别，由调用方按真实事件声明；组件不从文字或数值猜成败。\n   * 「没有权限」这类不是成败的结果，用 neutral 或 warning 加自己的 icon，类别仍由调用方判断。\n   */\n  tone?: ResultTone;\n  /** 状态标记。省略时按 tone 给默认图标（neutral 没有）；传节点则用它；`false` 不放标记。 */\n  icon?: React.ReactNode | false;\n};"
+        },
+        {
+          "name": "ResultTitleProps",
+          "definition": "export type ResultTitleProps = HeadingProps;"
+        },
+        {
+          "name": "ResultDescriptionProps",
+          "definition": "export type ResultDescriptionProps = useRender.ComponentProps<\"p\">;"
+        },
+        {
+          "name": "ResultActionsProps",
+          "definition": "export type ResultActionsProps = useRender.ComponentProps<\"div\">;"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "Result",
+          "import": "@qingye_lab/ui/components/result",
+          "owner": "result",
+          "status": "PASS"
+        },
+        {
+          "name": "ResultTitle",
+          "import": "@qingye_lab/ui/components/result",
+          "owner": "result",
+          "status": "PASS"
+        },
+        {
+          "name": "ResultDescription",
+          "import": "@qingye_lab/ui/components/result",
+          "owner": "result",
+          "status": "PASS"
+        },
+        {
+          "name": "ResultActions",
+          "import": "@qingye_lab/ui/components/result",
+          "owner": "result",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "@tabler/icons-react",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "usesLocale": true,
+        "usesTheme": false,
+        "required": [],
+        "contexts": [
+          {
+            "name": "LocaleContext",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "UILocaleProvider"
+            ]
+          }
+        ],
+        "baseUi": [
+          "@base-ui/react/direction-provider",
+          "@base-ui/react/merge-props",
+          "@base-ui/react/use-render"
+        ],
+        "status": "PASS",
+        "scope": "Static: React context reads and useUILocale/useTheme calls in the local import closure. useUILocale has a default locale, so a missing UILocaleProvider is tolerated."
+      },
+      "examples": [
+        {
+          "id": "tones",
+          "title": "成功、失败与提示",
+          "source": "apps/docs/src/content/result/demos/01-tones.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/layout",
+            "@qingye_lab/ui/components/result"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { Grid } from \"@qingye_lab/ui/components/layout\";\nimport { Result, ResultActions, ResultDescription, ResultTitle } from \"@qingye_lab/ui/components/result\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"成功、失败与提示\", titleEn: \"Success, failure and notice\" } satisfies DemoMeta;\n\nexport default function Demo() {\n  return <Grid columns={2} gap=\"section\">\n    <Result tone=\"success\"><ResultTitle level={3}>已保存</ResultTitle><ResultDescription>修改已写入，下次打开即可看到。</ResultDescription><ResultActions><Button>返回列表</Button></ResultActions></Result>\n    <Result tone=\"danger\" role=\"alert\"><ResultTitle level={3}>保存失败</ResultTitle><ResultDescription>网络中断，修改还在这个页面里，没有丢失。</ResultDescription><ResultActions><Button>重试</Button><Button variant=\"quiet\">返回</Button></ResultActions></Result>\n    <Result tone=\"warning\"><ResultTitle level={3}>部分文件未上传</ResultTitle><ResultDescription>3 个文件中有 1 个超过大小限制。</ResultDescription><ResultActions><Button>查看文件</Button></ResultActions></Result>\n    <Result tone=\"info\"><ResultTitle level={3}>正在审核</ResultTitle><ResultDescription>审核通过后会通知你。</ResultDescription></Result>\n  </Grid>;\n}\n",
+          "sha256": "d29f78fb7bb4f0ebdda4c517da9f5f3023d58f49efaa8fed411becd564fe3f1c"
+        },
+        {
+          "id": "custom-icon",
+          "title": "没有权限：自己的标记",
+          "source": "apps/docs/src/content/result/demos/02-custom-icon.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/result",
+            "@tabler/icons-react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { Result, ResultActions, ResultDescription, ResultTitle } from \"@qingye_lab/ui/components/result\";\nimport { IconLock } from \"@tabler/icons-react\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"没有权限：自己的标记\", titleEn: \"No permission: your own mark\" } satisfies DemoMeta;\n\n// 没有权限不是成功也不是失败：类别用 warning（仍有形状与读屏前缀），标记换成锁。\nexport default function Demo() {\n  return <Result tone=\"warning\" icon={<IconLock aria-hidden=\"true\" />}>\n    <ResultTitle level={3}>你没有查看这份文档的权限</ResultTitle>\n    <ResultDescription>向文档所有者申请访问，或回到你有权限的文档。</ResultDescription>\n    <ResultActions><Button>申请访问</Button><Button variant=\"quiet\">返回首页</Button></ResultActions>\n  </Result>;\n}\n",
+          "sha256": "2b1820004767a690af6801763946b81f57f39c07672b2a3f0ad059591fd8598a"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "相成相制"
+        ],
+        "whenToUse": [
+          "一次提交、保存或申请结束后，需要独占一块告诉用户结局和下一步。"
+        ],
+        "avoid": [
+          "区域里本来就没有内容用 Empty；对象仍在、只需旁注一句用 Alert。"
+        ],
+        "composition": [
+          "标记、标题、说明、动作自上而下，左对齐；动作复用公共控件。"
+        ],
+        "stateOwner": {
+          "library": [
+            "类别的色相、图标与读屏前缀，及各部分的间隔。"
+          ],
+          "application": [
+            "结局的事实、tone、文案、role 与去向。"
+          ]
+        },
+        "responsive": [
+          "标题、说明与动作完整换行；不居中，不加框。"
+        ],
+        "customization": [
+          "icon 可换成自己的节点或 false；没有权限这类非成败结果用 neutral 或 warning 加自己的 icon。"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/result.tsx",
+        "sha256": "68a37124c7872d1d121516a465cd9f9fe0d764871e5ee1f9ce9b58399d44e43e",
+        "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
+      },
+      "decisions": "与 Empty 的分工：Empty 说「这里还没有内容」，是一块区域的状态（零结果、未知、不适用）；Result 说「刚才那件事的结局」，是一次动作的回执，类别由事件决定，并总带着下一步的去向。与 Alert 的分工：Alert 是在场对象旁的一句提示，不占版面；Result 取代该处内容，独占一块。类别除色相外还有形状不同的图标和只给读屏的前缀；去掉图标不等于去掉类别。不自动宣告，是否读出由应用按真实事件决定。",
+      "localized": {
+        "en": {
+          "title": "Result",
+          "description": "The outcome of one action: a mark, a title, an explanation and where to go next.",
+          "category": "Feedback",
+          "decisions": "Versus Empty: Empty says \"there is no content here yet\" and is the state of a region (zero results, unknown, not applicable); Result says \"how that thing ended\" and is the receipt of an action, its tone decided by the event and always paired with where to go next. Versus Alert: Alert is a line beside an object that is still present and takes no layout; Result replaces that content and occupies its own block. Tone has a differently shaped icon and a screen-reader-only prefix besides hue; removing the icon does not remove the tone. It never announces itself; the application decides from the real event whether to speak it.",
+          "notes": [
+            "Outcomes that are neither success nor failure (such as no permission) have no dedicated status; use tone plus your own icon."
+          ],
+          "api": [
+            {
+              "name": "Result",
+              "description": "A div whose tone the caller declares.",
+              "descriptionEn": "A div whose tone the caller declares.",
+              "props": [
+                {
+                  "name": "tone",
+                  "type": "\"neutral\" | \"info\" | \"success\" | \"warning\" | \"danger\"",
+                  "default": "\"neutral\"",
+                  "description": "The outcome's category, declared from the real event; the component never guesses from text.",
+                  "descriptionEn": "The outcome's category, declared from the real event; the component never guesses from text."
+                },
+                {
+                  "name": "icon",
+                  "type": "React.ReactNode | false",
+                  "description": "Defaults to the tone's icon (neutral has none); a node replaces it; false removes the mark.",
+                  "descriptionEn": "Defaults to the tone's icon (neutral has none); a node replaces it; false removes the mark."
+                },
+                {
+                  "name": "children / render / ref / native props",
+                  "type": "useRender.ComponentProps<div>",
+                  "description": "Not automatically an alert or status.",
+                  "descriptionEn": "Not automatically an alert or status."
+                }
+              ]
+            },
+            {
+              "name": "ResultTitle",
+              "description": "A Heading composition.",
+              "descriptionEn": "A Heading composition.",
+              "props": [
+                {
+                  "name": "level / step / Heading props",
+                  "type": "HeadingProps",
+                  "description": "Document relationships determine heading level.",
+                  "descriptionEn": "Document relationships determine heading level."
+                }
+              ]
+            },
+            {
+              "name": "ResultDescription / ResultActions",
+              "description": "p explanation and div destinations.",
+              "descriptionEn": "p explanation and div destinations.",
+              "props": [
+                {
+                  "name": "children / render / ref / native props",
+                  "type": "useRender.ComponentProps<p | div>",
+                  "description": "Compose public controls for actions.",
+                  "descriptionEn": "Compose public controls for actions."
+                }
+              ]
+            }
+          ],
+          "keyboard": [],
+          "design": {
+            "methods": [
+              "Name matches substance （名实相符）",
+              "Complementary roles and safeguards （相成相制）"
+            ],
+            "whenToUse": [
+              "After a submission, save or request ends, a whole block must say how it ended and what comes next."
+            ],
+            "avoid": [
+              "Use Empty when a region simply has no content; use Alert when the object remains and a side note is enough."
+            ],
+            "composition": [
+              "Mark, title, description and actions run top to bottom, start-aligned; actions compose public controls."
+            ],
+            "stateOwner": {
+              "library": [
+                "Tone hue, icon and screen-reader prefix, and spacing between parts."
+              ],
+              "application": [
+                "The outcome's facts, tone, copy, role and next destination."
+              ]
+            },
+            "responsive": [
+              "Title, description and actions wrap fully; not centered, not boxed."
+            ],
+            "customization": [
+              "icon may be your own node or false; for non-success/failure outcomes such as no permission, use neutral or warning with your own icon."
+            ]
+          },
+          "providerGuidance": []
+        }
+      }
+    },
+    {
       "name": "scatter-chart",
       "title": "两量关系 ScatterChart",
       "description": "两个数值量之间的关系；全比较形式，1 至 3 个系列，同源的散点图、命名的双轴与按需展开的数据表。",
@@ -42992,7 +44258,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44118,7 +45384,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -46125,7 +47391,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -48381,7 +49647,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -49003,7 +50269,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -49192,6 +50458,280 @@
             ],
             "customization": [
               "className adjusts row width and block height; label names the object, e.g. “Loading members”."
+            ]
+          },
+          "providerGuidance": []
+        }
+      }
+    },
+    {
+      "name": "skip-link",
+      "title": "跳转链接 SkipLink",
+      "description": "让键盘用户越过重复的导航，直达主要内容。",
+      "category": "导航",
+      "source": "local",
+      "layer": "primitive",
+      "import": "@qingye_lab/ui/components/skip-link",
+      "exports": [
+        "SkipLink"
+      ],
+      "docs": "/docs/components/skip-link",
+      "notes": [
+        "目标若不可聚焦，组件会补上 tabindex=\"-1\"。"
+      ],
+      "keywords": [
+        "skip link",
+        "skip to content",
+        "bypass blocks",
+        "跳到正文",
+        "跳转链接",
+        "无障碍"
+      ],
+      "api": [
+        {
+          "name": "SkipLink",
+          "description": "指向页内锚点的 a。",
+          "descriptionEn": "An a pointing at an in-page anchor.",
+          "props": [
+            {
+              "name": "href",
+              "type": "`#${string}`",
+              "description": "必填。目标的锚点，写成 #id。",
+              "descriptionEn": "Required. The target anchor, written as #id."
+            },
+            {
+              "name": "children",
+              "type": "React.ReactNode",
+              "description": "省略时用 locale 的 skipToContent。",
+              "descriptionEn": "Defaults to the locale's skipToContent."
+            },
+            {
+              "name": "className / onClick / native props",
+              "type": "React.ComponentProps<a>",
+              "description": "onClick 在组件之前运行，调用 preventDefault 可取消转移。",
+              "descriptionEn": "onClick runs first; calling preventDefault cancels the focus transfer."
+            }
+          ]
+        }
+      ],
+      "apiStatus": "type-resolved",
+      "typeApi": {
+        "status": "PASS",
+        "checker": "typescript@5.9.3",
+        "ownRule": "A property is own when at least one declaration is inside packages/ui/src; everything else is counted by origin package and not expanded.",
+        "parts": [
+          {
+            "name": "SkipLink",
+            "status": "resolved",
+            "ownProps": [
+              {
+                "name": "href",
+                "optional": false,
+                "type": "`#${string}`",
+                "doc": "目标的锚点，写成 `#id`。必填：跳到哪里是页面结构的事实，不是默认值。",
+                "declaredAt": "packages/ui/src/components/skip-link.tsx:9"
+              }
+            ],
+            "inheritedCount": 287,
+            "inheritedFrom": [
+              {
+                "source": "@types/react",
+                "count": 287
+              }
+            ]
+          }
+        ],
+        "drift": {
+          "documentedButMissing": [],
+          "undocumented": []
+        }
+      },
+      "keyboard": [],
+      "actualExports": [
+        {
+          "name": "SkipLink",
+          "kind": "function",
+          "owner": "skip-link",
+          "module": "@qingye_lab/ui/components/skip-link",
+          "propsType": "SkipLinkProps",
+          "signature": "SkipLink({ href, children, className, onClick, ...props }: SkipLinkProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "SkipLinkProps",
+          "kind": "type",
+          "owner": "skip-link",
+          "module": "@qingye_lab/ui/components/skip-link",
+          "signature": "Omit<React.ComponentProps<\"a\">, \"href\"> & {\n  /** 目标的锚点，写成 `#id`。必填：跳到哪里是页面结构的事实，不是默认值。 */\n  href: `#${string}`;\n}",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        }
+      ],
+      "types": [
+        {
+          "name": "SkipLinkProps",
+          "definition": "export type SkipLinkProps = Omit<React.ComponentProps<\"a\">, \"href\"> & {\n  /** 目标的锚点，写成 `#id`。必填：跳到哪里是页面结构的事实，不是默认值。 */\n  href: `#${string}`;\n};"
+        }
+      ],
+      "usageImports": [
+        {
+          "name": "SkipLink",
+          "import": "@qingye_lab/ui/components/skip-link",
+          "owner": "skip-link",
+          "status": "PASS"
+        }
+      ],
+      "dependencies": {
+        "runtime": [
+          "@base-ui/react",
+          "clsx",
+          "react",
+          "tailwind-merge"
+        ],
+        "optionalPeers": []
+      },
+      "providers": {
+        "exports": [],
+        "guidance": [],
+        "usesLocale": true,
+        "usesTheme": false,
+        "required": [],
+        "contexts": [
+          {
+            "name": "LocaleContext",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
+            "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "UILocaleProvider"
+            ]
+          }
+        ],
+        "baseUi": [
+          "@base-ui/react/direction-provider"
+        ],
+        "status": "PASS",
+        "scope": "Static: React context reads and useUILocale/useTheme calls in the local import closure. useUILocale has a default locale, so a missing UILocaleProvider is tolerated."
+      },
+      "examples": [
+        {
+          "id": "bypass",
+          "title": "越过导航",
+          "source": "apps/docs/src/content/skip-link/demos/01-bypass.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/layout",
+            "@qingye_lab/ui/components/link",
+            "@qingye_lab/ui/components/skip-link",
+            "@qingye_lab/ui/components/typography"
+          ],
+          "providers": [],
+          "code": "import { Link } from \"@qingye_lab/ui/components/link\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport { SkipLink } from \"@qingye_lab/ui/components/skip-link\";\nimport { Text } from \"@qingye_lab/ui/components/typography\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"越过导航\", titleEn: \"Bypass the navigation\" } satisfies DemoMeta;\n\n// 真实页面里它固定在视口一角，只在获得焦点时现身；这里为了在样例中可见，改为静态并常显。\n// 目标 <main> 本身不可聚焦，点击后组件会补 tabindex=\"-1\" 并把焦点移过去。\nexport default function Demo() {\n  return <Stack gap=\"panel\">\n    <SkipLink href=\"#skip-demo-main\" className=\"static opacity-100 pointer-events-auto self-start\">跳到正文</SkipLink>\n    <nav aria-label=\"示例导航\"><Stack gap=\"pair\"><Link href=\"#a\">首页</Link><Link href=\"#b\">文档</Link><Link href=\"#c\">更新记录</Link></Stack></nav>\n    <main id=\"skip-demo-main\" className=\"outline-none focus-visible:ring-2\"><Text>正文从这里开始。</Text></main>\n  </Stack>;\n}\n",
+          "sha256": "aeb7949cf57d747eacb1a762ec86439c45b164adf2a577961d7795741db70045"
+        }
+      ],
+      "design": {
+        "methods": [
+          "名实相符",
+          "随境取度"
+        ],
+        "whenToUse": [
+          "每页都重复出现导航、侧栏或页眉，而主要内容在其后。"
+        ],
+        "avoid": [
+          "不要把它当作目录或页内导航；它只做一件事：越过重复区块。"
+        ],
+        "composition": [
+          "放在文档的最前面，href 指向主要内容容器的 id。"
+        ],
+        "stateOwner": {
+          "library": [
+            "现身时机、焦点转移与目标补救。"
+          ],
+          "application": [
+            "目标的位置与 id，及是否需要多个跳转目标。"
+          ]
+        },
+        "responsive": [
+          "固定在视口起始侧上角；从右向左排版时在右上。"
+        ],
+        "customization": [
+          "children 覆盖默认文字；className 调整层序。"
+        ]
+      },
+      "sourceFacts": {
+        "file": "packages/ui/src/components/skip-link.tsx",
+        "sha256": "4333b6b70cefd7211580107717851060f8942bbe39dc19982442c7da5363f79e",
+        "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
+      },
+      "decisions": "平时不可见也不可点，却是 Tab 序里第一个到达的；获得焦点才现身。点击时把焦点真正移到目标，目标不可聚焦就补 tabindex=-1，否则下一次 Tab 又回到导航里，跳转等于没发生。找不到目标时不拦截，交还浏览器的默认锚点跳转。",
+      "localized": {
+        "en": {
+          "title": "SkipLink",
+          "description": "Lets keyboard users bypass repeated navigation and reach the main content.",
+          "category": "Navigation",
+          "decisions": "Invisible and unclickable at rest, yet the first stop in tab order; it appears only when focused. On click it moves focus to the target for real, adding tabindex=-1 when the target is not focusable, otherwise the next Tab would return to the navigation and the skip would not have happened. A missing target is not intercepted; the browser's default anchor jump takes over.",
+          "notes": [
+            "If the target is not focusable, the component adds tabindex=\"-1\"."
+          ],
+          "api": [
+            {
+              "name": "SkipLink",
+              "description": "An a pointing at an in-page anchor.",
+              "descriptionEn": "An a pointing at an in-page anchor.",
+              "props": [
+                {
+                  "name": "href",
+                  "type": "`#${string}`",
+                  "description": "Required. The target anchor, written as #id.",
+                  "descriptionEn": "Required. The target anchor, written as #id."
+                },
+                {
+                  "name": "children",
+                  "type": "React.ReactNode",
+                  "description": "Defaults to the locale's skipToContent.",
+                  "descriptionEn": "Defaults to the locale's skipToContent."
+                },
+                {
+                  "name": "className / onClick / native props",
+                  "type": "React.ComponentProps<a>",
+                  "description": "onClick runs first; calling preventDefault cancels the focus transfer.",
+                  "descriptionEn": "onClick runs first; calling preventDefault cancels the focus transfer."
+                }
+              ]
+            }
+          ],
+          "keyboard": [],
+          "design": {
+            "methods": [
+              "Name matches substance （名实相符）",
+              "Adapt to context （随境取度）"
+            ],
+            "whenToUse": [
+              "Every page repeats navigation, a sidebar or a header ahead of the main content."
+            ],
+            "avoid": [
+              "Do not use it as a table of contents or in-page navigation; it does one thing, bypassing repeated blocks."
+            ],
+            "composition": [
+              "Place it first in the document, with href pointing at the id of the main-content container."
+            ],
+            "stateOwner": {
+              "library": [
+                "When it appears, focus transfer and target remediation."
+              ],
+              "application": [
+                "Where the target is and its id, and whether more than one skip target is needed."
+              ]
+            },
+            "responsive": [
+              "Fixed to the viewport's start-side top corner; top-right under right-to-left."
+            ],
+            "customization": [
+              "children overrides the default text; className adjusts stacking."
             ]
           },
           "providerGuidance": []
@@ -49757,7 +51297,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50313,7 +51853,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -51049,7 +52589,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -51457,7 +52997,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -51915,7 +53455,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -54264,7 +55804,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -54717,7 +56257,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -55782,7 +57322,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -56295,7 +57835,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -56846,7 +58386,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -57392,7 +58932,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -58013,7 +59553,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -60919,7 +62459,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -61430,7 +62970,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -61983,7 +63523,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -62518,7 +64058,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -64340,7 +65880,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:175",
+            "declaredAt": "packages/ui/src/locale.tsx:181",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -64663,6 +66203,7 @@
     "async-content",
     "autocomplete",
     "avatar",
+    "avatar-group",
     "badge",
     "breadcrumb",
     "bulk-action-bar",
@@ -64702,6 +66243,7 @@
     "form",
     "heatmap",
     "hover-card",
+    "image-preview",
     "input",
     "input-group",
     "input-modality-provider",
@@ -64728,6 +66270,7 @@
     "radio-group",
     "rating",
     "resizable",
+    "result",
     "scatter-chart",
     "scroll-area",
     "search-input",
@@ -64738,6 +66281,7 @@
     "severity-mark",
     "sidebar",
     "skeleton",
+    "skip-link",
     "slider",
     "sparkline",
     "stat",

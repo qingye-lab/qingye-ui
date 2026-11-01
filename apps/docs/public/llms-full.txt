@@ -708,7 +708,7 @@ ThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.d
 
 Examples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.
 
-# 第三部分 组件 (108)
+# 第三部分 组件 (112)
 
 ## 分组展开 Accordion
 
@@ -1382,7 +1382,7 @@ Source SHA-256: d6ca137a87d7eeb1a3ec766553246ed453cbcd78fdce9980f091bd27a21f417a
 同一身份视觉样本的图片与回退。
 
 ### Decision
-不要虚构姓名或让 initials 代替可访问名称。
+不要虚构姓名或让 initials 代替可访问名称。头像本身不可交互；要点击，就用 Button（或链接）包住它：可访问名称仍来自头像的 label，焦点、键盘和禁用状态归外层，头像不加 tabindex、不加 onClick。要换名称时给外层 aria-label。一组相关的人用 AvatarGroup。
 
 ### Use and ownership
 - 需要一张有名称的身份图像或明确回退。
@@ -1473,6 +1473,95 @@ export default function Demo() {
   </Inline>;
 }
 ```
+
+1 more examples: see the component page and its Markdown file.
+
+## 头像组 AvatarGroup
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/avatar-group
+Source: packages/ui/src/components/avatar-group.tsx
+Source SHA-256: 806282f5521b596540a007ca559299a7d312a09eca028fd5e9f8a9591375ea51
+
+一组相关的人，叠放并收起多余的成员。
+
+### Decision
+叠放量取头像直径的四分之一，字始终露在外面；被收起的人不会消失，「+N」的可访问名称列出他们全部的名称。整组不可点击，要点击就放进按钮或链接。
+
+### Notes
+- 「+N」的名称由 locale 提供（avatarGroupMore），列出被收起的全部名称。
+
+### Use and ownership
+- 表达一件事涉及哪几个人，且空间只够窄窄一行。
+- Avoid: 一个人的身份用 Avatar；需要逐个操作成员时用列表，不用叠放。
+- Library: 叠放、截断与整组命名。
+- Application: 成员事实、顺序与每个人的真实名称。
+
+### Composition
+- 整组 role=group 必须有名称；每个头像仍是自己的图形与名称，末尾的「+N」是一个独立头像。
+
+### Responsive behavior
+- 叠放量随头像档位等比，不随容器宽度变化；收起数量由 max 决定。
+
+### Customization
+- size 取头像五档之一；其余用 className。
+
+### Current exports
+- AvatarGroup: function; owner avatar-group; PASS; props: AvatarGroupProps
+- AvatarGroupItem: type; owner avatar-group; PASS
+- AvatarGroupProps: type; owner avatar-group; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### AvatarGroup
+- `items`: `readonly AvatarGroupItem[]`.
+- `max?`: `number`. 最多露出几个头像，其余收进末尾的「+N」。默认 5。
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 279 inherited (@types/react 279); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### AvatarGroup
+role=group 的 div，必须有 aria-label 或 aria-labelledby。
+- items: { key?, label, src?, fallback? }[]. 成员；label 必填，fallback 省略时取名称的第一个字。
+- max: number; default 5. 最多露出几个头像，其余收进末尾的「+N」。
+- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". 与 Avatar 同一组档位。
+- className / native props: React.ComponentProps<div>. 其余属性透传到根元素。
+
+### Keyboard
+
+### Source example
+#### 成员与收起
+Source: apps/docs/src/content/avatar-group/demos/01-members.tsx
+```tsx
+import { AvatarGroup } from "@qingye_lab/ui/components/avatar-group";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "成员与收起", titleEn: "Members and overflow" } satisfies DemoMeta;
+
+const people = [{ label: "陈致远" }, { label: "李一鸣" }, { label: "王一" }, { label: "周宁" }, { label: "赵清" }, { label: "孙墨" }, { label: "吴桐" }];
+
+export default function Demo() {
+  return <Stack gap="panel">
+    <AvatarGroup aria-label="全部成员" max={7} items={people} />
+    <AvatarGroup aria-label="项目成员" max={4} items={people} />
+    <Inline gap="panel">
+      {(["xs", "sm", "md", "lg", "xl"] as const).map(size => <AvatarGroup key={size} aria-label={`成员（${size}）`} size={size} max={3} items={people} />)}
+    </Inline>
+  </Stack>;
+}
+```
+
+1 more examples: see the component page and its Markdown file.
 
 ## 标记 Badge
 
@@ -2231,7 +2320,7 @@ export default function Demo() {
 }
 ```
 
-3 more examples: see the component page and its Markdown file.
+4 more examples: see the component page and its Markdown file.
 
 ## 级联选择 Cascader
 
@@ -4129,7 +4218,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/corner-mark
 Source: packages/ui/src/components/corner-mark.tsx
-Source SHA-256: 2ab94e2f89fda39bfa2f8751be6394fa346a22d2de902c123d38e012e59c9ac6
+Source SHA-256: ac8892bd3e844d1037659b14d1fa362244bb04e8b5091d156c8d33fc39096a5a
 
 钉在宿主一角的未读数或在线点，不是宿主内容本身。
 
@@ -4146,7 +4235,7 @@ Source SHA-256: 2ab94e2f89fda39bfa2f8751be6394fa346a22d2de902c123d38e012e59c9ac6
 - Application: 真实计数、在线等状态事实与可访问 label 的文字内容。
 
 ### Composition
-- CornerMark：包裹宿主内容，角标钉在宿主的右上角。
+- CornerMark：包裹宿主内容，角标钉在宿主的一角（默认行末上角）。
 
 ### Responsive behavior
 - 同一个数字可以在不同容器宽度下切换成行内文字或角标——语义与数值必须一致（随境取度）。
@@ -4156,6 +4245,8 @@ Source SHA-256: 2ab94e2f89fda39bfa2f8751be6394fa346a22d2de902c123d38e012e59c9ac6
 
 ### Current exports
 - CornerMark: function; owner corner-mark; PASS; props: CornerMarkProps
+- CornerMarkHostShape: type; owner corner-mark; PASS
+- CornerMarkPlacement: type; owner corner-mark; PASS
 - CornerMarkProps: type; owner corner-mark; PASS
 - CornerMarkTone: type; owner corner-mark; PASS
 
@@ -4167,8 +4258,10 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `className?`: `string`.
 - `count`: `number`.
 - `dot?`: `never`.
+- `hostShape?`: `"circle" | "square"`.
 - `label`: `string`.
 - `max?`: `number`.
+- `placement?`: `"top-end" | "bottom-end" | "top-start" | "bottom-start"`.
 - `tone?`: `"neutral" | "info" | "warning" | "danger" | "success"`.
 - `wrapperClassName?`: `string`.
 
@@ -4182,11 +4275,12 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 #### CornerMark
-包裹宿主内容，角标钉在宿主的右上角。
+包裹宿主内容，角标钉在宿主的一角（默认行末上角）。
 - count / max: number / number. 计数档；超过 max（默认 99）显示「max+」，真实数字仍在 label 里；count 为 0 时角标与 label 一起消失。
 - dot: true. 不显示数字的圆点档，与 count 互斥。
 - label: string（必填）. 角标本身 aria-hidden；这段视觉隐藏文字是数字或状态唯一确定能被读屏听到的途径，开发环境缺失时会抛错。
 - tone: "neutral" | "success" | "danger". 默认焦墨；success、danger 是已有语义类别，没有脱离类别的彩色。
+- placement / hostShape: "top-end" | "bottom-end" | "top-start" | "bottom-start" / "square" | "circle"; default "top-end" / "square". 角用逻辑方向（end 是行末，从右向左排版时自动在左），不用 left/right。宿主是圆形（头像）时设 hostShape="circle"，角标落在圆周上 45° 的点，否则会悬在圆外。
 - className / wrapperClassName: string. className 作用于角标本身（例如覆盖纸色圈，使其匹配实际承载面）；wrapperClassName 作用于外层定位容器。
 
 ### Keyboard
@@ -4205,10 +4299,12 @@ export default function Demo() {
   return <Inline gap="panel">
     <CornerMark count={3} label="3 条未读"><span className="inline-flex size-(--qy-fill-height) items-center justify-center rounded-item bg-surface-inset text-foreground"><IconBell aria-hidden="true" /></span></CornerMark>
     <CornerMark count={142} max={99} label="142 条未读"><span className="inline-flex size-(--qy-fill-height) items-center justify-center rounded-item bg-surface-inset text-foreground"><IconBell aria-hidden="true" /></span></CornerMark>
-    <CornerMark dot tone="success" label="在线"><Avatar label="陈致远"><AvatarFallback>陈</AvatarFallback></Avatar></CornerMark>
+    <CornerMark dot tone="success" placement="bottom-end" hostShape="circle" label="在线"><Avatar label="陈致远"><AvatarFallback>陈</AvatarFallback></Avatar></CornerMark>
   </Inline>;
 }
 ```
+
+1 more examples: see the component page and its Markdown file.
 
 ## 数据集合 DataTable
 
@@ -6291,6 +6387,90 @@ import { Inline } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "悬停与焦点", titleEn: "Hover and focus" };
 export default function HoverCardDemo() {
   return <Inline gap="fields"><HoverCard><HoverCardTrigger href="#hover-card-target">内容入口</HoverCardTrigger><HoverCardPopup>补充内容</HoverCardPopup></HoverCard><Button variant="quiet">下一控件</Button><span id="hover-card-target" className="text-body">内容</span></Inline>;
+}
+```
+
+## 图片预览 ImagePreview
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/image-preview
+Source: packages/ui/src/components/image-preview.tsx
+Source SHA-256: 23741daf38ba1fbc21c80c4eae46b218445b975188b4bbc3e6691bfd6a20803e
+
+缩略图打开大图，可在同组图片间切换并放大。
+
+### Decision
+复用 Dialog：焦点困住、Esc 关闭、背景阻断都来自它。alt 必填，它同时是缩略图按钮、大图和加载失败时唯一能读到的文字。放大后舞台可滚动并获得焦点，此时方向键归滚动、不切图。关闭后焦点回到打开的那张缩略图，即使已切到别的图。
+
+### Notes
+- 键盘：左右方向键切图（从右向左排版时对调）、+ / - 缩放、0 适应窗口；到头即止，不循环。
+
+### Use and ownership
+- 图片是内容的一部分，且需要放大看细节或在同组中浏览。
+- Avoid: 装饰性图片不需要预览；只展示一张固定大小的图用普通 img。
+- Library: 开合、当前图、缩放级别、键盘与焦点归还。
+- Application: 图片来源、alt 文案与分组。
+
+### Composition
+- 缩略图是按钮；大图在阻断式对话框里，页脚是位置、前后切换与缩放。
+
+### Responsive behavior
+- 舞台宽度有上限，高度取视口的 70%；窄屏下收窄到视口内。
+
+### Customization
+- thumbnailClassName 调整缩略图；其余用 className。
+
+### Current exports
+- ImagePreview: function; owner image-preview; PASS; props: ImagePreviewProps
+- ImagePreviewImage: type; owner image-preview; PASS
+- ImagePreviewProps: type; owner image-preview; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### ImagePreview
+- `images`: `readonly ImagePreviewImage[]`. 同一组图片：缩略图并排，大图里可以在它们之间前后切换。单张图传一项。
+- `thumbnailClassName?`: `string`.
+- plus 279 inherited (@types/react 279); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### ImagePreview
+一排缩略图按钮，打开 Dialog 中的大图。
+- images: { src, alt, thumbnailSrc? }[]. 同一组图片；alt 必填，thumbnailSrc 省略时缩略图也读 src。单张图传一项。
+- thumbnailClassName: string. 作用于每个缩略图按钮。
+- className / native props: React.ComponentProps<div>. 其余属性透传到根元素。
+
+### Keyboard
+
+### Source example
+#### 同组图片与单张
+Source: apps/docs/src/content/image-preview/demos/01-set.tsx
+```tsx
+import { ImagePreview } from "@qingye_lab/ui/components/image-preview";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "同组图片与单张", titleEn: "A set and a single image" } satisfies DemoMeta;
+
+const svg = (fill: string, label: string) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><rect width='800' height='500' fill='${fill}'/><text x='400' y='270' font-size='64' text-anchor='middle' fill='white'>${label}</text></svg>`)}`;
+
+export default function Demo() {
+  return <Stack gap="panel">
+    <ImagePreview images={[
+      { src: svg("#475569", "一"), alt: "第一张：石板色" },
+      { src: svg("#57534e", "二"), alt: "第二张：褐石色" },
+      { src: svg("#44403c", "三"), alt: "第三张：深褐色" },
+    ]} />
+    <ImagePreview images={[{ src: svg("#52525b", "单"), alt: "单张图片" }]} />
+  </Stack>;
 }
 ```
 
@@ -9198,6 +9378,117 @@ export default function Demo() {
 
 1 more examples: see the component page and its Markdown file.
 
+## 结果 Result
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/result
+Source: packages/ui/src/components/result.tsx
+Source SHA-256: 68a37124c7872d1d121516a465cd9f9fe0d764871e5ee1f9ce9b58399d44e43e
+
+一次操作的结局：标记、标题、说明与去向。
+
+### Decision
+与 Empty 的分工：Empty 说「这里还没有内容」，是一块区域的状态（零结果、未知、不适用）；Result 说「刚才那件事的结局」，是一次动作的回执，类别由事件决定，并总带着下一步的去向。与 Alert 的分工：Alert 是在场对象旁的一句提示，不占版面；Result 取代该处内容，独占一块。类别除色相外还有形状不同的图标和只给读屏的前缀；去掉图标不等于去掉类别。不自动宣告，是否读出由应用按真实事件决定。
+
+### Notes
+- 非成败的结局（例如没有权限）没有单独的 status；用 tone 加自己的 icon。
+
+### Use and ownership
+- 一次提交、保存或申请结束后，需要独占一块告诉用户结局和下一步。
+- Avoid: 区域里本来就没有内容用 Empty；对象仍在、只需旁注一句用 Alert。
+- Library: 类别的色相、图标与读屏前缀，及各部分的间隔。
+- Application: 结局的事实、tone、文案、role 与去向。
+
+### Composition
+- 标记、标题、说明、动作自上而下，左对齐；动作复用公共控件。
+
+### Responsive behavior
+- 标题、说明与动作完整换行；不居中，不加框。
+
+### Customization
+- icon 可换成自己的节点或 false；没有权限这类非成败结果用 neutral 或 warning 加自己的 icon。
+
+### Current exports
+- Result: function; owner result; PASS; props: ResultProps
+- ResultActions: function; owner result; PASS; props: ResultActionsProps
+- ResultActionsProps: type; owner result; PASS
+- ResultDescription: function; owner result; PASS; props: ResultDescriptionProps
+- ResultDescriptionProps: type; owner result; PASS
+- ResultProps: type; owner result; PASS
+- ResultTitle: function; owner result; PASS; props: ResultTitleProps
+- ResultTitleProps: type; owner result; PASS
+- ResultTone: type; owner result; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Result
+- `icon?`: `React.ReactNode | false`. 状态标记。省略时按 tone 给默认图标（neutral 没有）；传节点则用它；`false` 不放标记。
+- `tone?`: `"neutral" | "info" | "warning" | "danger" | "success"`. 这次操作的结果类别，由调用方按真实事件声明；组件不从文字或数值猜成败。 「没有权限」这类不是成败的结果，用 neutral 或 warning 加自己的 icon，类别仍由调用方判断。
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ResultActions
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ResultDescription
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ResultTitle
+- `level?`: `1 | 2 | 3 | 4 | 5 | 6`. Document outline, independent of the visual text step.
+- `numeric?`: `boolean`.
+- `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "label-mobile" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm…`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### Result
+div，类别由调用方声明。
+- tone: "neutral" | "info" | "success" | "warning" | "danger"; default "neutral". 结局的类别，按真实事件声明；组件不从文字猜成败。
+- icon: React.ReactNode | false. 省略时按 tone 给默认图标（neutral 没有）；传节点则替换；false 不放标记。
+- children / render / ref / native props: useRender.ComponentProps<div>. 不自动成为 alert 或 status。
+
+#### ResultTitle
+复用 Heading。
+- level / step / Heading props: HeadingProps. 标题层级由文档关系决定。
+
+#### ResultDescription / ResultActions
+p 说明与 div 去向。
+- children / render / ref / native props: useRender.ComponentProps<p | div>. 动作复用公共组件。
+
+### Keyboard
+
+### Source example
+#### 成功、失败与提示
+Source: apps/docs/src/content/result/demos/01-tones.tsx
+```tsx
+import { Button } from "@qingye_lab/ui/components/button";
+import { Grid } from "@qingye_lab/ui/components/layout";
+import { Result, ResultActions, ResultDescription, ResultTitle } from "@qingye_lab/ui/components/result";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "成功、失败与提示", titleEn: "Success, failure and notice" } satisfies DemoMeta;
+
+export default function Demo() {
+  return <Grid columns={2} gap="section">
+    <Result tone="success"><ResultTitle level={3}>已保存</ResultTitle><ResultDescription>修改已写入，下次打开即可看到。</ResultDescription><ResultActions><Button>返回列表</Button></ResultActions></Result>
+    <Result tone="danger" role="alert"><ResultTitle level={3}>保存失败</ResultTitle><ResultDescription>网络中断，修改还在这个页面里，没有丢失。</ResultDescription><ResultActions><Button>重试</Button><Button variant="quiet">返回</Button></ResultActions></Result>
+    <Result tone="warning"><ResultTitle level={3}>部分文件未上传</ResultTitle><ResultDescription>3 个文件中有 1 个超过大小限制。</ResultDescription><ResultActions><Button>查看文件</Button></ResultActions></Result>
+    <Result tone="info"><ResultTitle level={3}>正在审核</ResultTitle><ResultDescription>审核通过后会通知你。</ResultDescription></Result>
+  </Grid>;
+}
+```
+
+1 more examples: see the component page and its Markdown file.
+
 ## 两量关系 ScatterChart
 
 Package: @qingye_lab/ui@5.2.0
@@ -10416,6 +10707,87 @@ export default function Demo() {
 ```
 
 2 more examples: see the component page and its Markdown file.
+
+## 跳转链接 SkipLink
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/skip-link
+Source: packages/ui/src/components/skip-link.tsx
+Source SHA-256: 4333b6b70cefd7211580107717851060f8942bbe39dc19982442c7da5363f79e
+
+让键盘用户越过重复的导航，直达主要内容。
+
+### Decision
+平时不可见也不可点，却是 Tab 序里第一个到达的；获得焦点才现身。点击时把焦点真正移到目标，目标不可聚焦就补 tabindex=-1，否则下一次 Tab 又回到导航里，跳转等于没发生。找不到目标时不拦截，交还浏览器的默认锚点跳转。
+
+### Notes
+- 目标若不可聚焦，组件会补上 tabindex="-1"。
+
+### Use and ownership
+- 每页都重复出现导航、侧栏或页眉，而主要内容在其后。
+- Avoid: 不要把它当作目录或页内导航；它只做一件事：越过重复区块。
+- Library: 现身时机、焦点转移与目标补救。
+- Application: 目标的位置与 id，及是否需要多个跳转目标。
+
+### Composition
+- 放在文档的最前面，href 指向主要内容容器的 id。
+
+### Responsive behavior
+- 固定在视口起始侧上角；从右向左排版时在右上。
+
+### Customization
+- children 覆盖默认文字；className 调整层序。
+
+### Current exports
+- SkipLink: function; owner skip-link; PASS; props: SkipLinkProps
+- SkipLinkProps: type; owner skip-link; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### SkipLink
+- `href`: ``#${string}``. 目标的锚点，写成 `#id`。必填：跳到哪里是页面结构的事实，不是默认值。
+- plus 287 inherited (@types/react 287); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### SkipLink
+指向页内锚点的 a。
+- href: `#${string}`. 必填。目标的锚点，写成 #id。
+- children: React.ReactNode. 省略时用 locale 的 skipToContent。
+- className / onClick / native props: React.ComponentProps<a>. onClick 在组件之前运行，调用 preventDefault 可取消转移。
+
+### Keyboard
+
+### Source example
+#### 越过导航
+Source: apps/docs/src/content/skip-link/demos/01-bypass.tsx
+```tsx
+import { Link } from "@qingye_lab/ui/components/link";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { SkipLink } from "@qingye_lab/ui/components/skip-link";
+import { Text } from "@qingye_lab/ui/components/typography";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "越过导航", titleEn: "Bypass the navigation" } satisfies DemoMeta;
+
+// 真实页面里它固定在视口一角，只在获得焦点时现身；这里为了在样例中可见，改为静态并常显。
+// 目标 <main> 本身不可聚焦，点击后组件会补 tabindex="-1" 并把焦点移过去。
+export default function Demo() {
+  return <Stack gap="panel">
+    <SkipLink href="#skip-demo-main" className="static opacity-100 pointer-events-auto self-start">跳到正文</SkipLink>
+    <nav aria-label="示例导航"><Stack gap="pair"><Link href="#a">首页</Link><Link href="#b">文档</Link><Link href="#c">更新记录</Link></Stack></nav>
+    <main id="skip-demo-main" className="outline-none focus-visible:ring-2"><Text>正文从这里开始。</Text></main>
+  </Stack>;
+}
+```
 
 ## 滑块 Slider
 

@@ -15,7 +15,7 @@ export default {
     "AvatarPrimitive"
   ],
   "keywords": ["avatar", "profile picture", "user image", "头像", "用户头像", "身份"],
-  "decisions": "不要虚构姓名或让 initials 代替可访问名称。", decisionsEn: "Do not invent a name or let initials replace an accessible name.",
+  "decisions": "不要虚构姓名或让 initials 代替可访问名称。头像本身不可交互；要点击，就用 Button（或链接）包住它：可访问名称仍来自头像的 label，焦点、键盘和禁用状态归外层，头像不加 tabindex、不加 onClick。要换名称时给外层 aria-label。一组相关的人用 AvatarGroup。", decisionsEn: "Do not invent a name or let initials replace an accessible name. An avatar is not interactive itself; to make it clickable, wrap it in a Button (or link): the accessible name still comes from the avatar's label, while focus, keyboard and disabled state belong to the outer element, and the avatar gets no tabindex or onClick. Give the outer element an aria-label to change the name. Use AvatarGroup for a set of related people.",
   "design": {
     "methods": [
       "名实相符",

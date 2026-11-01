@@ -34,4 +34,12 @@ describe("CornerMark", () => {
     // @ts-expect-error intentionally omitting the required label to prove the guard
     expect(() => render(<CornerMark count={3}><span>图标</span></CornerMark>)).toThrow(/label/);
   });
+
+  it("pins to the top end by default and follows an explicit placement", () => {
+    const { rerender } = render(<CornerMark dot label="在线"><span>头像</span></CornerMark>);
+    expect(document.querySelector('[data-slot="corner-mark-badge"]')).toHaveAttribute("data-placement", "top-end");
+    rerender(<CornerMark dot placement="bottom-end" hostShape="circle" label="在线"><span>头像</span></CornerMark>);
+    expect(document.querySelector('[data-slot="corner-mark-badge"]')).toHaveAttribute("data-placement", "bottom-end");
+    expect(screen.getByText("在线")).toBeInTheDocument();
+  });
 });

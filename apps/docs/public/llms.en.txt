@@ -17,6 +17,7 @@
 - [AsyncContent](/en/docs/components/async-content.md): Present request status separately from content that remains valid.
 - [Autocomplete](/en/docs/components/autocomplete.md): Edit free text with optional suggestions.
 - [Avatar](/en/docs/components/avatar.md): An image with one named identity and a fallback.
+- [AvatarGroup](/en/docs/components/avatar-group.md): A set of related people, overlapped, with the surplus collapsed.
 - [Badge](/en/docs/components/badge.md): A short marker that keeps its content name without inferring state.
 - [Breadcrumb](/en/docs/components/breadcrumb.md): Parent links and an explicit current location.
 - [BulkActionBar](/en/docs/components/bulk-action-bar.md): Shared actions with explicit targets, versions and scope.
@@ -56,6 +57,7 @@
 - [Form](/en/docs/components/form.md): A native field submission scope and reset context.
 - [Heatmap](/en/docs/components/heatmap.md): A quantity over two categorical dimensions, such as sync activity by weekday and hour; a single-hue sequential scale (the first series color, light to full) or application-declared levels, readable cell by cell from the keyboard, with an on-demand data table.
 - [HoverCard](/en/docs/components/hover-card.md): Reveal the same supplemental content on hover and keyboard focus.
+- [ImagePreview](/en/docs/components/image-preview.md): Thumbnails open a large view with switching within the set and zoom.
 - [Input](/en/docs/components/input.md): Enter one text value.
 - [InputGroup](/en/docs/components/input-group.md): Give an input and its markers, units or actions one editing boundary.
 - [InputModalityProvider](/en/docs/components/input-modality-provider.md): Record input modality at the application root and skip transitions for keyboard input.
@@ -82,6 +84,7 @@
 - [RadioGroup](/en/docs/components/radio-group.md): Choose one value from a small set of visible options.
 - [Rating](/en/docs/components/rating.md): Give an integer score from 1 to max, shown as a row of stars.
 - [Resizable](/en/docs/components/resizable.md): Draggable separators between two or more panels that change how the space is shared.
+- [Result](/en/docs/components/result.md): The outcome of one action: a mark, a title, an explanation and where to go next.
 - [ScatterChart](/en/docs/components/scatter-chart.md): The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.
 - [Scroll area](/en/docs/components/scroll-area.md): Native scrolling with an optional composition of draggable scrollbars.
 - [SearchInput](/en/docs/components/search-input.md): Enter a search term and clear it in one step.
@@ -92,6 +95,7 @@
 - [SeverityMark](/en/docs/components/severity-mark.md): An ordered level shown as a number of filled cells, named by the application.
 - [Sidebar](/en/docs/components/sidebar.md): Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 - [Skeleton](/en/docs/components/skeleton.md): Hold the place and row count content will take until it arrives.
+- [SkipLink](/en/docs/components/skip-link.md): Lets keyboard users bypass repeated navigation and reach the main content.
 - [Slider](/en/docs/components/slider.md): Enter a number or an ordered range within explicit bounds.
 - [Sparkline](/en/docs/components/sparkline.md): A small line set in a line of text, showing how a reading has recently changed.
 - [Stat](/en/docs/components/stat.md): Values, units and explanations supplied independently.

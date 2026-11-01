@@ -363,7 +363,7 @@ ThemeProvider is document scoped. Brand: html[data-brand]; appearance: .light/.d
 
 Examples retain state locally. Reload persistence, permissions, backend writes and cancellation are host responsibilities.
 
-# Part 3. Components (108)
+# Part 3. Components (112)
 
 ## Accordion
 
@@ -1037,7 +1037,7 @@ Source SHA-256: d6ca137a87d7eeb1a3ec766553246ed453cbcd78fdce9980f091bd27a21f417a
 An image with one named identity and a fallback.
 
 ### Decision
-Do not invent a name or let initials replace an accessible name.
+Do not invent a name or let initials replace an accessible name. An avatar is not interactive itself; to make it clickable, wrap it in a Button (or link): the accessible name still comes from the avatar's label, while focus, keyboard and disabled state belong to the outer element, and the avatar gets no tabindex or onClick. Give the outer element an aria-label to change the name. Use AvatarGroup for a set of related people.
 
 ### Use and ownership
 - A named identity image or explicit fallback is needed.
@@ -1128,6 +1128,95 @@ export default function Demo() {
   </Inline>;
 }
 ```
+
+1 more examples: see the component page and its Markdown file.
+
+## AvatarGroup
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/avatar-group
+Source: packages/ui/src/components/avatar-group.tsx
+Source SHA-256: 806282f5521b596540a007ca559299a7d312a09eca028fd5e9f8a9591375ea51
+
+A set of related people, overlapped, with the surplus collapsed.
+
+### Decision
+The overlap is a quarter of the avatar diameter so the initials always stay clear; collapsed people do not disappear: the accessible name of "+N" lists all of them. The group itself is not clickable; to make it so, put it inside a button or link.
+
+### Notes
+- The name of "+N" comes from the locale (avatarGroupMore) and lists every collapsed name.
+
+### Use and ownership
+- Show which people a thing involves when there is room for only a narrow row.
+- Avoid: Use Avatar for one identity; use a list, not an overlap, when members must be acted on individually.
+- Library: Overlap, truncation and naming of the whole group.
+- Application: Membership facts, order and each person's real name.
+
+### Composition
+- The group is role=group and must be named; each avatar remains its own graphic with its own name, and the trailing "+N" is a separate avatar.
+
+### Responsive behavior
+- The overlap scales with the avatar size step, not with container width; max decides how many collapse.
+
+### Customization
+- size takes one of the five avatar steps; use className for the rest.
+
+### Current exports
+- AvatarGroup: function; owner avatar-group; PASS; props: AvatarGroupProps
+- AvatarGroupItem: type; owner avatar-group; PASS
+- AvatarGroupProps: type; owner avatar-group; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### AvatarGroup
+- `items`: `readonly AvatarGroupItem[]`.
+- `max?`: `number`. 最多露出几个头像，其余收进末尾的「+N」。默认 5。
+- `size?`: `"xs" | "sm" | "md" | "lg" | "xl"`.
+- plus 279 inherited (@types/react 279); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### AvatarGroup
+A role=group div that requires aria-label or aria-labelledby.
+- items: { key?, label, src?, fallback? }[]. Members; label is required, and fallback defaults to the first character of the name.
+- max: number; default 5. How many avatars to show before the rest collapse into a trailing "+N".
+- size: "xs" | "sm" | "md" | "lg" | "xl"; default "md". The same steps as Avatar.
+- className / native props: React.ComponentProps<div>. Remaining attributes forward to the root.
+
+### Keyboard
+
+### Source example
+#### 成员与收起
+Source: apps/docs/src/content/avatar-group/demos/01-members.tsx
+```tsx
+import { AvatarGroup } from "@qingye_lab/ui/components/avatar-group";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "成员与收起", titleEn: "Members and overflow" } satisfies DemoMeta;
+
+const people = [{ label: "陈致远" }, { label: "李一鸣" }, { label: "王一" }, { label: "周宁" }, { label: "赵清" }, { label: "孙墨" }, { label: "吴桐" }];
+
+export default function Demo() {
+  return <Stack gap="panel">
+    <AvatarGroup aria-label="全部成员" max={7} items={people} />
+    <AvatarGroup aria-label="项目成员" max={4} items={people} />
+    <Inline gap="panel">
+      {(["xs", "sm", "md", "lg", "xl"] as const).map(size => <AvatarGroup key={size} aria-label={`成员（${size}）`} size={size} max={3} items={people} />)}
+    </Inline>
+  </Stack>;
+}
+```
+
+1 more examples: see the component page and its Markdown file.
 
 ## Badge
 
@@ -1886,7 +1975,7 @@ export default function Demo() {
 }
 ```
 
-3 more examples: see the component page and its Markdown file.
+4 more examples: see the component page and its Markdown file.
 
 ## Cascader
 
@@ -3784,7 +3873,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.2.0
 Import: @qingye_lab/ui/components/corner-mark
 Source: packages/ui/src/components/corner-mark.tsx
-Source SHA-256: 2ab94e2f89fda39bfa2f8751be6394fa346a22d2de902c123d38e012e59c9ac6
+Source SHA-256: ac8892bd3e844d1037659b14d1fa362244bb04e8b5091d156c8d33fc39096a5a
 
 A count or presence dot anchored to a host's corner, never part of the host's own content.
 
@@ -3801,7 +3890,7 @@ The mark is decorative on its own: a count only reaches assistive tech through t
 - Application: The real count, presence facts such as online, and the accessible label's text.
 
 ### Composition
-- CornerMark: Wraps the host content; the mark is pinned to the host's top-right corner.
+- CornerMark: Wraps the host content; the mark is pinned to one of the host's corners (end-top by default).
 
 ### Responsive behavior
 - The same number may switch between inline text and an anchored mark across container widths — semantics and the value itself must stay identical.
@@ -3811,6 +3900,8 @@ The mark is decorative on its own: a count only reaches assistive tech through t
 
 ### Current exports
 - CornerMark: function; owner corner-mark; PASS; props: CornerMarkProps
+- CornerMarkHostShape: type; owner corner-mark; PASS
+- CornerMarkPlacement: type; owner corner-mark; PASS
 - CornerMarkProps: type; owner corner-mark; PASS
 - CornerMarkTone: type; owner corner-mark; PASS
 
@@ -3822,8 +3913,10 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `className?`: `string`.
 - `count`: `number`.
 - `dot?`: `never`.
+- `hostShape?`: `"circle" | "square"`.
 - `label`: `string`.
 - `max?`: `number`.
+- `placement?`: `"top-end" | "bottom-end" | "top-start" | "bottom-start"`.
 - `tone?`: `"neutral" | "info" | "warning" | "danger" | "success"`.
 - `wrapperClassName?`: `string`.
 
@@ -3837,11 +3930,12 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 #### CornerMark
-Wraps the host content; the mark is pinned to the host's top-right corner.
+Wraps the host content; the mark is pinned to one of the host's corners (end-top by default).
 - count / max: number / number. The count variant; past max (default 99) it reads "max+" while the real number stays in label; a count of 0 hides the mark and its label together.
 - dot: true. A digit-free dot variant, mutually exclusive with count.
 - label: string（必填）. The mark itself is aria-hidden; this visually hidden text is the only guaranteed path for the count or status to reach assistive technology. Missing it throws in development.
 - tone: "neutral" | "success" | "danger". Defaults to ink; success and danger are existing semantic categories, never hue without meaning.
+- placement / hostShape: "top-end" | "bottom-end" | "top-start" | "bottom-start" / "square" | "circle"; default "top-end" / "square". Corners use logical directions (end is the line end, so it sits on the left under right-to-left), never left/right. For a circular host (an avatar) set hostShape="circle" so the mark sits on the circle at 45 degrees instead of floating outside it.
 - className / wrapperClassName: string. className targets the mark itself (for example overriding the paper-colored ring to match the actual surface); wrapperClassName targets the outer positioning wrapper.
 
 ### Keyboard
@@ -3860,10 +3954,12 @@ export default function Demo() {
   return <Inline gap="panel">
     <CornerMark count={3} label="3 条未读"><span className="inline-flex size-(--qy-fill-height) items-center justify-center rounded-item bg-surface-inset text-foreground"><IconBell aria-hidden="true" /></span></CornerMark>
     <CornerMark count={142} max={99} label="142 条未读"><span className="inline-flex size-(--qy-fill-height) items-center justify-center rounded-item bg-surface-inset text-foreground"><IconBell aria-hidden="true" /></span></CornerMark>
-    <CornerMark dot tone="success" label="在线"><Avatar label="陈致远"><AvatarFallback>陈</AvatarFallback></Avatar></CornerMark>
+    <CornerMark dot tone="success" placement="bottom-end" hostShape="circle" label="在线"><Avatar label="陈致远"><AvatarFallback>陈</AvatarFallback></Avatar></CornerMark>
   </Inline>;
 }
 ```
+
+1 more examples: see the component page and its Markdown file.
 
 ## DataTable
 
@@ -5946,6 +6042,90 @@ import { Inline } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "悬停与焦点", titleEn: "Hover and focus" };
 export default function HoverCardDemo() {
   return <Inline gap="fields"><HoverCard><HoverCardTrigger href="#hover-card-target">内容入口</HoverCardTrigger><HoverCardPopup>补充内容</HoverCardPopup></HoverCard><Button variant="quiet">下一控件</Button><span id="hover-card-target" className="text-body">内容</span></Inline>;
+}
+```
+
+## ImagePreview
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/image-preview
+Source: packages/ui/src/components/image-preview.tsx
+Source SHA-256: 23741daf38ba1fbc21c80c4eae46b218445b975188b4bbc3e6691bfd6a20803e
+
+Thumbnails open a large view with switching within the set and zoom.
+
+### Decision
+Built on Dialog, which supplies the focus trap, Esc to close and the blocking backdrop. alt is required and is the only text available for the thumbnail button, the large view and a load failure. When zoomed, the stage scrolls and takes focus, and the arrow keys then scroll instead of switching images. After closing, focus returns to the thumbnail that opened it, even after switching to another image.
+
+### Notes
+- Keyboard: Left/Right switch images (swapped under right-to-left), +/- zoom, 0 fits; stops at the ends, no looping.
+
+### Use and ownership
+- Images are part of the content and details need zooming, or browsing within a set.
+- Avoid: Decorative images need no preview; a single fixed-size image can be a plain img.
+- Library: Open state, current image, zoom level, keyboard handling and focus return.
+- Application: Image sources, alt text and grouping.
+
+### Composition
+- Thumbnails are buttons; the large view sits in a blocking dialog whose footer carries position, previous/next and zoom.
+
+### Responsive behavior
+- The stage has a maximum width and a height of 70% of the viewport, narrowing to fit on small screens.
+
+### Customization
+- thumbnailClassName adjusts thumbnails; use className for the rest.
+
+### Current exports
+- ImagePreview: function; owner image-preview; PASS; props: ImagePreviewProps
+- ImagePreviewImage: type; owner image-preview; PASS
+- ImagePreviewProps: type; owner image-preview; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### ImagePreview
+- `images`: `readonly ImagePreviewImage[]`. 同一组图片：缩略图并排，大图里可以在它们之间前后切换。单张图传一项。
+- `thumbnailClassName?`: `string`.
+- plus 279 inherited (@types/react 279); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @tabler/icons-react, class-variance-authority, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### ImagePreview
+A row of thumbnail buttons that open the large view in a Dialog.
+- images: { src, alt, thumbnailSrc? }[]. One set of images; alt is required and thumbnailSrc falls back to src. Pass one item for a single image.
+- thumbnailClassName: string. Applies to every thumbnail button.
+- className / native props: React.ComponentProps<div>. Remaining attributes forward to the root.
+
+### Keyboard
+
+### Source example
+#### 同组图片与单张
+Source: apps/docs/src/content/image-preview/demos/01-set.tsx
+```tsx
+import { ImagePreview } from "@qingye_lab/ui/components/image-preview";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "同组图片与单张", titleEn: "A set and a single image" } satisfies DemoMeta;
+
+const svg = (fill: string, label: string) => `data:image/svg+xml,${encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'><rect width='800' height='500' fill='${fill}'/><text x='400' y='270' font-size='64' text-anchor='middle' fill='white'>${label}</text></svg>`)}`;
+
+export default function Demo() {
+  return <Stack gap="panel">
+    <ImagePreview images={[
+      { src: svg("#475569", "一"), alt: "第一张：石板色" },
+      { src: svg("#57534e", "二"), alt: "第二张：褐石色" },
+      { src: svg("#44403c", "三"), alt: "第三张：深褐色" },
+    ]} />
+    <ImagePreview images={[{ src: svg("#52525b", "单"), alt: "单张图片" }]} />
+  </Stack>;
 }
 ```
 
@@ -8853,6 +9033,117 @@ export default function Demo() {
 
 1 more examples: see the component page and its Markdown file.
 
+## Result
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/result
+Source: packages/ui/src/components/result.tsx
+Source SHA-256: 68a37124c7872d1d121516a465cd9f9fe0d764871e5ee1f9ce9b58399d44e43e
+
+The outcome of one action: a mark, a title, an explanation and where to go next.
+
+### Decision
+Versus Empty: Empty says "there is no content here yet" and is the state of a region (zero results, unknown, not applicable); Result says "how that thing ended" and is the receipt of an action, its tone decided by the event and always paired with where to go next. Versus Alert: Alert is a line beside an object that is still present and takes no layout; Result replaces that content and occupies its own block. Tone has a differently shaped icon and a screen-reader-only prefix besides hue; removing the icon does not remove the tone. It never announces itself; the application decides from the real event whether to speak it.
+
+### Notes
+- Outcomes that are neither success nor failure (such as no permission) have no dedicated status; use tone plus your own icon.
+
+### Use and ownership
+- After a submission, save or request ends, a whole block must say how it ended and what comes next.
+- Avoid: Use Empty when a region simply has no content; use Alert when the object remains and a side note is enough.
+- Library: Tone hue, icon and screen-reader prefix, and spacing between parts.
+- Application: The outcome's facts, tone, copy, role and next destination.
+
+### Composition
+- Mark, title, description and actions run top to bottom, start-aligned; actions compose public controls.
+
+### Responsive behavior
+- Title, description and actions wrap fully; not centered, not boxed.
+
+### Customization
+- icon may be your own node or false; for non-success/failure outcomes such as no permission, use neutral or warning with your own icon.
+
+### Current exports
+- Result: function; owner result; PASS; props: ResultProps
+- ResultActions: function; owner result; PASS; props: ResultActionsProps
+- ResultActionsProps: type; owner result; PASS
+- ResultDescription: function; owner result; PASS; props: ResultDescriptionProps
+- ResultDescriptionProps: type; owner result; PASS
+- ResultProps: type; owner result; PASS
+- ResultTitle: function; owner result; PASS; props: ResultTitleProps
+- ResultTitleProps: type; owner result; PASS
+- ResultTone: type; owner result; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### Result
+- `icon?`: `React.ReactNode | false`. 状态标记。省略时按 tone 给默认图标（neutral 没有）；传节点则用它；`false` 不放标记。
+- `tone?`: `"neutral" | "info" | "warning" | "danger" | "success"`. 这次操作的结果类别，由调用方按真实事件声明；组件不从文字或数值猜成败。 「没有权限」这类不是成败的结果，用 neutral 或 warning 加自己的 icon，类别仍由调用方判断。
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ResultActions
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ResultDescription
+- no props declared by this library
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### ResultTitle
+- `level?`: `1 | 2 | 3 | 4 | 5 | 6`. Document outline, independent of the visual text step.
+- `numeric?`: `boolean`.
+- `step?`: `"body" | "caption" | "label" | "title" | "display-xl" | "display-lg" | "display" | "chapter" | "heading" | "body-strong" | "reading" | "prose" | "prose-strong" | "prose-h1" | "prose-h2" | "prose-h3" | "support" | "support-mobile" | "support-strong" | "support-strong-mobile" | "dense" | "dense-mobile" | "dense-strong" | "dense-strong-mobile" | "caption-strong" | "label-mobile" | "metric" | "metric-lg" | "micro" | "control-xs" | "control-xs-mobile" | "control-sm" | "control-sm…`.
+- plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### Result
+A div whose tone the caller declares.
+- tone: "neutral" | "info" | "success" | "warning" | "danger"; default "neutral". The outcome's category, declared from the real event; the component never guesses from text.
+- icon: React.ReactNode | false. Defaults to the tone's icon (neutral has none); a node replaces it; false removes the mark.
+- children / render / ref / native props: useRender.ComponentProps<div>. Not automatically an alert or status.
+
+#### ResultTitle
+A Heading composition.
+- level / step / Heading props: HeadingProps. Document relationships determine heading level.
+
+#### ResultDescription / ResultActions
+p explanation and div destinations.
+- children / render / ref / native props: useRender.ComponentProps<p | div>. Compose public controls for actions.
+
+### Keyboard
+
+### Source example
+#### 成功、失败与提示
+Source: apps/docs/src/content/result/demos/01-tones.tsx
+```tsx
+import { Button } from "@qingye_lab/ui/components/button";
+import { Grid } from "@qingye_lab/ui/components/layout";
+import { Result, ResultActions, ResultDescription, ResultTitle } from "@qingye_lab/ui/components/result";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "成功、失败与提示", titleEn: "Success, failure and notice" } satisfies DemoMeta;
+
+export default function Demo() {
+  return <Grid columns={2} gap="section">
+    <Result tone="success"><ResultTitle level={3}>已保存</ResultTitle><ResultDescription>修改已写入，下次打开即可看到。</ResultDescription><ResultActions><Button>返回列表</Button></ResultActions></Result>
+    <Result tone="danger" role="alert"><ResultTitle level={3}>保存失败</ResultTitle><ResultDescription>网络中断，修改还在这个页面里，没有丢失。</ResultDescription><ResultActions><Button>重试</Button><Button variant="quiet">返回</Button></ResultActions></Result>
+    <Result tone="warning"><ResultTitle level={3}>部分文件未上传</ResultTitle><ResultDescription>3 个文件中有 1 个超过大小限制。</ResultDescription><ResultActions><Button>查看文件</Button></ResultActions></Result>
+    <Result tone="info"><ResultTitle level={3}>正在审核</ResultTitle><ResultDescription>审核通过后会通知你。</ResultDescription></Result>
+  </Grid>;
+}
+```
+
+1 more examples: see the component page and its Markdown file.
+
 ## ScatterChart
 
 Package: @qingye_lab/ui@5.2.0
@@ -10071,6 +10362,87 @@ export default function Demo() {
 ```
 
 2 more examples: see the component page and its Markdown file.
+
+## SkipLink
+
+Package: @qingye_lab/ui@5.2.0
+Import: @qingye_lab/ui/components/skip-link
+Source: packages/ui/src/components/skip-link.tsx
+Source SHA-256: 4333b6b70cefd7211580107717851060f8942bbe39dc19982442c7da5363f79e
+
+Lets keyboard users bypass repeated navigation and reach the main content.
+
+### Decision
+Invisible and unclickable at rest, yet the first stop in tab order; it appears only when focused. On click it moves focus to the target for real, adding tabindex=-1 when the target is not focusable, otherwise the next Tab would return to the navigation and the skip would not have happened. A missing target is not intercepted; the browser's default anchor jump takes over.
+
+### Notes
+- If the target is not focusable, the component adds tabindex="-1".
+
+### Use and ownership
+- Every page repeats navigation, a sidebar or a header ahead of the main content.
+- Avoid: Do not use it as a table of contents or in-page navigation; it does one thing, bypassing repeated blocks.
+- Library: When it appears, focus transfer and target remediation.
+- Application: Where the target is and its id, and whether more than one skip target is needed.
+
+### Composition
+- Place it first in the document, with href pointing at the id of the main-content container.
+
+### Responsive behavior
+- Fixed to the viewport's start-side top corner; top-right under right-to-left.
+
+### Customization
+- children overrides the default text; className adjusts stacking.
+
+### Current exports
+- SkipLink: function; owner skip-link; PASS; props: SkipLinkProps
+- SkipLinkProps: type; owner skip-link; PASS
+
+### Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### SkipLink
+- `href`: ``#${string}``. 目标的锚点，写成 `#id`。必填：跳到哪里是页面结构的事实，不是默认值。
+- plus 287 inherited (@types/react 287); not expanded, see the installed declarations
+
+### Dependencies and providers
+- Runtime: @base-ui/react, clsx, react, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: reads UILocale; works without UILocaleProvider (default locale)
+
+### Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+#### SkipLink
+An a pointing at an in-page anchor.
+- href: `#${string}`. Required. The target anchor, written as #id.
+- children: React.ReactNode. Defaults to the locale's skipToContent.
+- className / onClick / native props: React.ComponentProps<a>. onClick runs first; calling preventDefault cancels the focus transfer.
+
+### Keyboard
+
+### Source example
+#### 越过导航
+Source: apps/docs/src/content/skip-link/demos/01-bypass.tsx
+```tsx
+import { Link } from "@qingye_lab/ui/components/link";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { SkipLink } from "@qingye_lab/ui/components/skip-link";
+import { Text } from "@qingye_lab/ui/components/typography";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "越过导航", titleEn: "Bypass the navigation" } satisfies DemoMeta;
+
+// 真实页面里它固定在视口一角，只在获得焦点时现身；这里为了在样例中可见，改为静态并常显。
+// 目标 <main> 本身不可聚焦，点击后组件会补 tabindex="-1" 并把焦点移过去。
+export default function Demo() {
+  return <Stack gap="panel">
+    <SkipLink href="#skip-demo-main" className="static opacity-100 pointer-events-auto self-start">跳到正文</SkipLink>
+    <nav aria-label="示例导航"><Stack gap="pair"><Link href="#a">首页</Link><Link href="#b">文档</Link><Link href="#c">更新记录</Link></Stack></nav>
+    <main id="skip-demo-main" className="outline-none focus-visible:ring-2"><Text>正文从这里开始。</Text></main>
+  </Stack>;
+}
+```
 
 ## Slider
 

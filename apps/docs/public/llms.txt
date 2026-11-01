@@ -17,6 +17,7 @@
 - [异步内容 AsyncContent](/docs/components/async-content.md): 分别呈现请求状态与仍然有效的内容。
 - [建议输入 Autocomplete](/docs/components/autocomplete.md): 编辑自由文本，候选作为可接受的建议。
 - [身份图像 Avatar](/docs/components/avatar.md): 同一身份视觉样本的图片与回退。
+- [头像组 AvatarGroup](/docs/components/avatar-group.md): 一组相关的人，叠放并收起多余的成员。
 - [标记 Badge](/docs/components/badge.md): 短标记，保留内容名称而不推断状态。
 - [路径 Breadcrumb](/docs/components/breadcrumb.md): 父级链接与明确的当前位置。
 - [批量操作 BulkActionBar](/docs/components/bulk-action-bar.md): 明确对象、版本与范围的共同动作。
@@ -56,6 +57,7 @@
 - [表单 Form](/docs/components/form.md): 原生字段提交范围与重置上下文。
 - [两维度的量 Heatmap](/docs/components/heatmap.md): 两个类别维度上的量，例如「星期 × 时段」的同步热度；单色顺序色阶（第一色由淡到足）或应用声明的分档，可用键盘逐格读，另有按需展开的数据表。
 - [链接预览 HoverCard](/docs/components/hover-card.md): 悬停与键盘焦点展开相同补充内容。
+- [图片预览 ImagePreview](/docs/components/image-preview.md): 缩略图打开大图，可在同组图片间切换并放大。
 - [输入框 Input](/docs/components/input.md): 输入一个文本值。
 - [输入组合 InputGroup](/docs/components/input-group.md): 让输入与标记、单位或附属动作共用编辑边界。
 - [输入方式 InputModalityProvider](/docs/components/input-modality-provider.md): 在应用根部记录输入方式，键盘操作跳过过渡。
@@ -82,6 +84,7 @@
 - [单选组 RadioGroup](/docs/components/radio-group.md): 从同时可见的少量候选中取一个值。
 - [评分 Rating](/docs/components/rating.md): 在 1 到 max 之间给出一个整数分值，用一排星表示。
 - [分栏 Resizable](/docs/components/resizable.md): 两个或多个面板之间放可拖动的分隔条，调整各自占比。
+- [结果 Result](/docs/components/result.md): 一次操作的结局：标记、标题、说明与去向。
 - [两量关系 ScatterChart](/docs/components/scatter-chart.md): 两个数值量之间的关系；全比较形式，1 至 3 个系列，同源的散点图、命名的双轴与按需展开的数据表。
 - [滚动区域 ScrollArea](/docs/components/scroll-area.md): 真实原生滚动，或显式组合可拖动滚动条。
 - [搜索输入 SearchInput](/docs/components/search-input.md): 输入一个搜索词，并能一步清空。
@@ -92,6 +95,7 @@
 - [级别 SeverityMark](/docs/components/severity-mark.md): 用填了几格表达有次序的级别，名称由应用给出。
 - [侧栏导航 Sidebar](/docs/components/sidebar.md): 长期导航、收起为图标 rail 与二级子级。
 - [骨架屏 Skeleton](/docs/components/skeleton.md): 内容到达之前，先摆出它将占的位置与行数。
+- [跳转链接 SkipLink](/docs/components/skip-link.md): 让键盘用户越过重复的导航，直达主要内容。
 - [滑块 Slider](/docs/components/slider.md): 在明确区间内输入数值或有序范围。
 - [行内趋势 Sparkline](/docs/components/sparkline.md): 坐在文字行里的小型折线，说明一个读数最近怎样变化。
 - [度量 Stat](/docs/components/stat.md): 数值、单位与说明分别提供。

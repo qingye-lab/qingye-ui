@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-01T05:22:29.349Z",
-  "revision": "cc58417c2d7fc8287250a7a1eeb9f7846119f770",
+  "generatedAt": "2026-11-01T05:23:15.332Z",
+  "revision": "d5349fad42d4fc647054a00ef67360420ad1f9a2",
   "fingerprint": {
-    "sha256": "5d8a336bc155adb71269e7c103b3a2e026cc37e6223ac18daf0b20ccbffeb5fd",
+    "sha256": "0f2b943fe14285b6b0af21fdfd323b6f461d9034fe91f6c5a7742c8bdc4a9c64",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -31,8 +31,12 @@
         "sha256": "edc3c18f4840baec99ba481baa4b0fc0041bea2b8dc0aa145862069d50d92227"
       },
       {
+        "path": "apps/docs/src/content/avatar-group/meta.ts",
+        "sha256": "a47b001bb88cad7e076ef4112d23cc0f692bdc8365e7785bbcaa35a77755ca06"
+      },
+      {
         "path": "apps/docs/src/content/avatar/meta.ts",
-        "sha256": "2245faee13c1697897f27703165f705a47af66e5a7e54b35313ea897f651fbac"
+        "sha256": "ae7854608c04f2fb469cad364bacef65a229f578b461809f60540e40c7c8441b"
       },
       {
         "path": "apps/docs/src/content/badge/meta.ts",
@@ -120,7 +124,7 @@
       },
       {
         "path": "apps/docs/src/content/corner-mark/meta.ts",
-        "sha256": "57f0482a043922bdbe8646b2293ac8f2968728009c576a952ac9ca40aa709484"
+        "sha256": "68128a9218429415c8dd55a5dac361a6bb9337ac24155013d058de1d8188d484"
       },
       {
         "path": "apps/docs/src/content/data-table/meta.ts",
@@ -189,6 +193,10 @@
       {
         "path": "apps/docs/src/content/hover-card/meta.ts",
         "sha256": "b70f0d2d6397931f44910e4773a987dfac613fa723ae60f3464cc4a15bad3945"
+      },
+      {
+        "path": "apps/docs/src/content/image-preview/meta.ts",
+        "sha256": "8c2b1a64c18ef0508cccaa257bfafab71a41703e6009319a8854c909abd71f56"
       },
       {
         "path": "apps/docs/src/content/input-group/meta.ts",
@@ -295,6 +303,10 @@
         "sha256": "28a9a48d466a738b71aed87c859a47db0d8516f531c83fb3ce49ca3c1b79068c"
       },
       {
+        "path": "apps/docs/src/content/result/meta.ts",
+        "sha256": "e01a27c12b3030df85fd64b35085c86212fd82ce09ccbc9825b3a9e8792a097a"
+      },
+      {
         "path": "apps/docs/src/content/scatter-chart/meta.ts",
         "sha256": "62e68d7b91528db648944feb4562ef149b1831703dc3ca3711baf4c60cca75c9"
       },
@@ -333,6 +345,10 @@
       {
         "path": "apps/docs/src/content/skeleton/meta.ts",
         "sha256": "0ed995f03e84e04168cb27093b0094c96b9dfcee6eb7f9591f2a2287e572274f"
+      },
+      {
+        "path": "apps/docs/src/content/skip-link/meta.ts",
+        "sha256": "85a5a6a28b57035eb259079343ba60cd04aac76c3c9c00d824e2f907820df1fb"
       },
       {
         "path": "apps/docs/src/content/slider/meta.ts",
@@ -456,7 +472,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "130c43d38823e7204114f818fa312e0867d189bacd39063b320bd805268ce818"
+        "sha256": "23251aa89a6315afe4946a6af3a341385e084f4f71aca9f00db20ff37a9feae2"
       },
       {
         "path": "packages/ui/motion.css",
@@ -489,6 +505,10 @@
       {
         "path": "packages/ui/src/components/autocomplete.tsx",
         "sha256": "c9469aa067c4e7bbd8046ee4d1a1fc56a84185b145e02885cea990b6b19ce968"
+      },
+      {
+        "path": "packages/ui/src/components/avatar-group.tsx",
+        "sha256": "806282f5521b596540a007ca559299a7d312a09eca028fd5e9f8a9591375ea51"
       },
       {
         "path": "packages/ui/src/components/avatar.tsx",
@@ -580,7 +600,7 @@
       },
       {
         "path": "packages/ui/src/components/corner-mark.tsx",
-        "sha256": "2ab94e2f89fda39bfa2f8751be6394fa346a22d2de902c123d38e012e59c9ac6"
+        "sha256": "ac8892bd3e844d1037659b14d1fa362244bb04e8b5091d156c8d33fc39096a5a"
       },
       {
         "path": "packages/ui/src/components/data-table.tsx",
@@ -649,6 +669,10 @@
       {
         "path": "packages/ui/src/components/hover-card.tsx",
         "sha256": "4b6ea56ca364d46fe0fb8fbbd17cabed7ea198ed446cdcb08c75c06076ec499b"
+      },
+      {
+        "path": "packages/ui/src/components/image-preview.tsx",
+        "sha256": "23741daf38ba1fbc21c80c4eae46b218445b975188b4bbc3e6691bfd6a20803e"
       },
       {
         "path": "packages/ui/src/components/input-group.tsx",
@@ -755,6 +779,10 @@
         "sha256": "475ad2f99677a4a8568db306872ef7323f3f3386300065365e1086cbbc386a74"
       },
       {
+        "path": "packages/ui/src/components/result.tsx",
+        "sha256": "68a37124c7872d1d121516a465cd9f9fe0d764871e5ee1f9ce9b58399d44e43e"
+      },
+      {
         "path": "packages/ui/src/components/scatter-chart.tsx",
         "sha256": "c3975485a92833bf61f7ac1cac2587189f280468401f0fcc7f472f120ba5e129"
       },
@@ -793,6 +821,10 @@
       {
         "path": "packages/ui/src/components/skeleton.tsx",
         "sha256": "2b305870785ff60073a14431afb4356a4a270d0becf2dbf981459131e0fbf871"
+      },
+      {
+        "path": "packages/ui/src/components/skip-link.tsx",
+        "sha256": "4333b6b70cefd7211580107717851060f8942bbe39dc19982442c7da5363f79e"
       },
       {
         "path": "packages/ui/src/components/slider.tsx",
@@ -904,7 +936,7 @@
       },
       {
         "path": "packages/ui/src/index.ts",
-        "sha256": "1da0ac00543432de6cc0b21d36a36fa59fef70e2a3bfa396adf014a9b516257a"
+        "sha256": "fa9ebe4ce56c78d06ce5ca9e2839f240791a10d83bbfe45c731dfd12538ff78e"
       },
       {
         "path": "packages/ui/styles.css",
@@ -1046,10 +1078,10 @@
     "source": "packages/ui/package.json"
   },
   "counts": {
-    "components": 108,
-    "catalog": 108,
+    "components": 112,
+    "catalog": 112,
     "dist": 102,
-    "local": 108
+    "local": 112
   },
   "buildArtifacts": {
     "status": "PRESENT",
@@ -2779,6 +2811,192 @@
       }
     },
     {
+      "name": "avatar-group",
+      "status": "PRESENT",
+      "source": "packages/ui/src/components/avatar-group.tsx",
+      "exports": [
+        {
+          "name": "AvatarGroup",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/avatar-group.tsx",
+            "line": 49
+          }
+        },
+        {
+          "name": "AvatarGroupItem",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/avatar-group.tsx",
+            "line": 9
+          }
+        },
+        {
+          "name": "AvatarGroupProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/avatar-group.tsx",
+            "line": 18
+          }
+        }
+      ],
+      "metadata": {
+        "path": "apps/docs/src/content/avatar-group/meta.ts",
+        "title": "头像组 AvatarGroup",
+        "titleEn": "AvatarGroup",
+        "description": "一组相关的人，叠放并收起多余的成员。",
+        "descriptionEn": "A set of related people, overlapped, with the surplus collapsed.",
+        "category": "数据展示",
+        "layer": "pattern",
+        "source": "local",
+        "exports": [
+          "AvatarGroup"
+        ],
+        "keywords": [
+          "avatar group",
+          "stacked avatars",
+          "members",
+          "头像组",
+          "成员",
+          "协作者"
+        ],
+        "decisions": "叠放量取头像直径的四分之一，字始终露在外面；被收起的人不会消失，「+N」的可访问名称列出他们全部的名称。整组不可点击，要点击就放进按钮或链接。",
+        "decisionsEn": "The overlap is a quarter of the avatar diameter so the initials always stay clear; collapsed people do not disappear: the accessible name of \"+N\" lists all of them. The group itself is not clickable; to make it so, put it inside a button or link.",
+        "design": {
+          "methods": [
+            "名实相符",
+            "相成相制"
+          ],
+          "whenToUse": [
+            "表达一件事涉及哪几个人，且空间只够窄窄一行。"
+          ],
+          "avoid": [
+            "一个人的身份用 Avatar；需要逐个操作成员时用列表，不用叠放。"
+          ],
+          "composition": [
+            "整组 role=group 必须有名称；每个头像仍是自己的图形与名称，末尾的「+N」是一个独立头像。"
+          ],
+          "stateOwner": {
+            "library": [
+              "叠放、截断与整组命名。"
+            ],
+            "application": [
+              "成员事实、顺序与每个人的真实名称。"
+            ]
+          },
+          "responsive": [
+            "叠放量随头像档位等比，不随容器宽度变化；收起数量由 max 决定。"
+          ],
+          "customization": [
+            "size 取头像五档之一；其余用 className。"
+          ]
+        },
+        "designEn": {
+          "whenToUse": [
+            "Show which people a thing involves when there is room for only a narrow row."
+          ],
+          "avoid": [
+            "Use Avatar for one identity; use a list, not an overlap, when members must be acted on individually."
+          ],
+          "composition": [
+            "The group is role=group and must be named; each avatar remains its own graphic with its own name, and the trailing \"+N\" is a separate avatar."
+          ],
+          "stateOwner": {
+            "library": [
+              "Overlap, truncation and naming of the whole group."
+            ],
+            "application": [
+              "Membership facts, order and each person's real name."
+            ]
+          },
+          "responsive": [
+            "The overlap scales with the avatar size step, not with container width; max decides how many collapse."
+          ],
+          "customization": [
+            "size takes one of the five avatar steps; use className for the rest."
+          ]
+        },
+        "api": [
+          {
+            "name": "AvatarGroup",
+            "description": "role=group 的 div，必须有 aria-label 或 aria-labelledby。",
+            "descriptionEn": "A role=group div that requires aria-label or aria-labelledby.",
+            "props": [
+              {
+                "name": "items",
+                "type": "{ key?, label, src?, fallback? }[]",
+                "description": "成员；label 必填，fallback 省略时取名称的第一个字。",
+                "descriptionEn": "Members; label is required, and fallback defaults to the first character of the name."
+              },
+              {
+                "name": "max",
+                "type": "number",
+                "default": "5",
+                "description": "最多露出几个头像，其余收进末尾的「+N」。",
+                "descriptionEn": "How many avatars to show before the rest collapse into a trailing \"+N\"."
+              },
+              {
+                "name": "size",
+                "type": "\"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\"",
+                "default": "\"md\"",
+                "description": "与 Avatar 同一组档位。",
+                "descriptionEn": "The same steps as Avatar."
+              },
+              {
+                "name": "className / native props",
+                "type": "React.ComponentProps<div>",
+                "description": "其余属性透传到根元素。",
+                "descriptionEn": "Remaining attributes forward to the root."
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "「+N」的名称由 locale 提供（avatarGroupMore），列出被收起的全部名称。"
+        ],
+        "notesEn": [
+          "The name of \"+N\" comes from the locale (avatarGroupMore) and lists every collapsed name."
+        ],
+        "usageResolution": [
+          {
+            "name": "AvatarGroup",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/avatar-group.tsx",
+              "line": 49
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/avatar-group.tsx",
+              "line": 49
+            },
+            "status": "PRESENT"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "local",
+        "source": "apps/docs/src/content/avatar-group/meta.ts",
+        "designBasis": "design.md",
+        "trackingStatus": "PRESENT",
+        "verificationStatus": "NOT_RUN",
+        "scope": "Current library authorship classification; this generator does not perform independent provenance comparison."
+      },
+      "catalog": {
+        "present": true,
+        "version": "5.2.0",
+        "source": "packages/ui/catalog.json"
+      },
+      "dist": {
+        "js": false,
+        "declarations": false,
+        "status": "NOT_RUN"
+      },
+      "consistency": {
+        "status": "PASS",
+        "missingPublicMetadataExports": []
+      }
+    },
+    {
       "name": "avatar",
       "status": "PRESENT",
       "source": "packages/ui/src/components/avatar.tsx",
@@ -2856,8 +3074,8 @@
           "用户头像",
           "身份"
         ],
-        "decisions": "不要虚构姓名或让 initials 代替可访问名称。",
-        "decisionsEn": "Do not invent a name or let initials replace an accessible name.",
+        "decisions": "不要虚构姓名或让 initials 代替可访问名称。头像本身不可交互；要点击，就用 Button（或链接）包住它：可访问名称仍来自头像的 label，焦点、键盘和禁用状态归外层，头像不加 tabindex、不加 onClick。要换名称时给外层 aria-label。一组相关的人用 AvatarGroup。",
+        "decisionsEn": "Do not invent a name or let initials replace an accessible name. An avatar is not interactive itself; to make it clickable, wrap it in a Button (or link): the accessible name still comes from the avatar's label, while focus, keyboard and disabled state belong to the outer element, and the avatar gets no tabindex or onClick. Give the outer element an aria-label to change the name. Use AvatarGroup for a set of related people.",
         "design": {
           "methods": [
             "名实相符",
@@ -9955,7 +10173,23 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/corner-mark.tsx",
-            "line": 43
+            "line": 68
+          }
+        },
+        {
+          "name": "CornerMarkHostShape",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/corner-mark.tsx",
+            "line": 11
+          }
+        },
+        {
+          "name": "CornerMarkPlacement",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/corner-mark.tsx",
+            "line": 9
           }
         },
         {
@@ -9963,7 +10197,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/corner-mark.tsx",
-            "line": 10
+            "line": 14
           }
         },
         {
@@ -9998,8 +10232,8 @@
         "api": [
           {
             "name": "CornerMark",
-            "description": "包裹宿主内容，角标钉在宿主的右上角。",
-            "descriptionEn": "Wraps the host content; the mark is pinned to the host's top-right corner.",
+            "description": "包裹宿主内容，角标钉在宿主的一角（默认行末上角）。",
+            "descriptionEn": "Wraps the host content; the mark is pinned to one of the host's corners (end-top by default).",
             "props": [
               {
                 "name": "count / max",
@@ -10024,6 +10258,13 @@
                 "type": "\"neutral\" | \"success\" | \"danger\"",
                 "description": "默认焦墨；success、danger 是已有语义类别，没有脱离类别的彩色。",
                 "descriptionEn": "Defaults to ink; success and danger are existing semantic categories, never hue without meaning."
+              },
+              {
+                "name": "placement / hostShape",
+                "type": "\"top-end\" | \"bottom-end\" | \"top-start\" | \"bottom-start\" / \"square\" | \"circle\"",
+                "default": "\"top-end\" / \"square\"",
+                "description": "角用逻辑方向（end 是行末，从右向左排版时自动在左），不用 left/right。宿主是圆形（头像）时设 hostShape=\"circle\"，角标落在圆周上 45° 的点，否则会悬在圆外。",
+                "descriptionEn": "Corners use logical directions (end is the line end, so it sits on the left under right-to-left), never left/right. For a circular host (an avatar) set hostShape=\"circle\" so the mark sits on the circle at 45 degrees instead of floating outside it."
               },
               {
                 "name": "className / wrapperClassName",
@@ -10095,11 +10336,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/corner-mark.tsx",
-              "line": 43
+              "line": 68
             },
             "rootEntry": {
               "path": "packages/ui/src/components/corner-mark.tsx",
-              "line": 43
+              "line": 68
             },
             "status": "PRESENT"
           }
@@ -15490,6 +15731,185 @@
         "js": true,
         "declarations": true,
         "status": "PRESENT"
+      },
+      "consistency": {
+        "status": "PASS",
+        "missingPublicMetadataExports": []
+      }
+    },
+    {
+      "name": "image-preview",
+      "status": "PRESENT",
+      "source": "packages/ui/src/components/image-preview.tsx",
+      "exports": [
+        {
+          "name": "ImagePreview",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/image-preview.tsx",
+            "line": 39
+          }
+        },
+        {
+          "name": "ImagePreviewImage",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/image-preview.tsx",
+            "line": 12
+          }
+        },
+        {
+          "name": "ImagePreviewProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/image-preview.tsx",
+            "line": 19
+          }
+        }
+      ],
+      "metadata": {
+        "path": "apps/docs/src/content/image-preview/meta.ts",
+        "title": "图片预览 ImagePreview",
+        "titleEn": "ImagePreview",
+        "description": "缩略图打开大图，可在同组图片间切换并放大。",
+        "descriptionEn": "Thumbnails open a large view with switching within the set and zoom.",
+        "category": "数据展示",
+        "layer": "pattern",
+        "source": "local",
+        "exports": [
+          "ImagePreview"
+        ],
+        "keywords": [
+          "image preview",
+          "lightbox",
+          "gallery",
+          "zoom",
+          "图片预览",
+          "大图",
+          "放大"
+        ],
+        "decisions": "复用 Dialog：焦点困住、Esc 关闭、背景阻断都来自它。alt 必填，它同时是缩略图按钮、大图和加载失败时唯一能读到的文字。放大后舞台可滚动并获得焦点，此时方向键归滚动、不切图。关闭后焦点回到打开的那张缩略图，即使已切到别的图。",
+        "decisionsEn": "Built on Dialog, which supplies the focus trap, Esc to close and the blocking backdrop. alt is required and is the only text available for the thumbnail button, the large view and a load failure. When zoomed, the stage scrolls and takes focus, and the arrow keys then scroll instead of switching images. After closing, focus returns to the thumbnail that opened it, even after switching to another image.",
+        "design": {
+          "methods": [
+            "名实相符",
+            "应物象形"
+          ],
+          "whenToUse": [
+            "图片是内容的一部分，且需要放大看细节或在同组中浏览。"
+          ],
+          "avoid": [
+            "装饰性图片不需要预览；只展示一张固定大小的图用普通 img。"
+          ],
+          "composition": [
+            "缩略图是按钮；大图在阻断式对话框里，页脚是位置、前后切换与缩放。"
+          ],
+          "stateOwner": {
+            "library": [
+              "开合、当前图、缩放级别、键盘与焦点归还。"
+            ],
+            "application": [
+              "图片来源、alt 文案与分组。"
+            ]
+          },
+          "responsive": [
+            "舞台宽度有上限，高度取视口的 70%；窄屏下收窄到视口内。"
+          ],
+          "customization": [
+            "thumbnailClassName 调整缩略图；其余用 className。"
+          ]
+        },
+        "designEn": {
+          "whenToUse": [
+            "Images are part of the content and details need zooming, or browsing within a set."
+          ],
+          "avoid": [
+            "Decorative images need no preview; a single fixed-size image can be a plain img."
+          ],
+          "composition": [
+            "Thumbnails are buttons; the large view sits in a blocking dialog whose footer carries position, previous/next and zoom."
+          ],
+          "stateOwner": {
+            "library": [
+              "Open state, current image, zoom level, keyboard handling and focus return."
+            ],
+            "application": [
+              "Image sources, alt text and grouping."
+            ]
+          },
+          "responsive": [
+            "The stage has a maximum width and a height of 70% of the viewport, narrowing to fit on small screens."
+          ],
+          "customization": [
+            "thumbnailClassName adjusts thumbnails; use className for the rest."
+          ]
+        },
+        "api": [
+          {
+            "name": "ImagePreview",
+            "description": "一排缩略图按钮，打开 Dialog 中的大图。",
+            "descriptionEn": "A row of thumbnail buttons that open the large view in a Dialog.",
+            "props": [
+              {
+                "name": "images",
+                "type": "{ src, alt, thumbnailSrc? }[]",
+                "description": "同一组图片；alt 必填，thumbnailSrc 省略时缩略图也读 src。单张图传一项。",
+                "descriptionEn": "One set of images; alt is required and thumbnailSrc falls back to src. Pass one item for a single image."
+              },
+              {
+                "name": "thumbnailClassName",
+                "type": "string",
+                "description": "作用于每个缩略图按钮。",
+                "descriptionEn": "Applies to every thumbnail button."
+              },
+              {
+                "name": "className / native props",
+                "type": "React.ComponentProps<div>",
+                "description": "其余属性透传到根元素。",
+                "descriptionEn": "Remaining attributes forward to the root."
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "键盘：左右方向键切图（从右向左排版时对调）、+ / - 缩放、0 适应窗口；到头即止，不循环。"
+        ],
+        "notesEn": [
+          "Keyboard: Left/Right switch images (swapped under right-to-left), +/- zoom, 0 fits; stops at the ends, no looping."
+        ],
+        "usageResolution": [
+          {
+            "name": "ImagePreview",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/image-preview.tsx",
+              "line": 39
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/image-preview.tsx",
+              "line": 39
+            },
+            "status": "PRESENT"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "local",
+        "source": "apps/docs/src/content/image-preview/meta.ts",
+        "designBasis": "design.md",
+        "trackingStatus": "PRESENT",
+        "verificationStatus": "NOT_RUN",
+        "scope": "Current library authorship classification; this generator does not perform independent provenance comparison."
+      },
+      "catalog": {
+        "present": true,
+        "version": "5.2.0",
+        "source": "packages/ui/catalog.json"
+      },
+      "dist": {
+        "js": false,
+        "declarations": false,
+        "status": "NOT_RUN"
       },
       "consistency": {
         "status": "PASS",
@@ -23105,6 +23525,303 @@
       }
     },
     {
+      "name": "result",
+      "status": "PRESENT",
+      "source": "packages/ui/src/components/result.tsx",
+      "exports": [
+        {
+          "name": "Result",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/result.tsx",
+            "line": 37
+          }
+        },
+        {
+          "name": "ResultActions",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/result.tsx",
+            "line": 64
+          }
+        },
+        {
+          "name": "ResultActionsProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/result.tsx",
+            "line": 63
+          }
+        },
+        {
+          "name": "ResultDescription",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/result.tsx",
+            "line": 59
+          }
+        },
+        {
+          "name": "ResultDescriptionProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/result.tsx",
+            "line": 58
+          }
+        },
+        {
+          "name": "ResultProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/result.tsx",
+            "line": 13
+          }
+        },
+        {
+          "name": "ResultTitle",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/result.tsx",
+            "line": 56
+          }
+        },
+        {
+          "name": "ResultTitleProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/result.tsx",
+            "line": 55
+          }
+        },
+        {
+          "name": "ResultTone",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/result.tsx",
+            "line": 12
+          }
+        }
+      ],
+      "metadata": {
+        "path": "apps/docs/src/content/result/meta.ts",
+        "title": "结果 Result",
+        "titleEn": "Result",
+        "description": "一次操作的结局：标记、标题、说明与去向。",
+        "descriptionEn": "The outcome of one action: a mark, a title, an explanation and where to go next.",
+        "category": "反馈",
+        "layer": "pattern",
+        "source": "local",
+        "exports": [
+          "Result",
+          "ResultTitle",
+          "ResultDescription",
+          "ResultActions"
+        ],
+        "keywords": [
+          "result",
+          "outcome",
+          "success page",
+          "error page",
+          "结果",
+          "提交成功",
+          "操作失败",
+          "没有权限"
+        ],
+        "decisions": "与 Empty 的分工：Empty 说「这里还没有内容」，是一块区域的状态（零结果、未知、不适用）；Result 说「刚才那件事的结局」，是一次动作的回执，类别由事件决定，并总带着下一步的去向。与 Alert 的分工：Alert 是在场对象旁的一句提示，不占版面；Result 取代该处内容，独占一块。类别除色相外还有形状不同的图标和只给读屏的前缀；去掉图标不等于去掉类别。不自动宣告，是否读出由应用按真实事件决定。",
+        "decisionsEn": "Versus Empty: Empty says \"there is no content here yet\" and is the state of a region (zero results, unknown, not applicable); Result says \"how that thing ended\" and is the receipt of an action, its tone decided by the event and always paired with where to go next. Versus Alert: Alert is a line beside an object that is still present and takes no layout; Result replaces that content and occupies its own block. Tone has a differently shaped icon and a screen-reader-only prefix besides hue; removing the icon does not remove the tone. It never announces itself; the application decides from the real event whether to speak it.",
+        "design": {
+          "methods": [
+            "名实相符",
+            "相成相制"
+          ],
+          "whenToUse": [
+            "一次提交、保存或申请结束后，需要独占一块告诉用户结局和下一步。"
+          ],
+          "avoid": [
+            "区域里本来就没有内容用 Empty；对象仍在、只需旁注一句用 Alert。"
+          ],
+          "composition": [
+            "标记、标题、说明、动作自上而下，左对齐；动作复用公共控件。"
+          ],
+          "stateOwner": {
+            "library": [
+              "类别的色相、图标与读屏前缀，及各部分的间隔。"
+            ],
+            "application": [
+              "结局的事实、tone、文案、role 与去向。"
+            ]
+          },
+          "responsive": [
+            "标题、说明与动作完整换行；不居中，不加框。"
+          ],
+          "customization": [
+            "icon 可换成自己的节点或 false；没有权限这类非成败结果用 neutral 或 warning 加自己的 icon。"
+          ]
+        },
+        "designEn": {
+          "whenToUse": [
+            "After a submission, save or request ends, a whole block must say how it ended and what comes next."
+          ],
+          "avoid": [
+            "Use Empty when a region simply has no content; use Alert when the object remains and a side note is enough."
+          ],
+          "composition": [
+            "Mark, title, description and actions run top to bottom, start-aligned; actions compose public controls."
+          ],
+          "stateOwner": {
+            "library": [
+              "Tone hue, icon and screen-reader prefix, and spacing between parts."
+            ],
+            "application": [
+              "The outcome's facts, tone, copy, role and next destination."
+            ]
+          },
+          "responsive": [
+            "Title, description and actions wrap fully; not centered, not boxed."
+          ],
+          "customization": [
+            "icon may be your own node or false; for non-success/failure outcomes such as no permission, use neutral or warning with your own icon."
+          ]
+        },
+        "api": [
+          {
+            "name": "Result",
+            "description": "div，类别由调用方声明。",
+            "descriptionEn": "A div whose tone the caller declares.",
+            "props": [
+              {
+                "name": "tone",
+                "type": "\"neutral\" | \"info\" | \"success\" | \"warning\" | \"danger\"",
+                "default": "\"neutral\"",
+                "description": "结局的类别，按真实事件声明；组件不从文字猜成败。",
+                "descriptionEn": "The outcome's category, declared from the real event; the component never guesses from text."
+              },
+              {
+                "name": "icon",
+                "type": "React.ReactNode | false",
+                "description": "省略时按 tone 给默认图标（neutral 没有）；传节点则替换；false 不放标记。",
+                "descriptionEn": "Defaults to the tone's icon (neutral has none); a node replaces it; false removes the mark."
+              },
+              {
+                "name": "children / render / ref / native props",
+                "type": "useRender.ComponentProps<div>",
+                "description": "不自动成为 alert 或 status。",
+                "descriptionEn": "Not automatically an alert or status."
+              }
+            ]
+          },
+          {
+            "name": "ResultTitle",
+            "description": "复用 Heading。",
+            "descriptionEn": "A Heading composition.",
+            "props": [
+              {
+                "name": "level / step / Heading props",
+                "type": "HeadingProps",
+                "description": "标题层级由文档关系决定。",
+                "descriptionEn": "Document relationships determine heading level."
+              }
+            ]
+          },
+          {
+            "name": "ResultDescription / ResultActions",
+            "description": "p 说明与 div 去向。",
+            "descriptionEn": "p explanation and div destinations.",
+            "props": [
+              {
+                "name": "children / render / ref / native props",
+                "type": "useRender.ComponentProps<p | div>",
+                "description": "动作复用公共组件。",
+                "descriptionEn": "Compose public controls for actions."
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "非成败的结局（例如没有权限）没有单独的 status；用 tone 加自己的 icon。"
+        ],
+        "notesEn": [
+          "Outcomes that are neither success nor failure (such as no permission) have no dedicated status; use tone plus your own icon."
+        ],
+        "usageResolution": [
+          {
+            "name": "Result",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/result.tsx",
+              "line": 37
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/result.tsx",
+              "line": 37
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ResultTitle",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/result.tsx",
+              "line": 56
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/result.tsx",
+              "line": 56
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ResultDescription",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/result.tsx",
+              "line": 59
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/result.tsx",
+              "line": 59
+            },
+            "status": "PRESENT"
+          },
+          {
+            "name": "ResultActions",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/result.tsx",
+              "line": 64
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/result.tsx",
+              "line": 64
+            },
+            "status": "PRESENT"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "local",
+        "source": "apps/docs/src/content/result/meta.ts",
+        "designBasis": "design.md",
+        "trackingStatus": "PRESENT",
+        "verificationStatus": "NOT_RUN",
+        "scope": "Current library authorship classification; this generator does not perform independent provenance comparison."
+      },
+      "catalog": {
+        "present": true,
+        "version": "5.2.0",
+        "source": "packages/ui/catalog.json"
+      },
+      "dist": {
+        "js": false,
+        "declarations": false,
+        "status": "NOT_RUN"
+      },
+      "consistency": {
+        "status": "PASS",
+        "missingPublicMetadataExports": []
+      }
+    },
+    {
       "name": "scatter-chart",
       "status": "PRESENT",
       "source": "packages/ui/src/components/scatter-chart.tsx",
@@ -26498,6 +27215,176 @@
         "js": true,
         "declarations": true,
         "status": "PRESENT"
+      },
+      "consistency": {
+        "status": "PASS",
+        "missingPublicMetadataExports": []
+      }
+    },
+    {
+      "name": "skip-link",
+      "status": "PRESENT",
+      "source": "packages/ui/src/components/skip-link.tsx",
+      "exports": [
+        {
+          "name": "SkipLink",
+          "kind": "value",
+          "source": {
+            "path": "packages/ui/src/components/skip-link.tsx",
+            "line": 23
+          }
+        },
+        {
+          "name": "SkipLinkProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/skip-link.tsx",
+            "line": 7
+          }
+        }
+      ],
+      "metadata": {
+        "path": "apps/docs/src/content/skip-link/meta.ts",
+        "title": "跳转链接 SkipLink",
+        "titleEn": "SkipLink",
+        "description": "让键盘用户越过重复的导航，直达主要内容。",
+        "descriptionEn": "Lets keyboard users bypass repeated navigation and reach the main content.",
+        "category": "导航",
+        "layer": "primitive",
+        "source": "local",
+        "exports": [
+          "SkipLink"
+        ],
+        "keywords": [
+          "skip link",
+          "skip to content",
+          "bypass blocks",
+          "跳到正文",
+          "跳转链接",
+          "无障碍"
+        ],
+        "decisions": "平时不可见也不可点，却是 Tab 序里第一个到达的；获得焦点才现身。点击时把焦点真正移到目标，目标不可聚焦就补 tabindex=-1，否则下一次 Tab 又回到导航里，跳转等于没发生。找不到目标时不拦截，交还浏览器的默认锚点跳转。",
+        "decisionsEn": "Invisible and unclickable at rest, yet the first stop in tab order; it appears only when focused. On click it moves focus to the target for real, adding tabindex=-1 when the target is not focusable, otherwise the next Tab would return to the navigation and the skip would not have happened. A missing target is not intercepted; the browser's default anchor jump takes over.",
+        "design": {
+          "methods": [
+            "名实相符",
+            "随境取度"
+          ],
+          "whenToUse": [
+            "每页都重复出现导航、侧栏或页眉，而主要内容在其后。"
+          ],
+          "avoid": [
+            "不要把它当作目录或页内导航；它只做一件事：越过重复区块。"
+          ],
+          "composition": [
+            "放在文档的最前面，href 指向主要内容容器的 id。"
+          ],
+          "stateOwner": {
+            "library": [
+              "现身时机、焦点转移与目标补救。"
+            ],
+            "application": [
+              "目标的位置与 id，及是否需要多个跳转目标。"
+            ]
+          },
+          "responsive": [
+            "固定在视口起始侧上角；从右向左排版时在右上。"
+          ],
+          "customization": [
+            "children 覆盖默认文字；className 调整层序。"
+          ]
+        },
+        "designEn": {
+          "whenToUse": [
+            "Every page repeats navigation, a sidebar or a header ahead of the main content."
+          ],
+          "avoid": [
+            "Do not use it as a table of contents or in-page navigation; it does one thing, bypassing repeated blocks."
+          ],
+          "composition": [
+            "Place it first in the document, with href pointing at the id of the main-content container."
+          ],
+          "stateOwner": {
+            "library": [
+              "When it appears, focus transfer and target remediation."
+            ],
+            "application": [
+              "Where the target is and its id, and whether more than one skip target is needed."
+            ]
+          },
+          "responsive": [
+            "Fixed to the viewport's start-side top corner; top-right under right-to-left."
+          ],
+          "customization": [
+            "children overrides the default text; className adjusts stacking."
+          ]
+        },
+        "api": [
+          {
+            "name": "SkipLink",
+            "description": "指向页内锚点的 a。",
+            "descriptionEn": "An a pointing at an in-page anchor.",
+            "props": [
+              {
+                "name": "href",
+                "type": "`#${string}`",
+                "description": "必填。目标的锚点，写成 #id。",
+                "descriptionEn": "Required. The target anchor, written as #id."
+              },
+              {
+                "name": "children",
+                "type": "React.ReactNode",
+                "description": "省略时用 locale 的 skipToContent。",
+                "descriptionEn": "Defaults to the locale's skipToContent."
+              },
+              {
+                "name": "className / onClick / native props",
+                "type": "React.ComponentProps<a>",
+                "description": "onClick 在组件之前运行，调用 preventDefault 可取消转移。",
+                "descriptionEn": "onClick runs first; calling preventDefault cancels the focus transfer."
+              }
+            ]
+          }
+        ],
+        "notes": [
+          "目标若不可聚焦，组件会补上 tabindex=\"-1\"。"
+        ],
+        "notesEn": [
+          "If the target is not focusable, the component adds tabindex=\"-1\"."
+        ],
+        "usageResolution": [
+          {
+            "name": "SkipLink",
+            "kind": "value",
+            "componentEntry": {
+              "path": "packages/ui/src/components/skip-link.tsx",
+              "line": 23
+            },
+            "rootEntry": {
+              "path": "packages/ui/src/components/skip-link.tsx",
+              "line": 23
+            },
+            "status": "PRESENT"
+          }
+        ]
+      },
+      "provenance": {
+        "kind": "local",
+        "source": "apps/docs/src/content/skip-link/meta.ts",
+        "designBasis": "design.md",
+        "trackingStatus": "PRESENT",
+        "verificationStatus": "NOT_RUN",
+        "scope": "Current library authorship classification; this generator does not perform independent provenance comparison."
+      },
+      "catalog": {
+        "present": true,
+        "version": "5.2.0",
+        "source": "packages/ui/catalog.json"
+      },
+      "dist": {
+        "js": false,
+        "declarations": false,
+        "status": "NOT_RUN"
       },
       "consistency": {
         "status": "PASS",
@@ -42842,7 +43729,7 @@
     },
     {
       "name": "--qy-control-sm-padding",
-      "componentSourceOccurrences": 24,
+      "componentSourceOccurrences": 25,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
