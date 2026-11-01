@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-01T07:56:40.633Z",
-  "revision": "8248669dba7e7cd77f7f9e2d8401b4738b6c31d6",
+  "generatedAt": "2026-11-01T08:46:39.120Z",
+  "revision": "5a35d62064e535c853178872e6c5094b13ef6d66",
   "fingerprint": {
-    "sha256": "e25fb7f5165f83bb09489dc5bc58ca531b947fa585df4f306266fc2ba2f1ccc7",
+    "sha256": "85a364b1ea3daf082b3de05c99dc47b8c56a0ad7cfe9b08f50ce37d5edd3c075",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -476,7 +476,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "6efb1098653dbe1e2ae34f6d8a4af2df620e7e090b1fc8836c4ee3d61681119d"
+        "sha256": "563a5d4ec29488af0ce91c46cb54d933d831e66670342acde1b60d27caffd28f"
       },
       {
         "path": "packages/ui/motion.css",
@@ -588,7 +588,7 @@
       },
       {
         "path": "packages/ui/src/components/composer.tsx",
-        "sha256": "4acac907848fbc6389ee0d83b6f3e65e5f5daab6e8e704a343432f76724fee2b"
+        "sha256": "cf23ffe28f63bf58767ea6be5ea90c64e7ddde21ecbc68dab0655290dc9ab726"
       },
       {
         "path": "packages/ui/src/components/confirm-action.tsx",
@@ -780,7 +780,7 @@
       },
       {
         "path": "packages/ui/src/components/rating.tsx",
-        "sha256": "00742b70f6983cd7ca7c7c2e0844e5535bcdb5b26b28f5edc4350b580ea2ce1d"
+        "sha256": "280d62c431743cb0d2a9bee2a1f0a6897335c9a8fbb35d01d976fee4a78c1ebd"
       },
       {
         "path": "packages/ui/src/components/resizable.tsx",
@@ -916,11 +916,11 @@
       },
       {
         "path": "packages/ui/src/components/tour.tsx",
-        "sha256": "2b2d6f7b97214df0371feb91848cbbaa00f3fc9e2133dbb55939529ec9dcbf2c"
+        "sha256": "8ab262e1964ac7f2f31c5ad26259096418c3a8a81bba0f3f3fd5dff85e561c6e"
       },
       {
         "path": "packages/ui/src/components/transfer.tsx",
-        "sha256": "84ad943c10022f1cb49d8f88d030ba66cd2f5eda7908c0d3b5ebdbd51beaf159"
+        "sha256": "33edceaba8c73967d2c63e2a6120ec744e68eff44d41db0816c2075cecfa06c8"
       },
       {
         "path": "packages/ui/src/components/tree-select.tsx",
@@ -928,7 +928,7 @@
       },
       {
         "path": "packages/ui/src/components/tree.tsx",
-        "sha256": "39ad8a6be1d75c91bd52d2cc9ead3ec18a399b4bc2eba27362b6fa2f9537b93a"
+        "sha256": "00664fdc85c13950a92cd28f8f8b5a432dd0cdbd7d30c789aad35af23f6363ab"
       },
       {
         "path": "packages/ui/src/components/typography.tsx",
@@ -8922,7 +8922,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/composer.tsx",
-            "line": 690
+            "line": 691
           }
         },
         {
@@ -8938,7 +8938,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/composer.tsx",
-            "line": 687
+            "line": 688
           }
         },
         {
@@ -8964,7 +8964,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/composer.tsx",
-            "line": 678
+            "line": 679
           }
         },
         {
@@ -8972,7 +8972,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/composer.tsx",
-            "line": 671
+            "line": 672
           }
         },
         {
@@ -9312,11 +9312,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/composer.tsx",
-              "line": 678
+              "line": 679
             },
             "rootEntry": {
               "path": "packages/ui/src/components/composer.tsx",
-              "line": 678
+              "line": 679
             },
             "status": "PRESENT"
           },
@@ -9325,11 +9325,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/composer.tsx",
-              "line": 690
+              "line": 691
             },
             "rootEntry": {
               "path": "packages/ui/src/components/composer.tsx",
-              "line": 690
+              "line": 691
             },
             "status": "PRESENT"
           },
@@ -35296,7 +35296,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tree.tsx",
-            "line": 74
+            "line": 77
           }
         },
         {
@@ -35304,7 +35304,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tree.tsx",
-            "line": 59
+            "line": 62
           }
         },
         {
@@ -35548,11 +35548,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tree.tsx",
-              "line": 74
+              "line": 77
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tree.tsx",
-              "line": 74
+              "line": 77
             },
             "status": "PRESENT"
           }
