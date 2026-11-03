@@ -29,6 +29,7 @@ Dirty and appliedSummary are required facts; Apply emits intent without changing
 
 ## Customization
 - Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset.
+- Field widths go in the Field className (for example flex-1 lets search take the remaining space), not on the control.
 
 ## Current exports
 - FilterBar: function; owner filter-bar; PASS; props: FilterBarProps

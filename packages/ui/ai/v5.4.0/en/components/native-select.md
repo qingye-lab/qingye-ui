@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
-Source SHA-256: 27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874
+Source SHA-256: c79d1ce39764a22c4952574d981ffccb7e4d732c9e1be7816a5a3154dad1745f
 
 Keep the platform picker, native options and form values.
 
@@ -27,7 +27,7 @@ Native size names visible list rows only and no longer doubles as a geometry pro
 - One geometry for the single-value form, following the density axis; narrow height adds 4px, coarse pointers read touch-target, and multiple rows are not fixed to a single-line height.
 
 ## Customization
-- Retain the platform arrow; className/style/render belong to the actual select.
+- Retain the platform arrow. In the single-value form className/style belong to the wrapper, where width goes (w-full fills); selectClassName and render belong to the actual select. The list form has no wrapper, so all of them land on the select.
 
 ## Current exports
 - NativeSelect: function; owner native-select; PASS; props: NativeSelectProps
@@ -37,7 +37,7 @@ Native size names visible list rows only and no longer doubles as a geometry pro
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### NativeSelect
-- no props declared by this library
+- `selectClassName?`: `string | undefined`. 真实 select 的样式入口。单值形态的 className / style 属于外框（图标定位在那里，宽度也写在那里）；列表形态没有外框，两者都落在 select。
 - plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -53,7 +53,9 @@ Written descriptions; the list above is the type-resolved fact.
 A real select with native option and optgroup children.
 - size / multiple / disabled / required / name: native select props. Native rows, multiple values, disabled state, constraints and form name.
 - value / defaultValue / onChange: native select props. Controlled and uncontrolled values; multiple values use string arrays.
-- render / ref / ARIA / className / style: useRender.ComponentProps<select>. Props, events and ref reach the actual select; render must preserve a native value-selecting element.
+- render / ref / ARIA: useRender.ComponentProps<select>. Props, events and ref reach the actual select; render must preserve a native value-selecting element.
+- className / style: useRender.ComponentProps<select>. On the wrapper in the single-value form (the icon is positioned there), so width goes here; on the select in the list form (multiple or size above 1), which has no wrapper.
+- selectClassName: string. Styles for the actual select in both forms.
 
 ## Keyboard
 - Tab / Arrow keys / Platform picker keys: Uses native selection behavior on the current platform.

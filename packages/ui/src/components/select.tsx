@@ -6,6 +6,7 @@ import { IconCheck, IconChevronDown, IconLoader2 } from "@tabler/icons-react";
 import * as React from "react";
 import { useUILocale } from "../locale";
 import { overlayGroupLabelClassName } from "../overlay-group";
+import { textAdvance } from "../chart-text";
 import { candidateEmptyClassName, candidateItemClassName, overlayItemClassName } from "../overlay-item";
 import { PICKER_NAMED } from "../picker-trigger";
 import { cn } from "../utils";
@@ -56,6 +57,22 @@ function itemLabels(items: unknown): React.ReactNode[] {
     labels.push(label);
   }
   return labels;
+}
+
+// 量宽用的隐形节点每个候选一个，5000 个候选时挂载从 7ms 涨到约 120ms（实测，开发构建）。
+// 候选多于 SIZER_ALL 个时，纯文字名称只留估算最宽的 SIZER_KEPT 个；两个数都是预设，留几个是因为估算不是实测，最宽者可能排在第二第三。
+// 估错时值文字换行、触发器略变宽，不会溢出。节点名称估不出宽度，照旧全留。
+const SIZER_ALL = 64;
+const SIZER_KEPT = 8;
+function widestLabels(labels: readonly React.ReactNode[]) {
+  if (labels.length <= SIZER_ALL) return labels;
+  const text: { label: string | number; advance: number }[] = [];
+  const nodes: React.ReactNode[] = [];
+  for (const label of labels) {
+    if (typeof label === "string" || typeof label === "number") text.push({ label, advance: textAdvance(String(label)) });
+    else nodes.push(label);
+  }
+  return [...text.sort((a, b) => b.advance - a.advance).slice(0, SIZER_KEPT).map(entry => entry.label), ...nodes];
 }
 // 值 → 名称与次序（来自 Select 的 `items`）。多选的触发器要把已选的值说成名称，并按候选的次序摆放，
 // 而不是按点击的先后——同一组已选项无论怎么选到的，说法一致。
@@ -203,7 +220,8 @@ export function SelectValue({ placeholder, className, style, render, children, .
     longest.slice(0, PICKER_NAMED).join(messages.treeSelectSeparator),
     ...(longest.length > PICKER_NAMED ? [`${longest[0]} ${messages.selectMore(longest.length - 1)}`] : []),
   ];
-  const sizers = children != null ? [] : multiple ? [...multipleSizers, ...placeholderSizer] : [...labels, ...placeholderSizer];
+  const widest = React.useMemo(() => widestLabels(labels), [labels]);
+  const sizers = children != null ? [] : multiple ? [...multipleSizers, ...placeholderSizer] : [...widest, ...placeholderSizer];
   const value = <SelectPrimitive.Value
     data-slot="select-value" {...props} placeholder={shownPlaceholder}
     className={(state) => cn("col-start-1 row-start-1 min-w-0 text-start whitespace-normal wrap-break-word data-placeholder:text-muted-foreground", typeof className === "function" ? className(valueState(state)) : className)}

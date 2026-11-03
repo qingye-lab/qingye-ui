@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 7535b0831f9d85905f4e73b5309215d75ab89edbad35ab9cf44c498b960258d2
+Source SHA-256: 6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca
 
 筛选候选并确认一个或一组值，查询文字与选择事实分别持有。
 

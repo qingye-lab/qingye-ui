@@ -38,6 +38,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `onChange?`: `NativeSelectProps["onChange"]`.
 - `onLocaleChange`: `(locale: UILocale, event: React.ChangeEvent<HTMLSelectElement>) => void`.
 - `options`: `readonly LocaleSwitchOption[]`.
+- `selectClassName?`: `string | undefined`. 真实 select 的样式入口。单值形态的 className / style 属于外框（图标定位在那里，宽度也写在那里）；列表形态没有外框，两者都落在 select。
 - plus 283 inherited (@types/react 282, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers

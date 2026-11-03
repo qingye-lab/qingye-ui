@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
-Source SHA-256: 366d8d92678c1a91950609486d0435c80e07d89f95621d0781bab30f0ba37a09
+Source SHA-256: f4665dbed362bff8a49503a39078814435fee87286a1eef4e431e26d75f2df6e
 
 Enter one value from a small set of visible segments.
 
@@ -26,7 +26,7 @@ SegmentedControl produces a value. Use Tabs for content panels (Tabs can also be
 - FieldTitle names the group; FieldDescription/FieldError associate with the input; candidate children supply names.
 
 ## Responsive behavior
-- Retain all candidates and permit wrapping; five narrow-screen profiles preserve semantics.
+- Width follows content by default; className="w-full" shares it equally among candidates. When they do not fit they wrap per candidate instead of squeezing; five narrow-screen profiles preserve semantics.
 
 ## Customization
 - The selected segment reads --qy-track-selected and --qy-track-selected-foreground (light ink wash and ink text by default); unselected segments use muted ink; matching text, no outer focus ring.

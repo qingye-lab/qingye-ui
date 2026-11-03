@@ -7,6 +7,8 @@ import { ScrollArea as ScrollAreaPrimitive } from "@base-ui/react/scroll-area";
 import { useOverflowEdges, useScrollable, useScrollbarGutter, type OverflowEdges, type ScrollbarGutter } from "../hooks/use-scrollable";
 import { cn } from "../utils";
 
+declare const process: { env: { NODE_ENV?: string } };
+
 export type ScrollAreaProps = useRender.ComponentProps<"div"> & {
   /**
    * 边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。
@@ -40,8 +42,9 @@ const fadeClassName = [
 
 /**
  * Real native scrolling; scrollbar visibility follows the user's platform settings.
- * 键盘要能滚动它，所以内容溢出时可聚焦（tabIndex 0，须由调用方给出可访问名称）；不溢出就不进入 Tab 序列。
- * 调用方显式给出 tabIndex 时以调用方为准。
+ * 键盘要能滚动它，所以内容溢出时可聚焦（tabIndex 0，须由调用方给出可访问名称，缺了开发期提示）；不溢出就不进入 Tab 序列。
+ * 调用方显式给出 tabIndex 时以调用方为准：内容里有可聚焦项时可给 -1，少一个没有必要的 Tab 停靠。
+ * 给了名称就默认 role="region"：div 上的 aria-label 没有效果（ARIA 禁止给 generic 命名）。render 换了元素时不加，元素有自己的角色。
  * `fade` 开启时才挂测量两端的观察器；不开的区域与原来一样，只量是否溢出。
  */
 export function ScrollArea({ fade = false, ...props }: ScrollAreaProps) {
@@ -68,8 +71,18 @@ type ScrollAreaViewProps = Omit<ScrollAreaProps, "fade" | "ref"> & {
   gutter?: ScrollbarGutter;
 };
 function ScrollAreaView({ render, ref, className, tabIndex, scrollable, edges, gutter, ...props }: ScrollAreaViewProps) {
-  return useRender({ defaultTagName: "div", render, ref, props: mergeProps({
+  const root = React.useRef<HTMLElement | null>(null);
+  const named = Boolean(props["aria-label"] || props["aria-labelledby"]);
+  // 是否溢出取决于运行时内容，所以这里只提示、不抛错；从 DOM 读名称，render 元素上给的也算。
+  React.useEffect(() => {
+    if (typeof process === "undefined" || process.env.NODE_ENV === "production") return;
+    const node = root.current;
+    if (!scrollable || tabIndex !== undefined || !node || node.hasAttribute("aria-label") || node.hasAttribute("aria-labelledby")) return;
+    console.warn("ScrollArea scrolls and is a tab stop but has no accessible name: pass aria-label or aria-labelledby, or tabIndex={-1} when its content already has focusable items.");
+  }, [scrollable, tabIndex]);
+  return useRender({ defaultTagName: "div", render, ref: [ref, root], props: mergeProps({
     "data-slot": "scroll-area", ...(tabIndex !== undefined ? { tabIndex } : scrollable ? { tabIndex: 0 } : {}),
+    ...(named && !render ? { role: "region" } : {}),
     ...(edges ? {
       "data-overflow-x-start": edges.x.start ? "" : undefined, "data-overflow-x-end": edges.x.end ? "" : undefined,
       "data-overflow-y-start": edges.y.start ? "" : undefined, "data-overflow-y-end": edges.y.end ? "" : undefined,

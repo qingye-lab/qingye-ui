@@ -484,3 +484,17 @@ test("multiple: the marker of a branch with only unloaded descendants expands it
   expect(option("未载")).toBeInTheDocument();
   expect(onValueChange).not.toHaveBeenCalled();
 });
+
+test("a slash or percent inside a segment is escaped, so different paths never submit the same string", () => {
+  const options = [{ value: "a/b", label: "甲" }, { value: "a", label: "乙", children: [{ value: "b", label: "丙" }] }, { value: "50%", label: "丁" }];
+  const submitted = (path: string[]) => {
+    const { container, unmount } = render(<form><Cascader aria-label="地区" name="area" options={options} defaultValue={path} /></form>);
+    const value = new FormData(container.querySelector("form")!).get("area");
+    unmount();
+    return value;
+  };
+  expect(submitted(["a/b"])).toBe("a%2Fb");
+  expect(submitted(["a", "b"])).toBe("a/b");
+  expect(submitted(["50%"])).toBe("50%25");
+  expect(String(submitted(["a/b"])).split("/").map(decodeURIComponent)).toEqual(["a/b"]);
+});

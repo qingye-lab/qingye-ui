@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
-Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d
+Source SHA-256: 7850bfe90e1c53a915357e2fe0de3d9df988b18a93125cb67b3b649996486a94
 
 A shared single or multiple set of toggles whose pressed fact persists.
 
@@ -26,7 +26,7 @@ A pressed item is a light ink wash with ink text and unpressed items use muted i
 - ToggleGroup + ToggleGroupItem; its name identifies the shared scope.
 
 ## Responsive behavior
-- Horizontal layouts may wrap; vertical navigation follows up/down. Browser layout was not verified in this batch.
+- Width follows content by default; className="w-full" shares it equally among candidates. Horizontal layouts wrap per candidate when they do not fit, and icon candidates stay at least square; vertical navigation follows up/down.
 
 ## Customization
 - Pressed items read --qy-track-selected and --qy-track-selected-foreground (light ink wash and ink text by default), not --qy-primary; unpressed items use muted ink; existing five matching profiles.

@@ -259,11 +259,31 @@ test("async candidates show loading, then results, then an empty state; stale re
   expect(screen.getByRole("status")).toHaveTextContent("没有可选项");
 });
 
-test("a rejected candidate source is treated as an empty result", async () => {
-  const failing: ComposerTrigger = { char: "@", getItems: () => Promise.reject(new Error("offline")) };
-  render(<Composer><ComposerInput aria-label="消息" triggers={[failing]} /></Composer>);
+test("a rejected candidate source says it failed, Enter retries without submitting", async () => {
+  let attempts = 0;
+  const flaky: ComposerTrigger = { char: "@", getItems: () => { attempts += 1; return attempts === 1 ? Promise.reject(new Error("offline")) : people; } };
+  const onSubmit = vi.fn();
+  render(<Composer onSubmit={onSubmit}><ComposerInput aria-label="消息" triggers={[flaky]} /></Composer>);
   await type("@");
-  await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("没有可选项"));
+  await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("加载失败"));
+  await userEvent.keyboard("{Enter}");
+  expect(onSubmit).not.toHaveBeenCalled();
+  expect(attempts).toBe(2);
+  expect(await screen.findByRole("option", { name: "林青" })).toBeInTheDocument();
+});
+
+test("a source that throws fails the same way, the retry button refetches and Escape gives Enter back", async () => {
+  let attempts = 0;
+  const broken: ComposerTrigger = { char: "@", getItems: () => { attempts += 1; throw new Error("boom"); } };
+  const onSubmit = vi.fn();
+  render(<Composer onSubmit={onSubmit}><ComposerInput aria-label="消息" triggers={[broken]} /></Composer>);
+  await type("@");
+  await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("加载失败"));
+  fireEvent.click(screen.getByRole("button", { name: "重试", hidden: true }));
+  expect(attempts).toBe(2);
+  await userEvent.keyboard("{Escape}");
+  await userEvent.keyboard("{Enter}");
+  expect(onSubmit).toHaveBeenCalledTimes(1);
 });
 
 test("an action command runs the callback and removes the trigger text without leaving a token", async () => {

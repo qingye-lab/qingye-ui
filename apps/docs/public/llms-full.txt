@@ -2157,7 +2157,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
-Source SHA-256: 939f510230f7bb749ad55edda9f18e426b3445089850b1d0658f521ebe01744d
+Source SHA-256: 47cf83b47a3b8c84798bb80a71f75a0ea1b9e5dedc1ac4cd5ad80bf8c24ef08e
 
 在当地日历中导航年月，选择单日、多个日期或日期范围。
 
@@ -2344,7 +2344,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/cascader
 Source: packages/ui/src/components/cascader.tsx
-Source SHA-256: 404842647973eafb3974d29b0158669d28b573e50a16bb0808e0f679935593f9
+Source SHA-256: cb9151f01ae01a2db194a6e5f29fc8a0f359768ddd0e0197f9c73655d9aaf3d8
 
 沿「根到叶」的路径选一个值或勾选若干路径，每一级的候选各占一列。
 
@@ -2427,7 +2427,7 @@ Written descriptions; the list above is the type-resolved fact.
 - searchable: boolean; default false. 弹层顶部出现搜索输入；有输入时改为一列扁平的匹配路径（用 locale 的路径分隔符连接），匹配的文字加粗标出。只搜已知节点，未加载的分支不在其中。多选时只列叶子路径，每项带勾选标记，Enter 或点击勾选后弹层保持打开、焦点留在输入里。
 - placeholder: ReactNode; default locale.selectPlaceholder. 仅未选择时显示；不能替代 FieldLabel。
 - disabled / readOnly / required: boolean; default false. 只读保留当前值且不打开候选面；禁用的字段不提交；required 参与原生校验并标 aria-required。invalid 跟随 Field。
-- name / form: string. 隐藏输入的名称与所属表单。提交值是路径各段用 "/" 连接，例如 "zj/hz/xh"，未选择提交空字符串；多选每条路径一条同名值，未选择不提交（required 时拦下提交）；所以 value 里不应含 "/"。
+- name / form: string. 隐藏输入的名称与所属表单。提交值是路径各段用 "/" 连接，例如 "zj/hz/xh"，段内的 "%"、"/" 转义为 %25、%2F（按 "/" 拆开后逐段 decodeURIComponent 还原），未选择提交空字符串；多选每条路径一条同名值，未选择不提交（required 时拦下提交）。
 - aria-label / aria-labelledby / id / className: string. 触发器的名称与样式入口。没有名称会抛错：用 aria-label、aria-labelledby，或放进带 FieldLabel 的 Field。
 
 ### Keyboard
@@ -3186,7 +3186,7 @@ export default function CollapsibleDemo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/color-picker
 Source: packages/ui/src/components/color-picker.tsx
-Source SHA-256: c4204c351dca1bbf44ddcae8f1a5ef2b448a880c4b57f8782c8c1cc61dd9910b
+Source SHA-256: aacdb9bc0a3ecbe1c0081eff0149c5f5f097de7d58c4d93f77cedd7042e41afd
 
 选取用户数据里的颜色：标签颜色、主题配置取值，得到一个 #rrggbb。
 
@@ -3234,7 +3234,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `onValueChange?`: `((value: string) => void) | undefined`. 每次变化都调用（拖动中也调用）。
 - `onValueCommit?`: `((value: string) => void) | undefined`. 一次操作结束才调用：拖动松手、键盘离键、色值输入确认、选预设。供保存之类不宜逐帧触发的事使用。
 - `swatches?`: `readonly ColorSwatch[] | undefined`. 预设色行，复用 ColorSwatchPicker。
-- `value?`: `string | undefined`. "#rrggbb"。传了这个属性即受控；输出一律小写。
+- `value?`: `string | undefined`. "#rrggbb"。传字符串即受控；value={undefined} 等于没传，走非受控（颜色没有「空」这个值，这与可空的日期系列不同）。输出一律小写。
 - plus 283 inherited (@types/react 283); not expanded, see the installed declarations
 
 ### ColorSwatchPicker
@@ -3264,7 +3264,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 #### ColorPicker
 自由取色：按钮显示当前颜色与 hex，点开是饱和度与明度面、色相条、hex 输入和可选的预设行。
-- value / defaultValue / onValueChange: string / string / (value: string) => void. #rrggbb。传了 value 即受控；defaultValue 省略时为 #000000；格式不对抛错。onValueChange 在拖动中也每次变化都调用。
+- value / defaultValue / onValueChange: string / string / (value: string) => void. #rrggbb。传字符串即受控，value={undefined} 等于没传；defaultValue 省略时为 #000000；格式不对抛错。onValueChange 在拖动中也每次变化都调用。
 - onValueCommit: (value: string) => void. 一次操作结束才调用：松开指针、键盘离键、确认 hex、选预设。保存放这里，不放 onValueChange。
 - swatches: { value: string; label: string }[]. 预设行，复用 ColorSwatchPicker，规则相同。
 - name / form / disabled: string / string / boolean. name 存在时随表单提交 #rrggbb；disabled 时不提交、不可打开。
@@ -3316,7 +3316,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 7535b0831f9d85905f4e73b5309215d75ab89edbad35ab9cf44c498b960258d2
+Source SHA-256: 6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca
 
 筛选候选并确认一个或一组值，查询文字与选择事实分别持有。
 
@@ -3740,7 +3740,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/composer
 Source: packages/ui/src/components/composer.tsx
-Source SHA-256: cf23ffe28f63bf58767ea6be5ea90c64e7ddde21ecbc68dab0655290dc9ab726
+Source SHA-256: fef8f9c94f951cdabab88801f34d75427fb3c8b8a5d43b7a8170abdfa50b5fe7
 
 多行输入，支持 @ 提及、/ 命令与原子令牌，值是文字与令牌片段的数组。
 
@@ -3804,7 +3804,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `onValueChange?`: `((value: ComposerSegment[], details: ComposerChangeDetails) => void) | undefined`.
 - `readOnly?`: `boolean`.
 - `submitOn?`: `"enter" | "mod-enter"`. enter：Enter 提交、Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交、Enter 换行。
-- `value?`: `ComposerValue | undefined`. 受控值。片段数组：文字片段与令牌片段。
+- `value?`: `ComposerValue | undefined`. 受控值。片段数组：文字片段与令牌片段。value={undefined} 等于没传，走非受控（内容没有 undefined 这个值，要清空传 []）。
 - plus 278 inherited (@types/react 277, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ComposerInput
@@ -3840,7 +3840,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 #### Composer
 根：填值边界与状态，持有值、提交与禁用/只读。
-- value / defaultValue: readonly ComposerSegment[]; default defaultValue: []. 受控/非受控值；文字片段 { type: 'text', text } 与令牌片段 { type: 'token', trigger, id, label }。相邻文字片段会被合并。
+- value / defaultValue: readonly ComposerSegment[]; default defaultValue: []. 受控/非受控值，value={undefined} 等于没传，清空传 []；文字片段 { type: 'text', text } 与令牌片段 { type: 'token', trigger, id, label }。相邻文字片段会被合并。
 - onValueChange: (value: ComposerSegment[], details: ComposerChangeDetails) => void. details.reason 为 input/paste/cut/newline/token/action/delete-token/undo/redo/clear；cancel() 拒绝这次改动，编辑区随即恢复。
 - onSubmit: (value: ComposerSegment[], details: { event, clear }) => void. Enter（或 ComposerSubmit）触发；没有令牌且文字全是空白时不调用。clear() 经 onValueChange 把值清空。
 - submitOn: 'enter' | 'mod-enter'; default 'enter'. enter：Enter 提交，Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交，Enter 换行。
@@ -3850,7 +3850,7 @@ Written descriptions; the list above is the type-resolved fact.
 编辑区与候选浮层。
 - aria-label / aria-labelledby: string. 必填其一，否则抛错。
 - placeholder: string. 空时显示，同时写入 aria-placeholder。
-- triggers: readonly ComposerTrigger[]. 触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃。候选项 ComposerItem 为 { id, label, group?, description?, icon?, disabled?, select? }：id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”；同名 group 归为一组，按首次出现顺序排列；select 覆盖触发项的 select（token 插入令牌，action 删掉触发文字、只回调 onSelect）。
+- triggers: readonly ComposerTrigger[]. 触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃；抛错或 reject 显示「加载失败」与重试，不当作没有结果。候选项 ComposerItem 为 { id, label, group?, description?, icon?, disabled?, select? }：id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”；同名 group 归为一组，按首次出现顺序排列；select 覆盖触发项的 select（token 插入令牌，action 删掉触发文字、只回调 onSelect）。
 - minRows / maxRows: number; default 1 / 8. 起始行数与增长上限。超过上限在内部滚动，且不超过视口高度的一半。
 
 #### ComposerToolbar / ComposerSubmit
@@ -3861,6 +3861,7 @@ Written descriptions; the list above is the type-resolved fact.
 - Enter / Shift+Enter: 按 submitOn 提交或换行；组字中（isComposing 或 keyCode 229）不处理。
 - ArrowDown / ArrowUp: 候选打开时移动高亮，循环并跳过禁用项。
 - Enter / Tab: 候选打开且有高亮时选中，不提交。
+- Enter / Tab（加载失败时）: 重试加载，不提交；Escape 关闭候选后 Enter 恢复提交。
 - Escape: 关闭候选，保留已输入的文字。
 - Backspace / Delete: 光标紧邻令牌时整体删除。
 - Ctrl/⌘+Z、Ctrl/⌘+Shift+Z: 撤销与重做，用组件自己的快照栈。
@@ -4484,7 +4485,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: e5c08917cba6803b0c3cc667b0afbeedc349174161a8e516b17ceb6ba94c1033
+Source SHA-256: 150b236250585679cc9891aef9aec40ab46b80dbbc0516f08b0e48dca47f3580
 
 调用方真实集合的比较、排序、范围选择与可选虚拟化。
 
@@ -4619,7 +4620,7 @@ Written descriptions; the list above is the type-resolved fact.
 - selection: { label, rowLabel, canSelect?, scope?: 'page' | 'filtered' }. 启用选择列；全选只改当页可选行并保留范围外 ID。服务端完整选中范围读取 state.rowSelection，不读当前页的 getSelectedRowModel。scope 默认 page；filtered 让表头全选作用于全部筛选结果（跨页），仅 mode=client 可用——服务端调用方并不持有完整结果，用 mode=server 加 filtered 会在开发期抛错，请改用 BulkActionBar 的 extent / BulkActionBarExtend 让用户显式扩展到全部。
 - activeRow: ({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T, event: DataTableActivateEvent) => void }. 默认在指定列放激活按钮，cell 保持非交互内容；trigger=row 时点击行正文或聚焦行后按 Enter/Space。内部控件、链接、label 与编辑区不触发行激活；活动行与复选状态独立。onActivate 的第二个参数是触发它的 React 鼠标或键盘事件，调用方可读 metaKey / ctrlKey / shiftKey 区分「在新标签页打开」之类的意图。
 - selectionAppearance: row | checkbox; default row. checkbox 只取消选中行的底色，真实复选框仍保留；活动行的强调独立保留。
-- virtualization: { height: number, estimateRowHeight: number, overscan?: number }. 显式启用当前行模型的虚拟化；height 含 caption 与表头，实际行高自动测量。尺寸须有限且为正，overscan 为非负整数（默认 1）。
+- virtualization: { height?: number, estimateRowHeight: number, overscan?: number }. 显式启用当前行模型的虚拟化；height 含 caption 与表头，实际行高自动测量。不传 height 时铺满父级，也可由 Pattern 的 className 或 DataTable 的 containerProps 给高度；内容不撑高视口，父级没有确定高度时视口高为 0，不渲染行，不会退化成全量渲染。尺寸须有限且为正，overscan 为非负整数（默认 1）。
 - stickyHeader / stickyHeaderOffset: boolean / number | string. 表头吸在最近的滚动区顶部：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口，或 tableProps.containerProps 设了 height / max-height 时，是表格自己的容器。stickyHeaderOffset 让开滚动区顶上的固定页眉，数字按 px。
 - columns[].pinned / columns[].empty: boolean / ReactNode. pinned 固定从第一列起连续的前导列（选择列自动一并固定，不连续时抛错），横向滚动后末端出现一条线。empty 是无 cell 的列在 null、undefined、空串时显示的内容，默认「—」加读屏的「无值」；0 照常显示。未知与不适用由调用方用 empty 区分。
 - caption / busy / error / tableProps / native div props: ReactNode / boolean / ReactNode / DataTableProps / HTML props. busy 时旧数据行不动，表格顶缘出现不定进度记号，分页暂时挡住翻页但焦点留在原按钮。error 由应用给出内容和重试动作，摆在表格上方并声明 role=alert，旧数据行同样保留。属性分别归属表格或组合外层，不推断请求成功或失败。
@@ -5639,7 +5640,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
-Source SHA-256: 480ba69e05c63a550feab21b961e9593ff298bb612405f18de0a84d4f5724b65
+Source SHA-256: 8bf6a3b75be2b323a1fa09109535f1b90b02ac3ab333f114872add2881f1b47f
 
 关联一个值的名称、控件、说明与调用方提供的错误。
 
@@ -5661,10 +5662,10 @@ invalid 与错误内容分别传入。Field 关联名称与错误，不自行校
 - Application: 值、规则、invalid、错误内容、草稿与送达结果。
 
 ### Composition
-- Input 自动注册；原生控件通过 FieldControl 注册。Fieldset 命名共同范围，FieldGroup 只组织间隔。
+- Input 自动注册；原生控件通过 FieldControl 注册。Fieldset 命名共同范围，FieldGroup 组织间隔；名称要共用一列时给 FieldGroup labelColumn。
 
 ### Responsive behavior
-- 长名称与说明可换行；横向内容列可收缩；间距由字段角色决定。
+- 长名称与说明可换行；横向内容列可收缩；间距由字段角色决定。labelColumn 窄屏回到堆叠。
 
 ### Customization
 - className 最后合并，原生属性、状态样式函数、ref 和 render 透传；FieldTitle 不注册成 label。
@@ -5676,7 +5677,8 @@ invalid 与错误内容分别传入。Field 关联名称与错误，不自行校
 - FieldDescription: function; owner field; PASS; props: React.ComponentProps<typeof FieldPrimitive.Description>
 - FieldError: function; owner field; PASS; props: FieldErrorProps
 - FieldErrorProps: type; owner field; PASS
-- FieldGroup: function; owner field; PASS; props: useRender.ComponentProps<"div">
+- FieldGroup: function; owner field; PASS; props: FieldGroupProps
+- FieldGroupProps: type; owner field; PASS
 - FieldItem: function; owner field; PASS; props: React.ComponentProps<typeof FieldPrimitive.Item>
 - FieldLabel: function; owner field; PASS; props: FieldLabelProps
 - FieldLabelProps: type; owner field; PASS
@@ -5712,7 +5714,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
 
 ### FieldGroup
-- no props declared by this library
+- `labelColumn?`: `boolean`. 让组内字段的名称共用一列（宽度取最长名称），控件起点对齐；窄屏回到堆叠。字段须是组的直接子元素。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### FieldItem
@@ -5777,6 +5779,7 @@ Base UI Field.Root 的共同上下文；自动校验入口交给完整的 FieldP
 
 #### FieldGroup
 字段之间的关系间隔，没有 group 语义。
+- labelColumn: boolean; default false. 组内名称共用一列，列宽取最长的名称，控件起点对齐；说明与错误在控件下方，分隔线跨两列。窄屏回到堆叠。要放到控件列的内容（如操作按钮）包一层没有名称的 Field。
 
 #### FieldSeparator
 字段组分界；有文字时两侧线为装饰。
@@ -5804,7 +5807,7 @@ export default function Demo() {
 }
 ```
 
-8 more examples: see the component page and its Markdown file.
+9 more examples: see the component page and its Markdown file.
 
 ## 字段组 Fieldset
 
@@ -6151,6 +6154,7 @@ dirty 和 appliedSummary 是必填事实；点击应用只发出意图，库不�
 
 ### Customization
 - 控件档案、间距和浮层表面消费现有角色；具体外观是预设。
+- 字段宽度写在 Field 的 className 上（如 flex-1 让搜索框占满余量），不改控件本身。
 
 ### Current exports
 - FilterBar: function; owner filter-bar; PASS; props: FilterBarProps
@@ -7284,7 +7288,7 @@ Stack 纵向排列，Inline 横向排列并默认换行，Grid 等宽多列。ga
 
 ### Notes
 - 布局没有边框、表面、内边距或业务状态；独立对象边界用 Card。
-- Grid 只管等宽列；需要跨列、对齐表头的比较仍用原生 table/grid。
+- Grid 只管等宽列；需要跨列、对齐表头的比较仍用原生 table/grid。不等宽列用原生 div 加 grid-cols-[…]：Grid 的列由内联样式决定，写在它的 className 上不生效。
 - 角色数值是主题预设。确有特殊关系时在项目组合说明 className/style 覆写理由。
 - 方向、语言与密度沿真实 DOM 继承；换行不改变内容顺序。
 
@@ -7500,6 +7504,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `onChange?`: `NativeSelectProps["onChange"]`.
 - `onLocaleChange`: `(locale: UILocale, event: React.ChangeEvent<HTMLSelectElement>) => void`.
 - `options`: `readonly LocaleSwitchOption[]`.
+- `selectClassName?`: `string | undefined`. 真实 select 的样式入口。单值形态的 className / style 属于外框（图标定位在那里，宽度也写在那里）；列表形态没有外框，两者都落在 select。
 - plus 283 inherited (@types/react 282, @base-ui/react 1); not expanded, see the installed declarations
 
 ### Dependencies and providers
@@ -7867,7 +7872,7 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
-Source SHA-256: 27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874
+Source SHA-256: c79d1ce39764a22c4952574d981ffccb7e4d732c9e1be7816a5a3154dad1745f
 
 保留平台选择器、原生选项与表单值。
 
@@ -7891,7 +7896,7 @@ Source SHA-256: 27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874
 - 单值形态一套几何，跟随密度轴；窄屏外高 +4px，粗指针最小外高读 touch-target；多行不固定单行高度。
 
 ### Customization
-- 保留平台箭头；className / style / render 属于真实 select。
+- 保留平台箭头。单值形态的 className / style 属于外框，宽度写在这里（w-full 铺满）；selectClassName 与 render 属于真实 select。列表形态没有外框，都落在 select。
 
 ### Current exports
 - NativeSelect: function; owner native-select; PASS; props: NativeSelectProps
@@ -7901,7 +7906,7 @@ Source SHA-256: 27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### NativeSelect
-- no props declared by this library
+- `selectClassName?`: `string | undefined`. 真实 select 的样式入口。单值形态的 className / style 属于外框（图标定位在那里，宽度也写在那里）；列表形态没有外框，两者都落在 select。
 - plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
 
 ### Dependencies and providers
@@ -7917,7 +7922,9 @@ Written descriptions; the list above is the type-resolved fact.
 真实 select，children 使用原生 option / optgroup。
 - size / multiple / disabled / required / name: native select props. 原生显示行数、多值、禁用、约束与表单名。
 - value / defaultValue / onChange: native select props. 保留受控与非受控；多值是字符串数组。
-- render / ref / ARIA / className / style: useRender.ComponentProps<select>. 属性、事件与 ref 属于实际 select；render 应保留可选值的原生元素。
+- render / ref / ARIA: useRender.ComponentProps<select>. 属性、事件与 ref 属于实际 select；render 应保留可选值的原生元素。
+- className / style: useRender.ComponentProps<select>. 单值形态落在外框（图标定位在那里），宽度写在这里；列表形态（multiple 或 size 大于 1）没有外框，落在 select。
+- selectClassName: string. 真实 select 的样式入口，两种形态都落在 select。
 
 ### Keyboard
 - Tab / 方向键 / 平台选择键: 沿用所在平台的原生选择行为。
@@ -9598,7 +9605,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/resizable
 Source: packages/ui/src/components/resizable.tsx
-Source SHA-256: 475ad2f99677a4a8568db306872ef7323f3f3386300065365e1086cbbc386a74
+Source SHA-256: 275cd5bb5c655f0dfce41b9ae165de470d0a2507c08006653564e2bd34878f0a
 
 两个或多个面板之间放可拖动的分隔条，调整各自占比。
 
@@ -9673,7 +9680,7 @@ Written descriptions; the list above is the type-resolved fact.
 弹性容器，按 orientation 排列面板与分隔条，并量取自身长度以换算像素界限。
 - orientation: "horizontal" | "vertical"; default "horizontal". 面板的排列方向。horizontal 左右并排，分隔条是竖线。
 - onLayout: (sizes: number[]) => void. 一次拖动或一次按键调整结束时调用，参数是按面板顺序的百分比，和为 100。组长度变化引起的界限修正不调用。
-- layout: number[]. 受控布局，按面板顺序。长度与面板数不符时忽略。拖动中的中间值只用于显示，松手时才调用 onLayout。
+- layout: number[]. 受控布局，按面板顺序。长度与面板数不符时忽略，开发期提示。拖动中的中间值只用于显示，松手时才调用 onLayout。
 - className / ref / div props: ComponentProps<"div">. 作用于容器；默认撑满父元素，高度由父元素或 className 给出。
 
 #### ResizablePanel
@@ -9947,7 +9954,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: b335bf0444c58f204e72dbb5eedf2a8220cd65fc03da091dccdd57ce6e8428d1
+Source SHA-256: cac2e91684ebc4c766cf31f3d48387d72611874133cc8f8bb9b0609aab9afe14
 
 真实原生滚动，或显式组合可拖动滚动条。
 
@@ -10036,8 +10043,8 @@ Written descriptions; the list above is the type-resolved fact.
 - children: ReactNode. 完整内容，不窗口化或隐藏集合项。
 - style / className: div props. 消费布局给出 height/maxHeight 与宽度；默认 overflow:auto。
 - fade: boolean; default false. 边缘渐隐：只在内容确实被切掉的一端渐隐，滚到头的一端不渐隐；横纵两向各自量。做法与 TabsList 相同（遮罩、宽度基准、RTL 翻转）；渐隐宽度取一个填值控件行高（预设）。边缘事实以 data-overflow-x-start/end 与 data-overflow-y-start/end 暴露。
-- tabIndex: number; default 内容溢出时为 0. 内容溢出时能从键盘到达，没有可滚动的内容就不进入 Tab 序列；原生方向/Page/Home/End 滚动保留。显式给出时以调用方为准。
-- render / ref / ARIA / events: useRender.ComponentProps<'div'>. 真实视口的组合、名称、引用和原生滚动/键盘事件；有名称的独立区域可由调用方加 role=region。
+- tabIndex: number; default 内容溢出时为 0. 内容溢出时能从键盘到达，没有可滚动的内容就不进入 Tab 序列；原生方向/Page/Home/End 滚动保留。显式给出时以调用方为准；内容里有可聚焦项时可给 -1。可滚动、可聚焦却没有名称时开发期提示。
+- render / ref / ARIA / events: useRender.ComponentProps<'div'>. 真实视口的组合、名称、引用和原生滚动/键盘事件；给了 aria-label 或 aria-labelledby 就默认 role=region（用 render 换元素时不加），调用方给的 role 优先。
 
 #### ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent
 自定义滚动条的显式组合；Root 拥有布局与溢出事实，Viewport 才是真实滚动元素，Content 用于测量内容。
@@ -10062,7 +10069,7 @@ Source: apps/docs/src/content/scroll-area/demos/01-vertical.tsx
 import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
 export const meta = { title: "有限视口", titleEn: "Bounded viewport" };
 export default function Demo() {
-  return <ScrollArea aria-label="完整条目" role="region" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>;
+  return <ScrollArea aria-label="完整条目" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>;
 }
 ```
 
@@ -10283,7 +10290,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
-Source SHA-256: 366d8d92678c1a91950609486d0435c80e07d89f95621d0781bab30f0ba37a09
+Source SHA-256: f4665dbed362bff8a49503a39078814435fee87286a1eef4e431e26d75f2df6e
 
 从并列的少量候选中输入一个值。
 
@@ -10306,7 +10313,7 @@ SegmentedControl 产生一个新值。切换内容面板用 Tabs（Tabs 也可�
 - FieldTitle 命名组；FieldDescription/FieldError 关联输入；候选 children 是名称
 
 ### Responsive behavior
-- 保留全部候选并允许换行；五档窄屏尺寸不改变语义
+- 默认宽度由内容决定；给 className="w-full" 时候选等分。放不下时按候选换行，不压扁；五档窄屏尺寸不改变语义
 
 ### Customization
 - 选中段读 --qy-track-selected 与 --qy-track-selected-foreground（默认清染 + 焦墨），未选段字为浓墨；与同档文字；不新增外围焦点圈
@@ -10392,7 +10399,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: 36f9c843a86f51d2ebe65054cf5577bd80a4a076d0de1d52326c66eee10acf7a
+Source SHA-256: b17fc57dc658402188ba8a821eb0a99f9a034ed4217d47d74991b427c37583da
 
 从可收起的候选列表中取一个值。
 
@@ -10758,7 +10765,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: e3d0cd62528d452987733bc22151e9b69efaec4f7442904340694726857b3803
+Source SHA-256: c1a2e83537c08c137c4b2a0266f85d16a4f021a4fd5586adc06de2a85434351c
 
 长期导航、收起为图标 rail 与二级子级。
 
@@ -12003,7 +12010,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: fec95d44ade9b2245e569a1b91c9ddc6911c1af3b26f50a36521bb8a54d98137
+Source SHA-256: 8c8622ab9be09d415cd064c92ff7741e1190c7a1141a95c05e321c536a123a2b
 
 同一对象的不同视角，保留面板草稿。
 
@@ -12069,6 +12076,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context AppearanceContext: without a provider default-value; provided by Tabs
+- Context OrientationContext: without a provider default-value; provided by Tabs
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -12077,6 +12085,7 @@ Written descriptions; the list above is the type-resolved fact.
 当前视角与手动激活列表。
 - value / defaultValue / onValueChange / orientation: Base UI Root props. 值由应用或原语持有；取消不切换。
 - appearance: "line" | "track"; default "line". 标签栏外观，设在 Tabs 上整组生效。line 是导航线，track 是围在轨道里的选中面，横纵都成立。外观不改变 tablist / tab / tabpanel 的语义。
+- TabsList className: Base UI List props. 轨道外观落在轨道外框：默认宽度由内容决定，w-full 时标签等分；放不下时外框不变，标签在框内滚动。导航线外观本来占满所在行。
 - activateOnFocus: boolean; default false. 默认焦点移动不自动切换；消费者可明确选择自动激活。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
@@ -12113,7 +12122,7 @@ export default function Demo() { return <Tabs defaultValue="text"><TabsList aria
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: 2637acfdcaeef88dcee4ed922f2255f16986a33f838c1b347d039cce0dcd4217
+Source SHA-256: 8ec39c7dd44653e74738178db40ee5a62a4a34d551a80a03181428338f8035ec
 
 确认字符串集合，保留尚未确认的编辑草稿。
 
@@ -12194,7 +12203,7 @@ Written descriptions; the list above is the type-resolved fact.
 - render / ref / className / style / native props: useRender.ComponentProps<'div'>. 属于根容器；改渲染元素须保持结构与子控件。
 
 ### Keyboard
-- Enter: 非组字时确认草稿，阻止表单提交；组字中的 Enter 不添加。
+- Enter: 非组字时确认草稿，阻止表单提交；草稿为空时不拦，表单照常提交；组字中的 Enter 不添加。
 - Backspace / ArrowLeft（草稿起点，RTL 为 ArrowRight）: 空草稿的 Backspace 或起点的左箭头先聚焦最后一项，不立即删除。
 - Delete / Backspace（移除按钮）: 移除已聚焦项，保留相邻焦点位置。
 - ArrowLeft / ArrowRight（移除按钮）: 在确认项间移动，边界返回草稿；方向随实际排版，RTL 下对调。
@@ -12998,7 +13007,7 @@ export default function Demo() {
   const current = useTocScrollSpy(headings, { container: containerRef });
   return <Inline gap="panel" align="start">
     <Toc aria-label="示例文章目录" items={headings} current={current} className="w-40 shrink-0" />
-    <ScrollArea ref={containerRef} role="region" aria-label="接入说明" className="h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)">
+    <ScrollArea ref={containerRef} aria-label="接入说明" className="h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)">
       {sections.map((section) => {
         const Heading = section.level === 2 ? "h2" : "h3";
         return <section key={section.id} className="mb-(--qy-field-group-gap)">
@@ -13118,7 +13127,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
-Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d
+Source SHA-256: 7850bfe90e1c53a915357e2fe0de3d9df988b18a93125cb67b3b649996486a94
 
 关联一组单选或多选的切换按钮：选项保持切换状态。
 
@@ -13141,7 +13150,7 @@ Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d
 - ToggleGroup + ToggleGroupItem；组的名称必须说明共同范围
 
 ### Responsive behavior
-- 水平方向可以换行，纵向沿上下轴导航；浏览器布局未在本批验证
+- 默认宽度由内容决定；给 className="w-full" 时候选等分。水平方向放不下时按候选换行，图标候选不小于方形；纵向沿上下轴导航
 
 ### Customization
 - 按下项读 --qy-track-selected 与 --qy-track-selected-foreground（默认清染 + 焦墨），不借用 --qy-primary；未按下项字为浓墨；既有同名五档
@@ -14091,7 +14100,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
-Source SHA-256: 772ed07d69b729cdade24c67b719669caefd00765038118f3b30ab6ce587cd90
+Source SHA-256: 87082ed536a385bbdbf9468c74888760cfcb6f86b0d6133541ae7715106a7fb0
 
 以稳定项身份呈现等高或动态高度长集合，保留阅读位置与正在编辑的内容。
 
@@ -14133,7 +14142,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `actionsRef?`: `React.Ref<VirtualListActions>`. Separate from the native scrolling-element ref. Scrolling is instant and keeps focus.
 - `followEnd?`: `boolean`. Follow appended items only when previously at the end; never initially jump to the end.
 - `getKey`: `(item: Item, index: number) => React.Key`. Must remain stable across scrolling, insertion and reordering.
-- `height`: `number`.
+- `height?`: `number`. 视口高度，CSS px。不传时宽高都归 CSS（`flex-1`、`h-full`、`style`），由尺寸隔离防止内容反撑；需要服务端窗口时传数字。
 - `items`: `readonly Item[]`.
 - `itemSize`: `number`. Fixed outer row extent, or the estimated outer extent in dynamic mode, in CSS px.
 - `measurement?`: `"fixed" | "dynamic"`. Dynamic mode observes each mounted row's actual border-box height.
@@ -14153,13 +14162,14 @@ Written descriptions; the list above is the type-resolved fact.
 #### VirtualList<Item>
 集合渲染边界，真实 list/listitem，不提供选择、请求或业务列。
 - items / getKey / renderItem: readonly Item[] / (item,index)=>React.Key / (item,index)=>ReactNode. 真实集合、稳定唯一 key 与内容；重复 key 显式报错。插入、排序时用持久身份，不用位置。
-- itemSize / height: number. 项外高与视口高，CSS px，均为有限正数。默认固定高度；动态模式中 itemSize 是未测量行的估计值，不限制内容高度。
+- itemSize: number. 项外高，CSS px，有限正数。默认固定高度；动态模式中是未测量行的估计值，不限制内容高度。
+- height: number. 视口高，CSS px，有限正数。不传时高度归 CSS（className 的 h-full、flex-1 或 style），内容不撑高视口；父级没有确定高度时视口高为 0，不渲染行，不会退化成全量渲染。
 - measurement: 'fixed' | 'dynamic'; default 'fixed'. dynamic 用 ResizeObserver 测量已挂载行的实际 border-box 高度；整行高度应由正常内容流决定，外部 margin 不计入测量。
 - actionsRef: React.Ref<VirtualListActions>. 独立动作出口：scrollToIndex(index, { align?: 'auto' | 'start' | 'center' | 'end' }) 与 scrollToEnd()。立即滚动，不转移焦点。非法或越界 index 抛 RangeError；空集合 scrollToEnd 无操作。
 - followEnd: boolean; default false. 显式尾部跟随。仅原先停在底部（1 CSS px 容差）时跟随追加项；向上阅读后保持阅读位置，不在初次挂载时跳到底部。
 - overscan: number; default 2. 窗口两侧的渲染预算预设，非负整数；不是视觉尺寸。
 - aria-label / aria-labelledby: string. 必填其一：集合的可识别名称，落在 role=list 的滚动视口上；缺失或为空时抛错。
-- render / ref / style / className / events / ARIA: useRender.ComponentProps<'div'>. ref 仍是原生滚动视口。显式 height 承担视口高度；初始服务端窗口使用它。浏览器默认滚动锚定关闭，由组件统一维持阅读位置。给集合可识别名称。
+- render / ref / style / className / events / ARIA: useRender.ComponentProps<'div'>. ref 仍是原生滚动视口。传入 height 时由它承担视口高度，初始服务端窗口也用它；不传时服务端不预估窗口。浏览器默认滚动锚定关闭，由组件统一维持阅读位置。给集合可识别名称。
 
 ### Keyboard
 - Tab: 到达集合视口与已挂载的内部操作。

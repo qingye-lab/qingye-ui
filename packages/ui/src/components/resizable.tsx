@@ -5,6 +5,8 @@ import * as React from "react";
 import { isName, received } from "../require-name";
 import { cn } from "../utils";
 
+declare const process: { env: { NODE_ENV?: string } };
+
 /**
  * 可拖拽分栏：WAI-ARIA APG「Window Splitter」模式。
  * 面板之间放一条 ResizableHandle（role="separator"，可聚焦）；拖动或按键移动它，
@@ -215,6 +217,14 @@ export function ResizablePanelGroup({ orientation = "horizontal", onLayout, layo
 
   const stored = panels.map(panel => local[panel.id] ?? panel.defaultSize ?? 0);
   const controlled = layout && layout.length === panels.length ? layout : undefined;
+  // 面板在 effect 里注册，渲染途中长度可能短暂不符；推迟一拍仍不符才是调用方传错了。
+  const layoutLength = layout?.length;
+  React.useEffect(() => {
+    if (typeof process === "undefined" || process.env.NODE_ENV === "production") return;
+    if (layoutLength === undefined || panels.length === 0 || layoutLength === panels.length) return;
+    const timer = setTimeout(() => console.warn(`ResizablePanelGroup ignored layout: it has ${layoutLength} sizes for ${panels.length} panels.`), 0);
+    return () => clearTimeout(timer);
+  }, [layoutLength, panels.length]);
   const sizes = drag?.sizes ?? controlled ?? stored;
 
   const solve = React.useCallback<GroupContext["solve"]>((base, index, requested, mode) => {

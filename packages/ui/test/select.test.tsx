@@ -393,3 +393,13 @@ test("multiple: the keyboard chooses and unchooses with Enter and keeps the popu
   await user.keyboard("{Enter}");
   expect(new FormData(container.querySelector("form")!).getAll("tags")).toEqual([]);
 });
+
+test("with many candidates only the widest text labels are kept for sizing", () => {
+  const many = Array.from({ length: 200 }, (_, index) => ({ value: `v${index}`, label: `选项 ${index}` }));
+  many[150] = { value: "v150", label: "这是所有候选里最长的一个名称，它决定触发器的宽度" };
+  render(<Select items={many}><SelectTrigger aria-label="选项" /><SelectPopup><Options /></SelectPopup></Select>);
+  const labels = Array.from(document.querySelectorAll("[data-slot=select-value-sizer]")).map(node => node.getAttribute("data-label"));
+  // 留下的是最宽的 8 个加占位文字，不是全部 200 个。
+  expect(labels).toHaveLength(9);
+  expect(labels[0]).toBe("这是所有候选里最长的一个名称，它决定触发器的宽度");
+});

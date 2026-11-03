@@ -1810,7 +1810,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
-Source SHA-256: 939f510230f7bb749ad55edda9f18e426b3445089850b1d0658f521ebe01744d
+Source SHA-256: 47cf83b47a3b8c84798bb80a71f75a0ea1b9e5dedc1ac4cd5ad80bf8c24ef08e
 
 Navigate a local calendar and select a day, multiple dates, or a range.
 
@@ -1997,7 +1997,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/cascader
 Source: packages/ui/src/components/cascader.tsx
-Source SHA-256: 404842647973eafb3974d29b0158669d28b573e50a16bb0808e0f679935593f9
+Source SHA-256: cb9151f01ae01a2db194a6e5f29fc8a0f359768ddd0e0197f9c73655d9aaf3d8
 
 Choose one value along a root-to-leaf path, or check several paths, with each level's candidates in its own column.
 
@@ -2080,7 +2080,7 @@ Trigger, column-wise candidate popup and form value. The trigger shares Select's
 - searchable: boolean; default false. A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator, with the matched text in bold. Only known nodes are searched, so unloaded branches are not included. In multiple mode only leaf paths are listed, each with a check marker; Enter or a click checks it and the popup stays open with focus in the input.
 - placeholder: ReactNode; default locale.selectPlaceholder. Shown only without selection; cannot replace FieldLabel.
 - disabled / readOnly / required: boolean; default false. Read-only keeps the value and never opens the popup; a disabled field is not submitted; required joins native validation and sets aria-required. invalid follows Field.
-- name / form: string. Name and owning form of the hidden input. The submitted value is the path segments joined with "/", such as "zj/hz/xh"; an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission). Values should therefore not contain "/".
+- name / form: string. Name and owning form of the hidden input. The submitted value is the path segments joined with "/", such as "zj/hz/xh"; a "%" or "/" inside a segment is escaped as %25 or %2F (split on "/" and decodeURIComponent each segment to restore it); an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission).
 - aria-label / aria-labelledby / id / className: string. Name and styling entries of the trigger. A missing name throws: use aria-label, aria-labelledby, or place it in a Field with a FieldLabel.
 
 ### Keyboard
@@ -2839,7 +2839,7 @@ export default function CollapsibleDemo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/color-picker
 Source: packages/ui/src/components/color-picker.tsx
-Source SHA-256: c4204c351dca1bbf44ddcae8f1a5ef2b448a880c4b57f8782c8c1cc61dd9910b
+Source SHA-256: aacdb9bc0a3ecbe1c0081eff0149c5f5f097de7d58c4d93f77cedd7042e41afd
 
 Choose a colour that belongs to the user's data, such as a label colour or a theme setting, and get a #rrggbb string.
 
@@ -2887,7 +2887,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `onValueChange?`: `((value: string) => void) | undefined`. 每次变化都调用（拖动中也调用）。
 - `onValueCommit?`: `((value: string) => void) | undefined`. 一次操作结束才调用：拖动松手、键盘离键、色值输入确认、选预设。供保存之类不宜逐帧触发的事使用。
 - `swatches?`: `readonly ColorSwatch[] | undefined`. 预设色行，复用 ColorSwatchPicker。
-- `value?`: `string | undefined`. "#rrggbb"。传了这个属性即受控；输出一律小写。
+- `value?`: `string | undefined`. "#rrggbb"。传字符串即受控；value={undefined} 等于没传，走非受控（颜色没有「空」这个值，这与可空的日期系列不同）。输出一律小写。
 - plus 283 inherited (@types/react 283); not expanded, see the installed declarations
 
 ### ColorSwatchPicker
@@ -2917,7 +2917,7 @@ Choose one colour from presets. It is a radio group and every swatch is a named 
 
 #### ColorPicker
 Free choice: a button shows the current colour and its hex; it opens a saturation and brightness area, a hue slider, a hex input and an optional preset row.
-- value / defaultValue / onValueChange: string / string / (value: string) => void. #rrggbb. Passing value makes it controlled; defaultValue defaults to #000000; a malformed value throws. onValueChange fires on every change, including during a drag.
+- value / defaultValue / onValueChange: string / string / (value: string) => void. #rrggbb. A string makes it controlled, and value={undefined} counts as not passed; defaultValue defaults to #000000; a malformed value throws. onValueChange fires on every change, including during a drag.
 - onValueCommit: (value: string) => void. Called when an interaction ends: pointer release, key release, a confirmed hex, a chosen preset. Save here rather than in onValueChange.
 - swatches: { value: string; label: string }[]. A preset row using ColorSwatchPicker, with the same rules.
 - name / form / disabled: string / string / boolean. With name, #rrggbb is submitted with the form. When disabled it is neither submitted nor openable.
@@ -2969,7 +2969,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 7535b0831f9d85905f4e73b5309215d75ab89edbad35ab9cf44c498b960258d2
+Source SHA-256: 6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca
 
 Filter candidates and confirm one value or a set, with query text separate from selection.
 
@@ -3393,7 +3393,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/composer
 Source: packages/ui/src/components/composer.tsx
-Source SHA-256: cf23ffe28f63bf58767ea6be5ea90c64e7ddde21ecbc68dab0655290dc9ab726
+Source SHA-256: fef8f9c94f951cdabab88801f34d75427fb3c8b8a5d43b7a8170abdfa50b5fe7
 
 Multi-line input with @ mentions, / commands and atomic tokens; its value is an array of text and token segments.
 
@@ -3457,7 +3457,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `onValueChange?`: `((value: ComposerSegment[], details: ComposerChangeDetails) => void) | undefined`.
 - `readOnly?`: `boolean`.
 - `submitOn?`: `"enter" | "mod-enter"`. enter：Enter 提交、Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交、Enter 换行。
-- `value?`: `ComposerValue | undefined`. 受控值。片段数组：文字片段与令牌片段。
+- `value?`: `ComposerValue | undefined`. 受控值。片段数组：文字片段与令牌片段。value={undefined} 等于没传，走非受控（内容没有 undefined 这个值，要清空传 []）。
 - plus 278 inherited (@types/react 277, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ComposerInput
@@ -3493,7 +3493,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 #### Composer
 Root: fill-control frame and state; owns value, submit and disabled/readOnly.
-- value / defaultValue: readonly ComposerSegment[]; default defaultValue: []. Controlled/uncontrolled value: text segments and token segments. Adjacent text segments are merged.
+- value / defaultValue: readonly ComposerSegment[]; default defaultValue: []. Controlled/uncontrolled value; value={undefined} counts as not passed, and [] clears it. Text segments and token segments. Adjacent text segments are merged.
 - onValueChange: (value: ComposerSegment[], details: ComposerChangeDetails) => void. details.reason is input/paste/cut/newline/token/action/delete-token/undo/redo/clear. cancel() rejects the change and the editor reverts.
 - onSubmit: (value: ComposerSegment[], details: { event, clear }) => void. Fired by Enter or ComposerSubmit; not called when there is no token and the text is whitespace only. clear() empties the value through onValueChange.
 - submitOn: 'enter' | 'mod-enter'; default 'enter'. enter: Enter submits and Shift+Enter breaks the line. mod-enter: Ctrl/Cmd+Enter submits and Enter breaks the line.
@@ -3503,7 +3503,7 @@ Root: fill-control frame and state; owns value, submit and disabled/readOnly.
 The editor and candidate popup.
 - aria-label / aria-labelledby: string. One is required, otherwise it throws.
 - placeholder: string. Shown when empty and exposed as aria-placeholder.
-- triggers: readonly ComposerTrigger[]. Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect).
+- triggers: readonly ComposerTrigger[]. Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded; a throw or rejection shows a failed-to-load message with a retry rather than passing for no results. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect).
 - minRows / maxRows: number; default 1 / 8. Starting rows and growth cap. Beyond the cap the editor scrolls, and never exceeds half the viewport height.
 
 #### ComposerToolbar / ComposerSubmit
@@ -3514,6 +3514,7 @@ The toolbar holds xs buttons; ComposerSubmit is unavailable when empty, disabled
 - Enter / Shift+Enter: Submit or break the line per submitOn; ignored during composition (isComposing or keyCode 229).
 - ArrowDown / ArrowUp: Move the highlight while candidates are open, wrapping and skipping disabled items.
 - Enter / Tab: Select the highlight while candidates are open, without submitting.
+- Enter / Tab (after a failed load): Retry the load without submitting. After Escape closes the candidates, Enter submits again.
 - Escape: Close the candidates and keep the typed text.
 - Backspace / Delete: Delete an adjacent token as a whole.
 - Ctrl/⌘+Z、Ctrl/⌘+Shift+Z: Undo and redo using the component's own snapshot stack.
@@ -4137,7 +4138,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: e5c08917cba6803b0c3cc667b0afbeedc349174161a8e516b17ceb6ba94c1033
+Source SHA-256: 150b236250585679cc9891aef9aec40ab46b80dbbc0516f08b0e48dca47f3580
 
 Comparison, sorting, scoped selection and optional virtualization for a caller-owned collection.
 
@@ -4272,7 +4273,7 @@ Configured sorting, page selection, active rows and pagination without issuing r
 - selection: { label, rowLabel, canSelect?, scope?: 'page' | 'filtered' }. Enables selection; select-all changes eligible rows on the current page while preserving outside IDs. Read state.rowSelection for the complete server selection, not the loaded-page getSelectedRowModel. scope defaults to page; filtered makes the header select-all act on all filtered results across pages. It requires mode=client: a server caller does not hold the full result, so mode=server with filtered throws in development; use BulkActionBar extent / BulkActionBarExtend to let the user extend to everything explicitly.
 - activeRow: ({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T, event: DataTableActivateEvent) => void }. By default the named column gets an activation button and its cell must be noninteractive. With trigger=row, click row content or focus the row and press Enter/Space. Nested controls, links, labels and editors do not activate the row; activation and selection remain independent. The second onActivate argument is the React mouse or keyboard event that triggered it, so the caller can read metaKey / ctrlKey / shiftKey (for example to open in a new tab).
 - selectionAppearance: row | checkbox; default row. Checkbox mode removes only selected-row fill, retaining actual checkboxes and independent active-row emphasis.
-- virtualization: { height: number, estimateRowHeight: number, overscan?: number }. Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1.
+- virtualization: { height?: number, estimateRowHeight: number, overscan?: number }. Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Without height the table fills its parent, or takes a height from Pattern's className or DataTable's containerProps; rows never grow the viewport, so a parent without a definite height gives a zero-height viewport and no rows rather than rendering them all. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1.
 - stickyHeader / stickyHeaderOffset: boolean / number | string. Sticks the header to the top of the nearest scroll area: the page or Workspace content when the table fits horizontally; the table's own container for a horizontally overflowing table, the virtualization viewport, or a height / max-height set through tableProps.containerProps. stickyHeaderOffset clears a fixed bar above that area; numbers are px.
 - columns[].pinned / columns[].empty: boolean / ReactNode. pinned fixes a contiguous run of leading columns (the selection column is pinned with them; non-contiguous pins throw) and draws an edge line once scrolled sideways. empty replaces the default dash plus screen-reader 'No value' for null, undefined or empty strings in columns without cell; zero still renders. Callers distinguish unknown from not applicable through empty.
 - caption / busy / error / tableProps / native div props: ReactNode / boolean / ReactNode / DataTableProps / HTML props. While busy the old rows stay put, an indeterminate mark appears along the top edge and the pager blocks paging while keeping focus on the pressed button. error is application content with its own retry action, placed above the table as role=alert; old rows stay as well. Props target the table or composition root and never infer request outcomes.
@@ -5292,7 +5293,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
-Source SHA-256: 480ba69e05c63a550feab21b961e9593ff298bb612405f18de0a84d4f5724b65
+Source SHA-256: 8bf6a3b75be2b323a1fa09109535f1b90b02ac3ab333f114872add2881f1b47f
 
 Connect one value's name, control, description, and caller-supplied errors.
 
@@ -5314,10 +5315,10 @@ Supply invalid and error content separately. Field connects names and errors wit
 - Application: Values, rules, invalid facts, error content, drafts, and delivery outcomes.
 
 ### Composition
-- Input registers automatically; FieldControl registers native controls. Fieldset names a shared scope; FieldGroup organizes spacing only.
+- Input registers automatically; FieldControl registers native controls. Fieldset names a shared scope; FieldGroup organizes spacing, and labelColumn makes its names share one column.
 
 ### Responsive behavior
-- Long names/descriptions wrap, horizontal content columns shrink, and field roles determine spacing.
+- Long names/descriptions wrap, horizontal content columns shrink, and field roles determine spacing. labelColumn stacks on narrow screens.
 
 ### Customization
 - External classes merge last; native props, state styling callbacks, refs, and render forward. FieldTitle does not register as a label.
@@ -5329,7 +5330,8 @@ Supply invalid and error content separately. Field connects names and errors wit
 - FieldDescription: function; owner field; PASS; props: React.ComponentProps<typeof FieldPrimitive.Description>
 - FieldError: function; owner field; PASS; props: FieldErrorProps
 - FieldErrorProps: type; owner field; PASS
-- FieldGroup: function; owner field; PASS; props: useRender.ComponentProps<"div">
+- FieldGroup: function; owner field; PASS; props: FieldGroupProps
+- FieldGroupProps: type; owner field; PASS
 - FieldItem: function; owner field; PASS; props: React.ComponentProps<typeof FieldPrimitive.Item>
 - FieldLabel: function; owner field; PASS; props: FieldLabelProps
 - FieldLabelProps: type; owner field; PASS
@@ -5365,7 +5367,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
 
 ### FieldGroup
-- no props declared by this library
+- `labelColumn?`: `boolean`. 让组内字段的名称共用一列（宽度取最长名称），控件起点对齐；窄屏回到堆叠。字段须是组的直接子元素。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### FieldItem
@@ -5430,6 +5432,7 @@ The name and description column of a horizontal field.
 
 #### FieldGroup
 Spacing between fields, without group semantics.
+- labelColumn: boolean; default false. Names in the group share one column as wide as the longest name, and controls start at the same edge; descriptions and errors sit under the control, and separators span both columns. Stacks on narrow screens. Wrap content meant for the control column, such as an action, in a Field without a name.
 
 #### FieldSeparator
 A boundary between field groups; flanking lines are decorative when text is supplied.
@@ -5457,7 +5460,7 @@ export default function Demo() {
 }
 ```
 
-8 more examples: see the component page and its Markdown file.
+9 more examples: see the component page and its Markdown file.
 
 ## Fieldset
 
@@ -5804,6 +5807,7 @@ Dirty and appliedSummary are required facts; Apply emits intent without changing
 
 ### Customization
 - Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset.
+- Field widths go in the Field className (for example flex-1 lets search take the remaining space), not on the control.
 
 ### Current exports
 - FilterBar: function; owner filter-bar; PASS; props: FilterBarProps
@@ -6937,7 +6941,7 @@ Stack flows vertically; Inline flows horizontally and wraps by default; Grid lay
 
 ### Notes
 - Layout adds no border, surface, padding or business state; use Card for independent object boundaries.
-- Grid only does equal-width columns; keep native table/grid for spanning or header-aligned comparison.
+- Grid only does equal-width columns; keep native table/grid for spanning or header-aligned comparison. For unequal columns use a native div with grid-cols-[…]: Grid sets its columns inline, so they do not take effect in its className.
 - Role values are theme presets. Explain special className/style overrides in the project composition.
 - Direction, language and density follow the DOM; wrapping does not reorder content.
 
@@ -7153,6 +7157,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `onChange?`: `NativeSelectProps["onChange"]`.
 - `onLocaleChange`: `(locale: UILocale, event: React.ChangeEvent<HTMLSelectElement>) => void`.
 - `options`: `readonly LocaleSwitchOption[]`.
+- `selectClassName?`: `string | undefined`. 真实 select 的样式入口。单值形态的 className / style 属于外框（图标定位在那里，宽度也写在那里）；列表形态没有外框，两者都落在 select。
 - plus 283 inherited (@types/react 282, @base-ui/react 1); not expanded, see the installed declarations
 
 ### Dependencies and providers
@@ -7520,7 +7525,7 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
-Source SHA-256: 27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874
+Source SHA-256: c79d1ce39764a22c4952574d981ffccb7e4d732c9e1be7816a5a3154dad1745f
 
 Keep the platform picker, native options and form values.
 
@@ -7544,7 +7549,7 @@ Native size names visible list rows only and no longer doubles as a geometry pro
 - One geometry for the single-value form, following the density axis; narrow height adds 4px, coarse pointers read touch-target, and multiple rows are not fixed to a single-line height.
 
 ### Customization
-- Retain the platform arrow; className/style/render belong to the actual select.
+- Retain the platform arrow. In the single-value form className/style belong to the wrapper, where width goes (w-full fills); selectClassName and render belong to the actual select. The list form has no wrapper, so all of them land on the select.
 
 ### Current exports
 - NativeSelect: function; owner native-select; PASS; props: NativeSelectProps
@@ -7554,7 +7559,7 @@ Native size names visible list rows only and no longer doubles as a geometry pro
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### NativeSelect
-- no props declared by this library
+- `selectClassName?`: `string | undefined`. 真实 select 的样式入口。单值形态的 className / style 属于外框（图标定位在那里，宽度也写在那里）；列表形态没有外框，两者都落在 select。
 - plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
 
 ### Dependencies and providers
@@ -7570,7 +7575,9 @@ Written descriptions; the list above is the type-resolved fact.
 A real select with native option and optgroup children.
 - size / multiple / disabled / required / name: native select props. Native rows, multiple values, disabled state, constraints and form name.
 - value / defaultValue / onChange: native select props. Controlled and uncontrolled values; multiple values use string arrays.
-- render / ref / ARIA / className / style: useRender.ComponentProps<select>. Props, events and ref reach the actual select; render must preserve a native value-selecting element.
+- render / ref / ARIA: useRender.ComponentProps<select>. Props, events and ref reach the actual select; render must preserve a native value-selecting element.
+- className / style: useRender.ComponentProps<select>. On the wrapper in the single-value form (the icon is positioned there), so width goes here; on the select in the list form (multiple or size above 1), which has no wrapper.
+- selectClassName: string. Styles for the actual select in both forms.
 
 ### Keyboard
 - Tab / Arrow keys / Platform picker keys: Uses native selection behavior on the current platform.
@@ -9251,7 +9258,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/resizable
 Source: packages/ui/src/components/resizable.tsx
-Source SHA-256: 475ad2f99677a4a8568db306872ef7323f3f3386300065365e1086cbbc386a74
+Source SHA-256: 275cd5bb5c655f0dfce41b9ae165de470d0a2507c08006653564e2bd34878f0a
 
 Draggable separators between two or more panels that change how the space is shared.
 
@@ -9600,7 +9607,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: b335bf0444c58f204e72dbb5eedf2a8220cd65fc03da091dccdd57ce6e8428d1
+Source SHA-256: cac2e91684ebc4c766cf31f3d48387d72611874133cc8f8bb9b0609aab9afe14
 
 Native scrolling with an optional composition of draggable scrollbars.
 
@@ -9689,8 +9696,8 @@ An actual scrollable div; native scrollbars respect platform settings.
 - children: ReactNode. Complete content without windowing or hiding collection items.
 - style / className: div props. Consumer layout supplies height/maxHeight and width; overflow defaults to auto.
 - fade: boolean; default false. Edge fade: only the end that is actually cut off fades; an end scrolled to its limit does not. Both axes are measured independently. Built like TabsList (mask, width basis, RTL flip); the fade width is one fill-control row height (a preset). The edge facts are exposed as data-overflow-x-start/end and data-overflow-y-start/end.
-- tabIndex: number; default 0 while the content overflows. Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept.
-- render / ref / ARIA / events: useRender.ComponentProps<'div'>. Actual viewport composition, names, refs, and native scroll/keyboard events. The caller may add role=region for a named independent area.
+- tabIndex: number; default 0 while the content overflows. Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept; pass -1 when the content has focusable items. Scrolling, focusable and unnamed warns in development.
+- render / ref / ARIA / events: useRender.ComponentProps<'div'>. Actual viewport composition, names, refs, and native scroll/keyboard events. aria-label or aria-labelledby defaults the role to region (not when render swaps the element), and a role you pass wins.
 
 #### ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent
 Explicit styled-scrollbar composition: Root owns layout/overflow facts, Viewport is the actual scroll element and Content supports measurement.
@@ -9715,7 +9722,7 @@ Source: apps/docs/src/content/scroll-area/demos/01-vertical.tsx
 import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
 export const meta = { title: "有限视口", titleEn: "Bounded viewport" };
 export default function Demo() {
-  return <ScrollArea aria-label="完整条目" role="region" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>;
+  return <ScrollArea aria-label="完整条目" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>;
 }
 ```
 
@@ -9936,7 +9943,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
-Source SHA-256: 366d8d92678c1a91950609486d0435c80e07d89f95621d0781bab30f0ba37a09
+Source SHA-256: f4665dbed362bff8a49503a39078814435fee87286a1eef4e431e26d75f2df6e
 
 Enter one value from a small set of visible segments.
 
@@ -9959,7 +9966,7 @@ SegmentedControl produces a value. Use Tabs for content panels (Tabs can also be
 - FieldTitle names the group; FieldDescription/FieldError associate with the input; candidate children supply names.
 
 ### Responsive behavior
-- Retain all candidates and permit wrapping; five narrow-screen profiles preserve semantics.
+- Width follows content by default; className="w-full" shares it equally among candidates. When they do not fit they wrap per candidate instead of squeezing; five narrow-screen profiles preserve semantics.
 
 ### Customization
 - The selected segment reads --qy-track-selected and --qy-track-selected-foreground (light ink wash and ink text by default); unselected segments use muted ink; matching text, no outer focus ring.
@@ -10045,7 +10052,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
-Source SHA-256: 36f9c843a86f51d2ebe65054cf5577bd80a4a076d0de1d52326c66eee10acf7a
+Source SHA-256: b17fc57dc658402188ba8a821eb0a99f9a034ed4217d47d74991b427c37583da
 
 Choose one value from a collapsible set of options.
 
@@ -10411,7 +10418,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: e3d0cd62528d452987733bc22151e9b69efaec4f7442904340694726857b3803
+Source SHA-256: c1a2e83537c08c137c4b2a0266f85d16a4f021a4fd5586adc06de2a85434351c
 
 Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 
@@ -11656,7 +11663,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: fec95d44ade9b2245e569a1b91c9ddc6911c1af3b26f50a36521bb8a54d98137
+Source SHA-256: 8c8622ab9be09d415cd064c92ff7741e1190c7a1141a95c05e321c536a123a2b
 
 Different views of one object with panel drafts retained.
 
@@ -11722,6 +11729,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context AppearanceContext: without a provider default-value; provided by Tabs
+- Context OrientationContext: without a provider default-value; provided by Tabs
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -11730,6 +11738,7 @@ Written descriptions; the list above is the type-resolved fact.
 The current view and a manually activated list.
 - value / defaultValue / onValueChange / orientation: Base UI Root props. The application or primitive owns the value; cancellation prevents a switch.
 - appearance: "line" | "track"; default "line". Appearance of the tab list, set on Tabs for the whole set. line is the navigation line; track puts the selected face inside a track, horizontal or vertical. Appearance never changes the tablist / tab / tabpanel semantics.
+- TabsList className: Base UI List props. In the track appearance it lands on the track's outer frame: width follows content by default and w-full shares it equally among tabs; when they do not fit the frame stays put and tabs scroll inside it. The line appearance already fills its row.
 - activateOnFocus: boolean; default false. Focus movement does not activate by default; consumers may explicitly opt in.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
@@ -11766,7 +11775,7 @@ export default function Demo() { return <Tabs defaultValue="text"><TabsList aria
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: 2637acfdcaeef88dcee4ed922f2255f16986a33f838c1b347d039cce0dcd4217
+Source SHA-256: 8ec39c7dd44653e74738178db40ee5a62a4a34d551a80a03181428338f8035ec
 
 Confirm a string collection while keeping its unconfirmed draft.
 
@@ -11847,7 +11856,7 @@ Public composition of confirmed items, a draft input, and non-submitting actions
 - render / ref / className / style / native props: useRender.ComponentProps<'div'>. Applied to the root container. Render must retain its structure and children.
 
 ### Keyboard
-- Enter: Confirm the draft outside composition without submitting a form. Composition Enter does not add.
+- Enter: Confirm the draft outside composition without submitting a form. With an empty draft it is not intercepted and the form submits. Composition Enter does not add.
 - Backspace / ArrowLeft (start of draft; ArrowRight under RTL): Backspace on an empty draft or Left at its start focuses the last item without deleting it.
 - Delete / Backspace (remove button): Remove the focused item and preserve an adjacent focus position.
 - ArrowLeft / ArrowRight (remove button): Move among confirmed items; boundaries return to the draft. The direction follows the rendered layout and swaps under RTL.
@@ -12651,7 +12660,7 @@ export default function Demo() {
   const current = useTocScrollSpy(headings, { container: containerRef });
   return <Inline gap="panel" align="start">
     <Toc aria-label="示例文章目录" items={headings} current={current} className="w-40 shrink-0" />
-    <ScrollArea ref={containerRef} role="region" aria-label="接入说明" className="h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)">
+    <ScrollArea ref={containerRef} aria-label="接入说明" className="h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)">
       {sections.map((section) => {
         const Heading = section.level === 2 ? "h2" : "h3";
         return <section key={section.id} className="mb-(--qy-field-group-gap)">
@@ -12771,7 +12780,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
-Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d
+Source SHA-256: 7850bfe90e1c53a915357e2fe0de3d9df988b18a93125cb67b3b649996486a94
 
 A shared single or multiple set of toggles whose pressed fact persists.
 
@@ -12794,7 +12803,7 @@ A pressed item is a light ink wash with ink text and unpressed items use muted i
 - ToggleGroup + ToggleGroupItem; its name identifies the shared scope.
 
 ### Responsive behavior
-- Horizontal layouts may wrap; vertical navigation follows up/down. Browser layout was not verified in this batch.
+- Width follows content by default; className="w-full" shares it equally among candidates. Horizontal layouts wrap per candidate when they do not fit, and icon candidates stay at least square; vertical navigation follows up/down.
 
 ### Customization
 - Pressed items read --qy-track-selected and --qy-track-selected-foreground (light ink wash and ink text by default), not --qy-primary; unpressed items use muted ink; existing five matching profiles.
@@ -13744,7 +13753,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
-Source SHA-256: 772ed07d69b729cdade24c67b719669caefd00765038118f3b30ab6ce587cd90
+Source SHA-256: 87082ed536a385bbdbf9468c74888760cfcb6f86b0d6133541ae7715106a7fb0
 
 Window fixed or measured-height collections while retaining the reading position and active editing.
 
@@ -13786,7 +13795,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `actionsRef?`: `React.Ref<VirtualListActions>`. Separate from the native scrolling-element ref. Scrolling is instant and keeps focus.
 - `followEnd?`: `boolean`. Follow appended items only when previously at the end; never initially jump to the end.
 - `getKey`: `(item: Item, index: number) => React.Key`. Must remain stable across scrolling, insertion and reordering.
-- `height`: `number`.
+- `height?`: `number`. 视口高度，CSS px。不传时宽高都归 CSS（`flex-1`、`h-full`、`style`），由尺寸隔离防止内容反撑；需要服务端窗口时传数字。
 - `items`: `readonly Item[]`.
 - `itemSize`: `number`. Fixed outer row extent, or the estimated outer extent in dynamic mode, in CSS px.
 - `measurement?`: `"fixed" | "dynamic"`. Dynamic mode observes each mounted row's actual border-box height.
@@ -13806,13 +13815,14 @@ Written descriptions; the list above is the type-resolved fact.
 #### VirtualList<Item>
 Collection rendering boundary with actual list/listitem semantics, without selection, requests, or business columns.
 - items / getKey / renderItem: readonly Item[] / (item,index)=>React.Key / (item,index)=>ReactNode. Actual collection, stable unique keys, and content; duplicate keys throw. Use persistent identities across insertion and reordering, rather than positions.
-- itemSize / height: number. Outer item height and viewport height in CSS px, both finite and positive. Rows are fixed by default; in dynamic mode itemSize estimates unmeasured rows without constraining their content height.
+- itemSize: number. Outer item height in CSS px, finite and positive. Rows are fixed by default; in dynamic mode it estimates unmeasured rows without constraining their content.
+- height: number. Viewport height in CSS px, finite and positive. When omitted, CSS owns the height (h-full or flex-1 in className, or style) and content never stretches the viewport; a parent without a definite height yields a 0 viewport with no rows, rather than silently rendering everything.
 - measurement: 'fixed' | 'dynamic'; default 'fixed'. dynamic uses ResizeObserver to measure each mounted row's actual border-box height. Let normal content flow determine row height; external margins are excluded.
 - actionsRef: React.Ref<VirtualListActions>. Separate actions: scrollToIndex(index, { align?: 'auto' | 'start' | 'center' | 'end' }) and scrollToEnd(). Scroll instantly without moving focus. Invalid or out-of-bounds indices throw RangeError; scrollToEnd is a no-op for empty collections.
 - followEnd: boolean; default false. Explicit end following. Follow appended items only when previously at the bottom (within 1 CSS px). Reading history keeps its position, and initial mounting never jumps to the end.
 - overscan: number; default 2. A nonnegative integer rendering-budget preset on both window edges, rather than a visual dimension.
 - aria-label / aria-labelledby: string. One is required: the identifiable name of the collection, on the role=list scroll viewport. A missing or blank name throws.
-- render / ref / style / className / events / ARIA: useRender.ComponentProps<'div'>. ref remains the native scroll viewport. Explicit height owns its height and supplies the initial server-rendered window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name.
+- render / ref / style / className / events / ARIA: useRender.ComponentProps<'div'>. ref remains the native scroll viewport. An explicit height owns the viewport height and supplies the initial server window; without it the server estimates no window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name.
 
 ### Keyboard
 - Tab: Reach the collection viewport and mounted internal actions.

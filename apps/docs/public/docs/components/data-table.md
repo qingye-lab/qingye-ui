@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: e5c08917cba6803b0c3cc667b0afbeedc349174161a8e516b17ceb6ba94c1033
+Source SHA-256: 150b236250585679cc9891aef9aec40ab46b80dbbc0516f08b0e48dca47f3580
 
 调用方真实集合的比较、排序、范围选择与可选虚拟化。
 
@@ -138,7 +138,7 @@ Written descriptions; the list above is the type-resolved fact.
 - selection: { label, rowLabel, canSelect?, scope?: 'page' | 'filtered' }. 启用选择列；全选只改当页可选行并保留范围外 ID。服务端完整选中范围读取 state.rowSelection，不读当前页的 getSelectedRowModel。scope 默认 page；filtered 让表头全选作用于全部筛选结果（跨页），仅 mode=client 可用——服务端调用方并不持有完整结果，用 mode=server 加 filtered 会在开发期抛错，请改用 BulkActionBar 的 extent / BulkActionBarExtend 让用户显式扩展到全部。
 - activeRow: ({ trigger?: 'cell', columnId: string } | { trigger: 'row' }) & { onActivate?: (row: T, event: DataTableActivateEvent) => void }. 默认在指定列放激活按钮，cell 保持非交互内容；trigger=row 时点击行正文或聚焦行后按 Enter/Space。内部控件、链接、label 与编辑区不触发行激活；活动行与复选状态独立。onActivate 的第二个参数是触发它的 React 鼠标或键盘事件，调用方可读 metaKey / ctrlKey / shiftKey 区分「在新标签页打开」之类的意图。
 - selectionAppearance: row | checkbox; default row. checkbox 只取消选中行的底色，真实复选框仍保留；活动行的强调独立保留。
-- virtualization: { height: number, estimateRowHeight: number, overscan?: number }. 显式启用当前行模型的虚拟化；height 含 caption 与表头，实际行高自动测量。尺寸须有限且为正，overscan 为非负整数（默认 1）。
+- virtualization: { height?: number, estimateRowHeight: number, overscan?: number }. 显式启用当前行模型的虚拟化；height 含 caption 与表头，实际行高自动测量。不传 height 时铺满父级，也可由 Pattern 的 className 或 DataTable 的 containerProps 给高度；内容不撑高视口，父级没有确定高度时视口高为 0，不渲染行，不会退化成全量渲染。尺寸须有限且为正，overscan 为非负整数（默认 1）。
 - stickyHeader / stickyHeaderOffset: boolean / number | string. 表头吸在最近的滚动区顶部：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口，或 tableProps.containerProps 设了 height / max-height 时，是表格自己的容器。stickyHeaderOffset 让开滚动区顶上的固定页眉，数字按 px。
 - columns[].pinned / columns[].empty: boolean / ReactNode. pinned 固定从第一列起连续的前导列（选择列自动一并固定，不连续时抛错），横向滚动后末端出现一条线。empty 是无 cell 的列在 null、undefined、空串时显示的内容，默认「—」加读屏的「无值」；0 照常显示。未知与不适用由调用方用 empty 区分。
 - caption / busy / error / tableProps / native div props: ReactNode / boolean / ReactNode / DataTableProps / HTML props. busy 时旧数据行不动，表格顶缘出现不定进度记号，分页暂时挡住翻页但焦点留在原按钮。error 由应用给出内容和重试动作，摆在表格上方并声明 role=alert，旧数据行同样保留。属性分别归属表格或组合外层，不推断请求成功或失败。

@@ -137,3 +137,21 @@ test("without fade no edge attributes are exposed", () => {
   render(<ScrollArea aria-label="条目">很长</ScrollArea>);
   expect(screen.getByLabelText("条目").getAttributeNames().filter(name => name.startsWith("data-overflow"))).toEqual([]);
 });
+
+test("a name makes it a region unless the caller or render decides otherwise", () => {
+  stubLayout({});
+  render(<><ScrollArea aria-label="甲">短</ScrollArea><ScrollArea aria-label="乙" role="log">短</ScrollArea><ScrollArea aria-label="丙" render={<nav />}>短</ScrollArea><ScrollArea data-testid="丁">短</ScrollArea></>);
+  expect(screen.getByRole("region", { name: "甲" })).toBeInTheDocument();
+  expect(screen.getByRole("log", { name: "乙" })).toBeInTheDocument();
+  expect(screen.getByRole("navigation", { name: "丙" })).toBeInTheDocument();
+  expect(screen.getByTestId("丁")).not.toHaveAttribute("role");
+});
+
+test("a scrolling, unnamed tab stop warns in development; a name or an explicit tabIndex does not", () => {
+  stubLayout({ scrollHeight: 400, clientHeight: 100 });
+  const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  render(<><ScrollArea aria-label="甲">长</ScrollArea><ScrollArea render={<nav aria-label="乙" />}>长</ScrollArea><ScrollArea tabIndex={-1}>长</ScrollArea></>);
+  expect(warn).not.toHaveBeenCalled();
+  render(<ScrollArea>长</ScrollArea>);
+  expect(warn).toHaveBeenCalledTimes(1);
+});

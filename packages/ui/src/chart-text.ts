@@ -1,7 +1,7 @@
 import type * as React from "react";
 
 /**
- * 数据图里 SVG 文字的度量（Chart、ScatterChart 共用）。文字度量随字阶，不随分，所以不在 chart-geometry 里。
+ * 数据图里 SVG 文字的度量（Chart、ScatterChart 共用；Select 用 textAdvance 比候选谁最宽）。文字度量随字阶，不随分，所以不在 chart-geometry 里。
  * 轴宽要在画之前定，量不到真实字宽，这里按 dense 档（12px）估：CJK 一字 12px，其余一字 7.5px（数字的字宽）。
  * 是估算：英文的平均字宽低于估值（实测全大写 7.3px，大小写混排 5.6px），会多留；连串的宽字母低估（W 实测 11.6px），这类名称裁后仍可能越过图的左缘。
  */

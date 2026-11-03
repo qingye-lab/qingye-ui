@@ -29,6 +29,7 @@ dirty 和 appliedSummary 是必填事实；点击应用只发出意图，库不�
 
 ## Customization
 - 控件档案、间距和浮层表面消费现有角色；具体外观是预设。
+- 字段宽度写在 Field 的 className 上（如 flex-1 让搜索框占满余量），不改控件本身。
 
 ## Current exports
 - FilterBar: function; owner filter-bar; PASS; props: FilterBarProps

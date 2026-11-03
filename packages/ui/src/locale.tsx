@@ -79,6 +79,7 @@ export type UILocaleMessages = {
   /** 所有多选选择器（TreeSelect、Cascader、Select multiple 等）摘要里名称之间的分隔符；键名沿用首个使用者。 */
   treeSelectSeparator: string; treeSelectMore: (first: string, rest: number) => string;
   treeLoadFailed: string; treeRetry: string;
+  composerLoadFailed: string; composerRetry: string;
   treeMoveHint: string; treeMovePicked: (name: string) => string; treeMoved: (name: string, target: string, position: "before" | "after" | "inside") => string; treeMoveCancelled: string; treeMoveInvalid: string;
   // Rating, Transfer
   rating: string; ratingStar: (score: number) => string; ratingValue: (score: number, max: number) => string; ratingNone: string;
@@ -158,6 +159,7 @@ export const zhCN: UILocale = {
     commandEmpty: "没有匹配项",
     treeSelectSeparator: "、", treeSelectMore: (first, rest) => `${first} 及其余 ${rest.toLocaleString("zh-CN")} 项`,
     treeLoadFailed: "加载失败", treeRetry: "重试",
+    composerLoadFailed: "加载失败", composerRetry: "重试",
     treeMoveHint: "可移动节点：按 Ctrl 或 ⌘ 加 X 取起，移到目标后按 Alt 加 ↑ 放在前面、Alt 加 ↓ 放在后面、Alt 加 Enter 放入其中，Esc 取消。",
     treeMovePicked: name => `已取起「${name}」`,
     treeMoved: (name, target, position) => position === "inside" ? `已将「${name}」移入「${target}」` : `已将「${name}」移到「${target}」${position === "before" ? "之前" : "之后"}`,

@@ -77,7 +77,7 @@ export function DocsLayout({ children }: { children?: ReactNode }) {
     <>
       <div className="site-frame flex pb-[calc(2*var(--qy-cai))]" data-docs-frame>
         <div className="sticky top-(--docs-header-height) hidden h-[calc(100dvh-var(--docs-header-height))] w-(--docs-rail) shrink-0 lg:block" data-docs-sidebar>
-          <ScrollArea className="h-full">
+          <ScrollArea className="h-full" tabIndex={-1}>
             <DocsNav className="pt-[calc(2*var(--qy-cai))] pb-(--qy-section-gap) pe-(--qy-panel-padding)" />
           </ScrollArea>
         </div>

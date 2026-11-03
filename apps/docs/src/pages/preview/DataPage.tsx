@@ -180,7 +180,7 @@ export default function DataPage() {
         <VirtualList aria-label="同步日志" items={logRows} getKey={item => item.id} itemSize={ROW} height={ROW * 5} className="rounded-panel border border-border" renderItem={item => <span className="flex h-full items-center px-(--qy-panel-padding-sm) text-body numeric">{item.text}</span>} />
       </Row>
       <Row label="滚动区域" block lead="framed-row">
-        <ScrollArea aria-label="成员" role="region" className="rounded-panel border border-border" style={{ maxHeight: "12rem" }}>
+        <ScrollArea aria-label="成员" className="rounded-panel border border-border" style={{ maxHeight: "12rem" }}>
           {["陈致远", "李一鸣", "王一帆", "赵子纯", "孙若溪", "周景行", "吴念安", "郑清和"].map(name => <div key={name} className="flex min-h-(--qy-row-default) items-center gap-(--qy-field-gap) px-(--qy-panel-padding-sm) py-(--qy-field-gap) text-body">
             <Avatar size="xs" label={name}><AvatarFallback>{name.slice(0, 1)}</AvatarFallback></Avatar>{name}
           </div>)}

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
-Source SHA-256: 480ba69e05c63a550feab21b961e9593ff298bb612405f18de0a84d4f5724b65
+Source SHA-256: 8bf6a3b75be2b323a1fa09109535f1b90b02ac3ab333f114872add2881f1b47f
 
 关联一个值的名称、控件、说明与调用方提供的错误。
 
@@ -25,10 +25,10 @@ invalid 与错误内容分别传入。Field 关联名称与错误，不自行校
 - Application: 值、规则、invalid、错误内容、草稿与送达结果。
 
 ## Composition
-- Input 自动注册；原生控件通过 FieldControl 注册。Fieldset 命名共同范围，FieldGroup 只组织间隔。
+- Input 自动注册；原生控件通过 FieldControl 注册。Fieldset 命名共同范围，FieldGroup 组织间隔；名称要共用一列时给 FieldGroup labelColumn。
 
 ## Responsive behavior
-- 长名称与说明可换行；横向内容列可收缩；间距由字段角色决定。
+- 长名称与说明可换行；横向内容列可收缩；间距由字段角色决定。labelColumn 窄屏回到堆叠。
 
 ## Customization
 - className 最后合并，原生属性、状态样式函数、ref 和 render 透传；FieldTitle 不注册成 label。
@@ -40,7 +40,8 @@ invalid 与错误内容分别传入。Field 关联名称与错误，不自行校
 - FieldDescription: function; owner field; PASS; props: React.ComponentProps<typeof FieldPrimitive.Description>
 - FieldError: function; owner field; PASS; props: FieldErrorProps
 - FieldErrorProps: type; owner field; PASS
-- FieldGroup: function; owner field; PASS; props: useRender.ComponentProps<"div">
+- FieldGroup: function; owner field; PASS; props: FieldGroupProps
+- FieldGroupProps: type; owner field; PASS
 - FieldItem: function; owner field; PASS; props: React.ComponentProps<typeof FieldPrimitive.Item>
 - FieldLabel: function; owner field; PASS; props: FieldLabelProps
 - FieldLabelProps: type; owner field; PASS
@@ -76,7 +77,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
 
 ### FieldGroup
-- no props declared by this library
+- `labelColumn?`: `boolean`. 让组内字段的名称共用一列（宽度取最长名称），控件起点对齐；窄屏回到堆叠。字段须是组的直接子元素。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### FieldItem
@@ -141,6 +142,7 @@ Base UI Field.Root 的共同上下文；自动校验入口交给完整的 FieldP
 
 ### FieldGroup
 字段之间的关系间隔，没有 group 语义。
+- labelColumn: boolean; default false. 组内名称共用一列，列宽取最长的名称，控件起点对齐；说明与错误在控件下方，分隔线跨两列。窄屏回到堆叠。要放到控件列的内容（如操作按钮）包一层没有名称的 Field。
 
 ### FieldSeparator
 字段组分界；有文字时两侧线为装饰。
@@ -303,5 +305,27 @@ export const meta = { title: "校验中", titleEn: "Validating" };
 // 校验进行中旧的错误不显示；结论由应用在结束后传入。
 export default function Demo() {
   return <Field className="w-full max-w-xs" validating invalid><FieldLabel>用户名</FieldLabel><Input defaultValue="qingye" /><FieldError>用户名已被占用</FieldError></Field>;
+}
+```
+
+### 名称列
+Source: apps/docs/src/content/field/demos/10-label-column.tsx
+```tsx
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldDescription, FieldGroup, FieldLabel, FieldSeparator } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+
+export const meta = { title: "名称列", titleEn: "Label column" };
+
+export default function Demo() {
+  return (
+    <FieldGroup labelColumn className="w-full max-w-lg">
+      <Field><FieldLabel>姓名</FieldLabel><Input defaultValue="青野" /></Field>
+      <Field><FieldLabel>联系邮箱</FieldLabel><Input type="email" /><FieldDescription>说明与错误留在控件下方。</FieldDescription></Field>
+      <FieldSeparator />
+      <Field><FieldLabel>备注</FieldLabel><Input /></Field>
+      <Field><Button className="justify-self-start">保存</Button></Field>
+    </FieldGroup>
+  );
 }
 ```

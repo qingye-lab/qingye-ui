@@ -68,6 +68,7 @@ export const enUS: UILocale = {
     commandEmpty: "No matches",
     treeSelectSeparator: ", ", treeSelectMore: (first, rest) => `${first} and ${rest.toLocaleString("en-US")} more`,
     treeLoadFailed: "Failed to load", treeRetry: "Retry",
+    composerLoadFailed: "Failed to load", composerRetry: "Retry",
     treeMoveHint: "Items can be moved: press Ctrl or Command plus X to pick one up, move to a target, then press Alt plus Up Arrow to place it before, Alt plus Down Arrow to place it after, Alt plus Enter to place it inside, or Escape to cancel.",
     treeMovePicked: name => `Picked up “${name}”`,
     treeMoved: (name, target, position) => position === "inside" ? `Moved “${name}” into “${target}”` : `Moved “${name}” ${position} “${target}”`,

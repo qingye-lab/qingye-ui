@@ -206,3 +206,12 @@ test("an empty candidate list without application wording falls back to the shar
   expect(await screen.findByText("没有匹配的成员")).toBeInTheDocument();
   expect(screen.queryByText("没有可选项")).toBeNull();
 });
+
+test("a chip's remove button names what it removes even when the chip content is not a string", () => {
+  render(<Combobox multiple items={["甲"]} defaultValue={["甲"]}>
+    <ComboboxControl><ComboboxChips><ComboboxChip><strong>节点内容</strong></ComboboxChip><ComboboxChip>文字内容</ComboboxChip><ComboboxInput aria-label="候选" /></ComboboxChips></ComboboxControl>
+  </Combobox>);
+  expect(screen.getByRole("button", { name: "移除 节点内容" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: /文字内容/ })).toBeInTheDocument();
+  expect(screen.getByTitle("文字内容")).toHaveTextContent("文字内容");
+});

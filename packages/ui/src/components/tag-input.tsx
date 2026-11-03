@@ -274,7 +274,7 @@ export function TagInput({
         className="items-center gap-(--qy-tag-inset) p-(--qy-tag-inset) data-limit:has-[input:disabled]:cursor-auto data-limit:has-[input:disabled]:bg-surface-field data-limit:has-[input:disabled]:text-foreground">
         {value.length > 0 && <ul data-slot="tag-input-items" className="flex min-w-0 max-w-full flex-wrap gap-(--qy-tag-inset)">
           {value.map((tag, index) => <li key={`${index}:${tag}`} data-slot="tag-input-item" className={chipClassName} data-readonly={blocked.readOnly ? "" : undefined}>
-            <span data-slot="tag-input-value" className={cn("min-w-0 truncate", chipTextClassName)}>{tag}</span>
+            <span data-slot="tag-input-value" title={tag} className={cn("min-w-0 truncate", chipTextClassName)}>{tag}</span>
             {!blocked.readOnly && <Button ref={node => { removeRefs.current[index] = node; }} data-slot="tag-input-remove" size="xs" variant="quiet" shape="icon" type="button" disabled={blocked.disabled}
               className={chipActionClassName}
               aria-label={messages.removeTag(tag)} onClick={event => remove(index, event)}
@@ -338,7 +338,8 @@ export function TagInput({
           onKeyDown={event => {
             onKeyDown?.(event);
             if (event.defaultPrevented || event.baseUIHandlerPrevented || isBlocked() || composing.current || event.nativeEvent.isComposing || event.keyCode === 229) return;
-            if (event.key === "Enter") { event.preventDefault(); addDraft(event, true); }
+            // 空草稿没有要确认的东西：不拦，原生隐式提交照常（纯空白仍按误输入处理，留下并说明）。
+            if (event.key === "Enter") { if (draft !== "") { event.preventDefault(); addDraft(event, true); } }
             else if ((event.key === "Backspace" && draft === "") || (event.key === arrowToward(event.currentTarget).backward && event.currentTarget.selectionStart === 0 && event.currentTarget.selectionEnd === 0)) {
               const last = removeRefs.current[value.length - 1];
               if (last) { event.preventDefault(); last.focus(); }

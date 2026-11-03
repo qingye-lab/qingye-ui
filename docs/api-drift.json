@@ -15,7 +15,7 @@
       "type-resolved": 114
     },
     "documentedButMissing": 0,
-    "undocumented": 151,
+    "undocumented": 152,
     "undocumentedDeclaredInThisComponentsFile": 28,
     "unresolved": 0,
     "uncheckedWrittenNames": 215,
@@ -406,13 +406,13 @@
       "component": "data-table",
       "part": "DataTable",
       "prop": "stickyHeader",
-      "declaredAt": "packages/ui/src/components/data-table.tsx:104"
+      "declaredAt": "packages/ui/src/components/data-table.tsx:114"
     },
     {
       "component": "data-table",
       "part": "DataTable",
       "prop": "stickyHeaderOffset",
-      "declaredAt": "packages/ui/src/components/data-table.tsx:106"
+      "declaredAt": "packages/ui/src/components/data-table.tsx:116"
     },
     {
       "component": "data-table",
@@ -727,6 +727,13 @@
       "prop": "tone",
       "declaredAt": "packages/ui/src/components/button.tsx:67",
       "viaComponent": "button"
+    },
+    {
+      "component": "locale-switch",
+      "part": "LocaleSwitch",
+      "prop": "selectClassName",
+      "declaredAt": "packages/ui/src/components/native-select.tsx:11",
+      "viaComponent": "native-select"
     },
     {
       "component": "menu",
@@ -1964,7 +1971,7 @@
     {
       "component": "native-select",
       "part": "NativeSelect",
-      "written": "render / ref / ARIA / className / style",
+      "written": "render / ref / ARIA",
       "token": "ARIA",
       "reason": "generic"
     },

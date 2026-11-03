@@ -155,12 +155,12 @@ export function SidebarHeader({ render, className, ...props }: SidebarHeaderProp
 }
 export type SidebarTitleProps = useRender.ComponentProps<"span">;
 /**
- * 页头里的名称：占满身份与按钮之间的余地，放不下时截断（名称在别处还会出现，截断不丢信息）。
+ * 页头里的名称：占满身份与按钮之间的余地，放不下时截断，文字名称的全文在 title 里。
  * 收起时切到 sr-only——与 SidebarGroupLabel、链接名称同一机制：视觉隐藏，可访问名称仍在。
  */
 export function SidebarTitle({ render, className, ...props }: SidebarTitleProps) {
   const context = useSidebar();
-  return useRender({ defaultTagName: "span", render, props: mergeProps({ "data-slot": "sidebar-title", className: cn(context.collapsed ? "sr-only" : "min-w-0 flex-1 truncate text-body-strong", className) }, props) });
+  return useRender({ defaultTagName: "span", render, props: mergeProps({ "data-slot": "sidebar-title", title: typeof props.children === "string" ? props.children : undefined, className: cn(context.collapsed ? "sr-only" : "min-w-0 flex-1 truncate text-body-strong", className) }, props) });
 }
 export type SidebarContentProps = useRender.ComponentProps<"nav">;
 export function SidebarContent({ id, render, className, onFocusCapture, onBlurCapture, ref, ...props }: SidebarContentProps) {
@@ -380,7 +380,8 @@ export function SidebarSubContent({ className, children, ...props }: SidebarSubC
     {context.collapsed && (
       <PopoverPopup
         side="inline-end" align="start"
-        viewportProps={{ className: "grid min-w-0 gap-fen-half p-(--qy-overlay-inset)" }}
+        // 原语在视口内多一层包装，grid 和行距要落在包装层上，写在视口上不起作用。
+        viewportProps={{ className: "min-w-0 p-(--qy-overlay-inset) *:grid *:min-w-0 *:gap-fen-half" }}
         // 浮层的承载面是 surface-raised：当前项的面是叠合的选中面，在它上面同样比底深一级，不需要局部改写。
         className="min-w-[calc(8*var(--qy-cai))]"
       >

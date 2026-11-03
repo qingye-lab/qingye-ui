@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: fec95d44ade9b2245e569a1b91c9ddc6911c1af3b26f50a36521bb8a54d98137
+Source SHA-256: 8c8622ab9be09d415cd064c92ff7741e1190c7a1141a95c05e321c536a123a2b
 
 同一对象的不同视角，保留面板草稿。
 
@@ -69,6 +69,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context AppearanceContext: without a provider default-value; provided by Tabs
+- Context OrientationContext: without a provider default-value; provided by Tabs
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -77,6 +78,7 @@ Written descriptions; the list above is the type-resolved fact.
 当前视角与手动激活列表。
 - value / defaultValue / onValueChange / orientation: Base UI Root props. 值由应用或原语持有；取消不切换。
 - appearance: "line" | "track"; default "line". 标签栏外观，设在 Tabs 上整组生效。line 是导航线，track 是围在轨道里的选中面，横纵都成立。外观不改变 tablist / tab / tabpanel 的语义。
+- TabsList className: Base UI List props. 轨道外观落在轨道外框：默认宽度由内容决定，w-full 时标签等分；放不下时外框不变，标签在框内滚动。导航线外观本来占满所在行。
 - activateOnFocus: boolean; default false. 默认焦点移动不自动切换；消费者可明确选择自动激活。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 

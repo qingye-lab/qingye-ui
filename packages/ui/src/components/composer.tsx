@@ -103,7 +103,7 @@ function useComposerContext(part: string): ComposerContextValue {
 }
 
 export type ComposerProps = Omit<useRender.ComponentProps<"div">, "defaultValue" | "onChange" | "onSubmit"> & {
-  /** 受控值。片段数组：文字片段与令牌片段。 */
+  /** 受控值。片段数组：文字片段与令牌片段。value={undefined} 等于没传，走非受控（内容没有 undefined 这个值，要清空传 []）。 */
   value?: ComposerValue | undefined;
   defaultValue?: ComposerValue | undefined;
   onValueChange?: ((value: ComposerSegment[], details: ComposerChangeDetails) => void) | undefined;
@@ -257,7 +257,8 @@ export function ComposerInput({
 
   const [active, setActive] = React.useState<ComposerTriggerMatch | null>(null);
   const [dismissed, setDismissed] = React.useState<{ start: number; char: string } | null>(null);
-  const [candidates, setCandidates] = React.useState<{ key: string; status: "loading" | "ready"; items: readonly ComposerItem[] }>({ key: "", status: "ready", items: [] });
+  const [candidates, setCandidates] = React.useState<{ key: string; status: "loading" | "ready" | "error"; items: readonly ComposerItem[] }>({ key: "", status: "ready", items: [] });
+  const [attempt, setAttempt] = React.useState(0);
   const [highlight, setHighlight] = React.useState(-1);
 
   const trigger = active ? triggers[active.index] : undefined;
@@ -273,6 +274,7 @@ export function ComposerInput({
     return { groups, flat };
   }, [candidates, fresh]);
   const loading = fresh && candidates.status === "loading";
+  const failed = fresh && candidates.status === "error";
 
   // 最新的 props/状态给事件处理器用：处理器只在 effect 里挂一次（selectionchange、native beforeinput），不能闭包旧值。
   const live = { triggers, trigger, active, open, grouped, highlight, blocked };
@@ -388,18 +390,22 @@ export function ComposerInput({
     let stale = false;
     const controller = new AbortController();
     let result: ReturnType<ComposerTrigger["getItems"]>;
-    try { result = source.getItems(match.query, { signal: controller.signal }); } catch { result = []; }
+    // 失败不是「没有结果」：同步抛错与 reject 都进入失败态，可重试（attempt 变化即重取）。
+    try { result = source.getItems(match.query, { signal: controller.signal }); } catch {
+      setCandidates({ key: queryKey, status: "error", items: [] });
+      return () => controller.abort();
+    }
     if (isThenable(result)) {
       setCandidates({ key: queryKey, status: "loading", items: [] });
       result.then(
         (items) => { if (!stale) setCandidates({ key: queryKey, status: "ready", items: [...items] }); },
-        () => { if (!stale) setCandidates({ key: queryKey, status: "ready", items: [] }); },
+        () => { if (!stale) setCandidates({ key: queryKey, status: "error", items: [] }); },
       );
     } else {
       setCandidates({ key: queryKey, status: "ready", items: [...result] });
     }
     return () => { stale = true; controller.abort(); };
-  }, [open, queryKey]);
+  }, [open, queryKey, attempt]);
 
   React.useEffect(() => {
     setHighlight(nextEnabled(grouped.flat, -1, 1));
@@ -449,6 +455,12 @@ export function ComposerInput({
       if ((event.key === "Enter" || event.key === "Tab") && !event.shiftKey && !mod && highlighted) {
         event.preventDefault();
         selectItem(highlighted);
+        return;
+      }
+      // 失败时弹层里唯一的动作是重试：Enter 落在这里，不把半截消息误发出去（误发收不回，Esc 关掉后再按就能发）。
+      if ((event.key === "Enter" || event.key === "Tab") && !event.shiftKey && !mod && failed) {
+        event.preventDefault();
+        setAttempt((count) => count + 1);
         return;
       }
       if (event.key === "Escape" && active && trigger) {
@@ -546,7 +558,7 @@ export function ComposerInput({
 
   const hasTriggers = triggers.length > 0;
   const statusText = open && fresh
-    ? loading ? messages.loading : grouped.flat.length > 0 ? messages.resultCount(grouped.flat.length) : (trigger?.emptyText ?? messages.selectEmpty)
+    ? loading ? messages.loading : failed ? messages.composerLoadFailed : grouped.flat.length > 0 ? messages.resultCount(grouped.flat.length) : (trigger?.emptyText ?? messages.selectEmpty)
     : "";
 
   const anchor = React.useMemo(() => ({
@@ -628,7 +640,11 @@ export function ComposerInput({
       >
         <div onMouseDown={(event) => event.preventDefault()}>
           {loading && <div data-slot="composer-status-text" aria-hidden="true" className={candidateEmptyClassName}>{messages.loading}</div>}
-          {fresh && !loading && grouped.flat.length === 0 && <div data-slot="composer-empty" aria-hidden="true" className={candidateEmptyClassName}>{trigger?.emptyText ?? messages.selectEmpty}</div>}
+          {failed && <div data-slot="composer-error" className={cn(candidateEmptyClassName, "flex flex-wrap items-center gap-(--qy-field-gap) text-foreground")}>
+            <span aria-hidden="true">{messages.composerLoadFailed}</span>
+            <Button size="sm" variant="quiet" type="button" tabIndex={-1} onClick={() => setAttempt((count) => count + 1)}>{messages.composerRetry}</Button>
+          </div>}
+          {fresh && !loading && !failed && grouped.flat.length === 0 && <div data-slot="composer-empty" aria-hidden="true" className={candidateEmptyClassName}>{trigger?.emptyText ?? messages.selectEmpty}</div>}
           <div role="listbox" id={listId} aria-label={trigger?.label ?? label} aria-labelledby={trigger?.label ? undefined : labelledBy} aria-busy={loading || undefined} data-slot="composer-list">
             {grouped.groups.map(({ group, items }, groupIndex) => {
               const options = items.map((item) => {

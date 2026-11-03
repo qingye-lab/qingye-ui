@@ -121,7 +121,7 @@ export function ColorSwatchPicker({ swatches, value, defaultValue, onValueChange
 }
 
 export type ColorPickerProps = Omit<React.ComponentProps<"button">, "value" | "defaultValue" | "onChange" | "children" | "type" | "name" | "form"> & {
-  /** "#rrggbb"。传了这个属性即受控；输出一律小写。 */
+  /** "#rrggbb"。传字符串即受控；value={undefined} 等于没传，走非受控（颜色没有「空」这个值，这与可空的日期系列不同）。输出一律小写。 */
   value?: string | undefined;
   /** 非受控初值，原生表单 reset 回到它。省略时为 "#000000"。 */
   defaultValue?: string | undefined;
@@ -210,7 +210,8 @@ export function ColorPicker({ value: valueProp, defaultValue, onValueChange, onV
   };
 
   return <>
-    <Popover>
+    {/* Esc 是放弃：草稿不落定（紧随其后的失焦读到的已是 null）。重开总从真实的值开始，点外部时留下的非法草稿也不跨次打开。 */}
+    <Popover onOpenChange={(next, details) => { if (next || details.reason === "escape-key") { setDraft(null); setRejected(false); } }}>
       <PopoverTrigger
         disabled={disabled}
         render={<FieldPrimitive.Control render={<Button

@@ -251,3 +251,17 @@ test("dragging on the area sets saturation and brightness from the pointer and c
   expect(commit).toHaveBeenCalledTimes(1);
   expect(change).toHaveBeenCalled();
 });
+
+test("Escape abandons the typed hex: nothing is committed and reopening starts from the real value", async () => {
+  const onValueChange = vi.fn();
+  render(<ColorPicker aria-label="颜色" defaultValue="#336699" onValueChange={onValueChange} />);
+  const trigger = screen.getByRole("button", { name: /颜色/ });
+  await userEvent.click(trigger);
+  const input = await screen.findByRole("textbox", { name: "十六进制色值" });
+  await userEvent.clear(input);
+  await userEvent.type(input, "#112233{Escape}");
+  await waitFor(() => expect(screen.queryByRole("textbox", { name: "十六进制色值" })).not.toBeInTheDocument());
+  expect(onValueChange).not.toHaveBeenCalled();
+  await userEvent.click(trigger);
+  expect(await screen.findByRole("textbox", { name: "十六进制色值" })).toHaveValue("#336699");
+});

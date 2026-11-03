@@ -71,6 +71,8 @@ type Result = { path: string[]; chain: CascaderOption[]; label: string; disabled
 type Leaf = { path: string[]; disabled: boolean };
 
 const keyOf = (path: readonly string[]) => JSON.stringify(path);
+// 提交值：路径各段用 "/" 连接。段内的 "%"、"/" 先转义，["a/b"] 与 ["a","b"] 才不会提交成同一个串；服务端 split("/") 后逐段 decodeURIComponent 还原。
+const submitValueOf = (path: readonly string[]) => path.map(segment => segment.replace(/%/g, "%25").replace(/\//g, "%2F")).join("/");
 const samePath = (a: readonly string[], b: readonly string[]) => a.length === b.length && a.every((segment, index) => segment === b[index]);
 // 类型搜索的缓冲时长：预设，与 Tree 的类型搜索同值（500ms，常见的连击间隔）。
 const TYPEAHEAD_MS = 500;
@@ -250,7 +252,7 @@ export function Cascader(props: CascaderProps) {
   const labelOfPath = (path: readonly string[]) => { const { chain } = walk(path); return path.map((segment, index) => chain[index]?.label ?? segment).join(separator); };
   const orderedPaths = multiple ? ordered(paths) : [];
   const text = multiple ? pickerSummary(orderedPaths.map(labelOfPath), messages) : value ? labelOfPath(value) : null;
-  const ownedSubmitValue = value ? value.join("/") : "";
+  const ownedSubmitValue = value ? submitValueOf(value) : "";
 
   // ── 弹层状态 ──
   function prepare() {
@@ -435,13 +437,14 @@ export function Cascader(props: CascaderProps) {
         ariaLabel={ariaLabel} labelledBy={labelledBy} describedBy={describedBy}
         text={text} placeholder={placeholder ?? messages.selectPlaceholder}
       />
-      {/* 弹层沿用 Popover 的面板、边界与入退场；内边距由列自己留，所以视口去掉面板内边距，横向可滚动。 */}
+      {/* 弹层沿用 Popover 的面板、边界与入退场；内边距由列自己留，所以视口去掉面板内边距，横向可滚动。
+          视口里还隔着原语的一层内容包装（*:）：它也要参与收缩，可用高度才传得到列，列才在自己里面滚动，否则长列被视口裁掉、够不到。 */}
       <PopoverPopup
         data-slot="cascader-popup" role="group" align="start"
         // 宽度按内容取（上限仍是可用宽度）：Positioner 的宽度来自打开时量到的弹层宽度，块级弹层又跟随 Positioner，
         // 两者互锁，展开新列只会在列行里溢出、外框不变、不再触发重测——下一列就被裁在视野外。按内容取宽打破这个环。
         className="min-w-(--anchor-width) w-max"
-        viewportProps={{ className: "flex flex-col overflow-hidden p-0" }}
+        viewportProps={{ className: "flex flex-col overflow-hidden p-0 *:flex *:min-h-0 *:flex-col" }}
       >
         {searchable && <div data-slot="cascader-search" className="shrink-0 p-(--qy-overlay-inset)">
           <Input
@@ -512,6 +515,6 @@ export function Cascader(props: CascaderProps) {
       </PopoverPopup>
     </Popover>
     {/* 表单值：路径各段用 "/" 连接；多选每条路径一条。 */}
-    <PickerFormValue slot="cascader" name={name} form={form} value={multiple ? orderedPaths.map(path => path.join("/")) : ownedSubmitValue} required={required} disabled={disabled} triggerRef={triggerRef} />
+    <PickerFormValue slot="cascader" name={name} form={form} value={multiple ? orderedPaths.map(submitValueOf) : ownedSubmitValue} required={required} disabled={disabled} triggerRef={triggerRef} />
   </>;
 }

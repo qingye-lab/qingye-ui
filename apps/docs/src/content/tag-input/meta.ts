@@ -21,7 +21,7 @@ export default {
     { name: "render / ref / className / style / native props", type: "useRender.ComponentProps<'div'>", description: "属于根容器；改渲染元素须保持结构与子控件。", descriptionEn: "Applied to the root container. Render must retain its structure and children." },
   ] }],
   keyboard: [
-    { keys: "Enter", description: "非组字时确认草稿，阻止表单提交；组字中的 Enter 不添加。", descriptionEn: "Confirm the draft outside composition without submitting a form. Composition Enter does not add." },
+    { keys: "Enter", description: "非组字时确认草稿，阻止表单提交；草稿为空时不拦，表单照常提交；组字中的 Enter 不添加。", descriptionEn: "Confirm the draft outside composition without submitting a form. With an empty draft it is not intercepted and the form submits. Composition Enter does not add." },
     { keys: "Backspace / ArrowLeft（草稿起点，RTL 为 ArrowRight）", keysEn: "Backspace / ArrowLeft (start of draft; ArrowRight under RTL)", description: "空草稿的 Backspace 或起点的左箭头先聚焦最后一项，不立即删除。", descriptionEn: "Backspace on an empty draft or Left at its start focuses the last item without deleting it." },
     { keys: "Delete / Backspace（移除按钮）", keysEn: "Delete / Backspace (remove button)", description: "移除已聚焦项，保留相邻焦点位置。", descriptionEn: "Remove the focused item and preserve an adjacent focus position." },
     { keys: "ArrowLeft / ArrowRight（移除按钮）", keysEn: "ArrowLeft / ArrowRight (remove button)", description: "在确认项间移动，边界返回草稿；方向随实际排版，RTL 下对调。", descriptionEn: "Move among confirmed items; boundaries return to the draft. The direction follows the rendered layout and swaps under RTL." },

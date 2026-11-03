@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/composer
 Source: packages/ui/src/components/composer.tsx
-Source SHA-256: cf23ffe28f63bf58767ea6be5ea90c64e7ddde21ecbc68dab0655290dc9ab726
+Source SHA-256: fef8f9c94f951cdabab88801f34d75427fb3c8b8a5d43b7a8170abdfa50b5fe7
 
 多行输入，支持 @ 提及、/ 命令与原子令牌，值是文字与令牌片段的数组。
 
@@ -67,7 +67,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `onValueChange?`: `((value: ComposerSegment[], details: ComposerChangeDetails) => void) | undefined`.
 - `readOnly?`: `boolean`.
 - `submitOn?`: `"enter" | "mod-enter"`. enter：Enter 提交、Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交、Enter 换行。
-- `value?`: `ComposerValue | undefined`. 受控值。片段数组：文字片段与令牌片段。
+- `value?`: `ComposerValue | undefined`. 受控值。片段数组：文字片段与令牌片段。value={undefined} 等于没传，走非受控（内容没有 undefined 这个值，要清空传 []）。
 - plus 278 inherited (@types/react 277, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ComposerInput
@@ -103,7 +103,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 ### Composer
 根：填值边界与状态，持有值、提交与禁用/只读。
-- value / defaultValue: readonly ComposerSegment[]; default defaultValue: []. 受控/非受控值；文字片段 { type: 'text', text } 与令牌片段 { type: 'token', trigger, id, label }。相邻文字片段会被合并。
+- value / defaultValue: readonly ComposerSegment[]; default defaultValue: []. 受控/非受控值，value={undefined} 等于没传，清空传 []；文字片段 { type: 'text', text } 与令牌片段 { type: 'token', trigger, id, label }。相邻文字片段会被合并。
 - onValueChange: (value: ComposerSegment[], details: ComposerChangeDetails) => void. details.reason 为 input/paste/cut/newline/token/action/delete-token/undo/redo/clear；cancel() 拒绝这次改动，编辑区随即恢复。
 - onSubmit: (value: ComposerSegment[], details: { event, clear }) => void. Enter（或 ComposerSubmit）触发；没有令牌且文字全是空白时不调用。clear() 经 onValueChange 把值清空。
 - submitOn: 'enter' | 'mod-enter'; default 'enter'. enter：Enter 提交，Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交，Enter 换行。
@@ -113,7 +113,7 @@ Written descriptions; the list above is the type-resolved fact.
 编辑区与候选浮层。
 - aria-label / aria-labelledby: string. 必填其一，否则抛错。
 - placeholder: string. 空时显示，同时写入 aria-placeholder。
-- triggers: readonly ComposerTrigger[]. 触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃。候选项 ComposerItem 为 { id, label, group?, description?, icon?, disabled?, select? }：id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”；同名 group 归为一组，按首次出现顺序排列；select 覆盖触发项的 select（token 插入令牌，action 删掉触发文字、只回调 onSelect）。
+- triggers: readonly ComposerTrigger[]. 触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃；抛错或 reject 显示「加载失败」与重试，不当作没有结果。候选项 ComposerItem 为 { id, label, group?, description?, icon?, disabled?, select? }：id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”；同名 group 归为一组，按首次出现顺序排列；select 覆盖触发项的 select（token 插入令牌，action 删掉触发文字、只回调 onSelect）。
 - minRows / maxRows: number; default 1 / 8. 起始行数与增长上限。超过上限在内部滚动，且不超过视口高度的一半。
 
 ### ComposerToolbar / ComposerSubmit
@@ -124,6 +124,7 @@ Written descriptions; the list above is the type-resolved fact.
 - Enter / Shift+Enter: 按 submitOn 提交或换行；组字中（isComposing 或 keyCode 229）不处理。
 - ArrowDown / ArrowUp: 候选打开时移动高亮，循环并跳过禁用项。
 - Enter / Tab: 候选打开且有高亮时选中，不提交。
+- Enter / Tab（加载失败时）: 重试加载，不提交；Escape 关闭候选后 Enter 恢复提交。
 - Escape: 关闭候选，保留已输入的文字。
 - Backspace / Delete: 光标紧邻令牌时整体删除。
 - Ctrl/⌘+Z、Ctrl/⌘+Shift+Z: 撤销与重做，用组件自己的快照栈。

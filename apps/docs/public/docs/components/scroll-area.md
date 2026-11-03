@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: b335bf0444c58f204e72dbb5eedf2a8220cd65fc03da091dccdd57ce6e8428d1
+Source SHA-256: cac2e91684ebc4c766cf31f3d48387d72611874133cc8f8bb9b0609aab9afe14
 
 真实原生滚动，或显式组合可拖动滚动条。
 
@@ -92,8 +92,8 @@ Written descriptions; the list above is the type-resolved fact.
 - children: ReactNode. 完整内容，不窗口化或隐藏集合项。
 - style / className: div props. 消费布局给出 height/maxHeight 与宽度；默认 overflow:auto。
 - fade: boolean; default false. 边缘渐隐：只在内容确实被切掉的一端渐隐，滚到头的一端不渐隐；横纵两向各自量。做法与 TabsList 相同（遮罩、宽度基准、RTL 翻转）；渐隐宽度取一个填值控件行高（预设）。边缘事实以 data-overflow-x-start/end 与 data-overflow-y-start/end 暴露。
-- tabIndex: number; default 内容溢出时为 0. 内容溢出时能从键盘到达，没有可滚动的内容就不进入 Tab 序列；原生方向/Page/Home/End 滚动保留。显式给出时以调用方为准。
-- render / ref / ARIA / events: useRender.ComponentProps<'div'>. 真实视口的组合、名称、引用和原生滚动/键盘事件；有名称的独立区域可由调用方加 role=region。
+- tabIndex: number; default 内容溢出时为 0. 内容溢出时能从键盘到达，没有可滚动的内容就不进入 Tab 序列；原生方向/Page/Home/End 滚动保留。显式给出时以调用方为准；内容里有可聚焦项时可给 -1。可滚动、可聚焦却没有名称时开发期提示。
+- render / ref / ARIA / events: useRender.ComponentProps<'div'>. 真实视口的组合、名称、引用和原生滚动/键盘事件；给了 aria-label 或 aria-labelledby 就默认 role=region（用 render 换元素时不加），调用方给的 role 优先。
 
 ### ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent
 自定义滚动条的显式组合；Root 拥有布局与溢出事实，Viewport 才是真实滚动元素，Content 用于测量内容。
@@ -118,7 +118,7 @@ Source: apps/docs/src/content/scroll-area/demos/01-vertical.tsx
 import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
 export const meta = { title: "有限视口", titleEn: "Bounded viewport" };
 export default function Demo() {
-  return <ScrollArea aria-label="完整条目" role="region" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>;
+  return <ScrollArea aria-label="完整条目" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>;
 }
 ```
 
@@ -128,7 +128,7 @@ Source: apps/docs/src/content/scroll-area/demos/02-horizontal.tsx
 import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
 export const meta = { title: "水平内容", titleEn: "Horizontal content" };
 export default function Demo() {
-  return <ScrollArea aria-label="完整字符序列" role="region"><pre className="w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>;
+  return <ScrollArea aria-label="完整字符序列"><pre className="w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>;
 }
 ```
 
@@ -156,8 +156,8 @@ import { Stack } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "边缘渐隐", titleEn: "Edge fade" };
 export default function Demo() {
   return <Stack>
-    <ScrollArea fade aria-label="完整条目" role="region" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>
-    <ScrollArea fade aria-label="完整字符序列" role="region"><pre className="w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>
+    <ScrollArea fade aria-label="完整条目" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>
+    <ScrollArea fade aria-label="完整字符序列"><pre className="w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>
   </Stack>;
 }
 ```

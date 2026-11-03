@@ -758,7 +758,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1447,7 +1447,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -1823,7 +1823,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2779,7 +2779,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -3643,7 +3643,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -4535,7 +4535,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -5526,7 +5526,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -6112,7 +6112,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -7328,7 +7328,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -7438,7 +7438,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/calendar.tsx",
-        "sha256": "939f510230f7bb749ad55edda9f18e426b3445089850b1d0658f521ebe01744d",
+        "sha256": "47cf83b47a3b8c84798bb80a71f75a0ea1b9e5dedc1ac4cd5ad80bf8c24ef08e",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "日历的 Date 按当地年月日解释。范围是否允许同日、哪些日期不可选由调用方声明，库不添加业务时长规则。",
@@ -7999,8 +7999,8 @@
             {
               "name": "name / form",
               "type": "string",
-              "description": "隐藏输入的名称与所属表单。提交值是路径各段用 \"/\" 连接，例如 \"zj/hz/xh\"，未选择提交空字符串；多选每条路径一条同名值，未选择不提交（required 时拦下提交）；所以 value 里不应含 \"/\"。",
-              "descriptionEn": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission). Values should therefore not contain \"/\"."
+              "description": "隐藏输入的名称与所属表单。提交值是路径各段用 \"/\" 连接，例如 \"zj/hz/xh\"，段内的 \"%\"、\"/\" 转义为 %25、%2F（按 \"/\" 拆开后逐段 decodeURIComponent 还原），未选择提交空字符串；多选每条路径一条同名值，未选择不提交（required 时拦下提交）。",
+              "descriptionEn": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; a \"%\" or \"/\" inside a segment is escaped as %25 or %2F (split on \"/\" and decodeURIComponent each segment to restore it); an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission)."
             },
             {
               "name": "aria-label / aria-labelledby / id / className",
@@ -8302,7 +8302,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -8414,7 +8414,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/cascader.tsx",
-        "sha256": "404842647973eafb3974d29b0158669d28b573e50a16bb0808e0f679935593f9",
+        "sha256": "cb9151f01ae01a2db194a6e5f29fc8a0f359768ddd0e0197f9c73655d9aaf3d8",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "选择的是一条路径，不是最后一项：同名的叶子（不同省的「市辖区」）靠路径区分，所以值、表单与回调都用路径。分支能不能提交由 selectParent 决定，而不是看有没有子项；多选的值只含叶子路径，分支的勾选是派生显示，与 Tree、TreeSelect 同一约定。加载与失败是应用告知之外、组件自己看得见的事实，不会被当成「没有子项」。",
@@ -8500,8 +8500,8 @@
                 {
                   "name": "name / form",
                   "type": "string",
-                  "description": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission). Values should therefore not contain \"/\".",
-                  "descriptionEn": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission). Values should therefore not contain \"/\"."
+                  "description": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; a \"%\" or \"/\" inside a segment is escaped as %25 or %2F (split on \"/\" and decodeURIComponent each segment to restore it); an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission).",
+                  "descriptionEn": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; a \"%\" or \"/\" inside a segment is escaped as %25 or %2F (split on \"/\" and decodeURIComponent each segment to restore it); an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission)."
                 },
                 {
                   "name": "aria-label / aria-labelledby / id / className",
@@ -9554,7 +9554,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -11011,7 +11011,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -11421,7 +11421,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -12203,8 +12203,8 @@
             {
               "name": "value / defaultValue / onValueChange",
               "type": "string / string / (value: string) => void",
-              "description": "#rrggbb。传了 value 即受控；defaultValue 省略时为 #000000；格式不对抛错。onValueChange 在拖动中也每次变化都调用。",
-              "descriptionEn": "#rrggbb. Passing value makes it controlled; defaultValue defaults to #000000; a malformed value throws. onValueChange fires on every change, including during a drag."
+              "description": "#rrggbb。传字符串即受控，value={undefined} 等于没传；defaultValue 省略时为 #000000；格式不对抛错。onValueChange 在拖动中也每次变化都调用。",
+              "descriptionEn": "#rrggbb. A string makes it controlled, and value={undefined} counts as not passed; defaultValue defaults to #000000; a malformed value throws. onValueChange fires on every change, including during a drag."
             },
             {
               "name": "onValueCommit",
@@ -12293,7 +12293,7 @@
                 "name": "value",
                 "optional": true,
                 "type": "string | undefined",
-                "doc": "\"#rrggbb\"。传了这个属性即受控；输出一律小写。",
+                "doc": "\"#rrggbb\"。传字符串即受控；value={undefined} 等于没传，走非受控（颜色没有「空」这个值，这与可空的日期系列不同）。输出一律小写。",
                 "declaredAt": "packages/ui/src/components/color-picker.tsx:125"
               }
             ],
@@ -12402,7 +12402,7 @@
           "kind": "type",
           "owner": "color-picker",
           "module": "@qingye_lab/ui/components/color-picker",
-          "signature": "Omit<React.ComponentProps<\"button\">, \"value\" | \"defaultValue\" | \"onChange\" | \"children\" | \"type\" | \"name\" | \"form\"> & {\n  /** \"#rrggbb\"。传了这个属性即受控；输出一律小写。 */\n  value?: string | undefined;\n  /** 非受控初值，原生表单 reset 回到它。省略时为 \"#000000\"。 */\n  defaultValue?: string | undefined;\n  /** 每次变化都调用（拖动中也调用）。 */\n  onValueChange?: ((value: string) => void) | undefined;\n  /** 一次操作结束才调用：拖动松手、键盘离键、色值输入确认、选预设。供保存之类不宜逐帧触发的事使用。 */\n  onValueCommit?: ((value: string) => void) | undefined;\n  /** 预设色行，复用 ColorSwatchPicker。 */\n  swatches?: readonly ColorSwatch[] | undefined;\n  name?: string | undefined;\n  form?: string | undefined;\n}",
+          "signature": "Omit<React.ComponentProps<\"button\">, \"value\" | \"defaultValue\" | \"onChange\" | \"children\" | \"type\" | \"name\" | \"form\"> & {\n  /** \"#rrggbb\"。传字符串即受控；value={undefined} 等于没传，走非受控（颜色没有「空」这个值，这与可空的日期系列不同）。输出一律小写。 */\n  value?: string | undefined;\n  /** 非受控初值，原生表单 reset 回到它。省略时为 \"#000000\"。 */\n  defaultValue?: string | undefined;\n  /** 每次变化都调用（拖动中也调用）。 */\n  onValueChange?: ((value: string) => void) | undefined;\n  /** 一次操作结束才调用：拖动松手、键盘离键、色值输入确认、选预设。供保存之类不宜逐帧触发的事使用。 */\n  onValueCommit?: ((value: string) => void) | undefined;\n  /** 预设色行，复用 ColorSwatchPicker。 */\n  swatches?: readonly ColorSwatch[] | undefined;\n  name?: string | undefined;\n  form?: string | undefined;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -12450,7 +12450,7 @@
         },
         {
           "name": "ColorPickerProps",
-          "definition": "export type ColorPickerProps = Omit<React.ComponentProps<\"button\">, \"value\" | \"defaultValue\" | \"onChange\" | \"children\" | \"type\" | \"name\" | \"form\"> & {\n  /** \"#rrggbb\"。传了这个属性即受控；输出一律小写。 */\n  value?: string | undefined;\n  /** 非受控初值，原生表单 reset 回到它。省略时为 \"#000000\"。 */\n  defaultValue?: string | undefined;\n  /** 每次变化都调用（拖动中也调用）。 */\n  onValueChange?: ((value: string) => void) | undefined;\n  /** 一次操作结束才调用：拖动松手、键盘离键、色值输入确认、选预设。供保存之类不宜逐帧触发的事使用。 */\n  onValueCommit?: ((value: string) => void) | undefined;\n  /** 预设色行，复用 ColorSwatchPicker。 */\n  swatches?: readonly ColorSwatch[] | undefined;\n  name?: string | undefined;\n  form?: string | undefined;\n};"
+          "definition": "export type ColorPickerProps = Omit<React.ComponentProps<\"button\">, \"value\" | \"defaultValue\" | \"onChange\" | \"children\" | \"type\" | \"name\" | \"form\"> & {\n  /** \"#rrggbb\"。传字符串即受控；value={undefined} 等于没传，走非受控（颜色没有「空」这个值，这与可空的日期系列不同）。输出一律小写。 */\n  value?: string | undefined;\n  /** 非受控初值，原生表单 reset 回到它。省略时为 \"#000000\"。 */\n  defaultValue?: string | undefined;\n  /** 每次变化都调用（拖动中也调用）。 */\n  onValueChange?: ((value: string) => void) | undefined;\n  /** 一次操作结束才调用：拖动松手、键盘离键、色值输入确认、选预设。供保存之类不宜逐帧触发的事使用。 */\n  onValueCommit?: ((value: string) => void) | undefined;\n  /** 预设色行，复用 ColorSwatchPicker。 */\n  swatches?: readonly ColorSwatch[] | undefined;\n  name?: string | undefined;\n  form?: string | undefined;\n};"
         }
       ],
       "usageImports": [
@@ -12503,7 +12503,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -12590,7 +12590,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/color-picker.tsx",
-        "sha256": "c4204c351dca1bbf44ddcae8f1a5ef2b448a880c4b57f8782c8c1cc61dd9910b",
+        "sha256": "aacdb9bc0a3ecbe1c0081eff0149c5f5f097de7d58c4d93f77cedd7042e41afd",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "它只产出用户数据，不改库的主题：色块显示的就是那份数据，别处的颜色仍来自语义 token。值只有 #rrggbb，不含透明度；把它存下来的是应用。",
@@ -12646,8 +12646,8 @@
                 {
                   "name": "value / defaultValue / onValueChange",
                   "type": "string / string / (value: string) => void",
-                  "description": "#rrggbb. Passing value makes it controlled; defaultValue defaults to #000000; a malformed value throws. onValueChange fires on every change, including during a drag.",
-                  "descriptionEn": "#rrggbb. Passing value makes it controlled; defaultValue defaults to #000000; a malformed value throws. onValueChange fires on every change, including during a drag."
+                  "description": "#rrggbb. A string makes it controlled, and value={undefined} counts as not passed; defaultValue defaults to #000000; a malformed value throws. onValueChange fires on every change, including during a drag.",
+                  "descriptionEn": "#rrggbb. A string makes it controlled, and value={undefined} counts as not passed; defaultValue defaults to #000000; a malformed value throws. onValueChange fires on every change, including during a drag."
                 },
                 {
                   "name": "onValueCommit",
@@ -13134,13 +13134,13 @@
                 "name": "container",
                 "optional": true,
                 "type": "ComboboxPrimitive.Portal.Props[\"container\"]",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:86"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:90"
               },
               {
                 "name": "positionerProps",
                 "optional": true,
                 "type": "ComboboxPrimitive.Positioner.Props",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:86"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:90"
               }
             ],
             "inheritedCount": 280,
@@ -13168,59 +13168,59 @@
                 "name": "clearable",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:149"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:153"
               },
               {
                 "name": "controlProps",
                 "optional": true,
                 "type": "InputGroupProps | undefined",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:151"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:155"
               },
               {
                 "name": "emptyContent",
                 "optional": false,
                 "type": "React.ReactNode",
                 "doc": "当前查询已完成且没有候选时的内容，由应用说明查询对象。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:146"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:150"
               },
               {
                 "name": "inputProps",
                 "optional": true,
                 "type": "React.ComponentProps<typeof ComboboxInput> | undefined",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:150"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:154"
               },
               {
                 "name": "items",
                 "optional": false,
                 "type": "readonly Value[]",
                 "doc": "平铺候选；分组、多选或自定义解剖使用 Combobox 的公开部件。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:141"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:145"
               },
               {
                 "name": "itemToStringLabel",
                 "optional": false,
                 "type": "(item: Value) => string",
                 "doc": "输入框、过滤与候选共用的可读名称；富候选另用 renderItem。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:143"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:147"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "只表达调用方的请求事实，不发请求、不推断失败。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:148"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:152"
               },
               {
                 "name": "popupProps",
                 "optional": true,
                 "type": "ComboboxPopupProps | undefined",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:152"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:156"
               },
               {
                 "name": "renderItem",
                 "optional": true,
                 "type": "((item: Value) => React.ReactNode) | undefined",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:144"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:148"
               }
             ],
             "inheritedCount": 34,
@@ -13773,7 +13773,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13914,7 +13914,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/combobox.tsx",
-        "sha256": "7535b0831f9d85905f4e73b5309215d75ab89edbad35ab9cf44c498b960258d2",
+        "sha256": "6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保留候选，明确清除选择才请求空值；自由文本值用 Autocomplete。候选很多且要选几个时用 multiple；候选少而需要一眼看全用 CheckboxGroup，值不来自候选用 TagInput。",
@@ -14937,7 +14937,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -15285,8 +15285,8 @@
               "name": "value / defaultValue",
               "type": "readonly ComposerSegment[]",
               "default": "defaultValue: []",
-              "description": "受控/非受控值；文字片段 { type: 'text', text } 与令牌片段 { type: 'token', trigger, id, label }。相邻文字片段会被合并。",
-              "descriptionEn": "Controlled/uncontrolled value: text segments and token segments. Adjacent text segments are merged."
+              "description": "受控/非受控值，value={undefined} 等于没传，清空传 []；文字片段 { type: 'text', text } 与令牌片段 { type: 'token', trigger, id, label }。相邻文字片段会被合并。",
+              "descriptionEn": "Controlled/uncontrolled value; value={undefined} counts as not passed, and [] clears it. Text segments and token segments. Adjacent text segments are merged."
             },
             {
               "name": "onValueChange",
@@ -15336,8 +15336,8 @@
             {
               "name": "triggers",
               "type": "readonly ComposerTrigger[]",
-              "description": "触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃。候选项 ComposerItem 为 { id, label, group?, description?, icon?, disabled?, select? }：id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”；同名 group 归为一组，按首次出现顺序排列；select 覆盖触发项的 select（token 插入令牌，action 删掉触发文字、只回调 onSelect）。",
-              "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect)."
+              "description": "触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃；抛错或 reject 显示「加载失败」与重试，不当作没有结果。候选项 ComposerItem 为 { id, label, group?, description?, icon?, disabled?, select? }：id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”；同名 group 归为一组，按首次出现顺序排列；select 覆盖触发项的 select（token 插入令牌，action 删掉触发文字、只回调 onSelect）。",
+              "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded; a throw or rejection shows a failed-to-load message with a retry rather than passing for no results. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect)."
             },
             {
               "name": "minRows / maxRows",
@@ -15415,7 +15415,7 @@
                 "name": "value",
                 "optional": true,
                 "type": "ComposerValue | undefined",
-                "doc": "受控值。片段数组：文字片段与令牌片段。",
+                "doc": "受控值。片段数组：文字片段与令牌片段。value={undefined} 等于没传，走非受控（内容没有 undefined 这个值，要清空传 []）。",
                 "declaredAt": "packages/ui/src/components/composer.tsx:107"
               }
             ],
@@ -15600,6 +15600,12 @@
           "descriptionEn": "Select the highlight while candidates are open, without submitting."
         },
         {
+          "keys": "Enter / Tab（加载失败时）",
+          "keysEn": "Enter / Tab (after a failed load)",
+          "description": "重试加载，不提交；Escape 关闭候选后 Enter 恢复提交。",
+          "descriptionEn": "Retry the load without submitting. After Escape closes the candidates, Enter submits again."
+        },
+        {
           "keys": "Escape",
           "description": "关闭候选，保留已输入的文字。",
           "descriptionEn": "Close the candidates and keep the typed text."
@@ -15683,7 +15689,7 @@
           "kind": "type",
           "owner": "composer",
           "module": "@qingye_lab/ui/components/composer",
-          "signature": "Omit<useRender.ComponentProps<\"div\">, \"defaultValue\" | \"onChange\" | \"onSubmit\"> & {\n  /** 受控值。片段数组：文字片段与令牌片段。 */\n  value?: ComposerValue | undefined;\n  defaultValue?: ComposerValue | undefined;\n  onValueChange?: ((value: ComposerSegment[], details: ComposerChangeDetails) => void) | undefined;\n  /** 提交（Enter 或 ComposerSubmit）。内容为空（没有令牌且文字全是空白）时不会调用。 */\n  onSubmit?: ((value: ComposerSegment[], details: ComposerSubmitDetails) => void) | undefined;\n  /** enter：Enter 提交、Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交、Enter 换行。 */\n  submitOn?: \"enter\" | \"mod-enter\" | undefined;\n  disabled?: boolean | undefined;\n  readOnly?: boolean | undefined;\n}",
+          "signature": "Omit<useRender.ComponentProps<\"div\">, \"defaultValue\" | \"onChange\" | \"onSubmit\"> & {\n  /** 受控值。片段数组：文字片段与令牌片段。value={undefined} 等于没传，走非受控（内容没有 undefined 这个值，要清空传 []）。 */\n  value?: ComposerValue | undefined;\n  defaultValue?: ComposerValue | undefined;\n  onValueChange?: ((value: ComposerSegment[], details: ComposerChangeDetails) => void) | undefined;\n  /** 提交（Enter 或 ComposerSubmit）。内容为空（没有令牌且文字全是空白）时不会调用。 */\n  onSubmit?: ((value: ComposerSegment[], details: ComposerSubmitDetails) => void) | undefined;\n  /** enter：Enter 提交、Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交、Enter 换行。 */\n  submitOn?: \"enter\" | \"mod-enter\" | undefined;\n  disabled?: boolean | undefined;\n  readOnly?: boolean | undefined;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -15890,7 +15896,7 @@
         },
         {
           "name": "ComposerProps",
-          "definition": "export type ComposerProps = Omit<useRender.ComponentProps<\"div\">, \"defaultValue\" | \"onChange\" | \"onSubmit\"> & {\n  /** 受控值。片段数组：文字片段与令牌片段。 */\n  value?: ComposerValue | undefined;\n  defaultValue?: ComposerValue | undefined;\n  onValueChange?: ((value: ComposerSegment[], details: ComposerChangeDetails) => void) | undefined;\n  /** 提交（Enter 或 ComposerSubmit）。内容为空（没有令牌且文字全是空白）时不会调用。 */\n  onSubmit?: ((value: ComposerSegment[], details: ComposerSubmitDetails) => void) | undefined;\n  /** enter：Enter 提交、Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交、Enter 换行。 */\n  submitOn?: \"enter\" | \"mod-enter\" | undefined;\n  disabled?: boolean | undefined;\n  readOnly?: boolean | undefined;\n};"
+          "definition": "export type ComposerProps = Omit<useRender.ComponentProps<\"div\">, \"defaultValue\" | \"onChange\" | \"onSubmit\"> & {\n  /** 受控值。片段数组：文字片段与令牌片段。value={undefined} 等于没传，走非受控（内容没有 undefined 这个值，要清空传 []）。 */\n  value?: ComposerValue | undefined;\n  defaultValue?: ComposerValue | undefined;\n  onValueChange?: ((value: ComposerSegment[], details: ComposerChangeDetails) => void) | undefined;\n  /** 提交（Enter 或 ComposerSubmit）。内容为空（没有令牌且文字全是空白）时不会调用。 */\n  onSubmit?: ((value: ComposerSegment[], details: ComposerSubmitDetails) => void) | undefined;\n  /** enter：Enter 提交、Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交、Enter 换行。 */\n  submitOn?: \"enter\" | \"mod-enter\" | undefined;\n  disabled?: boolean | undefined;\n  readOnly?: boolean | undefined;\n};"
         },
         {
           "name": "ComposerInputProps",
@@ -16002,7 +16008,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -16103,7 +16109,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/composer.tsx",
-        "sha256": "cf23ffe28f63bf58767ea6be5ea90c64e7ddde21ecbc68dab0655290dc9ab726",
+        "sha256": "fef8f9c94f951cdabab88801f34d75427fb3c8b8a5d43b7a8170abdfa50b5fe7",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "编辑区是 contenteditable，因为令牌必须是行内原子对象（整体删除、光标进不去、读屏读名字），原生文本框做不到。值是片段数组而不是字符串：令牌带稳定 id，应用不必从文字里反解。候选浮层按 combobox 模式接线，但编辑区的角色是 textbox（多行的 combobox 不存在）。消息列表与气泡不在库内。",
@@ -16129,8 +16135,8 @@
                   "name": "value / defaultValue",
                   "type": "readonly ComposerSegment[]",
                   "default": "defaultValue: []",
-                  "description": "Controlled/uncontrolled value: text segments and token segments. Adjacent text segments are merged.",
-                  "descriptionEn": "Controlled/uncontrolled value: text segments and token segments. Adjacent text segments are merged."
+                  "description": "Controlled/uncontrolled value; value={undefined} counts as not passed, and [] clears it. Text segments and token segments. Adjacent text segments are merged.",
+                  "descriptionEn": "Controlled/uncontrolled value; value={undefined} counts as not passed, and [] clears it. Text segments and token segments. Adjacent text segments are merged."
                 },
                 {
                   "name": "onValueChange",
@@ -16180,8 +16186,8 @@
                 {
                   "name": "triggers",
                   "type": "readonly ComposerTrigger[]",
-                  "description": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect).",
-                  "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect)."
+                  "description": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded; a throw or rejection shows a failed-to-load message with a retry rather than passing for no results. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect).",
+                  "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded; a throw or rejection shows a failed-to-load message with a retry rather than passing for no results. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect)."
                 },
                 {
                   "name": "minRows / maxRows",
@@ -16222,6 +16228,12 @@
               "keys": "Enter / Tab",
               "description": "Select the highlight while candidates are open, without submitting.",
               "descriptionEn": "Select the highlight while candidates are open, without submitting."
+            },
+            {
+              "keys": "Enter / Tab (after a failed load)",
+              "keysEn": "Enter / Tab (after a failed load)",
+              "description": "Retry the load without submitting. After Escape closes the candidates, Enter submits again.",
+              "descriptionEn": "Retry the load without submitting. After Escape closes the candidates, Enter submits again."
             },
             {
               "keys": "Escape",
@@ -16530,7 +16542,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -17080,7 +17092,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -18752,7 +18764,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -19453,9 +19465,9 @@
             },
             {
               "name": "virtualization",
-              "type": "{ height: number, estimateRowHeight: number, overscan?: number }",
-              "description": "显式启用当前行模型的虚拟化；height 含 caption 与表头，实际行高自动测量。尺寸须有限且为正，overscan 为非负整数（默认 1）。",
-              "descriptionEn": "Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1."
+              "type": "{ height?: number, estimateRowHeight: number, overscan?: number }",
+              "description": "显式启用当前行模型的虚拟化；height 含 caption 与表头，实际行高自动测量。不传 height 时铺满父级，也可由 Pattern 的 className 或 DataTable 的 containerProps 给高度；内容不撑高视口，父级没有确定高度时视口高为 0，不渲染行，不会退化成全量渲染。尺寸须有限且为正，overscan 为非负整数（默认 1）。",
+              "descriptionEn": "Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Without height the table fills its parent, or takes a height from Pattern's className or DataTable's containerProps; rows never grow the viewport, so a parent without a definite height gives a zero-height viewport and no rows rather than rendering them all. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1."
             },
             {
               "name": "stickyHeader / stickyHeaderOffset",
@@ -19595,79 +19607,79 @@
                 "name": "activeRowId",
                 "optional": true,
                 "type": "string | null",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:90"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:100"
               },
               {
                 "name": "busy",
                 "optional": true,
                 "type": "boolean",
                 "doc": "正在取数。旧数据行原样保留（已有内容刷新时保留仍然有效的工作面），表格顶缘出现一条不定进度记号，不推挤布局；\naria-busy 仍然设置。数据、请求与完成时机由应用持有。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:84"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:94"
               },
               {
                 "name": "caption",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:78"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:88"
               },
               {
                 "name": "containerProps",
                 "optional": true,
                 "type": "TableContainerProps",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:99"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:109"
               },
               {
                 "name": "emptyContent",
                 "optional": false,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:79"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:89"
               },
               {
                 "name": "error",
                 "optional": true,
                 "type": "React.ReactNode",
                 "doc": "取数失败等需要读者处理的情况，由应用给出内容（说明与重试动作）；组件只把它摆在表格上方并声明 role=\"alert\"。\n出现错误时旧数据行不撤走：它们仍是读者可用的工作面，是否过期由应用在错误内容里说明。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:89"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:99"
               },
               {
                 "name": "onRowActivate",
                 "optional": true,
                 "type": "(row: Row<TData>, event: DataTableActivateEvent) => void",
                 "doc": "Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。\n第二个参数是触发它的鼠标或键盘事件（修饰键由调用方解读，库不替它决定「Cmd+点击」意味着什么）。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:97"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:107"
               },
               {
                 "name": "selectionAppearance",
                 "optional": true,
                 "type": "\"row\" | \"checkbox\"",
                 "doc": "Checkbox mode removes only the selected-row fill; selection controls and active-row emphasis remain.",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:92"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:102"
               },
               {
                 "name": "stickyHeader",
                 "optional": true,
                 "type": "boolean",
                 "doc": "表头吸顶，吸在最近的滚动区：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口，\n或 containerProps 设了 height / max-height 时，是表格自己的容器（见 TableHeader 的 sticky）。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:104"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:114"
               },
               {
                 "name": "stickyHeaderOffset",
                 "optional": true,
                 "type": "number | string | undefined",
                 "doc": "见 TableHeader 的 stickyOffset：滚动区顶上有固定页眉时让开它的高度。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:106"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:116"
               },
               {
                 "name": "table",
                 "optional": false,
                 "type": "TableInstance<TData>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:77"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:87"
               },
               {
                 "name": "virtualization",
                 "optional": true,
                 "type": "DataTableVirtualization",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:98"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:108"
               }
             ],
             "inheritedCount": 289,
@@ -19691,118 +19703,118 @@
                 "optional": true,
                 "type": "({ trigger?: \"cell\"; columnId: string } | { trigger: \"row\"; columnId?: never }) & { /** 第二个参数是触发它的鼠标或键盘事件，调用方据此识别 Cmd / Ctrl / Shift 等修饰键。 */ onActivate?: (row: TData, event: DataTableActivateEvent) => void; }",
                 "doc": "Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection.",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:622"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:633"
               },
               {
                 "name": "busy",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:628"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:639"
               },
               {
                 "name": "caption",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:626"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:637"
               },
               {
                 "name": "columns",
                 "optional": false,
                 "type": "readonly DataTablePatternColumn<TData>[]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:598"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:609"
               },
               {
                 "name": "data",
                 "optional": false,
                 "type": "TData[]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:597"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:608"
               },
               {
                 "name": "defaultState",
                 "optional": true,
                 "type": "Partial<DataTablePatternState>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:602"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:613"
               },
               {
                 "name": "emptyContent",
                 "optional": false,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:627"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:638"
               },
               {
                 "name": "error",
                 "optional": true,
                 "type": "React.ReactNode",
                 "doc": "见 DataTable 的 error：应用给出内容与重试动作，旧数据行保留。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:630"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:641"
               },
               {
                 "name": "getRowId",
                 "optional": false,
                 "type": "(row: TData) => string",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:599"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:610"
               },
               {
                 "name": "mode",
                 "optional": true,
                 "type": "\"client\" | \"server\"",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:600"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:611"
               },
               {
                 "name": "onStateChange",
                 "optional": true,
                 "type": "(state: DataTablePatternState, details: DataTablePatternChangeDetails) => void",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:603"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:614"
               },
               {
                 "name": "pagination",
                 "optional": true,
                 "type": "false | DataTablePatternPagination",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:604"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:615"
               },
               {
                 "name": "selection",
                 "optional": true,
                 "type": "{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean; /** * 表头全选的范围，默认 \"page\"（当页）。\"filtered\"：全部筛选结果，跨过分页——只在 mode=\"client\" 有效， * 因为只有客户端持有完整结果；mode=\"server\" 传 \"filtered\" 会抛错，服务端分页的全量选择用 BulkActionBar 的 ext…",
                 "typeTruncated": true,
-                "declaredAt": "packages/ui/src/components/data-table.tsx:605"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:616"
               },
               {
                 "name": "selectionAppearance",
                 "optional": true,
                 "type": "\"row\" | \"checkbox\"",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:616"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:627"
               },
               {
                 "name": "state",
                 "optional": true,
                 "type": "DataTablePatternState",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:601"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:612"
               },
               {
                 "name": "stickyHeader",
                 "optional": true,
                 "type": "boolean",
                 "doc": "表头吸顶，吸在最近的滚动区（见 DataTable 的 stickyHeader）。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:619"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:630"
               },
               {
                 "name": "stickyHeaderOffset",
                 "optional": true,
                 "type": "DataTableProps<TData>[\"stickyHeaderOffset\"]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:620"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:631"
               },
               {
                 "name": "tableProps",
                 "optional": true,
                 "type": "Omit<DataTableProps<TData>, \"table\" | \"caption\" | \"emptyContent\" | \"busy\" | \"error\" | \"activeRowId\" | \"onRowActivate\" | \"selectionAppearance\" | \"virtualization\" | \"stickyHeader\" | \"stickyHeaderOffset\">",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:631"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:642"
               },
               {
                 "name": "virtualization",
                 "optional": true,
                 "type": "DataTableVirtualization",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:617"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:628"
               }
             ],
             "inheritedCount": 277,
@@ -19822,25 +19834,25 @@
                 "optional": false,
                 "type": "string",
                 "doc": "Defines a string value that labels the current element.",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:534"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:545"
               },
               {
                 "name": "onCheckedChange",
                 "optional": true,
                 "type": "CheckboxProps[\"onCheckedChange\"]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:506"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:517"
               },
               {
                 "name": "scope",
                 "optional": false,
                 "type": "\"page\" | \"filtered\"",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:534"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:545"
               },
               {
                 "name": "table",
                 "optional": false,
                 "type": "TableInstance<TData>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:534"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:545"
               }
             ],
             "inheritedCount": 286,
@@ -19863,13 +19875,13 @@
                 "name": "onCheckedChange",
                 "optional": true,
                 "type": "CheckboxProps[\"onCheckedChange\"]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:506"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:517"
               },
               {
                 "name": "row",
                 "optional": false,
                 "type": "Row<TData>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:507"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:518"
               }
             ],
             "inheritedCount": 287,
@@ -19898,7 +19910,7 @@
                 "name": "column",
                 "optional": false,
                 "type": "Column<TData, unknown>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:500"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:511"
               },
               {
                 "name": "data-slot",
@@ -19957,12 +19969,12 @@
             {
               "part": "DataTable",
               "prop": "stickyHeader",
-              "declaredAt": "packages/ui/src/components/data-table.tsx:104"
+              "declaredAt": "packages/ui/src/components/data-table.tsx:114"
             },
             {
               "part": "DataTable",
               "prop": "stickyHeaderOffset",
-              "declaredAt": "packages/ui/src/components/data-table.tsx:106"
+              "declaredAt": "packages/ui/src/components/data-table.tsx:116"
             },
             {
               "part": "DataTableSortButton",
@@ -20211,7 +20223,7 @@
           "kind": "type",
           "owner": "data-table",
           "module": "@qingye_lab/ui/components/data-table",
-          "signature": "{\n  /** The scroll viewport includes the caption and header. Actual row heights are measured. */\n  height: number;\n  estimateRowHeight: number;\n  overscan?: number;\n}",
+          "signature": "{\n  /**\n   * The scroll viewport includes the caption and header. Actual row heights are measured.\n   * Omitted, the table fills its parent, or takes a height from containerProps (DataTable) or className (Pattern);\n   * the rows never grow the viewport, so a parent without a definite height shows none rather than all.\n   */\n  height?: number;\n  estimateRowHeight: number;\n  overscan?: number;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -20232,7 +20244,7 @@
         },
         {
           "name": "DataTableVirtualization",
-          "definition": "export type DataTableVirtualization = {\n  /** The scroll viewport includes the caption and header. Actual row heights are measured. */\n  height: number;\n  estimateRowHeight: number;\n  overscan?: number;\n};"
+          "definition": "export type DataTableVirtualization = {\n  /**\n   * The scroll viewport includes the caption and header. Actual row heights are measured.\n   * Omitted, the table fills its parent, or takes a height from containerProps (DataTable) or className (Pattern);\n   * the rows never grow the viewport, so a parent without a definite height shows none rather than all.\n   */\n  height?: number;\n  estimateRowHeight: number;\n  overscan?: number;\n};"
         },
         {
           "name": "DataTableActivateEvent",
@@ -20330,7 +20342,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -20528,7 +20540,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/data-table.tsx",
-        "sha256": "e5c08917cba6803b0c3cc667b0afbeedc349174161a8e516b17ceb6ba94c1033",
+        "sha256": "150b236250585679cc9891aef9aec40ab46b80dbbc0516f08b0e48dca47f3580",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。虚拟化只改变当前行模型的渲染窗口，不改变全选与分页范围。",
@@ -20592,9 +20604,9 @@
                 },
                 {
                   "name": "virtualization",
-                  "type": "{ height: number, estimateRowHeight: number, overscan?: number }",
-                  "description": "Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1.",
-                  "descriptionEn": "Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1."
+                  "type": "{ height?: number, estimateRowHeight: number, overscan?: number }",
+                  "description": "Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Without height the table fills its parent, or takes a height from Pattern's className or DataTable's containerProps; rows never grow the viewport, so a parent without a definite height gives a zero-height viewport and no rows rather than rendering them all. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1.",
+                  "descriptionEn": "Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Without height the table fills its parent, or takes a height from Pattern's className or DataTable's containerProps; rows never grow the viewport, so a parent without a definite height gives a zero-height viewport and no rows rather than rendering them all. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1."
                 },
                 {
                   "name": "stickyHeader / stickyHeaderOffset",
@@ -21033,7 +21045,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -21623,7 +21635,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -22118,7 +22130,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -22646,7 +22658,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -23985,7 +23997,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -24830,7 +24842,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -25760,7 +25772,16 @@
         {
           "name": "FieldGroup",
           "description": "字段之间的关系间隔，没有 group 语义。",
-          "descriptionEn": "Spacing between fields, without group semantics."
+          "descriptionEn": "Spacing between fields, without group semantics.",
+          "props": [
+            {
+              "name": "labelColumn",
+              "type": "boolean",
+              "default": "false",
+              "description": "组内名称共用一列，列宽取最长的名称，控件起点对齐；说明与错误在控件下方，分隔线跨两列。窄屏回到堆叠。要放到控件列的内容（如操作按钮）包一层没有名称的 Field。",
+              "descriptionEn": "Names in the group share one column as wide as the longest name, and controls start at the same edge; descriptions and errors sit under the control, and separators span both columns. Stacks on narrow screens. Wrap content meant for the control column, such as an action, in a Field without a name."
+            }
+          ]
         },
         {
           "name": "FieldSeparator",
@@ -25888,7 +25909,15 @@
           {
             "name": "FieldGroup",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "labelColumn",
+                "optional": true,
+                "type": "boolean",
+                "doc": "让组内字段的名称共用一列（宽度取最长名称），控件起点对齐；窄屏回到堆叠。字段须是组的直接子元素。",
+                "declaredAt": "packages/ui/src/components/field.tsx:84"
+              }
+            ],
             "inheritedCount": 281,
             "inheritedFrom": [
               {
@@ -25926,7 +25955,7 @@
                 "optional": true,
                 "type": "\"required\" | \"optional\"",
                 "doc": "必填 / 选填标记。`\"required\"` 只画 `*`（aria-hidden）；必填语义由控件自己的 `required` 向读屏表达，\n所以调用方必须同时给控件 `required`，否则标记只是视觉。`\"optional\"` 的「选填」是可见文字，计入可访问名称。",
-                "declaredAt": "packages/ui/src/components/field.tsx:87"
+                "declaredAt": "packages/ui/src/components/field.tsx:109"
               }
             ],
             "inheritedCount": 281,
@@ -26081,8 +26110,18 @@
           "kind": "function",
           "owner": "field",
           "module": "@qingye_lab/ui/components/field",
-          "propsType": "useRender.ComponentProps<\"div\">",
-          "signature": "FieldGroup({ className, render, ref, ...props }: useRender.ComponentProps<\"div\">)",
+          "propsType": "FieldGroupProps",
+          "signature": "FieldGroup({ labelColumn = false, className, render, ref, ...props }: FieldGroupProps)",
+          "status": "PASS",
+          "declarationStatus": "PASS",
+          "typeResolution": "UNVERIFIED"
+        },
+        {
+          "name": "FieldGroupProps",
+          "kind": "type",
+          "owner": "field",
+          "module": "@qingye_lab/ui/components/field",
+          "signature": "useRender.ComponentProps<\"div\"> & {\n  /** 让组内字段的名称共用一列（宽度取最长名称），控件起点对齐；窄屏回到堆叠。字段须是组的直接子元素。 */\n  labelColumn?: boolean;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -26193,6 +26232,10 @@
         {
           "name": "FieldErrorProps",
           "definition": "export type FieldErrorProps = React.ComponentProps<typeof FieldPrimitive.Error> & {\n  errors?: ReadonlyArray<{ message?: string | undefined } | undefined>;\n};"
+        },
+        {
+          "name": "FieldGroupProps",
+          "definition": "export type FieldGroupProps = useRender.ComponentProps<\"div\"> & {\n  /** 让组内字段的名称共用一列（宽度取最长名称），控件起点对齐；窄屏回到堆叠。字段须是组的直接子元素。 */\n  labelColumn?: boolean;\n};"
         },
         {
           "name": "FieldLabelProps",
@@ -26315,7 +26358,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -26446,6 +26489,19 @@
           "providers": [],
           "code": "import { Field, FieldError, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { Input } from \"@qingye_lab/ui/components/input\";\n\nexport const meta = { title: \"校验中\", titleEn: \"Validating\" };\n\n// 校验进行中旧的错误不显示；结论由应用在结束后传入。\nexport default function Demo() {\n  return <Field className=\"w-full max-w-xs\" validating invalid><FieldLabel>用户名</FieldLabel><Input defaultValue=\"qingye\" /><FieldError>用户名已被占用</FieldError></Field>;\n}\n",
           "sha256": "5081da8ed937042ab8b5b3c8ff503ee0300234cd804e23a94a40935c6c9cb484"
+        },
+        {
+          "id": "label-column",
+          "title": "名称列",
+          "source": "apps/docs/src/content/field/demos/10-label-column.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/field",
+            "@qingye_lab/ui/components/input"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { Field, FieldDescription, FieldGroup, FieldLabel, FieldSeparator } from \"@qingye_lab/ui/components/field\";\nimport { Input } from \"@qingye_lab/ui/components/input\";\n\nexport const meta = { title: \"名称列\", titleEn: \"Label column\" };\n\nexport default function Demo() {\n  return (\n    <FieldGroup labelColumn className=\"w-full max-w-lg\">\n      <Field><FieldLabel>姓名</FieldLabel><Input defaultValue=\"青野\" /></Field>\n      <Field><FieldLabel>联系邮箱</FieldLabel><Input type=\"email\" /><FieldDescription>说明与错误留在控件下方。</FieldDescription></Field>\n      <FieldSeparator />\n      <Field><FieldLabel>备注</FieldLabel><Input /></Field>\n      <Field><Button className=\"justify-self-start\">保存</Button></Field>\n    </FieldGroup>\n  );\n}\n",
+          "sha256": "7e988a1ab49117efa3a8dd95f85ecbb1771ac737fd62f1d5c5d686adf963509c"
         }
       ],
       "design": {
@@ -26462,7 +26518,7 @@
           "placeholder 代替名称；Toast 代替字段错误；超时冒充格式错误。"
         ],
         "composition": [
-          "Input 自动注册；原生控件通过 FieldControl 注册。Fieldset 命名共同范围，FieldGroup 只组织间隔。"
+          "Input 自动注册；原生控件通过 FieldControl 注册。Fieldset 命名共同范围，FieldGroup 组织间隔；名称要共用一列时给 FieldGroup labelColumn。"
         ],
         "stateOwner": {
           "library": [
@@ -26473,7 +26529,7 @@
           ]
         },
         "responsive": [
-          "长名称与说明可换行；横向内容列可收缩；间距由字段角色决定。"
+          "长名称与说明可换行；横向内容列可收缩；间距由字段角色决定。labelColumn 窄屏回到堆叠。"
         ],
         "customization": [
           "className 最后合并，原生属性、状态样式函数、ref 和 render 透传；FieldTitle 不注册成 label。"
@@ -26481,7 +26537,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/field.tsx",
-        "sha256": "480ba69e05c63a550feab21b961e9593ff298bb612405f18de0a84d4f5724b65",
+        "sha256": "8bf6a3b75be2b323a1fa09109535f1b90b02ac3ab333f114872add2881f1b47f",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "invalid 与错误内容分别传入。Field 关联名称与错误，不自行校验或推断提交结果。",
@@ -26604,7 +26660,16 @@
             {
               "name": "FieldGroup",
               "description": "Spacing between fields, without group semantics.",
-              "descriptionEn": "Spacing between fields, without group semantics."
+              "descriptionEn": "Spacing between fields, without group semantics.",
+              "props": [
+                {
+                  "name": "labelColumn",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Names in the group share one column as wide as the longest name, and controls start at the same edge; descriptions and errors sit under the control, and separators span both columns. Stacks on narrow screens. Wrap content meant for the control column, such as an action, in a Field without a name.",
+                  "descriptionEn": "Names in the group share one column as wide as the longest name, and controls start at the same edge; descriptions and errors sit under the control, and separators span both columns. Stacks on narrow screens. Wrap content meant for the control column, such as an action, in a Field without a name."
+                }
+              ]
             },
             {
               "name": "FieldSeparator",
@@ -26643,7 +26708,7 @@
               "Placeholders instead of names, Toast instead of field errors, or timeouts presented as format errors."
             ],
             "composition": [
-              "Input registers automatically; FieldControl registers native controls. Fieldset names a shared scope; FieldGroup organizes spacing only."
+              "Input registers automatically; FieldControl registers native controls. Fieldset names a shared scope; FieldGroup organizes spacing, and labelColumn makes its names share one column."
             ],
             "stateOwner": {
               "library": [
@@ -26654,7 +26719,7 @@
               ]
             },
             "responsive": [
-              "Long names/descriptions wrap, horizontal content columns shrink, and field roles determine spacing."
+              "Long names/descriptions wrap, horizontal content columns shrink, and field roles determine spacing. labelColumn stacks on narrow screens."
             ],
             "customization": [
               "External classes merge last; native props, state styling callbacks, refs, and render forward. FieldTitle does not register as a label."
@@ -27903,7 +27968,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -28980,7 +29045,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -29090,7 +29155,8 @@
           "桌面保持真实结构；菜单受可用空间限制，表格保留完整比较列。"
         ],
         "customization": [
-          "控件档案、间距和浮层表面消费现有角色；具体外观是预设。"
+          "控件档案、间距和浮层表面消费现有角色；具体外观是预设。",
+          "字段宽度写在 Field 的 className 上（如 flex-1 让搜索框占满余量），不改控件本身。"
         ]
       },
       "sourceFacts": {
@@ -29197,7 +29263,8 @@
               "Keep actual desktop structure; menus fit available space and tables retain complete comparison columns."
             ],
             "customization": [
-              "Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset."
+              "Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset.",
+              "Field widths go in the Field className (for example flex-1 lets search take the remaining space), not on the control."
             ]
           },
           "providerGuidance": []
@@ -29931,7 +29998,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -30815,7 +30882,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -31185,7 +31252,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -32089,7 +32156,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -33834,7 +33901,7 @@
       "docs": "/docs/components/layout",
       "notes": [
         "布局没有边框、表面、内边距或业务状态；独立对象边界用 Card。",
-        "Grid 只管等宽列；需要跨列、对齐表头的比较仍用原生 table/grid。",
+        "Grid 只管等宽列；需要跨列、对齐表头的比较仍用原生 table/grid。不等宽列用原生 div 加 grid-cols-[…]：Grid 的列由内联样式决定，写在它的 className 上不生效。",
         "角色数值是主题预设。确有特殊关系时在项目组合说明 className/style 覆写理由。",
         "方向、语言与密度沿真实 DOM 继承；换行不改变内容顺序。"
       ],
@@ -34321,7 +34388,7 @@
           "decisions": "Stack flows vertically; Inline flows horizontally and wraps by default; Grid lays out equal-width columns. Choose pair, field, action or section spacing with gap; render and content supply semantics.",
           "notes": [
             "Layout adds no border, surface, padding or business state; use Card for independent object boundaries.",
-            "Grid only does equal-width columns; keep native table/grid for spanning or header-aligned comparison.",
+            "Grid only does equal-width columns; keep native table/grid for spanning or header-aligned comparison. For unequal columns use a native div with grid-cols-[…]: Grid sets its columns inline, so they do not take effect in its className.",
             "Role values are theme presets. Explain special className/style overrides in the project composition.",
             "Direction, language and density follow the DOM; wrapping does not reorder content."
           ],
@@ -34816,6 +34883,13 @@
                 "optional": false,
                 "type": "readonly LocaleSwitchOption[]",
                 "declaredAt": "packages/ui/src/components/locale-switch.tsx:9"
+              },
+              {
+                "name": "selectClassName",
+                "optional": true,
+                "type": "string | undefined",
+                "doc": "真实 select 的样式入口。单值形态的 className / style 属于外框（图标定位在那里，宽度也写在那里）；列表形态没有外框，两者都落在 select。",
+                "declaredAt": "packages/ui/src/components/native-select.tsx:11"
               }
             ],
             "inheritedCount": 283,
@@ -34833,7 +34907,14 @@
         ],
         "drift": {
           "documentedButMissing": [],
-          "undocumented": []
+          "undocumented": [
+            {
+              "part": "LocaleSwitch",
+              "prop": "selectClassName",
+              "declaredAt": "packages/ui/src/components/native-select.tsx:11",
+              "viaComponent": "native-select"
+            }
+          ]
         }
       },
       "keyboard": [
@@ -34920,7 +35001,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -36867,7 +36948,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -37101,10 +37182,22 @@
               "descriptionEn": "Controlled and uncontrolled values; multiple values use string arrays."
             },
             {
-              "name": "render / ref / ARIA / className / style",
+              "name": "render / ref / ARIA",
               "type": "useRender.ComponentProps<select>",
               "description": "属性、事件与 ref 属于实际 select；render 应保留可选值的原生元素。",
               "descriptionEn": "Props, events and ref reach the actual select; render must preserve a native value-selecting element."
+            },
+            {
+              "name": "className / style",
+              "type": "useRender.ComponentProps<select>",
+              "description": "单值形态落在外框（图标定位在那里），宽度写在这里；列表形态（multiple 或 size 大于 1）没有外框，落在 select。",
+              "descriptionEn": "On the wrapper in the single-value form (the icon is positioned there), so width goes here; on the select in the list form (multiple or size above 1), which has no wrapper."
+            },
+            {
+              "name": "selectClassName",
+              "type": "string",
+              "description": "真实 select 的样式入口，两种形态都落在 select。",
+              "descriptionEn": "Styles for the actual select in both forms."
             }
           ]
         }
@@ -37118,7 +37211,15 @@
           {
             "name": "NativeSelect",
             "status": "resolved",
-            "ownProps": [],
+            "ownProps": [
+              {
+                "name": "selectClassName",
+                "optional": true,
+                "type": "string | undefined",
+                "doc": "真实 select 的样式入口。单值形态的 className / style 属于外框（图标定位在那里，宽度也写在那里）；列表形态没有外框，两者都落在 select。",
+                "declaredAt": "packages/ui/src/components/native-select.tsx:11"
+              }
+            ],
             "inheritedCount": 289,
             "inheritedFrom": [
               {
@@ -37152,7 +37253,7 @@
           "owner": "native-select",
           "module": "@qingye_lab/ui/components/native-select",
           "propsType": "NativeSelectProps",
-          "signature": "NativeSelect({ className, render, ref, multiple, size, ...props }: NativeSelectProps)",
+          "signature": "NativeSelect({ className, selectClassName, style, render, ref, multiple, size, ...props }: NativeSelectProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -37162,7 +37263,7 @@
           "kind": "type",
           "owner": "native-select",
           "module": "@qingye_lab/ui/components/native-select",
-          "signature": "useRender.ComponentProps<\"select\">",
+          "signature": "useRender.ComponentProps<\"select\"> & {\n  /** 真实 select 的样式入口。单值形态的 className / style 属于外框（图标定位在那里，宽度也写在那里）；列表形态没有外框，两者都落在 select。 */\n  selectClassName?: string | undefined;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -37171,7 +37272,7 @@
       "types": [
         {
           "name": "NativeSelectProps",
-          "definition": "export type NativeSelectProps = useRender.ComponentProps<\"select\">;"
+          "definition": "export type NativeSelectProps = useRender.ComponentProps<\"select\"> & {\n  /** 真实 select 的样式入口。单值形态的 className / style 属于外框（图标定位在那里，宽度也写在那里）；列表形态没有外框，两者都落在 select。 */\n  selectClassName?: string | undefined;\n};"
         }
       ],
       "usageImports": [
@@ -37272,12 +37373,12 @@
           "单值形态一套几何，跟随密度轴；窄屏外高 +4px，粗指针最小外高读 touch-target；多行不固定单行高度。"
         ],
         "customization": [
-          "保留平台箭头；className / style / render 属于真实 select。"
+          "保留平台箭头。单值形态的 className / style 属于外框，宽度写在这里（w-full 铺满）；selectClassName 与 render 属于真实 select。列表形态没有外框，都落在 select。"
         ]
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/native-select.tsx",
-        "sha256": "27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874",
+        "sha256": "c79d1ce39764a22c4952574d981ffccb7e4d732c9e1be7816a5a3154dad1745f",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "原生 size 只表示列表显示行数，不再与呈现几何同名混用；单值形态的几何跟随密度轴，全库一套。multiple 保留多值表单数据和平台列表容量。",
@@ -37310,10 +37411,22 @@
                   "descriptionEn": "Controlled and uncontrolled values; multiple values use string arrays."
                 },
                 {
-                  "name": "render / ref / ARIA / className / style",
+                  "name": "render / ref / ARIA",
                   "type": "useRender.ComponentProps<select>",
                   "description": "Props, events and ref reach the actual select; render must preserve a native value-selecting element.",
                   "descriptionEn": "Props, events and ref reach the actual select; render must preserve a native value-selecting element."
+                },
+                {
+                  "name": "className / style",
+                  "type": "useRender.ComponentProps<select>",
+                  "description": "On the wrapper in the single-value form (the icon is positioned there), so width goes here; on the select in the list form (multiple or size above 1), which has no wrapper.",
+                  "descriptionEn": "On the wrapper in the single-value form (the icon is positioned there), so width goes here; on the select in the list form (multiple or size above 1), which has no wrapper."
+                },
+                {
+                  "name": "selectClassName",
+                  "type": "string",
+                  "description": "Styles for the actual select in both forms.",
+                  "descriptionEn": "Styles for the actual select in both forms."
                 }
               ]
             }
@@ -37353,7 +37466,7 @@
               "One geometry for the single-value form, following the density axis; narrow height adds 4px, coarse pointers read touch-target, and multiple rows are not fixed to a single-line height."
             ],
             "customization": [
-              "Retain the platform arrow; className/style/render belong to the actual select."
+              "Retain the platform arrow. In the single-value form className/style belong to the wrapper, where width goes (w-full fills); selectClassName and render belong to the actual select. The list form has no wrapper, so all of them land on the select."
             ]
           },
           "providerGuidance": []
@@ -38798,7 +38911,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -39354,7 +39467,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41083,7 +41196,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -41621,7 +41734,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -42001,7 +42114,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -43329,7 +43442,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -43723,7 +43836,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -44532,7 +44645,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -45002,7 +45115,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -45376,7 +45489,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -45593,7 +45706,7 @@
             {
               "name": "layout",
               "type": "number[]",
-              "description": "受控布局，按面板顺序。长度与面板数不符时忽略。拖动中的中间值只用于显示，松手时才调用 onLayout。",
+              "description": "受控布局，按面板顺序。长度与面板数不符时忽略，开发期提示。拖动中的中间值只用于显示，松手时才调用 onLayout。",
               "descriptionEn": "Controlled layout in panel order; ignored when its length differs from the panel count. Intermediate drag values are display-only; onLayout is called on release."
             },
             {
@@ -45695,47 +45808,47 @@
                 "optional": true,
                 "type": "number",
                 "doc": "折叠后的百分比。默认 0。",
-                "declaredAt": "packages/ui/src/components/resizable.tsx:259"
+                "declaredAt": "packages/ui/src/components/resizable.tsx:269"
               },
               {
                 "name": "collapsible",
                 "optional": true,
                 "type": "boolean",
                 "doc": "允许折叠：指针拖过「折叠值与最小值的中点」吸附折叠，分隔条上 Enter 折叠 / 还原。",
-                "declaredAt": "packages/ui/src/components/resizable.tsx:257"
+                "declaredAt": "packages/ui/src/components/resizable.tsx:267"
               },
               {
                 "name": "defaultSize",
                 "optional": true,
                 "type": "number",
                 "doc": "初始百分比。省略的面板均分其余部分。",
-                "declaredAt": "packages/ui/src/components/resizable.tsx:251"
+                "declaredAt": "packages/ui/src/components/resizable.tsx:261"
               },
               {
                 "name": "maxSize",
                 "optional": true,
                 "type": "ResizableBound",
                 "doc": "上限，写法同 minSize。省略为 100。",
-                "declaredAt": "packages/ui/src/components/resizable.tsx:255"
+                "declaredAt": "packages/ui/src/components/resizable.tsx:265"
               },
               {
                 "name": "minSize",
                 "optional": true,
                 "type": "ResizableBound",
                 "doc": "下限：数字是百分比，`\"240px\"` 是像素。省略为 0。",
-                "declaredAt": "packages/ui/src/components/resizable.tsx:253"
+                "declaredAt": "packages/ui/src/components/resizable.tsx:263"
               },
               {
                 "name": "onCollapse",
                 "optional": true,
                 "type": "() => void",
-                "declaredAt": "packages/ui/src/components/resizable.tsx:260"
+                "declaredAt": "packages/ui/src/components/resizable.tsx:270"
               },
               {
                 "name": "onExpand",
                 "optional": true,
                 "type": "() => void",
-                "declaredAt": "packages/ui/src/components/resizable.tsx:261"
+                "declaredAt": "packages/ui/src/components/resizable.tsx:271"
               }
             ],
             "inheritedCount": 279,
@@ -45755,21 +45868,21 @@
                 "optional": true,
                 "type": "number[]",
                 "doc": "受控布局，按面板出现的顺序。长度与面板数不符时忽略，退回内部状态。",
-                "declaredAt": "packages/ui/src/components/resizable.tsx:165"
+                "declaredAt": "packages/ui/src/components/resizable.tsx:167"
               },
               {
                 "name": "onLayout",
                 "optional": true,
                 "type": "(sizes: number[]) => void",
                 "doc": "一次拖动或一次按键调整结束时调用，参数是各面板的百分比（和为 100）。",
-                "declaredAt": "packages/ui/src/components/resizable.tsx:163"
+                "declaredAt": "packages/ui/src/components/resizable.tsx:165"
               },
               {
                 "name": "orientation",
                 "optional": true,
                 "type": "\"horizontal\" | \"vertical\"",
                 "doc": "面板的排列方向。`horizontal` 左右并排（分隔条是竖线）。",
-                "declaredAt": "packages/ui/src/components/resizable.tsx:161"
+                "declaredAt": "packages/ui/src/components/resizable.tsx:163"
               }
             ],
             "inheritedCount": 280,
@@ -45958,7 +46071,7 @@
         "contexts": [
           {
             "name": "GroupContext",
-            "declaredAt": "packages/ui/src/components/resizable.tsx:147",
+            "declaredAt": "packages/ui/src/components/resizable.tsx:149",
             "defaultValue": "null",
             "withoutProvider": "throws",
             "providedBy": [
@@ -46034,7 +46147,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/resizable.tsx",
-        "sha256": "475ad2f99677a4a8568db306872ef7323f3f3386300065365e1086cbbc386a74",
+        "sha256": "275cd5bb5c655f0dfce41b9ae165de470d0a2507c08006653564e2bd34878f0a",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "分隔条只改变它前后两个面板，其余面板不动，占比总和恒为 100。像素下限（\"240px\"）按组的实际长度换算，量不到长度时不生效。折叠是面板自己的状态，由指针越过折叠与最小值的中点、或分隔条上的 Enter 触发；内容是否随之隐藏、折叠后如何再打开由应用决定。",
@@ -46557,7 +46670,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -46995,7 +47108,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -47229,14 +47342,14 @@
               "type": "number",
               "default": "内容溢出时为 0",
               "defaultEn": "0 while the content overflows",
-              "description": "内容溢出时能从键盘到达，没有可滚动的内容就不进入 Tab 序列；原生方向/Page/Home/End 滚动保留。显式给出时以调用方为准。",
-              "descriptionEn": "Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept."
+              "description": "内容溢出时能从键盘到达，没有可滚动的内容就不进入 Tab 序列；原生方向/Page/Home/End 滚动保留。显式给出时以调用方为准；内容里有可聚焦项时可给 -1。可滚动、可聚焦却没有名称时开发期提示。",
+              "descriptionEn": "Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept; pass -1 when the content has focusable items. Scrolling, focusable and unnamed warns in development."
             },
             {
               "name": "render / ref / ARIA / events",
               "type": "useRender.ComponentProps<'div'>",
-              "description": "真实视口的组合、名称、引用和原生滚动/键盘事件；有名称的独立区域可由调用方加 role=region。",
-              "descriptionEn": "Actual viewport composition, names, refs, and native scroll/keyboard events. The caller may add role=region for a named independent area."
+              "description": "真实视口的组合、名称、引用和原生滚动/键盘事件；给了 aria-label 或 aria-labelledby 就默认 role=region（用 render 换元素时不加），调用方给的 role 优先。",
+              "descriptionEn": "Actual viewport composition, names, refs, and native scroll/keyboard events. aria-label or aria-labelledby defaults the role to region (not when render swaps the element), and a role you pass wins."
             }
           ]
         },
@@ -47295,7 +47408,7 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "边缘渐隐：内容还有被切掉的一端渐隐，滚到头的一端不渐隐。横纵两向各自量、各自渐隐。\n做法与 TabsList 相同（遮罩、宽度基准、RTL 见 tabs.tsx 头注释）。占位的原生滚动条不随之变淡：渐隐止于滚动条之前，滚动条所在条带整条不透明。",
-                "declaredAt": "packages/ui/src/components/scroll-area.tsx:15"
+                "declaredAt": "packages/ui/src/components/scroll-area.tsx:17"
               }
             ],
             "inheritedCount": 281,
@@ -47701,8 +47814,8 @@
             "@qingye_lab/ui/components/scroll-area"
           ],
           "providers": [],
-          "code": "import { ScrollArea } from \"@qingye_lab/ui/components/scroll-area\";\nexport const meta = { title: \"有限视口\", titleEn: \"Bounded viewport\" };\nexport default function Demo() {\n  return <ScrollArea aria-label=\"完整条目\" role=\"region\" style={{ maxHeight: \"calc(var(--qy-control-md) * 5)\" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className=\"flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)\">条目 {index + 1}</div>)}</ScrollArea>;\n}\n",
-          "sha256": "e87a741ea91ad50d27b22e1e68dedf289cd7b5b491992901a4571960be23599a"
+          "code": "import { ScrollArea } from \"@qingye_lab/ui/components/scroll-area\";\nexport const meta = { title: \"有限视口\", titleEn: \"Bounded viewport\" };\nexport default function Demo() {\n  return <ScrollArea aria-label=\"完整条目\" style={{ maxHeight: \"calc(var(--qy-control-md) * 5)\" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className=\"flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)\">条目 {index + 1}</div>)}</ScrollArea>;\n}\n",
+          "sha256": "8ad844e69176024d1b20a5ea84fc9e6b13c41edb6c39b01bd24ae68639535a16"
         },
         {
           "id": "horizontal",
@@ -47712,8 +47825,8 @@
             "@qingye_lab/ui/components/scroll-area"
           ],
           "providers": [],
-          "code": "import { ScrollArea } from \"@qingye_lab/ui/components/scroll-area\";\nexport const meta = { title: \"水平内容\", titleEn: \"Horizontal content\" };\nexport default function Demo() {\n  return <ScrollArea aria-label=\"完整字符序列\" role=\"region\"><pre className=\"w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body\">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>;\n}\n",
-          "sha256": "9fe1e28bb6f62f38afa0555c8cc9d213c89b91e95a822dcd2d0d30d645c92525"
+          "code": "import { ScrollArea } from \"@qingye_lab/ui/components/scroll-area\";\nexport const meta = { title: \"水平内容\", titleEn: \"Horizontal content\" };\nexport default function Demo() {\n  return <ScrollArea aria-label=\"完整字符序列\"><pre className=\"w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body\">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>;\n}\n",
+          "sha256": "ddaf0f7fbba67419b5f115544a551b33c812fabc7f2201c20594b06f5fc707fd"
         },
         {
           "id": "styled-scrollbars",
@@ -47735,8 +47848,8 @@
             "@qingye_lab/ui/components/scroll-area"
           ],
           "providers": [],
-          "code": "import { ScrollArea } from \"@qingye_lab/ui/components/scroll-area\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nexport const meta = { title: \"边缘渐隐\", titleEn: \"Edge fade\" };\nexport default function Demo() {\n  return <Stack>\n    <ScrollArea fade aria-label=\"完整条目\" role=\"region\" style={{ maxHeight: \"calc(var(--qy-control-md) * 5)\" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className=\"flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)\">条目 {index + 1}</div>)}</ScrollArea>\n    <ScrollArea fade aria-label=\"完整字符序列\" role=\"region\"><pre className=\"w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body\">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>\n  </Stack>;\n}\n",
-          "sha256": "12d77908d76e762f8c401c2c363e041feb1ce13063271505db6a91f0404efc3b"
+          "code": "import { ScrollArea } from \"@qingye_lab/ui/components/scroll-area\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nexport const meta = { title: \"边缘渐隐\", titleEn: \"Edge fade\" };\nexport default function Demo() {\n  return <Stack>\n    <ScrollArea fade aria-label=\"完整条目\" style={{ maxHeight: \"calc(var(--qy-control-md) * 5)\" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className=\"flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)\">条目 {index + 1}</div>)}</ScrollArea>\n    <ScrollArea fade aria-label=\"完整字符序列\"><pre className=\"w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body\">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>\n  </Stack>;\n}\n",
+          "sha256": "7053ab035d3e65799d8854a413c670255517285bb8ece5c64ab277e240c389cb"
         }
       ],
       "design": {
@@ -47770,7 +47883,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/scroll-area.tsx",
-        "sha256": "b335bf0444c58f204e72dbb5eedf2a8220cd65fc03da091dccdd57ce6e8428d1",
+        "sha256": "cac2e91684ebc4c766cf31f3d48387d72611874133cc8f8bb9b0609aab9afe14",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "localized": {
@@ -47816,14 +47929,14 @@
                   "type": "number",
                   "default": "0 while the content overflows",
                   "defaultEn": "0 while the content overflows",
-                  "description": "Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept.",
-                  "descriptionEn": "Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept."
+                  "description": "Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept; pass -1 when the content has focusable items. Scrolling, focusable and unnamed warns in development.",
+                  "descriptionEn": "Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept; pass -1 when the content has focusable items. Scrolling, focusable and unnamed warns in development."
                 },
                 {
                   "name": "render / ref / ARIA / events",
                   "type": "useRender.ComponentProps<'div'>",
-                  "description": "Actual viewport composition, names, refs, and native scroll/keyboard events. The caller may add role=region for a named independent area.",
-                  "descriptionEn": "Actual viewport composition, names, refs, and native scroll/keyboard events. The caller may add role=region for a named independent area."
+                  "description": "Actual viewport composition, names, refs, and native scroll/keyboard events. aria-label or aria-labelledby defaults the role to region (not when render swaps the element), and a role you pass wins.",
+                  "descriptionEn": "Actual viewport composition, names, refs, and native scroll/keyboard events. aria-label or aria-labelledby defaults the role to region (not when render swaps the element), and a role you pass wins."
                 }
               ]
             },
@@ -48157,7 +48270,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -49380,7 +49493,7 @@
           ]
         },
         "responsive": [
-          "保留全部候选并允许换行；五档窄屏尺寸不改变语义"
+          "默认宽度由内容决定；给 className=\"w-full\" 时候选等分。放不下时按候选换行，不压扁；五档窄屏尺寸不改变语义"
         ],
         "customization": [
           "选中段读 --qy-track-selected 与 --qy-track-selected-foreground（默认清染 + 焦墨），未选段字为浓墨；与同档文字；不新增外围焦点圈"
@@ -49388,7 +49501,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/segmented-control.tsx",
-        "sha256": "366d8d92678c1a91950609486d0435c80e07d89f95621d0781bab30f0ba37a09",
+        "sha256": "f4665dbed362bff8a49503a39078814435fee87286a1eef4e431e26d75f2df6e",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "SegmentedControl 产生一个新值。切换内容面板用 Tabs（Tabs 也可以用 appearance 设为 track 画成同一条轨道，外观不决定语义）；允许全部取消的工具切换用 ToggleGroup。选中段是选中面（清染）加焦墨字，不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它；要调整，改系统的选中面 --qy-surface-selected（全库的选中一起变；--qy-track-selected 只是它的别名）与 --qy-track-selected-foreground。",
@@ -49516,7 +49629,7 @@
               ]
             },
             "responsive": [
-              "Retain all candidates and permit wrapping; five narrow-screen profiles preserve semantics."
+              "Width follows content by default; className=\"w-full\" shares it equally among candidates. When they do not fit they wrap per candidate instead of squeezing; five narrow-screen profiles preserve semantics."
             ],
             "customization": [
               "The selected segment reads --qy-track-selected and --qy-track-selected-foreground (light ink wash and ink text by default); unselected segments use muted ink; matching text, no outer focus ring."
@@ -49783,14 +49896,14 @@
                 "optional": true,
                 "type": "React.ReactNode",
                 "doc": "取候选失败时由应用提供的内容（说明与重试动作）；候选面以 role=\"alert\" 摆放，组件不推断失败、不写原因。",
-                "declaredAt": "packages/ui/src/components/select.tsx:22"
+                "declaredAt": "packages/ui/src/components/select.tsx:23"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "应用正在取候选这一事实：触发器与候选面标 aria-busy，候选面显示等待记号与「正在加载」。组件不发请求、不推断结果。",
-                "declaredAt": "packages/ui/src/components/select.tsx:20"
+                "declaredAt": "packages/ui/src/components/select.tsx:21"
               }
             ],
             "inheritedCount": 24,
@@ -49858,13 +49971,13 @@
                 "optional": true,
                 "type": "React.ReactNode",
                 "doc": "没有子项时的说法；省略时用内置的「没有可选项」。应用若要说明查询对象，在这里给出。",
-                "declaredAt": "packages/ui/src/components/select.tsx:35"
+                "declaredAt": "packages/ui/src/components/select.tsx:36"
               },
               {
                 "name": "positionerProps",
                 "optional": true,
                 "type": "SelectPrimitive.Positioner.Props",
-                "declaredAt": "packages/ui/src/components/select.tsx:33"
+                "declaredAt": "packages/ui/src/components/select.tsx:34"
               }
             ],
             "inheritedCount": 285,
@@ -49893,7 +50006,7 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。",
-                "declaredAt": "packages/ui/src/components/select.tsx:26"
+                "declaredAt": "packages/ui/src/components/select.tsx:27"
               }
             ],
             "inheritedCount": 289,
@@ -50193,7 +50306,7 @@
         "contexts": [
           {
             "name": "EmptyValueLabel",
-            "declaredAt": "packages/ui/src/components/select.tsx:42",
+            "declaredAt": "packages/ui/src/components/select.tsx:43",
             "defaultValue": "undefined",
             "withoutProvider": "nullable",
             "providedBy": [
@@ -50226,7 +50339,7 @@
           },
           {
             "name": "ItemLabels",
-            "declaredAt": "packages/ui/src/components/select.tsx:44",
+            "declaredAt": "packages/ui/src/components/select.tsx:45",
             "defaultValue": "[]",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50235,7 +50348,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50244,7 +50357,7 @@
           },
           {
             "name": "MultipleState",
-            "declaredAt": "packages/ui/src/components/select.tsx:74",
+            "declaredAt": "packages/ui/src/components/select.tsx:91",
             "defaultValue": "{ multiple: false, index: new Map(), itemToStringLabel: und…",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50253,7 +50366,7 @@
           },
           {
             "name": "SourceState",
-            "declaredAt": "packages/ui/src/components/select.tsx:78",
+            "declaredAt": "packages/ui/src/components/select.tsx:95",
             "defaultValue": "{ loading: false, error: undefined, readOnly: false }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -50362,7 +50475,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/select.tsx",
-        "sha256": "36f9c843a86f51d2ebe65054cf5577bd80a4a076d0de1d52326c66eee10acf7a",
+        "sha256": "b17fc57dc658402188ba8a821eb0a99f9a034ed4217d47d74991b427c37583da",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "高亮表示当前位置，选取才改变值。未选择不会自动变为第一项；需要并置比较时用 RadioGroup。",
@@ -52622,7 +52735,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52794,7 +52907,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/sidebar.tsx",
-        "sha256": "e3d0cd62528d452987733bc22151e9b69efaec4f7442904340694726857b3803",
+        "sha256": "c1a2e83537c08c137c4b2a0266f85d16a4f021a4fd5586adc06de2a85434351c",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "收起是图标 rail，不是隐藏：导航与链接保持挂载，名称切到视觉隐藏（可访问名称不变），用 Tooltip 补足可见名称；二级子级展开态用内嵌面板，rail 态换成同一组内容的 Popover，开合记忆不因侧栏收起而改变。active 与路由由应用明确提供。",
@@ -53327,7 +53440,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -53687,7 +53800,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -54382,7 +54495,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -54938,7 +55051,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -55675,7 +55788,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -56099,7 +56212,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -56558,7 +56671,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -58030,6 +58143,12 @@
               "default": "\"line\""
             },
             {
+              "name": "TabsList className",
+              "type": "Base UI List props",
+              "description": "轨道外观落在轨道外框：默认宽度由内容决定，w-full 时标签等分；放不下时外框不变，标签在框内滚动。导航线外观本来占满所在行。",
+              "descriptionEn": "In the track appearance it lands on the track's outer frame: width follows content by default and w-full shares it equally among tabs; when they do not fit the frame stays put and tabs scroll inside it. The line appearance already fills its row."
+            },
+            {
               "name": "activateOnFocus",
               "type": "boolean",
               "description": "默认焦点移动不自动切换；消费者可明确选择自动激活。",
@@ -58099,7 +58218,7 @@
                 "optional": true,
                 "type": "\"track\" | \"line\"",
                 "doc": "标签栏的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，横纵都成立。",
-                "declaredAt": "packages/ui/src/components/tabs.tsx:16"
+                "declaredAt": "packages/ui/src/components/tabs.tsx:17"
               }
             ],
             "inheritedCount": 282,
@@ -58139,7 +58258,7 @@
                 "optional": true,
                 "type": "\"visited\" | boolean",
                 "doc": "\"visited\"（默认）：第一次到达时才挂载，之后保留；true：一开始就全部挂载；false：离开即卸载。",
-                "declaredAt": "packages/ui/src/components/tabs.tsx:60"
+                "declaredAt": "packages/ui/src/components/tabs.tsx:65"
               }
             ],
             "inheritedCount": 279,
@@ -58200,7 +58319,7 @@
           "owner": "tabs",
           "module": "@qingye_lab/ui/components/tabs",
           "propsType": "TabsProps",
-          "signature": "Tabs({ className, appearance = \"line\", ...props }: TabsProps)",
+          "signature": "Tabs({ className, appearance = \"line\", orientation = \"horizontal\", ...props }: TabsProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -58221,7 +58340,7 @@
           "owner": "tabs",
           "module": "@qingye_lab/ui/components/tabs",
           "propsType": "TabsListProps",
-          "signature": "TabsList({ className, ref, ...props }: TabsListProps)",
+          "signature": "TabsList({ className, ref, children, ...props }: TabsListProps)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -58378,6 +58497,15 @@
             "providedBy": [
               "Tabs"
             ]
+          },
+          {
+            "name": "OrientationContext",
+            "declaredAt": "packages/ui/src/components/tabs.tsx:14",
+            "defaultValue": "\"horizontal\"",
+            "withoutProvider": "default-value",
+            "providedBy": [
+              "Tabs"
+            ]
           }
         ],
         "baseUi": [
@@ -58451,7 +58579,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tabs.tsx",
-        "sha256": "fec95d44ade9b2245e569a1b91c9ddc6911c1af3b26f50a36521bb8a54d98137",
+        "sha256": "8c8622ab9be09d415cd064c92ff7741e1190c7a1141a95c05e321c536a123a2b",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "默认手动激活、面板保留挂载；切换视角不等于批准或保存草稿。",
@@ -58484,6 +58612,12 @@
                   "description": "Appearance of the tab list, set on Tabs for the whole set. line is the navigation line; track puts the selected face inside a track, horizontal or vertical. Appearance never changes the tablist / tab / tabpanel semantics.",
                   "descriptionEn": "Appearance of the tab list, set on Tabs for the whole set. line is the navigation line; track puts the selected face inside a track, horizontal or vertical. Appearance never changes the tablist / tab / tabpanel semantics.",
                   "default": "\"line\""
+                },
+                {
+                  "name": "TabsList className",
+                  "type": "Base UI List props",
+                  "description": "In the track appearance it lands on the track's outer frame: width follows content by default and w-full shares it equally among tabs; when they do not fit the frame stays put and tabs scroll inside it. The line appearance already fills its row.",
+                  "descriptionEn": "In the track appearance it lands on the track's outer frame: width follows content by default and w-full shares it equally among tabs; when they do not fit the frame stays put and tabs scroll inside it. The line appearance already fills its row."
                 },
                 {
                   "name": "activateOnFocus",
@@ -58833,8 +58967,8 @@
       "keyboard": [
         {
           "keys": "Enter",
-          "description": "非组字时确认草稿，阻止表单提交；组字中的 Enter 不添加。",
-          "descriptionEn": "Confirm the draft outside composition without submitting a form. Composition Enter does not add."
+          "description": "非组字时确认草稿，阻止表单提交；草稿为空时不拦，表单照常提交；组字中的 Enter 不添加。",
+          "descriptionEn": "Confirm the draft outside composition without submitting a form. With an empty draft it is not intercepted and the form submits. Composition Enter does not add."
         },
         {
           "keys": "Backspace / ArrowLeft（草稿起点，RTL 为 ArrowRight）",
@@ -58928,7 +59062,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -59025,7 +59159,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tag-input.tsx",
-        "sha256": "2637acfdcaeef88dcee4ed922f2255f16986a33f838c1b347d039cce0dcd4217",
+        "sha256": "8ec39c7dd44653e74738178db40ee5a62a4a34d551a80a03181428338f8035ec",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "Enter 或添加按钮才确认；两端空白去除，精确字符串去重且区分大小写。空项、重复项及受控拒绝不会清空草稿。",
@@ -59131,8 +59265,8 @@
           "keyboard": [
             {
               "keys": "Enter",
-              "description": "Confirm the draft outside composition without submitting a form. Composition Enter does not add.",
-              "descriptionEn": "Confirm the draft outside composition without submitting a form. Composition Enter does not add."
+              "description": "Confirm the draft outside composition without submitting a form. With an empty draft it is not intercepted and the form submits. Composition Enter does not add.",
+              "descriptionEn": "Confirm the draft outside composition without submitting a form. With an empty draft it is not intercepted and the form submits. Composition Enter does not add."
             },
             {
               "keys": "Backspace / ArrowLeft (start of draft; ArrowRight under RTL)",
@@ -59415,7 +59549,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -60493,7 +60627,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -61006,7 +61140,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -61557,7 +61691,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -62103,7 +62237,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -62724,7 +62858,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -62753,8 +62887,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { Toc, useTocHeadings, useTocScrollSpy } from \"@qingye_lab/ui/components/toc\";\nimport { Inline } from \"@qingye_lab/ui/components/layout\";\nimport { ScrollArea } from \"@qingye_lab/ui/components/scroll-area\";\nimport * as React from \"react\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"随滚动更新当前项\", titleEn: \"Updates the current item as the reader scrolls\" } satisfies DemoMeta;\n\nconst sections = [\n  { id: \"demo-install\", level: 2 as const, title: \"安装\", body: \"用包管理器加入 @qingye_lab/ui，组件与样式在同一个包里。\" },\n  { id: \"demo-styles\", level: 3 as const, title: \"引入样式\", body: \"在应用入口引入一次 styles.css；之后每个组件都按同一套令牌取值。\" },\n  { id: \"demo-theme\", level: 3 as const, title: \"明暗与品牌\", body: \"ThemeProvider 写入明暗；品牌只写在 html 的 data-brand 上，两者互不覆盖。\" },\n  { id: \"demo-density\", level: 2 as const, title: \"密度\", body: \"在容器上写 data-density=\\\"compact\\\"，其中的控件与间距一起收紧，字号不变。\" },\n];\n\nexport default function Demo() {\n  const containerRef = React.useRef<HTMLDivElement>(null);\n  const headings = useTocHeadings(containerRef);\n  const current = useTocScrollSpy(headings, { container: containerRef });\n  return <Inline gap=\"panel\" align=\"start\">\n    <Toc aria-label=\"示例文章目录\" items={headings} current={current} className=\"w-40 shrink-0\" />\n    <ScrollArea ref={containerRef} role=\"region\" aria-label=\"接入说明\" className=\"h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)\">\n      {sections.map((section) => {\n        const Heading = section.level === 2 ? \"h2\" : \"h3\";\n        return <section key={section.id} className=\"mb-(--qy-field-group-gap)\">\n          <Heading id={section.id} className=\"m-0 mb-(--qy-field-gap) text-heading text-foreground\">{section.title}</Heading>\n          <p className=\"m-0 text-body text-foreground\">{section.body}</p>\n        </section>;\n      })}\n    </ScrollArea>\n  </Inline>;\n}\n",
-          "sha256": "c7c59d166aa9bf5e6cf3d00dccb4670de16f4842445c1ffe452afed22716b9d6"
+          "code": "import { Toc, useTocHeadings, useTocScrollSpy } from \"@qingye_lab/ui/components/toc\";\nimport { Inline } from \"@qingye_lab/ui/components/layout\";\nimport { ScrollArea } from \"@qingye_lab/ui/components/scroll-area\";\nimport * as React from \"react\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"随滚动更新当前项\", titleEn: \"Updates the current item as the reader scrolls\" } satisfies DemoMeta;\n\nconst sections = [\n  { id: \"demo-install\", level: 2 as const, title: \"安装\", body: \"用包管理器加入 @qingye_lab/ui，组件与样式在同一个包里。\" },\n  { id: \"demo-styles\", level: 3 as const, title: \"引入样式\", body: \"在应用入口引入一次 styles.css；之后每个组件都按同一套令牌取值。\" },\n  { id: \"demo-theme\", level: 3 as const, title: \"明暗与品牌\", body: \"ThemeProvider 写入明暗；品牌只写在 html 的 data-brand 上，两者互不覆盖。\" },\n  { id: \"demo-density\", level: 2 as const, title: \"密度\", body: \"在容器上写 data-density=\\\"compact\\\"，其中的控件与间距一起收紧，字号不变。\" },\n];\n\nexport default function Demo() {\n  const containerRef = React.useRef<HTMLDivElement>(null);\n  const headings = useTocHeadings(containerRef);\n  const current = useTocScrollSpy(headings, { container: containerRef });\n  return <Inline gap=\"panel\" align=\"start\">\n    <Toc aria-label=\"示例文章目录\" items={headings} current={current} className=\"w-40 shrink-0\" />\n    <ScrollArea ref={containerRef} aria-label=\"接入说明\" className=\"h-56 w-80 rounded-item border border-border p-(--qy-panel-padding-sm)\">\n      {sections.map((section) => {\n        const Heading = section.level === 2 ? \"h2\" : \"h3\";\n        return <section key={section.id} className=\"mb-(--qy-field-group-gap)\">\n          <Heading id={section.id} className=\"m-0 mb-(--qy-field-gap) text-heading text-foreground\">{section.title}</Heading>\n          <p className=\"m-0 text-body text-foreground\">{section.body}</p>\n        </section>;\n      })}\n    </ScrollArea>\n  </Inline>;\n}\n",
+          "sha256": "98157ff450873ce28ebf444f935e7279c14452fba5777abfff79ebab9bf79232"
         },
         {
           "id": "explicit-items",
@@ -63711,7 +63845,7 @@
           ]
         },
         "responsive": [
-          "水平方向可以换行，纵向沿上下轴导航；浏览器布局未在本批验证"
+          "默认宽度由内容决定；给 className=\"w-full\" 时候选等分。水平方向放不下时按候选换行，图标候选不小于方形；纵向沿上下轴导航"
         ],
         "customization": [
           "按下项读 --qy-track-selected 与 --qy-track-selected-foreground（默认清染 + 焦墨），不借用 --qy-primary；未按下项字为浓墨；既有同名五档"
@@ -63719,7 +63853,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/toggle-group.tsx",
-        "sha256": "c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d",
+        "sha256": "7850bfe90e1c53a915357e2fe0de3d9df988b18a93125cb67b3b649996486a94",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "按下项是选中面（清染）加焦墨字，未按下项字为浓墨，字重不变；它不用主操作的填充，所以品牌覆写 --qy-primary 不会改变它。要调整，改系统的选中面 --qy-surface-selected（全库的选中一起变；--qy-track-selected 只是它的别名）与 --qy-track-selected-foreground。",
@@ -63847,7 +63981,7 @@
               ]
             },
             "responsive": [
-              "Horizontal layouts may wrap; vertical navigation follows up/down. Browser layout was not verified in this batch."
+              "Width follows content by default; className=\"w-full\" shares it equally among candidates. Horizontal layouts wrap per candidate when they do not fit, and icon candidates stay at least square; vertical navigation follows up/down."
             ],
             "customization": [
               "Pressed items read --qy-track-selected and --qy-track-selected-foreground (light ink wash and ink text by default), not --qy-primary; unpressed items use muted ink; existing five matching profiles."
@@ -65630,7 +65764,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -66141,7 +66275,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -66785,7 +66919,7 @@
         "contexts": [
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -67392,7 +67526,7 @@
           },
           {
             "name": "LocaleContext",
-            "declaredAt": "packages/ui/src/locale.tsx:204",
+            "declaredAt": "packages/ui/src/locale.tsx:206",
             "defaultValue": "{ ...zhCN, dir: \"ltr\" }",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -68221,10 +68355,16 @@
               "descriptionEn": "Actual collection, stable unique keys, and content; duplicate keys throw. Use persistent identities across insertion and reordering, rather than positions."
             },
             {
-              "name": "itemSize / height",
+              "name": "itemSize",
               "type": "number",
-              "description": "项外高与视口高，CSS px，均为有限正数。默认固定高度；动态模式中 itemSize 是未测量行的估计值，不限制内容高度。",
-              "descriptionEn": "Outer item height and viewport height in CSS px, both finite and positive. Rows are fixed by default; in dynamic mode itemSize estimates unmeasured rows without constraining their content height."
+              "description": "项外高，CSS px，有限正数。默认固定高度；动态模式中是未测量行的估计值，不限制内容高度。",
+              "descriptionEn": "Outer item height in CSS px, finite and positive. Rows are fixed by default; in dynamic mode it estimates unmeasured rows without constraining their content."
+            },
+            {
+              "name": "height",
+              "type": "number",
+              "description": "视口高，CSS px，有限正数。不传时高度归 CSS（className 的 h-full、flex-1 或 style），内容不撑高视口；父级没有确定高度时视口高为 0，不渲染行，不会退化成全量渲染。",
+              "descriptionEn": "Viewport height in CSS px, finite and positive. When omitted, CSS owns the height (h-full or flex-1 in className, or style) and content never stretches the viewport; a parent without a definite height yields a 0 viewport with no rows, rather than silently rendering everything."
             },
             {
               "name": "measurement",
@@ -68262,8 +68402,8 @@
             {
               "name": "render / ref / style / className / events / ARIA",
               "type": "useRender.ComponentProps<'div'>",
-              "description": "ref 仍是原生滚动视口。显式 height 承担视口高度；初始服务端窗口使用它。浏览器默认滚动锚定关闭，由组件统一维持阅读位置。给集合可识别名称。",
-              "descriptionEn": "ref remains the native scroll viewport. Explicit height owns its height and supplies the initial server-rendered window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name."
+              "description": "ref 仍是原生滚动视口。传入 height 时由它承担视口高度，初始服务端窗口也用它；不传时服务端不预估窗口。浏览器默认滚动锚定关闭，由组件统一维持阅读位置。给集合可识别名称。",
+              "descriptionEn": "ref remains the native scroll viewport. An explicit height owns the viewport height and supplies the initial server window; without it the server estimates no window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name."
             }
           ]
         }
@@ -68283,14 +68423,14 @@
                 "optional": true,
                 "type": "React.Ref<VirtualListActions>",
                 "doc": "Separate from the native scrolling-element ref. Scrolling is instant and keeps focus.",
-                "declaredAt": "packages/ui/src/components/virtual-list.tsx:29"
+                "declaredAt": "packages/ui/src/components/virtual-list.tsx:30"
               },
               {
                 "name": "followEnd",
                 "optional": true,
                 "type": "boolean",
                 "doc": "Follow appended items only when previously at the end; never initially jump to the end.",
-                "declaredAt": "packages/ui/src/components/virtual-list.tsx:31"
+                "declaredAt": "packages/ui/src/components/virtual-list.tsx:32"
               },
               {
                 "name": "getKey",
@@ -68301,9 +68441,10 @@
               },
               {
                 "name": "height",
-                "optional": false,
+                "optional": true,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/virtual-list.tsx:25"
+                "doc": "视口高度，CSS px。不传时宽高都归 CSS（`flex-1`、`h-full`、`style`），由尺寸隔离防止内容反撑；需要服务端窗口时传数字。",
+                "declaredAt": "packages/ui/src/components/virtual-list.tsx:26"
               },
               {
                 "name": "items",
@@ -68323,14 +68464,14 @@
                 "optional": true,
                 "type": "\"fixed\" | \"dynamic\"",
                 "doc": "Dynamic mode observes each mounted row's actual border-box height.",
-                "declaredAt": "packages/ui/src/components/virtual-list.tsx:27"
+                "declaredAt": "packages/ui/src/components/virtual-list.tsx:28"
               },
               {
                 "name": "overscan",
                 "optional": true,
                 "type": "number",
                 "doc": "Render budget on either side of the visible window; not a visual dimension.",
-                "declaredAt": "packages/ui/src/components/virtual-list.tsx:33"
+                "declaredAt": "packages/ui/src/components/virtual-list.tsx:34"
               },
               {
                 "name": "renderItem",
@@ -68397,7 +68538,7 @@
           "kind": "type",
           "owner": "virtual-list",
           "module": "@qingye_lab/ui/components/virtual-list",
-          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\"> & {\n  items: readonly Item[];\n  /** Must remain stable across scrolling, insertion and reordering. */\n  getKey: (item: Item, index: number) => React.Key;\n  renderItem: (item: Item, index: number) => React.ReactNode;\n  /** Fixed outer row extent, or the estimated outer extent in dynamic mode, in CSS px. */\n  itemSize: number;\n  height: number;\n  /** Dynamic mode observes each mounted row's actual border-box height. */\n  measurement?: \"fixed\" | \"dynamic\";\n  /** Separate from the native scrolling-element ref. Scrolling is instant and keeps focus. */\n  actionsRef?: React.Ref<VirtualListActions>;\n  /** Follow appended items only when previously at the end; never initially jump to the end. */\n  followEnd?: boolean;\n  /** Render budget on either side of the visible window; not a visual dimension. */\n  overscan?: number;\n}",
+          "signature": "Omit<useRender.ComponentProps<\"div\">, \"children\"> & {\n  items: readonly Item[];\n  /** Must remain stable across scrolling, insertion and reordering. */\n  getKey: (item: Item, index: number) => React.Key;\n  renderItem: (item: Item, index: number) => React.ReactNode;\n  /** Fixed outer row extent, or the estimated outer extent in dynamic mode, in CSS px. */\n  itemSize: number;\n  /** 视口高度，CSS px。不传时宽高都归 CSS（`flex-1`、`h-full`、`style`），由尺寸隔离防止内容反撑；需要服务端窗口时传数字。 */\n  height?: number;\n  /** Dynamic mode observes each mounted row's actual border-box height. */\n  measurement?: \"fixed\" | \"dynamic\";\n  /** Separate from the native scrolling-element ref. Scrolling is instant and keeps focus. */\n  actionsRef?: React.Ref<VirtualListActions>;\n  /** Follow appended items only when previously at the end; never initially jump to the end. */\n  followEnd?: boolean;\n  /** Render budget on either side of the visible window; not a visual dimension. */\n  overscan?: number;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -68424,7 +68565,7 @@
         },
         {
           "name": "VirtualListProps",
-          "definition": "export type VirtualListProps<Item> = Omit<useRender.ComponentProps<\"div\">, \"children\"> & {\n  items: readonly Item[];\n  /** Must remain stable across scrolling, insertion and reordering. */\n  getKey: (item: Item, index: number) => React.Key;\n  renderItem: (item: Item, index: number) => React.ReactNode;\n  /** Fixed outer row extent, or the estimated outer extent in dynamic mode, in CSS px. */\n  itemSize: number;\n  height: number;\n  /** Dynamic mode observes each mounted row's actual border-box height. */\n  measurement?: \"fixed\" | \"dynamic\";\n  /** Separate from the native scrolling-element ref. Scrolling is instant and keeps focus. */\n  actionsRef?: React.Ref<VirtualListActions>;\n  /** Follow appended items only when previously at the end; never initially jump to the end. */\n  followEnd?: boolean;\n  /** Render budget on either side of the visible window; not a visual dimension. */\n  overscan?: number;\n};"
+          "definition": "export type VirtualListProps<Item> = Omit<useRender.ComponentProps<\"div\">, \"children\"> & {\n  items: readonly Item[];\n  /** Must remain stable across scrolling, insertion and reordering. */\n  getKey: (item: Item, index: number) => React.Key;\n  renderItem: (item: Item, index: number) => React.ReactNode;\n  /** Fixed outer row extent, or the estimated outer extent in dynamic mode, in CSS px. */\n  itemSize: number;\n  /** 视口高度，CSS px。不传时宽高都归 CSS（`flex-1`、`h-full`、`style`），由尺寸隔离防止内容反撑；需要服务端窗口时传数字。 */\n  height?: number;\n  /** Dynamic mode observes each mounted row's actual border-box height. */\n  measurement?: \"fixed\" | \"dynamic\";\n  /** Separate from the native scrolling-element ref. Scrolling is instant and keeps focus. */\n  actionsRef?: React.Ref<VirtualListActions>;\n  /** Follow appended items only when previously at the end; never initially jump to the end. */\n  followEnd?: boolean;\n  /** Render budget on either side of the visible window; not a visual dimension. */\n  overscan?: number;\n};"
         }
       ],
       "usageImports": [
@@ -68531,7 +68672,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/virtual-list.tsx",
-        "sha256": "772ed07d69b729cdade24c67b719669caefd00765038118f3b30ab6ce587cd90",
+        "sha256": "87082ed536a385bbdbf9468c74888760cfcb6f86b0d6133541ae7715106a7fb0",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "VirtualList 只拥有窗口、测量、阅读锚点与焦点连续性。集合、稳定 key、未读状态及是否跟随由消费项目决定；默认保持固定高度和手动滚动。",
@@ -68561,10 +68702,16 @@
                   "descriptionEn": "Actual collection, stable unique keys, and content; duplicate keys throw. Use persistent identities across insertion and reordering, rather than positions."
                 },
                 {
-                  "name": "itemSize / height",
+                  "name": "itemSize",
                   "type": "number",
-                  "description": "Outer item height and viewport height in CSS px, both finite and positive. Rows are fixed by default; in dynamic mode itemSize estimates unmeasured rows without constraining their content height.",
-                  "descriptionEn": "Outer item height and viewport height in CSS px, both finite and positive. Rows are fixed by default; in dynamic mode itemSize estimates unmeasured rows without constraining their content height."
+                  "description": "Outer item height in CSS px, finite and positive. Rows are fixed by default; in dynamic mode it estimates unmeasured rows without constraining their content.",
+                  "descriptionEn": "Outer item height in CSS px, finite and positive. Rows are fixed by default; in dynamic mode it estimates unmeasured rows without constraining their content."
+                },
+                {
+                  "name": "height",
+                  "type": "number",
+                  "description": "Viewport height in CSS px, finite and positive. When omitted, CSS owns the height (h-full or flex-1 in className, or style) and content never stretches the viewport; a parent without a definite height yields a 0 viewport with no rows, rather than silently rendering everything.",
+                  "descriptionEn": "Viewport height in CSS px, finite and positive. When omitted, CSS owns the height (h-full or flex-1 in className, or style) and content never stretches the viewport; a parent without a definite height yields a 0 viewport with no rows, rather than silently rendering everything."
                 },
                 {
                   "name": "measurement",
@@ -68602,8 +68749,8 @@
                 {
                   "name": "render / ref / style / className / events / ARIA",
                   "type": "useRender.ComponentProps<'div'>",
-                  "description": "ref remains the native scroll viewport. Explicit height owns its height and supplies the initial server-rendered window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name.",
-                  "descriptionEn": "ref remains the native scroll viewport. Explicit height owns its height and supplies the initial server-rendered window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name."
+                  "description": "ref remains the native scroll viewport. An explicit height owns the viewport height and supplies the initial server window; without it the server estimates no window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name.",
+                  "descriptionEn": "ref remains the native scroll viewport. An explicit height owns the viewport height and supplies the initial server window; without it the server estimates no window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name."
                 }
               ]
             }

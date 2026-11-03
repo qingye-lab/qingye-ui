@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
-Source SHA-256: 772ed07d69b729cdade24c67b719669caefd00765038118f3b30ab6ce587cd90
+Source SHA-256: 87082ed536a385bbdbf9468c74888760cfcb6f86b0d6133541ae7715106a7fb0
 
 Window fixed or measured-height collections while retaining the reading position and active editing.
 
@@ -45,7 +45,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `actionsRef?`: `React.Ref<VirtualListActions>`. Separate from the native scrolling-element ref. Scrolling is instant and keeps focus.
 - `followEnd?`: `boolean`. Follow appended items only when previously at the end; never initially jump to the end.
 - `getKey`: `(item: Item, index: number) => React.Key`. Must remain stable across scrolling, insertion and reordering.
-- `height`: `number`.
+- `height?`: `number`. 视口高度，CSS px。不传时宽高都归 CSS（`flex-1`、`h-full`、`style`），由尺寸隔离防止内容反撑；需要服务端窗口时传数字。
 - `items`: `readonly Item[]`.
 - `itemSize`: `number`. Fixed outer row extent, or the estimated outer extent in dynamic mode, in CSS px.
 - `measurement?`: `"fixed" | "dynamic"`. Dynamic mode observes each mounted row's actual border-box height.
@@ -65,13 +65,14 @@ Written descriptions; the list above is the type-resolved fact.
 ### VirtualList<Item>
 Collection rendering boundary with actual list/listitem semantics, without selection, requests, or business columns.
 - items / getKey / renderItem: readonly Item[] / (item,index)=>React.Key / (item,index)=>ReactNode. Actual collection, stable unique keys, and content; duplicate keys throw. Use persistent identities across insertion and reordering, rather than positions.
-- itemSize / height: number. Outer item height and viewport height in CSS px, both finite and positive. Rows are fixed by default; in dynamic mode itemSize estimates unmeasured rows without constraining their content height.
+- itemSize: number. Outer item height in CSS px, finite and positive. Rows are fixed by default; in dynamic mode it estimates unmeasured rows without constraining their content.
+- height: number. Viewport height in CSS px, finite and positive. When omitted, CSS owns the height (h-full or flex-1 in className, or style) and content never stretches the viewport; a parent without a definite height yields a 0 viewport with no rows, rather than silently rendering everything.
 - measurement: 'fixed' | 'dynamic'; default 'fixed'. dynamic uses ResizeObserver to measure each mounted row's actual border-box height. Let normal content flow determine row height; external margins are excluded.
 - actionsRef: React.Ref<VirtualListActions>. Separate actions: scrollToIndex(index, { align?: 'auto' | 'start' | 'center' | 'end' }) and scrollToEnd(). Scroll instantly without moving focus. Invalid or out-of-bounds indices throw RangeError; scrollToEnd is a no-op for empty collections.
 - followEnd: boolean; default false. Explicit end following. Follow appended items only when previously at the bottom (within 1 CSS px). Reading history keeps its position, and initial mounting never jumps to the end.
 - overscan: number; default 2. A nonnegative integer rendering-budget preset on both window edges, rather than a visual dimension.
 - aria-label / aria-labelledby: string. One is required: the identifiable name of the collection, on the role=list scroll viewport. A missing or blank name throws.
-- render / ref / style / className / events / ARIA: useRender.ComponentProps<'div'>. ref remains the native scroll viewport. Explicit height owns its height and supplies the initial server-rendered window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name.
+- render / ref / style / className / events / ARIA: useRender.ComponentProps<'div'>. ref remains the native scroll viewport. An explicit height owns the viewport height and supplies the initial server window; without it the server estimates no window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name.
 
 ## Keyboard
 - Tab: Reach the collection viewport and mounted internal actions.

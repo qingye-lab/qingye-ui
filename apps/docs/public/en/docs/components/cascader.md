@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/cascader
 Source: packages/ui/src/components/cascader.tsx
-Source SHA-256: 404842647973eafb3974d29b0158669d28b573e50a16bb0808e0f679935593f9
+Source SHA-256: cb9151f01ae01a2db194a6e5f29fc8a0f359768ddd0e0197f9c73655d9aaf3d8
 
 Choose one value along a root-to-leaf path, or check several paths, with each level's candidates in its own column.
 
@@ -86,7 +86,7 @@ Trigger, column-wise candidate popup and form value. The trigger shares Select's
 - searchable: boolean; default false. A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator, with the matched text in bold. Only known nodes are searched, so unloaded branches are not included. In multiple mode only leaf paths are listed, each with a check marker; Enter or a click checks it and the popup stays open with focus in the input.
 - placeholder: ReactNode; default locale.selectPlaceholder. Shown only without selection; cannot replace FieldLabel.
 - disabled / readOnly / required: boolean; default false. Read-only keeps the value and never opens the popup; a disabled field is not submitted; required joins native validation and sets aria-required. invalid follows Field.
-- name / form: string. Name and owning form of the hidden input. The submitted value is the path segments joined with "/", such as "zj/hz/xh"; an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission). Values should therefore not contain "/".
+- name / form: string. Name and owning form of the hidden input. The submitted value is the path segments joined with "/", such as "zj/hz/xh"; a "%" or "/" inside a segment is escaped as %25 or %2F (split on "/" and decodeURIComponent each segment to restore it); an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission).
 - aria-label / aria-labelledby / id / className: string. Name and styling entries of the trigger. A missing name throws: use aria-label, aria-labelledby, or place it in a Field with a FieldLabel.
 
 ## Keyboard

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
-Source SHA-256: 480ba69e05c63a550feab21b961e9593ff298bb612405f18de0a84d4f5724b65
+Source SHA-256: 8bf6a3b75be2b323a1fa09109535f1b90b02ac3ab333f114872add2881f1b47f
 
 Connect one value's name, control, description, and caller-supplied errors.
 
@@ -25,10 +25,10 @@ Supply invalid and error content separately. Field connects names and errors wit
 - Application: Values, rules, invalid facts, error content, drafts, and delivery outcomes.
 
 ## Composition
-- Input registers automatically; FieldControl registers native controls. Fieldset names a shared scope; FieldGroup organizes spacing only.
+- Input registers automatically; FieldControl registers native controls. Fieldset names a shared scope; FieldGroup organizes spacing, and labelColumn makes its names share one column.
 
 ## Responsive behavior
-- Long names/descriptions wrap, horizontal content columns shrink, and field roles determine spacing.
+- Long names/descriptions wrap, horizontal content columns shrink, and field roles determine spacing. labelColumn stacks on narrow screens.
 
 ## Customization
 - External classes merge last; native props, state styling callbacks, refs, and render forward. FieldTitle does not register as a label.
@@ -40,7 +40,8 @@ Supply invalid and error content separately. Field connects names and errors wit
 - FieldDescription: function; owner field; PASS; props: React.ComponentProps<typeof FieldPrimitive.Description>
 - FieldError: function; owner field; PASS; props: FieldErrorProps
 - FieldErrorProps: type; owner field; PASS
-- FieldGroup: function; owner field; PASS; props: useRender.ComponentProps<"div">
+- FieldGroup: function; owner field; PASS; props: FieldGroupProps
+- FieldGroupProps: type; owner field; PASS
 - FieldItem: function; owner field; PASS; props: React.ComponentProps<typeof FieldPrimitive.Item>
 - FieldLabel: function; owner field; PASS; props: FieldLabelProps
 - FieldLabelProps: type; owner field; PASS
@@ -76,7 +77,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
 
 ### FieldGroup
-- no props declared by this library
+- `labelColumn?`: `boolean`. 让组内字段的名称共用一列（宽度取最长名称），控件起点对齐；窄屏回到堆叠。字段须是组的直接子元素。
 - plus 281 inherited (@types/react 280, @base-ui/react 1); not expanded, see the installed declarations
 
 ### FieldItem
@@ -141,6 +142,7 @@ The name and description column of a horizontal field.
 
 ### FieldGroup
 Spacing between fields, without group semantics.
+- labelColumn: boolean; default false. Names in the group share one column as wide as the longest name, and controls start at the same edge; descriptions and errors sit under the control, and separators span both columns. Stacks on narrow screens. Wrap content meant for the control column, such as an action, in a Field without a name.
 
 ### FieldSeparator
 A boundary between field groups; flanking lines are decorative when text is supplied.
@@ -303,5 +305,27 @@ export const meta = { title: "校验中", titleEn: "Validating" };
 // 校验进行中旧的错误不显示；结论由应用在结束后传入。
 export default function Demo() {
   return <Field className="w-full max-w-xs" validating invalid><FieldLabel>用户名</FieldLabel><Input defaultValue="qingye" /><FieldError>用户名已被占用</FieldError></Field>;
+}
+```
+
+### 名称列
+Source: apps/docs/src/content/field/demos/10-label-column.tsx
+```tsx
+import { Button } from "@qingye_lab/ui/components/button";
+import { Field, FieldDescription, FieldGroup, FieldLabel, FieldSeparator } from "@qingye_lab/ui/components/field";
+import { Input } from "@qingye_lab/ui/components/input";
+
+export const meta = { title: "名称列", titleEn: "Label column" };
+
+export default function Demo() {
+  return (
+    <FieldGroup labelColumn className="w-full max-w-lg">
+      <Field><FieldLabel>姓名</FieldLabel><Input defaultValue="青野" /></Field>
+      <Field><FieldLabel>联系邮箱</FieldLabel><Input type="email" /><FieldDescription>说明与错误留在控件下方。</FieldDescription></Field>
+      <FieldSeparator />
+      <Field><FieldLabel>备注</FieldLabel><Input /></Field>
+      <Field><Button className="justify-self-start">保存</Button></Field>
+    </FieldGroup>
+  );
 }
 ```

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
-Source SHA-256: 772ed07d69b729cdade24c67b719669caefd00765038118f3b30ab6ce587cd90
+Source SHA-256: 87082ed536a385bbdbf9468c74888760cfcb6f86b0d6133541ae7715106a7fb0
 
 以稳定项身份呈现等高或动态高度长集合，保留阅读位置与正在编辑的内容。
 
@@ -45,7 +45,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `actionsRef?`: `React.Ref<VirtualListActions>`. Separate from the native scrolling-element ref. Scrolling is instant and keeps focus.
 - `followEnd?`: `boolean`. Follow appended items only when previously at the end; never initially jump to the end.
 - `getKey`: `(item: Item, index: number) => React.Key`. Must remain stable across scrolling, insertion and reordering.
-- `height`: `number`.
+- `height?`: `number`. 视口高度，CSS px。不传时宽高都归 CSS（`flex-1`、`h-full`、`style`），由尺寸隔离防止内容反撑；需要服务端窗口时传数字。
 - `items`: `readonly Item[]`.
 - `itemSize`: `number`. Fixed outer row extent, or the estimated outer extent in dynamic mode, in CSS px.
 - `measurement?`: `"fixed" | "dynamic"`. Dynamic mode observes each mounted row's actual border-box height.
@@ -65,13 +65,14 @@ Written descriptions; the list above is the type-resolved fact.
 ### VirtualList<Item>
 集合渲染边界，真实 list/listitem，不提供选择、请求或业务列。
 - items / getKey / renderItem: readonly Item[] / (item,index)=>React.Key / (item,index)=>ReactNode. 真实集合、稳定唯一 key 与内容；重复 key 显式报错。插入、排序时用持久身份，不用位置。
-- itemSize / height: number. 项外高与视口高，CSS px，均为有限正数。默认固定高度；动态模式中 itemSize 是未测量行的估计值，不限制内容高度。
+- itemSize: number. 项外高，CSS px，有限正数。默认固定高度；动态模式中是未测量行的估计值，不限制内容高度。
+- height: number. 视口高，CSS px，有限正数。不传时高度归 CSS（className 的 h-full、flex-1 或 style），内容不撑高视口；父级没有确定高度时视口高为 0，不渲染行，不会退化成全量渲染。
 - measurement: 'fixed' | 'dynamic'; default 'fixed'. dynamic 用 ResizeObserver 测量已挂载行的实际 border-box 高度；整行高度应由正常内容流决定，外部 margin 不计入测量。
 - actionsRef: React.Ref<VirtualListActions>. 独立动作出口：scrollToIndex(index, { align?: 'auto' | 'start' | 'center' | 'end' }) 与 scrollToEnd()。立即滚动，不转移焦点。非法或越界 index 抛 RangeError；空集合 scrollToEnd 无操作。
 - followEnd: boolean; default false. 显式尾部跟随。仅原先停在底部（1 CSS px 容差）时跟随追加项；向上阅读后保持阅读位置，不在初次挂载时跳到底部。
 - overscan: number; default 2. 窗口两侧的渲染预算预设，非负整数；不是视觉尺寸。
 - aria-label / aria-labelledby: string. 必填其一：集合的可识别名称，落在 role=list 的滚动视口上；缺失或为空时抛错。
-- render / ref / style / className / events / ARIA: useRender.ComponentProps<'div'>. ref 仍是原生滚动视口。显式 height 承担视口高度；初始服务端窗口使用它。浏览器默认滚动锚定关闭，由组件统一维持阅读位置。给集合可识别名称。
+- render / ref / style / className / events / ARIA: useRender.ComponentProps<'div'>. ref 仍是原生滚动视口。传入 height 时由它承担视口高度，初始服务端窗口也用它；不传时服务端不预估窗口。浏览器默认滚动锚定关闭，由组件统一维持阅读位置。给集合可识别名称。
 
 ## Keyboard
 - Tab: 到达集合视口与已挂载的内部操作。

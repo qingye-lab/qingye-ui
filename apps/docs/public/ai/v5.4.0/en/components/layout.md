@@ -12,7 +12,7 @@ Stack flows vertically; Inline flows horizontally and wraps by default; Grid lay
 
 ## Notes
 - Layout adds no border, surface, padding or business state; use Card for independent object boundaries.
-- Grid only does equal-width columns; keep native table/grid for spanning or header-aligned comparison.
+- Grid only does equal-width columns; keep native table/grid for spanning or header-aligned comparison. For unequal columns use a native div with grid-cols-[…]: Grid sets its columns inline, so they do not take effect in its className.
 - Role values are theme presets. Explain special className/style overrides in the project composition.
 - Direction, language and density follow the DOM; wrapping does not reorder content.
 

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
-Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d
+Source SHA-256: 7850bfe90e1c53a915357e2fe0de3d9df988b18a93125cb67b3b649996486a94
 
 关联一组单选或多选的切换按钮：选项保持切换状态。
 
@@ -26,7 +26,7 @@ Source SHA-256: c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d
 - ToggleGroup + ToggleGroupItem；组的名称必须说明共同范围
 
 ## Responsive behavior
-- 水平方向可以换行，纵向沿上下轴导航；浏览器布局未在本批验证
+- 默认宽度由内容决定；给 className="w-full" 时候选等分。水平方向放不下时按候选换行，图标候选不小于方形；纵向沿上下轴导航
 
 ## Customization
 - 按下项读 --qy-track-selected 与 --qy-track-selected-foreground（默认清染 + 焦墨），不借用 --qy-primary；未按下项字为浓墨；既有同名五档

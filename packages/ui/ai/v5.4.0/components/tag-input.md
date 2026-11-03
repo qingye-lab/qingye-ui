@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: 2637acfdcaeef88dcee4ed922f2255f16986a33f838c1b347d039cce0dcd4217
+Source SHA-256: 8ec39c7dd44653e74738178db40ee5a62a4a34d551a80a03181428338f8035ec
 
 确认字符串集合，保留尚未确认的编辑草稿。
 
@@ -84,7 +84,7 @@ Written descriptions; the list above is the type-resolved fact.
 - render / ref / className / style / native props: useRender.ComponentProps<'div'>. 属于根容器；改渲染元素须保持结构与子控件。
 
 ## Keyboard
-- Enter: 非组字时确认草稿，阻止表单提交；组字中的 Enter 不添加。
+- Enter: 非组字时确认草稿，阻止表单提交；草稿为空时不拦，表单照常提交；组字中的 Enter 不添加。
 - Backspace / ArrowLeft（草稿起点，RTL 为 ArrowRight）: 空草稿的 Backspace 或起点的左箭头先聚焦最后一项，不立即删除。
 - Delete / Backspace（移除按钮）: 移除已聚焦项，保留相邻焦点位置。
 - ArrowLeft / ArrowRight（移除按钮）: 在确认项间移动，边界返回草稿；方向随实际排版，RTL 下对调。

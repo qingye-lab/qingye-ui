@@ -353,3 +353,20 @@ test("under rtl layout the arrow keys follow it: toward the tags is ArrowRight",
   expect(input).toHaveFocus();
   spy.mockRestore();
 });
+
+test("Enter on an empty draft leaves the form to submit; a whitespace draft is still held back", async () => {
+  const onSubmit = vi.fn((event: React.FormEvent) => event.preventDefault());
+  render(<form onSubmit={onSubmit}><TagInput inputProps={{ "aria-label": "标签" }} /><button type="submit">提交</button></form>);
+  const input = screen.getByRole("textbox");
+  await userEvent.type(input, "{Enter}");
+  expect(onSubmit).toHaveBeenCalledTimes(1);
+  await userEvent.type(input, " {Enter}");
+  expect(onSubmit).toHaveBeenCalledTimes(1);
+  expect(screen.getByRole("status")).toHaveTextContent("请输入非空标签");
+});
+
+test("a long tag keeps its full text reachable after truncation", () => {
+  const long = "一个很长很长的标签".repeat(10);
+  render(<TagInput defaultValue={[long]} inputProps={{ "aria-label": "标签" }} />);
+  expect(screen.getByTitle(long)).toHaveTextContent(long);
+});

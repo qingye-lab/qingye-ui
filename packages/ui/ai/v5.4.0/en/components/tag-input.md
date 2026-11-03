@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: 2637acfdcaeef88dcee4ed922f2255f16986a33f838c1b347d039cce0dcd4217
+Source SHA-256: 8ec39c7dd44653e74738178db40ee5a62a4a34d551a80a03181428338f8035ec
 
 Confirm a string collection while keeping its unconfirmed draft.
 
@@ -84,7 +84,7 @@ Public composition of confirmed items, a draft input, and non-submitting actions
 - render / ref / className / style / native props: useRender.ComponentProps<'div'>. Applied to the root container. Render must retain its structure and children.
 
 ## Keyboard
-- Enter: Confirm the draft outside composition without submitting a form. Composition Enter does not add.
+- Enter: Confirm the draft outside composition without submitting a form. With an empty draft it is not intercepted and the form submits. Composition Enter does not add.
 - Backspace / ArrowLeft (start of draft; ArrowRight under RTL): Backspace on an empty draft or Left at its start focuses the last item without deleting it.
 - Delete / Backspace (remove button): Remove the focused item and preserve an adjacent focus position.
 - ArrowLeft / ArrowRight (remove button): Move among confirmed items; boundaries return to the draft. The direction follows the rendered layout and swaps under RTL.

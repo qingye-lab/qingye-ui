@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/color-picker
 Source: packages/ui/src/components/color-picker.tsx
-Source SHA-256: c4204c351dca1bbf44ddcae8f1a5ef2b448a880c4b57f8782c8c1cc61dd9910b
+Source SHA-256: aacdb9bc0a3ecbe1c0081eff0149c5f5f097de7d58c4d93f77cedd7042e41afd
 
 选取用户数据里的颜色：标签颜色、主题配置取值，得到一个 #rrggbb。
 
@@ -51,7 +51,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `onValueChange?`: `((value: string) => void) | undefined`. 每次变化都调用（拖动中也调用）。
 - `onValueCommit?`: `((value: string) => void) | undefined`. 一次操作结束才调用：拖动松手、键盘离键、色值输入确认、选预设。供保存之类不宜逐帧触发的事使用。
 - `swatches?`: `readonly ColorSwatch[] | undefined`. 预设色行，复用 ColorSwatchPicker。
-- `value?`: `string | undefined`. "#rrggbb"。传了这个属性即受控；输出一律小写。
+- `value?`: `string | undefined`. "#rrggbb"。传字符串即受控；value={undefined} 等于没传，走非受控（颜色没有「空」这个值，这与可空的日期系列不同）。输出一律小写。
 - plus 283 inherited (@types/react 283); not expanded, see the installed declarations
 
 ### ColorSwatchPicker
@@ -81,7 +81,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 ### ColorPicker
 自由取色：按钮显示当前颜色与 hex，点开是饱和度与明度面、色相条、hex 输入和可选的预设行。
-- value / defaultValue / onValueChange: string / string / (value: string) => void. #rrggbb。传了 value 即受控；defaultValue 省略时为 #000000；格式不对抛错。onValueChange 在拖动中也每次变化都调用。
+- value / defaultValue / onValueChange: string / string / (value: string) => void. #rrggbb。传字符串即受控，value={undefined} 等于没传；defaultValue 省略时为 #000000；格式不对抛错。onValueChange 在拖动中也每次变化都调用。
 - onValueCommit: (value: string) => void. 一次操作结束才调用：松开指针、键盘离键、确认 hex、选预设。保存放这里，不放 onValueChange。
 - swatches: { value: string; label: string }[]. 预设行，复用 ColorSwatchPicker，规则相同。
 - name / form / disabled: string / string / boolean. name 存在时随表单提交 #rrggbb；disabled 时不提交、不可打开。

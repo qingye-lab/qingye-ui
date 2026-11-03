@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-03T08:34:52.067Z",
-  "revision": "15aa1e3656db2d8b4656d643db4a1ac7be0357b6",
+  "generatedAt": "2026-11-03T09:04:50.738Z",
+  "revision": "7819b8e456ef905a764a6228f9393cb8a3301b9c",
   "fingerprint": {
-    "sha256": "86ebae6e248f36383627ff22963d759744dd6db7b102071d94706522f24966ca",
+    "sha256": "63d6259bab0c9710c534d9995eb47a06e25cffe6393248215ba4651275a9d19c",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -68,7 +68,7 @@
       },
       {
         "path": "apps/docs/src/content/cascader/meta.ts",
-        "sha256": "44b0cc1e3553c375dcba99995fd8b7b8a59d9298370926175dd6f91a5f2f0ac6"
+        "sha256": "ef4e0e8ffa3624459073d4e3e4283d8bf1f5c1d3c94818edbae87359e8d11b83"
       },
       {
         "path": "apps/docs/src/content/chart/meta.ts",
@@ -96,7 +96,7 @@
       },
       {
         "path": "apps/docs/src/content/color-picker/meta.ts",
-        "sha256": "ed0f95b87769c846e0e10ef5ca07ca2af8018ccc1d18eff2d01ccf3b128680a7"
+        "sha256": "0d56cb2b2930f656209a96fed06e45da86c0a548ee73fe0c6fa23d7fdb50f09f"
       },
       {
         "path": "apps/docs/src/content/combobox/meta.ts",
@@ -108,7 +108,7 @@
       },
       {
         "path": "apps/docs/src/content/composer/meta.ts",
-        "sha256": "e9e4f66cc59d8ddd719821dd3eebe1cd840d49a9b9b3a8c0c07f090f19e86e76"
+        "sha256": "75c7db292fb65037fe14032946e520c58ddcd1461da7f92ba16e05a64be50e05"
       },
       {
         "path": "apps/docs/src/content/confirm-action/meta.ts",
@@ -132,7 +132,7 @@
       },
       {
         "path": "apps/docs/src/content/data-table/meta.ts",
-        "sha256": "347100f4fb7527ceffb5cfde9bb76a5485652782244efc2594e87bd053ae7c88"
+        "sha256": "4bda3ad89faa75b4bc3d01d7829e16300bb4b9309cc1785bcc4a815122e5551a"
       },
       {
         "path": "apps/docs/src/content/date-picker/meta.ts",
@@ -168,7 +168,7 @@
       },
       {
         "path": "apps/docs/src/content/field/meta.ts",
-        "sha256": "51a063b6585680337cbe98f1310191f680963a9736989febaa3cadac01a2d19d"
+        "sha256": "3229a510bddb813e888c05c12319f9737280f9c5b9f28417a71bcc48540496d5"
       },
       {
         "path": "apps/docs/src/content/fieldset/meta.ts",
@@ -184,7 +184,7 @@
       },
       {
         "path": "apps/docs/src/content/filter-bar/meta.ts",
-        "sha256": "248933b8ac1a285a42006406927b32b1328c37ceb131265321bf8e858abf28c8"
+        "sha256": "7fb68e686535340d5dc783a38830479e913ababde248f1ec01e1feb0a5143cd4"
       },
       {
         "path": "apps/docs/src/content/form/meta.ts",
@@ -228,7 +228,7 @@
       },
       {
         "path": "apps/docs/src/content/layout/meta.ts",
-        "sha256": "a8edbef76b09341714a26ec7b00daba147ece7a5ad2ce77af72994c701914cb7"
+        "sha256": "bd4c72e7db8a8df7ed741e218db280b13e9976df8c76027e5ae88069d7441eb8"
       },
       {
         "path": "apps/docs/src/content/link/meta.ts",
@@ -248,7 +248,7 @@
       },
       {
         "path": "apps/docs/src/content/native-select/meta.ts",
-        "sha256": "c48765bed2ac658706e994318401266ea1930e350eaf7f0f9f60494653b4994f"
+        "sha256": "9cf72eee607484b7b7984361d0c47d8edc21ddf8cf16d7fb1e493f9d32c0d48a"
       },
       {
         "path": "apps/docs/src/content/navigation-menu/meta.ts",
@@ -308,7 +308,7 @@
       },
       {
         "path": "apps/docs/src/content/resizable/meta.ts",
-        "sha256": "28a9a48d466a738b71aed87c859a47db0d8516f531c83fb3ce49ca3c1b79068c"
+        "sha256": "57bad9685508855f8d2001db38f6874f9752e4c37b95446f3d60f113b6202bdc"
       },
       {
         "path": "apps/docs/src/content/result/meta.ts",
@@ -320,7 +320,7 @@
       },
       {
         "path": "apps/docs/src/content/scroll-area/meta.ts",
-        "sha256": "29d706b617be3d6ce36e387ef3e891a2fd90df931d255a5394731fca7eca86bb"
+        "sha256": "74bbd7d05efd31277e78268a43b0d3e9a73c422a5e130624e3a36364b39c28e2"
       },
       {
         "path": "apps/docs/src/content/search-input/meta.ts",
@@ -332,7 +332,7 @@
       },
       {
         "path": "apps/docs/src/content/segmented-control/meta.ts",
-        "sha256": "ded746934f809d92f2e6cea63525c25126039726ebfb656b6873fb70a0fc633e"
+        "sha256": "5afa2c1d64e8ef02ac34f2102448fca3fa4565ef8bed7665c7c991f629fa5e8e"
       },
       {
         "path": "apps/docs/src/content/select/meta.ts",
@@ -388,11 +388,11 @@
       },
       {
         "path": "apps/docs/src/content/tabs/meta.ts",
-        "sha256": "70fa5a305a0e5c2f0fd716f70e30fc46dcc92950cc8ebc7d0f657b23fcd38b8d"
+        "sha256": "e74426513bd33148dc61c84779150701065705caa1689756f219138e0d87630b"
       },
       {
         "path": "apps/docs/src/content/tag-input/meta.ts",
-        "sha256": "040376406f8f6f348751d2bf79ea6239dfbfb5a1633da8e48f3dc412163787c5"
+        "sha256": "8c9064a58aaf4e5c5eec24a906efb7f2e413e45d4f729f44dcf83e0e80d3d88d"
       },
       {
         "path": "apps/docs/src/content/textarea/meta.ts",
@@ -424,7 +424,7 @@
       },
       {
         "path": "apps/docs/src/content/toggle-group/meta.ts",
-        "sha256": "438f708bdfde7b3e3c24614ae69b6197a029f3cbd7cbe96f5a20886bd9ed1dac"
+        "sha256": "d17344a0d0faee5eae4dabdb8c3511b2f7bc324983d02061c4b1cdcd78aed3e9"
       },
       {
         "path": "apps/docs/src/content/toggle/meta.ts",
@@ -460,7 +460,7 @@
       },
       {
         "path": "apps/docs/src/content/virtual-list/meta.ts",
-        "sha256": "a4e21e49f438d62c5bc71de6ef160a351e93180e102942e3b056d35f7c13deb3"
+        "sha256": "632a44f4f1fea0d65e6e3481ad600a7a17c6f7e21390b1cf3547df69cb696d1e"
       },
       {
         "path": "apps/docs/src/content/workspace/meta.ts",
@@ -480,7 +480,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "1a5b51010b013fa45823981b143c259f6733ea4b6eb5c2fb3b3092e02f6b6f1a"
+        "sha256": "713507d76d0221fd234baa41959f665e3ae4318b4819b6135c8fd28dad7d3761"
       },
       {
         "path": "packages/ui/motion.css",
@@ -544,7 +544,7 @@
       },
       {
         "path": "packages/ui/src/components/calendar.tsx",
-        "sha256": "939f510230f7bb749ad55edda9f18e426b3445089850b1d0658f521ebe01744d"
+        "sha256": "47cf83b47a3b8c84798bb80a71f75a0ea1b9e5dedc1ac4cd5ad80bf8c24ef08e"
       },
       {
         "path": "packages/ui/src/components/card.tsx",
@@ -552,7 +552,7 @@
       },
       {
         "path": "packages/ui/src/components/cascader.tsx",
-        "sha256": "404842647973eafb3974d29b0158669d28b573e50a16bb0808e0f679935593f9"
+        "sha256": "cb9151f01ae01a2db194a6e5f29fc8a0f359768ddd0e0197f9c73655d9aaf3d8"
       },
       {
         "path": "packages/ui/src/components/chart.tsx",
@@ -580,11 +580,11 @@
       },
       {
         "path": "packages/ui/src/components/color-picker.tsx",
-        "sha256": "c4204c351dca1bbf44ddcae8f1a5ef2b448a880c4b57f8782c8c1cc61dd9910b"
+        "sha256": "aacdb9bc0a3ecbe1c0081eff0149c5f5f097de7d58c4d93f77cedd7042e41afd"
       },
       {
         "path": "packages/ui/src/components/combobox.tsx",
-        "sha256": "7535b0831f9d85905f4e73b5309215d75ab89edbad35ab9cf44c498b960258d2"
+        "sha256": "6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca"
       },
       {
         "path": "packages/ui/src/components/command.tsx",
@@ -592,7 +592,7 @@
       },
       {
         "path": "packages/ui/src/components/composer.tsx",
-        "sha256": "cf23ffe28f63bf58767ea6be5ea90c64e7ddde21ecbc68dab0655290dc9ab726"
+        "sha256": "fef8f9c94f951cdabab88801f34d75427fb3c8b8a5d43b7a8170abdfa50b5fe7"
       },
       {
         "path": "packages/ui/src/components/confirm-action.tsx",
@@ -616,7 +616,7 @@
       },
       {
         "path": "packages/ui/src/components/data-table.tsx",
-        "sha256": "e5c08917cba6803b0c3cc667b0afbeedc349174161a8e516b17ceb6ba94c1033"
+        "sha256": "150b236250585679cc9891aef9aec40ab46b80dbbc0516f08b0e48dca47f3580"
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
@@ -652,7 +652,7 @@
       },
       {
         "path": "packages/ui/src/components/field.tsx",
-        "sha256": "480ba69e05c63a550feab21b961e9593ff298bb612405f18de0a84d4f5724b65"
+        "sha256": "8bf6a3b75be2b323a1fa09109535f1b90b02ac3ab333f114872add2881f1b47f"
       },
       {
         "path": "packages/ui/src/components/fieldset.tsx",
@@ -732,7 +732,7 @@
       },
       {
         "path": "packages/ui/src/components/native-select.tsx",
-        "sha256": "27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874"
+        "sha256": "c79d1ce39764a22c4952574d981ffccb7e4d732c9e1be7816a5a3154dad1745f"
       },
       {
         "path": "packages/ui/src/components/navigation-menu.tsx",
@@ -792,7 +792,7 @@
       },
       {
         "path": "packages/ui/src/components/resizable.tsx",
-        "sha256": "475ad2f99677a4a8568db306872ef7323f3f3386300065365e1086cbbc386a74"
+        "sha256": "275cd5bb5c655f0dfce41b9ae165de470d0a2507c08006653564e2bd34878f0a"
       },
       {
         "path": "packages/ui/src/components/result.tsx",
@@ -804,7 +804,7 @@
       },
       {
         "path": "packages/ui/src/components/scroll-area.tsx",
-        "sha256": "b335bf0444c58f204e72dbb5eedf2a8220cd65fc03da091dccdd57ce6e8428d1"
+        "sha256": "cac2e91684ebc4c766cf31f3d48387d72611874133cc8f8bb9b0609aab9afe14"
       },
       {
         "path": "packages/ui/src/components/search-input.tsx",
@@ -816,11 +816,11 @@
       },
       {
         "path": "packages/ui/src/components/segmented-control.tsx",
-        "sha256": "366d8d92678c1a91950609486d0435c80e07d89f95621d0781bab30f0ba37a09"
+        "sha256": "f4665dbed362bff8a49503a39078814435fee87286a1eef4e431e26d75f2df6e"
       },
       {
         "path": "packages/ui/src/components/select.tsx",
-        "sha256": "36f9c843a86f51d2ebe65054cf5577bd80a4a076d0de1d52326c66eee10acf7a"
+        "sha256": "b17fc57dc658402188ba8a821eb0a99f9a034ed4217d47d74991b427c37583da"
       },
       {
         "path": "packages/ui/src/components/separator.tsx",
@@ -832,7 +832,7 @@
       },
       {
         "path": "packages/ui/src/components/sidebar.tsx",
-        "sha256": "e3d0cd62528d452987733bc22151e9b69efaec4f7442904340694726857b3803"
+        "sha256": "c1a2e83537c08c137c4b2a0266f85d16a4f021a4fd5586adc06de2a85434351c"
       },
       {
         "path": "packages/ui/src/components/skeleton.tsx",
@@ -872,11 +872,11 @@
       },
       {
         "path": "packages/ui/src/components/tabs.tsx",
-        "sha256": "fec95d44ade9b2245e569a1b91c9ddc6911c1af3b26f50a36521bb8a54d98137"
+        "sha256": "8c8622ab9be09d415cd064c92ff7741e1190c7a1141a95c05e321c536a123a2b"
       },
       {
         "path": "packages/ui/src/components/tag-input.tsx",
-        "sha256": "2637acfdcaeef88dcee4ed922f2255f16986a33f838c1b347d039cce0dcd4217"
+        "sha256": "8ec39c7dd44653e74738178db40ee5a62a4a34d551a80a03181428338f8035ec"
       },
       {
         "path": "packages/ui/src/components/textarea.tsx",
@@ -908,7 +908,7 @@
       },
       {
         "path": "packages/ui/src/components/toggle-group.tsx",
-        "sha256": "c5e70388ffd9e0292285318e7dba5cf6cac171fe4784d2b12409568605308c3d"
+        "sha256": "7850bfe90e1c53a915357e2fe0de3d9df988b18a93125cb67b3b649996486a94"
       },
       {
         "path": "packages/ui/src/components/toggle.tsx",
@@ -944,7 +944,7 @@
       },
       {
         "path": "packages/ui/src/components/virtual-list.tsx",
-        "sha256": "772ed07d69b729cdade24c67b719669caefd00765038118f3b30ab6ce587cd90"
+        "sha256": "87082ed536a385bbdbf9468c74888760cfcb6f86b0d6133541ae7715106a7fb0"
       },
       {
         "path": "packages/ui/src/components/workspace.tsx",
@@ -1146,7 +1146,7 @@
         {
           "name": "AccordionPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/accordion/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/accordion/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/accordion.tsx",
             "line": 23
@@ -1507,7 +1507,7 @@
         {
           "name": "AlertDialogPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/alert-dialog/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/alert-dialog/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/alert-dialog.tsx",
             "line": 84
@@ -2383,7 +2383,7 @@
         {
           "name": "AutocompletePrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
             "line": 116
@@ -3053,7 +3053,7 @@
         {
           "name": "AvatarPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/avatar/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/avatar/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/avatar.tsx",
             "line": 21
@@ -4820,7 +4820,7 @@
         {
           "name": "CalendarPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@daypicker+react@10.0.2_@types+react@19.2.7_react@19.2.1/node_modules/@daypicker/react/dist/esm/index\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@daypicker+react@10.0.2_@types+react@19.2.7_react@19.2.1/node_modules/@daypicker/react/dist/esm/index\"",
           "source": {
             "path": "packages/ui/src/components/calendar.tsx",
             "line": 245
@@ -5307,7 +5307,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/cascader.tsx",
-            "line": 108
+            "line": 110
           }
         },
         {
@@ -5418,8 +5418,8 @@
               {
                 "name": "name / form",
                 "type": "string",
-                "description": "隐藏输入的名称与所属表单。提交值是路径各段用 \"/\" 连接，例如 \"zj/hz/xh\"，未选择提交空字符串；多选每条路径一条同名值，未选择不提交（required 时拦下提交）；所以 value 里不应含 \"/\"。",
-                "descriptionEn": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission). Values should therefore not contain \"/\"."
+                "description": "隐藏输入的名称与所属表单。提交值是路径各段用 \"/\" 连接，例如 \"zj/hz/xh\"，段内的 \"%\"、\"/\" 转义为 %25、%2F（按 \"/\" 拆开后逐段 decodeURIComponent 还原），未选择提交空字符串；多选每条路径一条同名值，未选择不提交（required 时拦下提交）。",
+                "descriptionEn": "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; a \"%\" or \"/\" inside a segment is escaped as %25 or %2F (split on \"/\" and decodeURIComponent each segment to restore it); an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission)."
               },
               {
                 "name": "aria-label / aria-labelledby / id / className",
@@ -5557,11 +5557,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/cascader.tsx",
-              "line": 108
+              "line": 110
             },
             "rootEntry": {
               "path": "packages/ui/src/components/cascader.tsx",
-              "line": 108
+              "line": 110
             },
             "status": "PRESENT"
           }
@@ -6421,7 +6421,7 @@
         {
           "name": "CheckboxPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/checkbox/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/checkbox/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/checkbox.tsx",
             "line": 38
@@ -7085,7 +7085,7 @@
         {
           "name": "CollapsiblePrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/collapsible/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/collapsible/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/collapsible.tsx",
             "line": 26
@@ -7460,8 +7460,8 @@
               {
                 "name": "value / defaultValue / onValueChange",
                 "type": "string / string / (value: string) => void",
-                "description": "#rrggbb。传了 value 即受控；defaultValue 省略时为 #000000；格式不对抛错。onValueChange 在拖动中也每次变化都调用。",
-                "descriptionEn": "#rrggbb. Passing value makes it controlled; defaultValue defaults to #000000; a malformed value throws. onValueChange fires on every change, including during a drag."
+                "description": "#rrggbb。传字符串即受控，value={undefined} 等于没传；defaultValue 省略时为 #000000；格式不对抛错。onValueChange 在拖动中也每次变化都调用。",
+                "descriptionEn": "#rrggbb. A string makes it controlled, and value={undefined} counts as not passed; defaultValue defaults to #000000; a malformed value throws. onValueChange fires on every change, including during a drag."
               },
               {
                 "name": "onValueCommit",
@@ -7702,7 +7702,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 128
+            "line": 132
           }
         },
         {
@@ -7718,7 +7718,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 107
+            "line": 111
           }
         },
         {
@@ -7726,7 +7726,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 116
+            "line": 120
           }
         },
         {
@@ -7734,7 +7734,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 120
+            "line": 124
           }
         },
         {
@@ -7750,7 +7750,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 99
+            "line": 103
           }
         },
         {
@@ -7758,7 +7758,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 95
+            "line": 99
           }
         },
         {
@@ -7766,7 +7766,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 88
+            "line": 92
           }
         },
         {
@@ -7774,16 +7774,16 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 86
+            "line": 90
           }
         },
         {
           "name": "ComboboxPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/combobox/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/combobox/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 174
+            "line": 178
           }
         },
         {
@@ -7799,7 +7799,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 160
+            "line": 164
           }
         },
         {
@@ -7807,7 +7807,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 139
+            "line": 143
           }
         },
         {
@@ -7815,7 +7815,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 124
+            "line": 128
           }
         },
         {
@@ -7823,7 +7823,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 134
+            "line": 138
           }
         },
         {
@@ -7831,7 +7831,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 129
+            "line": 133
           }
         },
         {
@@ -8100,11 +8100,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 160
+              "line": 164
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 160
+              "line": 164
             },
             "status": "PRESENT"
           },
@@ -8217,11 +8217,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 88
+              "line": 92
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 88
+              "line": 92
             },
             "status": "PRESENT"
           },
@@ -8230,11 +8230,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 95
+              "line": 99
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 95
+              "line": 99
             },
             "status": "PRESENT"
           },
@@ -8243,11 +8243,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 99
+              "line": 103
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 99
+              "line": 103
             },
             "status": "PRESENT"
           },
@@ -8256,11 +8256,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 116
+              "line": 120
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 116
+              "line": 120
             },
             "status": "PRESENT"
           },
@@ -8269,11 +8269,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 120
+              "line": 124
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 120
+              "line": 124
             },
             "status": "PRESENT"
           },
@@ -8282,11 +8282,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 124
+              "line": 128
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 124
+              "line": 128
             },
             "status": "PRESENT"
           },
@@ -8295,11 +8295,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 128
+              "line": 132
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 128
+              "line": 132
             },
             "status": "PRESENT"
           },
@@ -8308,11 +8308,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 107
+              "line": 111
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 107
+              "line": 111
             },
             "status": "PRESENT"
           },
@@ -8321,11 +8321,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 134
+              "line": 138
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 134
+              "line": 138
             },
             "status": "PRESENT"
           },
@@ -8334,11 +8334,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 174
+              "line": 178
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 174
+              "line": 178
             },
             "status": "PRESENT"
           }
@@ -8495,7 +8495,7 @@
         {
           "name": "CommandPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
             "line": 238
@@ -8956,7 +8956,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/composer.tsx",
-            "line": 691
+            "line": 707
           }
         },
         {
@@ -8972,7 +8972,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/composer.tsx",
-            "line": 688
+            "line": 704
           }
         },
         {
@@ -8998,7 +8998,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/composer.tsx",
-            "line": 679
+            "line": 695
           }
         },
         {
@@ -9006,7 +9006,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/composer.tsx",
-            "line": 672
+            "line": 688
           }
         },
         {
@@ -9137,8 +9137,8 @@
                 "name": "value / defaultValue",
                 "type": "readonly ComposerSegment[]",
                 "default": "defaultValue: []",
-                "description": "受控/非受控值；文字片段 { type: 'text', text } 与令牌片段 { type: 'token', trigger, id, label }。相邻文字片段会被合并。",
-                "descriptionEn": "Controlled/uncontrolled value: text segments and token segments. Adjacent text segments are merged."
+                "description": "受控/非受控值，value={undefined} 等于没传，清空传 []；文字片段 { type: 'text', text } 与令牌片段 { type: 'token', trigger, id, label }。相邻文字片段会被合并。",
+                "descriptionEn": "Controlled/uncontrolled value; value={undefined} counts as not passed, and [] clears it. Text segments and token segments. Adjacent text segments are merged."
               },
               {
                 "name": "onValueChange",
@@ -9188,8 +9188,8 @@
               {
                 "name": "triggers",
                 "type": "readonly ComposerTrigger[]",
-                "description": "触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃。候选项 ComposerItem 为 { id, label, group?, description?, icon?, disabled?, select? }：id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”；同名 group 归为一组，按首次出现顺序排列；select 覆盖触发项的 select（token 插入令牌，action 删掉触发文字、只回调 onSelect）。",
-                "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect)."
+                "description": "触发项：char、getItems(query, { signal })、select（token 或 action）、onSelect、startOnly、label、emptyText。getItems 可返回数组或 Promise；加载中与无结果与 Combobox 同文案，迟到的结果被丢弃；抛错或 reject 显示「加载失败」与重试，不当作没有结果。候选项 ComposerItem 为 { id, label, group?, description?, icon?, disabled?, select? }：id 是令牌身份，label 是显示名，令牌读作“触发字符 + label”；同名 group 归为一组，按首次出现顺序排列；select 覆盖触发项的 select（token 插入令牌，action 删掉触发文字、只回调 onSelect）。",
+                "descriptionEn": "Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded; a throw or rejection shows a failed-to-load message with a retry rather than passing for no results. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect)."
               },
               {
                 "name": "minRows / maxRows",
@@ -9230,6 +9230,12 @@
             "keys": "Enter / Tab",
             "description": "候选打开且有高亮时选中，不提交。",
             "descriptionEn": "Select the highlight while candidates are open, without submitting."
+          },
+          {
+            "keys": "Enter / Tab（加载失败时）",
+            "keysEn": "Enter / Tab (after a failed load)",
+            "description": "重试加载，不提交；Escape 关闭候选后 Enter 恢复提交。",
+            "descriptionEn": "Retry the load without submitting. After Escape closes the candidates, Enter submits again."
           },
           {
             "keys": "Escape",
@@ -9346,11 +9352,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/composer.tsx",
-              "line": 679
+              "line": 695
             },
             "rootEntry": {
               "path": "packages/ui/src/components/composer.tsx",
-              "line": 679
+              "line": 695
             },
             "status": "PRESENT"
           },
@@ -9359,11 +9365,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/composer.tsx",
-              "line": 691
+              "line": 707
             },
             "rootEntry": {
               "path": "packages/ui/src/components/composer.tsx",
-              "line": 691
+              "line": 707
             },
             "status": "PRESENT"
           },
@@ -9499,7 +9505,7 @@
         {
           "name": "ConfirmActionPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/alert-dialog/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/alert-dialog/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/confirm-action.tsx",
             "line": 92
@@ -10087,7 +10093,7 @@
         {
           "name": "ContextMenuPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/context-menu/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/context-menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/context-menu.tsx",
             "line": 26
@@ -11036,7 +11042,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 212
+            "line": 222
           }
         },
         {
@@ -11044,7 +11050,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 75
+            "line": 85
           }
         },
         {
@@ -11076,7 +11082,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 666
+            "line": 677
           }
         },
         {
@@ -11084,7 +11090,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 587
+            "line": 598
           }
         },
         {
@@ -11092,7 +11098,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 550
+            "line": 561
           }
         },
         {
@@ -11100,7 +11106,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 588
+            "line": 599
           }
         },
         {
@@ -11108,7 +11114,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 596
+            "line": 607
           }
         },
         {
@@ -11116,7 +11122,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 580
+            "line": 591
           }
         },
         {
@@ -11124,7 +11130,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 76
+            "line": 86
           }
         },
         {
@@ -11132,7 +11138,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 540
+            "line": 551
           }
         },
         {
@@ -11140,7 +11146,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 534
+            "line": 545
           }
         },
         {
@@ -11148,7 +11154,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 527
+            "line": 538
           }
         },
         {
@@ -11156,7 +11162,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 507
+            "line": 518
           }
         },
         {
@@ -11164,7 +11170,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 502
+            "line": 513
           }
         },
         {
@@ -11172,7 +11178,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 500
+            "line": 511
           }
         },
         {
@@ -11180,7 +11186,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 57
+            "line": 63
           }
         }
       ],
@@ -11257,9 +11263,9 @@
               },
               {
                 "name": "virtualization",
-                "type": "{ height: number, estimateRowHeight: number, overscan?: number }",
-                "description": "显式启用当前行模型的虚拟化；height 含 caption 与表头，实际行高自动测量。尺寸须有限且为正，overscan 为非负整数（默认 1）。",
-                "descriptionEn": "Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1."
+                "type": "{ height?: number, estimateRowHeight: number, overscan?: number }",
+                "description": "显式启用当前行模型的虚拟化；height 含 caption 与表头，实际行高自动测量。不传 height 时铺满父级，也可由 Pattern 的 className 或 DataTable 的 containerProps 给高度；内容不撑高视口，父级没有确定高度时视口高为 0，不渲染行，不会退化成全量渲染。尺寸须有限且为正，overscan 为非负整数（默认 1）。",
+                "descriptionEn": "Explicitly virtualizes the current row model. Height includes the caption and header; actual row heights are measured. Without height the table fills its parent, or takes a height from Pattern's className or DataTable's containerProps; rows never grow the viewport, so a parent without a definite height gives a zero-height viewport and no rows rather than rendering them all. Dimensions must be finite and positive; overscan is a nonnegative integer, defaulting to 1."
               },
               {
                 "name": "stickyHeader / stickyHeaderOffset",
@@ -11470,11 +11476,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 666
+              "line": 677
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 666
+              "line": 677
             },
             "status": "PRESENT"
           },
@@ -11483,11 +11489,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 212
+              "line": 222
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 212
+              "line": 222
             },
             "status": "PRESENT"
           },
@@ -11496,11 +11502,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 502
+              "line": 513
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 502
+              "line": 513
             },
             "status": "PRESENT"
           },
@@ -11509,11 +11515,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 527
+              "line": 538
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 527
+              "line": 538
             },
             "status": "PRESENT"
           },
@@ -11522,11 +11528,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 540
+              "line": 551
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 540
+              "line": 551
             },
             "status": "PRESENT"
           }
@@ -12838,7 +12844,7 @@
         {
           "name": "DialogPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/dialog/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/dialog/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/dialog.tsx",
             "line": 100
@@ -13321,7 +13327,7 @@
         {
           "name": "DrawerPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/drawer/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/drawer/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/drawer.tsx",
             "line": 81
@@ -14011,7 +14017,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
-            "line": 71
+            "line": 93
           }
         },
         {
@@ -14019,7 +14025,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
-            "line": 169
+            "line": 191
           }
         },
         {
@@ -14027,7 +14033,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
-            "line": 106
+            "line": 128
           }
         },
         {
@@ -14035,7 +14041,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
-            "line": 143
+            "line": 165
           }
         },
         {
@@ -14051,7 +14057,15 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
-            "line": 65
+            "line": 87
+          }
+        },
+        {
+          "name": "FieldGroupProps",
+          "kind": "type",
+          "source": {
+            "path": "packages/ui/src/components/field.tsx",
+            "line": 82
           }
         },
         {
@@ -14059,7 +14073,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
-            "line": 114
+            "line": 136
           }
         },
         {
@@ -14067,7 +14081,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
-            "line": 90
+            "line": 112
           }
         },
         {
@@ -14075,7 +14089,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
-            "line": 84
+            "line": 106
           }
         },
         {
@@ -14089,10 +14103,10 @@
         {
           "name": "FieldPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/field/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/field/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
-            "line": 171
+            "line": 193
           }
         },
         {
@@ -14108,7 +14122,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
-            "line": 122
+            "line": 144
           }
         },
         {
@@ -14116,7 +14130,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
-            "line": 78
+            "line": 100
           }
         },
         {
@@ -14124,7 +14138,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
-            "line": 170
+            "line": 192
           }
         }
       ],
@@ -14174,7 +14188,7 @@
             "placeholder 代替名称；Toast 代替字段错误；超时冒充格式错误。"
           ],
           "composition": [
-            "Input 自动注册；原生控件通过 FieldControl 注册。Fieldset 命名共同范围，FieldGroup 只组织间隔。"
+            "Input 自动注册；原生控件通过 FieldControl 注册。Fieldset 命名共同范围，FieldGroup 组织间隔；名称要共用一列时给 FieldGroup labelColumn。"
           ],
           "stateOwner": {
             "library": [
@@ -14185,7 +14199,7 @@
             ]
           },
           "responsive": [
-            "长名称与说明可换行；横向内容列可收缩；间距由字段角色决定。"
+            "长名称与说明可换行；横向内容列可收缩；间距由字段角色决定。labelColumn 窄屏回到堆叠。"
           ],
           "customization": [
             "className 最后合并，原生属性、状态样式函数、ref 和 render 透传；FieldTitle 不注册成 label。"
@@ -14199,7 +14213,7 @@
             "Placeholders instead of names, Toast instead of field errors, or timeouts presented as format errors."
           ],
           "composition": [
-            "Input registers automatically; FieldControl registers native controls. Fieldset names a shared scope; FieldGroup organizes spacing only."
+            "Input registers automatically; FieldControl registers native controls. Fieldset names a shared scope; FieldGroup organizes spacing, and labelColumn makes its names share one column."
           ],
           "stateOwner": {
             "library": [
@@ -14210,7 +14224,7 @@
             ]
           },
           "responsive": [
-            "Long names/descriptions wrap, horizontal content columns shrink, and field roles determine spacing."
+            "Long names/descriptions wrap, horizontal content columns shrink, and field roles determine spacing. labelColumn stacks on narrow screens."
           ],
           "customization": [
             "External classes merge last; native props, state styling callbacks, refs, and render forward. FieldTitle does not register as a label."
@@ -14321,7 +14335,16 @@
           {
             "name": "FieldGroup",
             "description": "字段之间的关系间隔，没有 group 语义。",
-            "descriptionEn": "Spacing between fields, without group semantics."
+            "descriptionEn": "Spacing between fields, without group semantics.",
+            "props": [
+              {
+                "name": "labelColumn",
+                "type": "boolean",
+                "default": "false",
+                "description": "组内名称共用一列，列宽取最长的名称，控件起点对齐；说明与错误在控件下方，分隔线跨两列。窄屏回到堆叠。要放到控件列的内容（如操作按钮）包一层没有名称的 Field。",
+                "descriptionEn": "Names in the group share one column as wide as the longest name, and controls start at the same edge; descriptions and errors sit under the control, and separators span both columns. Stacks on narrow screens. Wrap content meant for the control column, such as an action, in a Field without a name."
+              }
+            ]
           },
           {
             "name": "FieldSeparator",
@@ -14381,11 +14404,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 90
+              "line": 112
             },
             "rootEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 90
+              "line": 112
             },
             "status": "PRESENT"
           },
@@ -14394,11 +14417,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 106
+              "line": 128
             },
             "rootEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 106
+              "line": 128
             },
             "status": "PRESENT"
           },
@@ -14407,11 +14430,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 143
+              "line": 165
             },
             "rootEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 143
+              "line": 165
             },
             "status": "PRESENT"
           },
@@ -14420,11 +14443,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 78
+              "line": 100
             },
             "rootEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 78
+              "line": 100
             },
             "status": "PRESENT"
           },
@@ -14433,11 +14456,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 71
+              "line": 93
             },
             "rootEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 71
+              "line": 93
             },
             "status": "PRESENT"
           },
@@ -14446,11 +14469,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 65
+              "line": 87
             },
             "rootEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 65
+              "line": 87
             },
             "status": "PRESENT"
           },
@@ -14459,11 +14482,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 122
+              "line": 144
             },
             "rootEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 122
+              "line": 144
             },
             "status": "PRESENT"
           },
@@ -14472,11 +14495,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 114
+              "line": 136
             },
             "rootEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 114
+              "line": 136
             },
             "status": "PRESENT"
           },
@@ -14485,11 +14508,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 169
+              "line": 191
             },
             "rootEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 169
+              "line": 191
             },
             "status": "PRESENT"
           },
@@ -14498,11 +14521,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 170
+              "line": 192
             },
             "rootEntry": {
               "path": "packages/ui/src/components/field.tsx",
-              "line": 170
+              "line": 192
             },
             "status": "PRESENT"
           }
@@ -14563,7 +14586,7 @@
         {
           "name": "FieldsetPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/fieldset/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/fieldset/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/fieldset.tsx",
             "line": 43
@@ -15496,7 +15519,8 @@
             "桌面保持真实结构；菜单受可用空间限制，表格保留完整比较列。"
           ],
           "customization": [
-            "控件档案、间距和浮层表面消费现有角色；具体外观是预设。"
+            "控件档案、间距和浮层表面消费现有角色；具体外观是预设。",
+            "字段宽度写在 Field 的 className 上（如 flex-1 让搜索框占满余量），不改控件本身。"
           ]
         },
         "designEn": {
@@ -15518,7 +15542,8 @@
             "Keep actual desktop structure; menus fit available space and tables retain complete comparison columns."
           ],
           "customization": [
-            "Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset."
+            "Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset.",
+            "Field widths go in the Field className (for example flex-1 lets search take the remaining space), not on the control."
           ]
         },
         "usageResolution": [
@@ -16194,7 +16219,7 @@
         {
           "name": "HoverCardPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/preview-card/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/preview-card/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/hover-card.tsx",
             "line": 25
@@ -18382,13 +18407,13 @@
         ],
         "notes": [
           "布局没有边框、表面、内边距或业务状态；独立对象边界用 Card。",
-          "Grid 只管等宽列；需要跨列、对齐表头的比较仍用原生 table/grid。",
+          "Grid 只管等宽列；需要跨列、对齐表头的比较仍用原生 table/grid。不等宽列用原生 div 加 grid-cols-[…]：Grid 的列由内联样式决定，写在它的 className 上不生效。",
           "角色数值是主题预设。确有特殊关系时在项目组合说明 className/style 覆写理由。",
           "方向、语言与密度沿真实 DOM 继承；换行不改变内容顺序。"
         ],
         "notesEn": [
           "Layout adds no border, surface, padding or business state; use Card for independent object boundaries.",
-          "Grid only does equal-width columns; keep native table/grid for spanning or header-aligned comparison.",
+          "Grid only does equal-width columns; keep native table/grid for spanning or header-aligned comparison. For unequal columns use a native div with grid-cols-[…]: Grid sets its columns inline, so they do not take effect in its className.",
           "Role values are theme presets. Explain special className/style overrides in the project composition.",
           "Direction, language and density follow the DOM; wrapping does not reorder content."
         ],
@@ -19023,7 +19048,7 @@
         {
           "name": "MenuPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/menu/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
             "line": 101
@@ -19659,7 +19684,7 @@
         {
           "name": "MeterPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/meter/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/meter/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/meter.tsx",
             "line": 39
@@ -19954,7 +19979,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/native-select.tsx",
-            "line": 23
+            "line": 29
           }
         },
         {
@@ -20013,7 +20038,7 @@
             "单值形态一套几何，跟随密度轴；窄屏外高 +4px，粗指针最小外高读 touch-target；多行不固定单行高度。"
           ],
           "customization": [
-            "保留平台箭头；className / style / render 属于真实 select。"
+            "保留平台箭头。单值形态的 className / style 属于外框，宽度写在这里（w-full 铺满）；selectClassName 与 render 属于真实 select。列表形态没有外框，都落在 select。"
           ]
         },
         "designEn": {
@@ -20038,7 +20063,7 @@
             "One geometry for the single-value form, following the density axis; narrow height adds 4px, coarse pointers read touch-target, and multiple rows are not fixed to a single-line height."
           ],
           "customization": [
-            "Retain the platform arrow; className/style/render belong to the actual select."
+            "Retain the platform arrow. In the single-value form className/style belong to the wrapper, where width goes (w-full fills); selectClassName and render belong to the actual select. The list form has no wrapper, so all of them land on the select."
           ]
         },
         "api": [
@@ -20060,10 +20085,22 @@
                 "descriptionEn": "Controlled and uncontrolled values; multiple values use string arrays."
               },
               {
-                "name": "render / ref / ARIA / className / style",
+                "name": "render / ref / ARIA",
                 "type": "useRender.ComponentProps<select>",
                 "description": "属性、事件与 ref 属于实际 select；render 应保留可选值的原生元素。",
                 "descriptionEn": "Props, events and ref reach the actual select; render must preserve a native value-selecting element."
+              },
+              {
+                "name": "className / style",
+                "type": "useRender.ComponentProps<select>",
+                "description": "单值形态落在外框（图标定位在那里），宽度写在这里；列表形态（multiple 或 size 大于 1）没有外框，落在 select。",
+                "descriptionEn": "On the wrapper in the single-value form (the icon is positioned there), so width goes here; on the select in the list form (multiple or size above 1), which has no wrapper."
+              },
+              {
+                "name": "selectClassName",
+                "type": "string",
+                "description": "真实 select 的样式入口，两种形态都落在 select。",
+                "descriptionEn": "Styles for the actual select in both forms."
               }
             ]
           }
@@ -20090,11 +20127,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/native-select.tsx",
-              "line": 23
+              "line": 29
             },
             "rootEntry": {
               "path": "packages/ui/src/components/native-select.tsx",
-              "line": 23
+              "line": 29
             },
             "status": "PRESENT"
           }
@@ -20283,7 +20320,7 @@
         {
           "name": "NavigationMenuPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/navigation-menu/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/navigation-menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
             "line": 85
@@ -20749,7 +20786,7 @@
         {
           "name": "NumberFieldPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/number-field/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/number-field/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
             "line": 135
@@ -22665,7 +22702,7 @@
         {
           "name": "PopoverPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/popover/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/popover/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/popover.tsx",
             "line": 181
@@ -23034,7 +23071,7 @@
         {
           "name": "ProgressPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/progress/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/progress/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/progress.tsx",
             "line": 44
@@ -23740,7 +23777,7 @@
         {
           "name": "RadioPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/radio/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/radio/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/radio-group.tsx",
             "line": 50
@@ -24465,7 +24502,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/resizable.tsx",
-            "line": 25
+            "line": 27
           }
         },
         {
@@ -24473,7 +24510,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/resizable.tsx",
-            "line": 34
+            "line": 36
           }
         },
         {
@@ -24481,7 +24518,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/resizable.tsx",
-            "line": 293
+            "line": 303
           }
         },
         {
@@ -24489,7 +24526,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/resizable.tsx",
-            "line": 291
+            "line": 301
           }
         },
         {
@@ -24497,7 +24534,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/resizable.tsx",
-            "line": 35
+            "line": 37
           }
         },
         {
@@ -24505,7 +24542,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/resizable.tsx",
-            "line": 264
+            "line": 274
           }
         },
         {
@@ -24513,7 +24550,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/resizable.tsx",
-            "line": 168
+            "line": 170
           }
         },
         {
@@ -24521,7 +24558,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/resizable.tsx",
-            "line": 159
+            "line": 161
           }
         },
         {
@@ -24529,7 +24566,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/resizable.tsx",
-            "line": 249
+            "line": 259
           }
         }
       ],
@@ -24635,7 +24672,7 @@
               {
                 "name": "layout",
                 "type": "number[]",
-                "description": "受控布局，按面板顺序。长度与面板数不符时忽略。拖动中的中间值只用于显示，松手时才调用 onLayout。",
+                "description": "受控布局，按面板顺序。长度与面板数不符时忽略，开发期提示。拖动中的中间值只用于显示，松手时才调用 onLayout。",
                 "descriptionEn": "Controlled layout in panel order; ignored when its length differs from the panel count. Intermediate drag values are display-only; onLayout is called on release."
               },
               {
@@ -24739,11 +24776,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/resizable.tsx",
-              "line": 168
+              "line": 170
             },
             "rootEntry": {
               "path": "packages/ui/src/components/resizable.tsx",
-              "line": 168
+              "line": 170
             },
             "status": "PRESENT"
           },
@@ -24752,11 +24789,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/resizable.tsx",
-              "line": 264
+              "line": 274
             },
             "rootEntry": {
               "path": "packages/ui/src/components/resizable.tsx",
-              "line": 264
+              "line": 274
             },
             "status": "PRESENT"
           },
@@ -24765,11 +24802,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/resizable.tsx",
-              "line": 293
+              "line": 303
             },
             "rootEntry": {
               "path": "packages/ui/src/components/resizable.tsx",
-              "line": 293
+              "line": 303
             },
             "status": "PRESENT"
           }
@@ -25320,7 +25357,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 47
+            "line": 50
           }
         },
         {
@@ -25328,7 +25365,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 94
+            "line": 107
           }
         },
         {
@@ -25336,7 +25373,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 93
+            "line": 106
           }
         },
         {
@@ -25344,7 +25381,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 119
+            "line": 132
           }
         },
         {
@@ -25352,16 +25389,16 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 118
+            "line": 131
           }
         },
         {
           "name": "ScrollAreaPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/scroll-area/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/scroll-area/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 123
+            "line": 136
           }
         },
         {
@@ -25369,7 +25406,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 10
+            "line": 12
           }
         },
         {
@@ -25377,7 +25414,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 84
+            "line": 97
           }
         },
         {
@@ -25385,7 +25422,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 83
+            "line": 96
           }
         },
         {
@@ -25393,7 +25430,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 99
+            "line": 112
           }
         },
         {
@@ -25401,7 +25438,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 98
+            "line": 111
           }
         },
         {
@@ -25409,7 +25446,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 110
+            "line": 123
           }
         },
         {
@@ -25417,7 +25454,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 109
+            "line": 122
           }
         },
         {
@@ -25425,7 +25462,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 89
+            "line": 102
           }
         },
         {
@@ -25433,7 +25470,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 88
+            "line": 101
           }
         }
       ],
@@ -25494,14 +25531,14 @@
                 "type": "number",
                 "default": "内容溢出时为 0",
                 "defaultEn": "0 while the content overflows",
-                "description": "内容溢出时能从键盘到达，没有可滚动的内容就不进入 Tab 序列；原生方向/Page/Home/End 滚动保留。显式给出时以调用方为准。",
-                "descriptionEn": "Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept."
+                "description": "内容溢出时能从键盘到达，没有可滚动的内容就不进入 Tab 序列；原生方向/Page/Home/End 滚动保留。显式给出时以调用方为准；内容里有可聚焦项时可给 -1。可滚动、可聚焦却没有名称时开发期提示。",
+                "descriptionEn": "Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept; pass -1 when the content has focusable items. Scrolling, focusable and unnamed warns in development."
               },
               {
                 "name": "render / ref / ARIA / events",
                 "type": "useRender.ComponentProps<'div'>",
-                "description": "真实视口的组合、名称、引用和原生滚动/键盘事件；有名称的独立区域可由调用方加 role=region。",
-                "descriptionEn": "Actual viewport composition, names, refs, and native scroll/keyboard events. The caller may add role=region for a named independent area."
+                "description": "真实视口的组合、名称、引用和原生滚动/键盘事件；给了 aria-label 或 aria-labelledby 就默认 role=region（用 render 换元素时不加），调用方给的 role 优先。",
+                "descriptionEn": "Actual viewport composition, names, refs, and native scroll/keyboard events. aria-label or aria-labelledby defaults the role to region (not when render swaps the element), and a role you pass wins."
               }
             ]
           },
@@ -25628,11 +25665,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 47
+              "line": 50
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 47
+              "line": 50
             },
             "status": "PRESENT"
           },
@@ -25641,11 +25678,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 84
+              "line": 97
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 84
+              "line": 97
             },
             "status": "PRESENT"
           },
@@ -25654,11 +25691,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 89
+              "line": 102
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 89
+              "line": 102
             },
             "status": "PRESENT"
           },
@@ -25667,11 +25704,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 94
+              "line": 107
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 94
+              "line": 107
             },
             "status": "PRESENT"
           },
@@ -25680,11 +25717,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 99
+              "line": 112
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 99
+              "line": 112
             },
             "status": "PRESENT"
           },
@@ -25693,11 +25730,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 110
+              "line": 123
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 110
+              "line": 123
             },
             "status": "PRESENT"
           },
@@ -25706,11 +25743,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 119
+              "line": 132
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 119
+              "line": 132
             },
             "status": "PRESENT"
           },
@@ -25719,11 +25756,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 123
+              "line": 136
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 123
+              "line": 136
             },
             "status": "PRESENT"
           }
@@ -26313,7 +26350,7 @@
         {
           "name": "SegmentedControlItemPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/radio/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/radio/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/segmented-control.tsx",
             "line": 51
@@ -26500,7 +26537,7 @@
             ]
           },
           "responsive": [
-            "保留全部候选并允许换行；五档窄屏尺寸不改变语义"
+            "默认宽度由内容决定；给 className=\"w-full\" 时候选等分。放不下时按候选换行，不压扁；五档窄屏尺寸不改变语义"
           ],
           "customization": [
             "选中段读 --qy-track-selected 与 --qy-track-selected-foreground（默认清染 + 焦墨），未选段字为浓墨；与同档文字；不新增外围焦点圈"
@@ -26527,7 +26564,7 @@
             ]
           },
           "responsive": [
-            "Retain all candidates and permit wrapping; five narrow-screen profiles preserve semantics."
+            "Width follows content by default; className=\"w-full\" shares it equally among candidates. When they do not fit they wrap per candidate instead of squeezing; five narrow-screen profiles preserve semantics."
           ],
           "customization": [
             "The selected segment reads --qy-track-selected and --qy-track-selected-foreground (light ink wash and ink text by default); unselected segments use muted ink; matching text, no outer focus ring."
@@ -26621,7 +26658,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 101
+            "line": 118
           }
         },
         {
@@ -26629,7 +26666,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 265
+            "line": 283
           }
         },
         {
@@ -26637,7 +26674,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 269
+            "line": 287
           }
         },
         {
@@ -26645,7 +26682,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 253
+            "line": 271
           }
         },
         {
@@ -26653,7 +26690,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 29
+            "line": 30
           }
         },
         {
@@ -26661,7 +26698,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 223
+            "line": 241
           }
         },
         {
@@ -26669,16 +26706,16 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 30
+            "line": 31
           }
         },
         {
           "name": "SelectPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/select/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/select/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 273
+            "line": 291
           }
         },
         {
@@ -26686,7 +26723,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 18
+            "line": 19
           }
         },
         {
@@ -26694,7 +26731,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 129
+            "line": 146
           }
         },
         {
@@ -26702,7 +26739,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 24
+            "line": 25
           }
         },
         {
@@ -26710,7 +26747,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 175
+            "line": 192
           }
         },
         {
@@ -26718,7 +26755,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
-            "line": 28
+            "line": 29
           }
         }
       ],
@@ -27070,11 +27107,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 101
+              "line": 118
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 101
+              "line": 118
             },
             "status": "PRESENT"
           },
@@ -27083,11 +27120,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 129
+              "line": 146
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 129
+              "line": 146
             },
             "status": "PRESENT"
           },
@@ -27096,11 +27133,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 175
+              "line": 192
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 175
+              "line": 192
             },
             "status": "PRESENT"
           },
@@ -27109,11 +27146,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 223
+              "line": 241
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 223
+              "line": 241
             },
             "status": "PRESENT"
           },
@@ -27122,11 +27159,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 253
+              "line": 271
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 253
+              "line": 271
             },
             "status": "PRESENT"
           },
@@ -27135,11 +27172,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 265
+              "line": 283
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 265
+              "line": 283
             },
             "status": "PRESENT"
           },
@@ -27148,11 +27185,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 269
+              "line": 287
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 269
+              "line": 287
             },
             "status": "PRESENT"
           },
@@ -27161,11 +27198,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 273
+              "line": 291
             },
             "rootEntry": {
               "path": "packages/ui/src/components/select.tsx",
-              "line": 273
+              "line": 291
             },
             "status": "PRESENT"
           }
@@ -28858,7 +28895,7 @@
         {
           "name": "SliderPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/slider/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/slider/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/slider.tsx",
             "line": 133
@@ -30376,7 +30413,7 @@
         {
           "name": "SwitchPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/switch/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/switch/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/switch.tsx",
             "line": 49
@@ -31087,7 +31124,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 18
+            "line": 19
           }
         },
         {
@@ -31103,7 +31140,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 35
+            "line": 36
           }
         },
         {
@@ -31111,7 +31148,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 19
+            "line": 20
           }
         },
         {
@@ -31119,7 +31156,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 69
+            "line": 74
           }
         },
         {
@@ -31127,16 +31164,16 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 56
+            "line": 61
           }
         },
         {
           "name": "TabsPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tabs/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tabs/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 74
+            "line": 79
           }
         },
         {
@@ -31144,7 +31181,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 14
+            "line": 15
           }
         },
         {
@@ -31152,7 +31189,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 48
+            "line": 52
           }
         },
         {
@@ -31160,7 +31197,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
-            "line": 47
+            "line": 51
           }
         }
       ],
@@ -31207,6 +31244,12 @@
                 "description": "标签栏外观，设在 Tabs 上整组生效。line 是导航线，track 是围在轨道里的选中面，横纵都成立。外观不改变 tablist / tab / tabpanel 的语义。",
                 "descriptionEn": "Appearance of the tab list, set on Tabs for the whole set. line is the navigation line; track puts the selected face inside a track, horizontal or vertical. Appearance never changes the tablist / tab / tabpanel semantics.",
                 "default": "\"line\""
+              },
+              {
+                "name": "TabsList className",
+                "type": "Base UI List props",
+                "description": "轨道外观落在轨道外框：默认宽度由内容决定，w-full 时标签等分；放不下时外框不变，标签在框内滚动。导航线外观本来占满所在行。",
+                "descriptionEn": "In the track appearance it lands on the track's outer frame: width follows content by default and w-full shares it equally among tabs; when they do not fit the frame stays put and tabs scroll inside it. The line appearance already fills its row."
               },
               {
                 "name": "activateOnFocus",
@@ -31340,11 +31383,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 18
+              "line": 19
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 18
+              "line": 19
             },
             "status": "PRESENT"
           },
@@ -31353,11 +31396,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 35
+              "line": 36
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 35
+              "line": 36
             },
             "status": "PRESENT"
           },
@@ -31366,11 +31409,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 48
+              "line": 52
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 48
+              "line": 52
             },
             "status": "PRESENT"
           },
@@ -31379,11 +31422,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 69
+              "line": 74
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 69
+              "line": 74
             },
             "status": "PRESENT"
           },
@@ -31392,11 +31435,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 74
+              "line": 79
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tabs.tsx",
-              "line": 74
+              "line": 79
             },
             "status": "PRESENT"
           }
@@ -31564,8 +31607,8 @@
         "keyboard": [
           {
             "keys": "Enter",
-            "description": "非组字时确认草稿，阻止表单提交；组字中的 Enter 不添加。",
-            "descriptionEn": "Confirm the draft outside composition without submitting a form. Composition Enter does not add."
+            "description": "非组字时确认草稿，阻止表单提交；草稿为空时不拦，表单照常提交；组字中的 Enter 不添加。",
+            "descriptionEn": "Confirm the draft outside composition without submitting a form. With an empty draft it is not intercepted and the form submits. Composition Enter does not add."
           },
           {
             "keys": "Backspace / ArrowLeft（草稿起点，RTL 为 ArrowRight）",
@@ -31710,7 +31753,7 @@
         {
           "name": "TextareaPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/field/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/field/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/textarea.tsx",
             "line": 88
@@ -33017,7 +33060,7 @@
         {
           "name": "ToastPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toast/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toast/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
             "line": 195
@@ -33838,7 +33881,7 @@
             ]
           },
           "responsive": [
-            "水平方向可以换行，纵向沿上下轴导航；浏览器布局未在本批验证"
+            "默认宽度由内容决定；给 className=\"w-full\" 时候选等分。水平方向放不下时按候选换行，图标候选不小于方形；纵向沿上下轴导航"
           ],
           "customization": [
             "按下项读 --qy-track-selected 与 --qy-track-selected-foreground（默认清染 + 焦墨），不借用 --qy-primary；未按下项字为浓墨；既有同名五档"
@@ -33865,7 +33908,7 @@
             ]
           },
           "responsive": [
-            "Horizontal layouts may wrap; vertical navigation follows up/down. Browser layout was not verified in this batch."
+            "Width follows content by default; className=\"w-full\" shares it equally among candidates. Horizontal layouts wrap per candidate when they do not fit, and icon candidates stay at least square; vertical navigation follows up/down."
           ],
           "customization": [
             "Pressed items read --qy-track-selected and --qy-track-selected-foreground (light ink wash and ink text by default), not --qy-primary; unpressed items use muted ink; existing five matching profiles."
@@ -34252,7 +34295,7 @@
         {
           "name": "ToolbarPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toolbar/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toolbar/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/toolbar.tsx",
             "line": 35
@@ -34585,7 +34628,7 @@
         {
           "name": "TooltipPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tooltip/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tooltip/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/tooltip.tsx",
             "line": 176
@@ -36337,7 +36380,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/virtual-list.tsx",
-            "line": 40
+            "line": 41
           }
         },
         {
@@ -36401,10 +36444,16 @@
                 "descriptionEn": "Actual collection, stable unique keys, and content; duplicate keys throw. Use persistent identities across insertion and reordering, rather than positions."
               },
               {
-                "name": "itemSize / height",
+                "name": "itemSize",
                 "type": "number",
-                "description": "项外高与视口高，CSS px，均为有限正数。默认固定高度；动态模式中 itemSize 是未测量行的估计值，不限制内容高度。",
-                "descriptionEn": "Outer item height and viewport height in CSS px, both finite and positive. Rows are fixed by default; in dynamic mode itemSize estimates unmeasured rows without constraining their content height."
+                "description": "项外高，CSS px，有限正数。默认固定高度；动态模式中是未测量行的估计值，不限制内容高度。",
+                "descriptionEn": "Outer item height in CSS px, finite and positive. Rows are fixed by default; in dynamic mode it estimates unmeasured rows without constraining their content."
+              },
+              {
+                "name": "height",
+                "type": "number",
+                "description": "视口高，CSS px，有限正数。不传时高度归 CSS（className 的 h-full、flex-1 或 style），内容不撑高视口；父级没有确定高度时视口高为 0，不渲染行，不会退化成全量渲染。",
+                "descriptionEn": "Viewport height in CSS px, finite and positive. When omitted, CSS owns the height (h-full or flex-1 in className, or style) and content never stretches the viewport; a parent without a definite height yields a 0 viewport with no rows, rather than silently rendering everything."
               },
               {
                 "name": "measurement",
@@ -36442,8 +36491,8 @@
               {
                 "name": "render / ref / style / className / events / ARIA",
                 "type": "useRender.ComponentProps<'div'>",
-                "description": "ref 仍是原生滚动视口。显式 height 承担视口高度；初始服务端窗口使用它。浏览器默认滚动锚定关闭，由组件统一维持阅读位置。给集合可识别名称。",
-                "descriptionEn": "ref remains the native scroll viewport. Explicit height owns its height and supplies the initial server-rendered window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name."
+                "description": "ref 仍是原生滚动视口。传入 height 时由它承担视口高度，初始服务端窗口也用它；不传时服务端不预估窗口。浏览器默认滚动锚定关闭，由组件统一维持阅读位置。给集合可识别名称。",
+                "descriptionEn": "ref remains the native scroll viewport. An explicit height owns the viewport height and supplies the initial server window; without it the server estimates no window. Browser scroll anchoring is disabled so the component owns reading continuity. Give the collection an identifiable name."
               }
             ]
           }
@@ -36532,11 +36581,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/virtual-list.tsx",
-              "line": 40
+              "line": 41
             },
             "rootEntry": {
               "path": "packages/ui/src/components/virtual-list.tsx",
-              "line": 40
+              "line": 41
             },
             "status": "PRESENT"
           }
@@ -45600,6 +45649,111 @@
     "scripts/ai-eval/prepare-matrix.mjs",
     "scripts/ai-eval/prepare.mjs",
     "scripts/ai-eval/record.mjs",
+    "scripts/ai-eval/runs/b-t01-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t01-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t01-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t02-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t02-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t02-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t03-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t03-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t03-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t04-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t04-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/b-t04-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t01-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t01-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t01-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t02-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t02-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t02-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t03-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t03-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t03-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t04-1/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t04-2/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/n-t04-3/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-0611b23c-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-11cc2d55-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-191c4d7d-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-7e98a6b9-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-private-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-public-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-92e26fbd-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-private-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-public-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-a88b9dde-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e392da7f-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-private-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-public-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-e62c8e0f-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fd407ba0-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-private-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-public-subpath/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t01-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t01-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t02-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t02-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t03-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t03-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t04-bad/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/runs/self-fe0a301a-t04-good/evaluation/vitest.config.mjs",
     "scripts/ai-eval/selftest.mjs",
     "scripts/ai-eval/summarize.mjs",
     "scripts/ai-eval/tool.mjs",

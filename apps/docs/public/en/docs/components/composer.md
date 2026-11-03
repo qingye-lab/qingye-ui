@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/composer
 Source: packages/ui/src/components/composer.tsx
-Source SHA-256: cf23ffe28f63bf58767ea6be5ea90c64e7ddde21ecbc68dab0655290dc9ab726
+Source SHA-256: fef8f9c94f951cdabab88801f34d75427fb3c8b8a5d43b7a8170abdfa50b5fe7
 
 Multi-line input with @ mentions, / commands and atomic tokens; its value is an array of text and token segments.
 
@@ -67,7 +67,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `onValueChange?`: `((value: ComposerSegment[], details: ComposerChangeDetails) => void) | undefined`.
 - `readOnly?`: `boolean`.
 - `submitOn?`: `"enter" | "mod-enter"`. enter：Enter 提交、Shift+Enter 换行；mod-enter：Ctrl/⌘+Enter 提交、Enter 换行。
-- `value?`: `ComposerValue | undefined`. 受控值。片段数组：文字片段与令牌片段。
+- `value?`: `ComposerValue | undefined`. 受控值。片段数组：文字片段与令牌片段。value={undefined} 等于没传，走非受控（内容没有 undefined 这个值，要清空传 []）。
 - plus 278 inherited (@types/react 277, @base-ui/react 1); not expanded, see the installed declarations
 
 ### ComposerInput
@@ -103,7 +103,7 @@ Written descriptions; the list above is the type-resolved fact.
 
 ### Composer
 Root: fill-control frame and state; owns value, submit and disabled/readOnly.
-- value / defaultValue: readonly ComposerSegment[]; default defaultValue: []. Controlled/uncontrolled value: text segments and token segments. Adjacent text segments are merged.
+- value / defaultValue: readonly ComposerSegment[]; default defaultValue: []. Controlled/uncontrolled value; value={undefined} counts as not passed, and [] clears it. Text segments and token segments. Adjacent text segments are merged.
 - onValueChange: (value: ComposerSegment[], details: ComposerChangeDetails) => void. details.reason is input/paste/cut/newline/token/action/delete-token/undo/redo/clear. cancel() rejects the change and the editor reverts.
 - onSubmit: (value: ComposerSegment[], details: { event, clear }) => void. Fired by Enter or ComposerSubmit; not called when there is no token and the text is whitespace only. clear() empties the value through onValueChange.
 - submitOn: 'enter' | 'mod-enter'; default 'enter'. enter: Enter submits and Shift+Enter breaks the line. mod-enter: Ctrl/Cmd+Enter submits and Enter breaks the line.
@@ -113,7 +113,7 @@ Root: fill-control frame and state; owns value, submit and disabled/readOnly.
 The editor and candidate popup.
 - aria-label / aria-labelledby: string. One is required, otherwise it throws.
 - placeholder: string. Shown when empty and exposed as aria-placeholder.
-- triggers: readonly ComposerTrigger[]. Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect).
+- triggers: readonly ComposerTrigger[]. Triggers: char, getItems(query, { signal }), select (token or action), onSelect, startOnly, label, emptyText. getItems may return an array or a Promise; loading and no-result copy match Combobox and late results are discarded; a throw or rejection shows a failed-to-load message with a retry rather than passing for no results. A ComposerItem is { id, label, group?, description?, icon?, disabled?, select? }: id is the token identity and label the display name, so a token reads as trigger + label; items with the same group are grouped in order of first appearance; select overrides the trigger's select (token inserts a token, action removes the trigger text and only calls onSelect).
 - minRows / maxRows: number; default 1 / 8. Starting rows and growth cap. Beyond the cap the editor scrolls, and never exceeds half the viewport height.
 
 ### ComposerToolbar / ComposerSubmit
@@ -124,6 +124,7 @@ The toolbar holds xs buttons; ComposerSubmit is unavailable when empty, disabled
 - Enter / Shift+Enter: Submit or break the line per submitOn; ignored during composition (isComposing or keyCode 229).
 - ArrowDown / ArrowUp: Move the highlight while candidates are open, wrapping and skipping disabled items.
 - Enter / Tab: Select the highlight while candidates are open, without submitting.
+- Enter / Tab (after a failed load): Retry the load without submitting. After Escape closes the candidates, Enter submits again.
 - Escape: Close the candidates and keep the typed text.
 - Backspace / Delete: Delete an adjacent token as a whole.
 - Ctrl/⌘+Z、Ctrl/⌘+Shift+Z: Undo and redo using the component's own snapshot stack.

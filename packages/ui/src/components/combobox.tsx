@@ -78,9 +78,13 @@ export function ComboboxChip({ label, className, children, ...props }: ComboboxC
   const readOnly = React.useContext(ReadOnly);
   const { messages } = useUILocale();
   const name = label ?? (typeof children === "string" || typeof children === "number" ? String(children) : undefined);
+  // 内容是节点时读不出文字：移除按钮的名称由 DOM 拼成「移除 + 这枚值的内容」，不退成一个分不清对象的「移除」。
+  const uid = React.useId();
+  const removeId = `${uid}-remove`;
+  const textId = `${uid}-text`;
   return <ComboboxPrimitive.Chip data-slot="combobox-chip" data-readonly={readOnly ? "" : undefined} {...props} className={state => cn(chipClassName, "outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset", typeof className === "function" ? className(state) : className)}>
-    <span data-slot="combobox-chip-text" className={cn("min-w-0 truncate", chipTextClassName)}>{children}</span>
-    {!readOnly && <ComboboxPrimitive.ChipRemove data-slot="combobox-chip-remove" aria-label={name === undefined ? messages.remove : messages.removeTag(name)} render={<Button size="xs" variant="quiet" shape="icon" className={chipActionClassName} />}><IconX aria-hidden="true" /></ComboboxPrimitive.ChipRemove>}
+    <span data-slot="combobox-chip-text" id={name === undefined ? textId : undefined} title={name} className={cn("min-w-0 truncate", chipTextClassName)}>{children}</span>
+    {!readOnly && <ComboboxPrimitive.ChipRemove data-slot="combobox-chip-remove" {...(name === undefined ? { id: removeId, "aria-label": messages.remove, "aria-labelledby": `${removeId} ${textId}` } : { "aria-label": messages.removeTag(name) })} render={<Button size="xs" variant="quiet" shape="icon" className={chipActionClassName} />}><IconX aria-hidden="true" /></ComboboxPrimitive.ChipRemove>}
   </ComboboxPrimitive.Chip>;
 }
 export type ComboboxPopupProps = ComboboxPrimitive.Popup.Props & React.RefAttributes<HTMLDivElement> & { container?: ComboboxPrimitive.Portal.Props["container"]; positionerProps?: ComboboxPrimitive.Positioner.Props };

@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, expect, test, vi } from "vitest";
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup, type ResizablePanelGroupProps, type ResizablePanelProps } from "../src/components/resizable";
@@ -263,4 +263,19 @@ test("the sizes always add up to 100 across three panels", async () => {
   const last = onLayout.mock.calls.at(-1)![0] as number[];
   expect(last).toEqual([20, 10, 70]);
   expect(last.reduce((sum, value) => sum + value, 0)).toBe(100);
+});
+
+test("a controlled layout of the wrong length is ignored and says so in development", async () => {
+  const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  render(<ResizablePanelGroup layout={[100]}><ResizablePanel defaultSize={50}>甲</ResizablePanel><ResizableHandle aria-label="调整" /><ResizablePanel defaultSize={50}>乙</ResizablePanel></ResizablePanelGroup>);
+  await waitFor(() => expect(warn).toHaveBeenCalledWith(expect.stringContaining("ignored layout")));
+  warn.mockRestore();
+});
+
+test("a controlled layout of the right length does not warn", async () => {
+  const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+  render(<ResizablePanelGroup layout={[30, 70]}><ResizablePanel defaultSize={50}>甲</ResizablePanel><ResizableHandle aria-label="调整" /><ResizablePanel defaultSize={50}>乙</ResizablePanel></ResizablePanelGroup>);
+  await new Promise(resolve => setTimeout(resolve, 10));
+  expect(warn).not.toHaveBeenCalled();
+  warn.mockRestore();
 });

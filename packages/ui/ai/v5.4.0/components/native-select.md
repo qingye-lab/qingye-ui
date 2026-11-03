@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
-Source SHA-256: 27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874
+Source SHA-256: c79d1ce39764a22c4952574d981ffccb7e4d732c9e1be7816a5a3154dad1745f
 
 保留平台选择器、原生选项与表单值。
 
@@ -27,7 +27,7 @@ Source SHA-256: 27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874
 - 单值形态一套几何，跟随密度轴；窄屏外高 +4px，粗指针最小外高读 touch-target；多行不固定单行高度。
 
 ## Customization
-- 保留平台箭头；className / style / render 属于真实 select。
+- 保留平台箭头。单值形态的 className / style 属于外框，宽度写在这里（w-full 铺满）；selectClassName 与 render 属于真实 select。列表形态没有外框，都落在 select。
 
 ## Current exports
 - NativeSelect: function; owner native-select; PASS; props: NativeSelectProps
@@ -37,7 +37,7 @@ Source SHA-256: 27236c53474d1222915e5f16659c3a9f53c407dd907e846088fa6afe7dce4874
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### NativeSelect
-- no props declared by this library
+- `selectClassName?`: `string | undefined`. 真实 select 的样式入口。单值形态的 className / style 属于外框（图标定位在那里，宽度也写在那里）；列表形态没有外框，两者都落在 select。
 - plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -53,7 +53,9 @@ Written descriptions; the list above is the type-resolved fact.
 真实 select，children 使用原生 option / optgroup。
 - size / multiple / disabled / required / name: native select props. 原生显示行数、多值、禁用、约束与表单名。
 - value / defaultValue / onChange: native select props. 保留受控与非受控；多值是字符串数组。
-- render / ref / ARIA / className / style: useRender.ComponentProps<select>. 属性、事件与 ref 属于实际 select；render 应保留可选值的原生元素。
+- render / ref / ARIA: useRender.ComponentProps<select>. 属性、事件与 ref 属于实际 select；render 应保留可选值的原生元素。
+- className / style: useRender.ComponentProps<select>. 单值形态落在外框（图标定位在那里），宽度写在这里；列表形态（multiple 或 size 大于 1）没有外框，落在 select。
+- selectClassName: string. 真实 select 的样式入口，两种形态都落在 select。
 
 ## Keyboard
 - Tab / 方向键 / 平台选择键: 沿用所在平台的原生选择行为。

@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
-Source SHA-256: fec95d44ade9b2245e569a1b91c9ddc6911c1af3b26f50a36521bb8a54d98137
+Source SHA-256: 8c8622ab9be09d415cd064c92ff7741e1190c7a1141a95c05e321c536a123a2b
 
 Different views of one object with panel drafts retained.
 
@@ -69,6 +69,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
 - Context AppearanceContext: without a provider default-value; provided by Tabs
+- Context OrientationContext: without a provider default-value; provided by Tabs
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -77,6 +78,7 @@ Written descriptions; the list above is the type-resolved fact.
 The current view and a manually activated list.
 - value / defaultValue / onValueChange / orientation: Base UI Root props. The application or primitive owns the value; cancellation prevents a switch.
 - appearance: "line" | "track"; default "line". Appearance of the tab list, set on Tabs for the whole set. line is the navigation line; track puts the selected face inside a track, horizontal or vertical. Appearance never changes the tablist / tab / tabpanel semantics.
+- TabsList className: Base UI List props. In the track appearance it lands on the track's outer frame: width follows content by default and w-full shares it equally among tabs; when they do not fit the frame stays put and tabs scroll inside it. The line appearance already fills its row.
 - activateOnFocus: boolean; default false. Focus movement does not activate by default; consumers may explicitly opt in.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 

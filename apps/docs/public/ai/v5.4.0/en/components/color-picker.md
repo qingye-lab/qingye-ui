@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/color-picker
 Source: packages/ui/src/components/color-picker.tsx
-Source SHA-256: c4204c351dca1bbf44ddcae8f1a5ef2b448a880c4b57f8782c8c1cc61dd9910b
+Source SHA-256: aacdb9bc0a3ecbe1c0081eff0149c5f5f097de7d58c4d93f77cedd7042e41afd
 
 Choose a colour that belongs to the user's data, such as a label colour or a theme setting, and get a #rrggbb string.
 
@@ -51,7 +51,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `onValueChange?`: `((value: string) => void) | undefined`. 每次变化都调用（拖动中也调用）。
 - `onValueCommit?`: `((value: string) => void) | undefined`. 一次操作结束才调用：拖动松手、键盘离键、色值输入确认、选预设。供保存之类不宜逐帧触发的事使用。
 - `swatches?`: `readonly ColorSwatch[] | undefined`. 预设色行，复用 ColorSwatchPicker。
-- `value?`: `string | undefined`. "#rrggbb"。传了这个属性即受控；输出一律小写。
+- `value?`: `string | undefined`. "#rrggbb"。传字符串即受控；value={undefined} 等于没传，走非受控（颜色没有「空」这个值，这与可空的日期系列不同）。输出一律小写。
 - plus 283 inherited (@types/react 283); not expanded, see the installed declarations
 
 ### ColorSwatchPicker
@@ -81,7 +81,7 @@ Choose one colour from presets. It is a radio group and every swatch is a named 
 
 ### ColorPicker
 Free choice: a button shows the current colour and its hex; it opens a saturation and brightness area, a hue slider, a hex input and an optional preset row.
-- value / defaultValue / onValueChange: string / string / (value: string) => void. #rrggbb. Passing value makes it controlled; defaultValue defaults to #000000; a malformed value throws. onValueChange fires on every change, including during a drag.
+- value / defaultValue / onValueChange: string / string / (value: string) => void. #rrggbb. A string makes it controlled, and value={undefined} counts as not passed; defaultValue defaults to #000000; a malformed value throws. onValueChange fires on every change, including during a drag.
 - onValueCommit: (value: string) => void. Called when an interaction ends: pointer release, key release, a confirmed hex, a chosen preset. Save here rather than in onValueChange.
 - swatches: { value: string; label: string }[]. A preset row using ColorSwatchPicker, with the same rules.
 - name / form / disabled: string / string / boolean. With name, #rrggbb is submitted with the form. When disabled it is neither submitted nor openable.

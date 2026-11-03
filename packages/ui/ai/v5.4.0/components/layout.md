@@ -12,7 +12,7 @@ Stack 纵向排列，Inline 横向排列并默认换行，Grid 等宽多列。ga
 
 ## Notes
 - 布局没有边框、表面、内边距或业务状态；独立对象边界用 Card。
-- Grid 只管等宽列；需要跨列、对齐表头的比较仍用原生 table/grid。
+- Grid 只管等宽列；需要跨列、对齐表头的比较仍用原生 table/grid。不等宽列用原生 div 加 grid-cols-[…]：Grid 的列由内联样式决定，写在它的 className 上不生效。
 - 角色数值是主题预设。确有特殊关系时在项目组合说明 className/style 覆写理由。
 - 方向、语言与密度沿真实 DOM 继承；换行不改变内容顺序。
 

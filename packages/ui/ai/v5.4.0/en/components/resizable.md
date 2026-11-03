@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/resizable
 Source: packages/ui/src/components/resizable.tsx
-Source SHA-256: 475ad2f99677a4a8568db306872ef7323f3f3386300065365e1086cbbc386a74
+Source SHA-256: 275cd5bb5c655f0dfce41b9ae165de470d0a2507c08006653564e2bd34878f0a
 
 Draggable separators between two or more panels that change how the space is shared.
 

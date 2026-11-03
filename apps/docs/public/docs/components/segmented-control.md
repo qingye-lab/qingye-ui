@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
-Source SHA-256: 366d8d92678c1a91950609486d0435c80e07d89f95621d0781bab30f0ba37a09
+Source SHA-256: f4665dbed362bff8a49503a39078814435fee87286a1eef4e431e26d75f2df6e
 
 从并列的少量候选中输入一个值。
 
@@ -26,7 +26,7 @@ SegmentedControl 产生一个新值。切换内容面板用 Tabs（Tabs 也可�
 - FieldTitle 命名组；FieldDescription/FieldError 关联输入；候选 children 是名称
 
 ## Responsive behavior
-- 保留全部候选并允许换行；五档窄屏尺寸不改变语义
+- 默认宽度由内容决定；给 className="w-full" 时候选等分。放不下时按候选换行，不压扁；五档窄屏尺寸不改变语义
 
 ## Customization
 - 选中段读 --qy-track-selected 与 --qy-track-selected-foreground（默认清染 + 焦墨），未选段字为浓墨；与同档文字；不新增外围焦点圈

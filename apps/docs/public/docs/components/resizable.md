@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/resizable
 Source: packages/ui/src/components/resizable.tsx
-Source SHA-256: 475ad2f99677a4a8568db306872ef7323f3f3386300065365e1086cbbc386a74
+Source SHA-256: 275cd5bb5c655f0dfce41b9ae165de470d0a2507c08006653564e2bd34878f0a
 
 两个或多个面板之间放可拖动的分隔条，调整各自占比。
 
@@ -78,7 +78,7 @@ Written descriptions; the list above is the type-resolved fact.
 弹性容器，按 orientation 排列面板与分隔条，并量取自身长度以换算像素界限。
 - orientation: "horizontal" | "vertical"; default "horizontal". 面板的排列方向。horizontal 左右并排，分隔条是竖线。
 - onLayout: (sizes: number[]) => void. 一次拖动或一次按键调整结束时调用，参数是按面板顺序的百分比，和为 100。组长度变化引起的界限修正不调用。
-- layout: number[]. 受控布局，按面板顺序。长度与面板数不符时忽略。拖动中的中间值只用于显示，松手时才调用 onLayout。
+- layout: number[]. 受控布局，按面板顺序。长度与面板数不符时忽略，开发期提示。拖动中的中间值只用于显示，松手时才调用 onLayout。
 - className / ref / div props: ComponentProps<"div">. 作用于容器；默认撑满父元素，高度由父元素或 className 给出。
 
 ### ResizablePanel

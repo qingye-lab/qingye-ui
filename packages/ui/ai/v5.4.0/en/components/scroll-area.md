@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: b335bf0444c58f204e72dbb5eedf2a8220cd65fc03da091dccdd57ce6e8428d1
+Source SHA-256: cac2e91684ebc4c766cf31f3d48387d72611874133cc8f8bb9b0609aab9afe14
 
 Native scrolling with an optional composition of draggable scrollbars.
 
@@ -92,8 +92,8 @@ An actual scrollable div; native scrollbars respect platform settings.
 - children: ReactNode. Complete content without windowing or hiding collection items.
 - style / className: div props. Consumer layout supplies height/maxHeight and width; overflow defaults to auto.
 - fade: boolean; default false. Edge fade: only the end that is actually cut off fades; an end scrolled to its limit does not. Both axes are measured independently. Built like TabsList (mask, width basis, RTL flip); the fade width is one fill-control row height (a preset). The edge facts are exposed as data-overflow-x-start/end and data-overflow-y-start/end.
-- tabIndex: number; default 0 while the content overflows. Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept.
-- render / ref / ARIA / events: useRender.ComponentProps<'div'>. Actual viewport composition, names, refs, and native scroll/keyboard events. The caller may add role=region for a named independent area.
+- tabIndex: number; default 0 while the content overflows. Keyboard-reachable while the content overflows and not a tab stop when nothing scrolls; retains native arrows/Page/Home/End scrolling. A value you pass is kept; pass -1 when the content has focusable items. Scrolling, focusable and unnamed warns in development.
+- render / ref / ARIA / events: useRender.ComponentProps<'div'>. Actual viewport composition, names, refs, and native scroll/keyboard events. aria-label or aria-labelledby defaults the role to region (not when render swaps the element), and a role you pass wins.
 
 ### ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent
 Explicit styled-scrollbar composition: Root owns layout/overflow facts, Viewport is the actual scroll element and Content supports measurement.
@@ -118,7 +118,7 @@ Source: apps/docs/src/content/scroll-area/demos/01-vertical.tsx
 import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
 export const meta = { title: "有限视口", titleEn: "Bounded viewport" };
 export default function Demo() {
-  return <ScrollArea aria-label="完整条目" role="region" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>;
+  return <ScrollArea aria-label="完整条目" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>;
 }
 ```
 
@@ -128,7 +128,7 @@ Source: apps/docs/src/content/scroll-area/demos/02-horizontal.tsx
 import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
 export const meta = { title: "水平内容", titleEn: "Horizontal content" };
 export default function Demo() {
-  return <ScrollArea aria-label="完整字符序列" role="region"><pre className="w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>;
+  return <ScrollArea aria-label="完整字符序列"><pre className="w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>;
 }
 ```
 
@@ -156,8 +156,8 @@ import { Stack } from "@qingye_lab/ui/components/layout";
 export const meta = { title: "边缘渐隐", titleEn: "Edge fade" };
 export default function Demo() {
   return <Stack>
-    <ScrollArea fade aria-label="完整条目" role="region" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>
-    <ScrollArea fade aria-label="完整字符序列" role="region"><pre className="w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>
+    <ScrollArea fade aria-label="完整条目" style={{ maxHeight: "calc(var(--qy-control-md) * 5)" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className="flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)">条目 {index + 1}</div>)}</ScrollArea>
+    <ScrollArea fade aria-label="完整字符序列"><pre className="w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>
   </Stack>;
 }
 ```
