@@ -61,7 +61,7 @@ describe("DataTable", () => {
       { accessorKey: "count", header: "数量", size: 120 },
     ] }];
     rerender(<AdvancedFixture definitions={definitions} />);
-    expect(screen.getByRole("table")).toHaveStyle({ tableLayout: "fixed", width: "280px" });
+    expect(screen.getByRole("table")).toHaveStyle({ tableLayout: "fixed", width: "100%", minWidth: "280px" });
     expect(screen.getByRole("columnheader", { name: "条目" })).toHaveAttribute("colspan", "2");
     expect(screen.getByRole("columnheader", { name: "条目" })).toHaveStyle({ width: "280px" });
     expect(screen.getByRole("columnheader", { name: "名称" })).toHaveStyle({ width: "160px" });
@@ -74,7 +74,7 @@ describe("DataTable", () => {
 
   it("also consumes advanced columnSizing state without requiring definition sizes", () => {
     render(<AdvancedFixture columnSizing={{ label: 240, count: 80 }} />);
-    expect(screen.getByRole("table")).toHaveStyle({ tableLayout: "fixed", width: "320px" });
+    expect(screen.getByRole("table")).toHaveStyle({ tableLayout: "fixed", width: "100%", minWidth: "320px" });
     expect(screen.getByRole("rowheader", { name: "A" })).toHaveStyle({ width: "240px" });
   });
 
@@ -407,6 +407,30 @@ describe("DataTable", () => {
       expect(screen.getByRole("cell", { name: "2" })).toHaveStyle({ width: "90px" });
     });
 
+    it("keeps a declared size as the floor of a growing column even with a lower minSize", () => {
+      const client = vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockReturnValue(400);
+      render(<AdvancedFixture definitions={[{ accessorKey: "label", header: "名称", size: 300, minSize: 50, meta: { rowHeader: true, grow: 1 } }, { accessorKey: "count", header: "数量", minSize: 50, meta: { grow: 1 } }]} />);
+      expect(cols().map(col => col.style.width)).toEqual(["300px", "100px"]);
+      client.mockRestore();
+    });
+
+    it("measures fit columns again after leaving virtualization, because the first-screen lock belongs to it", () => {
+      const client = vi.spyOn(HTMLElement.prototype, "clientWidth", "get").mockReturnValue(1000);
+      const offset = vi.spyOn(HTMLElement.prototype, "offsetWidth", "get").mockReturnValue(1000);
+      const computed = window.getComputedStyle.bind(window);
+      const style = vi.spyOn(window, "getComputedStyle").mockImplementation((node, pseudo) => {
+        const element = node as HTMLElement;
+        return element.dataset.slot === "data-table-fit" ? { width: `${element.textContent!.length * 10}px` } as CSSStyleDeclaration : computed(node, pseudo);
+      });
+      const definitions: ColumnDef<RecordItem>[] = [{ accessorKey: "label", header: "名称", meta: { rowHeader: true, fit: true } }, { accessorKey: "count", header: "数量", meta: { grow: 1 } }];
+      const { rerender } = render(<AdvancedFixture definitions={definitions} virtualization={{ height: 144, estimateRowHeight: 48, overscan: 0 }} />);
+      const locked = parseFloat(cols()[0]!.style.width);
+      expect(locked).toBeGreaterThan(0);
+      rerender(<AdvancedFixture definitions={definitions} data={[...items, { id: "long", label: "很长".repeat(20), count: 1 }]} />);
+      expect(cols()[0]!.style.width).toBe("400px");
+      style.mockRestore(); offset.mockRestore(); client.mockRestore();
+    });
+
     it("uses TanStack's default size as the floor of a flexible column without minSize", () => {
       render(<AdvancedFixture definitions={[{ accessorKey: "label", header: "名称", meta: { rowHeader: true } }, { accessorKey: "count", header: "数量", size: 80 }]} />);
       expect(screen.getByRole("table").style.minWidth).toBe("230px");
@@ -436,12 +460,12 @@ describe("DataTable", () => {
       expect(cols()[1]!.style.width).toBe("");
     });
 
-    it("keeps the sum-of-columns table when every column is fixed or a marker, and natural layout when nothing is sized", () => {
+    it("fills the container without scaling when every column is fixed or a marker, and natural layout when nothing is sized", () => {
       render(<AdvancedFixture definitions={[{ accessorKey: "label", header: "名称", size: 200, meta: { rowHeader: true } }, { accessorKey: "count", header: "数量", size: 100 }]} />);
       const table = screen.getByRole("table");
       expect(table.style.tableLayout).toBe("fixed");
-      expect(table.style.width).toBe("300px");
-      expect(table.style.minWidth).toBe("");
+      expect(table.style.width).toBe("100%");
+      expect(table.style.minWidth).toBe("300px");
       expect(cols().map(col => col.style.width)).toEqual(["200px", "100px"]);
     });
   });

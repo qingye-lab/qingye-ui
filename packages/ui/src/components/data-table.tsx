@@ -8,6 +8,7 @@ import { PaginationPattern, normalizePaginationValue, type PaginationValue } fro
 import { Progress, ProgressIndicator, ProgressTrack } from "./progress";
 import { Tooltip, TooltipPopup, TooltipTrigger } from "./tooltip";
 import { Table, TableBody, TableCaption, TableCell, TableContainer, TableHead, TableHeader, TableRow, type TableProps, type TableContainerProps } from "./table";
+import { resolveColumnWidths, type ColumnTrack } from "../column-widths";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 
@@ -19,7 +20,7 @@ export interface DataTableColumnMeta {
    * 设置了 onRowActivate 时至少要有一个可见的行标题列，否则抛错。
    */
   rowHeader?: boolean;
-  /** 这一列只放一个标记（复选框、行操作）：由内容定宽（w-line），留白与文字列同一条规则。 */
+  /** 这一列只放一个标记（复选框这类）：宽度由标记尺寸加单元格内缘算出，不看内容；放操作按钮的列写 fit。 */
   marker?: boolean;
   /**
    * 数值列：由列定义声明，不由内容猜。表头与该列每个单元格同一对齐——行内末端（RTL 下在左）并用等宽数字，数位对齐才能比较大小（基础层 §19）。
@@ -34,6 +35,17 @@ export interface DataTableColumnMeta {
   ellipsis?: boolean;
   /** 固定在行内起点（RTL 下为右侧）。只允许从第一列起连续的前导列，否则抛错；其宽度由表头单元格实测，后一个固定列接在前一个之后。 */
   pinned?: boolean;
+  /**
+   * 按权重分配剩余宽度（与 fr、flex-grow 同义），minSize / maxSize 是它的上下限，到界的列把余量让给其它列。
+   * 同时写 size 时 size 是下限。用户拖动过的列（columnSizing）退出分配，回到定宽。
+   */
+  grow?: number;
+  /**
+   * 按内容定宽：列宽 = 表头与已渲染单元格里最宽的内容 + 单元格内缘，单元格放得下就不换行。
+   * maxSize 是单元格内容的上限（超出的折行，配 ellipsis 则省略），不会把列压到比列名还窄。
+   * 虚拟化时只量首屏并锁定，滚动不改列宽；之后更宽的文字单行省略（同 ellipsis）。与 grow 互斥。
+   */
+  fit?: boolean;
 }
 /**
  * 标记列的宽度不是一个尺寸预设，而是一条「谁吸收剩余空间」的关系：表格宽 100%，
@@ -151,7 +163,7 @@ function hasColumnDimensions<TData>(definitions: readonly Partial<ColumnDef<TDat
   return definitions.some(column => column.size !== undefined || column.minSize !== undefined || column.maxSize !== undefined || ("columns" in column && column.columns && hasColumnDimensions(column.columns)));
 }
 /** 列定义里写了某项尺寸（size 或 minSize）的列 id。TanStack 会把默认值合并进 columnDef，所以只能在原始定义上判断「写了没有」。 */
-function declaredColumnIds<TData>(definitions: readonly ColumnDef<TData, unknown>[], key: "size" | "minSize", ids = new Set<string>()): Set<string> {
+function declaredColumnIds<TData>(definitions: readonly ColumnDef<TData, unknown>[], key: "size" | "minSize" | "maxSize", ids = new Set<string>()): Set<string> {
   for (const definition of definitions) {
     if (definition[key] !== undefined) {
       const id = definition.id ?? ("accessorKey" in definition ? String(definition.accessorKey).replaceAll(".", "_") : typeof definition.header === "string" ? definition.header : undefined);
@@ -162,6 +174,38 @@ function declaredColumnIds<TData>(definitions: readonly ColumnDef<TData, unknown
   return ids;
 }
 const sumWidths = (widths: readonly (number | string)[]): number | string => widths.every(width => typeof width === "number") ? widths.reduce((sum, width) => sum + width, 0) : `calc(${widths.map(width => typeof width === "number" ? `${width}px` : width).join(" + ")})`;
+/*
+ * 被测量的内容包一层 max-content 宽的块：它的宽度不受列宽影响，所以能量到内容本来要多宽；
+ * max-w-full 让它在列到上限时折行（内容不裁切、焦点环不被切）。TableHead / TableCell 对直接子元素的规则随内容移到这一层。
+ */
+const fitClass = "w-max max-w-full [&>[data-slot]]:align-top";
+const fitHeadClass = "[&>[data-variant][data-shape]]:-mx-(--qy-control-sm-padding)";
+type FitWidth = { head: number; content: number };
+function readFitWidths(table: HTMLElement, markers: readonly (readonly [string, string])[]): Record<string, FitWidth> {
+  const nodes = Array.from(table.querySelectorAll<HTMLElement>("[data-slot=data-table-fit]"));
+  // 列宽由量出的值决定，量的时候要摘掉 max-w-full；computed width 带小数且不受祖先 transform（弹窗入场动画）影响，使用时向上取整。
+  for (const node of nodes) node.style.maxWidth = "none";
+  const widths: Record<string, FitWidth> = {};
+  for (const node of nodes) {
+    const cell = node.closest<HTMLElement>("th,td");
+    if (!cell) continue;
+    const { paddingInlineStart, paddingInlineEnd } = getComputedStyle(cell);
+    const width = (parseFloat(getComputedStyle(node).width) || 0) + (parseFloat(paddingInlineStart) || 0) + (parseFloat(paddingInlineEnd) || 0);
+    const entry = widths[node.dataset.columnId!] ??= { head: 0, content: 0 };
+    if (cell.closest("thead")) entry.head = Math.max(entry.head, width);
+    else entry.content = Math.max(entry.content, width);
+  }
+  for (const node of nodes) node.style.maxWidth = "";
+  // 标记列的宽度是 CSS 表达式，不看内容；分配算法要像素值，所以就地解析一次（继承所在位置的 token 与密度）。
+  for (const [id, expression] of markers) {
+    const probe = document.createElement("div");
+    probe.style.cssText = `position:absolute;visibility:hidden;width:${expression}`;
+    table.parentElement!.append(probe);
+    widths[id] = { head: 0, content: parseFloat(getComputedStyle(probe).width) || 0 };
+    probe.remove();
+  }
+  return widths;
+}
 function VirtualSpacer({ height, columns }: { height: number; columns: number }) {
   return height > 0 ? <tr data-slot="data-table-spacer" aria-hidden="true" style={{ height }}><td colSpan={columns} style={{ height, padding: 0, border: 0, lineHeight: 0 }} /></tr> : null;
 }
@@ -173,7 +217,45 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
   const { messages } = useUILocale();
   const rows = table.getRowModel().rows; const primarySort = table.getState().sorting?.[0]?.id;
   const headerGroups = table.getHeaderGroups();
-  const sized = hasColumnDimensions(table.options.columns) || hasColumnDimensions([table.options.defaultColumn ?? {}]) || Object.keys(table.getState().columnSizing ?? {}).length > 0;
+  const columnMeta = (column: Column<TData, unknown>) => column.columnDef.meta as DataTableColumnMeta | undefined;
+  for (const column of columns) {
+    const { grow, fit } = columnMeta(column) ?? {};
+    if (grow !== undefined && (!Number.isFinite(grow) || grow <= 0)) throw new Error("DataTable meta.grow must be a finite positive number.");
+    if (grow !== undefined && fit) throw new Error("DataTable meta.grow and meta.fit are mutually exclusive.");
+  }
+  const sizeIds = declaredColumnIds(table.options.columns, "size");
+  const minSizeIds = declaredColumnIds(table.options.columns, "minSize");
+  const maxSizeIds = declaredColumnIds(table.options.columns, "maxSize");
+  const defaultSized = table.options.defaultColumn?.size !== undefined;
+  const defaultMinSized = table.options.defaultColumn?.minSize !== undefined;
+  const defaultMaxSized = table.options.defaultColumn?.maxSize !== undefined;
+  const isDragged = (column: Column<TData, unknown>) => table.getState().columnSizing?.[column.id] !== undefined;
+  const isFit = (column: Column<TData, unknown>) => !isDragged(column) && Boolean(columnMeta(column)?.fit);
+  const isGrow = (column: Column<TData, unknown>) => !isDragged(column) && columnMeta(column)?.grow !== undefined;
+  const isFixedWidth = (column: Column<TData, unknown>) => isDragged(column) || (!isFit(column) && !isGrow(column) && (defaultSized || sizeIds.has(column.id)));
+  const isMarker = (column: Column<TData, unknown>) => !isFixedWidth(column) && !isFit(column) && Boolean(columnMeta(column)?.marker);
+  /*
+   * 按关系分配：有列声明 grow / fit，或弹性列写了 maxSize 时，列宽由 resolveColumnWidths 算出。标记列始终由标记尺寸决定；放操作按钮的列按内容定宽，写 fit。
+   * 算出之前（服务端渲染、隐藏的面板）fit 列退回 column.getSize()，其余沿用下面的 fixed 平分规则。
+   */
+  const distributed = columns.some(column => isFit(column) || isGrow(column) || (!isFixedWidth(column) && !isMarker(column) && (defaultMaxSized || maxSizeIds.has(column.id))));
+  const isMeasured = (column: Column<TData, unknown>) => distributed && isFit(column);
+  const isRead = (column: Column<TData, unknown>) => isMeasured(column) || (distributed && isMarker(column));
+  const sized = distributed || hasColumnDimensions(table.options.columns) || hasColumnDimensions([table.options.defaultColumn ?? {}]) || Object.keys(table.getState().columnSizing ?? {}).length > 0;
+  const body = React.useRef<HTMLTableSectionElement>(null);
+  const viewport = React.useCallback(() => body.current?.parentElement?.parentElement as HTMLDivElement | null, []);
+  const [available, setAvailable] = React.useState(0);
+  const [fitWidths, setFitWidths] = React.useState<Record<string, FitWidth>>({});
+  React.useLayoutEffect(() => {
+    const node = viewport();
+    if (!distributed || !node) return;
+    const read = () => setAvailable(node.clientWidth);
+    read();
+    if (typeof ResizeObserver === "undefined") return;
+    const observer = new ResizeObserver(read);
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [distributed, viewport]);
   /*
    * 列宽：可见叶子列分三类，宽度各由一条关系决定。
    * 定宽列——写了 size（列定义或 defaultColumn），或用户拖动过（columnSizing 里有它）：宽度 = column.getSize()，由调用方给定，按 minSize/maxSize 钳制。
@@ -182,22 +264,35 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
    * 没有弹性列时表宽就是各列之和（原有行为）；有弹性列时 minWidth 保证每个弹性列都不窄于它自己的下限：
    * 平分剩余空间时最窄的一份不能小于最大的下限，所以 minWidth = 定宽列之和 + 标记列之和 + 弹性列数 × max(各弹性列下限)。
    * 弹性列下限 = 它声明的 minSize，否则 column.getSize()，即 150px（预设：TanStack 默认 size）。
-   * 弹性列的 maxSize 不约束宽度（fixed 布局里 col/td 的 max-width 不生效）；需要上限就写 size。
+   * 以上是未声明分配时的规则。写了 grow / fit，或弹性列写了 maxSize，就改走上面的按关系分配，maxSize 由算法兑现（fixed 布局里 col/td 的 max-width 本身不生效）。
    */
-  const sizeIds = declaredColumnIds(table.options.columns, "size");
-  const minSizeIds = declaredColumnIds(table.options.columns, "minSize");
-  const defaultSized = table.options.defaultColumn?.size !== undefined;
-  const defaultMinSized = table.options.defaultColumn?.minSize !== undefined;
-  const isFixedWidth = (column: Column<TData, unknown>) => defaultSized || sizeIds.has(column.id) || table.getState().columnSizing?.[column.id] !== undefined;
-  const isMarker = (column: Column<TData, unknown>) => !isFixedWidth(column) && Boolean((column.columnDef.meta as DataTableColumnMeta | undefined)?.marker);
-  const isFlexible = (column: Column<TData, unknown>) => sized && !isFixedWidth(column) && !isMarker(column);
-  const flexibleFloor = (column: Column<TData, unknown>) => defaultMinSized || minSizeIds.has(column.id) ? column.columnDef.minSize ?? column.getSize() : column.getSize();
-  const columnWidth = (column: Column<TData, unknown>): number | string | undefined => {
-    if (isFlexible(column)) return undefined;
-    if (!isMarker(column)) return column.getSize();
-    // A lone marker keeps its existing role and actual cell insets; it does not inherit TanStack's text-column width preset.
+  const isFlexible = (column: Column<TData, unknown>) => sized && !isFixedWidth(column) && !isMarker(column) && !isFit(column);
+  const flexibleFloor = (column: Column<TData, unknown>) => !defaultSized && !sizeIds.has(column.id) && (defaultMinSized || minSizeIds.has(column.id)) ? column.columnDef.minSize ?? column.getSize() : column.getSize();
+  const measuredReady = columns.every(column => !isRead(column) || fitWidths[column.id] !== undefined);
+  const resolved = (() => {
+    if (!distributed || available <= 0 || !measuredReady) return null;
+    const tracks = columns.map((column): ColumnTrack => {
+      if (isFlexible(column)) return { grow: columnMeta(column)?.grow ?? 1, min: flexibleFloor(column), max: defaultMaxSized || maxSizeIds.has(column.id) ? column.columnDef.maxSize ?? Infinity : Infinity };
+      if (!isRead(column)) return { base: column.getSize() };
+      const { head, content } = fitWidths[column.id]!;
+      const declaredMin = defaultMinSized || minSizeIds.has(column.id) ? column.columnDef.minSize ?? 0 : 0;
+      const declaredMax = defaultMaxSized || maxSizeIds.has(column.id) ? column.columnDef.maxSize ?? Infinity : Infinity;
+      return { base: Math.ceil(Math.max(head, declaredMin, Math.min(declaredMax, content))) };
+    });
+    const widths = resolveColumnWidths(tracks, available);
+    return new Map(columns.map((column, index) => [column.id, widths[index]!]));
+  })();
+  // A lone marker keeps its existing role and actual cell insets; it does not inherit TanStack's text-column width preset.
+  const markerWidth = (column: Column<TData, unknown>) => {
     const index = columns.indexOf(column);
     return `calc(var(--qy-marker-size) + ${index === 0 ? "var(--qy-panel-padding)" : "var(--qy-panel-gap) / 2"} + ${index === columns.length - 1 ? "var(--qy-panel-padding)" : "var(--qy-panel-gap) / 2"})`;
+  };
+  const columnWidth = (column: Column<TData, unknown>): number | string | undefined => {
+    const allotted = resolved?.get(column.id);
+    if (allotted !== undefined) return allotted;
+    if (isFit(column)) return column.getSize();
+    if (isFlexible(column)) return undefined;
+    return isMarker(column) ? markerWidth(column) : column.getSize();
   };
   /** 表头单元格宽度：叶子列里有弹性列就不设宽度（由列宽规则决定）。 */
   const combinedWidth = (leaves: Column<TData, unknown>[]): number | string | undefined => {
@@ -205,7 +300,13 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
     return widths.some(width => width === undefined) ? undefined : sumWidths(widths as (number | string)[]);
   };
   const flexibleColumns = columns.filter(isFlexible);
-  const tableWidth: React.CSSProperties = !sized ? {} : flexibleColumns.length === 0 ? { tableLayout: "fixed", width: combinedWidth(columns) } : { tableLayout: "fixed", width: "100%", minWidth: sumWidths([...columns.filter(column => !isFlexible(column)).map(column => columnWidth(column)!), flexibleColumns.length * Math.max(...flexibleColumns.map(flexibleFloor))]) };
+  /*
+   * 每列都有确定宽度时（全部到上限、全写 size），各列之和可能小于容器：列宽不放大，表仍占满容器，余量落在行尾的伪元素单元格上，表头底与行线延伸到右缘。
+   * 伪元素不是 DOM 子节点，所以不进无障碍树，也不改变最后一列的 last: 内缘；宽度够时它宽 0。
+   */
+  const extendsRows = sized && (resolved !== null || flexibleColumns.length === 0);
+  const rowExtension = extendsRows ? "after:table-cell after:border-b after:border-border after:content-['']" : undefined;
+  const tableWidth: React.CSSProperties = !sized ? {} : extendsRows ? { tableLayout: "fixed", width: "100%", minWidth: combinedWidth(columns) } : { tableLayout: "fixed", width: "100%", minWidth: sumWidths([...columns.filter(column => !isFlexible(column)).map(column => columnWidth(column)!), flexibleColumns.length * Math.max(...flexibleColumns.map(flexibleFloor))]) };
   // 行的可访问名称来自行标题单元格；整行可激活而没有名字，读屏用户无法分辨「激活的是哪一行」，与库里「名称缺失即抛错」一致。
   const hasRowHeader = columns.some(column => (column.columnDef.meta as DataTableColumnMeta | undefined)?.rowHeader);
   if (onRowActivate && !hasRowHeader) throw new Error("DataTable onRowActivate requires a visible row-header column: set meta.rowHeader: true on one column (rowHeader: true in DataTablePattern) to name each activatable row.");
@@ -220,9 +321,7 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
   const pinKey = pinnedIds.join("\u0000");
   const [pinOffsets, setPinOffsets] = React.useState<number[]>([]);
   const [pinScrolled, setPinScrolled] = React.useState(false);
-  const body = React.useRef<HTMLTableSectionElement>(null);
-  const viewport = React.useCallback(() => body.current?.parentElement?.parentElement as HTMLDivElement | null, []);
-  // 偏移量 = 前面固定列的实际宽度：量表头末行的固定单元格（列宽可能来自内容），不写死数值。
+  // 偏移量 =前面固定列的实际宽度：量表头末行的固定单元格（列宽可能来自内容），不写死数值。
   React.useLayoutEffect(() => {
     const table = body.current?.parentElement; const node = viewport();
     if (!pinKey || !table || !node) { setPinOffsets(previous => previous.length ? [] : previous); setPinScrolled(false); return; }
@@ -322,7 +421,7 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
     // 悬停只给数据行：宽表横向阅读时，它帮读者把眼睛对准同一行（比较任务保留必要的二维关系）。
     const cells = row.getVisibleCells();
     const labelledBy = hasRowHeader ? cells.flatMap((cell, cellIndex) => (cell.column.columnDef.meta as DataTableColumnMeta | undefined)?.rowHeader ? [`${rowHeaderId}-${index}-${cellIndex}`] : []).join(" ") || undefined : undefined;
-    return <TableRow key={row.id} aria-labelledby={labelledBy} ref={virtualization ? virtualizer.measureElement : undefined} data-index={virtualization ? index : undefined} data-row-id={row.id} data-selected={row.getIsSelected() || undefined} data-active={row.id === activeRowId || undefined} aria-current={row.id === activeRowId ? "true" : undefined} aria-rowindex={virtualization ? headerGroups.length + index + 1 : undefined} tabIndex={onRowActivate ? row.id === tabStopId ? 0 : -1 : virtualization ? -1 : undefined} className={cn("group/row", filled ? "bg-surface-selected" : "hover:bg-accent", (onRowActivate || virtualization) && "outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset")} onClick={event => { if (!event.defaultPrevented && isRowInteraction(event)) onRowActivate?.(row, event); }} onKeyDown={event => {
+    return <TableRow key={row.id} aria-labelledby={labelledBy} ref={virtualization ? virtualizer.measureElement : undefined} data-index={virtualization ? index : undefined} data-row-id={row.id} data-selected={row.getIsSelected() || undefined} data-active={row.id === activeRowId || undefined} aria-current={row.id === activeRowId ? "true" : undefined} aria-rowindex={virtualization ? headerGroups.length + index + 1 : undefined} tabIndex={onRowActivate ? row.id === tabStopId ? 0 : -1 : virtualization ? -1 : undefined} className={cn("group/row", rowExtension, rowExtension && "last:after:border-b-0", filled ? "bg-surface-selected" : "hover:bg-accent", (onRowActivate || virtualization) && "outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset")} onClick={event => { if (!event.defaultPrevented && isRowInteraction(event)) onRowActivate?.(row, event); }} onKeyDown={event => {
       if (event.target !== event.currentTarget) return;
       navigate(event, index);
       if (onRowActivate && !event.defaultPrevented && !event.repeat && !event.altKey && !event.ctrlKey && !event.metaKey && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onRowActivate(row, event); }
@@ -330,11 +429,39 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
       const meta = cell.column.columnDef.meta as DataTableColumnMeta | undefined;
       const content = flexRender(cell.column.columnDef.cell, cell.getContext());
       const pinIndex = meta?.pinned ? pinnedIds.indexOf(cell.column.id) : -1;
+      const inner = meta?.ellipsis || (virtualization && isMeasured(cell.column)) ? <EllipsisContent>{content}</EllipsisContent> : content;
+      const shown = isMeasured(cell.column) ? <div data-slot="data-table-fit" data-column-id={cell.column.id} className={cn(fitClass, meta?.numeric && "ms-auto")}>{inner}</div> : inner;
       const cellProps = { numeric: meta?.numeric, className: cn(cellWidth(meta), pinIndex >= 0 && pinClass(filled ? "selected" : "plain", pinIndex === pinnedIds.length - 1)), "data-pinned": pinIndex >= 0 ? "" : undefined, "data-scrolled": pinIndex === pinnedIds.length - 1 && pinScrolled ? "" : undefined, style: { ...(sized ? { width: columnWidth(cell.column), minWidth: cell.column.columnDef.minSize, maxWidth: cell.column.columnDef.maxSize } : {}), ...(pinIndex >= 0 ? { insetInlineStart: pinOffsets[pinIndex] ?? 0 } : {}) } };
-      return meta?.rowHeader ? <TableHead key={cell.id} id={`${rowHeaderId}-${index}-${cellIndex}`} scope="row" {...cellProps}>{meta.ellipsis ? <EllipsisContent>{content}</EllipsisContent> : content}</TableHead> : <TableCell key={cell.id} {...cellProps}>{meta?.ellipsis ? <EllipsisContent>{content}</EllipsisContent> : content}</TableCell>;
+      return meta?.rowHeader ? <TableHead key={cell.id} id={`${rowHeaderId}-${index}-${cellIndex}`} scope="row" {...cellProps}>{shown}</TableHead> : <TableCell key={cell.id} {...cellProps}>{shown}</TableCell>;
     })}</TableRow>;
   };
   const virtualRows = virtualization ? virtualizer.getVirtualItems() : [];
+  const markerExpressions = distributed ? columns.filter(isMarker).map(column => [column.id, markerWidth(column)] as const) : [];
+  const measuredKey = [...columns.filter(isMeasured).map(column => column.id), ...markerExpressions.flat()].join("\u0000");
+  const fitLock = React.useRef<string | null>(null);
+  // 虚拟化只量首屏并锁定：行是滚动时才渲染的，边滚边量会让整张表的列跳动（AG Grid、MUI 的默认同样不随滚动改宽）。其余情况内容变了（换页、字体载入）就重量。
+  React.useLayoutEffect(() => {
+    const section = body.current; const element = section?.parentElement;
+    if (!measuredKey || !section || !element) return;
+    if (fitLock.current !== null && (fitLock.current !== measuredKey || !virtualization)) fitLock.current = null;
+    const measure = () => {
+      if (fitLock.current === measuredKey) return;
+      // 表不可见（隐藏的面板）时量不到真实宽度，等它显示后由下面的 ResizeObserver 带动重算。
+      if (element.offsetWidth === 0) return;
+      const next = readFitWidths(element, markerExpressions);
+      if (virtualization && section.querySelector("[data-slot=data-table-fit]")) fitLock.current = measuredKey;
+      setFitWidths(previous => {
+        const ids = Object.keys(next);
+        return ids.length === Object.keys(previous).length && ids.every(id => previous[id]?.head === next[id]!.head && previous[id]?.content === next[id]!.content) ? previous : next;
+      });
+    };
+    measure();
+    if (typeof ResizeObserver === "undefined" || fitLock.current === measuredKey) return;
+    const observer = new ResizeObserver(measure);
+    observer.observe(element);
+    for (const node of Array.from(element.querySelectorAll("[data-slot=data-table-fit]"))) observer.observe(node);
+    return () => observer.disconnect();
+  }, [measuredKey, rows, virtualRows.length > 0, Boolean(virtualization)]);
   let previousEnd = scrollMargin;
   return <div data-slot="data-table-frame" className="flex min-w-0 flex-col gap-(--qy-panel-gap)">
     {error != null && error !== false && <div data-slot="data-table-error" role="alert" className="min-w-0">{error}</div>}
@@ -352,13 +479,15 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
   }} onBlurCapture={event => { onBlurCapture?.(event); if (!event.currentTarget.contains(event.relatedTarget)) { focusedElement.current = null; setFocusedId(null); } }}>
     {caption !== undefined && <TableCaption>{caption}</TableCaption>}
     {sized && <colgroup>{columns.map(column => <col key={column.id} style={{ width: columnWidth(column), minWidth: column.columnDef.minSize, maxWidth: column.columnDef.maxSize }} />)}</colgroup>}
-    <TableHeader sticky={stickyHeader} stickyOffset={stickyHeaderOffset}>{headerGroups.map((group, index) => <TableRow key={group.id} aria-rowindex={virtualization ? index + 1 : undefined}>{group.headers.map(header => {
+    <TableHeader sticky={stickyHeader} stickyOffset={stickyHeaderOffset}>{headerGroups.map((group, index) => <TableRow key={group.id} aria-rowindex={virtualization ? index + 1 : undefined} className={rowExtension}>{group.headers.map(header => {
       const sort = header.column.getIsSorted(); const meta = header.column.columnDef.meta as DataTableColumnMeta | undefined;
       const content = header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext());
+      const inner = meta?.ellipsis ? <EllipsisContent>{content}</EllipsisContent> : content;
+      const shown = !header.subHeaders.length && isMeasured(header.column) ? <div data-slot="data-table-fit" data-column-id={header.column.id} className={cn(fitClass, fitHeadClass, meta?.numeric && "ms-auto")}>{inner}</div> : inner;
       const pinIndex = !header.subHeaders.length && meta?.pinned ? pinnedIds.indexOf(header.column.id) : -1;
-      return <TableHead key={header.id} colSpan={header.colSpan} scope={header.subHeaders.length ? "colgroup" : "col"} aria-sort={header.column.id === primarySort && sort ? sort === "asc" ? "ascending" : "descending" : undefined} data-pinned={pinIndex >= 0 ? "" : undefined} data-scrolled={pinIndex >= 0 && pinIndex === pinnedIds.length - 1 && pinScrolled ? "" : undefined} style={{ ...(sized ? { width: combinedWidth(header.column.getLeafColumns()) } : {}), ...(pinIndex >= 0 ? { insetInlineStart: pinOffsets[pinIndex] ?? 0 } : {}) }} numeric={meta?.numeric} className={cn(cellWidth(meta), pinIndex >= 0 && pinClass("head", pinIndex === pinnedIds.length - 1))}>{meta?.ellipsis ? <EllipsisContent>{content}</EllipsisContent> : content}</TableHead>;
+      return <TableHead key={header.id} colSpan={header.colSpan} scope={header.subHeaders.length ? "colgroup" : "col"} aria-sort={header.column.id === primarySort && sort ? sort === "asc" ? "ascending" : "descending" : undefined} data-pinned={pinIndex >= 0 ? "" : undefined} data-scrolled={pinIndex >= 0 && pinIndex === pinnedIds.length - 1 && pinScrolled ? "" : undefined} style={{ ...(sized ? { width: combinedWidth(header.column.getLeafColumns()) } : {}), ...(pinIndex >= 0 ? { insetInlineStart: pinOffsets[pinIndex] ?? 0 } : {}) }} numeric={meta?.numeric} className={cn(cellWidth(meta), pinIndex >= 0 && pinClass("head", pinIndex === pinnedIds.length - 1))}>{shown}</TableHead>;
     })}</TableRow>)}</TableHeader>
-    <TableBody ref={body}>{rows.length === 0 ? <TableRow aria-rowindex={virtualization ? headerGroups.length + 1 : undefined}><TableCell colSpan={columns.length}>{emptyContent}</TableCell></TableRow> : virtualization ? <>{virtualRows.map(item => {
+    <TableBody ref={body}>{rows.length === 0 ? <TableRow aria-rowindex={virtualization ? headerGroups.length + 1 : undefined} className={cn(rowExtension, rowExtension && "last:after:border-b-0")}><TableCell colSpan={columns.length}>{emptyContent}</TableCell></TableRow> : virtualization ? <>{virtualRows.map(item => {
       const gap = item.start - previousEnd;
       previousEnd = item.end;
       return <React.Fragment key={item.key}><VirtualSpacer height={gap} columns={columns.length} />{renderRow(rows[item.index]!, item.index)}</React.Fragment>;
@@ -429,11 +558,15 @@ export type DataTablePatternColumn<TData> = {
   numeric?: boolean;
   /**
    * Pixel dimensions, clamped by TanStack; any explicit dimension opts the table into fixed layout.
-   * 只有写了 size 的列是定宽列；没写 size 的列是弹性列，平分剩余空间（表宽 100%），minSize 是它的下限。弹性列的 maxSize 不约束宽度，需要上限就写 size。
+   * 只有写了 size 的列是定宽列；没写 size 的列是弹性列，平分剩余空间（表宽 100%），minSize 是它的下限。弹性列写 maxSize 时由分配算法兑现，到界后余量让给其它列；需要上限也可以写 size。
    */
   size?: number;
   minSize?: number;
   maxSize?: number;
+  /** 见 DataTableColumnMeta.grow。 */
+  grow?: number;
+  /** 见 DataTableColumnMeta.fit。 */
+  fit?: boolean;
   ellipsis?: boolean;
   /**
    * 没有 cell 时，accessor 返回 null、undefined 或空字符串所显示的内容；0 与 false 不算空值。
@@ -556,7 +689,7 @@ export function DataTablePattern<TData>({ data, columns, getRowId, mode = "clien
     ...(column.size === undefined ? {} : { size: column.size }),
     ...(column.minSize === undefined ? {} : { minSize: column.minSize }),
     ...(column.maxSize === undefined ? {} : { maxSize: column.maxSize }),
-    meta: { rowHeader: column.rowHeader, numeric: column.numeric, ellipsis: column.ellipsis, pinned: column.pinned, config: column, activeRow, state: current, update },
+    meta: { rowHeader: column.rowHeader, numeric: column.numeric, ellipsis: column.ellipsis, pinned: column.pinned, grow: column.grow, fit: column.fit, config: column, activeRow, state: current, update },
     header: PatternColumnHeader<TData>,
     cell: PatternColumnCell<TData>,
   }));
