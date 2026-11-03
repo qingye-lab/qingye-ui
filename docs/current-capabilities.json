@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-03T06:31:42.211Z",
-  "revision": "8f33ae8f73d97188cf7180f23359bf9688a24e50",
+  "generatedAt": "2026-11-03T08:34:52.067Z",
+  "revision": "15aa1e3656db2d8b4656d643db4a1ac7be0357b6",
   "fingerprint": {
-    "sha256": "9442a98830fd46d5630335e54cc9466eacd2bf1b30df44242803bb4cbbaeaad8",
+    "sha256": "86ebae6e248f36383627ff22963d759744dd6db7b102071d94706522f24966ca",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -68,11 +68,11 @@
       },
       {
         "path": "apps/docs/src/content/cascader/meta.ts",
-        "sha256": "47368938e741b1dafce2b496e5e6c4e466b8ca6db3abcbd970094a06c623e013"
+        "sha256": "44b0cc1e3553c375dcba99995fd8b7b8a59d9298370926175dd6f91a5f2f0ac6"
       },
       {
         "path": "apps/docs/src/content/chart/meta.ts",
-        "sha256": "09073dc64c4ef2fa1e50227adda71f238bee60a44040054d21ef9bfdfb20a450"
+        "sha256": "ad6fa0afbe105f55a61a8d70bccb7492e0739569dc39cb2a2c35c0f685f0e059"
       },
       {
         "path": "apps/docs/src/content/checkbox-group/meta.ts",
@@ -136,7 +136,7 @@
       },
       {
         "path": "apps/docs/src/content/date-picker/meta.ts",
-        "sha256": "a0afb493d4c633e202102f6b02d4666c9544e448639c029fba8db35835dd7775"
+        "sha256": "0b19423823e6cda45f839c68ed0ace50d7738e1bab2d2134c2d223b613b24a25"
       },
       {
         "path": "apps/docs/src/content/date-range-picker/meta.ts",
@@ -144,7 +144,7 @@
       },
       {
         "path": "apps/docs/src/content/date-time-picker/meta.ts",
-        "sha256": "4281acc2be682f6d3f0ace505405a1c71faa10ff5d6364a144d7084a1624b43d"
+        "sha256": "2754ee7861cf4f5a5d808467610aeed744d70fd901916a9174e18d2e1ca7bb59"
       },
       {
         "path": "apps/docs/src/content/date-time-range-picker/meta.ts",
@@ -192,7 +192,7 @@
       },
       {
         "path": "apps/docs/src/content/heatmap/meta.ts",
-        "sha256": "851538c9e6324dd2a7bedad8a1152001b3ca5f135f2d8ac1e6a0457df76fe931"
+        "sha256": "58702e0133f7484c7562f698e790fca662792f3e9171cc1443bc098a4e806cb1"
       },
       {
         "path": "apps/docs/src/content/hover-card/meta.ts",
@@ -316,7 +316,7 @@
       },
       {
         "path": "apps/docs/src/content/scatter-chart/meta.ts",
-        "sha256": "62e68d7b91528db648944feb4562ef149b1831703dc3ca3711baf4c60cca75c9"
+        "sha256": "1219375e7dc48e95dfc6468c34e15b75f809345adb72c42b377760cd86a4ebfc"
       },
       {
         "path": "apps/docs/src/content/scroll-area/meta.ts",
@@ -452,7 +452,7 @@
       },
       {
         "path": "apps/docs/src/content/tree/meta.ts",
-        "sha256": "22e21dd620b617265ded04fe5b88e6434f3f3cabc37ea98738603125ebb5c72f"
+        "sha256": "154c83ee406e804475ea234797d4c5859d2d965a6e5867708f7bc3cad7bbb876"
       },
       {
         "path": "apps/docs/src/content/typography/meta.ts",
@@ -472,7 +472,7 @@
       },
       {
         "path": "design.md",
-        "sha256": "336acb80dc69fe53da764429890e1cae90e21688c97b1553193b4b523296c89d"
+        "sha256": "e809ed3053e1226b836d71d3e169aec9b53c188730b9151196a4ebfa9740d123"
       },
       {
         "path": "package.json",
@@ -480,7 +480,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "226b296b0a743445f6b602197ae863019701ee673aa8d3a3020d9d9a1603f81f"
+        "sha256": "1a5b51010b013fa45823981b143c259f6733ea4b6eb5c2fb3b3092e02f6b6f1a"
       },
       {
         "path": "packages/ui/motion.css",
@@ -488,7 +488,7 @@
       },
       {
         "path": "packages/ui/package.json",
-        "sha256": "2505dbfa9879eb98b781fdb511ab37ce7c76c2d747ef8b3b21c7f3d9bd4aa4d9"
+        "sha256": "128f7ddde6f088a2521964298dff1cb5fc5a0d7475fb25b780f411e3328ff776"
       },
       {
         "path": "packages/ui/prose.css",
@@ -552,11 +552,11 @@
       },
       {
         "path": "packages/ui/src/components/cascader.tsx",
-        "sha256": "7505bc1141d445780df672e96c0d8fa7ad119b68fe7799a7561fda94974e72e6"
+        "sha256": "404842647973eafb3974d29b0158669d28b573e50a16bb0808e0f679935593f9"
       },
       {
         "path": "packages/ui/src/components/chart.tsx",
-        "sha256": "08d6d12e26032c4bd9afae849ca0efd03a5c3ac15e38582e9ee4c2d7a079cc75"
+        "sha256": "2520f2b39351f8ffe7b60cb12afb200d3e3cab3b64c402eebcff4f19fd9db480"
       },
       {
         "path": "packages/ui/src/components/checkbox-group.tsx",
@@ -620,7 +620,7 @@
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
-        "sha256": "f7a4c6d63df4dd08e95bb0da89d430426236ec6d84728930a43011e90709b663"
+        "sha256": "2874fbc00dcb9d6f3ecdf9e421097e47d03d9ff810447d8a2d744435d3ccba60"
       },
       {
         "path": "packages/ui/src/components/date-range-picker.tsx",
@@ -628,7 +628,7 @@
       },
       {
         "path": "packages/ui/src/components/date-time-picker.tsx",
-        "sha256": "55e12b48559b0a46cd8fbe9121ed6a7c1d92b14d4031bfe344d4ffbf9af52d65"
+        "sha256": "ffa594e825dabe5935b253a86f90638a5b73fac7089de3996641e0af6d7461ca"
       },
       {
         "path": "packages/ui/src/components/date-time-range-picker.tsx",
@@ -676,7 +676,7 @@
       },
       {
         "path": "packages/ui/src/components/heatmap.tsx",
-        "sha256": "5391179dc66b84007b34083c21d0987deff96fd286fed3d8c0216f3cf54a6801"
+        "sha256": "a0208da9a4fca7de7e68d8b4dc4bb6ba881b4b1fdc2ac6bcaf046febc74eec34"
       },
       {
         "path": "packages/ui/src/components/hover-card.tsx",
@@ -800,7 +800,7 @@
       },
       {
         "path": "packages/ui/src/components/scatter-chart.tsx",
-        "sha256": "c3975485a92833bf61f7ac1cac2587189f280468401f0fcc7f472f120ba5e129"
+        "sha256": "91d9cdf6eb59bb5da1a566606bc87f7c19782ce98a4f38be03872593d2eafd31"
       },
       {
         "path": "packages/ui/src/components/scroll-area.tsx",
@@ -936,7 +936,7 @@
       },
       {
         "path": "packages/ui/src/components/tree.tsx",
-        "sha256": "00664fdc85c13950a92cd28f8f8b5a432dd0cdbd7d30c789aad35af23f6363ab"
+        "sha256": "51af2eea6dd23fce52b0b5062e83fd08bbb41be9369d653212f2d152d4d86b7a"
       },
       {
         "path": "packages/ui/src/components/typography.tsx",
@@ -976,7 +976,7 @@
       },
       {
         "path": "packages/ui/tokens/semantic.css",
-        "sha256": "411578e52d845fa9b658594552d6fc38de5ab3e0cac58acf76231547aad18ca2"
+        "sha256": "962e2aee859bf000eb3d9641dbafd3a59dc5f89d9a3f8bf225dc4b3bf22b76d3"
       },
       {
         "path": "packages/ui/utilities.css",
@@ -987,7 +987,7 @@
   "scope": "Implementation facts; PRESENT means source exists, not runtime acceptance. Internal docs are not added to package files.",
   "package": {
     "name": "@qingye_lab/ui",
-    "version": "5.3.0",
+    "version": "5.4.0",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
@@ -1090,7 +1090,8 @@
       "!ai/v4.2.0",
       "!ai/v5.0.0",
       "!ai/v5.1.0",
-      "!ai/v5.2.0"
+      "!ai/v5.2.0",
+      "!ai/v5.3.0"
     ],
     "source": "packages/ui/package.json"
   },
@@ -1145,7 +1146,7 @@
         {
           "name": "AccordionPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/accordion/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/accordion/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/accordion.tsx",
             "line": 23
@@ -1413,7 +1414,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1506,7 +1507,7 @@
         {
           "name": "AlertDialogPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/alert-dialog/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/alert-dialog/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/alert-dialog.tsx",
             "line": 84
@@ -1843,7 +1844,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2079,7 +2080,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2257,7 +2258,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2382,7 +2383,7 @@
         {
           "name": "AutocompletePrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
             "line": 116
@@ -2821,7 +2822,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3007,7 +3008,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3052,7 +3053,7 @@
         {
           "name": "AvatarPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/avatar/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/avatar/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/avatar.tsx",
             "line": 21
@@ -3275,7 +3276,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3457,7 +3458,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3827,7 +3828,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4194,7 +4195,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4477,7 +4478,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4774,7 +4775,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4819,7 +4820,7 @@
         {
           "name": "CalendarPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@daypicker+react@10.0.2_@types+react@19.2.7_react@19.2.1/node_modules/@daypicker/react/dist/esm/index\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@daypicker+react@10.0.2_@types+react@19.2.7_react@19.2.1/node_modules/@daypicker/react/dist/esm/index\"",
           "source": {
             "path": "packages/ui/src/components/calendar.tsx",
             "line": 245
@@ -5105,7 +5106,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5283,7 +5284,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5390,8 +5391,8 @@
               {
                 "name": "loadChildren",
                 "type": "(option: CascaderOption) => Promise<CascaderOption[]>",
-                "description": "展开一个没有 children、也没有标 isLeaf 的节点时调用。等待时该列显示「正在加载」，reject 时显示「加载失败」与重试；结果为空数组则该节点成为叶子。结果按路径缓存，组件不重复请求。",
-                "descriptionEn": "Called when a node with neither children nor isLeaf is expanded. While waiting the column shows \"Loading\"; a rejection shows \"Failed to load\" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice."
+                "description": "展开一个没有 children、也没有标 isLeaf 的节点时调用。等待时该列显示「正在加载」，reject 时显示「加载失败」与重试；结果为空数组则该节点成为叶子。结果按路径缓存，组件不重复请求。multiple 下，还有未加载的启用后代的分支最多显示 mixed，因为还不知道下面有什么；值里有路径落在未加载的启用分支下时，这条分支及其祖先也显示 mixed。点它的标记勾选其下全部已加载的启用叶子，它们都已勾选时再点则全部取消，未加载分支下的这些路径一起清除；下面只有未加载分支、没有可勾的叶子也没有这样的路径时，点标记只是展开它。",
+                "descriptionEn": "Called when a node with neither children nor isLeaf is expanded. While waiting the column shows \"Loading\"; a rejection shows \"Failed to load\" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice. With multiple, a branch that still has an unloaded enabled descendant shows mixed at most, because what lies below is not yet known; a value path inside an unloaded enabled branch also shows that branch and its ancestors as mixed. Clicking the marker checks every loaded enabled leaf below it, and clicking again once they are all checked unchecks them and clears those paths too. With only unloaded branches below, no leaf to check and no such path, clicking the marker just expands it."
               },
               {
                 "name": "searchable",
@@ -5576,7 +5577,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5607,7 +5608,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 574
+            "line": 585
           }
         },
         {
@@ -5615,7 +5616,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 50
+            "line": 51
           }
         },
         {
@@ -5623,7 +5624,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 40
+            "line": 41
           }
         },
         {
@@ -5631,7 +5632,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 81
+            "line": 82
           }
         },
         {
@@ -5639,7 +5640,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 58
+            "line": 59
           }
         },
         {
@@ -5648,7 +5649,7 @@
           "target": "ChartGeometry",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 16
+            "line": 17
           }
         },
         {
@@ -5656,7 +5657,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 560
+            "line": 570
           }
         },
         {
@@ -5664,7 +5665,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 34
+            "line": 35
           }
         },
         {
@@ -5672,7 +5673,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 68
+            "line": 69
           }
         },
         {
@@ -5680,7 +5681,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 548
+            "line": 558
           }
         },
         {
@@ -5688,7 +5689,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 56
+            "line": 57
           }
         },
         {
@@ -5696,7 +5697,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 76
+            "line": 77
           }
         },
         {
@@ -5704,7 +5705,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 70
+            "line": 71
           }
         },
         {
@@ -5712,7 +5713,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 91
+            "line": 92
           }
         },
         {
@@ -5720,7 +5721,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 35
+            "line": 36
           }
         },
         {
@@ -5728,7 +5729,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 38
+            "line": 39
           }
         },
         {
@@ -5736,7 +5737,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 19
+            "line": 20
           }
         },
         {
@@ -5744,7 +5745,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 20
+            "line": 21
           }
         },
         {
@@ -5752,7 +5753,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 36
+            "line": 37
           }
         },
         {
@@ -5760,7 +5761,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 77
+            "line": 78
           }
         },
         {
@@ -5768,7 +5769,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 67
+            "line": 68
           }
         },
         {
@@ -5776,7 +5777,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 17
+            "line": 18
           }
         },
         {
@@ -5784,7 +5785,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 18
+            "line": 19
           }
         },
         {
@@ -5792,7 +5793,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 571
+            "line": 582
           }
         },
         {
@@ -5816,7 +5817,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 130
+            "line": 131
           }
         },
         {
@@ -5832,7 +5833,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 129
+            "line": 130
           }
         },
         {
@@ -5840,7 +5841,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 292
+            "line": 291
           }
         },
         {
@@ -5848,7 +5849,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 528
+            "line": 538
           }
         },
         {
@@ -5856,7 +5857,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 537
+            "line": 547
           }
         },
         {
@@ -5865,7 +5866,7 @@
           "target": "useChartGeometry",
           "source": {
             "path": "packages/ui/src/components/chart.tsx",
-            "line": 16
+            "line": 17
           }
         }
       ],
@@ -5934,8 +5935,8 @@
               {
                 "name": "type",
                 "type": "\"line\" | \"bar\" | \"area\" | \"area-stacked\" | \"area-share\" | \"bar-horizontal\" | \"bar-stacked\" | \"bar-share\" | \"donut\"",
-                "description": "由任务选定的形式，不是外观偏好：line 随时间/次序的趋势；bar 类别间比较；area 随时间的量（单系列第一色淡面，多系列默认半透叠放）；area-stacked 随时间的构成（淡色带加足色上沿，彼此相切）；bar-horizontal 类别名长或按大小排序的排行；bar-stacked 类别间的构成比较；bar-share / area-share 构成的占比怎样变（各行归一到该行之和，量轴固定 0–100%，原值与占比同时在读数与数据表里；两个以上系列，值不得为负；含未知 / 不适用值或和为 0 的行不画，已知原值在数据表里如实列出；不接受 references 与 valueDomain）；donut 只用于 2–5 个部分、一眼占比的单个整体（rows 必须正好一行）。必填。",
-                "descriptionEn": "The form chosen by the task, not an appearance preference: line for trends over time/order; bar for category comparison; area for a quantity over time (a first-color wash for one series, translucent overlap by default for several); area-stacked for composition over time (opaque light bands with full-color top edges, touching); bar-horizontal for long category names or size-ordered rankings; bar-stacked for composition comparison between categories; bar-share / area-share for how the share of a composition changes (each row is normalised to its own sum on a fixed 0–100% axis, with original value and share together in the readout and table; two or more series, no negative values; a row with an unknown / not-applicable value or a sum of zero is not drawn while its known original values stay in the data table; references and valueDomain are not accepted); donut only for an at-a-glance share of 2–5 parts in a single whole (rows must be exactly one). Required."
+                "description": "由任务选定的形式，不是外观偏好：line 随时间/次序的趋势；bar 类别间比较；area 随时间的量（单系列第一色淡面，多系列默认半透叠放）；area-stacked 随时间的构成（淡色带加足色上沿，彼此相切）；bar-horizontal 类别名长或按大小排序的排行（类别轴随最长名称变宽，最多占绘图区的三分之一，超长名称在轴上截断，全文在读数与数据表里）；bar-stacked 类别间的构成比较；bar-share / area-share 构成的占比怎样变（各行归一到该行之和，量轴固定 0–100%，原值与占比同时在读数与数据表里；两个以上系列，值不得为负；含未知 / 不适用值或和为 0 的行不画，已知原值在数据表里如实列出；不接受 references 与 valueDomain）；donut 只用于 2–5 个部分、一眼占比的单个整体（rows 必须正好一行）。必填。",
+                "descriptionEn": "The form chosen by the task, not an appearance preference: line for trends over time/order; bar for category comparison; area for a quantity over time (a first-color wash for one series, translucent overlap by default for several); area-stacked for composition over time (opaque light bands with full-color top edges, touching); bar-horizontal for long category names or size-ordered rankings (the category axis grows with the longest name up to a third of the plot; longer names are truncated on the axis and stay whole in the readout and table); bar-stacked for composition comparison between categories; bar-share / area-share for how the share of a composition changes (each row is normalised to its own sum on a fixed 0–100% axis, with original value and share together in the readout and table; two or more series, no negative values; a row with an unknown / not-applicable value or a sum of zero is not drawn while its known original values stay in the data table; references and valueDomain are not accepted); donut only for an at-a-glance share of 2–5 parts in a single whole (rows must be exactly one). Required."
               },
               {
                 "name": "categoryLabel / valueLabel",
@@ -5952,8 +5953,8 @@
               {
                 "name": "rows",
                 "type": "readonly ChartRow[]",
-                "description": "稳定id、分类名称与values；值为finite number或{state:unknown|not-applicable,label}。必须有真实记录；donut 要求正好一行，且每个部分必须是已知的非负数。",
-                "descriptionEn": "Stable ids, category names and values: finite numbers or explicitly named unknown/not-applicable values. ready requires actual records; donut requires exactly one row, with every part a known non-negative number."
+                "description": "稳定id、分类名称与values；值为finite number或{state:unknown|not-applicable,label}。必须有真实记录；bar-horizontal、bar-stacked、area-stacked 的已知值不得为负，违反抛错（有跨零的值时用 bar）；donut 要求正好一行，且每个部分必须是已知的非负数。",
+                "descriptionEn": "Stable ids, category names and values: finite numbers or explicitly named unknown/not-applicable values. ready requires actual records; bar-horizontal, bar-stacked and area-stacked throw on a negative known value (use bar when values cross zero); donut requires exactly one row, with every part a known non-negative number."
               },
               {
                 "name": "contextLabel",
@@ -5988,8 +5989,8 @@
               {
                 "name": "valueLabels",
                 "type": "boolean",
-                "description": "把格式化后的值标在柱的数据端外侧（纵柱在柱顶上方，横柱在末端之后，负值在另一侧）；同时不再画量轴刻度与网格，基线保留。只对 bar 与 bar-horizontal 生效，且只允许单系列、至多 12 行（每根柱的类别带得放得下一个标签）；其他类型、多系列或行数超出抛错。文字用墨阶、dense 档、等宽数字；formatValue 只取字符串或数字结果，返回节点时退回默认数值格式。",
-                "descriptionEn": "Put the formatted value just outside the data end of each bar (above a vertical bar, after the end of a horizontal one, on the other side for negative values); value-axis ticks and grid are then no longer drawn and the baseline stays. Only for bar and bar-horizontal, a single series and at most 12 rows (each category band must hold a label); any other type, several series or more rows throws. Text is ink, dense step, tabular figures; formatValue is read for strings or numbers only and falls back to the default number format when it returns a node."
+                "description": "把格式化后的值标在柱的数据端外侧（纵柱在柱顶上方，横柱在末端之后，纵柱的负值在柱底下方）；同时不再画量轴刻度与网格，基线保留。只对 bar 与 bar-horizontal 生效，且只允许单系列、至多 12 行（每根柱的类别带得放得下一个标签）；其他类型、多系列或行数超出抛错。文字用墨阶、dense 档、等宽数字；formatValue 只取字符串或数字结果，返回节点时退回默认数值格式。",
+                "descriptionEn": "Put the formatted value just outside the data end of each bar (above a vertical bar, after the end of a horizontal one, below the end of a negative vertical bar); value-axis ticks and grid are then no longer drawn and the baseline stays. Only for bar and bar-horizontal, a single series and at most 12 rows (each category band must hold a label); any other type, several series or more rows throws. Text is ink, dense step, tabular figures; formatValue is read for strings or numbers only and falls back to the default number format when it returns a node."
               },
               {
                 "name": "formatValue",
@@ -6132,11 +6133,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/chart.tsx",
-              "line": 574
+              "line": 585
             },
             "rootEntry": {
               "path": "packages/ui/src/components/chart.tsx",
-              "line": 574
+              "line": 585
             },
             "status": "PRESENT"
           }
@@ -6152,7 +6153,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6391,7 +6392,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6420,7 +6421,7 @@
         {
           "name": "CheckboxPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/checkbox/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/checkbox/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/checkbox.tsx",
             "line": 38
@@ -6633,7 +6634,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6838,7 +6839,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7047,7 +7048,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7084,7 +7085,7 @@
         {
           "name": "CollapsiblePrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/collapsible/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/collapsible/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/collapsible.tsx",
             "line": 26
@@ -7335,7 +7336,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7638,7 +7639,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7779,7 +7780,7 @@
         {
           "name": "ComboboxPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/combobox/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/combobox/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
             "line": 174
@@ -8353,7 +8354,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8494,7 +8495,7 @@
         {
           "name": "CommandPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
             "line": 238
@@ -8867,7 +8868,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9469,7 +9470,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9498,7 +9499,7 @@
         {
           "name": "ConfirmActionPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/alert-dialog/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/alert-dialog/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/confirm-action.tsx",
             "line": 92
@@ -9726,7 +9727,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9993,7 +9994,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10086,7 +10087,7 @@
         {
           "name": "ContextMenuPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/context-menu/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/context-menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/context-menu.tsx",
             "line": 26
@@ -10570,7 +10571,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10806,7 +10807,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11012,7 +11013,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11541,7 +11542,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11675,14 +11676,14 @@
         "notes": [
           "granularity 不是 day 时，输入框不再是浏览器的原生日期控件，所以显示格式由区域的 periodWeek / periodMonth / periodQuarter / periodYear 决定，也接受 2026-W44、2026-11、2026-Q4、2026 这类 ISO 写法。",
           "日期输入的本地显示格式由浏览器决定，提交值固定 YYYY-MM-DD。",
-          "日历选择完成后关闭；调用方拒绝变更时原日期仍保留。",
+          "日历选择完成后关闭；调用方拒绝变更时原日期仍保留。再点已选的日期或周期不算清除，值不变也不上报，只关闭日历；清除用清除按钮。",
           "没有自动修正越界值或推断提交成功；用 FieldError 表达调用方已知错误。",
           "年份可键到 5–6 位、分段可只填一半：这些键入中间态不是值，不上报也不清空已有值，焦点离开后回到已接受的日期；只有所有分段都被清空才是清除。"
         ],
         "notesEn": [
           "With a granularity other than day the input is no longer the browser's native date control, so the display format comes from the locale's periodWeek / periodMonth / periodQuarter / periodYear, and ISO spellings such as 2026-W44, 2026-11, 2026-Q4 and 2026 are also accepted.",
           "The browser chooses the displayed date format; submission uses YYYY-MM-DD.",
-          "Calendar selection closes the popup. Rejected controlled changes preserve the prior date.",
+          "Calendar selection closes the popup. Rejected controlled changes preserve the prior date. Clicking the selected date or period again is not a clear: the value stays, nothing is reported and the calendar just closes. The clear button clears.",
           "The component does not repair bounds or infer submission success. Express known errors with FieldError.",
           "The year can be typed to five or six digits and a segment can be left half-filled. These in-between entries are not values: they neither report nor clear the accepted date, and the input returns to it once focus leaves. Only emptying every segment clears."
         ],
@@ -11755,7 +11756,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12012,7 +12013,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12137,12 +12138,12 @@
           }
         ],
         "notes": [
-          "应用仅在日期与时间完整时可用，点击后仍由调用方接受值。",
+          "应用仅在日期与时间完整时可用，点击后仍由调用方接受值。在日历里再点已选的日期不会清空草稿。",
           "原生 min/max/step 校验与业务可用性是独立事实；回调不是保存成功。",
           "浏览器显示格式可随用户环境变化，提交保持无时区的本地文本。"
         ],
         "notesEn": [
-          "Apply is available only with complete date and time; the caller still accepts the value.",
+          "Apply is available only with complete date and time; the caller still accepts the value. Clicking the selected day in the calendar again keeps the draft.",
           "Native min/max/step validation and business availability are independent. A callback is not successful persistence.",
           "The browser's display may vary by environment; submission remains unzoned local text."
         ],
@@ -12215,7 +12216,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12451,7 +12452,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12728,7 +12729,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12837,7 +12838,7 @@
         {
           "name": "DialogPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/dialog/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/dialog/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/dialog.tsx",
             "line": 100
@@ -13219,7 +13220,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13320,7 +13321,7 @@
         {
           "name": "DrawerPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/drawer/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/drawer/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/drawer.tsx",
             "line": 81
@@ -13702,7 +13703,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13979,7 +13980,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14088,7 +14089,7 @@
         {
           "name": "FieldPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/field/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/field/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/field.tsx",
             "line": 171
@@ -14517,7 +14518,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14562,7 +14563,7 @@
         {
           "name": "FieldsetPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/fieldset/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/fieldset/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/fieldset.tsx",
             "line": 43
@@ -14754,7 +14755,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14944,7 +14945,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15232,7 +15233,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15637,7 +15638,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15843,7 +15844,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15866,7 +15867,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/heatmap.tsx",
-            "line": 155
+            "line": 158
           }
         },
         {
@@ -15946,8 +15947,8 @@
           "热度",
           "网格"
         ],
-        "decisions": "行列都是类别轴，不是数据系列——没有身份要区分，只有量的大小，因此只用一种色相：数据是色，取第一色（花青）与纸调和的 12% 到足色。未知/不适用格用清墨斜线纹，不进色阶，避免与真实的小量值混淆。给出 levels 时改按档上色：档由应用声明，浓淡随档次递增，去掉色相仍读得出次序；档名进入格子的名称与读数。",
-        "decisionsEn": "Rows and columns are both categorical axes, not data series — there is no identity to distinguish, only magnitude, so it uses one hue: data is color, the first series color (huaqing) mixed with paper from 12% to full. Unknown/not-applicable cells carry a diagonal ink hatch instead of a scale step, so they are never mistaken for a small real value. With levels, cells take the color of their level: the application declares the levels, depth grows with the level so the order survives without hue, and the level name joins each cell's name and the readout.",
+        "decisions": "行列都是类别轴，不是数据系列——没有身份要区分，只有量的大小，因此只用一种色相：数据是色，取第一色（花青）与纸调和的 12% 到足色。未知/不适用格用清墨斜线纹，不进色阶，避免与真实的小量值混淆。给出 levels 时改按档上色：档由应用声明，浓淡随档次递增，去掉色相仍读得出次序；档名进入格子的名称与读数。未标 tone 的最低档读作不需要注意，只铺一层清染，一张正常的图不是一大片灰。",
+        "decisionsEn": "Rows and columns are both categorical axes, not data series — there is no identity to distinguish, only magnitude, so it uses one hue: data is color, the first series color (huaqing) mixed with paper from 12% to full. Unknown/not-applicable cells carry a diagonal ink hatch instead of a scale step, so they are never mistaken for a small real value. With levels, cells take the color of their level: the application declares the levels, depth grows with the level so the order survives without hue, and the level name joins each cell's name and the readout. A lowest level without a tone reads as nothing to look at and takes only a faint wash, so a healthy chart is not a large field of gray.",
         "api": [
           {
             "name": "Heatmap",
@@ -15988,8 +15989,8 @@
               {
                 "name": "rows",
                 "type": "readonly ChartRow[]",
-                "description": "行维度的取值，2 个以上；每行必须对每个 column.key 给出 finite number 或 {state, label}。",
-                "descriptionEn": "The row dimension's values, two or more; every row must supply a finite number or {state, label} for every column key."
+                "description": "行维度的取值，2 个以上；每行必须对每个 column.key 给出 finite number 或 {state, label}。连续色阶的已知值不得为负，违反抛错（单色的浓淡只表达大小）；有负值时声明 levels，其第一档覆盖更小的值，负值在内。",
+                "descriptionEn": "The row dimension's values, two or more; every row must supply a finite number or {state, label} for every column key. The continuous scale throws on a negative known value (one hue's depth only expresses magnitude); declare levels when values go negative, since the first level covers every smaller value."
               },
               {
                 "name": "formatValue",
@@ -16120,11 +16121,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/heatmap.tsx",
-              "line": 155
+              "line": 158
             },
             "rootEntry": {
               "path": "packages/ui/src/components/heatmap.tsx",
-              "line": 155
+              "line": 158
             },
             "status": "PRESENT"
           }
@@ -16140,7 +16141,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16193,7 +16194,7 @@
         {
           "name": "HoverCardPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/preview-card/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/preview-card/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/hover-card.tsx",
             "line": 25
@@ -16445,7 +16446,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16624,7 +16625,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17085,7 +17086,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17265,7 +17266,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17488,7 +17489,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17844,7 +17845,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17997,7 +17998,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18160,7 +18161,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18497,7 +18498,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18677,7 +18678,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18857,7 +18858,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19022,7 +19023,7 @@
         {
           "name": "MenuPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/menu/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/menu.tsx",
             "line": 101
@@ -19613,7 +19614,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19658,7 +19659,7 @@
         {
           "name": "MeterPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/meter/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/meter/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/meter.tsx",
             "line": 39
@@ -19930,7 +19931,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20109,7 +20110,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20282,7 +20283,7 @@
         {
           "name": "NavigationMenuPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/navigation-menu/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/navigation-menu/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/navigation-menu.tsx",
             "line": 85
@@ -20679,7 +20680,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20748,7 +20749,7 @@
         {
           "name": "NumberFieldPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/number-field/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/number-field/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
             "line": 135
@@ -21101,7 +21102,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21352,7 +21353,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21644,7 +21645,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22191,7 +22192,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22405,7 +22406,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22586,7 +22587,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22664,7 +22665,7 @@
         {
           "name": "PopoverPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/popover/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/popover/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/popover.tsx",
             "line": 181
@@ -22980,7 +22981,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23033,7 +23034,7 @@
         {
           "name": "ProgressPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/progress/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/progress/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/progress.tsx",
             "line": 44
@@ -23311,7 +23312,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23496,7 +23497,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23685,7 +23686,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23739,7 +23740,7 @@
         {
           "name": "RadioPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/radio/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/radio/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/radio-group.tsx",
             "line": 50
@@ -24017,7 +24018,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24249,7 +24250,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24441,7 +24442,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24784,7 +24785,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25081,7 +25082,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25104,7 +25105,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scatter-chart.tsx",
-            "line": 89
+            "line": 90
           }
         },
         {
@@ -25112,7 +25113,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scatter-chart.tsx",
-            "line": 19
+            "line": 20
           }
         },
         {
@@ -25120,7 +25121,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scatter-chart.tsx",
-            "line": 15
+            "line": 16
           }
         },
         {
@@ -25128,7 +25129,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scatter-chart.tsx",
-            "line": 16
+            "line": 17
           }
         }
       ],
@@ -25196,8 +25197,8 @@
               {
                 "name": "formatX / formatY",
                 "type": "(value: number) => ReactNode",
-                "description": "格式化已知数值；默认按 UILocale 数值 Intl。",
-                "descriptionEn": "Format known values; defaults to Intl number formatting for UILocale."
+                "description": "格式化已知数值；默认按 UILocale 数值 Intl。读数与数据表可用节点；轴上的文字只取字符串或数字结果，返回节点时退回默认数值格式。",
+                "descriptionEn": "Format known values; defaults to Intl number formatting for UILocale. The readout and table accept nodes; axis ticks are read for strings or numbers only and fall back to the default number format when a node is returned."
               }
             ]
           }
@@ -25276,11 +25277,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scatter-chart.tsx",
-              "line": 89
+              "line": 90
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scatter-chart.tsx",
-              "line": 89
+              "line": 90
             },
             "status": "PRESENT"
           }
@@ -25296,7 +25297,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25357,7 +25358,7 @@
         {
           "name": "ScrollAreaPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/scroll-area/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/scroll-area/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
             "line": 123
@@ -25738,7 +25739,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25963,7 +25964,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26275,7 +26276,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26312,7 +26313,7 @@
         {
           "name": "SegmentedControlItemPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/radio/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/radio/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/segmented-control.tsx",
             "line": 51
@@ -26597,7 +26598,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26674,7 +26675,7 @@
         {
           "name": "SelectPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/select/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/select/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/select.tsx",
             "line": 273
@@ -27180,7 +27181,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27374,7 +27375,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27580,7 +27581,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28312,7 +28313,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28610,7 +28611,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28780,7 +28781,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28857,7 +28858,7 @@
         {
           "name": "SliderPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/slider/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/slider/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/slider.tsx",
             "line": 133
@@ -29271,7 +29272,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -29491,7 +29492,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -29884,7 +29885,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30069,7 +30070,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30346,7 +30347,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30375,7 +30376,7 @@
         {
           "name": "SwitchPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/switch/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/switch/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/switch.tsx",
             "line": 49
@@ -30589,7 +30590,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31063,7 +31064,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31132,7 +31133,7 @@
         {
           "name": "TabsPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tabs/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tabs/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/tabs.tsx",
             "line": 74
@@ -31411,7 +31412,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31680,7 +31681,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31709,7 +31710,7 @@
         {
           "name": "TextareaPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/field/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/field/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/textarea.tsx",
             "line": 88
@@ -31938,7 +31939,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32215,7 +32216,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32444,7 +32445,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32663,7 +32664,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32955,7 +32956,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -33016,7 +33017,7 @@
         {
           "name": "ToastPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toast/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toast/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/toast.tsx",
             "line": 195
@@ -33342,7 +33343,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -33632,7 +33633,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -33922,7 +33923,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -34174,7 +34175,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -34251,7 +34252,7 @@
         {
           "name": "ToolbarPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toolbar/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/toolbar/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/toolbar.tsx",
             "line": 35
@@ -34527,7 +34528,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -34584,7 +34585,7 @@
         {
           "name": "TooltipPrimitive",
           "kind": "value",
-          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tooltip/index.parts\"",
+          "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/.claude/worktrees/trusting-kare-538434/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/tooltip/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/tooltip.tsx",
             "line": 176
@@ -34967,7 +34968,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -35201,7 +35202,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -35463,7 +35464,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -35714,7 +35715,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -35870,8 +35871,8 @@
               {
                 "name": "loadChildren",
                 "type": "(node: TreeNode) => Promise<readonly TreeNode[]>",
-                "description": "第一次展开一个没有 children、也没有标 isLeaf 的节点时调用（命名与 Cascader 一致）。等待时该节点标 aria-busy，并在其下显示 locale 的「正在加载」；reject 时显示「加载失败」与重试按钮（节点上按 → 也可重试）；结果为空数组则该节点成为叶子。结果按节点缓存，组件不重复请求。未加载的分支在 checkable 模式下不能被勾选，点它只会展开。",
-                "descriptionEn": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands."
+                "description": "第一次展开一个没有 children、也没有标 isLeaf 的节点时调用（命名与 Cascader 一致）。等待时该节点标 aria-busy，并在其下显示 locale 的「正在加载」；reject 时显示「加载失败」与重试按钮（节点上按 → 也可重试）；结果为空数组则该节点成为叶子。结果按节点缓存，组件不重复请求。未加载的分支在 checkable 模式下不能被勾选，点它只会展开；它的祖先最多显示 mixed，因为还不知道下面有什么。这样的祖先上，点击勾选其下全部已加载的启用叶子，它们都已勾选时再点则全部取消；下面只有未加载分支、没有可勾的叶子时，点击只是展开它。",
+                "descriptionEn": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands. Its ancestors show mixed at most, because what lies below is not yet known. Clicking such an ancestor checks every loaded enabled leaf below it, and clicking again once they are all checked unchecks them. With only unloaded branches and no leaf to check below it, a click just expands it."
               },
               {
                 "name": "query",
@@ -36009,7 +36010,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -36313,7 +36314,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -36551,7 +36552,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -37054,7 +37055,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.3.0",
+        "version": "5.4.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -37080,7 +37081,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 225
+            "line": 229
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -37098,7 +37099,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 226
+            "line": 230
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -37306,7 +37307,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 47
+            "line": 48
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -37320,7 +37321,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 116
+            "line": 117
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -37396,14 +37397,14 @@
       "definitions": [
         {
           "name": "--qy-border",
-          "value": "color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent)",
+          "value": "color-mix(in srgb, var(--qy-ink) calc(1.5 * var(--qy-ink-qing)), transparent)",
           "references": [
             "--qy-ink",
             "--qy-ink-qing"
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 170
+            "line": 174
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -37422,7 +37423,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 171
+            "line": 175
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -37441,7 +37442,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 175
+            "line": 179
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -37549,7 +37550,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 104
+            "line": 105
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -37562,7 +37563,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 149
+            "line": 150
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -37580,7 +37581,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 105
+            "line": 106
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -37593,7 +37594,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 150
+            "line": 151
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -37611,7 +37612,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 106
+            "line": 107
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -37624,7 +37625,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 151
+            "line": 152
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -37642,7 +37643,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 107
+            "line": 108
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -37655,7 +37656,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 152
+            "line": 153
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -37673,7 +37674,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 108
+            "line": 109
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -37686,7 +37687,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 153
+            "line": 154
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -38299,7 +38300,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 71
+            "line": 72
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -38313,7 +38314,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 128
+            "line": 129
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -38332,7 +38333,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 73
+            "line": 74
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -38346,7 +38347,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 130
+            "line": 131
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -38380,7 +38381,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 195
+            "line": 199
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -38414,7 +38415,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 190
+            "line": 194
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -38433,7 +38434,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 72
+            "line": 73
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -38447,7 +38448,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 129
+            "line": 130
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -38459,14 +38460,14 @@
       "definitions": [
         {
           "name": "--qy-danger-graphic",
-          "value": "color-mix(in srgb, var(--qy-red-500) 50%, var(--qy-black))",
+          "value": "color-mix(in srgb, var(--qy-red-500) 55%, var(--qy-neutral-950))",
           "references": [
             "--qy-red-500",
-            "--qy-black"
+            "--qy-neutral-950"
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 95
+            "line": 96
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -38480,7 +38481,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 143
+            "line": 144
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -38498,7 +38499,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 74
+            "line": 75
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -38511,7 +38512,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 131
+            "line": 132
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -38543,7 +38544,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 245
+            "line": 249
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -38575,7 +38576,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 251
+            "line": 255
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -39247,7 +39248,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 164
+            "line": 165
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -39267,7 +39268,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 166
+            "line": 167
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -39285,7 +39286,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 165
+            "line": 166
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -39303,7 +39304,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 167
+            "line": 168
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -39374,7 +39375,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 229
+            "line": 233
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -39583,7 +39584,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 79
+            "line": 80
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -39596,7 +39597,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 136
+            "line": 137
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -39614,7 +39615,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 80
+            "line": 81
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -39627,7 +39628,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 137
+            "line": 138
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -39646,7 +39647,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 98
+            "line": 99
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -39660,7 +39661,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 146
+            "line": 147
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -39692,7 +39693,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 248
+            "line": 252
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -39723,7 +39724,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 114
+            "line": 115
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -39769,7 +39770,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 182
+            "line": 186
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -40311,7 +40312,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 244
+            "line": 248
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -40343,7 +40344,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 61
+            "line": 62
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -40354,7 +40355,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 123
+            "line": 124
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -40502,7 +40503,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 117
+            "line": 118
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -40538,7 +40539,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 187
+            "line": 191
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -40572,7 +40573,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 194
+            "line": 198
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -40590,7 +40591,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 188
+            "line": 192
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -40624,7 +40625,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 189
+            "line": 193
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41072,7 +41073,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 183
+            "line": 187
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41175,7 +41176,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 64
+            "line": 65
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -41186,7 +41187,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 126
+            "line": 127
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -41202,7 +41203,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 62
+            "line": 63
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -41213,7 +41214,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 124
+            "line": 125
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -41229,7 +41230,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 63
+            "line": 64
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -41240,7 +41241,7 @@
           "references": [],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 125
+            "line": 126
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -41290,7 +41291,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 255
+            "line": 259
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41308,7 +41309,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 259
+            "line": 263
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41326,7 +41327,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 260
+            "line": 264
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41344,7 +41345,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 257
+            "line": 261
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41362,7 +41363,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 264
+            "line": 268
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41380,7 +41381,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 266
+            "line": 270
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41398,7 +41399,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 256
+            "line": 260
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41416,7 +41417,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 267
+            "line": 271
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41665,7 +41666,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 77
+            "line": 78
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -41678,7 +41679,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 134
+            "line": 135
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -41697,7 +41698,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 78
+            "line": 79
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -41710,7 +41711,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 135
+            "line": 136
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -41729,7 +41730,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 97
+            "line": 98
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -41743,7 +41744,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 145
+            "line": 146
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -41775,7 +41776,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 247
+            "line": 251
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41793,7 +41794,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 45
+            "line": 46
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -41806,7 +41807,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 118
+            "line": 119
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -41825,7 +41826,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 218
+            "line": 222
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41843,7 +41844,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 58
+            "line": 59
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -41856,7 +41857,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 121
+            "line": 122
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -41889,7 +41890,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 216
+            "line": 220
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41908,7 +41909,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 198
+            "line": 202
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -41926,7 +41927,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 46
+            "line": 47
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -41940,7 +41941,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 119
+            "line": 120
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -41973,7 +41974,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 217
+            "line": 221
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -42005,7 +42006,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 222
+            "line": 226
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -42025,7 +42026,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 223
+            "line": 227
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -44815,7 +44816,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 232
+            "line": 236
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -44851,7 +44852,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 239
+            "line": 243
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -44869,7 +44870,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 240
+            "line": 244
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -44887,7 +44888,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 231
+            "line": 235
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -44937,7 +44938,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 75
+            "line": 76
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -44950,7 +44951,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 132
+            "line": 133
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -44969,7 +44970,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 76
+            "line": 77
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -44982,7 +44983,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 133
+            "line": 134
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -45001,7 +45002,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 96
+            "line": 97
           },
           "context": ":root,\n  .light,\n  [data-theme=\"light\"]",
           "complete": true
@@ -45015,7 +45016,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 144
+            "line": 145
           },
           "context": ".dark,\n  [data-theme=\"dark\"]",
           "complete": true
@@ -45047,7 +45048,7 @@
           ],
           "source": {
             "path": "packages/ui/tokens/semantic.css",
-            "line": 246
+            "line": 250
           },
           "context": ":root,\n  .light,\n  .dark,\n  [data-theme]",
           "complete": true
@@ -45599,111 +45600,6 @@
     "scripts/ai-eval/prepare-matrix.mjs",
     "scripts/ai-eval/prepare.mjs",
     "scripts/ai-eval/record.mjs",
-    "scripts/ai-eval/runs/b-t01-1/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/b-t01-2/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/b-t01-3/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/b-t02-1/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/b-t02-2/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/b-t02-3/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/b-t03-1/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/b-t03-2/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/b-t03-3/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/b-t04-1/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/b-t04-2/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/b-t04-3/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/n-t01-1/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/n-t01-2/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/n-t01-3/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/n-t02-1/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/n-t02-2/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/n-t02-3/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/n-t03-1/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/n-t03-2/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/n-t03-3/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/n-t04-1/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/n-t04-2/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/n-t04-3/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-0611b23c-t01-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-0611b23c-t01-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-0611b23c-t02-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-0611b23c-t02-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-0611b23c-t03-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-0611b23c-t03-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-0611b23c-t04-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-0611b23c-t04-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-11cc2d55-t01-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-11cc2d55-t01-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-11cc2d55-t02-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-11cc2d55-t02-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-11cc2d55-t03-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-11cc2d55-t03-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-11cc2d55-t04-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-11cc2d55-t04-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-191c4d7d-t01-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-191c4d7d-t01-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-191c4d7d-t02-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-191c4d7d-t02-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-191c4d7d-t03-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-191c4d7d-t03-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-191c4d7d-t04-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-191c4d7d-t04-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-7e98a6b9-t01-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-7e98a6b9-t01-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-7e98a6b9-t02-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-7e98a6b9-t02-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-7e98a6b9-t03-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-7e98a6b9-t03-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-7e98a6b9-t04-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-7e98a6b9-t04-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-92e26fbd-private-subpath/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-92e26fbd-public-subpath/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-92e26fbd-t01-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-92e26fbd-t01-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-92e26fbd-t02-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-92e26fbd-t02-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-92e26fbd-t03-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-92e26fbd-t03-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-92e26fbd-t04-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-92e26fbd-t04-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-a88b9dde-private-subpath/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-a88b9dde-public-subpath/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-a88b9dde-t01-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-a88b9dde-t01-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-a88b9dde-t02-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-a88b9dde-t02-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-a88b9dde-t03-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-a88b9dde-t03-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-a88b9dde-t04-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-a88b9dde-t04-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-e392da7f-t01-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-e62c8e0f-private-subpath/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-e62c8e0f-public-subpath/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-e62c8e0f-t01-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-e62c8e0f-t01-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-e62c8e0f-t02-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-e62c8e0f-t02-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-e62c8e0f-t03-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-e62c8e0f-t03-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-e62c8e0f-t04-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-e62c8e0f-t04-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fd407ba0-t01-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fd407ba0-t01-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fd407ba0-t02-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fd407ba0-t02-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fd407ba0-t03-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fd407ba0-t03-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fd407ba0-t04-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fd407ba0-t04-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fe0a301a-private-subpath/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fe0a301a-public-subpath/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fe0a301a-t01-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fe0a301a-t01-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fe0a301a-t02-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fe0a301a-t02-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fe0a301a-t03-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fe0a301a-t03-good/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fe0a301a-t04-bad/evaluation/vitest.config.mjs",
-    "scripts/ai-eval/runs/self-fe0a301a-t04-good/evaluation/vitest.config.mjs",
     "scripts/ai-eval/selftest.mjs",
     "scripts/ai-eval/summarize.mjs",
     "scripts/ai-eval/tool.mjs",

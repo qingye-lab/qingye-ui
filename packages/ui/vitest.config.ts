@@ -28,6 +28,8 @@ const isolatedFiles = [
   "dialog", "tag-input", "avatar", "bulk-action-bar",
   // toast 的管理器是模块级单例。
   "toast",
+  // vi.mock("recharts")：复用模块时 recharts 已被其他文件加载，mock 不生效。
+  "chart-axis",
 ].map((name) => `test/${name}.test.{ts,tsx}`);
 
 export default defineConfig({

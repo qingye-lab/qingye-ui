@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/cascader
 Source: packages/ui/src/components/cascader.tsx
-Source SHA-256: 404842647973eafb3974d29b0158669d28b573e50a16bb0808e0f679935593f9
+Source SHA-256: 7505bc1141d445780df672e96c0d8fa7ad119b68fe7799a7561fda94974e72e6
 
 Choose one value along a root-to-leaf path, or check several paths, with each level's candidates in its own column.
 
@@ -82,7 +82,7 @@ Trigger, column-wise candidate popup and form value. The trigger shares Select's
 - value / defaultValue: string[] | null  (multiple: readonly (readonly string[])[]). Single: the path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. Multiple: an array of checked leaf paths, an empty array is no selection and the order follows the option tree. A path segment that is not loaded yet falls back to its value in the trigger.
 - onValueChange: (path: string[] | null, options: CascaderOption[]) => void  (multiple: (paths: string[][], options: CascaderOption[][]) => void). Called when a new value is submitted; the second argument is the nodes on the path (in multiple mode, one group per path). Submitting the same value does not call it.
 - selectParent: boolean; default false. Only leaves submit by default; with true any level can submit (Ant Design's changeOnSelect).
-- loadChildren: (option: CascaderOption) => Promise<CascaderOption[]>. Called when a node with neither children nor isLeaf is expanded. While waiting the column shows "Loading"; a rejection shows "Failed to load" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice. With multiple, a branch that still has an unloaded enabled descendant shows mixed at most, because what lies below is not yet known; a value path inside an unloaded enabled branch also shows that branch and its ancestors as mixed. Clicking the marker checks every loaded enabled leaf below it, and clicking again once they are all checked unchecks them and clears those paths too. With only unloaded branches below, no leaf to check and no such path, clicking the marker just expands it.
+- loadChildren: (option: CascaderOption) => Promise<CascaderOption[]>. Called when a node with neither children nor isLeaf is expanded. While waiting the column shows "Loading"; a rejection shows "Failed to load" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice.
 - searchable: boolean; default false. A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator, with the matched text in bold. Only known nodes are searched, so unloaded branches are not included. In multiple mode only leaf paths are listed, each with a check marker; Enter or a click checks it and the popup stays open with focus in the input.
 - placeholder: ReactNode; default locale.selectPlaceholder. Shown only without selection; cannot replace FieldLabel.
 - disabled / readOnly / required: boolean; default false. Read-only keeps the value and never opens the popup; a disabled field is not submitted; required joins native validation and sets aria-required. invalid follows Field.

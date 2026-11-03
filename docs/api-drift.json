@@ -219,7 +219,7 @@
       "component": "chart",
       "part": "Chart",
       "prop": "events",
-      "declaredAt": "packages/ui/src/components/chart.tsx:102"
+      "declaredAt": "packages/ui/src/components/chart.tsx:103"
     },
     {
       "component": "command",
@@ -890,7 +890,7 @@
       "component": "scatter-chart",
       "part": "ScatterChart",
       "prop": "style",
-      "declaredAt": "packages/ui/src/components/scatter-chart.tsx:18"
+      "declaredAt": "packages/ui/src/components/scatter-chart.tsx:19"
     },
     {
       "component": "search-input",

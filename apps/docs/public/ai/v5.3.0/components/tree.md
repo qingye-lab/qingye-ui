@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
-Source SHA-256: 51af2eea6dd23fce52b0b5062e83fd08bbb41be9369d653212f2d152d4d86b7a
+Source SHA-256: 00664fdc85c13950a92cd28f8f8b5a432dd0cdbd7d30c789aad35af23f6363ab
 
 稳定节点的层级、展开、焦点、独立单选与可选的级联勾选。
 
@@ -84,7 +84,7 @@ Written descriptions; the list above is the type-resolved fact.
 - checkable: boolean. 开启级联多选勾选模式；默认 false。为 true 时行点击与 Space 勾选当前节点，selectable 的单选点击不再生效。
 - checkedIds / defaultCheckedIds / onCheckedChange: readonly string[] / callback. 只含叶子节点 id；details.cancel() 不提交。勾选一个分支会把它启用的叶子后代一并加入或移出集合；禁用的叶子保留给定事实，不被级联改变。
 - defaultFocusedId: string | null. 首次渲染时 roving 入口所在的节点，默认是第一个可用节点；节点不可见或不可用时退回最近的可见可用祖先。展开其祖先由调用方通过 expandedIds 负责。TreeSelect 用它让弹层打开时焦点落在已选节点上。
-- loadChildren: (node: TreeNode) => Promise<readonly TreeNode[]>. 第一次展开一个没有 children、也没有标 isLeaf 的节点时调用（命名与 Cascader 一致）。等待时该节点标 aria-busy，并在其下显示 locale 的「正在加载」；reject 时显示「加载失败」与重试按钮（节点上按 → 也可重试）；结果为空数组则该节点成为叶子。结果按节点缓存，组件不重复请求。未加载的分支在 checkable 模式下不能被勾选，点它只会展开；它的祖先最多显示 mixed，因为还不知道下面有什么。这样的祖先上，点击勾选其下全部已加载的启用叶子，它们都已勾选时再点则全部取消；下面只有未加载分支、没有可勾的叶子时，点击只是展开它。
+- loadChildren: (node: TreeNode) => Promise<readonly TreeNode[]>. 第一次展开一个没有 children、也没有标 isLeaf 的节点时调用（命名与 Cascader 一致）。等待时该节点标 aria-busy，并在其下显示 locale 的「正在加载」；reject 时显示「加载失败」与重试按钮（节点上按 → 也可重试）；结果为空数组则该节点成为叶子。结果按节点缓存，组件不重复请求。未加载的分支在 checkable 模式下不能被勾选，点它只会展开。
 - query: string. 按标签过滤：保留匹配的节点及其全部祖先，其余隐藏，匹配的文字用 mark 标出，无匹配时显示 emptyContent。有匹配后代的分支被强制展开（此时它的展开开关不起作用，也不触发 onExpandedChange），清空 query 后回到原来的展开状态。过滤只隐藏：分支的勾选状态与级联仍按完整的树计算。传原始字符串即可，匹配不区分大小写并忽略首尾空白。
 - draggable / onMove / canDrop: boolean / (move: TreeMove, details: { event, reason: "keyboard" | "pointer" }) => void / (move: TreeMove) => boolean. draggable 打开调整位置：指针拖放按落点在行内的位置报告 before（上四分之一）、after（下四分之一）或 inside（中间），并画出插入线；键盘用 Ctrl/⌘+X 取起、Alt+↑ / ↓ / Enter 放到当前节点之前 / 之后 / 之内。Tree 不持有数据，只通过 onMove({ nodeId, targetId, position }) 报告，调用方改 nodes。不能放到自身或自身子树里、不能是位置不变的移动、禁用的节点既不能拖也不能作目标；canDrop 返回 false 可进一步禁止。取起、放下、取消与不允许的位置都通过 role=status 的区域播报。
 - aria-label / aria-labelledby: string. 必填其一：树的名称，落在 role=tree 的根上；缺失或为空时抛错。各节点的名称来自节点自己的 label。

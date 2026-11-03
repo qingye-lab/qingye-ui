@@ -175,6 +175,8 @@ Components cannot infer facts they do not have. Clicking Save without an outcome
 
 Group fields and actions around a shared task. Cards serve objects needing independent boundaries. Headings, alignment, and spacing can organize reading and settings. Open, enclosed, inset, and raised are choices, not four required new components.
 
+Overviews and dashboards put many objects on screen to be read together, so settle the order first: one primary reading takes the largest place and the rest support it. Enclose blocks that sit side by side and are read independently; use headings and spacing for content read as one continuous passage. All open leaves no boundaries; all boxed returns to a flat row of equals. Normal states do not spread large areas of color or gray, so color stays with what needs attention. Each scope uses one kind of boundary, and overriding global tokens is not the way to supply it.
+
 Comparison retains necessary two-dimensional relationships. Compact density may tighten relationship spacing but cannot mechanically shrink text and touch targets. Empty states make an entry clear and yield when content arrives. Refreshes retain still-valid working space.
 
 Use existing role tokens and layout compositions. Add a token only when a relationship needs independent adjustment and has a clear consumer. Structural `0`, percentages, `fr`, ordinary flex/grid, and actual data values do not require tokens.

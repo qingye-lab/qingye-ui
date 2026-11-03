@@ -1,9 +1,9 @@
 # 图表 Chart
 
-Package: @qingye_lab/ui@5.3.0
+Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
-Source SHA-256: 08d6d12e26032c4bd9afae849ca0efd03a5c3ac15e38582e9ee4c2d7a079cc75
+Source SHA-256: 2520f2b39351f8ffe7b60cb12afb200d3e3cab3b64c402eebcff4f19fd9db480
 
 九种由任务选定的形式——折线、柱状、面积、堆叠面积、占比面积、横向柱、堆叠柱、占比柱、环形；同源的图形、命名的轴与按需展开的数据表。
 
@@ -85,7 +85,7 @@ Source SHA-256: 08d6d12e26032c4bd9afae849ca0efd03a5c3ac15e38582e9ee4c2d7a079cc75
 - MARKERS: const; owner chart; PASS
 - MarkerShape: function; owner chart; PASS; props: { marker: ChartMarker }
 - PLOT_PRESETS: const; owner chart; PASS
-- ReadoutTooltip: function; owner chart; PASS; props: { active?: boolean; payload?: readonly TooltipEntry[]; label?: string | number; series: readonly ChartProjectedSeries[]; format: (value: number, key: string, category: string) => React.ReactNode; band?: ChartBand | undefined; eventsOf?: (rowId: string) => readonly ChartEvent[]; share?: { raw: (rowId: string, key: string) => string | null; percent: Intl.NumberFormat } | undefined; total?: ((rowId: string) => React.ReactNode) | undefined }
+- ReadoutTooltip: function; owner chart; PASS; props: { active?: boolean; payload?: readonly TooltipEntry[]; label?: string | number; series: readonly ChartProjectedSeries[]; format: (value: number, key: string, category: string, rowId: string) => React.ReactNode; band?: ChartBand | undefined; eventsOf?: (rowId: string) => readonly ChartEvent[]; share?: { raw: (rowId: string, key: string) => string | null; percent: Intl.NumberFormat } | undefined; total?: ((rowId: string) => React.ReactNode) | undefined }
 - readValue: function; owner chart; PASS; props: ChartRow
 - useChartData: function; owner chart; PASS
 - useChartGeometry: reexport; owner chart; UNVERIFIED
@@ -143,7 +143,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `active?`: `boolean`.
 - `band?`: `ChartBand | undefined`.
 - `eventsOf?`: `(rowId: string) => readonly ChartEvent[]`.
-- `format`: `(value: number, key: string, category: string) => React.ReactNode`.
+- `format`: `(value: number, key: string, category: string, rowId: string) => React.ReactNode`.
 - `label?`: `string | number`.
 - `payload?`: `readonly TooltipEntry[]`.
 - `series`: `readonly ChartProjectedSeries[]`.
@@ -165,16 +165,16 @@ figure名称、共同轴量纲、不同系列形态与同源可见Table。
 - label: string. 非空真实语义名称。
 - framed: boolean; default true. false：图放在已有的面上（无边框的 Section、Card、面板），不铺自己的纸——没有线、底、圆角与内缘，图的左右缘就是承载面的内容缘。与 TableContainer 的 framed 同义。是否显示图内标题与它无关。
 - aria-labelledby / aria-label: string. 外部名称：传入非空的 aria-labelledby（如 SectionTitle 的 id）或 aria-label 时，figure 由它命名，图内不显示标题；图例与「查看数据」仍在图内、靠行尾，二者都没有时标题栏整行不渲染。不传时由图内标题命名。label 仍必填，是等价数据表的名字。
-- type: "line" | "bar" | "area" | "area-stacked" | "area-share" | "bar-horizontal" | "bar-stacked" | "bar-share" | "donut". 由任务选定的形式，不是外观偏好：line 随时间/次序的趋势；bar 类别间比较；area 随时间的量（单系列第一色淡面，多系列默认半透叠放）；area-stacked 随时间的构成（淡色带加足色上沿，彼此相切）；bar-horizontal 类别名长或按大小排序的排行；bar-stacked 类别间的构成比较；bar-share / area-share 构成的占比怎样变（各行归一到该行之和，量轴固定 0–100%，原值与占比同时在读数与数据表里；两个以上系列，值不得为负；含未知 / 不适用值或和为 0 的行不画，已知原值在数据表里如实列出；不接受 references 与 valueDomain）；donut 只用于 2–5 个部分、一眼占比的单个整体（rows 必须正好一行）。必填。
+- type: "line" | "bar" | "area" | "area-stacked" | "area-share" | "bar-horizontal" | "bar-stacked" | "bar-share" | "donut". 由任务选定的形式，不是外观偏好：line 随时间/次序的趋势；bar 类别间比较；area 随时间的量（单系列第一色淡面，多系列默认半透叠放）；area-stacked 随时间的构成（淡色带加足色上沿，彼此相切）；bar-horizontal 类别名长或按大小排序的排行（类别轴随最长名称变宽，最多占绘图区的三分之一，超长名称在轴上截断，全文在读数与数据表里）；bar-stacked 类别间的构成比较；bar-share / area-share 构成的占比怎样变（各行归一到该行之和，量轴固定 0–100%，原值与占比同时在读数与数据表里；两个以上系列，值不得为负；含未知 / 不适用值或和为 0 的行不画，已知原值在数据表里如实列出；不接受 references 与 valueDomain）；donut 只用于 2–5 个部分、一眼占比的单个整体（rows 必须正好一行）。必填。
 - categoryLabel / valueLabel: string. 非空分类轴名与共享量纲/单位；donut 不画轴线，但两个名字仍用于等价数据表与中心读数的说明文字。
 - series: readonly { key: string; label: string; context?: boolean; tone?: Tone; interpolation?: "linear" | "step"; range?: { min: string; max: string } }[]. 1至5个同量纲系列（donut 要求2至5个；背景系列不计入）。context: true 只用于 line，画成淡墨细线、不画标记、不占身份色与标记名额，另限 12 条；tone 取 danger / warning / success / info，全部非背景系列都声明或都不声明，同一类别不得重复（混用、重复抛错）。interpolation 取 linear（默认）或 step（阶梯，step-after：值从该点起保持到下一点），只对 line、area、area-stacked、area-share 生效，其他类型传入抛错；堆叠与占比的面各带共用边界，必须同一种。range: { min, max } 只用于 line 的非背景系列，min、max 是 rows 中 values 的键（须为不同的键，每行都要有值，可显式未知）：这条线在每一点上还有一段区间时，画成同色的淡带垫在线下（浓度为预设），读数多一行“范围 min–max”，数据表在该系列后多“最小值”“最大值”两列；某点任一端不可得则该点无带；两端都已知时 min 大于 max、或越出 valueDomain 都抛错；线本身（key 的值）不要求落在区间正中。带区间的单系列仍显示图例，让淡带的键与线对上。只有一个系列时取第一色（文字是墨，数据是色）、不显示图例；两个以上按 chart1..5 的校验顺序取色，并配不同标记形状或图例方块。
-- rows: readonly ChartRow[]. 稳定id、分类名称与values；值为finite number或{state:unknown|not-applicable,label}。必须有真实记录；donut 要求正好一行，且每个部分必须是已知的非负数。
+- rows: readonly ChartRow[]. 稳定id、分类名称与values；值为finite number或{state:unknown|not-applicable,label}。必须有真实记录；bar-horizontal、bar-stacked、area-stacked 的已知值不得为负，违反抛错（有跨零的值时用 bar）；donut 要求正好一行，且每个部分必须是已知的非负数。
 - contextLabel: string. 有背景系列时必填：图例里合成一项的名字（淡墨线键 + 此名），例如「其余蚕室」。背景系列各自的名字只出现在等价数据表。缺失抛错。
 - references: ({ kind: "band"; from: number; to: number; label: string } | { kind: "line"; value: number; label: string })[]. 量轴上的参照：目标带或参照线（纵向图是横带 / 横线，bar-horizontal 是竖带 / 竖线）。画成墨、在数据之后；量轴范围自动算入；label 必填，出现在图例与数据表下的表注；band 须 from < to，数值有限；donut 传入抛错。有带时悬停读数为每个数值多一行相对目标的位置（高于、低于多少，或在内）；多个带时只对第一个计算。
 - events: readonly { rowId: string; label: string; tone?: Tone }[]. 落在类别轴某一行上的事件：基线处一个圆点（给 tone 时用类别色，否则用墨）。事件名出现在该行的悬停读数，并作为数据表的「事件」一列。rowId 不存在或 donut 传入抛错。
 - valueDomain: readonly [number, number]. 量轴范围，只对 line 生效：位置编码可以不从零起，例如 80%–100% 的比率。其他类型传入即抛 RangeError（柱与面积用长度、面积编码，必须从零起）。min < max；任何已知值或参照落在范围外抛错——截掉数据与名实不符。刻度取 1、2、2.5、5 乘 10 的幂，最多 6 个。
 - total: number. 只用于 donut：整体的总量。省略时等于各部分之和；大于之和时，剩余部分并入「其余」（groove-surface，不是第六种色相）。
-- valueLabels: boolean. 把格式化后的值标在柱的数据端外侧（纵柱在柱顶上方，横柱在末端之后，负值在另一侧）；同时不再画量轴刻度与网格，基线保留。只对 bar 与 bar-horizontal 生效，且只允许单系列、至多 12 行（每根柱的类别带得放得下一个标签）；其他类型、多系列或行数超出抛错。文字用墨阶、dense 档、等宽数字；formatValue 只取字符串或数字结果，返回节点时退回默认数值格式。
+- valueLabels: boolean. 把格式化后的值标在柱的数据端外侧（纵柱在柱顶上方，横柱在末端之后，纵柱的负值在柱底下方）；同时不再画量轴刻度与网格，基线保留。只对 bar 与 bar-horizontal 生效，且只允许单系列、至多 12 行（每根柱的类别带得放得下一个标签）；其他类型、多系列或行数超出抛错。文字用墨阶、dense 档、等宽数字；formatValue 只取字符串或数字结果，返回节点时退回默认数值格式。
 - formatValue: (value, series, row) => ReactNode. 格式化已知数值；默认按UILocale数值Intl，不改数据。合计、环形图例的数值与「其余」按第一个系列调用（堆叠与环形的系列共用一个量纲）；占比读数、柱上标值、环形图例只取字符串或数字结果。
 - renderPlot: (projection: ChartPlotData) => ReactNode. 替换同源图形；gap为null，默认LineChart不连接gap且不动画。名称、图例与可见Table始终保留。自定义图形承担自身交互/ARIA；projection 带有 references、events、valueDomain，系列带 context 与 tone，自定义图形应一并遵守（背景系列不画标记，参照画在数据后面）。
 - style / className / render / ref: ChartStyle / useRender组合. 根style可覆写 --qy-chart-plot-height（默认 10 材）。线宽、标记与柱宽是图的法度，不开放逐个配置。

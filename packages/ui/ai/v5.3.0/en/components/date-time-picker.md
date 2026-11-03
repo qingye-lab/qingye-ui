@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: ffa594e825dabe5935b253a86f90638a5b73fac7089de3996641e0af6d7461ca
+Source SHA-256: 55e12b48559b0a46cd8fbe9121ed6a7c1d92b14d4031bfe344d4ffbf9af52d65
 
 Edit complete local wall-clock date/time, or apply calendar and time drafts.
 
@@ -11,7 +11,7 @@ Edit complete local wall-clock date/time, or apply calendar and time drafts.
 value is unzoned YYYY-MM-DDTHH:mm[:ss[.SSS]] wall-clock text, not a UTC instant. The application owns timezone, DST, and availability rules. Empty time never becomes the current time automatically.
 
 ## Notes
-- Apply is available only with complete date and time; the caller still accepts the value. Clicking the selected day in the calendar again keeps the draft.
+- Apply is available only with complete date and time; the caller still accepts the value.
 - Native min/max/step validation and business availability are independent. A callback is not successful persistence.
 - The browser's display may vary by environment; submission remains unzoned local text.
 

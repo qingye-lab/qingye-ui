@@ -1,9 +1,9 @@
 # ScatterChart
 
-Package: @qingye_lab/ui@5.3.0
+Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
-Source SHA-256: c3975485a92833bf61f7ac1cac2587189f280468401f0fcc7f472f120ba5e129
+Source SHA-256: 91d9cdf6eb59bb5da1a566606bc87f7c19782ce98a4f38be03872593d2eafd31
 
 The relationship between two numeric quantities; an all-pairs form with one to three series, a same-source scatter plot, named axes and an on-demand data table.
 
@@ -69,7 +69,7 @@ A named figure, named x/y axes, series-colored markers and a visible same-source
 - aria-labelledby / aria-label: string. Outside name: a nonempty aria-labelledby (such as a SectionTitle id) or aria-label names the figure and the in-chart title is not drawn; the legend and Show data stay inside the figure at the row end, and with neither the header row is not rendered. Without one the in-chart title names it. label stays required and names the equivalent data table.
 - xLabel / yLabel: string. What the x and y axes measure, e.g. "records" and "failure rate".
 - series: readonly { key: string; label: string; points: readonly { id: string; label: string; x: number; y: number }[] }[]. One to three series. A single series takes the first color without a legend; two or more take the chart1..3 order with distinct marker shapes. Every point needs a stable id and a nonempty name.
-- formatX / formatY: (value: number) => ReactNode. Format known values; defaults to Intl number formatting for UILocale.
+- formatX / formatY: (value: number) => ReactNode. Format known values; defaults to Intl number formatting for UILocale. The readout and table accept nodes; axis ticks are read for strings or numbers only and fall back to the default number format when a node is returned.
 
 ## Keyboard
 

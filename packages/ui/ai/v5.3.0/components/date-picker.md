@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: 2874fbc00dcb9d6f3ecdf9e421097e47d03d9ff810447d8a2d744435d3ccba60
+Source SHA-256: f7a4c6d63df4dd08e95bb0da89d430426236ec6d84728930a43011e90709b663
 
 编辑一个当地日期，或展开日历选择。
 
@@ -13,7 +13,7 @@ value 是调用方持有的当地 Date。输入和日历选择只请求变更；
 ## Notes
 - granularity 不是 day 时，输入框不再是浏览器的原生日期控件，所以显示格式由区域的 periodWeek / periodMonth / periodQuarter / periodYear 决定，也接受 2026-W44、2026-11、2026-Q4、2026 这类 ISO 写法。
 - 日期输入的本地显示格式由浏览器决定，提交值固定 YYYY-MM-DD。
-- 日历选择完成后关闭；调用方拒绝变更时原日期仍保留。再点已选的日期或周期不算清除，值不变也不上报，只关闭日历；清除用清除按钮。
+- 日历选择完成后关闭；调用方拒绝变更时原日期仍保留。
 - 没有自动修正越界值或推断提交成功；用 FieldError 表达调用方已知错误。
 - 年份可键到 5–6 位、分段可只填一半：这些键入中间态不是值，不上报也不清空已有值，焦点离开后回到已接受的日期；只有所有分段都被清空才是清除。
 

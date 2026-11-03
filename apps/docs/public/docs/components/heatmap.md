@@ -1,14 +1,14 @@
 # 两维度的量 Heatmap
 
-Package: @qingye_lab/ui@5.3.0
+Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
-Source SHA-256: 5391179dc66b84007b34083c21d0987deff96fd286fed3d8c0216f3cf54a6801
+Source SHA-256: a0208da9a4fca7de7e68d8b4dc4bb6ba881b4b1fdc2ac6bcaf046febc74eec34
 
 两个类别维度上的量，例如「星期 × 时段」的同步热度；单色顺序色阶（第一色由淡到足）或应用声明的分档，可用键盘逐格读，另有按需展开的数据表。
 
 ## Decision
-行列都是类别轴，不是数据系列——没有身份要区分，只有量的大小，因此只用一种色相：数据是色，取第一色（花青）与纸调和的 12% 到足色。未知/不适用格用清墨斜线纹，不进色阶，避免与真实的小量值混淆。给出 levels 时改按档上色：档由应用声明，浓淡随档次递增，去掉色相仍读得出次序；档名进入格子的名称与读数。
+行列都是类别轴，不是数据系列——没有身份要区分，只有量的大小，因此只用一种色相：数据是色，取第一色（花青）与纸调和的 12% 到足色。未知/不适用格用清墨斜线纹，不进色阶，避免与真实的小量值混淆。给出 levels 时改按档上色：档由应用声明，浓淡随档次递增，去掉色相仍读得出次序；档名进入格子的名称与读数。未标 tone 的最低档读作不需要注意，只铺一层清染，一张正常的图不是一大片灰。
 
 ## Notes
 - 整张图是一个 grid，只有一个 Tab 停靠点；每个格是只读的 gridcell，aria-label 直接给出行、列、数值（有分档时再加档名）或未知原因，不依赖悬停就能读到。
@@ -76,7 +76,7 @@ figure 名称、两个命名的类别轴、单色顺序色阶的网格与同源�
 - aria-labelledby / aria-label: string. 外部名称：传入非空的 aria-labelledby（如 SectionTitle 的 id）或 aria-label 时，figure 由它命名，图内不显示标题；图例与「查看数据」仍在图内、靠行尾，二者都没有时标题栏整行不渲染。不传时由图内标题命名。label 仍必填，是等价数据表的名字。
 - rowLabel / columnLabel / valueLabel: string. 行维度、列维度与量各自的名字，例如「时段」「星期」「同步次数」。
 - columns: readonly { key: string; label: string }[]. 列维度的取值，2 个以上——与数据系列不同，没有身份色上限。
-- rows: readonly ChartRow[]. 行维度的取值，2 个以上；每行必须对每个 column.key 给出 finite number 或 {state, label}。
+- rows: readonly ChartRow[]. 行维度的取值，2 个以上；每行必须对每个 column.key 给出 finite number 或 {state, label}。连续色阶的已知值不得为负，违反抛错（单色的浓淡只表达大小）；有负值时声明 levels，其第一档覆盖更小的值，负值在内。
 - formatValue: (value, row, column) => ReactNode. 格式化已知数值；默认按 UILocale 数值 Intl。可以返回节点用于读数与数据表；格子的可访问名称只取字符串或数字的结果，其余退回默认格式。
 - levels: readonly { label: string; from?: number; tone?: Tone }[]. 分档，2 到 5 档。第一档不写 from（覆盖更小的值），其后每档 from 严格递增；档名非空且互不相同，违反抛错。给出后格子按所在的档上色，图例是各档的色块加档名；没有 tone 的档取墨，有 tone 的档取该类别色，浓淡随档次递增。未知格不属于任何一档。
 - rowSummary: { label: string; value: (row) => string }. 行尾多出一列文字（等宽数字、右对齐），列头是 label，同时是等价数据表的最后一列。它是对这一行的汇总，由应用给出，组件不计算。

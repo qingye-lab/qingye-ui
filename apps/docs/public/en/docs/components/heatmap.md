@@ -1,14 +1,14 @@
 # Heatmap
 
-Package: @qingye_lab/ui@5.3.0
+Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
-Source SHA-256: 5391179dc66b84007b34083c21d0987deff96fd286fed3d8c0216f3cf54a6801
+Source SHA-256: a0208da9a4fca7de7e68d8b4dc4bb6ba881b4b1fdc2ac6bcaf046febc74eec34
 
 A quantity over two categorical dimensions, such as sync activity by weekday and hour; a single-hue sequential scale (the first series color, light to full) or application-declared levels, readable cell by cell from the keyboard, with an on-demand data table.
 
 ## Decision
-Rows and columns are both categorical axes, not data series — there is no identity to distinguish, only magnitude, so it uses one hue: data is color, the first series color (huaqing) mixed with paper from 12% to full. Unknown/not-applicable cells carry a diagonal ink hatch instead of a scale step, so they are never mistaken for a small real value. With levels, cells take the color of their level: the application declares the levels, depth grows with the level so the order survives without hue, and the level name joins each cell's name and the readout.
+Rows and columns are both categorical axes, not data series — there is no identity to distinguish, only magnitude, so it uses one hue: data is color, the first series color (huaqing) mixed with paper from 12% to full. Unknown/not-applicable cells carry a diagonal ink hatch instead of a scale step, so they are never mistaken for a small real value. With levels, cells take the color of their level: the application declares the levels, depth grows with the level so the order survives without hue, and the level name joins each cell's name and the readout. A lowest level without a tone reads as nothing to look at and takes only a faint wash, so a healthy chart is not a large field of gray.
 
 ## Notes
 - The chart is one grid with a single tab stop; every cell is a read-only gridcell whose aria-label states the row, column, value (plus the level name when levels are set) or unavailable reason, reachable without hovering.
@@ -76,7 +76,7 @@ A named figure, two named categorical axes, a single-hue sequential grid and a v
 - aria-labelledby / aria-label: string. Outside name: a nonempty aria-labelledby (such as a SectionTitle id) or aria-label names the figure and the in-chart title is not drawn; the legend and Show data stay inside the figure at the row end, and with neither the header row is not rendered. Without one the in-chart title names it. label stays required and names the equivalent data table.
 - rowLabel / columnLabel / valueLabel: string. Names for the row dimension, column dimension and the measured quantity, e.g. "hour", "weekday", "syncs".
 - columns: readonly { key: string; label: string }[]. The column dimension's values, two or more — unlike a data series, there is no identity-color cap.
-- rows: readonly ChartRow[]. The row dimension's values, two or more; every row must supply a finite number or {state, label} for every column key.
+- rows: readonly ChartRow[]. The row dimension's values, two or more; every row must supply a finite number or {state, label} for every column key. The continuous scale throws on a negative known value (one hue's depth only expresses magnitude); declare levels when values go negative, since the first level covers every smaller value.
 - formatValue: (value, row, column) => ReactNode. Format known values; defaults to Intl number formatting for UILocale. May return a node for the readout and data table; a cell's accessible name uses only a string or number result and otherwise falls back to the default format.
 - levels: readonly { label: string; from?: number; tone?: Tone }[]. Two to five levels. The first omits from (it covers smaller values); each later from is strictly increasing; names are nonempty and distinct, otherwise it throws. Cells take the color of their level and the legend lists each level as a swatch and a name. A level without tone uses ink, a level with tone uses that category color, and depth grows with the level. Unknown cells belong to no level.
 - rowSummary: { label: string; value: (row) => string }. Adds a trailing text column (tabular numerals, end-aligned) headed by label, also the last column of the equivalent data table. It summarizes the row; the application supplies it and the component computes nothing.

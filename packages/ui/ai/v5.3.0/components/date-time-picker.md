@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: ffa594e825dabe5935b253a86f90638a5b73fac7089de3996641e0af6d7461ca
+Source SHA-256: 55e12b48559b0a46cd8fbe9121ed6a7c1d92b14d4031bfe344d4ffbf9af52d65
 
 编辑完整的当地墙上日期与时间，或应用日历与时间草稿。
 
@@ -11,7 +11,7 @@ Source SHA-256: ffa594e825dabe5935b253a86f90638a5b73fac7089de3996641e0af6d7461ca
 value 是 YYYY-MM-DDTHH:mm[:ss[.SSS]] 的无时区 wall-clock 文本。它不表示 UTC 瞬间；时区、DST、业务可用时段由应用决定。空时间不会自动补当前时间。
 
 ## Notes
-- 应用仅在日期与时间完整时可用，点击后仍由调用方接受值。在日历里再点已选的日期不会清空草稿。
+- 应用仅在日期与时间完整时可用，点击后仍由调用方接受值。
 - 原生 min/max/step 校验与业务可用性是独立事实；回调不是保存成功。
 - 浏览器显示格式可随用户环境变化，提交保持无时区的本地文本。
 

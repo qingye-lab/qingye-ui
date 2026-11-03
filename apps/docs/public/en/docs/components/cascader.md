@@ -1,6 +1,6 @@
 # Cascader
 
-Package: @qingye_lab/ui@5.3.0
+Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/cascader
 Source: packages/ui/src/components/cascader.tsx
 Source SHA-256: 404842647973eafb3974d29b0158669d28b573e50a16bb0808e0f679935593f9
