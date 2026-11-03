@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-11-01T14:25:23.285Z",
-  "revision": "fbb8da411334ee139c92a12a82e2ae9ea605c4ad",
+  "generatedAt": "2026-11-03T06:24:31.870Z",
+  "revision": "cf5627a07d11647c2384833e48c7626f662c1c5b",
   "static": {
     "fingerprint": {
-      "sha256": "d484d5f26a3a1a661e5fceb60e5dd4cdc505fe2e4ae9729e282b7c712eb765ec",
+      "sha256": "7e5a4e59cdfa8ac307ef95bbba1a9ecdeee2496f845839485a603ad8375eda2f",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -800,8 +800,12 @@
           "sha256": "5e76e395788a555470c70d032f46e68d16bc72cb05dc1301c1ca8aae5f72ff54"
         },
         {
+          "path": "apps/docs/src/content/data-table/demos/09-column-relations.tsx",
+          "sha256": "774e66516bb7400c36d6df66ceeb895295c8dbd42a66f6a5a9420f9981e98c86"
+        },
+        {
           "path": "apps/docs/src/content/data-table/meta.ts",
-          "sha256": "ab360f8c6694b9de5b2efcb001af49f169227a62c99dd054770f8973e2638645"
+          "sha256": "347100f4fb7527ceffb5cfde9bb76a5485652782244efc2594e87bd053ae7c88"
         },
         {
           "path": "apps/docs/src/content/date-picker/cover.tsx",
@@ -2828,6 +2832,10 @@
           "sha256": "bd368ac0cc25154c9c9c0df10dd60322cbdf28b58e193af4e9006e23f48e9cbc"
         },
         {
+          "path": "packages/ui/src/column-widths.ts",
+          "sha256": "29e8dda89c17ebd0d735c81503a3c8dad2b3cb22cc4e5f8000b726f2e8635a51"
+        },
+        {
           "path": "packages/ui/src/components/accordion.tsx",
           "sha256": "f26d950ad70f423b6c93d4deeef25da02fd927f85623521eaff44f13ca4ac328"
         },
@@ -2949,7 +2957,7 @@
         },
         {
           "path": "packages/ui/src/components/data-table.tsx",
-          "sha256": "d2cf2f1324b57061682625df086973eac082929734dc257b7b81374b4cf9707c"
+          "sha256": "1a8172af8bbc45ffc9bfae352b050c8a591578ee6d765a5f33118dc3aa430326"
         },
         {
           "path": "packages/ui/src/components/date-picker.tsx",
@@ -105071,7 +105079,7 @@
         "className": "rounded-marker",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105112,7 +105120,7 @@
         "className": "rounded-marker",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105161,7 +105169,7 @@
         "className": "rounded-marker",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105210,7 +105218,7 @@
         "className": "rounded-marker",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105267,7 +105275,7 @@
         "className": "rounded-marker",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105308,7 +105316,7 @@
         "className": "rounded-marker",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105334,7 +105342,7 @@
         "className": "focus-visible:ring-(length:--qy-focus-quiet-width)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105368,7 +105376,7 @@
         "className": "focus-visible:ring-(length:--qy-focus-quiet-width)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105402,7 +105410,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105444,7 +105452,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105494,7 +105502,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105552,7 +105560,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105610,7 +105618,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105660,7 +105668,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105710,7 +105718,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105768,7 +105776,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105826,7 +105834,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105892,7 +105900,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -105966,7 +105974,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106040,7 +106048,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106106,7 +106114,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106180,7 +106188,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106246,7 +106254,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106312,7 +106320,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106370,7 +106378,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 148
+          "line": 160
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106393,7 +106401,7 @@
         "className": "gap-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 339
+          "line": 466
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106424,7 +106432,7 @@
         "className": "gap-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 339
+          "line": 466
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106463,7 +106471,7 @@
         "className": "gap-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 339
+          "line": 466
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106502,7 +106510,7 @@
         "className": "gap-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 339
+          "line": 466
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106549,7 +106557,7 @@
         "className": "gap-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 339
+          "line": 466
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106580,7 +106588,7 @@
         "className": "rounded-panel",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 342
+          "line": 469
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106619,7 +106627,7 @@
         "className": "rounded-panel",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 342
+          "line": 469
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106666,7 +106674,7 @@
         "className": "rounded-panel",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 342
+          "line": 469
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106699,7 +106707,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106740,7 +106748,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106789,7 +106797,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106838,7 +106846,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106879,7 +106887,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106920,7 +106928,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -106969,7 +106977,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107018,7 +107026,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107075,7 +107083,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107140,7 +107148,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107205,7 +107213,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107262,7 +107270,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107327,7 +107335,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107384,7 +107392,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107441,7 +107449,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107490,7 +107498,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 375
+          "line": 504
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107521,7 +107529,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107560,7 +107568,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107607,7 +107615,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107654,7 +107662,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107693,7 +107701,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107732,7 +107740,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107779,7 +107787,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107826,7 +107834,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107881,7 +107889,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -107944,7 +107952,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108007,7 +108015,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108062,7 +108070,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108125,7 +108133,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108180,7 +108188,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108235,7 +108243,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108282,7 +108290,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 517
+          "line": 650
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108313,7 +108321,7 @@
         "className": "font-normal",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108344,7 +108352,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108375,7 +108383,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108414,7 +108422,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108445,7 +108453,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108476,7 +108484,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108515,7 +108523,7 @@
         "className": "text-body",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108548,7 +108556,7 @@
         "className": "sm:text-body",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108581,7 +108589,7 @@
         "className": "sm:text-body",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108622,7 +108630,7 @@
         "className": "sm:text-body",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108655,7 +108663,7 @@
         "className": "sm:text-body",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108688,7 +108696,7 @@
         "className": "sm:text-body",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108729,7 +108737,7 @@
         "className": "sm:text-body",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108752,7 +108760,7 @@
         "className": "gap-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 579
+          "line": 712
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108783,7 +108791,7 @@
         "className": "gap-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 579
+          "line": 712
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108822,7 +108830,7 @@
         "className": "gap-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 579
+          "line": 712
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108861,7 +108869,7 @@
         "className": "gap-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 579
+          "line": 712
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -108908,7 +108916,7 @@
         "className": "gap-(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 579
+          "line": 712
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -592265,7 +592273,7 @@
         "className": "[background-image:linear-gradient(var(--qy-surface-inset),var(--qy-surface-inset))]",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 58
+          "line": 70
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -592274,7 +592282,7 @@
         "className": "[background-image:linear-gradient(var(--qy-surface-selected),var(--qy-surface-selected))]",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 58
+          "line": 70
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -592283,7 +592291,16 @@
         "className": "group-hover/row:[background-image:linear-gradient(var(--qy-surface-hover),var(--qy-surface-hover))]",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 58
+          "line": 70
+        },
+        "reason": "Unsupported class/property mapping; no runtime claim"
+      },
+      {
+        "sourceComponent": "data-table",
+        "className": "[&>[data-variant][data-shape]]:-mx-(--qy-control-sm-padding)",
+        "source": {
+          "path": "packages/ui/src/components/data-table.tsx",
+          "line": 182
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -592292,7 +592309,7 @@
         "className": "var(--qy-panel-padding)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 200
+          "line": 288
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -592301,7 +592318,7 @@
         "className": "var(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 200
+          "line": 288
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -592310,7 +592327,7 @@
         "className": "var(--qy-panel-padding)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 200
+          "line": 288
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -592319,7 +592336,7 @@
         "className": "var(--qy-panel-gap)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 200
+          "line": 288
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -592328,7 +592345,7 @@
         "className": "focus-visible:ring-(length:--qy-focus-quiet-width)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 325
+          "line": 424
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -592337,7 +592354,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 325
+          "line": 424
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -592346,7 +592363,7 @@
         "className": "inset-x-(--qy-line-width)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 343
+          "line": 470
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -592355,7 +592372,7 @@
         "className": "top-(--qy-line-width)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 343
+          "line": 470
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -592364,7 +592381,7 @@
         "className": "-mx-(--qy-control-sm-padding)",
         "source": {
           "path": "packages/ui/src/components/data-table.tsx",
-          "line": 518
+          "line": 651
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -599957,7 +599974,7 @@
     "method": "Root inline important custom-property override; computed styles and geometry on real existing rendered parts; value restored after each probe."
   },
   "computation": {
-    "staleRuntime": false,
+    "staleRuntime": true,
     "scope": "Only the selected probes and recorded theme/viewport/state combinations. PASS for no-change proves measured non-effect, never universal non-consumption.",
     "cases": [
       {
@@ -599967,9 +599984,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -599999,9 +600016,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600031,9 +600048,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600055,9 +600072,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600079,9 +600096,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "field-group-relationship-gap:light:desktop:1100x900:fine"
       },
@@ -600092,9 +600109,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "field-group-relationship-gap:dark:desktop:1100x900:fine"
       },
@@ -600105,9 +600122,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "button-primary:light:desktop:1100x900:fine"
       },
@@ -600118,9 +600135,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "button-primary:dark:desktop:1100x900:fine"
       },
@@ -600131,9 +600148,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "button-radius:light:desktop:1100x900:fine"
       },
@@ -600144,9 +600161,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "button-radius:dark:desktop:1100x900:fine"
       },
@@ -600157,9 +600174,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "button-control:light:desktop:1100x900:fine"
       },
@@ -600170,9 +600187,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "button-control:dark:desktop:1100x900:fine"
       },
@@ -600183,9 +600200,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600223,9 +600240,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600257,9 +600274,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600291,9 +600308,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600323,9 +600340,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600355,9 +600372,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600387,9 +600404,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600419,9 +600436,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600451,9 +600468,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600483,9 +600500,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600515,9 +600532,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600547,9 +600564,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600579,9 +600596,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600611,9 +600628,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "select-highlight:light:desktop:1100x900:fine"
       },
@@ -600624,9 +600641,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "select-highlight:dark:desktop:1100x900:fine"
       },
@@ -600637,9 +600654,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "select-control:light:desktop:1100x900:fine"
       },
@@ -600650,9 +600667,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "select-control:dark:desktop:1100x900:fine"
       },
@@ -600663,9 +600680,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600695,9 +600712,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600727,9 +600744,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "panel-padding:light:desktop:1100x900:fine"
       },
@@ -600740,9 +600757,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "panel-padding:dark:desktop:1100x900:fine"
       },
@@ -600753,9 +600770,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600777,9 +600794,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -600801,9 +600818,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "native-select-control:light:desktop:1100x900:fine"
       },
@@ -600814,9 +600831,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "native-select-control:dark:desktop:1100x900:fine"
       },
@@ -600827,9 +600844,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "input-group-control:light:desktop:1100x900:fine"
       },
@@ -600840,9 +600857,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "input-group-control:dark:desktop:1100x900:fine"
       },
@@ -600853,9 +600870,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-radius:light:desktop:1100x900:fine"
       },
@@ -600866,9 +600883,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-radius:dark:desktop:1100x900:fine"
       },
@@ -600879,9 +600896,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-item-radius:light:desktop:1100x900:fine"
       },
@@ -600892,9 +600909,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-item-radius:dark:desktop:1100x900:fine"
       },
@@ -600905,9 +600922,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-surface:light:desktop:1100x900:fine"
       },
@@ -600918,9 +600935,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-surface:dark:desktop:1100x900:fine"
       },
@@ -600931,9 +600948,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-border:light:desktop:1100x900:fine"
       },
@@ -600944,9 +600961,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-border:dark:desktop:1100x900:fine"
       },
@@ -600957,9 +600974,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-selected:light:desktop:1100x900:fine"
       },
@@ -600970,9 +600987,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-selected:dark:desktop:1100x900:fine"
       },
@@ -600983,9 +601000,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-selected-foreground:light:desktop:1100x900:fine"
       },
@@ -600996,9 +601013,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-selected-foreground:dark:desktop:1100x900:fine"
       },
@@ -601009,9 +601026,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601033,9 +601050,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601052,10 +601069,10 @@
       }
     ],
     "counts": {
-      "PASS": 23,
+      "PASS": 0,
       "FAIL": 0,
-      "UNVERIFIED": 30,
-      "NOT_RUN": 0
+      "UNVERIFIED": 0,
+      "NOT_RUN": 53
     }
   },
   "probePlan": [

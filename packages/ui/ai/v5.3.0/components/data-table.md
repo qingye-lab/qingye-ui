@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: d2cf2f1324b57061682625df086973eac082929734dc257b7b81374b4cf9707c
+Source SHA-256: 1a8172af8bbc45ffc9bfae352b050c8a591578ee6d765a5f33118dc3aa430326
 
 调用方真实集合的比较、排序、范围选择与可选虚拟化。
 
@@ -14,7 +14,7 @@ Source SHA-256: d2cf2f1324b57061682625df086973eac082929734dc257b7b81374b4cf9707c
 - 标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern，自 5.2.0 起随其改为一行布局，只有一页时只留范围摘要。跨页选择的对象内容、权限与批量执行范围仍由应用核实。
 - TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。
 - 只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。
-- 固定布局中未写 size 的文字列是弹性列，平分定宽列与标记列之外的剩余空间；标记列仍按已有 marker 与单元格内缘角色取宽。列宽过小不会裁掉交互控件，请给操作列留下真实容量。
+- 固定布局中未写 size 的文字列是弹性列，平分定宽列与标记列之外的剩余空间；标记列仍按已有 marker 与单元格内缘角色取宽。列宽过小不会裁掉交互控件，操作列写 meta.fit 按内容定宽。
 - 虚拟化保留 table/thead/tbody/tr/th/td。aria-rowcount 与 aria-rowindex 描述当前表格页（含表头），不把服务端全局总数冒充已加载行；全选仍覆盖当前模型的完整范围。
 - 虚拟行按稳定 ID 测量，支持实际可变行高；estimateRowHeight 应接近真实行高，未测量的远端行仍是估计。建议显式列宽，避免自动布局因窗口内容变化而重排；纯客户端页面需要查看或打印所有行时关闭虚拟化。
 - 焦点所在的离屏行额外保留一行，输入草稿不因滚动丢失；该行移出当前模型时，焦点仍属于它才回到滚动容器。
@@ -146,7 +146,10 @@ Written descriptions; the list above is the type-resolved fact.
 ### DataTable
 原生二维集合。
 - table / emptyContent / caption / busy / error / activeRowId / containerProps: TableInstance<T> / ReactNode / TableContainerProps. getRowId 必填、至少一列；零值/caption 保留，busy 不删除有效 rows，也不变暗。数据行悬停读悬停面，选中与活动行保持更深的选中面。error 摆在表格上方（role=alert），应用自带重试动作。
-- table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing: number / number / number / TanStack state. 实际像素列宽，按 minSize/maxSize 钳制。显式配置任一尺寸或非空 columnSizing 时启用固定布局与 colgroup；未配置尺寸时保持原生自动布局。写了 size（或 defaultColumn.size，或 columnSizing 里有它）的列定宽，标记列取内容宽，其余列是弹性列：表宽 100%，弹性列平分剩余空间，minSize 是它的下限，未写 minSize 时下限为 150px（TanStack 默认 size）。表格最小宽度 = 定宽列之和 + 标记列之和 + 弹性列数 × 各弹性列下限的最大值，窄于此值时横向滚动。弹性列的 maxSize 不约束宽度，需要上限就写 size。没有弹性列时表宽等于各列之和，组合表头取可见叶列之和。不内置拖拽调宽。
+- table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing: number / number / number / TanStack state. 实际像素列宽，按 minSize/maxSize 钳制。显式配置任一尺寸或非空 columnSizing 时启用固定布局与 colgroup；未配置尺寸时保持原生自动布局。写了 size（或 defaultColumn.size，或 columnSizing 里有它）的列定宽，标记列取内容宽，其余列是弹性列：表宽 100%，弹性列平分剩余空间（写 meta.grow 时按比例），minSize 是它的下限，未写 minSize 时下限为 150px（TanStack 默认 size）。表格最小宽度 = 定宽列之和 + 标记列之和 + 弹性列数 × 各弹性列下限的最大值，窄于此值时横向滚动。弹性列写 maxSize 就是它的上限，多出的宽度回到其它弹性列；优先级是 columnSizing > grow / fit > size。每列宽度都已确定且总和小于容器时（没有弹性列，或弹性列都到了上限），列宽不放大，表头底与行线延伸到容器右缘；放不下时表宽等于各列之和并横向滚动，组合表头取可见叶列之和。不内置拖拽调宽。
+- columnDef.meta.grow: number. 按比例分剩余宽度，须为有限正数；minSize / maxSize 是它的上下限，到界的列冻结，余量回到其它弹性列。同时写 size 时 size 是下限。用户拖动过的列（columnSizing）退出分配。与 fit 互斥。
+- columnDef.meta.fit: boolean; default false. 按内容定宽：列宽等于表头与已渲染单元格里最宽的内容加单元格内缘，放操作按钮的列也写它。maxSize 是单元格内容的上限，超出的折行或配 ellipsis 省略，不会把列压到比列名还窄。虚拟化时只量首屏并锁定，滚动不改列宽，之后更宽的文字单行省略（规则同 ellipsis）；含控件的内容不裁切，给这类列留够宽度。与 grow 互斥。
+- columnDef.meta.marker: boolean; default false. 这一列只放复选框这类标记：宽度由标记尺寸加单元格内缘算出，不看内容。放操作按钮的列写 fit。
 - columnDef.meta.ellipsis: boolean; default false. 对非交互的表头与单元格文字启用单行省略。完整文字始终在 DOM 与可访问名称里；真的被截断时这一格成为键盘停靠点，聚焦或悬停以 Tooltip 显示全文（不用原生 title：键盘与触屏读不到）。放得下的格不占 Tab 序列。含控件的内容不裁切；唯一例外是格里只有一个带 href 的链接：链接自己单行省略，真的被截断时聚焦或悬停同样以 Tooltip 显示全文，不新增 Tab 停靠点，链接的可访问名称不变。不省略时单元格默认折行显示全文；列宽决定容量，关键后果仍应直接可见。
 - columnDef.meta.numeric: boolean; default false. 数值列由列定义声明，不由内容猜：表头与该列每个单元格同一对齐——行内末端（RTL 下在左）并用等宽数字。Pattern 的列配置同名。
 - selectionAppearance / onRowActivate / virtualization: row | checkbox / (row: Row<T>, event: DataTableActivateEvent) => void / DataTableVirtualization. 选择外观与虚拟化同 Pattern；行激活回调收到 TanStack Row 与触发它的鼠标或键盘事件（可读修饰键），调用方持有 activeRowId。整张表只有一行在 Tab 序列里（最近聚焦的行，否则活动行，否则第一行），方向键在行间移动。点击内部交互元素不激活，data-row-activate-ignore 可排除自定义区域；不改变选择。需要一个可见的 meta.rowHeader 列给行命名，否则抛错。
@@ -457,5 +460,42 @@ export default function Demo() {
     />
     <p role="status" className="text-body text-muted-foreground">{note}</p>
   </div>;
+}
+```
+
+### 按内容、按比例与上限
+Source: apps/docs/src/content/data-table/demos/09-column-relations.tsx
+```tsx
+import { getCoreRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
+import { Button } from "@qingye_lab/ui/components/button";
+import { DataTable } from "@qingye_lab/ui/components/data-table";
+import { StatusDot, type StatusDotStatus } from "@qingye_lab/ui/components/status-dot";
+import { useUILocale } from "@qingye_lab/ui/locale";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "按内容、按比例与上限", titleEn: "Content, proportion and limits" } satisfies DemoMeta;
+
+type Entry = { id: string; name: string; status: string; dot: StatusDotStatus; synced: string; owner: string; note: string };
+export default function Demo() {
+  const english = useUILocale().code.startsWith("en");
+  const data: Entry[] = english ? [
+    { id: "sensors", name: "Connected devices", status: "Online", dot: "online", synced: "2026-11-03 14:20", owner: "Lin", note: "Workshop sensors and the remote sites that report through the gateway." },
+    { id: "roles", name: "Permissions and roles", status: "Draft", dot: "neutral", synced: "2026-11-02 09:05", owner: "Zhou", note: "Who may view, edit and export each collection." },
+    { id: "sync", name: "Sync and export", status: "Synchronizing", dot: "neutral", synced: "2026-10-30 22:41", owner: "Xu", note: "Nightly export to the shared archive." },
+  ] : [
+    { id: "sensors", name: "接入设备", status: "在线", dot: "online", synced: "2026-11-03 14:20", owner: "林", note: "车间传感器，以及经网关上报的远端站点。" },
+    { id: "roles", name: "权限与角色", status: "草稿", dot: "neutral", synced: "2026-11-02 09:05", owner: "周", note: "谁可以查看、编辑和导出各个集合。" },
+    { id: "sync", name: "同步与导出", status: "同步中", dot: "neutral", synced: "2026-10-30 22:41", owner: "徐", note: "每晚导出到共享归档。" },
+  ];
+  const columns: ColumnDef<Entry>[] = [
+    { accessorKey: "name", header: english ? "Name" : "名称", meta: { rowHeader: true, fit: true } },
+    { accessorKey: "status", header: english ? "Status" : "状态", meta: { fit: true }, cell: ({ row }) => <StatusDot status={row.original.dot} label={row.original.status} /> },
+    { accessorKey: "synced", header: english ? "Last synchronized" : "最近同步", meta: { fit: true } },
+    { accessorKey: "owner", header: english ? "Owner" : "负责人", minSize: 96, maxSize: 160, meta: { grow: 1 } },
+    { accessorKey: "note", header: english ? "Description" : "描述", minSize: 200, meta: { grow: 3 } },
+    { id: "actions", header: () => <span className="sr-only">{english ? "Actions" : "操作"}</span>, meta: { fit: true }, cell: () => <><Button variant="quiet" size="sm">{english ? "Edit" : "编辑"}</Button><Button variant="quiet" size="sm">{english ? "Delete" : "删除"}</Button></> },
+  ];
+  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), autoResetAll: false });
+  return <DataTable table={table} caption={english ? "Local collection · 3 entries" : "本地集合 · 3 项"} emptyContent={english ? "No local entries" : "本地集合没有条目"} />;
 }
 ```

@@ -18,13 +18,13 @@
     "undocumented": 151,
     "undocumentedDeclaredInThisComponentsFile": 28,
     "unresolved": 0,
-    "uncheckedWrittenNames": 212,
+    "uncheckedWrittenNames": 215,
     "uncheckedByReason": {
       "generic": 151,
       "part-not-applicable": 33,
       "no-resolved-part-in-group": 13,
       "unparsed": 10,
-      "dotted-path-into-another-type": 5
+      "dotted-path-into-another-type": 8
     }
   },
   "gate": "documented-but-missing and unresolved must not exceed docs/api-drift.baseline.json; undocumented is report-only.",
@@ -406,13 +406,13 @@
       "component": "data-table",
       "part": "DataTable",
       "prop": "stickyHeader",
-      "declaredAt": "packages/ui/src/components/data-table.tsx:92"
+      "declaredAt": "packages/ui/src/components/data-table.tsx:104"
     },
     {
       "component": "data-table",
       "part": "DataTable",
       "prop": "stickyHeaderOffset",
-      "declaredAt": "packages/ui/src/components/data-table.tsx:94"
+      "declaredAt": "packages/ui/src/components/data-table.tsx:106"
     },
     {
       "component": "data-table",
@@ -1553,6 +1553,27 @@
       "part": "DataTable",
       "written": "table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing",
       "token": "table.options.state.columnSizing",
+      "reason": "dotted-path-into-another-type"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTable",
+      "written": "columnDef.meta.grow",
+      "token": "columnDef.meta.grow",
+      "reason": "dotted-path-into-another-type"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTable",
+      "written": "columnDef.meta.fit",
+      "token": "columnDef.meta.fit",
+      "reason": "dotted-path-into-another-type"
+    },
+    {
+      "component": "data-table",
+      "part": "DataTable",
+      "written": "columnDef.meta.marker",
+      "token": "columnDef.meta.marker",
       "reason": "dotted-path-into-another-type"
     },
     {

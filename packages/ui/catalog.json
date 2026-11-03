@@ -19393,7 +19393,7 @@
         "标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern，自 5.2.0 起随其改为一行布局，只有一页时只留范围摘要。跨页选择的对象内容、权限与批量执行范围仍由应用核实。",
         "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。",
         "只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。",
-        "固定布局中未写 size 的文字列是弹性列，平分定宽列与标记列之外的剩余空间；标记列仍按已有 marker 与单元格内缘角色取宽。列宽过小不会裁掉交互控件，请给操作列留下真实容量。",
+        "固定布局中未写 size 的文字列是弹性列，平分定宽列与标记列之外的剩余空间；标记列仍按已有 marker 与单元格内缘角色取宽。列宽过小不会裁掉交互控件，操作列写 meta.fit 按内容定宽。",
         "虚拟化保留 table/thead/tbody/tr/th/td。aria-rowcount 与 aria-rowindex 描述当前表格页（含表头），不把服务端全局总数冒充已加载行；全选仍覆盖当前模型的完整范围。",
         "虚拟行按稳定 ID 测量，支持实际可变行高；estimateRowHeight 应接近真实行高，未测量的远端行仍是估计。建议显式列宽，避免自动布局因窗口内容变化而重排；纯客户端页面需要查看或打印所有行时关闭虚拟化。",
         "焦点所在的离屏行额外保留一行，输入草稿不因滚动丢失；该行移出当前模型时，焦点仍属于它才回到滚动容器。"
@@ -19491,8 +19491,28 @@
             {
               "name": "table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing",
               "type": "number / number / number / TanStack state",
-              "description": "实际像素列宽，按 minSize/maxSize 钳制。显式配置任一尺寸或非空 columnSizing 时启用固定布局与 colgroup；未配置尺寸时保持原生自动布局。写了 size（或 defaultColumn.size，或 columnSizing 里有它）的列定宽，标记列取内容宽，其余列是弹性列：表宽 100%，弹性列平分剩余空间，minSize 是它的下限，未写 minSize 时下限为 150px（TanStack 默认 size）。表格最小宽度 = 定宽列之和 + 标记列之和 + 弹性列数 × 各弹性列下限的最大值，窄于此值时横向滚动。弹性列的 maxSize 不约束宽度，需要上限就写 size。没有弹性列时表宽等于各列之和，组合表头取可见叶列之和。不内置拖拽调宽。",
-              "descriptionEn": "Actual pixel widths clamped by minSize/maxSize. Any explicit dimension or nonempty columnSizing opts into fixed layout with colgroup; otherwise native auto layout remains. A column with size (or defaultColumn.size, or an entry in columnSizing) is fixed, a marker column takes its content width, and every other column is flexible: the table is 100% wide, flexible columns split the remaining space, minSize is a flexible column's floor, and without minSize the floor is 150px (TanStack's default size). The table's minimum width is the fixed columns plus the marker columns plus the flexible column count times the largest flexible floor; below it the table scrolls horizontally. maxSize does not constrain a flexible column; write size when a cap is needed. Without flexible columns the table is as wide as its columns together, and grouped headers sum visible leaf widths. Drag resizing is not built in."
+              "description": "实际像素列宽，按 minSize/maxSize 钳制。显式配置任一尺寸或非空 columnSizing 时启用固定布局与 colgroup；未配置尺寸时保持原生自动布局。写了 size（或 defaultColumn.size，或 columnSizing 里有它）的列定宽，标记列取内容宽，其余列是弹性列：表宽 100%，弹性列平分剩余空间（写 meta.grow 时按比例），minSize 是它的下限，未写 minSize 时下限为 150px（TanStack 默认 size）。表格最小宽度 = 定宽列之和 + 标记列之和 + 弹性列数 × 各弹性列下限的最大值，窄于此值时横向滚动。弹性列写 maxSize 就是它的上限，多出的宽度回到其它弹性列；优先级是 columnSizing > grow / fit > size。每列宽度都已确定且总和小于容器时（没有弹性列，或弹性列都到了上限），列宽不放大，表头底与行线延伸到容器右缘；放不下时表宽等于各列之和并横向滚动，组合表头取可见叶列之和。不内置拖拽调宽。",
+              "descriptionEn": "Actual pixel widths clamped by minSize/maxSize. Any explicit dimension or nonempty columnSizing opts into fixed layout with colgroup; otherwise native auto layout remains. A column with size (or defaultColumn.size, or an entry in columnSizing) is fixed, a marker column takes its content width, and every other column is flexible: the table is 100% wide, flexible columns split the remaining space, minSize is a flexible column's floor, and without minSize the floor is 150px (TanStack's default size). The table's minimum width is the fixed columns plus the marker columns plus the flexible column count times the largest flexible floor; below it the table scrolls horizontally. A flexible column's maxSize is its cap, and the excess returns to the other flexible columns; precedence is columnSizing > grow / fit > size. When every column width is settled and they total less than the container (no flexible columns, or all of them at their cap), columns do not stretch: the header ground and row lines extend to the container's end. When they do not fit, the table is as wide as its columns together and scrolls, and grouped headers sum visible leaf widths. Drag resizing is not built in."
+            },
+            {
+              "name": "columnDef.meta.grow",
+              "type": "number",
+              "description": "按比例分剩余宽度，须为有限正数；minSize / maxSize 是它的上下限，到界的列冻结，余量回到其它弹性列。同时写 size 时 size 是下限。用户拖动过的列（columnSizing）退出分配。与 fit 互斥。",
+              "descriptionEn": "Shares the remaining width by proportion; must be a finite positive number. minSize and maxSize bound it: a column at a bound freezes and the excess returns to the other flexible columns. With size as well, size is a floor. A column the user has resized (columnSizing) leaves distribution. Mutually exclusive with fit."
+            },
+            {
+              "name": "columnDef.meta.fit",
+              "type": "boolean",
+              "default": "false",
+              "description": "按内容定宽：列宽等于表头与已渲染单元格里最宽的内容加单元格内缘，放操作按钮的列也写它。maxSize 是单元格内容的上限，超出的折行或配 ellipsis 省略，不会把列压到比列名还窄。虚拟化时只量首屏并锁定，滚动不改列宽，之后更宽的文字单行省略（规则同 ellipsis）；含控件的内容不裁切，给这类列留够宽度。与 grow 互斥。",
+              "descriptionEn": "Sizes the column to its content: the widest of the header and rendered cells plus the cell insets. Use it for action columns too. maxSize caps cell content, which wraps or ellipsizes beyond it, and never squeezes the column below its header. With virtualization only the first screen is measured and then locked, so scrolling never changes widths; wider text further down ellipsizes on one line, under the same rules as ellipsis. Interactive content is not clipped, so give such columns enough width. Mutually exclusive with grow."
+            },
+            {
+              "name": "columnDef.meta.marker",
+              "type": "boolean",
+              "default": "false",
+              "description": "这一列只放复选框这类标记：宽度由标记尺寸加单元格内缘算出，不看内容。放操作按钮的列写 fit。",
+              "descriptionEn": "The column holds only a marker such as a checkbox: its width is the marker size plus the cell insets, regardless of content. Action columns use fit."
             },
             {
               "name": "columnDef.meta.ellipsis",
@@ -19575,79 +19595,79 @@
                 "name": "activeRowId",
                 "optional": true,
                 "type": "string | null",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:78"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:90"
               },
               {
                 "name": "busy",
                 "optional": true,
                 "type": "boolean",
                 "doc": "正在取数。旧数据行原样保留（已有内容刷新时保留仍然有效的工作面），表格顶缘出现一条不定进度记号，不推挤布局；\naria-busy 仍然设置。数据、请求与完成时机由应用持有。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:72"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:84"
               },
               {
                 "name": "caption",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:66"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:78"
               },
               {
                 "name": "containerProps",
                 "optional": true,
                 "type": "TableContainerProps",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:87"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:99"
               },
               {
                 "name": "emptyContent",
                 "optional": false,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:67"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:79"
               },
               {
                 "name": "error",
                 "optional": true,
                 "type": "React.ReactNode",
                 "doc": "取数失败等需要读者处理的情况，由应用给出内容（说明与重试动作）；组件只把它摆在表格上方并声明 role=\"alert\"。\n出现错误时旧数据行不撤走：它们仍是读者可用的工作面，是否过期由应用在错误内容里说明。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:77"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:89"
               },
               {
                 "name": "onRowActivate",
                 "optional": true,
                 "type": "(row: Row<TData>, event: DataTableActivateEvent) => void",
                 "doc": "Click noninteractive row content, or focus the row and press Enter / Space. Never toggles selection. 需要至少一个可见的 meta.rowHeader 列来给每一行命名，否则抛错。\n第二个参数是触发它的鼠标或键盘事件（修饰键由调用方解读，库不替它决定「Cmd+点击」意味着什么）。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:85"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:97"
               },
               {
                 "name": "selectionAppearance",
                 "optional": true,
                 "type": "\"row\" | \"checkbox\"",
                 "doc": "Checkbox mode removes only the selected-row fill; selection controls and active-row emphasis remain.",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:80"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:92"
               },
               {
                 "name": "stickyHeader",
                 "optional": true,
                 "type": "boolean",
                 "doc": "表头吸顶，吸在最近的滚动区：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口，\n或 containerProps 设了 height / max-height 时，是表格自己的容器（见 TableHeader 的 sticky）。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:92"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:104"
               },
               {
                 "name": "stickyHeaderOffset",
                 "optional": true,
                 "type": "number | string | undefined",
                 "doc": "见 TableHeader 的 stickyOffset：滚动区顶上有固定页眉时让开它的高度。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:94"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:106"
               },
               {
                 "name": "table",
                 "optional": false,
                 "type": "TableInstance<TData>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:65"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:77"
               },
               {
                 "name": "virtualization",
                 "optional": true,
                 "type": "DataTableVirtualization",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:86"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:98"
               }
             ],
             "inheritedCount": 289,
@@ -19671,118 +19691,118 @@
                 "optional": true,
                 "type": "({ trigger?: \"cell\"; columnId: string } | { trigger: \"row\"; columnId?: never }) & { /** 第二个参数是触发它的鼠标或键盘事件，调用方据此识别 Cmd / Ctrl / Shift 等修饰键。 */ onActivate?: (row: TData, event: DataTableActivateEvent) => void; }",
                 "doc": "Cell activation preserves the existing button entry; row activation excludes nested interactive content. Both stay independent from selection.",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:489"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:622"
               },
               {
                 "name": "busy",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:495"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:628"
               },
               {
                 "name": "caption",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:493"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:626"
               },
               {
                 "name": "columns",
                 "optional": false,
                 "type": "readonly DataTablePatternColumn<TData>[]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:465"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:598"
               },
               {
                 "name": "data",
                 "optional": false,
                 "type": "TData[]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:464"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:597"
               },
               {
                 "name": "defaultState",
                 "optional": true,
                 "type": "Partial<DataTablePatternState>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:469"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:602"
               },
               {
                 "name": "emptyContent",
                 "optional": false,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:494"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:627"
               },
               {
                 "name": "error",
                 "optional": true,
                 "type": "React.ReactNode",
                 "doc": "见 DataTable 的 error：应用给出内容与重试动作，旧数据行保留。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:497"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:630"
               },
               {
                 "name": "getRowId",
                 "optional": false,
                 "type": "(row: TData) => string",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:466"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:599"
               },
               {
                 "name": "mode",
                 "optional": true,
                 "type": "\"client\" | \"server\"",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:467"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:600"
               },
               {
                 "name": "onStateChange",
                 "optional": true,
                 "type": "(state: DataTablePatternState, details: DataTablePatternChangeDetails) => void",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:470"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:603"
               },
               {
                 "name": "pagination",
                 "optional": true,
                 "type": "false | DataTablePatternPagination",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:471"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:604"
               },
               {
                 "name": "selection",
                 "optional": true,
                 "type": "{ label: string; rowLabel: (row: TData) => string; canSelect?: (row: TData) => boolean; /** * 表头全选的范围，默认 \"page\"（当页）。\"filtered\"：全部筛选结果，跨过分页——只在 mode=\"client\" 有效， * 因为只有客户端持有完整结果；mode=\"server\" 传 \"filtered\" 会抛错，服务端分页的全量选择用 BulkActionBar 的 ext…",
                 "typeTruncated": true,
-                "declaredAt": "packages/ui/src/components/data-table.tsx:472"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:605"
               },
               {
                 "name": "selectionAppearance",
                 "optional": true,
                 "type": "\"row\" | \"checkbox\"",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:483"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:616"
               },
               {
                 "name": "state",
                 "optional": true,
                 "type": "DataTablePatternState",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:468"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:601"
               },
               {
                 "name": "stickyHeader",
                 "optional": true,
                 "type": "boolean",
                 "doc": "表头吸顶，吸在最近的滚动区（见 DataTable 的 stickyHeader）。",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:486"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:619"
               },
               {
                 "name": "stickyHeaderOffset",
                 "optional": true,
                 "type": "DataTableProps<TData>[\"stickyHeaderOffset\"]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:487"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:620"
               },
               {
                 "name": "tableProps",
                 "optional": true,
                 "type": "Omit<DataTableProps<TData>, \"table\" | \"caption\" | \"emptyContent\" | \"busy\" | \"error\" | \"activeRowId\" | \"onRowActivate\" | \"selectionAppearance\" | \"virtualization\" | \"stickyHeader\" | \"stickyHeaderOffset\">",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:498"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:631"
               },
               {
                 "name": "virtualization",
                 "optional": true,
                 "type": "DataTableVirtualization",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:484"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:617"
               }
             ],
             "inheritedCount": 277,
@@ -19802,25 +19822,25 @@
                 "optional": false,
                 "type": "string",
                 "doc": "Defines a string value that labels the current element.",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:405"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:534"
               },
               {
                 "name": "onCheckedChange",
                 "optional": true,
                 "type": "CheckboxProps[\"onCheckedChange\"]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:377"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:506"
               },
               {
                 "name": "scope",
                 "optional": false,
                 "type": "\"page\" | \"filtered\"",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:405"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:534"
               },
               {
                 "name": "table",
                 "optional": false,
                 "type": "TableInstance<TData>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:405"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:534"
               }
             ],
             "inheritedCount": 286,
@@ -19843,13 +19863,13 @@
                 "name": "onCheckedChange",
                 "optional": true,
                 "type": "CheckboxProps[\"onCheckedChange\"]",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:377"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:506"
               },
               {
                 "name": "row",
                 "optional": false,
                 "type": "Row<TData>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:378"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:507"
               }
             ],
             "inheritedCount": 287,
@@ -19878,7 +19898,7 @@
                 "name": "column",
                 "optional": false,
                 "type": "Column<TData, unknown>",
-                "declaredAt": "packages/ui/src/components/data-table.tsx:371"
+                "declaredAt": "packages/ui/src/components/data-table.tsx:500"
               },
               {
                 "name": "data-slot",
@@ -19937,12 +19957,12 @@
             {
               "part": "DataTable",
               "prop": "stickyHeader",
-              "declaredAt": "packages/ui/src/components/data-table.tsx:92"
+              "declaredAt": "packages/ui/src/components/data-table.tsx:104"
             },
             {
               "part": "DataTable",
               "prop": "stickyHeaderOffset",
-              "declaredAt": "packages/ui/src/components/data-table.tsx:94"
+              "declaredAt": "packages/ui/src/components/data-table.tsx:106"
             },
             {
               "part": "DataTableSortButton",
@@ -20078,7 +20098,7 @@
           "kind": "type",
           "owner": "data-table",
           "module": "@qingye_lab/ui/components/data-table",
-          "signature": "{\n  id: string;\n  header: React.ReactNode;\n  accessor: (row: TData) => unknown;\n  cell?: (row: TData, value: unknown) => React.ReactNode;\n  sortable?: boolean;\n  sortDescFirst?: boolean;\n  rowHeader?: boolean;\n  numeric?: boolean;\n  /**\n   * Pixel dimensions, clamped by TanStack; any explicit dimension opts the table into fixed layout.\n   * 只有写了 size 的列是定宽列；没写 size 的列是弹性列，平分剩余空间（表宽 100%），minSize 是它的下限。弹性列的 maxSize 不约束宽度，需要上限就写 size。\n   */\n  size?: number;\n  minSize?: number;\n  maxSize?: number;\n  ellipsis?: boolean;\n  /**\n   * 没有 cell 时，accessor 返回 null、undefined 或空字符串所显示的内容；0 与 false 不算空值。\n   * 默认是一个 aria-hidden 的「—」加给读屏的「无值」。库只知道「没有值」——未知与不适用是调用方的事实，\n   * 需要区分时用 empty（如「不适用」「未知」）或自己的 cell。给了 cell 则不经过 empty。\n   */\n  empty?: React.ReactNode;\n  /** 固定在行内起点。只允许从第一列起连续的前导列，不连续时抛错；有 selection 时选择列自动一并固定。 */\n  pinned?: boolean;\n}",
+          "signature": "{\n  id: string;\n  header: React.ReactNode;\n  accessor: (row: TData) => unknown;\n  cell?: (row: TData, value: unknown) => React.ReactNode;\n  sortable?: boolean;\n  sortDescFirst?: boolean;\n  rowHeader?: boolean;\n  numeric?: boolean;\n  /**\n   * Pixel dimensions, clamped by TanStack; any explicit dimension opts the table into fixed layout.\n   * 只有写了 size 的列是定宽列；没写 size 的列是弹性列，平分剩余空间（表宽 100%），minSize 是它的下限。弹性列写 maxSize 时由分配算法兑现，到界后余量让给其它列；需要上限也可以写 size。\n   */\n  size?: number;\n  minSize?: number;\n  maxSize?: number;\n  /** 见 DataTableColumnMeta.grow。 */\n  grow?: number;\n  /** 见 DataTableColumnMeta.fit。 */\n  fit?: boolean;\n  ellipsis?: boolean;\n  /**\n   * 没有 cell 时，accessor 返回 null、undefined 或空字符串所显示的内容；0 与 false 不算空值。\n   * 默认是一个 aria-hidden 的「—」加给读屏的「无值」。库只知道「没有值」——未知与不适用是调用方的事实，\n   * 需要区分时用 empty（如「不适用」「未知」）或自己的 cell。给了 cell 则不经过 empty。\n   */\n  empty?: React.ReactNode;\n  /** 固定在行内起点。只允许从第一列起连续的前导列，不连续时抛错；有 selection 时选择列自动一并固定。 */\n  pinned?: boolean;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -20208,7 +20228,7 @@
         },
         {
           "name": "DataTableColumnMeta",
-          "definition": "export interface DataTableColumnMeta {\n  /**\n   * 这一列是行标题（th scope=\"row\"）。每一行的可访问名称取自该行所有行标题单元格（行的 aria-labelledby 指向它们）；\n   * 设置了 onRowActivate 时至少要有一个可见的行标题列，否则抛错。\n   */\n  rowHeader?: boolean;\n  /** 这一列只放一个标记（复选框、行操作）：由内容定宽（w-line），留白与文字列同一条规则。 */\n  marker?: boolean;\n  /**\n   * 数值列：由列定义声明，不由内容猜。表头与该列每个单元格同一对齐——行内末端（RTL 下在左）并用等宽数字，数位对齐才能比较大小（基础层 §19）。\n   * 落到 TableHead / TableCell 的 `numeric` 属性与 `data-numeric`；DataTablePattern 的列配置同名。\n   */\n  numeric?: boolean;\n  /**\n   * 对非交互文字启用单行省略。完整文字始终在 DOM 里，读屏读到全文（省略只是视觉）；\n   * 真的被截断时，该格可获得键盘焦点并用 Tooltip 显示全文（悬停、聚焦均可）。含控件的内容不裁切；\n   * 例外：格里唯一的控件是一个链接（a[href]）时，链接本身单行截断，被截断时悬停或聚焦链接显示全文（不新增 Tab 停靠点）。\n   */\n  ellipsis?: boolean;\n  /** 固定在行内起点（RTL 下为右侧）。只允许从第一列起连续的前导列，否则抛错；其宽度由表头单元格实测，后一个固定列接在前一个之后。 */\n  pinned?: boolean;\n}"
+          "definition": "export interface DataTableColumnMeta {\n  /**\n   * 这一列是行标题（th scope=\"row\"）。每一行的可访问名称取自该行所有行标题单元格（行的 aria-labelledby 指向它们）；\n   * 设置了 onRowActivate 时至少要有一个可见的行标题列，否则抛错。\n   */\n  rowHeader?: boolean;\n  /** 这一列只放一个标记（复选框这类）：宽度由标记尺寸加单元格内缘算出，不看内容；放操作按钮的列写 fit。 */\n  marker?: boolean;\n  /**\n   * 数值列：由列定义声明，不由内容猜。表头与该列每个单元格同一对齐——行内末端（RTL 下在左）并用等宽数字，数位对齐才能比较大小（基础层 §19）。\n   * 落到 TableHead / TableCell 的 `numeric` 属性与 `data-numeric`；DataTablePattern 的列配置同名。\n   */\n  numeric?: boolean;\n  /**\n   * 对非交互文字启用单行省略。完整文字始终在 DOM 里，读屏读到全文（省略只是视觉）；\n   * 真的被截断时，该格可获得键盘焦点并用 Tooltip 显示全文（悬停、聚焦均可）。含控件的内容不裁切；\n   * 例外：格里唯一的控件是一个链接（a[href]）时，链接本身单行截断，被截断时悬停或聚焦链接显示全文（不新增 Tab 停靠点）。\n   */\n  ellipsis?: boolean;\n  /** 固定在行内起点（RTL 下为右侧）。只允许从第一列起连续的前导列，否则抛错；其宽度由表头单元格实测，后一个固定列接在前一个之后。 */\n  pinned?: boolean;\n  /**\n   * 按权重分配剩余宽度（与 fr、flex-grow 同义），minSize / maxSize 是它的上下限，到界的列把余量让给其它列。\n   * 同时写 size 时 size 是下限。用户拖动过的列（columnSizing）退出分配，回到定宽。\n   */\n  grow?: number;\n  /**\n   * 按内容定宽：列宽 = 表头与已渲染单元格里最宽的内容 + 单元格内缘，单元格放得下就不换行。\n   * maxSize 是单元格内容的上限（超出的折行，配 ellipsis 则省略），不会把列压到比列名还窄。\n   * 虚拟化时只量首屏并锁定，滚动不改列宽；之后更宽的文字单行省略（同 ellipsis）。与 grow 互斥。\n   */\n  fit?: boolean;\n}"
         },
         {
           "name": "DataTableVirtualization",
@@ -20236,7 +20256,7 @@
         },
         {
           "name": "DataTablePatternColumn",
-          "definition": "export type DataTablePatternColumn<TData> = {\n  id: string;\n  header: React.ReactNode;\n  accessor: (row: TData) => unknown;\n  cell?: (row: TData, value: unknown) => React.ReactNode;\n  sortable?: boolean;\n  sortDescFirst?: boolean;\n  rowHeader?: boolean;\n  numeric?: boolean;\n  /**\n   * Pixel dimensions, clamped by TanStack; any explicit dimension opts the table into fixed layout.\n   * 只有写了 size 的列是定宽列；没写 size 的列是弹性列，平分剩余空间（表宽 100%），minSize 是它的下限。弹性列的 maxSize 不约束宽度，需要上限就写 size。\n   */\n  size?: number;\n  minSize?: number;\n  maxSize?: number;\n  ellipsis?: boolean;\n  /**\n   * 没有 cell 时，accessor 返回 null、undefined 或空字符串所显示的内容；0 与 false 不算空值。\n   * 默认是一个 aria-hidden 的「—」加给读屏的「无值」。库只知道「没有值」——未知与不适用是调用方的事实，\n   * 需要区分时用 empty（如「不适用」「未知」）或自己的 cell。给了 cell 则不经过 empty。\n   */\n  empty?: React.ReactNode;\n  /** 固定在行内起点。只允许从第一列起连续的前导列，不连续时抛错；有 selection 时选择列自动一并固定。 */\n  pinned?: boolean;\n};"
+          "definition": "export type DataTablePatternColumn<TData> = {\n  id: string;\n  header: React.ReactNode;\n  accessor: (row: TData) => unknown;\n  cell?: (row: TData, value: unknown) => React.ReactNode;\n  sortable?: boolean;\n  sortDescFirst?: boolean;\n  rowHeader?: boolean;\n  numeric?: boolean;\n  /**\n   * Pixel dimensions, clamped by TanStack; any explicit dimension opts the table into fixed layout.\n   * 只有写了 size 的列是定宽列；没写 size 的列是弹性列，平分剩余空间（表宽 100%），minSize 是它的下限。弹性列写 maxSize 时由分配算法兑现，到界后余量让给其它列；需要上限也可以写 size。\n   */\n  size?: number;\n  minSize?: number;\n  maxSize?: number;\n  /** 见 DataTableColumnMeta.grow。 */\n  grow?: number;\n  /** 见 DataTableColumnMeta.fit。 */\n  fit?: boolean;\n  ellipsis?: boolean;\n  /**\n   * 没有 cell 时，accessor 返回 null、undefined 或空字符串所显示的内容；0 与 false 不算空值。\n   * 默认是一个 aria-hidden 的「—」加给读屏的「无值」。库只知道「没有值」——未知与不适用是调用方的事实，\n   * 需要区分时用 empty（如「不适用」「未知」）或自己的 cell。给了 cell 则不经过 empty。\n   */\n  empty?: React.ReactNode;\n  /** 固定在行内起点。只允许从第一列起连续的前导列，不连续时抛错；有 selection 时选择列自动一并固定。 */\n  pinned?: boolean;\n};"
         },
         {
           "name": "DataTablePatternState",
@@ -20455,6 +20475,22 @@
           "providers": [],
           "code": "import * as React from \"react\";\nimport { DataTablePattern, type DataTablePatternColumn } from \"@qingye_lab/ui/components/data-table\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"全选整个结果与修饰键\", titleEn: \"Select the whole result and modifier keys\" } satisfies DemoMeta;\n\ntype Entry = { id: string; name: string; count: number };\nconst rows: Entry[] = Array.from({ length: 23 }, (_, index) => ({ id: `entry-${index + 1}`, name: `${String(index + 1).padStart(2, \"0\")}`, count: (index * 7) % 31 }));\n\nexport default function Demo() {\n  const english = useUILocale().code.startsWith(\"en\");\n  const [note, setNote] = React.useState(\"\");\n  const columns: DataTablePatternColumn<Entry>[] = [\n    { id: \"name\", header: english ? \"Name\" : \"名称\", accessor: row => english ? `Entry ${row.name}` : `条目 ${row.name}`, rowHeader: true, sortable: true },\n    { id: \"count\", header: english ? \"Records\" : \"记录数\", accessor: row => row.count, numeric: true, size: 120 },\n  ];\n  return <div className=\"flex min-w-0 flex-col gap-(--qy-panel-gap)\">\n    <DataTablePattern\n      data={rows} columns={columns} getRowId={row => row.id}\n      caption={english ? \"Entries\" : \"条目\"} emptyContent={english ? \"No entries\" : \"没有条目\"}\n      pagination={{ pageSizeOptions: [5, 10] }} defaultState={{ pagination: { page: 1, pageSize: 5 } }}\n      selection={{ label: english ? \"Select entries\" : \"选择条目\", rowLabel: row => english ? `Select Entry ${row.name}` : `选择条目 ${row.name}`, scope: \"filtered\" }}\n      activeRow={{ trigger: \"row\", onActivate: (row, event) => setNote(`${english ? \"Activated\" : \"已激活\"} ${row.name}${event.metaKey || event.ctrlKey ? (english ? \" with Cmd/Ctrl\" : \"，按住了 Cmd / Ctrl\") : event.shiftKey ? (english ? \" with Shift\" : \"，按住了 Shift\") : \"\"}`)}}\n    />\n    <p role=\"status\" className=\"text-body text-muted-foreground\">{note}</p>\n  </div>;\n}\n",
           "sha256": "5e76e395788a555470c70d032f46e68d16bc72cb05dc1301c1ca8aae5f72ff54"
+        },
+        {
+          "id": "column-relations",
+          "title": "按内容、按比例与上限",
+          "source": "apps/docs/src/content/data-table/demos/09-column-relations.tsx",
+          "imports": [
+            "@/lib/types",
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/data-table",
+            "@qingye_lab/ui/components/status-dot",
+            "@qingye_lab/ui/locale",
+            "@tanstack/react-table"
+          ],
+          "providers": [],
+          "code": "import { getCoreRowModel, useReactTable, type ColumnDef } from \"@tanstack/react-table\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { DataTable } from \"@qingye_lab/ui/components/data-table\";\nimport { StatusDot, type StatusDotStatus } from \"@qingye_lab/ui/components/status-dot\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"按内容、按比例与上限\", titleEn: \"Content, proportion and limits\" } satisfies DemoMeta;\n\ntype Entry = { id: string; name: string; status: string; dot: StatusDotStatus; synced: string; owner: string; note: string };\nexport default function Demo() {\n  const english = useUILocale().code.startsWith(\"en\");\n  const data: Entry[] = english ? [\n    { id: \"sensors\", name: \"Connected devices\", status: \"Online\", dot: \"online\", synced: \"2026-11-03 14:20\", owner: \"Lin\", note: \"Workshop sensors and the remote sites that report through the gateway.\" },\n    { id: \"roles\", name: \"Permissions and roles\", status: \"Draft\", dot: \"neutral\", synced: \"2026-11-02 09:05\", owner: \"Zhou\", note: \"Who may view, edit and export each collection.\" },\n    { id: \"sync\", name: \"Sync and export\", status: \"Synchronizing\", dot: \"neutral\", synced: \"2026-10-30 22:41\", owner: \"Xu\", note: \"Nightly export to the shared archive.\" },\n  ] : [\n    { id: \"sensors\", name: \"接入设备\", status: \"在线\", dot: \"online\", synced: \"2026-11-03 14:20\", owner: \"林\", note: \"车间传感器，以及经网关上报的远端站点。\" },\n    { id: \"roles\", name: \"权限与角色\", status: \"草稿\", dot: \"neutral\", synced: \"2026-11-02 09:05\", owner: \"周\", note: \"谁可以查看、编辑和导出各个集合。\" },\n    { id: \"sync\", name: \"同步与导出\", status: \"同步中\", dot: \"neutral\", synced: \"2026-10-30 22:41\", owner: \"徐\", note: \"每晚导出到共享归档。\" },\n  ];\n  const columns: ColumnDef<Entry>[] = [\n    { accessorKey: \"name\", header: english ? \"Name\" : \"名称\", meta: { rowHeader: true, fit: true } },\n    { accessorKey: \"status\", header: english ? \"Status\" : \"状态\", meta: { fit: true }, cell: ({ row }) => <StatusDot status={row.original.dot} label={row.original.status} /> },\n    { accessorKey: \"synced\", header: english ? \"Last synchronized\" : \"最近同步\", meta: { fit: true } },\n    { accessorKey: \"owner\", header: english ? \"Owner\" : \"负责人\", minSize: 96, maxSize: 160, meta: { grow: 1 } },\n    { accessorKey: \"note\", header: english ? \"Description\" : \"描述\", minSize: 200, meta: { grow: 3 } },\n    { id: \"actions\", header: () => <span className=\"sr-only\">{english ? \"Actions\" : \"操作\"}</span>, meta: { fit: true }, cell: () => <><Button variant=\"quiet\" size=\"sm\">{english ? \"Edit\" : \"编辑\"}</Button><Button variant=\"quiet\" size=\"sm\">{english ? \"Delete\" : \"删除\"}</Button></> },\n  ];\n  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), autoResetAll: false });\n  return <DataTable table={table} caption={english ? \"Local collection · 3 entries\" : \"本地集合 · 3 项\"} emptyContent={english ? \"No local entries\" : \"本地集合没有条目\"} />;\n}\n",
+          "sha256": "774e66516bb7400c36d6df66ceeb895295c8dbd42a66f6a5a9420f9981e98c86"
         }
       ],
       "design": {
@@ -20492,7 +20528,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/data-table.tsx",
-        "sha256": "d2cf2f1324b57061682625df086973eac082929734dc257b7b81374b4cf9707c",
+        "sha256": "1a8172af8bbc45ffc9bfae352b050c8a591578ee6d765a5f33118dc3aa430326",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。虚拟化只改变当前行模型的渲染窗口，不改变全选与分页范围。",
@@ -20506,7 +20542,7 @@
             "Import DataTablePattern from components/data-table; its pager reuses PaginationPattern and since 5.2.0 follows its one-row layout, leaving only the range summary for a single page. Applications still verify cross-page object data, permissions and bulk-action scope.",
             "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.",
             "With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component.",
-            "In fixed layout, text columns without size are flexible and split the width left over by fixed and marker columns; marker columns retain their marker and cell-inset roles. Interactive content is not clipped to force a narrow width: allow actual capacity for action columns.",
+            "In fixed layout, text columns without size are flexible and split the width left over by fixed and marker columns; marker columns retain their marker and cell-inset roles. Interactive content is not clipped to force a narrow width: action columns use meta.fit to size to their content.",
             "Virtualization retains table/thead/tbody/tr/th/td. Aria-rowcount and aria-rowindex describe the current table page including headers, without presenting server totals as loaded rows. Select-all still covers the complete current model scope.",
             "Virtual rows are measured by stable ID and support variable actual heights. Choose an estimateRowHeight close to actual rows: distant unmeasured heights remain estimates. Explicit column widths prevent window content from changing natural layout. Disable virtualization to view or print all client rows.",
             "One extra offscreen row retains focus and editor drafts while scrolling. When it leaves the current model, focus returns to the viewport only if that row still owned focus."
@@ -20594,8 +20630,28 @@
                 {
                   "name": "table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing",
                   "type": "number / number / number / TanStack state",
-                  "description": "Actual pixel widths clamped by minSize/maxSize. Any explicit dimension or nonempty columnSizing opts into fixed layout with colgroup; otherwise native auto layout remains. A column with size (or defaultColumn.size, or an entry in columnSizing) is fixed, a marker column takes its content width, and every other column is flexible: the table is 100% wide, flexible columns split the remaining space, minSize is a flexible column's floor, and without minSize the floor is 150px (TanStack's default size). The table's minimum width is the fixed columns plus the marker columns plus the flexible column count times the largest flexible floor; below it the table scrolls horizontally. maxSize does not constrain a flexible column; write size when a cap is needed. Without flexible columns the table is as wide as its columns together, and grouped headers sum visible leaf widths. Drag resizing is not built in.",
-                  "descriptionEn": "Actual pixel widths clamped by minSize/maxSize. Any explicit dimension or nonempty columnSizing opts into fixed layout with colgroup; otherwise native auto layout remains. A column with size (or defaultColumn.size, or an entry in columnSizing) is fixed, a marker column takes its content width, and every other column is flexible: the table is 100% wide, flexible columns split the remaining space, minSize is a flexible column's floor, and without minSize the floor is 150px (TanStack's default size). The table's minimum width is the fixed columns plus the marker columns plus the flexible column count times the largest flexible floor; below it the table scrolls horizontally. maxSize does not constrain a flexible column; write size when a cap is needed. Without flexible columns the table is as wide as its columns together, and grouped headers sum visible leaf widths. Drag resizing is not built in."
+                  "description": "Actual pixel widths clamped by minSize/maxSize. Any explicit dimension or nonempty columnSizing opts into fixed layout with colgroup; otherwise native auto layout remains. A column with size (or defaultColumn.size, or an entry in columnSizing) is fixed, a marker column takes its content width, and every other column is flexible: the table is 100% wide, flexible columns split the remaining space, minSize is a flexible column's floor, and without minSize the floor is 150px (TanStack's default size). The table's minimum width is the fixed columns plus the marker columns plus the flexible column count times the largest flexible floor; below it the table scrolls horizontally. A flexible column's maxSize is its cap, and the excess returns to the other flexible columns; precedence is columnSizing > grow / fit > size. When every column width is settled and they total less than the container (no flexible columns, or all of them at their cap), columns do not stretch: the header ground and row lines extend to the container's end. When they do not fit, the table is as wide as its columns together and scrolls, and grouped headers sum visible leaf widths. Drag resizing is not built in.",
+                  "descriptionEn": "Actual pixel widths clamped by minSize/maxSize. Any explicit dimension or nonempty columnSizing opts into fixed layout with colgroup; otherwise native auto layout remains. A column with size (or defaultColumn.size, or an entry in columnSizing) is fixed, a marker column takes its content width, and every other column is flexible: the table is 100% wide, flexible columns split the remaining space, minSize is a flexible column's floor, and without minSize the floor is 150px (TanStack's default size). The table's minimum width is the fixed columns plus the marker columns plus the flexible column count times the largest flexible floor; below it the table scrolls horizontally. A flexible column's maxSize is its cap, and the excess returns to the other flexible columns; precedence is columnSizing > grow / fit > size. When every column width is settled and they total less than the container (no flexible columns, or all of them at their cap), columns do not stretch: the header ground and row lines extend to the container's end. When they do not fit, the table is as wide as its columns together and scrolls, and grouped headers sum visible leaf widths. Drag resizing is not built in."
+                },
+                {
+                  "name": "columnDef.meta.grow",
+                  "type": "number",
+                  "description": "Shares the remaining width by proportion; must be a finite positive number. minSize and maxSize bound it: a column at a bound freezes and the excess returns to the other flexible columns. With size as well, size is a floor. A column the user has resized (columnSizing) leaves distribution. Mutually exclusive with fit.",
+                  "descriptionEn": "Shares the remaining width by proportion; must be a finite positive number. minSize and maxSize bound it: a column at a bound freezes and the excess returns to the other flexible columns. With size as well, size is a floor. A column the user has resized (columnSizing) leaves distribution. Mutually exclusive with fit."
+                },
+                {
+                  "name": "columnDef.meta.fit",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "Sizes the column to its content: the widest of the header and rendered cells plus the cell insets. Use it for action columns too. maxSize caps cell content, which wraps or ellipsizes beyond it, and never squeezes the column below its header. With virtualization only the first screen is measured and then locked, so scrolling never changes widths; wider text further down ellipsizes on one line, under the same rules as ellipsis. Interactive content is not clipped, so give such columns enough width. Mutually exclusive with grow.",
+                  "descriptionEn": "Sizes the column to its content: the widest of the header and rendered cells plus the cell insets. Use it for action columns too. maxSize caps cell content, which wraps or ellipsizes beyond it, and never squeezes the column below its header. With virtualization only the first screen is measured and then locked, so scrolling never changes widths; wider text further down ellipsizes on one line, under the same rules as ellipsis. Interactive content is not clipped, so give such columns enough width. Mutually exclusive with grow."
+                },
+                {
+                  "name": "columnDef.meta.marker",
+                  "type": "boolean",
+                  "default": "false",
+                  "description": "The column holds only a marker such as a checkbox: its width is the marker size plus the cell insets, regardless of content. Action columns use fit.",
+                  "descriptionEn": "The column holds only a marker such as a checkbox: its width is the marker size plus the cell insets, regardless of content. Action columns use fit."
                 },
                 {
                   "name": "columnDef.meta.ellipsis",

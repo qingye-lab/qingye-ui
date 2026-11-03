@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: d2cf2f1324b57061682625df086973eac082929734dc257b7b81374b4cf9707c
+Source SHA-256: 1a8172af8bbc45ffc9bfae352b050c8a591578ee6d765a5f33118dc3aa430326
 
 Comparison, sorting, scoped selection and optional virtualization for a caller-owned collection.
 
@@ -14,7 +14,7 @@ Configure data, columns and stable IDs with DataTablePattern; retain DataTable f
 - Import DataTablePattern from components/data-table; its pager reuses PaginationPattern and since 5.2.0 follows its one-row layout, leaving only the range summary for a single page. Applications still verify cross-page object data, permissions and bulk-action scope.
 - TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.
 - With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component.
-- In fixed layout, text columns without size are flexible and split the width left over by fixed and marker columns; marker columns retain their marker and cell-inset roles. Interactive content is not clipped to force a narrow width: allow actual capacity for action columns.
+- In fixed layout, text columns without size are flexible and split the width left over by fixed and marker columns; marker columns retain their marker and cell-inset roles. Interactive content is not clipped to force a narrow width: action columns use meta.fit to size to their content.
 - Virtualization retains table/thead/tbody/tr/th/td. Aria-rowcount and aria-rowindex describe the current table page including headers, without presenting server totals as loaded rows. Select-all still covers the complete current model scope.
 - Virtual rows are measured by stable ID and support variable actual heights. Choose an estimateRowHeight close to actual rows: distant unmeasured heights remain estimates. Explicit column widths prevent window content from changing natural layout. Disable virtualization to view or print all client rows.
 - One extra offscreen row retains focus and editor drafts while scrolling. When it leaves the current model, focus returns to the viewport only if that row still owned focus.
@@ -146,7 +146,10 @@ Configured sorting, page selection, active rows and pagination without issuing r
 ### DataTable
 A native two-dimensional collection.
 - table / emptyContent / caption / busy / error / activeRowId / containerProps: TableInstance<T> / ReactNode / TableContainerProps. GetRowId and at least one visible column are required; zero and caption are retained, and busy keeps valid rows without dimming them. Data rows take the hover surface on pointer hover; selected and active rows keep the deeper selected surface. error is placed above the table as role=alert and carries its own retry action.
-- table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing: number / number / number / TanStack state. Actual pixel widths clamped by minSize/maxSize. Any explicit dimension or nonempty columnSizing opts into fixed layout with colgroup; otherwise native auto layout remains. A column with size (or defaultColumn.size, or an entry in columnSizing) is fixed, a marker column takes its content width, and every other column is flexible: the table is 100% wide, flexible columns split the remaining space, minSize is a flexible column's floor, and without minSize the floor is 150px (TanStack's default size). The table's minimum width is the fixed columns plus the marker columns plus the flexible column count times the largest flexible floor; below it the table scrolls horizontally. maxSize does not constrain a flexible column; write size when a cap is needed. Without flexible columns the table is as wide as its columns together, and grouped headers sum visible leaf widths. Drag resizing is not built in.
+- table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing: number / number / number / TanStack state. Actual pixel widths clamped by minSize/maxSize. Any explicit dimension or nonempty columnSizing opts into fixed layout with colgroup; otherwise native auto layout remains. A column with size (or defaultColumn.size, or an entry in columnSizing) is fixed, a marker column takes its content width, and every other column is flexible: the table is 100% wide, flexible columns split the remaining space, minSize is a flexible column's floor, and without minSize the floor is 150px (TanStack's default size). The table's minimum width is the fixed columns plus the marker columns plus the flexible column count times the largest flexible floor; below it the table scrolls horizontally. A flexible column's maxSize is its cap, and the excess returns to the other flexible columns; precedence is columnSizing > grow / fit > size. When every column width is settled and they total less than the container (no flexible columns, or all of them at their cap), columns do not stretch: the header ground and row lines extend to the container's end. When they do not fit, the table is as wide as its columns together and scrolls, and grouped headers sum visible leaf widths. Drag resizing is not built in.
+- columnDef.meta.grow: number. Shares the remaining width by proportion; must be a finite positive number. minSize and maxSize bound it: a column at a bound freezes and the excess returns to the other flexible columns. With size as well, size is a floor. A column the user has resized (columnSizing) leaves distribution. Mutually exclusive with fit.
+- columnDef.meta.fit: boolean; default false. Sizes the column to its content: the widest of the header and rendered cells plus the cell insets. Use it for action columns too. maxSize caps cell content, which wraps or ellipsizes beyond it, and never squeezes the column below its header. With virtualization only the first screen is measured and then locked, so scrolling never changes widths; wider text further down ellipsizes on one line, under the same rules as ellipsis. Interactive content is not clipped, so give such columns enough width. Mutually exclusive with grow.
+- columnDef.meta.marker: boolean; default false. The column holds only a marker such as a checkbox: its width is the marker size plus the cell insets, regardless of content. Action columns use fit.
 - columnDef.meta.ellipsis: boolean; default false. Ellipsizes noninteractive header/cell text on one line. The full text always stays in the DOM and accessible name; when actually truncated the cell becomes a keyboard stop and shows the full text in a Tooltip on focus or hover (not a native title, which keyboards and touch cannot read). Cells that fit stay out of the Tab sequence. Interactive content is not clipped, with one exception: a cell holding a single link with an href. The link itself truncates to one line and, when actually truncated, shows the full text in a Tooltip on hover or focus, with no extra Tab stop and an unchanged accessible name. Without ellipsis cells wrap and show the full text; column widths determine capacity, so keep critical consequences visible.
 - columnDef.meta.numeric: boolean; default false. A numeric column is declared by the column definition, never guessed from content: header and every cell share one alignment, at the inline end (left in RTL), with tabular figures. The Pattern column config uses the same name.
 - selectionAppearance / onRowActivate / virtualization: row | checkbox / (row: Row<T>, event: DataTableActivateEvent) => void / DataTableVirtualization. Selection appearance and virtualization match Pattern. Row activation receives a TanStack Row and the mouse or keyboard event that triggered it (modifier keys readable); the caller owns activeRowId. Only one row is in the Tab sequence (the last focused row, else the active row, else the first) and arrow keys move between rows. Nested interactive elements and custom data-row-activate-ignore regions are excluded, and activation never changes selection. A visible meta.rowHeader column is required to name the rows; without one it throws.
@@ -457,5 +460,42 @@ export default function Demo() {
     />
     <p role="status" className="text-body text-muted-foreground">{note}</p>
   </div>;
+}
+```
+
+### 按内容、按比例与上限
+Source: apps/docs/src/content/data-table/demos/09-column-relations.tsx
+```tsx
+import { getCoreRowModel, useReactTable, type ColumnDef } from "@tanstack/react-table";
+import { Button } from "@qingye_lab/ui/components/button";
+import { DataTable } from "@qingye_lab/ui/components/data-table";
+import { StatusDot, type StatusDotStatus } from "@qingye_lab/ui/components/status-dot";
+import { useUILocale } from "@qingye_lab/ui/locale";
+import type { DemoMeta } from "@/lib/types";
+
+export const meta = { title: "按内容、按比例与上限", titleEn: "Content, proportion and limits" } satisfies DemoMeta;
+
+type Entry = { id: string; name: string; status: string; dot: StatusDotStatus; synced: string; owner: string; note: string };
+export default function Demo() {
+  const english = useUILocale().code.startsWith("en");
+  const data: Entry[] = english ? [
+    { id: "sensors", name: "Connected devices", status: "Online", dot: "online", synced: "2026-11-03 14:20", owner: "Lin", note: "Workshop sensors and the remote sites that report through the gateway." },
+    { id: "roles", name: "Permissions and roles", status: "Draft", dot: "neutral", synced: "2026-11-02 09:05", owner: "Zhou", note: "Who may view, edit and export each collection." },
+    { id: "sync", name: "Sync and export", status: "Synchronizing", dot: "neutral", synced: "2026-10-30 22:41", owner: "Xu", note: "Nightly export to the shared archive." },
+  ] : [
+    { id: "sensors", name: "接入设备", status: "在线", dot: "online", synced: "2026-11-03 14:20", owner: "林", note: "车间传感器，以及经网关上报的远端站点。" },
+    { id: "roles", name: "权限与角色", status: "草稿", dot: "neutral", synced: "2026-11-02 09:05", owner: "周", note: "谁可以查看、编辑和导出各个集合。" },
+    { id: "sync", name: "同步与导出", status: "同步中", dot: "neutral", synced: "2026-10-30 22:41", owner: "徐", note: "每晚导出到共享归档。" },
+  ];
+  const columns: ColumnDef<Entry>[] = [
+    { accessorKey: "name", header: english ? "Name" : "名称", meta: { rowHeader: true, fit: true } },
+    { accessorKey: "status", header: english ? "Status" : "状态", meta: { fit: true }, cell: ({ row }) => <StatusDot status={row.original.dot} label={row.original.status} /> },
+    { accessorKey: "synced", header: english ? "Last synchronized" : "最近同步", meta: { fit: true } },
+    { accessorKey: "owner", header: english ? "Owner" : "负责人", minSize: 96, maxSize: 160, meta: { grow: 1 } },
+    { accessorKey: "note", header: english ? "Description" : "描述", minSize: 200, meta: { grow: 3 } },
+    { id: "actions", header: () => <span className="sr-only">{english ? "Actions" : "操作"}</span>, meta: { fit: true }, cell: () => <><Button variant="quiet" size="sm">{english ? "Edit" : "编辑"}</Button><Button variant="quiet" size="sm">{english ? "Delete" : "删除"}</Button></> },
+  ];
+  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), autoResetAll: false });
+  return <DataTable table={table} caption={english ? "Local collection · 3 entries" : "本地集合 · 3 项"} emptyContent={english ? "No local entries" : "本地集合没有条目"} />;
 }
 ```
