@@ -151,6 +151,54 @@ describe("Tree loadChildren", () => {
   });
 });
 
+describe("Tree checkable with unloaded descendants", () => {
+  // 父下一个已知叶子 + 一个还没取子项的分支。
+  const partial: TreeNode[] = [{ id: "root", label: "根", children: [{ id: "known", label: "已知", isLeaf: true }, { id: "later", label: "未载" }] }];
+  const item = (name: string) => screen.getByRole("treeitem", { name });
+  const load = async () => [{ id: "late1", label: "迟到一", isLeaf: true }, { id: "late2", label: "迟到二", isLeaf: true }];
+  it("shows a parent as mixed at most while a descendant is unloaded, and false when nothing is checked", () => {
+    const { rerender } = render(<Tree aria-label="层级" nodes={partial} defaultExpandedIds={["root"]} checkable loadChildren={load} checkedIds={["known"]} />);
+    expect(item("根")).toHaveAttribute("aria-checked", "mixed"); expect(item("未载")).toHaveAttribute("aria-checked", "false");
+    rerender(<Tree aria-label="层级" nodes={partial} defaultExpandedIds={["root"]} checkable loadChildren={load} checkedIds={[]} />);
+    expect(item("根")).toHaveAttribute("aria-checked", "false");
+  });
+  it("lets a parent stuck at mixed be unchecked: all loaded enabled leaves checked means the click clears them", async () => {
+    const user = userEvent.setup(); const onCheckedChange = vi.fn();
+    render(<Tree aria-label="层级" nodes={partial} defaultExpandedIds={["root"]} checkable loadChildren={load} defaultCheckedIds={["known"]} onCheckedChange={onCheckedChange} />);
+    await user.click(item("根")); expect(onCheckedChange).toHaveBeenLastCalledWith([], expect.anything()); expect(item("根")).toHaveAttribute("aria-checked", "false");
+    await user.click(item("根")); expect(onCheckedChange).toHaveBeenLastCalledWith(["known"], expect.anything()); expect(item("根")).toHaveAttribute("aria-checked", "mixed");
+    item("根").focus(); await user.keyboard(" "); expect(onCheckedChange).toHaveBeenLastCalledWith([], expect.anything());
+  });
+  it("still checks the rest first when a loaded leaf is unchecked, and reaches true once everything has loaded", async () => {
+    const user = userEvent.setup(); const onCheckedChange = vi.fn();
+    render(<Tree aria-label="层级" nodes={partial} defaultExpandedIds={["root", "later"]} checkable loadChildren={load} defaultCheckedIds={["known"]} onCheckedChange={onCheckedChange} />);
+    await screen.findByRole("treeitem", { name: "迟到一" });
+    expect(item("根")).toHaveAttribute("aria-checked", "mixed");
+    await user.click(item("根")); expect(onCheckedChange).toHaveBeenLastCalledWith(["known", "late1", "late2"], expect.anything()); expect(item("根")).toHaveAttribute("aria-checked", "true");
+    await user.click(item("根")); expect(onCheckedChange).toHaveBeenLastCalledWith([], expect.anything());
+  });
+  it("does not count a disabled unloaded branch: nobody can ever load or check it", () => {
+    const tree: TreeNode[] = [{ id: "root", label: "根", children: [{ id: "known", label: "已知", isLeaf: true }, { id: "later", label: "未载", disabled: true }] }];
+    render(<Tree aria-label="层级" nodes={tree} defaultExpandedIds={["root"]} checkable loadChildren={load} checkedIds={["known"]} />);
+    expect(item("根")).toHaveAttribute("aria-checked", "true");
+  });
+  it("expands a parent whose only descendants are unloaded, because it has nothing to check yet", async () => {
+    const user = userEvent.setup(); const onCheckedChange = vi.fn();
+    const tree: TreeNode[] = [{ id: "root", label: "根", children: [{ id: "later", label: "未载" }] }];
+    render(<Tree aria-label="层级" nodes={tree} checkable loadChildren={load} onCheckedChange={onCheckedChange} />);
+    await user.click(item("根"));
+    expect(item("根")).toHaveAttribute("aria-expanded", "true"); expect(item("未载")).toBeInTheDocument();
+    expect(onCheckedChange).not.toHaveBeenCalled();
+  });
+  it("leaves a parent alone when its only unloaded descendants are disabled", async () => {
+    const user = userEvent.setup();
+    const tree: TreeNode[] = [{ id: "root", label: "根", children: [{ id: "later", label: "未载", disabled: true }] }];
+    render(<Tree aria-label="层级" nodes={tree} checkable loadChildren={load} />);
+    await user.click(item("根"));
+    expect(item("根")).toHaveAttribute("aria-expanded", "false");
+  });
+});
+
 describe("Tree query", () => {
   const tree: TreeNode[] = [{ id: "a", label: "水果", children: [{ id: "a1", label: "苹果" }, { id: "a2", label: "香蕉" }] }, { id: "b", label: "蔬菜", children: [{ id: "b1", label: "苹果酱" }] }, { id: "c", label: "谷物" }];
   it("keeps matches and their ancestors, opens those branches, and marks the matched text", () => {

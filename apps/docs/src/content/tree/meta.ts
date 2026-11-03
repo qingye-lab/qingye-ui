@@ -64,8 +64,8 @@ export default {
         {
           "name": "loadChildren",
           "type": "(node: TreeNode) => Promise<readonly TreeNode[]>",
-          "description": "第一次展开一个没有 children、也没有标 isLeaf 的节点时调用（命名与 Cascader 一致）。等待时该节点标 aria-busy，并在其下显示 locale 的「正在加载」；reject 时显示「加载失败」与重试按钮（节点上按 → 也可重试）；结果为空数组则该节点成为叶子。结果按节点缓存，组件不重复请求。未加载的分支在 checkable 模式下不能被勾选，点它只会展开。",
-          "descriptionEn": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands."
+          "description": "第一次展开一个没有 children、也没有标 isLeaf 的节点时调用（命名与 Cascader 一致）。等待时该节点标 aria-busy，并在其下显示 locale 的「正在加载」；reject 时显示「加载失败」与重试按钮（节点上按 → 也可重试）；结果为空数组则该节点成为叶子。结果按节点缓存，组件不重复请求。未加载的分支在 checkable 模式下不能被勾选，点它只会展开；它的祖先最多显示 mixed，因为还不知道下面有什么。这样的祖先上，点击勾选其下全部已加载的启用叶子，它们都已勾选时再点则全部取消；下面只有未加载分支、没有可勾的叶子时，点击只是展开它。",
+          "descriptionEn": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands. Its ancestors show mixed at most, because what lies below is not yet known. Clicking such an ancestor checks every loaded enabled leaf below it, and clicking again once they are all checked unchecks them. With only unloaded branches and no leaf to check below it, a click just expands it."
         },
         {
           "name": "query",

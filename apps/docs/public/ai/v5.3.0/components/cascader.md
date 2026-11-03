@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/cascader
 Source: packages/ui/src/components/cascader.tsx
-Source SHA-256: 7505bc1141d445780df672e96c0d8fa7ad119b68fe7799a7561fda94974e72e6
+Source SHA-256: 404842647973eafb3974d29b0158669d28b573e50a16bb0808e0f679935593f9
 
 沿「根到叶」的路径选一个值或勾选若干路径，每一级的候选各占一列。
 
@@ -82,7 +82,7 @@ Written descriptions; the list above is the type-resolved fact.
 - value / defaultValue: string[] | null  (multiple: readonly (readonly string[])[]). 单选：从根到所选节点的路径，null 是未选择；省略初值不会选第一项。多选：已勾选的叶子路径的数组，空数组是未选择，顺序按候选树的顺序。路径里尚未加载的节点，触发器退回显示它的 value。
 - onValueChange: (path: string[] | null, options: CascaderOption[]) => void  (multiple: (paths: string[][], options: CascaderOption[][]) => void). 提交了新的值时调用；第二个参数是路径上各节点（多选是每条路径各一组）。提交相同的值不调用。
 - selectParent: boolean; default false. 默认只有叶子可提交；true 时任意层级都可提交（对应 Ant Design 的 changeOnSelect）。
-- loadChildren: (option: CascaderOption) => Promise<CascaderOption[]>. 展开一个没有 children、也没有标 isLeaf 的节点时调用。等待时该列显示「正在加载」，reject 时显示「加载失败」与重试；结果为空数组则该节点成为叶子。结果按路径缓存，组件不重复请求。
+- loadChildren: (option: CascaderOption) => Promise<CascaderOption[]>. 展开一个没有 children、也没有标 isLeaf 的节点时调用。等待时该列显示「正在加载」，reject 时显示「加载失败」与重试；结果为空数组则该节点成为叶子。结果按路径缓存，组件不重复请求。multiple 下，还有未加载的启用后代的分支最多显示 mixed，因为还不知道下面有什么；值里有路径落在未加载的启用分支下时，这条分支及其祖先也显示 mixed。点它的标记勾选其下全部已加载的启用叶子，它们都已勾选时再点则全部取消，未加载分支下的这些路径一起清除；下面只有未加载分支、没有可勾的叶子也没有这样的路径时，点标记只是展开它。
 - searchable: boolean; default false. 弹层顶部出现搜索输入；有输入时改为一列扁平的匹配路径（用 locale 的路径分隔符连接），匹配的文字加粗标出。只搜已知节点，未加载的分支不在其中。多选时只列叶子路径，每项带勾选标记，Enter 或点击勾选后弹层保持打开、焦点留在输入里。
 - placeholder: ReactNode; default locale.selectPlaceholder. 仅未选择时显示；不能替代 FieldLabel。
 - disabled / readOnly / required: boolean; default false. 只读保留当前值且不打开候选面；禁用的字段不提交；required 参与原生校验并标 aria-required。invalid 跟随 Field。

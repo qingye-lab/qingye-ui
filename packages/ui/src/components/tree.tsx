@@ -131,14 +131,17 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
   }
   index(nodes, null, 1, true, false);
   const enabled = visible.filter(entry => !disabled && !entry.node.disabled);
-  /** 分支的勾选态：只看启用的叶子后代。全禁用的子树里没有可操作的事实，退回看全部叶子，只为如实显示，不代表可以点它改变什么。 */
+  /** 子树里还有启用的 lazy 节点，叶子数是未知的。禁用的 lazy 节点没人能展开，和勾选只看启用的叶子同一口径，不算未知。 */
+  function hasUnloaded(node: TreeNode): boolean { const kids = kidsOf(node); return kids?.length ? kids.some(hasUnloaded) : lazy(node) && !node.disabled; }
+  /** 分支的勾选态：只看启用的叶子后代。全禁用的子树里没有可操作的事实，退回看全部叶子，只为如实显示，不代表可以点它改变什么。
+   * 还有未加载的后代时说不上「全选」，最多是 mixed。 */
   function deriveChecked(node: TreeNode): TreeCheckedState {
     if (lazy(node)) return false;
     if (!kidsOf(node)?.length) return checkedSet.has(node.id);
     const leaves = collectLeaves(node); const enabledLeaves = leaves.filter(leaf => !leaf.disabled);
     const pool = enabledLeaves.length ? enabledLeaves : leaves; if (pool.length === 0) return false;
     const count = pool.filter(leaf => checkedSet.has(leaf.id)).length;
-    return count === 0 ? false : count === pool.length ? true : "mixed";
+    return count === 0 ? false : count === pool.length && !hasUnloaded(node) ? true : "mixed";
   }
   const [focused, setFocused] = React.useState<string | null>(defaultFocusedId);
   const typed = React.useRef({ text: "", time: 0 });
@@ -179,13 +182,14 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
     if (!canceled && selectedId === undefined) setLocalSelected(id);
   }
   /** 级联只改启用的叶子：disabled 叶子保留当前事实，不被父级的勾选/取消改变。
-   * mixed 与 false 点击都归为「变为勾选」，和原生 indeterminate 复选框点击后的事实一致。
-   * 还没取到子项的分支没有叶子可勾：点它只是展开（触发加载）；加载失败时再点即重试。 */
+   * 目标看可勾的叶子，不看显示的勾选态：还有没勾的就全勾，都勾了就全清。有未加载后代的分支最多显示 mixed，按显示态判断就再也取消不了。
+   * 还没取到子项的分支没有叶子可勾：点它只是展开（触发加载）；加载失败时再点即重试。下面只有这种分支的父节点同样无叶可勾，点它展开，好让人走到它们。 */
   function changeChecked(node: TreeNode, event: React.SyntheticEvent, reason: TreeChangeDetails["reason"]) {
     if (!checkable || disabled || node.disabled) return;
     if (lazy(node)) { if (!expanded.includes(node.id)) changeExpanded(node.id, event, reason); else if (sources[node.id]?.state === "error") load(node); return; }
-    const enabledLeaves = collectLeaves(node).filter(leaf => !leaf.disabled); if (enabledLeaves.length === 0) return;
-    const target = deriveChecked(node) !== true; const next = new Set(checked);
+    const enabledLeaves = collectLeaves(node).filter(leaf => !leaf.disabled);
+    if (enabledLeaves.length === 0) { if (hasUnloaded(node) && !expanded.includes(node.id)) changeExpanded(node.id, event, reason); return; }
+    const target = enabledLeaves.some(leaf => !checkedSet.has(leaf.id)); const next = new Set(checked);
     for (const leaf of enabledLeaves) { if (target) next.add(leaf.id); else next.delete(leaf.id); }
     const result = [...next]; let canceled = false;
     onCheckedChange?.(result, { event, reason, cancel() { canceled = true; } });
@@ -269,7 +273,7 @@ export function Tree({ nodes, expandedIds, defaultExpandedIds = [], onExpandedCh
       const isDisabled = disabled || Boolean(node.disabled); const branch = branchOf(node); const open = branch && isOpen(node);
       const kids = shownKids(node); const pendingLoad = open && kids === undefined && lazy(node); const failed = pendingLoad && sources[node.id]?.state === "error"; const busy = pendingLoad && !failed;
       const checkState = checkable ? deriveChecked(node) : false;
-      const checkDim = checkable && (isDisabled || (branch && !lazy(node) && collectLeaves(node).every(leaf => leaf.disabled)));
+      const checkDim = checkable && (isDisabled || (branch && !hasUnloaded(node) && collectLeaves(node).every(leaf => leaf.disabled)));
       const canDrag = draggable && !isDisabled; const dropHere = drop?.targetId === node.id ? drop.position : null;
       return <li key={node.id} data-slot="tree-item" role="treeitem" aria-labelledby={`${idBase}-${order.get(node.id)}`} aria-level={level} aria-expanded={branch ? open : undefined} aria-busy={busy || undefined} aria-selected={checkable ? undefined : (selectable ? selected === node.id : undefined)} aria-checked={checkable ? checkState : undefined} aria-disabled={isDisabled || undefined} tabIndex={active === node.id ? 0 : -1} ref={element => { if (element) refs.current.set(node.id, element); else refs.current.delete(node.id); }} onFocus={event => { if (event.target === event.currentTarget) setFocused(node.id); }} onKeyDown={event => keyDown(all.get(node.id)!, event)} onClick={event => { if (event.target instanceof Element && event.target.closest('[role="treeitem"]') !== event.currentTarget) return; if (!isDisabled) { focus(node.id); if (checkable) changeChecked(node, event, "pointer"); else select(node.id, event, "pointer"); } }} className="min-w-0 outline-none [&:focus-visible>[data-slot=tree-row]]:ring-(length:--qy-focus-quiet-width) [&:focus-visible>[data-slot=tree-row]]:ring-ring [&:focus-visible>[data-slot=tree-row]]:ring-inset">
         <div data-slot="tree-row" data-grabbed={grabbed === node.id ? "" : undefined} data-dragging={dragging === node.id ? "" : undefined} draggable={canDrag || undefined}

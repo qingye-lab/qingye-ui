@@ -7972,8 +7972,8 @@
             {
               "name": "loadChildren",
               "type": "(option: CascaderOption) => Promise<CascaderOption[]>",
-              "description": "展开一个没有 children、也没有标 isLeaf 的节点时调用。等待时该列显示「正在加载」，reject 时显示「加载失败」与重试；结果为空数组则该节点成为叶子。结果按路径缓存，组件不重复请求。",
-              "descriptionEn": "Called when a node with neither children nor isLeaf is expanded. While waiting the column shows \"Loading\"; a rejection shows \"Failed to load\" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice."
+              "description": "展开一个没有 children、也没有标 isLeaf 的节点时调用。等待时该列显示「正在加载」，reject 时显示「加载失败」与重试；结果为空数组则该节点成为叶子。结果按路径缓存，组件不重复请求。multiple 下，还有未加载的启用后代的分支最多显示 mixed，因为还不知道下面有什么；值里有路径落在未加载的启用分支下时，这条分支及其祖先也显示 mixed。点它的标记勾选其下全部已加载的启用叶子，它们都已勾选时再点则全部取消，未加载分支下的这些路径一起清除；下面只有未加载分支、没有可勾的叶子也没有这样的路径时，点标记只是展开它。",
+              "descriptionEn": "Called when a node with neither children nor isLeaf is expanded. While waiting the column shows \"Loading\"; a rejection shows \"Failed to load\" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice. With multiple, a branch that still has an unloaded enabled descendant shows mixed at most, because what lies below is not yet known; a value path inside an unloaded enabled branch also shows that branch and its ancestors as mixed. Clicking the marker checks every loaded enabled leaf below it, and clicking again once they are all checked unchecks them and clears those paths too. With only unloaded branches below, no leaf to check and no such path, clicking the marker just expands it."
             },
             {
               "name": "searchable",
@@ -8414,7 +8414,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/cascader.tsx",
-        "sha256": "7505bc1141d445780df672e96c0d8fa7ad119b68fe7799a7561fda94974e72e6",
+        "sha256": "404842647973eafb3974d29b0158669d28b573e50a16bb0808e0f679935593f9",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "选择的是一条路径，不是最后一项：同名的叶子（不同省的「市辖区」）靠路径区分，所以值、表单与回调都用路径。分支能不能提交由 selectParent 决定，而不是看有没有子项；多选的值只含叶子路径，分支的勾选是派生显示，与 Tree、TreeSelect 同一约定。加载与失败是应用告知之外、组件自己看得见的事实，不会被当成「没有子项」。",
@@ -8473,8 +8473,8 @@
                 {
                   "name": "loadChildren",
                   "type": "(option: CascaderOption) => Promise<CascaderOption[]>",
-                  "description": "Called when a node with neither children nor isLeaf is expanded. While waiting the column shows \"Loading\"; a rejection shows \"Failed to load\" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice.",
-                  "descriptionEn": "Called when a node with neither children nor isLeaf is expanded. While waiting the column shows \"Loading\"; a rejection shows \"Failed to load\" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice."
+                  "description": "Called when a node with neither children nor isLeaf is expanded. While waiting the column shows \"Loading\"; a rejection shows \"Failed to load\" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice. With multiple, a branch that still has an unloaded enabled descendant shows mixed at most, because what lies below is not yet known; a value path inside an unloaded enabled branch also shows that branch and its ancestors as mixed. Clicking the marker checks every loaded enabled leaf below it, and clicking again once they are all checked unchecks them and clears those paths too. With only unloaded branches below, no leaf to check and no such path, clicking the marker just expands it.",
+                  "descriptionEn": "Called when a node with neither children nor isLeaf is expanded. While waiting the column shows \"Loading\"; a rejection shows \"Failed to load\" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice. With multiple, a branch that still has an unloaded enabled descendant shows mixed at most, because what lies below is not yet known; a value path inside an unloaded enabled branch also shows that branch and its ancestors as mixed. Clicking the marker checks every loaded enabled leaf below it, and clicking again once they are all checked unchecks them and clears those paths too. With only unloaded branches below, no leaf to check and no such path, clicking the marker just expands it."
                 },
                 {
                   "name": "searchable",
@@ -20728,7 +20728,7 @@
       "notes": [
         "granularity 不是 day 时，输入框不再是浏览器的原生日期控件，所以显示格式由区域的 periodWeek / periodMonth / periodQuarter / periodYear 决定，也接受 2026-W44、2026-11、2026-Q4、2026 这类 ISO 写法。",
         "日期输入的本地显示格式由浏览器决定，提交值固定 YYYY-MM-DD。",
-        "日历选择完成后关闭；调用方拒绝变更时原日期仍保留。",
+        "日历选择完成后关闭；调用方拒绝变更时原日期仍保留。再点已选的日期或周期不算清除，值不变也不上报，只关闭日历；清除用清除按钮。",
         "没有自动修正越界值或推断提交成功；用 FieldError 表达调用方已知错误。",
         "年份可键到 5–6 位、分段可只填一半：这些键入中间态不是值，不上报也不清空已有值，焦点离开后回到已接受的日期；只有所有分段都被清空才是清除。"
       ],
@@ -21085,7 +21085,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-picker.tsx",
-        "sha256": "f7a4c6d63df4dd08e95bb0da89d430426236ec6d84728930a43011e90709b663",
+        "sha256": "2874fbc00dcb9d6f3ecdf9e421097e47d03d9ff810447d8a2d744435d3ccba60",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是调用方持有的当地 Date。输入和日历选择只请求变更；清除请求 undefined，Escape 关闭日历并保留已接受值。",
@@ -21098,7 +21098,7 @@
           "notes": [
             "With a granularity other than day the input is no longer the browser's native date control, so the display format comes from the locale's periodWeek / periodMonth / periodQuarter / periodYear, and ISO spellings such as 2026-W44, 2026-11, 2026-Q4 and 2026 are also accepted.",
             "The browser chooses the displayed date format; submission uses YYYY-MM-DD.",
-            "Calendar selection closes the popup. Rejected controlled changes preserve the prior date.",
+            "Calendar selection closes the popup. Rejected controlled changes preserve the prior date. Clicking the selected date or period again is not a clear: the value stays, nothing is reported and the calendar just closes. The clear button clears.",
             "The component does not repair bounds or infer submission success. Express known errors with FieldError.",
             "The year can be typed to five or six digits and a segment can be left half-filled. These in-between entries are not values: they neither report nor clear the accepted date, and the input returns to it once focus leaves. Only emptying every segment clears."
           ],
@@ -21827,7 +21827,7 @@
       ],
       "docs": "/docs/components/date-time-picker",
       "notes": [
-        "应用仅在日期与时间完整时可用，点击后仍由调用方接受值。",
+        "应用仅在日期与时间完整时可用，点击后仍由调用方接受值。在日历里再点已选的日期不会清空草稿。",
         "原生 min/max/step 校验与业务可用性是独立事实；回调不是保存成功。",
         "浏览器显示格式可随用户环境变化，提交保持无时区的本地文本。"
       ],
@@ -22157,7 +22157,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-time-picker.tsx",
-        "sha256": "55e12b48559b0a46cd8fbe9121ed6a7c1d92b14d4031bfe344d4ffbf9af52d65",
+        "sha256": "ffa594e825dabe5935b253a86f90638a5b73fac7089de3996641e0af6d7461ca",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是 YYYY-MM-DDTHH:mm[:ss[.SSS]] 的无时区 wall-clock 文本。它不表示 UTC 瞬间；时区、DST、业务可用时段由应用决定。空时间不会自动补当前时间。",
@@ -22168,7 +22168,7 @@
           "category": "Date and time",
           "decisions": "value is unzoned YYYY-MM-DDTHH:mm[:ss[.SSS]] wall-clock text, not a UTC instant. The application owns timezone, DST, and availability rules. Empty time never becomes the current time automatically.",
           "notes": [
-            "Apply is available only with complete date and time; the caller still accepts the value.",
+            "Apply is available only with complete date and time; the caller still accepts the value. Clicking the selected day in the calendar again keeps the draft.",
             "Native min/max/step validation and business availability are independent. A callback is not successful persistence.",
             "The browser's display may vary by environment; submission remains unzoned local text."
           ],
@@ -66382,8 +66382,8 @@
             {
               "name": "loadChildren",
               "type": "(node: TreeNode) => Promise<readonly TreeNode[]>",
-              "description": "第一次展开一个没有 children、也没有标 isLeaf 的节点时调用（命名与 Cascader 一致）。等待时该节点标 aria-busy，并在其下显示 locale 的「正在加载」；reject 时显示「加载失败」与重试按钮（节点上按 → 也可重试）；结果为空数组则该节点成为叶子。结果按节点缓存，组件不重复请求。未加载的分支在 checkable 模式下不能被勾选，点它只会展开。",
-              "descriptionEn": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands."
+              "description": "第一次展开一个没有 children、也没有标 isLeaf 的节点时调用（命名与 Cascader 一致）。等待时该节点标 aria-busy，并在其下显示 locale 的「正在加载」；reject 时显示「加载失败」与重试按钮（节点上按 → 也可重试）；结果为空数组则该节点成为叶子。结果按节点缓存，组件不重复请求。未加载的分支在 checkable 模式下不能被勾选，点它只会展开；它的祖先最多显示 mixed，因为还不知道下面有什么。这样的祖先上，点击勾选其下全部已加载的启用叶子，它们都已勾选时再点则全部取消；下面只有未加载分支、没有可勾的叶子时，点击只是展开它。",
+              "descriptionEn": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands. Its ancestors show mixed at most, because what lies below is not yet known. Clicking such an ancestor checks every loaded enabled leaf below it, and clicking again once they are all checked unchecks them. With only unloaded branches and no leaf to check below it, a click just expands it."
             },
             {
               "name": "query",
@@ -66835,7 +66835,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tree.tsx",
-        "sha256": "00664fdc85c13950a92cd28f8f8b5a432dd0cdbd7d30c789aad35af23f6363ab",
+        "sha256": "51af2eea6dd23fce52b0b5062e83fd08bbb41be9369d653212f2d152d4d86b7a",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "expandedIds 与 selectedId 分开；加载与失败是组件自己看得见的事实，不当成「没有子项」；过滤只隐藏、不改变值与派生的勾选状态；拖放只报告、不持有数据。聚焦不选择，隐藏节点不强行清除既有选择。checkable 与 selectable 的点击不组合：checkable 为 true 时行点击与 Space 勾选，不再单选，避免同一次点击承担两种互相冲突的意图。checkedIds 只含叶子节点 id；分支的勾选是派生显示（true / false / mixed），从不写回值，避免「勾一个分支」被多计成 N+1 项。级联只触达启用的叶子：禁用节点保留给定的勾选事实，不被祖先的勾选/取消改变；分支在其启用的叶子后代全部勾选时显示为已勾选，即使存在未勾选的禁用后代。",
@@ -66900,8 +66900,8 @@
                 {
                   "name": "loadChildren",
                   "type": "(node: TreeNode) => Promise<readonly TreeNode[]>",
-                  "description": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands.",
-                  "descriptionEn": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands."
+                  "description": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands. Its ancestors show mixed at most, because what lies below is not yet known. Clicking such an ancestor checks every loaded enabled leaf below it, and clicking again once they are all checked unchecks them. With only unloaded branches and no leaf to check below it, a click just expands it.",
+                  "descriptionEn": "Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's \"Loading\" under it; a rejection shows \"Failed to load\" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands. Its ancestors show mixed at most, because what lies below is not yet known. Clicking such an ancestor checks every loaded enabled leaf below it, and clicking again once they are all checked unchecks them. With only unloaded branches and no leaf to check below it, a click just expands it."
                 },
                 {
                   "name": "query",
