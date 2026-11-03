@@ -158,8 +158,9 @@ export function DatePicker(allProps: DatePickerProps) {
         <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={period ? { week: messages.selectWeek, month: messages.selectMonth, quarter: messages.selectQuarter, year: messages.selectYear }[period] : messages.selectDate} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
       </InputGroup>
       {period && (fieldName ?? name) && value && <input type="hidden" name={fieldName ?? name} value={formatLocalDate(value)} form={form} disabled={disabled || facts.disabled} />}
-      <PopoverPopup align="start" anchor={boundaryRef}><Calendar {...(value ? { defaultMonth: value } : {})} {...calendarProps} {...bounds} granularity={granularity} mode="single" selected={value} disabled={editable ? bounds.disabled : true} autoFocus
-        onSelect={(next, _day, _modifiers, event) => { if (!editable) return; typing.release(); change(next, event); setOpen(false); }} /></PopoverPopup>
+      {/* 再点已选的日期或周期不是清除（清除有自己的按钮）：required 让它仍给出日期，值没变就不上报，只收起日历。 */}
+      <PopoverPopup align="start" anchor={boundaryRef}><Calendar {...(value ? { defaultMonth: value } : {})} {...calendarProps} {...bounds} granularity={granularity} mode="single" required selected={value} disabled={editable ? bounds.disabled : true} autoFocus
+        onSelect={(next, _day, _modifiers, event) => { if (!editable) return; typing.release(); if (!isSamePeriod(next, value, granularity, rules)) change(next, event); setOpen(false); }} /></PopoverPopup>
     </Popover>,
   }) });
 }

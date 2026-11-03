@@ -414,3 +414,73 @@ test("multiple search: lists leaf paths with markers, marks the match, toggles w
   await userEvent.click(result);
   expect(onValueChange).toHaveBeenLastCalledWith([], expect.any(Array));
 });
+
+test("multiple: an unloaded descendant caps the parent at partial, and the parent can still be unchecked", async () => {
+  const onValueChange = vi.fn();
+  const tree: CascaderOption[] = [{ value: "root", label: "根", children: [{ value: "known", label: "已知", isLeaf: true }, { value: "later", label: "未载" }] }];
+  render(<Cascader aria-label="地区" multiple options={tree} loadChildren={async () => [{ value: "late", label: "迟到", isLeaf: true }]} defaultValue={[["root", "known"]]} onValueChange={onValueChange} />);
+  await userEvent.click(trigger());
+  const mark = () => option("根").querySelector("span[aria-hidden]")!;
+  expect(option("根")).toHaveAttribute("aria-selected", "false");
+  expect(option("根")).toHaveAccessibleDescription(/部分已选/);
+  await userEvent.click(mark());
+  expect(onValueChange).toHaveBeenLastCalledWith([], expect.any(Array));
+  expect(option("根")).not.toHaveAccessibleDescription(/部分已选/);
+  await userEvent.click(mark());
+  expect(onValueChange).toHaveBeenLastCalledWith([["root", "known"]], expect.any(Array));
+  expect(option("根")).toHaveAccessibleDescription(/部分已选/);
+  // 取回子项后没有未知了：先勾上新来的叶子，全选才成立。
+  await userEvent.click(option("根"));
+  await userEvent.click(option("未载"));
+  await screen.findByRole("option", { name: "迟到" });
+  expect(option("根")).toHaveAccessibleDescription(/部分已选/);
+  await userEvent.click(mark());
+  expect(onValueChange).toHaveBeenLastCalledWith([["root", "known"], ["root", "later", "late"]], expect.any(Array));
+  expect(option("根")).toHaveAttribute("aria-selected", "true");
+  await userEvent.click(mark());
+  expect(onValueChange).toHaveBeenLastCalledWith([], expect.any(Array));
+});
+
+test("multiple: a disabled unloaded branch does not hold its parent at partial", async () => {
+  const tree: CascaderOption[] = [{ value: "root", label: "根", children: [{ value: "known", label: "已知", isLeaf: true }, { value: "later", label: "未载", disabled: true }] }];
+  render(<Cascader aria-label="地区" multiple options={tree} loadChildren={async () => []} defaultValue={[["root", "known"]]} />);
+  await userEvent.click(trigger());
+  expect(option("根")).toHaveAttribute("aria-selected", "true");
+});
+
+test("multiple: a checked path inside an unloaded branch shows as partial up the chain, and clearing the parent removes it", async () => {
+  const onValueChange = vi.fn();
+  const tree: CascaderOption[] = [{ value: "root", label: "根", children: [{ value: "known", label: "已知", isLeaf: true }, { value: "later", label: "未载" }] }];
+  // 取子项一直不返回：弹层打开时这条路径下的叶子始终未知。
+  render(<Cascader aria-label="地区" multiple options={tree} loadChildren={() => new Promise(() => {})} defaultValue={[["root", "later", "x"]]} onValueChange={onValueChange} />);
+  await userEvent.click(trigger());
+  const mark = () => option("根").querySelector("span[aria-hidden]")!;
+  expect(option("根")).toHaveAccessibleDescription(/部分已选/);
+  expect(option("未载")).toHaveAccessibleDescription(/部分已选/);
+  // 还有没勾的已加载叶子：先全勾，未加载分支下的路径原样保留。
+  await userEvent.click(mark());
+  expect(onValueChange).toHaveBeenLastCalledWith([["root", "known"], ["root", "later", "x"]], expect.any(Array));
+  await userEvent.click(mark());
+  expect(onValueChange).toHaveBeenLastCalledWith([], expect.any(Array));
+  expect(option("根")).not.toHaveAccessibleDescription(/部分已选/);
+  expect(option("未载")).not.toHaveAccessibleDescription(/部分已选/);
+});
+
+test("multiple: the marker of a branch holding only a checked unloaded path clears it", async () => {
+  const onValueChange = vi.fn();
+  const tree: CascaderOption[] = [{ value: "root", label: "根", children: [{ value: "later", label: "未载" }] }];
+  render(<Cascader aria-label="地区" multiple options={tree} loadChildren={() => new Promise(() => {})} defaultValue={[["root", "later", "x"]]} onValueChange={onValueChange} />);
+  await userEvent.click(trigger());
+  await userEvent.click(option("未载").querySelector("span[aria-hidden]")!);
+  expect(onValueChange).toHaveBeenLastCalledWith([], expect.any(Array));
+});
+
+test("multiple: the marker of a branch with only unloaded descendants expands it, as there is nothing to check yet", async () => {
+  const onValueChange = vi.fn();
+  const tree: CascaderOption[] = [{ value: "root", label: "根", children: [{ value: "later", label: "未载" }] }];
+  render(<Cascader aria-label="地区" multiple options={tree} loadChildren={async () => []} onValueChange={onValueChange} />);
+  await userEvent.click(trigger());
+  await userEvent.click(option("根").querySelector("span[aria-hidden]")!);
+  expect(option("未载")).toBeInTheDocument();
+  expect(onValueChange).not.toHaveBeenCalled();
+});

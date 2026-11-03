@@ -178,14 +178,23 @@ export function Cascader(props: CascaderProps) {
     if (kids && kids.length > 0) return kids.flatMap(kid => leavesUnder(kid, [...path, kid.value])).map(leaf => option.disabled ? { ...leaf, disabled: true } : leaf);
     return hasChildren(option, path) ? [] : [{ path, disabled: Boolean(option.disabled) }];
   }
-  /** 勾选态只看启用的叶子；全部禁用时退回看全部，只为如实显示，不代表可以改变什么。 */
+  /** 之下（含自身）还没取到子项的分支，这些地方的叶子数是未知的。禁用的分支没人能展开，和勾选只看启用的叶子同一口径，不算未知。 */
+  function unloadedUnder(option: CascaderOption, path: string[]): string[][] {
+    if (option.disabled) return [];
+    const kids = childrenOf(option, path);
+    return kids ? kids.flatMap(kid => unloadedUnder(kid, [...path, kid.value])) : hasChildren(option, path) ? [path] : [];
+  }
+  /** 值里落在这些未加载分支之下的路径（例如回填的初值）：叶子还看不见，但它们确实选着。 */
+  const heldIn = (branches: readonly string[][]) => paths.filter(item => branches.some(branch => item.length > branch.length && branch.every((segment, index) => item[index] === segment)));
+  /** 勾选态只看启用的叶子；全部禁用时退回看全部，只为如实显示，不代表可以改变什么。还有未加载的后代时说不上「全选」，最多是 mixed；未加载的分支下有已选路径时也不是「未选」。 */
   function checkState(option: CascaderOption, path: string[]): CheckMarkState {
     const leaves = leavesUnder(option, path);
     const enabledLeaves = leaves.filter(leaf => !leaf.disabled);
     const pool = enabledLeaves.length > 0 ? enabledLeaves : leaves;
-    if (pool.length === 0) return false;
+    const unloaded = unloadedUnder(option, path);
     const count = pool.filter(leaf => checkedKeys.has(keyOf(leaf.path))).length;
-    return count === 0 ? false : count === pool.length ? true : "mixed";
+    if (count === 0 && heldIn(unloaded).length === 0) return false;
+    return count === pool.length && unloaded.length === 0 ? true : "mixed";
   }
   /** 值按树的顺序；不在已知树里的路径（例如还没加载的分支下的）保留在末尾，不被静默丢掉。 */
   function ordered(list: readonly (readonly string[])[]): string[][] {
@@ -207,14 +216,16 @@ export function Cascader(props: CascaderProps) {
     fieldRoot.setFilled(next.length > 0);
     if (props.multiple === true) props.onValueChange?.(next, next.map(path => walk(path).chain));
   }
-  /** 勾选或取消一个节点：叶子翻转自己；分支把全部启用的叶子一起置为「未全选则全选，否则全清」。还没取到子项的分支没有叶子，点它只是展开。 */
+  /** 勾选或取消一个节点：叶子翻转自己；分支把全部启用的叶子一起置为「未全选则全选，否则全清」。目标看可勾的叶子，不看显示的勾选态：有未加载后代的分支最多显示 mixed，按显示态判断就再也取消不了。全清时连未加载分支下的已选路径一起清，否则它还是 mixed。下面没有叶子、只有未加载分支时没有可勾的，点它只是展开。 */
   function toggle(col: number, option: CascaderOption) {
     if (disabled || readOnly || option.disabled) return;
     const path = [...expanded.slice(0, col), option.value];
     const enabledLeaves = leavesUnder(option, path).filter(leaf => !leaf.disabled);
-    if (enabledLeaves.length === 0) { if (hasChildren(option, path) && !childrenOf(option, path)) expandAt(col, option); return; }
-    const select = checkState(option, path) !== true;
-    const touched = new Set(enabledLeaves.map(leaf => keyOf(leaf.path)));
+    const unloaded = unloadedUnder(option, path);
+    const held = heldIn(unloaded);
+    if (enabledLeaves.length === 0 && held.length === 0) { if (unloaded.length > 0) expandAt(col, option); return; }
+    const select = enabledLeaves.some(leaf => !checkedKeys.has(keyOf(leaf.path)));
+    const touched = new Set([...enabledLeaves.map(leaf => leaf.path), ...(select ? [] : held)].map(keyOf));
     const kept = paths.filter(item => !touched.has(keyOf(item)));
     commitPaths(ordered(select ? [...kept, ...enabledLeaves.map(leaf => leaf.path)] : kept));
   }

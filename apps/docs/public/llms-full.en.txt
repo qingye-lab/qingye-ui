@@ -1995,7 +1995,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/cascader
 Source: packages/ui/src/components/cascader.tsx
-Source SHA-256: 7505bc1141d445780df672e96c0d8fa7ad119b68fe7799a7561fda94974e72e6
+Source SHA-256: 404842647973eafb3974d29b0158669d28b573e50a16bb0808e0f679935593f9
 
 Choose one value along a root-to-leaf path, or check several paths, with each level's candidates in its own column.
 
@@ -2074,7 +2074,7 @@ Trigger, column-wise candidate popup and form value. The trigger shares Select's
 - value / defaultValue: string[] | null  (multiple: readonly (readonly string[])[]). Single: the path from the root to the chosen node; null is no selection, and omitting an initial value does not choose the first item. Multiple: an array of checked leaf paths, an empty array is no selection and the order follows the option tree. A path segment that is not loaded yet falls back to its value in the trigger.
 - onValueChange: (path: string[] | null, options: CascaderOption[]) => void  (multiple: (paths: string[][], options: CascaderOption[][]) => void). Called when a new value is submitted; the second argument is the nodes on the path (in multiple mode, one group per path). Submitting the same value does not call it.
 - selectParent: boolean; default false. Only leaves submit by default; with true any level can submit (Ant Design's changeOnSelect).
-- loadChildren: (option: CascaderOption) => Promise<CascaderOption[]>. Called when a node with neither children nor isLeaf is expanded. While waiting the column shows "Loading"; a rejection shows "Failed to load" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice.
+- loadChildren: (option: CascaderOption) => Promise<CascaderOption[]>. Called when a node with neither children nor isLeaf is expanded. While waiting the column shows "Loading"; a rejection shows "Failed to load" with a retry; an empty result makes the node a leaf. Results are cached by path and not requested twice. With multiple, a branch that still has an unloaded enabled descendant shows mixed at most, because what lies below is not yet known; a value path inside an unloaded enabled branch also shows that branch and its ancestors as mixed. Clicking the marker checks every loaded enabled leaf below it, and clicking again once they are all checked unchecks them and clears those paths too. With only unloaded branches below, no leaf to check and no such path, clicking the marker just expands it.
 - searchable: boolean; default false. A search input appears at the top of the popup; with input the columns give way to one flat list of matching paths joined by the locale separator, with the matched text in bold. Only known nodes are searched, so unloaded branches are not included. In multiple mode only leaf paths are listed, each with a check marker; Enter or a click checks it and the popup stays open with focus in the input.
 - placeholder: ReactNode; default locale.selectPlaceholder. Shown only without selection; cannot replace FieldLabel.
 - disabled / readOnly / required: boolean; default false. Read-only keeps the value and never opens the popup; a disabled field is not submitted; required joins native validation and sets aria-required. invalid follows Field.
@@ -4343,7 +4343,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: f7a4c6d63df4dd08e95bb0da89d430426236ec6d84728930a43011e90709b663
+Source SHA-256: 2874fbc00dcb9d6f3ecdf9e421097e47d03d9ff810447d8a2d744435d3ccba60
 
 Edit one local date or choose it from a calendar.
 
@@ -4353,7 +4353,7 @@ The caller owns the local Date. Input and calendar selection request changes; cl
 ### Notes
 - With a granularity other than day the input is no longer the browser's native date control, so the display format comes from the locale's periodWeek / periodMonth / periodQuarter / periodYear, and ISO spellings such as 2026-W44, 2026-11, 2026-Q4 and 2026 are also accepted.
 - The browser chooses the displayed date format; submission uses YYYY-MM-DD.
-- Calendar selection closes the popup. Rejected controlled changes preserve the prior date.
+- Calendar selection closes the popup. Rejected controlled changes preserve the prior date. Clicking the selected date or period again is not a clear: the value stays, nothing is reported and the calendar just closes. The clear button clears.
 - The component does not repair bounds or infer submission success. Express known errors with FieldError.
 - The year can be typed to five or six digits and a segment can be left half-filled. These in-between entries are not values: they neither report nor clear the accepted date, and the input returns to it once focus leaves. Only emptying every segment clears.
 
@@ -4545,7 +4545,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: 55e12b48559b0a46cd8fbe9121ed6a7c1d92b14d4031bfe344d4ffbf9af52d65
+Source SHA-256: ffa594e825dabe5935b253a86f90638a5b73fac7089de3996641e0af6d7461ca
 
 Edit complete local wall-clock date/time, or apply calendar and time drafts.
 
@@ -4553,7 +4553,7 @@ Edit complete local wall-clock date/time, or apply calendar and time drafts.
 value is unzoned YYYY-MM-DDTHH:mm[:ss[.SSS]] wall-clock text, not a UTC instant. The application owns timezone, DST, and availability rules. Empty time never becomes the current time automatically.
 
 ### Notes
-- Apply is available only with complete date and time; the caller still accepts the value.
+- Apply is available only with complete date and time; the caller still accepts the value. Clicking the selected day in the calendar again keeps the draft.
 - Native min/max/step validation and business availability are independent. A callback is not successful persistence.
 - The browser's display may vary by environment; submission remains unzoned local text.
 
@@ -13371,7 +13371,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
-Source SHA-256: 00664fdc85c13950a92cd28f8f8b5a432dd0cdbd7d30c789aad35af23f6363ab
+Source SHA-256: 51af2eea6dd23fce52b0b5062e83fd08bbb41be9369d653212f2d152d4d86b7a
 
 Hierarchy, expansion, focus, independent single selection, and an optional cascading checkable mode for stable nodes.
 
@@ -13452,7 +13452,7 @@ A complete hierarchical collection.
 - checkable: boolean. Turns on cascading checkable mode; defaults to false. When true, row clicks and Space toggle the checked state instead of selectable's single-select click.
 - checkedIds / defaultCheckedIds / onCheckedChange: readonly string[] / callback. Holds only leaf ids; details.cancel() prevents commit. Checking a branch adds or removes its enabled leaf descendants together; a disabled leaf keeps the fact it was given and cascade never changes it.
 - defaultFocusedId: string | null. The node holding the roving entry on first render, the first enabled node by default; a hidden or disabled node falls back to its nearest visible enabled ancestor. Expanding its ancestors is the caller's job through expandedIds. TreeSelect uses it to land focus on the chosen node when its popup opens.
-- loadChildren: (node: TreeNode) => Promise<readonly TreeNode[]>. Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's "Loading" under it; a rejection shows "Failed to load" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands.
+- loadChildren: (node: TreeNode) => Promise<readonly TreeNode[]>. Called when a node with neither children nor isLeaf is expanded for the first time (named as in Cascader). While waiting the node carries aria-busy and shows the locale's "Loading" under it; a rejection shows "Failed to load" with a retry button (→ on the node retries too); an empty result makes the node a leaf. Results are cached per node and not requested twice. In checkable mode an unloaded branch cannot be checked; clicking it only expands. Its ancestors show mixed at most, because what lies below is not yet known. Clicking such an ancestor checks every loaded enabled leaf below it, and clicking again once they are all checked unchecks them. With only unloaded branches and no leaf to check below it, a click just expands it.
 - query: string. Filters by label: matching nodes and all their ancestors stay, the rest are hidden, the matched text is marked, and emptyContent shows when nothing matches. A branch with matching descendants is forced open (its toggle then does nothing and onExpandedChange does not fire), and clearing the query restores the earlier expansion. Filtering only hides: a branch's checked state and cascade are still computed on the full tree. Pass the raw string; matching ignores case and surrounding whitespace.
 - draggable / onMove / canDrop: boolean / (move: TreeMove, details: { event, reason: "keyboard" | "pointer" }) => void / (move: TreeMove) => boolean. draggable turns on repositioning: a pointer drop reports before (top quarter), after (bottom quarter) or inside (middle) by where it lands in the row, with an insertion line; the keyboard picks up with Ctrl/Cmd+X and drops before / after / inside the focused node with Alt+↑ / ↓ / Enter. Tree holds no data and only reports through onMove({ nodeId, targetId, position }); the caller changes nodes. A node cannot go onto itself or into its own subtree, a move that changes nothing is refused, and a disabled node can neither be dragged nor be a target; canDrop returning false forbids more. Picking up, dropping, cancelling and refused places are announced in a role=status region.
 - aria-label / aria-labelledby: string. One is required: the name of the tree, on the role=tree root. A missing or blank name throws. Each item is named by its own label.

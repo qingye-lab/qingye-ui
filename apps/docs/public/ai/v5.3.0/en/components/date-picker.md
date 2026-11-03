@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.3.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: f7a4c6d63df4dd08e95bb0da89d430426236ec6d84728930a43011e90709b663
+Source SHA-256: 2874fbc00dcb9d6f3ecdf9e421097e47d03d9ff810447d8a2d744435d3ccba60
 
 Edit one local date or choose it from a calendar.
 
@@ -13,7 +13,7 @@ The caller owns the local Date. Input and calendar selection request changes; cl
 ## Notes
 - With a granularity other than day the input is no longer the browser's native date control, so the display format comes from the locale's periodWeek / periodMonth / periodQuarter / periodYear, and ISO spellings such as 2026-W44, 2026-11, 2026-Q4 and 2026 are also accepted.
 - The browser chooses the displayed date format; submission uses YYYY-MM-DD.
-- Calendar selection closes the popup. Rejected controlled changes preserve the prior date.
+- Calendar selection closes the popup. Rejected controlled changes preserve the prior date. Clicking the selected date or period again is not a clear: the value stays, nothing is reported and the calendar just closes. The clear button clears.
 - The component does not repair bounds or infer submission success. Express known errors with FieldError.
 - The year can be typed to five or six digits and a segment can be left half-filled. These in-between entries are not values: they neither report nor clear the accepted date, and the input returns to it once focus leaves. Only emptying every segment clears.
 

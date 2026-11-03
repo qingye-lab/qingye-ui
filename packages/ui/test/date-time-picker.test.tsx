@@ -142,3 +142,16 @@ test("the time draft in the popover keeps milliseconds and Apply emits them", as
   await userEvent.click(screen.getByRole("button", { name: "Apply" }));
   expect(change).toHaveBeenLastCalledWith("2026-10-03T09:12:35.001", expect.anything());
 });
+
+test("clicking the draft's day again keeps the draft, so Apply stays available", async () => {
+  const change = vi.fn();
+  render(<UILocaleProvider locale={enUS}><DateTimePicker defaultValue="2026-11-03T09:30" onValueChange={change} inputProps={{ "aria-label": "when" }} /></UILocaleProvider>);
+  await userEvent.click(screen.getByRole("button", { name: "Select date and time" }));
+  const day = await screen.findByRole("button", { name: /November 3, 2026/ });
+  await userEvent.click(day);
+  expect(screen.getByRole("button", { name: "Apply" })).toBeEnabled();
+  expect(change).not.toHaveBeenCalled();
+  await userEvent.click(screen.getByRole("button", { name: "Apply" }));
+  expect(change).toHaveBeenLastCalledWith("2026-11-03T09:30", expect.anything());
+  expect(screen.getByLabelText("when")).toHaveValue("2026-11-03T09:30");
+});
