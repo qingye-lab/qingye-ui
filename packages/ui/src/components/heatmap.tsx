@@ -172,7 +172,7 @@ export function Heatmap({ label, framed = true, render, ref, className, rowLabel
   if (rowSummary && typeof rowSummary.value !== "function") throw new Error(`Heatmap rowSummary requires a value function; received ${received(rowSummary.value)}.`);
   if (rowSummary && !isName(rowSummary.label)) throw new Error(`Heatmap rowSummary requires a nonempty label heading its column; received ${received(rowSummary.label)}.`);
   let max = 0, anyNumeric = false;
-  const grid = rows.map(row => columns.map(column => { const value = readValue(row, column.key); if (typeof value === "number") { anyNumeric = true; max = Math.max(max, value); } return value; }));
+  const grid = rows.map(row => columns.map(column => { const value = readValue(row, column.key); if (typeof value === "number") { if (value < 0 && !levels) throw new RangeError(`Heatmap's continuous scale requires non-negative values: its depth runs from zero to the largest value, and ${value} at "${row.label}" / "${column.label}" has no depth on it. Declare levels, whose first level covers every smaller value including negatives.`); anyNumeric = true; max = Math.max(max, value); } return value; }));
   const format = (value: number, row: HeatmapRow, column: HeatmapColumn) => formatValue ? formatValue(value, row, column) : number.format(value);
   /* 名称只用字符串：formatValue 可以返回节点（图标、加粗），名称里放不下，退回默认的数值格式。 */
   const plain = (value: number, row: HeatmapRow, column: HeatmapColumn) => { const formatted = formatValue?.(value, row, column); return typeof formatted === "string" || typeof formatted === "number" ? String(formatted) : number.format(value); };

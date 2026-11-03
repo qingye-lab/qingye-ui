@@ -80,6 +80,30 @@ test("bar-horizontal and bar-stacked reuse the same rows/series contract as bar"
   expect(plot.mock.calls.at(-1)![0].type).toBe("bar-stacked");
 });
 
+test("forms that only grow one way from the baseline reject a negative value and name it; bar still crosses zero", () => {
+  const two = [{ key: "a", label: "甲" }, { key: "b", label: "乙" }];
+  const signed = [{ id: "m1", label: "一月", values: { a: 40, b: 20 } }, { id: "m2", label: "二月", values: { a: -30, b: 20 } }];
+  const draw = (type: "bar-horizontal" | "bar-stacked" | "area-stacked") => () => render(<Chart type={type} label="图" categoryLabel="月" valueLabel="量" series={two} rows={signed} renderPlot={() => null} />);
+  expect(draw("bar-horizontal")).toThrow(/-30 at "二月"[^]*Use type "bar"/);
+  expect(draw("bar-stacked")).toThrow(/-30 at "二月"[^]*Use type "bar"/);
+  expect(draw("area-stacked")).toThrow(/-30 at "二月"[^]*Use type "bar"/);
+  // 未知值不是负数，不拦。
+  expect(() => render(<Chart type="bar-stacked" label="图" categoryLabel="月" valueLabel="量" series={two} rows={[{ id: "m", label: "一月", values: { a: { state: "unknown", label: "未统计" }, b: 2 } }]} renderPlot={() => null} />)).not.toThrow();
+  const plot = vi.fn((_: ChartPlotData) => null);
+  render(<Chart type="bar" label="图" categoryLabel="月" valueLabel="量" series={two} rows={signed} renderPlot={plot} />);
+  expect(plot).toHaveBeenCalled();
+});
+
+test("the readout formats by row id, so two rows sharing a name keep their own formatValue row", () => {
+  const items: ChartProjectedSeries[] = [{ key: "v", label: "值", dataKey: "s0", color: "red", marker: "circle", context: false }];
+  const format = vi.fn((value: number, _key: string, _category: string, rowId: string) => `${rowId}:${value}`);
+  const entry = (id: string, value: number) => ({ dataKey: "s0", value, payload: { id } });
+  const { rerender } = render(<ReadoutTooltip active label="同名" series={items} format={format} payload={[entry("first", 10)]} />);
+  expect(screen.getByText("first:10")).toBeVisible();
+  rerender(<ReadoutTooltip active label="同名" series={items} format={format} payload={[entry("second", 20)]} />);
+  expect(screen.getByText("second:20")).toBeVisible();
+});
+
 test("donut requires exactly one row, two to five known non-negative parts, and folds a larger total into a rest slice", () => {
   const parts = [{ key: "a", label: "成功" }, { key: "b", label: "失败" }];
   const oneRow = [{ id: "r", label: "本周", values: { a: 3, b: 1 } }];

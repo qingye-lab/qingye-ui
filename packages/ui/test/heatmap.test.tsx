@@ -89,6 +89,13 @@ test("Escape dismisses the readout without moving focus", () => {
   expect(document.activeElement).toBe(cell);
 });
 
+test("the continuous scale rejects a negative value and points at levels, which do cover it", () => {
+  const signed: readonly HeatmapRow[] = [{ id: "am", label: "上午", values: { mon: -200, tue: 0, wed: 3 } }, { id: "pm", label: "下午", values: { mon: 30, tue: 18, wed: 6 } }];
+  expect(() => render(<Heatmap {...common} rows={signed} />)).toThrow(/-200 at "上午"[^]*levels/);
+  render(<Heatmap {...common} rows={signed} levels={[{ label: "低" }, { label: "高", from: 10 }]} />);
+  expect(screen.getByRole("gridcell", { name: /-200.*低/ })).toBeVisible();
+});
+
 test("levels must be two to five named steps with a strictly increasing lower bound", () => {
   const draw = (steps: readonly HeatmapLevel[]) => () => render(<Heatmap {...common} levels={steps} />);
   expect(draw([{ label: "平稳" }])).toThrow(/two to five/);

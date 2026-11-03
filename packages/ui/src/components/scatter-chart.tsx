@@ -7,6 +7,7 @@ import * as React from "react";
 import { AxisTick, ChartHeader, chartBaseClassName, chartName, chartPaperClassName, legendClassName, useChartData, MARKERS, Marker, PLOT_PRESETS, type ChartFigureProps, type ChartMarker, type ChartStyle } from "./chart";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "./table";
 import { ChartGeometryContext, chartGeometry, READOUT_SURFACE } from "../chart-geometry";
+import { nodeText, textAdvance } from "../chart-text";
 import { useUILocale } from "../locale";
 import { isList, isName, received, requireNamedItems } from "../require-name";
 import { useSystemUnits } from "../system-units";
@@ -120,16 +121,21 @@ export function ScatterChart({ label, framed = true, render, ref, className, sty
   const showY = formatY ?? ((value: number) => number.format(value));
   const xs = allPoints.map(point => point.x), ys = allPoints.map(point => point.y);
   const x = niceScale(xs), y = niceScale(ys);
-  const yWidth = Math.ceil(Math.max(...y.ticks.map(value => String(showY(value)).length)) * 7.5) + geometry.axisGutter;
+  // 轴上只取字符串或数字（SVG 文字放不下节点），否则退回默认数值格式，与 Chart、Heatmap 同一规则；读数与数据表仍用 formatX / formatY 的原结果。
+  const axisX = (value: number) => nodeText(showX(value), number.format(value));
+  const axisY = (value: number) => nodeText(showY(value), number.format(value));
+  const yWidth = Math.ceil(Math.max(...y.ticks.map(value => textAdvance(axisY(value))))) + geometry.axisGutter;
+  // 末端的横轴刻度以轴端为中心，右侧要留出它的半宽，否则被 SVG 裁掉；放得下时仍是一个标记的宽。
+  const xEnd = Math.max(geometry.mark, Math.ceil(textAdvance(axisX(x.max)) / 2));
   legend = !single && <ul data-slot="chart-legend" className={legendClassName}>{projected.map(item => <li key={item.key} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><ScatterLegendKey color={item.color} marker={item.marker} /><span>{item.label}</span></li>)}</ul>;
   content = <>
     <div data-slot="chart-value-axis" className="min-w-0 text-dense text-muted-foreground wrap-anywhere">{yLabel}</div>
     {/* 绘图区对读屏隐藏：每个点只是标记，没有可读的名称与值；数据由「查看数据」展开的等价表承担（与 Chart 同）。 */}
     <div data-slot="chart-plot" aria-hidden="true" style={{ height: "var(--qy-chart-plot-height)" }} className="min-w-0 w-full">
-      <ResponsiveContainer width="100%" height="100%"><RechartsScatterChart accessibilityLayer={false} margin={{ top: geometry.mark, right: geometry.mark, bottom: 0, left: 0 }}>
+      <ResponsiveContainer width="100%" height="100%"><RechartsScatterChart accessibilityLayer={false} margin={{ top: geometry.mark, right: xEnd, bottom: 0, left: 0 }}>
         <CartesianGrid horizontal vertical stroke="var(--qy-border)" strokeWidth={geometry.hairline} />
-        <XAxis type="number" dataKey="x" name={xLabel} domain={[x.min, x.max]} ticks={x.ticks} tick={<AxisTick formatter={value => typeof value === "number" ? String(showX(value)) : value} />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: geometry.hairline }} />
-        <YAxis type="number" dataKey="y" name={yLabel} domain={[y.min, y.max]} ticks={y.ticks} tick={<AxisTick textAnchor="end" verticalAnchor="middle" formatter={value => typeof value === "number" ? String(showY(value)) : value} />} tickLine={false} axisLine={false} width={yWidth} />
+        <XAxis type="number" dataKey="x" name={xLabel} domain={[x.min, x.max]} ticks={x.ticks} tick={<AxisTick formatter={value => typeof value === "number" ? axisX(value) : value} />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: geometry.hairline }} />
+        <YAxis type="number" dataKey="y" name={yLabel} domain={[y.min, y.max]} ticks={y.ticks} tick={<AxisTick textAnchor="end" verticalAnchor="middle" formatter={value => typeof value === "number" ? axisY(value) : value} />} tickLine={false} axisLine={false} width={yWidth} />
         <Tooltip isAnimationActive={false} cursor={false} content={(tooltipProps) => <ScatterReadout {...tooltipProps as { active?: boolean; payload?: readonly ScatterTooltipPayload[] }} xLabel={xLabel} yLabel={yLabel} formatX={showX} formatY={showY} />} />
         {projected.map(item => <Scatter key={item.key} name={item.label} data={item.points.map(point => ({ ...point, color: item.color, marker: item.marker, seriesLabel: item.label }))} isAnimationActive={false} shape={(shapeProps: unknown) => <PointShape {...shapeProps as React.ComponentProps<typeof PointShape>} />} />)}
       </RechartsScatterChart></ResponsiveContainer>

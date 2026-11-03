@@ -2,11 +2,12 @@
 
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, ComposedChart, Line, LineChart, Pie, PieChart, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Text as RechartsText, Tooltip, usePlotArea, XAxis, YAxis } from "recharts";
+import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, ComposedChart, Line, LineChart, Pie, PieChart, ReferenceArea, ReferenceDot, ReferenceLine, ResponsiveContainer, Text as RechartsText, Tooltip, useChartWidth, usePlotArea, XAxis, YAxis } from "recharts";
 import * as React from "react";
 import { Button } from "./button";
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableHeader, TableRow } from "./table";
 import { ChartGeometryContext, chartGeometry, useChartGeometry, type ChartGeometry, READOUT_SURFACE } from "../chart-geometry";
+import { categoryAxisWidth, fitText, nodeText, textAdvance } from "../chart-text";
 import { useUILocale } from "../locale";
 import { isList, isName, received, requireNamedItems } from "../require-name";
 import { useSystemUnits } from "../system-units";
@@ -182,7 +183,6 @@ const SHARE_TICKS = [0, 0.25, 0.5, 0.75, 1] as const;
  */
 const LABEL_LINE = 16; // dense 档的行高（桌面）：文字度量，随字阶不随分
 const LABEL_ROWS_MAX = 12;
-const textAdvance = (text: string) => [...text].reduce((sum, char) => sum + (char.charCodeAt(0) >= 0x2e80 ? 12 : 7.5), 0);
 
 /**
  * 标记的形：画在 mark × mark 的方框里（默认 8 × 8，圆角 1 = 边长的 1/8）。形状的比例是预设；方框的边长是 2 分，随分走。
@@ -236,7 +236,7 @@ function BarShape({ x = 0, y = 0, width = 0, height = 0, fill, value, label }: {
     : `M${x},${top}V${top + h - r}Q${x},${top + h} ${x + r},${top + h}H${x + width - r}Q${x + width},${top + h} ${x + width},${top + h - r}V${top}Z`;
   return text ? <g><path d={d} fill={fill} />{text}</g> : <path d={d} fill={fill} />;
 }
-/** 横向柱：数据端（右端，假定非负）圆角，基线端（左端）方角——bar-horizontal 不支持负值。label 给出时标在末端之后。 */
+/** 横向柱：数据端（右端，假定非负）圆角，基线端（左端）方角：bar-horizontal 不支持负值（Chart 入口抛错）。label 给出时标在末端之后。 */
 function BarShapeHorizontal({ x = 0, y = 0, width = 0, height = 0, fill, label }: { x?: number; y?: number; width?: number; height?: number; fill?: string; label?: string | undefined }) {
   const { barRadius, labelGap } = useChartGeometry();
   const text = label === undefined ? null : <text x={x + width + labelGap} y={y + height / 2} textAnchor="start" dominantBaseline="central" className={valueLabelClassName} fill={valueLabelFill}>{label}</text>;
@@ -256,7 +256,7 @@ function stackEdges(payload: Record<string, unknown> | undefined, keys: readonly
 }
 /**
  * 堆叠柱的一段：段与段之间留一个空隙（surfaceGap，默认 2px）的纸色（骨法用笔，一个范围一种机制，不描边）；只有堆叠最外
- * 的数据端（isTop）才是圆角，基线端（isBase）方角，中间的段两端都方——假定非负值由基线向上叠加。
+ * 的数据端（isTop）才是圆角，基线端（isBase）方角，中间的段两端都方。负值已在 Chart 入口抛错，这里的段都由基线向上叠加。
  * 填充类图（柱、堆叠、面积、环形）不加纹理（用户裁决 2026-10-30，看过红绿色弱模拟对比后定）：系列靠明度差、固定次序、
  * 这道纸色空隙和读数/数据表里的名称区分；纹理在大面积与细段上是噪点，盖过数据本身。
  */
@@ -282,14 +282,13 @@ function bandPosition(value: number, band: ChartBand) {
   if (value < band.from) return { position: "below" as const, amount: clean(band.from - value) };
   return { position: "within" as const, amount: 0 };
 }
-const nodeText = (node: React.ReactNode, fallback: string) => typeof node === "string" || typeof node === "number" ? String(node) : fallback;
 /**
  * 悬停读数：数值在前、名称在后（读者已有系列，要的是数）；只增强，不替代数据表。
  * 背景系列不进读数（它们是背景，等价数据表里有）。有目标带时每个数值下多一行相对目标的位置；
  * 有多个带时只对第一个计算（位置要有唯一的比较对象，多个带各算一行会把读数拉长成表）。事件名列在数值之后。
  * 堆叠类（total 给出）在各系列之后多一行“合计”；占比类（share 给出）每个数值同时给原值与占比（图上的量是占比，原值要从读数里读）。
  */
-export function ReadoutTooltip({ active, payload, label, series, format, band, eventsOf, share, total }: { active?: boolean; payload?: readonly TooltipEntry[]; label?: string | number; series: readonly ChartProjectedSeries[]; format: (value: number, key: string, category: string) => React.ReactNode; band?: ChartBand | undefined; eventsOf?: (rowId: string) => readonly ChartEvent[]; share?: { raw: (rowId: string, key: string) => string | null; percent: Intl.NumberFormat } | undefined; total?: ((rowId: string) => React.ReactNode) | undefined }) {
+export function ReadoutTooltip({ active, payload, label, series, format, band, eventsOf, share, total }: { active?: boolean; payload?: readonly TooltipEntry[]; label?: string | number; series: readonly ChartProjectedSeries[]; format: (value: number, key: string, category: string, rowId: string) => React.ReactNode; band?: ChartBand | undefined; eventsOf?: (rowId: string) => readonly ChartEvent[]; share?: { raw: (rowId: string, key: string) => string | null; percent: Intl.NumberFormat } | undefined; total?: ((rowId: string) => React.ReactNode) | undefined }) {
   const { code, messages } = useUILocale();
   if (!active || !payload?.length) return null;
   const rowId = payload[0]?.payload?.id ?? "";
@@ -303,10 +302,10 @@ export function ReadoutTooltip({ active, payload, label, series, format, band, e
       const place = known && band ? bandPosition(entry.value as number, band) : undefined;
       // 区间：两端都已知才写；有一端不可得时读数不猜（数据表里有各自的状态）。格式与线上的读数同一个 format。
       const low = item.range ? entry.payload?.[item.range.min] : undefined, high = item.range ? entry.payload?.[item.range.max] : undefined;
-      const rangeText = typeof low === "number" && typeof high === "number" ? messages.chartRange(nodeText(format(low, item.key, String(label)), new Intl.NumberFormat(code).format(low)), nodeText(format(high, item.key, String(label)), new Intl.NumberFormat(code).format(high))) : undefined;
+      const rangeText = typeof low === "number" && typeof high === "number" ? messages.chartRange(nodeText(format(low, item.key, String(label), rowId), new Intl.NumberFormat(code).format(low)), nodeText(format(high, item.key, String(label), rowId), new Intl.NumberFormat(code).format(high))) : undefined;
       // 占比类：图上的量是占比，读数给“原值（占比）”。没有画的行（含未知值或和为 0）没有图形可悬停，读数不出现，已知原值在数据表里。
       const raw = share?.raw(rowId, item.key);
-      const reading = share ? (known && raw !== null && raw !== undefined ? messages.proportionShare(raw, share.percent.format(entry.value as number)) : "—") : known ? format(entry.value as number, item.key, String(label)) : "—";
+      const reading = share ? (known && raw !== null && raw !== undefined ? messages.proportionShare(raw, share.percent.format(entry.value as number)) : "—") : known ? format(entry.value as number, item.key, String(label), rowId) : "—";
       return <div key={item.key} className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-(--qy-field-gap)">
         {/* 读数键是一段数据线：高 = 数据线宽（半分），宽 3 分是预设（短于图例键的 4 分，读数里只需认色）。合计行的空位与它同宽，数字列才对齐。 */}
         <span aria-hidden="true" className="h-fen-half w-3 shrink-0 rounded-full" style={{ background: item.color }} />
@@ -315,7 +314,7 @@ export function ReadoutTooltip({ active, payload, label, series, format, band, e
           <span className="min-w-0 text-muted-foreground wrap-anywhere">{item.label}</span>
         </div>
         {rangeText && <div data-slot="chart-range" className="col-start-2 text-dense text-muted-foreground numeric wrap-anywhere">{rangeText}</div>}
-        {place && band && <div className="col-start-2 text-dense text-muted-foreground numeric wrap-anywhere">{messages.chartBandPosition(place.position, nodeText(format(place.amount, item.key, String(label)), new Intl.NumberFormat(code).format(place.amount)), band.label)}</div>}
+        {place && band && <div className="col-start-2 text-dense text-muted-foreground numeric wrap-anywhere">{messages.chartBandPosition(place.position, nodeText(format(place.amount, item.key, String(label), rowId), new Intl.NumberFormat(code).format(place.amount)), band.label)}</div>}
       </div>;
     })}
     {total && <div data-slot="chart-total" className="grid min-w-0 grid-cols-[auto_minmax(0,1fr)] items-center gap-x-(--qy-field-gap)">
@@ -389,11 +388,20 @@ function DonutTooltip({ active, payload, number }: { active?: boolean; payload?:
 const curveOf = (item: ChartProjectedSeries) => item.interpolation === "step" ? "stepAfter" as const : "linear" as const;
 /** 默认图形需要而投影里没有的：数字格式与由行算出的读数（占比、合计、柱上标值）。 */
 type PlotExtras = {
-  number: Intl.NumberFormat; format: (value: number, key: string, category: string) => React.ReactNode;
+  number: Intl.NumberFormat; format: (value: number, key: string, category: string, rowId: string) => React.ReactNode;
   percent?: Intl.NumberFormat; percentTick?: Intl.NumberFormat;
   rawText?: (rowId: string, key: string) => string | null; totalText?: (rowId: string) => React.ReactNode;
   labelText?: (value: number, rowId: string, key: string) => string; donutParts?: readonly DonutPart[];
 };
+/*
+ * 横向柱的类别轴：宽度够放下最长的名称就停，封顶见 categoryAxisWidth。超过的名称在轴上截断，全文留在读数与数据表（图的 data 里仍是全文）。
+ * 绘图区多宽只有图内才知道，所以这条轴是图内的组件，不在图外算好再传。reserved 是绘图区两侧的边距（含柱端标值的余量）。
+ */
+function HorizontalCategoryAxis({ labels, nameOf, reserved }: { labels: readonly string[]; nameOf: (id: string | number) => string; reserved: number }) {
+  const geo = useChartGeometry();
+  const width = categoryAxisWidth(labels, (useChartWidth() ?? 0) - reserved, geo.axisGutter);
+  return <YAxis type="category" dataKey="id" tickFormatter={nameOf} tick={<AxisTick textAnchor="end" verticalAnchor="middle" formatter={value => fitText(nameOf(value), width - geo.axisGutter)} />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: geo.hairline }} width={width} />;
+}
 function DefaultPlot({ type, data, series, valueLabel, total, references = [], events = [], valueDomain, valueLabels, number, format, percent, percentTick, rawText, totalText, labelText, donutParts }: ChartPlotData & PlotExtras) {
   const geo = useChartGeometry();
   if (type === "donut") {
@@ -427,7 +435,10 @@ function DefaultPlot({ type, data, series, valueLabel, total, references = [], e
   const valueFormatter = (value: string | number) => typeof value === "number" ? (share && percentTick ? percentTick.format(value) : number.format(value)) : value;
   const band = references.find((reference): reference is ChartBand => reference.kind === "band");
   const eventsOf = (rowId: string) => events.filter(event => event.rowId === rowId);
-  const tooltip = <Tooltip isAnimationActive={false} cursor={type === "line" ? { stroke: "var(--qy-border-input)", strokeWidth: geo.hairline } : { fill: "var(--qy-surface-hover)" }} content={(props) => <ReadoutTooltip {...props as { active?: boolean; payload?: readonly TooltipEntry[]; label?: string | number }} series={series} format={format} band={band} eventsOf={eventsOf} share={share && percent && rawText ? { raw: rawText, percent } : undefined} total={totalText} />} />;
+  // 类别轴按行 id 排：名称可以重复，Recharts 遇到重复的轴值把定义域换成序号，悬停就对不上行。轴上与读数里显示的仍是名称。
+  const names = new Map(data.map(row => [String(row.id), String(row.category)]));
+  const nameOf = (id: string | number) => names.get(String(id)) ?? String(id);
+  const tooltip = <Tooltip isAnimationActive={false} cursor={type === "line" ? { stroke: "var(--qy-border-input)", strokeWidth: geo.hairline } : { fill: "var(--qy-surface-hover)" }} content={(props) => <ReadoutTooltip {...props as { active?: boolean; payload?: readonly TooltipEntry[] }} label={nameOf(props.label as string | number)} series={series} format={format} band={band} eventsOf={eventsOf} share={share && percent && rawText ? { raw: rawText, percent } : undefined} total={totalText} />} />;
   // 参照与事件：量轴方向画参照（纵向图是横带 / 横线，横向柱是竖带 / 竖线），画在数据后面。
   // ifOverflow="extendDomain"：Recharts 的参照默认越界即丢弃，这里显式把参照并入量轴范围（再由 "auto" 取整刻度）。
   const referenceMarks = references.map((reference, index) => {
@@ -441,7 +452,7 @@ function DefaultPlot({ type, data, series, valueLabel, total, references = [], e
     const row = data.find(record => record.id === event.rowId);
     if (!row) return null;
     // 点的另一轴坐标由 EventMark 取绘图区的边；y（或横向柱的 x）只需是个轴上存在的值，ifOverflow="visible" 保证不被丢弃。
-    const at = (horizontal ? { x: 0, y: row.category as string } : { x: row.category as string, y: 0 }) as unknown as { x: number; y: number };
+    const at = (horizontal ? { x: 0, y: row.id as string } : { x: row.id as string, y: 0 }) as unknown as { x: number; y: number };
     return <ReferenceDot key={`event${index}`} {...at} r={EVENT_RADIUS} ifOverflow="visible" shape={(props: unknown) => <EventMark {...props as { cx?: number; cy?: number }} horizontal={horizontal} tone={event.tone} />} />;
   });
   // 量轴范围：默认从零起（柱与面积必须从零长出来）、上限取整；折线可由 valueDomain 指定，范围就是传入的两端；占比固定 0–100%。
@@ -453,10 +464,9 @@ function DefaultPlot({ type, data, series, valueLabel, total, references = [], e
   if (labelled) { if (horizontal) labelMargin.right = Math.ceil(Math.max(0, ...rowLabels.map(textAdvance))) + geo.labelGap; else labelMargin.top = geo.labelGap + LABEL_LINE; }
   const labelFor = (props: { value?: unknown; payload?: { id?: string } }, key: string) => labelled && labelText && typeof props.value === "number" ? labelText(props.value, props.payload?.id ?? "", key) : undefined;
   if (horizontal) {
-    // 横向柱：类别换到纵轴，数值换到横轴；纵轴宽按最长类别名估算（dense 12px，约 1 字 12px）。
-    const longestLabel = Math.max(1, ...data.map(row => String(row.category).length));
+    // 横向柱：类别换到纵轴，数值换到横轴。
     const valueAxis = labelled ? <XAxis type="number" hide domain={domain} /> : <XAxis type="number" domain={domain} tick={<AxisTick formatter={valueFormatter} />} tickLine={false} axisLine={false} />;
-    const categoryAxis = <YAxis type="category" dataKey="category" tick={<AxisTick textAnchor="end" verticalAnchor="middle" />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: geo.hairline }} width={Math.ceil(longestLabel * 12) + geo.axisGutter} />;
+    const categoryAxis = <HorizontalCategoryAxis labels={[...names.values()]} nameOf={nameOf} reserved={labelMargin.left + labelMargin.right} />;
     return <ResponsiveContainer width="100%" height="100%"><BarChart data={data} layout="vertical" accessibilityLayer={false} barGap={geo.surfaceGap} barCategoryGap={BAR_CATEGORY_GAP} {...(labelled ? { margin: labelMargin } : {})}>
       {grid}{valueAxis}{categoryAxis}{tooltip}{referenceMarks}
       {series.map(item => <Bar key={item.key} dataKey={item.dataKey} name={item.label} fill={item.color} maxBarSize={geo.barMax} isAnimationActive={false} shape={(props: unknown) => <BarShapeHorizontal {...props as React.ComponentProps<typeof BarShapeHorizontal>} label={labelFor(props as { value?: unknown; payload?: { id?: string } }, item.key)} />} />)}
@@ -464,7 +474,7 @@ function DefaultPlot({ type, data, series, valueLabel, total, references = [], e
     </BarChart></ResponsiveContainer>;
   }
   // 折线两端留出半个标记加一圈纸色，端点不被切开；柱状由类别带自带留白。
-  const categoryAxis = <XAxis dataKey="category" tick={<AxisTick />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: geo.hairline }} interval="preserveStartEnd" minTickGap={geo.tickGap} {...(type === "line" || type === "area" || stackedAreas ? { padding: { left: geo.mark, right: geo.mark } } : {})} />;
+  const categoryAxis = <XAxis dataKey="id" tickFormatter={nameOf} tick={<AxisTick formatter={nameOf} />} tickLine={false} axisLine={{ stroke: "var(--qy-groove-surface)", strokeWidth: geo.hairline }} interval="preserveStartEnd" minTickGap={geo.tickGap} {...(type === "line" || type === "area" || stackedAreas ? { padding: { left: geo.mark, right: geo.mark } } : {})} />;
   // 轴宽按最长刻度文字估算（12px 等宽数字约 7.5px 一字）。上限取整后约多 25%，参照与指定范围的两端也要算进去。
   // 堆叠时轴读的是各行加总，不是单个部分：按加总估宽，否则最长刻度被截。占比轴固定，刻度是百分数。
   const extent = [...(type === "area-stacked" || type === "bar-stacked" ? data.map(row => series.reduce((sum, item) => sum + (typeof row[item.dataKey] === "number" ? row[item.dataKey] as number : 0), 0)) : values), ...refValues, ...(valueDomain ?? [])];
@@ -678,6 +688,8 @@ export function Chart({ label, framed = true, render, ref, className, style, typ
       const value = readValue(row, item.key);
       if (type === "donut" && (typeof value !== "number" || value < 0)) throw new RangeError("Chart type \"donut\" requires every part's value to be a known, non-negative number; an unavailable or negative share has no wedge to draw. When the whole is unavailable, render Empty in place of the chart.");
       if (share && typeof value === "number" && value < 0) throw new RangeError(`Chart type "${type}" requires non-negative values: a share is a part of the row's sum, and a negative part has no share of the whole. Use a bar for values that cross zero.`);
+      if (type === "bar-horizontal" && typeof value === "number" && value < 0) throw new RangeError(`Chart type "bar-horizontal" requires non-negative values: its bars grow one way from the axis, and ${value} at "${row.label}" would leave the plot. Use type "bar" for values that cross zero.`);
+      if ((type === "bar-stacked" || type === "area-stacked") && typeof value === "number" && value < 0) throw new RangeError(`Chart type "${type}" requires non-negative values: parts stack up from the baseline, and ${value} at "${row.label}" has no place in the stack. Use type "bar" for values that cross zero.`);
       if (typeof value === "number" && valueDomain && (value < valueDomain[0] || value > valueDomain[1])) throw new RangeError(`Chart value ${value} of "${row.label}" falls outside valueDomain [${valueDomain[0]}, ${valueDomain[1]}]; cutting the data off would misstate it.`);
       if (typeof value === "number" && !share) numeric = true;
       rawRow[item.dataKey] = typeof value === "number" ? value : null;
@@ -706,13 +718,14 @@ export function Chart({ label, framed = true, render, ref, className, style, typ
     const sum = projected.reduce((acc, item) => acc + (data[0]![item.dataKey] as number), 0);
     if (total !== undefined && (!Number.isFinite(total) || total < sum)) throw new RangeError("Chart type \"donut\" total must be a finite number at least the sum of its parts.");
   }
-  const format = (value: number, key: string, category: string) => {
-    const item = series.find(s => s.key === key); const row = rows.find(r => r.label === category);
+  const rowById = new Map(rows.map(row => [row.id, row]));
+  // 按行 id 找行：类别名可以重名，传给 formatValue 的必须是被悬停的那一行。
+  const format = (value: number, key: string, _category: string, rowId: string) => {
+    const item = series.find(s => s.key === key); const row = rowById.get(rowId);
     return item && row && formatValue ? formatValue(value, item, row) : number.format(value);
   };
   // 只取字符串或数字结果：SVG 文字与字符串拼接放不下节点，退回默认数值格式（与 Heatmap 的 plain 同一规则）。
   const plain = (value: number, item: ChartSeries, row: ChartRow) => nodeText(formatValue?.(value, item, row), number.format(value));
-  const rowById = new Map(rows.map(row => [row.id, row]));
   const seriesByKey = new Map(series.map(item => [item.key, item]));
   // 合计：各部分加总。含任何一个不可得的值时不合计——已知部分的和不是合计，写成“合计”就名不副实；读数里记 “—”，数据表里写明缺项（messages.chartTotalPartial）。
   // 格式化沿用第一个系列：堆叠的系列共用一个量纲（valueLabel），按量纲写的格式适用；按系列身份区分的格式不在约定之内。
