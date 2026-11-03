@@ -61,7 +61,7 @@ describe("DataTable", () => {
       { accessorKey: "count", header: "数量", size: 120 },
     ] }];
     rerender(<AdvancedFixture definitions={definitions} />);
-    expect(screen.getByRole("table")).toHaveStyle({ tableLayout: "fixed", width: "280px" });
+    expect(screen.getByRole("table")).toHaveStyle({ tableLayout: "fixed", width: "100%", minWidth: "280px" });
     expect(screen.getByRole("columnheader", { name: "条目" })).toHaveAttribute("colspan", "2");
     expect(screen.getByRole("columnheader", { name: "条目" })).toHaveStyle({ width: "280px" });
     expect(screen.getByRole("columnheader", { name: "名称" })).toHaveStyle({ width: "160px" });
@@ -74,7 +74,7 @@ describe("DataTable", () => {
 
   it("also consumes advanced columnSizing state without requiring definition sizes", () => {
     render(<AdvancedFixture columnSizing={{ label: 240, count: 80 }} />);
-    expect(screen.getByRole("table")).toHaveStyle({ tableLayout: "fixed", width: "320px" });
+    expect(screen.getByRole("table")).toHaveStyle({ tableLayout: "fixed", width: "100%", minWidth: "320px" });
     expect(screen.getByRole("rowheader", { name: "A" })).toHaveStyle({ width: "240px" });
   });
 
@@ -436,12 +436,12 @@ describe("DataTable", () => {
       expect(cols()[1]!.style.width).toBe("");
     });
 
-    it("keeps the sum-of-columns table when every column is fixed or a marker, and natural layout when nothing is sized", () => {
+    it("fills the container without scaling when every column is fixed or a marker, and natural layout when nothing is sized", () => {
       render(<AdvancedFixture definitions={[{ accessorKey: "label", header: "名称", size: 200, meta: { rowHeader: true } }, { accessorKey: "count", header: "数量", size: 100 }]} />);
       const table = screen.getByRole("table");
       expect(table.style.tableLayout).toBe("fixed");
-      expect(table.style.width).toBe("300px");
-      expect(table.style.minWidth).toBe("");
+      expect(table.style.width).toBe("100%");
+      expect(table.style.minWidth).toBe("300px");
       expect(cols().map(col => col.style.width)).toEqual(["200px", "100px"]);
     });
   });

@@ -49,8 +49,28 @@ export default {
         {
           "name": "table.options.columns[].size / table.options.columns[].minSize / table.options.columns[].maxSize / table.options.state.columnSizing",
           "type": "number / number / number / TanStack state",
-          "description": "实际像素列宽，按 minSize/maxSize 钳制。显式配置任一尺寸或非空 columnSizing 时启用固定布局与 colgroup；未配置尺寸时保持原生自动布局。写了 size（或 defaultColumn.size，或 columnSizing 里有它）的列定宽，标记列取内容宽，其余列是弹性列：表宽 100%，弹性列平分剩余空间，minSize 是它的下限，未写 minSize 时下限为 150px（TanStack 默认 size）。表格最小宽度 = 定宽列之和 + 标记列之和 + 弹性列数 × 各弹性列下限的最大值，窄于此值时横向滚动。弹性列的 maxSize 不约束宽度，需要上限就写 size。没有弹性列时表宽等于各列之和，组合表头取可见叶列之和。不内置拖拽调宽。",
-          "descriptionEn": "Actual pixel widths clamped by minSize/maxSize. Any explicit dimension or nonempty columnSizing opts into fixed layout with colgroup; otherwise native auto layout remains. A column with size (or defaultColumn.size, or an entry in columnSizing) is fixed, a marker column takes its content width, and every other column is flexible: the table is 100% wide, flexible columns split the remaining space, minSize is a flexible column's floor, and without minSize the floor is 150px (TanStack's default size). The table's minimum width is the fixed columns plus the marker columns plus the flexible column count times the largest flexible floor; below it the table scrolls horizontally. maxSize does not constrain a flexible column; write size when a cap is needed. Without flexible columns the table is as wide as its columns together, and grouped headers sum visible leaf widths. Drag resizing is not built in."
+          "description": "实际像素列宽，按 minSize/maxSize 钳制。显式配置任一尺寸或非空 columnSizing 时启用固定布局与 colgroup；未配置尺寸时保持原生自动布局。写了 size（或 defaultColumn.size，或 columnSizing 里有它）的列定宽，标记列取内容宽，其余列是弹性列：表宽 100%，弹性列平分剩余空间（写 meta.grow 时按比例），minSize 是它的下限，未写 minSize 时下限为 150px（TanStack 默认 size）。表格最小宽度 = 定宽列之和 + 标记列之和 + 弹性列数 × 各弹性列下限的最大值，窄于此值时横向滚动。弹性列写 maxSize 就是它的上限，多出的宽度回到其它弹性列；优先级是 columnSizing > grow / fit > size。每列宽度都已确定且总和小于容器时（没有弹性列，或弹性列都到了上限），列宽不放大，表头底与行线延伸到容器右缘；放不下时表宽等于各列之和并横向滚动，组合表头取可见叶列之和。不内置拖拽调宽。",
+          "descriptionEn": "Actual pixel widths clamped by minSize/maxSize. Any explicit dimension or nonempty columnSizing opts into fixed layout with colgroup; otherwise native auto layout remains. A column with size (or defaultColumn.size, or an entry in columnSizing) is fixed, a marker column takes its content width, and every other column is flexible: the table is 100% wide, flexible columns split the remaining space, minSize is a flexible column's floor, and without minSize the floor is 150px (TanStack's default size). The table's minimum width is the fixed columns plus the marker columns plus the flexible column count times the largest flexible floor; below it the table scrolls horizontally. A flexible column's maxSize is its cap, and the excess returns to the other flexible columns; precedence is columnSizing > grow / fit > size. When every column width is settled and they total less than the container (no flexible columns, or all of them at their cap), columns do not stretch: the header ground and row lines extend to the container's end. When they do not fit, the table is as wide as its columns together and scrolls, and grouped headers sum visible leaf widths. Drag resizing is not built in."
+        },
+        {
+          "name": "columnDef.meta.grow",
+          "type": "number",
+          "description": "按比例分剩余宽度，须为有限正数；minSize / maxSize 是它的上下限，到界的列冻结，余量回到其它弹性列。同时写 size 时 size 是下限。用户拖动过的列（columnSizing）退出分配。与 fit 互斥。",
+          "descriptionEn": "Shares the remaining width by proportion; must be a finite positive number. minSize and maxSize bound it: a column at a bound freezes and the excess returns to the other flexible columns. With size as well, size is a floor. A column the user has resized (columnSizing) leaves distribution. Mutually exclusive with fit."
+        },
+        {
+          "name": "columnDef.meta.fit",
+          "type": "boolean",
+          "default": "false",
+          "description": "按内容定宽：列宽等于表头与已渲染单元格里最宽的内容加单元格内缘，放操作按钮的列也写它。maxSize 是单元格内容的上限，超出的折行或配 ellipsis 省略，不会把列压到比列名还窄。虚拟化时只量首屏并锁定，滚动不改列宽，之后更宽的文字单行省略（规则同 ellipsis）；含控件的内容不裁切，给这类列留够宽度。与 grow 互斥。",
+          "descriptionEn": "Sizes the column to its content: the widest of the header and rendered cells plus the cell insets. Use it for action columns too. maxSize caps cell content, which wraps or ellipsizes beyond it, and never squeezes the column below its header. With virtualization only the first screen is measured and then locked, so scrolling never changes widths; wider text further down ellipsizes on one line, under the same rules as ellipsis. Interactive content is not clipped, so give such columns enough width. Mutually exclusive with grow."
+        },
+        {
+          "name": "columnDef.meta.marker",
+          "type": "boolean",
+          "default": "false",
+          "description": "这一列只放复选框这类标记：宽度由标记尺寸加单元格内缘算出，不看内容。放操作按钮的列写 fit。",
+          "descriptionEn": "The column holds only a marker such as a checkbox: its width is the marker size plus the cell insets, regardless of content. Action columns use fit."
         },
         {
           "name": "columnDef.meta.ellipsis",
@@ -127,7 +147,7 @@ export default {
     "标准组合从 components/data-table 导入 DataTablePattern；分页内置复用 PaginationPattern，自 5.2.0 起随其改为一行布局，只有一页时只留范围摘要。跨页选择的对象内容、权限与批量执行范围仍由应用核实。",
     "TanStack 为已声明的可选 peer；应用明确启用排序/筛选/分页模型。",
     "只用排序与选择、不分页时，给 useReactTable 传 `autoResetAll: false`：它的自动重置在渲染之外排队更新状态，页面经 Suspense 懒加载时，被丢弃的那次渲染会让 React 报「未挂载组件更新状态」。",
-    "固定布局中未写 size 的文字列是弹性列，平分定宽列与标记列之外的剩余空间；标记列仍按已有 marker 与单元格内缘角色取宽。列宽过小不会裁掉交互控件，请给操作列留下真实容量。",
+    "固定布局中未写 size 的文字列是弹性列，平分定宽列与标记列之外的剩余空间；标记列仍按已有 marker 与单元格内缘角色取宽。列宽过小不会裁掉交互控件，操作列写 meta.fit 按内容定宽。",
     "虚拟化保留 table/thead/tbody/tr/th/td。aria-rowcount 与 aria-rowindex 描述当前表格页（含表头），不把服务端全局总数冒充已加载行；全选仍覆盖当前模型的完整范围。",
     "虚拟行按稳定 ID 测量，支持实际可变行高；estimateRowHeight 应接近真实行高，未测量的远端行仍是估计。建议显式列宽，避免自动布局因窗口内容变化而重排；纯客户端页面需要查看或打印所有行时关闭虚拟化。",
     "焦点所在的离屏行额外保留一行，输入草稿不因滚动丢失；该行移出当前模型时，焦点仍属于它才回到滚动容器。"
@@ -136,7 +156,7 @@ export default {
     "Import DataTablePattern from components/data-table; its pager reuses PaginationPattern and since 5.2.0 follows its one-row layout, leaving only the range summary for a single page. Applications still verify cross-page object data, permissions and bulk-action scope.",
     "TanStack is a declared optional peer; applications explicitly enable sorting, filtering and pagination models.",
     "With sorting and selection only and no pagination, pass `autoResetAll: false` to useReactTable: its automatic reset queues a state update outside render, and when the page loads lazily through Suspense a discarded render makes React warn about updating an unmounted component.",
-    "In fixed layout, text columns without size are flexible and split the width left over by fixed and marker columns; marker columns retain their marker and cell-inset roles. Interactive content is not clipped to force a narrow width: allow actual capacity for action columns.",
+    "In fixed layout, text columns without size are flexible and split the width left over by fixed and marker columns; marker columns retain their marker and cell-inset roles. Interactive content is not clipped to force a narrow width: action columns use meta.fit to size to their content.",
     "Virtualization retains table/thead/tbody/tr/th/td. Aria-rowcount and aria-rowindex describe the current table page including headers, without presenting server totals as loaded rows. Select-all still covers the complete current model scope.",
     "Virtual rows are measured by stable ID and support variable actual heights. Choose an estimateRowHeight close to actual rows: distant unmeasured heights remain estimates. Explicit column widths prevent window content from changing natural layout. Disable virtualization to view or print all client rows.",
     "One extra offscreen row retains focus and editor drafts while scrolling. When it leaves the current model, focus returns to the viewport only if that row still owned focus."
