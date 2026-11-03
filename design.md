@@ -175,6 +175,8 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 
 围绕共同任务组织字段和操作。卡片用于需要独立边界的对象；阅读与设置分节也可以由标题、对齐和间距组织。开放、围合、内嵌与浮起是选择，不要求新增四个组件。
 
+总览与看板是同屏并读多个对象的页面，开工前先定主次：一个主读数占最大的位置，其余从属。并列且各自独立读取的块用围合，属于同一段连续阅读的内容用标题和间距。全部开放读不出边界，全部加框又回到平铺等权。正常状态不铺大面积的色或灰，颜色只留给需要处理的部分；一个范围只用一种边界，不靠覆盖全局 token 来补。
+
 比较任务保留必要的二维关系。紧凑可以收紧关系间距，但不能机械缩小文字和触摸目标。空态留出明确入口，内容到来后让位；已有内容刷新时保留仍然有效的工作面。
 
 使用项目已有的角色 token 和布局组合。仅当某种关系需要独立调整且已有明确消费部位时，才增加 token。结构性的 `0`、百分比、`fr`、正常 flex/grid 和真实数据值不必 token 化。
@@ -341,7 +343,7 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 在授权范围内实现并验证，说明修改归属、实际证据和未验证范围。
 ```
 
-<!-- qingye:translation:en:start source-sha256=32d125972cb3a98626435ec9c3e81a50f154d896fdda0c5ffe87cee8caeb8a41 -->
+<!-- qingye:translation:en:start source-sha256=aaece6e77485964e1367b8466132ea86f8e702bb6513e2af5c2f048301762606 -->
 # Qingye UI Design Guide
 
 **Purpose first. Relationships guide the form. Fitness sets the measure.**
@@ -518,6 +520,8 @@ Components cannot infer facts they do not have. Clicking Save without an outcome
 ### Space and surfaces
 
 Group fields and actions around a shared task. Cards serve objects needing independent boundaries. Headings, alignment, and spacing can organize reading and settings. Open, enclosed, inset, and raised are choices, not four required new components.
+
+Overviews and dashboards put many objects on screen to be read together, so settle the order first: one primary reading takes the largest place and the rest support it. Enclose blocks that sit side by side and are read independently; use headings and spacing for content read as one continuous passage. All open leaves no boundaries; all boxed returns to a flat row of equals. Normal states do not spread large areas of color or gray, so color stays with what needs attention. Each scope uses one kind of boundary, and overriding global tokens is not the way to supply it.
 
 Comparison retains necessary two-dimensional relationships. Compact density may tighten relationship spacing but cannot mechanically shrink text and touch targets. Empty states make an entry clear and yield when content arrives. Refreshes retain still-valid working space.
 

@@ -101,6 +101,9 @@ function scalePaint(value: number, max: number): Paint {
   return { background: mix("var(--qy-chart-1)", pct) };
 }
 function levelPaint(index: number, count: number, tone?: Tone): Paint {
+  /* 无 tone 的最低档是「不需要注意」：只铺一层清染（透明叠合，在所坐的面上深一级），让出现的颜色都是要看的。
+   * 不从 12% 起，否则一张正常的图是一大片灰（§6：正常状态不铺大面积灰底）。 */
+  if (!tone && index === 0) return { background: "var(--qy-neutral-soft)" };
   const rank = (index / (count - 1)) ** STEP;
   if (!tone) return { background: mix("var(--qy-ink)", INK_FLOOR + rank * (LEVEL_INK_CEIL - INK_FLOOR)) };
   return { background: mix(toneColor[tone], INK_FLOOR + rank * (INK_CEIL - INK_FLOOR)) };
@@ -241,7 +244,7 @@ export function Heatmap({ label, framed = true, render, ref, className, rowLabel
       {active && <HeatmapReadout key={`${active.row.id}/${active.column.key}`} active={active} rowLabel={rowLabel} columnLabel={columnLabel} format={(value) => format(value, active.row, active.column)} renderReadout={renderReadout} />}
       <div aria-hidden="true" className="mt-(--qy-field-gap) flex items-center gap-(--qy-field-gap) text-dense text-muted-foreground">
         {levels
-          ? <ul data-slot="heatmap-legend" className={cn(legendClassName, "text-dense")}>{levels.map((level, index) => <li key={level.label} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><span data-slot="legend-key" data-level={index} className="size-(--qy-status-dot-size) shrink-0 rounded-(--qy-swatch-radius)" style={{ background: levelPaint(index, levels.length, level.tone).background }} /><span>{level.label}</span></li>)}</ul>
+          ? <ul data-slot="heatmap-legend" className={cn(legendClassName, "text-dense")}>{levels.map((level, index) => <li key={level.label} className="inline-flex min-w-0 items-center gap-(--qy-field-gap) wrap-anywhere"><span data-slot="legend-key" data-level={index} className={cn("size-(--qy-status-dot-size) shrink-0 rounded-(--qy-swatch-radius)", !level.tone && index === 0 && "border border-border")} style={{ background: levelPaint(index, levels.length, level.tone).background }} /><span>{level.label}</span></li>)}</ul>
           : <>
             <span>{messages.heatmapScaleFrom}</span>
             {/* 色阶键：高 2 分（与图例色块同高），宽 16 分是预设——够看出由浅到深的渐变，又不比两端文字更抢眼。 */}

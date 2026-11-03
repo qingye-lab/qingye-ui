@@ -571,8 +571,9 @@ export function ChartHeader({ titleId, label, legend, toggle }: { titleId?: stri
   const titled = titleId !== undefined && label != null;
   if (!titled && !legend && !toggle) return null;
   return <div data-slot="chart-header" data-titled={titled} className={cn("mb-(--qy-field-gap) flex min-h-(--qy-control-sm) min-w-0 flex-wrap items-center gap-x-(--qy-panel-gap) gap-y-(--qy-field-gap) [&_[data-slot=button-content]]:whitespace-nowrap", !titled && "justify-end")}>
-    {/* 图名所在的行恒为一个小号控件高：标题栏折行时，第一行的中线也不动。 */}
-    {titled && <figcaption id={titleId} className="flex min-h-(--qy-control-sm) min-w-0 grow items-center text-heading wrap-anywhere">{label}</figcaption>}
+    {/* 图名所在的行恒为一个小号控件高：标题栏折行时，第一行的中线也不动。
+      * 区块里的图从属于区块标题，图名降一级，否则两层标题同字号，读不出谁包含谁。 */}
+    {titled && <figcaption id={titleId} className="flex min-h-(--qy-control-sm) min-w-0 grow items-center text-heading in-data-[slot=section]:text-body-strong wrap-anywhere">{label}</figcaption>}
     {legend}{toggle}
   </div>;
 }

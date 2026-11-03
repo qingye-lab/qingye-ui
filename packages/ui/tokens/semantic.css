@@ -41,7 +41,8 @@
     --qy-ink: var(--qy-black);
     --qy-paper: var(--qy-white);
 
-    /* 纸：面板是纸本色；页面底纸上一层清染，去掉卡片阴影后面板与页面仍分得开。 */
+    /* 纸：面板是纸本色；页面底纸上一层清染，去掉卡片阴影后面板与页面仍分得开。
+     * 这个前提只在底纸上成立：工作面也是纸本色，坐在工作面里的卡片与工作面同色，边界全由容器线承担。 */
     --qy-surface: var(--qy-paper);
     --qy-surface-raised: var(--qy-paper);
     --qy-background: color-mix(in srgb, var(--qy-ink) var(--qy-wash-qing), var(--qy-paper));
@@ -88,11 +89,11 @@
      *   所以浅色里不能靠「提亮警示」去拉开四色；
      *   四色两两：正常视觉 ΔE00 ≥ 16，protan / deutan / tritan 模拟（Machado 2009）ΔE00 ≥ 9（数据系列的门槛，§7）；
      *   彩度不超过数据五色（OKLCH C ≤ 0.150）。-foreground 的危险（0.181）与信息（0.243）比数据色艳，放到大面上刺眼。
-     * 灰度检验：由深到浅 危险 < 信息 < 成功 < 警示（CSS 灰度 44 / 68 / 82 / 94，两两 ≥ 12）。最近的两对
+     * 灰度检验：由深到浅 危险 < 信息 < 成功 < 警示（CSS 灰度 53 / 68 / 82 / 94，两两 ≥ 12）。最近的两对
      * （成功与警示、信息与成功）靠 2px 空隙、图例次序与名称兜底。
      * 预设：各色的百分比与调和对象。做法是在「原色阶 + 墨 / 中性」里枚举，取满足上列约束、离 -foreground 最近的一组，
      * 不是推导；色相带取 -foreground 的 ±10° 上下，警示 +9°（琥珀 600 比 -foreground 的 700 偏黄）。 */
-    --qy-danger-graphic: color-mix(in srgb, var(--qy-red-500) 50%, var(--qy-black));
+    --qy-danger-graphic: color-mix(in srgb, var(--qy-red-500) 55%, var(--qy-neutral-950));
     --qy-warning-graphic: color-mix(in srgb, var(--qy-amber-600) 73%, var(--qy-black));
     --qy-success-graphic: color-mix(in srgb, var(--qy-emerald-600) 71%, var(--qy-black));
     --qy-info-graphic: color-mix(in srgb, var(--qy-blue-700) 56%, var(--qy-neutral-700));
@@ -167,7 +168,10 @@
     --qy-foreground-subtle: var(--qy-foreground-muted);
 
     /* 线：重与清，透明叠合。焦点线取焦墨。 */
-    --qy-border: color-mix(in srgb, var(--qy-ink) var(--qy-ink-qing), transparent);
+    /* 容器线 = 清 × 1.5 = 12%（用户裁决 2026-11-03，取代 8%）。工作面是纸本色，卡片与它同色，边界全由这条线承担；
+     * 8% 对纸只有 1.19:1，两者分不开；12% 约 1.32:1。不改 --qy-ink-qing：它还决定悬停、选中与柔底，那些不该变深。
+     * 作用范围：所有读 border-border 的线，含表格分隔线与图的网格。修改入口：这一行。 */
+    --qy-border: color-mix(in srgb, var(--qy-ink) calc(1.5 * var(--qy-ink-qing)), transparent);
     --qy-border-input: color-mix(in srgb, var(--qy-ink) var(--qy-ink-zhong), transparent);
     /* 强调边界：浓墨，比输入边界（重）深一级。用途是可编辑控件的悬停边（input、select、checkbox……）：
      * 此前它等于 --qy-border-input，`hover:border-border-strong` 在 7 个组件里是一条不产生任何变化的死规则。
