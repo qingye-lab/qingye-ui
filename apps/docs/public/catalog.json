@@ -20528,7 +20528,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/data-table.tsx",
-        "sha256": "1a8172af8bbc45ffc9bfae352b050c8a591578ee6d765a5f33118dc3aa430326",
+        "sha256": "e5c08917cba6803b0c3cc667b0afbeedc349174161a8e516b17ceb6ba94c1033",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。虚拟化只改变当前行模型的渲染窗口，不改变全选与分页范围。",

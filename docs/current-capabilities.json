@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-03T06:24:30.084Z",
-  "revision": "cf5627a07d11647c2384833e48c7626f662c1c5b",
+  "generatedAt": "2026-11-03T06:31:42.211Z",
+  "revision": "8f33ae8f73d97188cf7180f23359bf9688a24e50",
   "fingerprint": {
-    "sha256": "022b3111dfa4d60270e2cd76108bffe3cb777abf66f00d15e2a6720efee58de9",
+    "sha256": "9442a98830fd46d5630335e54cc9466eacd2bf1b30df44242803bb4cbbaeaad8",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -480,7 +480,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "bd37fc6f4c04d64518245f0798dec9a9533253b565456b653a0a767961742206"
+        "sha256": "226b296b0a743445f6b602197ae863019701ee673aa8d3a3020d9d9a1603f81f"
       },
       {
         "path": "packages/ui/motion.css",
@@ -616,7 +616,7 @@
       },
       {
         "path": "packages/ui/src/components/data-table.tsx",
-        "sha256": "1a8172af8bbc45ffc9bfae352b050c8a591578ee6d765a5f33118dc3aa430326"
+        "sha256": "e5c08917cba6803b0c3cc667b0afbeedc349174161a8e516b17ceb6ba94c1033"
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",

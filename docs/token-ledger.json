@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-11-03T06:24:31.870Z",
-  "revision": "cf5627a07d11647c2384833e48c7626f662c1c5b",
+  "generatedAt": "2026-11-03T06:31:44.330Z",
+  "revision": "8f33ae8f73d97188cf7180f23359bf9688a24e50",
   "static": {
     "fingerprint": {
-      "sha256": "7e5a4e59cdfa8ac307ef95bbba1a9ecdeee2496f845839485a603ad8375eda2f",
+      "sha256": "896a8aaac799136ed18a880367bc72e041a3937611c7b6eeb5ef9775ed4fcdba",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -2957,7 +2957,7 @@
         },
         {
           "path": "packages/ui/src/components/data-table.tsx",
-          "sha256": "1a8172af8bbc45ffc9bfae352b050c8a591578ee6d765a5f33118dc3aa430326"
+          "sha256": "e5c08917cba6803b0c3cc667b0afbeedc349174161a8e516b17ceb6ba94c1033"
         },
         {
           "path": "packages/ui/src/components/date-picker.tsx",

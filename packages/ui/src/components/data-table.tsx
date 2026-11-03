@@ -267,7 +267,7 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
    * 以上是未声明分配时的规则。写了 grow / fit，或弹性列写了 maxSize，就改走上面的按关系分配，maxSize 由算法兑现（fixed 布局里 col/td 的 max-width 本身不生效）。
    */
   const isFlexible = (column: Column<TData, unknown>) => sized && !isFixedWidth(column) && !isMarker(column) && !isFit(column);
-  const flexibleFloor = (column: Column<TData, unknown>) => defaultMinSized || minSizeIds.has(column.id) ? column.columnDef.minSize ?? column.getSize() : column.getSize();
+  const flexibleFloor = (column: Column<TData, unknown>) => !defaultSized && !sizeIds.has(column.id) && (defaultMinSized || minSizeIds.has(column.id)) ? column.columnDef.minSize ?? column.getSize() : column.getSize();
   const measuredReady = columns.every(column => !isRead(column) || fitWidths[column.id] !== undefined);
   const resolved = (() => {
     if (!distributed || available <= 0 || !measuredReady) return null;
@@ -443,7 +443,7 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
   React.useLayoutEffect(() => {
     const section = body.current; const element = section?.parentElement;
     if (!measuredKey || !section || !element) return;
-    if (fitLock.current !== null && fitLock.current !== measuredKey) fitLock.current = null;
+    if (fitLock.current !== null && (fitLock.current !== measuredKey || !virtualization)) fitLock.current = null;
     const measure = () => {
       if (fitLock.current === measuredKey) return;
       // 表不可见（隐藏的面板）时量不到真实宽度，等它显示后由下面的 ResizeObserver 带动重算。
