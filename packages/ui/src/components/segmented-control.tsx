@@ -5,7 +5,7 @@ import { RadioGroup as SegmentedControlPrimitive } from "@base-ui/react/radio-gr
 import * as React from "react";
 import { OptionScope } from "../labelable-scope";
 import { cn } from "../utils";
-import { trackClassName, trackItemFaceClassName } from "../track";
+import { trackClassName, trackItemFaceClassName, trackItemShareClassName } from "../track";
 import type { ToggleSize } from "./toggle";
 
 export type SegmentedControlSize = ToggleSize;
@@ -40,7 +40,7 @@ export function SegmentedControlItem<Value>({ size, className, render = <button 
       // 条目的面（按钮 quiet 面 + 轨道倒推的候选高与圆角 + 选中/未选的墨色）与 Tabs、NavigationMenu 的轨道外观
       // 共用一份：src/track.ts 的 trackItemFaceClassName。悬停是当前状态自己的悬停：选中段悬停不变，
       // 未选段字回到焦墨、按下出现按下面。
-      trackItemFaceClassName(state.checked, resolvedSize),
+      trackItemFaceClassName(state.checked, resolvedSize), trackItemShareClassName,
       state.disabled && "cursor-not-allowed opacity-disabled",
       state.readOnly && "cursor-default",
       typeof className === "function" ? className(state) : className,

@@ -47,7 +47,8 @@ export function Field({ orientation = "vertical", invalid = false, validating = 
         validationMode="onSubmit"
         className={(state) => cn(
           "flex min-w-0 gap-(--qy-field-gap)",
-          orientation === "vertical" ? "flex-col" : "flex-row items-start",
+          // 名称写在控件前面时不被控件挤成逐字竖排；最多占一半是预设，再长就折行，控件仍有位置。
+          orientation === "vertical" ? "flex-col" : "flex-row items-start [&>[data-slot=field-label]:first-child,&>[data-slot=field-title]:first-child]:max-w-1/2 [&>[data-slot=field-label]:first-child,&>[data-slot=field-title]:first-child]:shrink-0",
           typeof className === "function" ? className(state) : className,
         )}
       >
@@ -62,10 +63,31 @@ export function Field({ orientation = "vertical", invalid = false, validating = 
   );
 }
 
-export function FieldGroup({ className, render, ref, ...props }: useRender.ComponentProps<"div">) {
+/*
+ * 名称列（labelColumn）。名称共用一列、控件起点对齐，是一组字段之间的关系，所以写在组上，字段自身不需要知道。
+ * 列宽 = 最长名称（max-content），与 DescriptionList 同一做法；纵向字段是跨两列的 subgrid，名称进第一列，
+ * 控件、说明、错误、校验中都进第二列。列间距与字段间距同一角色，子网格写同一个值，否则条目会被内缩半个差值。
+ * 名称的第一行要和控件的第一行居中对齐：上方留白 =（控件高 − 名称行高）/ 2，用 padding 而不是 flex 居中，
+ * 长名称折行或控件是多行文本时，对齐的仍是第一行。横向字段（控件在前）整条放第二列，组内其他内容（分隔线）跨两列；要进第二列的内容（操作）包一层没有名称的 Field，子元素自己写列类压不过组上的规则。
+ * 窄屏堆叠：名称列放不下，回到每个字段自己的纵向排列。
+ */
+const labelColumnClassName = cn(
+  "sm:grid sm:grid-cols-[max-content_minmax(0,1fr)] sm:gap-x-(--qy-field-group-gap) sm:*:col-span-2",
+  "sm:[&>[data-slot=field][data-orientation=vertical]]:grid sm:[&>[data-slot=field][data-orientation=vertical]]:grid-cols-subgrid sm:[&>[data-slot=field][data-orientation=vertical]]:items-start sm:[&>[data-slot=field][data-orientation=vertical]]:gap-x-(--qy-field-group-gap)",
+  "sm:[&>[data-slot=field][data-orientation=vertical]>*]:col-start-2",
+  "sm:[&>[data-slot=field][data-orientation=vertical]>[data-slot=field-label],&>[data-slot=field][data-orientation=vertical]>[data-slot=field-title]]:col-start-1 sm:[&>[data-slot=field][data-orientation=vertical]>[data-slot=field-label],&>[data-slot=field][data-orientation=vertical]>[data-slot=field-title]]:pt-[calc((var(--qy-fill-height)-1lh)/2)]",
+  "sm:[&>[data-slot=field][data-orientation=horizontal]]:col-span-1 sm:[&>[data-slot=field][data-orientation=horizontal]]:col-start-2",
+);
+
+export type FieldGroupProps = useRender.ComponentProps<"div"> & {
+  /** 让组内字段的名称共用一列（宽度取最长名称），控件起点对齐；窄屏回到堆叠。字段须是组的直接子元素。 */
+  labelColumn?: boolean;
+};
+
+export function FieldGroup({ labelColumn = false, className, render, ref, ...props }: FieldGroupProps) {
   return useRender({ defaultTagName: "div", render, ref, props: mergeProps({
     "data-slot": "field-group",
-  }, props, { className: cn("flex min-w-0 flex-col gap-(--qy-field-group-gap)", className) }) });
+  }, props, { className: cn("flex min-w-0 flex-col gap-(--qy-field-group-gap)", labelColumn && labelColumnClassName, className) }) });
 }
 
 export function FieldContent({ className, render, ref, ...props }: useRender.ComponentProps<"div">) {

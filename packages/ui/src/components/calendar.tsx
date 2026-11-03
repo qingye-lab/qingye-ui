@@ -33,7 +33,7 @@ function CalendarChevron(props: CalendarPrimitive.ChevronProps) {
 // 年月下拉是「在一组有限的值里选一个」的填值控件：直接用 NativeSelect，几何、边界、焦点与它一致，
 // 平台选择器与读屏语义原样保留（2026-10-12）。DayPicker 原有的「透明 select 叠一个假标签」不再需要。
 function CalendarDropdown({ options, className, ...selectProps }: CalendarPrimitive.DropdownProps) {
-  return <NativeSelect {...selectProps} className={className}>{options?.map(option => <option key={option.value} value={option.value} disabled={option.disabled}>{option.label}</option>)}</NativeSelect>;
+  return <NativeSelect {...selectProps} selectClassName={className}>{options?.map(option => <option key={option.value} value={option.value} disabled={option.disabled}>{option.label}</option>)}</NativeSelect>;
 }
 
 type WeekInfoLocale = Intl.Locale & { getWeekInfo?: () => { firstDay?: number; minimalDays?: number }; weekInfo?: { firstDay?: number; minimalDays?: number } };

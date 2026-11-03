@@ -58,7 +58,7 @@ test("native attrs, render events, ref and class precedence remain at the select
   const ref = createRef<HTMLSelectElement>();
   const caller = vi.fn();
   const rendered = vi.fn();
-  render(<NativeSelect aria-label="选项" ref={ref} required autoComplete="off" className="px-0" render={<select data-rendered="yes" onChange={rendered} />} onChange={caller}><option value="">请选择</option><option value="a">一</option></NativeSelect>);
+  render(<NativeSelect aria-label="选项" ref={ref} required autoComplete="off" selectClassName="px-0" render={<select data-rendered="yes" onChange={rendered} />} onChange={caller}><option value="">请选择</option><option value="a">一</option></NativeSelect>);
   const select = screen.getByRole("combobox");
   expect(ref.current).toBe(select);
   expect(select).toHaveAttribute("required");
@@ -67,4 +67,15 @@ test("native attrs, render events, ref and class precedence remain at the select
   fireEvent.change(select, { target: { value: "a" } });
   expect(caller).toHaveBeenCalledOnce();
   expect(rendered).toHaveBeenCalledOnce();
+});
+
+test("width props reach the wrapper in the single-value form and the select in the list form", () => {
+  const { rerender } = render(<NativeSelect aria-label="选项" style={{ width: 300 }}><option>一</option></NativeSelect>);
+  const single = screen.getByRole("combobox");
+  expect(single.style.width).toBe("");
+  expect(single.parentElement?.style.width).toBe("300px");
+  rerender(<NativeSelect aria-label="选项" multiple style={{ width: 300 }}><option>一</option></NativeSelect>);
+  const list = screen.getByRole("listbox");
+  expect(list.style.width).toBe("300px");
+  expect(list.parentElement?.style.width).toBe("");
 });

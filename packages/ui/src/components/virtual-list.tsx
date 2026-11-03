@@ -22,7 +22,8 @@ export type VirtualListProps<Item> = Omit<useRender.ComponentProps<"div">, "chil
   renderItem: (item: Item, index: number) => React.ReactNode;
   /** Fixed outer row extent, or the estimated outer extent in dynamic mode, in CSS px. */
   itemSize: number;
-  height: number;
+  /** 视口高度，CSS px。不传时宽高都归 CSS（`flex-1`、`h-full`、`style`），由尺寸隔离防止内容反撑；需要服务端窗口时传数字。 */
+  height?: number;
   /** Dynamic mode observes each mounted row's actual border-box height. */
   measurement?: "fixed" | "dynamic";
   /** Separate from the native scrolling-element ref. Scrolling is instant and keeps focus. */
@@ -39,7 +40,8 @@ const useLayoutEffect = typeof document === "undefined" ? React.useEffect : Reac
 /** A measured or fixed collection window with reachable rows and retained descendant focus. */
 export function VirtualList<Item>({ items, getKey, renderItem, itemSize, height, measurement = "fixed", actionsRef, followEnd = false, overscan = 2, render, ref, className, style, ...props }: VirtualListProps<Item>) {
   if (!isName(props["aria-label"]) && !isName(props["aria-labelledby"])) throw new Error(`VirtualList requires a nonempty aria-label or aria-labelledby naming the list; received aria-label ${received(props["aria-label"])} and aria-labelledby ${received(props["aria-labelledby"])}.`);
-  if (!Number.isFinite(itemSize) || itemSize <= 0 || !Number.isFinite(height) || height <= 0) throw new RangeError("VirtualList itemSize and height must be finite positive numbers.");
+  if (!Number.isFinite(itemSize) || itemSize <= 0 || (height !== undefined && (!Number.isFinite(height) || height <= 0))) throw new RangeError("VirtualList itemSize and height must be finite positive numbers.");
+  const knownHeight = height ?? 0;
   if (!Number.isInteger(overscan) || overscan < 0) throw new RangeError("VirtualList overscan must be a nonnegative integer.");
   if (measurement !== "fixed" && measurement !== "dynamic") throw new RangeError("VirtualList measurement must be fixed or dynamic.");
   // Identity is derived only when the collection/key function changes, never per scroll.
@@ -67,10 +69,10 @@ export function VirtualList<Item>({ items, getKey, renderItem, itemSize, height,
   const estimateSize = React.useCallback(() => itemSize, [itemSize]);
   // The explicit height also supplies the SSR window, before an element can be observed.
   const observeRect = React.useCallback<NonNullable<Parameters<typeof useVirtualizer<HTMLDivElement, HTMLDivElement>>[0]["observeElementRect"]>>((instance, callback) =>
-    observeElementRect(instance, rect => callback({ ...rect, height: rect.height || height })), [height]);
+    observeElementRect(instance, rect => callback({ ...rect, height: rect.height || knownHeight })), [knownHeight]);
   const virtualizer = useVirtualizer<HTMLDivElement, HTMLDivElement>({
     count: items.length, getScrollElement: () => viewportRef.current, getItemKey, estimateSize,
-    initialRect: { width: 0, height }, observeElementRect: observeRect, overscan, rangeExtractor,
+    initialRect: { width: 0, height: knownHeight }, observeElementRect: observeRect, overscan, rangeExtractor,
     anchorTo: followEnd && hasCommitted.current ? "end" : "start", followOnAppend: false,
   });
   // Keep an entirely above-viewport row's resize from moving the reading point, even
@@ -111,7 +113,7 @@ export function VirtualList<Item>({ items, getKey, renderItem, itemSize, height,
           // Core can handle changed edges in end mode; this also covers a reorder
           // whose first/last keys are unchanged. It never adds the same delta twice.
           const target = Math.max(0, item.start + anchor.within);
-          const maximum = Math.max(0, virtualizer.getTotalSize() - (viewportRef.current?.clientHeight || height));
+          const maximum = Math.max(0, virtualizer.getTotalSize() - (viewportRef.current?.clientHeight || knownHeight));
           if (Math.abs((viewportRef.current?.scrollTop ?? 0) - Math.min(target, maximum)) > 0.5) virtualizer.scrollToOffset(target, { behavior: "instant" });
         }
       }
@@ -181,8 +183,10 @@ export function VirtualList<Item>({ items, getKey, renderItem, itemSize, height,
     onWheel: () => virtualizer.cancelScroll(), onTouchStart: () => virtualizer.cancelScroll(),
   }, props, {
     className: cn("relative min-w-0 max-w-full overflow-auto outline-none focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-quiet-width)] focus-visible:ring-ring", className),
+    // Without an explicit height, contain:size keeps the total-height space from growing the
+    // viewport: an undefined parent gives an empty list instead of silently rendering every row.
     // TanStack owns anchoring; disable the browser's independent anchor correction.
-    style: { ...style, height, overflowAnchor: "none" },
+    style: { ...style, ...(height === undefined ? { contain: "size" } : { height }), overflowAnchor: "none" },
     children: <div data-slot="virtual-list-space" style={{ position: "relative", height: virtualizer.getTotalSize() }}>
       {virtualizer.getVirtualItems().map(row => {
         const item = items[row.index]!;
