@@ -253,3 +253,33 @@ test("a disabled granular picker cannot be opened", () => {
   expect(screen.getByLabelText("月")).toBeDisabled();
   expect(screen.getByRole("button", { name: "Select month" })).toBeDisabled();
 });
+
+test.each([
+  ["day", new Date(2026, 10, 3), /November 3, 2026/],
+  // 周、月、季、年走自己的选择逻辑，再点所在周期同样不是清除。
+  ["week", new Date(2026, 10, 4), /November 3, 2026/],
+  ["month", new Date(2026, 10, 1), /^November/],
+] as const)("clicking the already selected %s keeps the value, reports nothing, and closes the calendar", async (granularity, value, cell) => {
+  const change = vi.fn();
+  render(<UILocaleProvider locale={enUS}><DatePicker aria-label="date" defaultValue={value} granularity={granularity} onValueChange={change} inputProps={{ "aria-label": "date input" }} /></UILocaleProvider>);
+  const input = screen.getByLabelText("date input") as HTMLInputElement;
+  const before = input.value;
+  expect(before).not.toBe("");
+  const name = { day: "Select date", week: "Select week", month: "Select month" }[granularity];
+  await userEvent.click(screen.getByRole("button", { name }));
+  const target = await screen.findByRole("button", { name: cell });
+  await userEvent.click(target);
+  expect(change).not.toHaveBeenCalled();
+  expect(input).toHaveValue(before);
+  await waitFor(() => expect(screen.queryByRole("grid")).toBeNull());
+  expect(screen.getByRole("button", { name: "Clear date" })).toBeInTheDocument();
+});
+
+test("clicking a different day still changes the value", async () => {
+  const change = vi.fn();
+  render(<UILocaleProvider locale={enUS}><DatePicker defaultValue={new Date(2026, 10, 3)} onValueChange={change} inputProps={{ "aria-label": "date input" }} /></UILocaleProvider>);
+  await userEvent.click(screen.getByRole("button", { name: "Select date" }));
+  await userEvent.click(await screen.findByRole("button", { name: /November 4, 2026/ }));
+  expect(change).toHaveBeenCalledTimes(1);
+  expect(screen.getByLabelText("date input")).toHaveValue("2026-11-04");
+});
