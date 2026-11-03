@@ -6,7 +6,10 @@ import { IconChevronDown } from "@tabler/icons-react";
 import { cn } from "../utils";
 import { fillStateNative } from "../fill-state";
 
-export type NativeSelectProps = useRender.ComponentProps<"select">;
+export type NativeSelectProps = useRender.ComponentProps<"select"> & {
+  /** 真实 select 的样式入口。单值形态的 className / style 属于外框（图标定位在那里，宽度也写在那里）；列表形态没有外框，两者都落在 select。 */
+  selectClassName?: string | undefined;
+};
 
 /**
  * 基础层 §2/§8、用户裁决 2026-10-05：填值控件只有一套几何，跟随密度轴。
@@ -19,13 +22,16 @@ const height = "min-h-(--qy-fill-height-narrow) sm:min-h-(--qy-fill-height)";
 const chevronSpace = "pe-[calc(var(--qy-fill-padding)*2+var(--qy-fill-icon))]";
 const iconPosition = "end-(--qy-fill-padding) size-(--qy-fill-icon)";
 
-/** 平台 select 保留选项、键盘、移动选择器与真实表单值。宽度默认随最长选项。 */
-export function NativeSelect({ className, render, ref, multiple, size, ...props }: NativeSelectProps) {
+/**
+ * 平台 select 保留选项、键盘、移动选择器与真实表单值。宽度默认随最长选项；要拉满在 NativeSelect 上给
+ * `className="w-full"`，与 Select、NumberField 同一写法，不另设 `fullWidth` 属性。
+ */
+export function NativeSelect({ className, selectClassName, style, render, ref, multiple, size, ...props }: NativeSelectProps) {
   const list = multiple || (size !== undefined && size > 1);
   const select = useRender({
     defaultTagName: "select", render, ref,
     props: mergeProps({ "data-slot": "native-select" }, props, {
-      multiple, size,
+      multiple, size, style: list ? style : undefined,
       className: cn(
         "box-border min-w-0 max-w-full border border-input bg-surface-field py-0 text-foreground outline-none transition-[border-color,background-color] duration-(--qy-duration-fast) ease-(--qy-ease-out) focus-visible:border-ring not-disabled:not-focus-visible:not-aria-invalid:hover:border-border-strong aria-invalid:border-destructive aria-invalid:focus-visible:border-destructive-foreground", fillStateNative,
         profile,
@@ -39,13 +45,14 @@ export function NativeSelect({ className, render, ref, multiple, size, ...props 
             height, chevronSpace,
           ),
         "pointer-coarse:min-h-(--qy-touch-target)",
-        className,
+        list && className,
+        selectClassName,
       ),
     }),
   });
   if (list) return select;
   return (
-    <span className="relative inline-grid w-fit max-w-full min-w-0 self-start align-top" data-slot="native-select-wrapper">
+    <span className={cn("relative inline-grid w-fit max-w-full min-w-0 self-start align-top", className)} style={style} data-slot="native-select-wrapper">
       {select}
       <IconChevronDown aria-hidden="true" className={cn("pointer-events-none absolute top-1/2 -translate-y-1/2 text-muted-foreground", iconPosition)} data-slot="native-select-icon" />
     </span>

@@ -3,7 +3,7 @@
 import { ToggleGroup as ToggleGroupPrimitive } from "@base-ui/react/toggle-group";
 import * as React from "react";
 import { cn } from "../utils";
-import { trackClassName, trackItemClassName } from "../track";
+import { trackClassName, trackItemClassName, trackItemShareClassName } from "../track";
 import { Toggle, type ToggleProps, type ToggleSize } from "./toggle";
 
 export type ToggleGroupProps<Value extends string = string> = ToggleGroupPrimitive.Props<Value> & { size?: ToggleSize };
@@ -39,7 +39,7 @@ export function ToggleGroupItem<Value extends string>({ size, className, ...prop
       "border-transparent [--qy-button-bordered-border:transparent]",
       !state.pressed && "bg-transparent text-muted-foreground not-aria-disabled:hover:text-foreground not-aria-disabled:active:bg-(--qy-surface-active)",
       // 候选高与圆角由轨道倒推（src/track.ts），覆盖按钮自己的几何。
-      trackItemClassName,
+      trackItemClassName, trackItemShareClassName,
       state.disabled && "cursor-not-allowed opacity-disabled",
       typeof className === "function" ? className(state) : className,
     )}

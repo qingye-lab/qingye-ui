@@ -4,18 +4,19 @@ import * as React from "react";
 import { useOverflowEdges } from "../hooks/use-scrollable";
 import { cn } from "../utils";
 import { navLineCurrentClassName, navLineItemClassName, navLineListClassName } from "../nav-line";
-import { trackClassName, trackItemFaceClassName } from "../track";
+import { trackClassName, trackItemFaceClassName, trackItemShareClassName } from "../track";
 /**
  * 外观与语义分开：`line` 是导航线（src/nav-line.ts），`track` 是轨道（src/track.ts）。两种外观都能承载
  * 「几个并列的去处」，用哪一种与条目从哪来无关；tablist / tab / tabpanel 的语义不随外观变化。
  */
 export type TabsAppearance = "line" | "track";
 const AppearanceContext = React.createContext<TabsAppearance>("line");
+const OrientationContext = React.createContext<NonNullable<TabsPrimitive.Root.Props["orientation"]>>("horizontal");
 export type TabsProps = TabsPrimitive.Root.Props & {
   /** 标签栏的外观，一处设置整组生效。`line`（默认）是导航线；`track` 是围在轨道里的选中面，横纵都成立。 */
   appearance?: TabsAppearance;
 };
-export function Tabs({ className, appearance = "line", ...props }: TabsProps) { return <AppearanceContext.Provider value={appearance}><TabsPrimitive.Root data-slot="tabs" data-appearance={appearance} {...props} className={state => cn("flex min-w-0 gap-(--qy-panel-gap)", state.orientation === "vertical" ? "flex-row items-start" : "flex-col", typeof className === "function" ? className(state) : className)} /></AppearanceContext.Provider>; }
+export function Tabs({ className, appearance = "line", orientation = "horizontal", ...props }: TabsProps) { return <AppearanceContext.Provider value={appearance}><OrientationContext.Provider value={orientation}><TabsPrimitive.Root data-slot="tabs" data-appearance={appearance} orientation={orientation} {...props} className={state => cn("flex min-w-0 gap-(--qy-panel-gap)", state.orientation === "vertical" ? "flex-row items-start" : "flex-col", typeof className === "function" ? className(state) : className)} /></OrientationContext.Provider></AppearanceContext.Provider>; }
 export type TabsListProps = TabsPrimitive.List.Props;
 /*
  * 横向放不下时，列表可滑动；两端是否还有内容由实测决定（useOverflowEdges），只在真有内容被切掉的那一端渐隐，
@@ -32,25 +33,29 @@ export type TabsListProps = TabsPrimitive.List.Props;
  */
 const tabsListFadeClassName = "[--qy-tabs-fade:var(--qy-fill-height)] [--qy-tabs-fade-start:0px] [--qy-tabs-fade-end:0px] data-overflow-start:[--qy-tabs-fade-start:var(--qy-tabs-fade)] data-overflow-end:[--qy-tabs-fade-end:var(--qy-tabs-fade)] scroll-px-(--qy-tabs-fade) [&[data-overflow-start],&[data-overflow-end]]:[mask-image:linear-gradient(to_right,transparent_0,currentcolor_var(--qy-tabs-fade-start),currentcolor_calc(100%-var(--qy-tabs-fade-end)),transparent_100%)] rtl:[&[data-overflow-start],&[data-overflow-end]]:[mask-image:linear-gradient(to_left,transparent_0,currentcolor_var(--qy-tabs-fade-start),currentcolor_calc(100%-var(--qy-tabs-fade-end)),transparent_100%)]";
 /** 标签页在同一对象的几个视图之间走动（默认画成导航线，src/nav-line.ts；`appearance="track"` 时画成轨道，src/track.ts）；横向可滚动而不换行，标签行数变化会让下方面板跳动。放不下时在被切掉的那一端渐隐，并且横向滚到头不带动页面。 */
-export function TabsList({ className, ref, ...props }: TabsListProps) {
-  const [listRef, edges] = useOverflowEdges<HTMLDivElement>(ref);
+export function TabsList({ className, ref, children, ...props }: TabsListProps) {
   const track = React.useContext(AppearanceContext) === "track";
+  const vertical = React.useContext(OrientationContext) === "vertical";
+  // 轨道外观的滚动层在列表里面，所以调用方的 ref 只在导航线外观交给量边的元素。
+  const [edgesRef, edges] = useOverflowEdges<HTMLDivElement>(track ? undefined : ref);
   const listClassName = (state: TabsPrimitive.List.State) => typeof className === "function" ? className(state) : className;
+  const overflow = { "data-overflow-start": edges.start ? "" : undefined, "data-overflow-end": edges.end ? "" : undefined };
   const scroll = cn("overflow-x-auto overflow-y-hidden overscroll-x-contain", tabsListFadeClassName);
-  const list = <TabsPrimitive.List data-slot="tabs-list" {...props} ref={listRef} data-overflow-start={edges.start ? "" : undefined} data-overflow-end={edges.end ? "" : undefined} className={state => track
-    ? cn("flex min-w-0 gap-(--qy-track-inset)", state.orientation === "vertical" ? "flex-col items-stretch" : scroll, listClassName(state))
-    : cn(navLineListClassName, state.orientation === "vertical" ? "flex-col gap-0 self-start border-b-0 border-s" : scroll, listClassName(state))} />;
-  // 轨道外观：轨道的边框与底面画在外层，滚动与渐隐留在里面的列表上，放不下时只有标签渐隐，轨道外框保持完整。
-  // 外层是 inline-flex，self-start 让它在纵排的根里不被拉成整行；max-w-full / min-w-0（trackClassName 自带）让放不下时由里面的列表横向滚动。
-  return track ? <div data-slot="tabs-track" className={cn(trackClassName("md"), "self-start")}>{list}</div> : list;
+  // 轨道外观：列表自身是外框，边框、底面和调用方的 className 都在这里（w-full 能铺满）；滚动与渐隐在里面一层，
+  // 放不下时只有标签渐隐，外框保持完整。外框默认 w-fit（trackClassName），self-start 让它在纵排的根里不被拉高。
+  if (track) return <TabsPrimitive.List data-slot="tabs-list" {...props} ref={ref} className={state => cn(trackClassName("md"), "self-start", listClassName(state))}>
+    <div data-slot="tabs-scroll" ref={edgesRef} {...overflow} className={cn("flex min-w-0 flex-1 gap-(--qy-track-inset)", vertical ? "flex-col items-stretch" : scroll)}>{children}</div>
+  </TabsPrimitive.List>;
+  return <TabsPrimitive.List data-slot="tabs-list" {...props} ref={edgesRef} {...overflow} className={state => cn(navLineListClassName, vertical ? "flex-col gap-0 self-start border-b-0 border-s" : scroll, listClassName(state))}>{children}</TabsPrimitive.List>;
 }
 export type TabsTabProps = TabsPrimitive.Tab.Props;
 export function TabsTab({ className, ...props }: TabsTabProps) {
   const track = React.useContext(AppearanceContext) === "track";
-  // 轨道外观：当前面板的标签是选中面（trackItemFaceClassName 与 SegmentedControl 同一份）。shrink-0 让放不下时由列表滚动，而不是压扁标签；
+  // 轨道外观：当前面板的标签是选中面（trackItemFaceClassName 与 SegmentedControl 同一份），份额也同一份（trackItemShareClassName）。
+  // shrink-0 让放不下时由列表滚动，而不是压扁标签；
   // 纵排是起始对齐的列表，名称不居中。
   return <TabsPrimitive.Tab data-slot="tabs-tab" {...props} className={state => track
-    ? cn(trackItemFaceClassName(state.active), "shrink-0 data-disabled:cursor-not-allowed data-disabled:opacity-disabled", state.orientation === "vertical" && "justify-start", typeof className === "function" ? className(state) : className)
+    ? cn(trackItemFaceClassName(state.active), trackItemShareClassName, "shrink-0 data-disabled:cursor-not-allowed data-disabled:opacity-disabled", state.orientation === "vertical" && "justify-start", typeof className === "function" ? className(state) : className)
     : cn(navLineItemClassName, state.orientation === "vertical" ? "-ms-line mb-0 border-b-0 border-s ps-(--qy-field-gap)" : "pointer-coarse:justify-center", state.active && navLineCurrentClassName, typeof className === "function" ? className(state) : className)} />;
 }
 export type TabsPanelProps = Omit<TabsPrimitive.Panel.Props, "keepMounted"> & {

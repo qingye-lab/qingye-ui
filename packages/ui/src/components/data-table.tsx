@@ -54,9 +54,19 @@ export interface DataTableColumnMeta {
  * 共同决定，所以两处都写。
  */
 const cellWidth = (meta: DataTableColumnMeta | undefined) => meta?.marker ? "w-px" : undefined;
+/*
+ * 不传 virtualization.height 时，高度由外层决定：表格是 frame > 定位层 > 容器三层，一个 h-full 走不到调用方那里，
+ * 所以外层一路接力。flex-1 接 flex 纵排父级（基准 0，让兄弟先占位），h-full 接定高的块级或 grid 父级；
+ * 横排父级里 flex-1 同时给出宽度，因为容器的 contain: size 让它的固有宽度为 0。
+ */
+const fillParentClassName = "h-full min-h-0 flex-1";
 export type DataTableVirtualization = {
-  /** The scroll viewport includes the caption and header. Actual row heights are measured. */
-  height: number;
+  /**
+   * The scroll viewport includes the caption and header. Actual row heights are measured.
+   * Omitted, the table fills its parent, or takes a height from containerProps (DataTable) or className (Pattern);
+   * the rows never grow the viewport, so a parent without a definite height shows none rather than all.
+   */
+  height?: number;
   estimateRowHeight: number;
   overscan?: number;
 };
@@ -212,7 +222,7 @@ function VirtualSpacer({ height, columns }: { height: number; columns: number })
 export function DataTable<TData>({ table, caption, emptyContent, busy = false, error, activeRowId, selectionAppearance = "row", onRowActivate, virtualization, containerProps, stickyHeader = false, stickyHeaderOffset, className, style, onFocusCapture, onBlurCapture, ...props }: DataTableProps<TData>) {
   if (!table.options.getRowId) throw new Error("DataTable requires an explicit stable getRowId.");
   const columns = table.getVisibleLeafColumns(); if (columns.length === 0) throw new Error("DataTable requires at least one visible comparison column.");
-  if (virtualization && (!Number.isFinite(virtualization.height) || virtualization.height <= 0 || !Number.isFinite(virtualization.estimateRowHeight) || virtualization.estimateRowHeight <= 0)) throw new Error("DataTable virtualization requires finite positive height and estimateRowHeight.");
+  if (virtualization && ((virtualization.height !== undefined && (!Number.isFinite(virtualization.height) || virtualization.height <= 0)) || !Number.isFinite(virtualization.estimateRowHeight) || virtualization.estimateRowHeight <= 0)) throw new Error("DataTable virtualization requires finite positive height and estimateRowHeight.");
   if (virtualization?.overscan !== undefined && (!Number.isInteger(virtualization.overscan) || virtualization.overscan < 0)) throw new Error("DataTable virtualization overscan must be a nonnegative integer.");
   const { messages } = useUILocale();
   const rows = table.getRowModel().rows; const primarySort = table.getState().sorting?.[0]?.id;
@@ -463,12 +473,13 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
     return () => observer.disconnect();
   }, [measuredKey, rows, virtualRows.length > 0, Boolean(virtualization)]);
   let previousEnd = scrollMargin;
-  return <div data-slot="data-table-frame" className="flex min-w-0 flex-col gap-(--qy-panel-gap)">
+  const fillsParent = virtualization !== undefined && virtualization.height === undefined;
+  return <div data-slot="data-table-frame" className={cn("flex min-w-0 flex-col gap-(--qy-panel-gap)", fillsParent && fillParentClassName)}>
     {error != null && error !== false && <div data-slot="data-table-error" role="alert" className="min-w-0">{error}</div>}
     {/* 等待记号叠在纸的顶缘：绝对定位，不占布局，旧数据行不动、不变暗；它在容器之外，横向滚动时不随内容移走。 */}
-    <div className="relative min-w-0 rounded-panel">
+    <div className={cn("relative min-w-0 rounded-panel", fillsParent && "min-h-0 flex-1")}>
     {busy && <Progress value={null} aria-label={messages.loading} data-slot="data-table-busy" className={cn("pointer-events-none absolute z-[2] block overflow-hidden rounded-t-panel", containerProps?.framed === false ? "inset-x-0 top-0" : "inset-x-(--qy-line-width) top-(--qy-line-width)")}><ProgressTrack className="rounded-none bg-transparent"><ProgressIndicator /></ProgressTrack></Progress>}
-    <TableContainer data-slot="data-table-container" fade={pinnedIds.length > 0 ? "end" : true} {...containerProps} {...(virtualization ? { tabIndex: containerProps?.tabIndex ?? 0 } : {})} className={cn(virtualization && "overflow-auto", containerProps?.className)} style={virtualization ? { ...containerProps?.style, height: virtualization.height } : containerProps?.style} onWheel={event => { containerProps?.onWheel?.(event); virtualizer.cancelScroll(); pendingFocus.current = null; }} onTouchStart={event => { containerProps?.onTouchStart?.(event); virtualizer.cancelScroll(); pendingFocus.current = null; }} onKeyDown={event => { containerProps?.onKeyDown?.(event); if (event.target === event.currentTarget) navigate(event); }}><Table data-slot="data-table" data-selection-appearance={selectionAppearance} aria-busy={busy} aria-rowcount={virtualization ? headerGroups.length + Math.max(1, rows.length) : undefined} {...props} className={cn(className)} style={{ ...tableWidth, ...style }} onFocusCapture={event => {
+    <TableContainer data-slot="data-table-container" fade={pinnedIds.length > 0 ? "end" : true} {...containerProps} {...(virtualization ? { tabIndex: containerProps?.tabIndex ?? 0 } : {})} className={cn(virtualization && "overflow-auto", fillsParent && "h-full", containerProps?.className)} style={virtualization ? { ...containerProps?.style, ...(virtualization.height === undefined ? { contain: "size" } : { height: virtualization.height }) } : containerProps?.style} onWheel={event => { containerProps?.onWheel?.(event); virtualizer.cancelScroll(); pendingFocus.current = null; }} onTouchStart={event => { containerProps?.onTouchStart?.(event); virtualizer.cancelScroll(); pendingFocus.current = null; }} onKeyDown={event => { containerProps?.onKeyDown?.(event); if (event.target === event.currentTarget) navigate(event); }}><Table data-slot="data-table" data-selection-appearance={selectionAppearance} aria-busy={busy} aria-rowcount={virtualization ? headerGroups.length + Math.max(1, rows.length) : undefined} {...props} className={cn(className)} style={{ ...tableWidth, ...style }} onFocusCapture={event => {
     onFocusCapture?.(event);
     const row = event.target instanceof Element ? event.target.closest<HTMLTableRowElement>("tr[data-row-id]") : null;
     if (onRowActivate && row && body.current?.contains(row)) setRovingId(row.dataset.rowId!);
@@ -709,7 +720,7 @@ export function DataTablePattern<TData>({ data, columns, getRowId, mode = "clien
       return { ...previous, pagination: normalizePaginationValue({ page: next.pageIndex + 1, pageSize: next.pageSize }, totalCount) };
     }, "pagination"),
   });
-  return <div data-slot="data-table-pattern" {...props} className={cn("flex min-w-0 flex-col gap-(--qy-panel-gap)", className)}>
+  return <div data-slot="data-table-pattern" {...props} className={cn("flex min-w-0 flex-col gap-(--qy-panel-gap)", virtualization && virtualization.height === undefined && fillParentClassName, className)}>
     <DataTable<TData> {...tableProps} table={table} caption={caption} emptyContent={emptyContent} busy={busy} error={error} activeRowId={current.activeRowId} selectionAppearance={selectionAppearance} {...(virtualization ? { virtualization } : {})} {...(stickyHeader ? { stickyHeader } : {})} {...(stickyHeaderOffset !== undefined ? { stickyHeaderOffset } : {})} {...(activeRow?.trigger === "row" ? { onRowActivate: (row, event) => {
       update(previous => ({ ...previous, activeRowId: row.id }), "active-row");
       activeRow.onActivate?.(row.original, event);

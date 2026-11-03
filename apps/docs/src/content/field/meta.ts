@@ -13,11 +13,11 @@ export default {
     methods: ["名实相符", "相成相制", "布白有用", "进退相承"],
     whenToUse: ["一个值需要持续名称、必要说明或就地错误。"],
     avoid: ["placeholder 代替名称；Toast 代替字段错误；超时冒充格式错误。"],
-    composition: ["Input 自动注册；原生控件通过 FieldControl 注册。Fieldset 命名共同范围，FieldGroup 只组织间隔。"],
+    composition: ["Input 自动注册；原生控件通过 FieldControl 注册。Fieldset 命名共同范围，FieldGroup 组织间隔；名称要共用一列时给 FieldGroup labelColumn。"],
     stateOwner: {library: ["名称、说明和错误的可访问连接；焦点、触及、禁用传播。"], application: ["值、规则、invalid、错误内容、草稿与送达结果。"]},
-    responsive: ["长名称与说明可换行；横向内容列可收缩；间距由字段角色决定。"],
+    responsive: ["长名称与说明可换行；横向内容列可收缩；间距由字段角色决定。labelColumn 窄屏回到堆叠。"],
     customization: ["className 最后合并，原生属性、状态样式函数、ref 和 render 透传；FieldTitle 不注册成 label。"],
-  }, designEn: {"whenToUse":["A value needs a persistent name, necessary explanation, or in-place error."],"avoid":["Placeholders instead of names, Toast instead of field errors, or timeouts presented as format errors."],"composition":["Input registers automatically; FieldControl registers native controls. Fieldset names a shared scope; FieldGroup organizes spacing only."],"stateOwner":{"library":["Accessible name/description/error associations; focus, touched state, and disabled propagation."],"application":["Values, rules, invalid facts, error content, drafts, and delivery outcomes."]},"responsive":["Long names/descriptions wrap, horizontal content columns shrink, and field roles determine spacing."],"customization":["External classes merge last; native props, state styling callbacks, refs, and render forward. FieldTitle does not register as a label."]},
+  }, designEn: {"whenToUse":["A value needs a persistent name, necessary explanation, or in-place error."],"avoid":["Placeholders instead of names, Toast instead of field errors, or timeouts presented as format errors."],"composition":["Input registers automatically; FieldControl registers native controls. Fieldset names a shared scope; FieldGroup organizes spacing, and labelColumn makes its names share one column."],"stateOwner":{"library":["Accessible name/description/error associations; focus, touched state, and disabled propagation."],"application":["Values, rules, invalid facts, error content, drafts, and delivery outcomes."]},"responsive":["Long names/descriptions wrap, horizontal content columns shrink, and field roles determine spacing. labelColumn stacks on narrow screens."],"customization":["External classes merge last; native props, state styling callbacks, refs, and render forward. FieldTitle does not register as a label."]},
   api: [
     {name: "Field", description: "Base UI Field.Root 的共同上下文；自动校验入口交给完整的 FieldPrimitive。", descriptionEn: "Shared Base UI Field.Root context. Full automatic-validation APIs remain on FieldPrimitive.", props: [
       {name: "orientation", type: '"vertical" | "horizontal"', default: '"vertical"', description: "纵向编辑或横向选项，不改变关联。", descriptionEn: "Vertical editing or a horizontal option; associations stay intact."},
@@ -38,7 +38,9 @@ export default {
     ]},
     {name: "FieldTitle", description: "普通事实标题；用于自命名控件或无输入事实，不是 label。", descriptionEn: "A plain fact heading for self-named controls or facts without input; it is not a label."},
     {name: "FieldContent", description: "横向字段的名称、说明内容列。", descriptionEn: "The name and description column of a horizontal field."},
-    {name: "FieldGroup", description: "字段之间的关系间隔，没有 group 语义。", descriptionEn: "Spacing between fields, without group semantics."},
+    {name: "FieldGroup", description: "字段之间的关系间隔，没有 group 语义。", descriptionEn: "Spacing between fields, without group semantics.", props: [
+      {name: "labelColumn", type: "boolean", default: "false", description: "组内名称共用一列，列宽取最长的名称，控件起点对齐；说明与错误在控件下方，分隔线跨两列。窄屏回到堆叠。要放到控件列的内容（如操作按钮）包一层没有名称的 Field。", descriptionEn: "Names in the group share one column as wide as the longest name, and controls start at the same edge; descriptions and errors sit under the control, and separators span both columns. Stacks on narrow screens. Wrap content meant for the control column, such as an action, in a Field without a name."},
+    ]},
     {name: "FieldSeparator", description: "字段组分界；有文字时两侧线为装饰。", descriptionEn: "A boundary between field groups; flanking lines are decorative when text is supplied."},
     {name: "FieldItem", description: "同一 Field 内某个控件与标签的局部关联。一个 Field 只带一个控件；第二个控件（如滑块旁的精确输入）各用一个 FieldItem，否则它们共用同一个 id。", descriptionEn: "Scopes a particular control and label within one Field. A Field carries one control; give each additional control (for example an exact-entry NumberField beside a Slider) its own FieldItem."},
     {name: "FieldControl / FieldValidity / FieldPrimitive", description: "直接的原语注册、状态读取与完整 API 出口。", descriptionEn: "Direct primitive outlets for registration, state reading, and the full API."},

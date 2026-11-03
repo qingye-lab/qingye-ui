@@ -37,6 +37,12 @@ export default {
           "default": "\"line\""
         },
         {
+          "name": "TabsList className",
+          "type": "Base UI List props",
+          "description": "轨道外观落在轨道外框：默认宽度由内容决定，w-full 时标签等分；放不下时外框不变，标签在框内滚动。导航线外观本来占满所在行。",
+          "descriptionEn": "In the track appearance it lands on the track's outer frame: width follows content by default and w-full shares it equally among tabs; when they do not fit the frame stays put and tabs scroll inside it. The line appearance already fills its row."
+        },
+        {
           "name": "activateOnFocus",
           "type": "boolean",
           "description": "默认焦点移动不自动切换；消费者可明确选择自动激活。",

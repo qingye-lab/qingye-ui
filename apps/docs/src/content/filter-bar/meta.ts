@@ -109,7 +109,8 @@ export default {
       "桌面保持真实结构；菜单受可用空间限制，表格保留完整比较列。"
     ],
     "customization": [
-      "控件档案、间距和浮层表面消费现有角色；具体外观是预设。"
+      "控件档案、间距和浮层表面消费现有角色；具体外观是预设。",
+      "字段宽度写在 Field 的 className 上（如 flex-1 让搜索框占满余量），不改控件本身。"
     ]
-  }, designEn: {"whenToUse":["Several conditions need explicit apply/cancel boundaries."],"avoid":["Treating draft condition counts as applied result counts."],"stateOwner":{"library":["Native submission, fieldset disabling, and state markers."],"application":["Drafts, applied conditions, results, counts, and asynchronous execution."]},"responsive":["Keep actual desktop structure; menus fit available space and tables retain complete comparison columns."],"customization":["Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset."]}
+  }, designEn: {"whenToUse":["Several conditions need explicit apply/cancel boundaries."],"avoid":["Treating draft condition counts as applied result counts."],"stateOwner":{"library":["Native submission, fieldset disabling, and state markers."],"application":["Drafts, applied conditions, results, counts, and asynchronous execution."]},"responsive":["Keep actual desktop structure; menus fit available space and tables retain complete comparison columns."],"customization":["Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset.","Field widths go in the Field className (for example flex-1 lets search take the remaining space), not on the control."]}
 } satisfies ComponentMeta;

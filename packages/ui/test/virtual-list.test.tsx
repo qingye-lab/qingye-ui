@@ -69,6 +69,12 @@ test("empty collections remain reachable, and invalid dimensions/duplicate keys 
   expect(() => render(<VirtualList aria-label="条目" items={items} getKey={() => "same"} renderItem={renderItem} itemSize={20} height={60} />)).toThrow("unique stable");
 });
 
+test("height is optional, and an explicit invalid height still fails", () => {
+  render(<VirtualList aria-label="条目" items={items} getKey={getKey} renderItem={renderItem} itemSize={20} />);
+  expect(screen.getByRole("list").style.height).toBe("");
+  expect(() => render(<VirtualList aria-label="条目" items={items} getKey={getKey} renderItem={renderItem} itemSize={20} height={0} />)).toThrow("finite positive");
+});
+
 test("scrolling a large collection renders only the window and does not walk the data again", async () => {
   const many = Array.from({ length: 50_000 }, (_, id) => ({ id, label: `条目 ${id + 1}` }));
   const keyOf = vi.fn((item: typeof many[number]) => item.id);

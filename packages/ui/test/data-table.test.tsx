@@ -340,6 +340,12 @@ describe("DataTable", () => {
     } finally { unmount(); scroll.restore(); }
   });
 
+  it("renders no rows without a measured viewport when height is left to CSS, rather than all of them", () => {
+    const { container } = render(<AdvancedFixture virtualization={{ estimateRowHeight: 48 }} />);
+    expect(container.querySelector("[data-slot=data-table-container]")).toHaveStyle({ contain: "size" });
+    expect(container.querySelectorAll("tbody tr[data-row-id]")).toHaveLength(0);
+  });
+
   it("rejects invalid virtual geometry instead of rendering an unbounded or invalid range", () => {
     for (const height of [0, -1, NaN, Infinity]) expect(() => render(<AdvancedFixture virtualization={{ height, estimateRowHeight: 48 }} />)).toThrow("finite positive");
     for (const estimateRowHeight of [0, -1, NaN, Infinity]) expect(() => render(<AdvancedFixture virtualization={{ height: 144, estimateRowHeight }} />)).toThrow("finite positive");

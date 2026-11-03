@@ -26,7 +26,7 @@ const outer: Record<TrackSize, string> = {
 
 /** 轨道本身：白底 + 容器线（用户裁决 2026-10-05：正常状态不用灰底）。 */
 export function trackClassName(size: TrackSize = "md") {
-  return `inline-flex max-w-full min-w-0 gap-(--qy-track-inset) rounded-(--qy-track-radius) border border-(--qy-track-border) bg-(--qy-track-surface) p-(--qy-track-inset) [--qy-radius-track-item:max(0px,calc(var(--qy-track-radius)-var(--qy-track-inset)-var(--qy-line-width)))] ${outer[size]}`;
+  return `inline-flex w-fit max-w-full min-w-0 gap-(--qy-track-inset) rounded-(--qy-track-radius) border border-(--qy-track-border) bg-(--qy-track-surface) p-(--qy-track-inset) [--qy-radius-track-item:max(0px,calc(var(--qy-track-radius)-var(--qy-track-inset)-var(--qy-line-width)))] ${outer[size]}`;
 }
 
 /**
@@ -35,6 +35,14 @@ export function trackClassName(size: TrackSize = "md") {
  */
 export const trackItemClassName =
   "min-h-[calc(var(--qy-track-outer)-2*var(--qy-track-inset)-2*var(--qy-line-width))] sm:min-h-[calc(var(--qy-track-outer)-2*var(--qy-track-inset)-2*var(--qy-line-width))] rounded-(--qy-radius-track-item) data-[shape=icon]:w-[calc(var(--qy-track-outer)-2*var(--qy-track-inset)-2*var(--qy-line-width))] sm:data-[shape=icon]:w-[calc(var(--qy-track-outer)-2*var(--qy-track-inset)-2*var(--qy-line-width))] data-[shape=icon]:p-0 sm:data-[shape=icon]:p-0";
+
+/*
+ * 候选在轨道里的份额。并列候选地位相同，所以轨道宽于内容时多出的宽度等分（flex-1）；轨道默认 w-fit，
+ * 本来就没有多余宽度，调用方给轨道 w-full 就铺满。放不下时不按比例压扁（min-w-fit）：分段控件与切换组
+ * 按候选换行，标签页横向滚动；图标形候选的内容比方形窄，下限另取方形的边长，否则换行前先被压扁。
+ * 放在共享的候选几何之外，因为导航菜单的条目是去处，长度由名称决定，不等分。
+ */
+export const trackItemShareClassName = "flex-1 min-w-fit data-[shape=icon]:min-w-[calc(var(--qy-track-outer)-2*var(--qy-track-inset)-2*var(--qy-line-width))]";
 
 /*
  * 轨道外观（2026-11-01 用户裁决）：轨道表达的是「几个并列的去处或取值」，不限定条目从哪来——
