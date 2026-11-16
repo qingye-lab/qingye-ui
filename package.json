@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "axe-core": "4.14.0",
+    "typescript-7": "npm:typescript@7.0.2",
     "playwright-core": "1.63.0"
   }
 }
