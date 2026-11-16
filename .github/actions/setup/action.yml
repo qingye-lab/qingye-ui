@@ -1,0 +1,38 @@
+name: Setup workspace
+description: pnpm + Node + frozen install, optionally the cached Playwright chromium.
+
+inputs:
+  playwright:
+    description: Install the Playwright chromium used by the browser audits.
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - uses: pnpm/action-setup@v6
+    - uses: actions/setup-node@v7
+      with:
+        node-version: 24
+        cache: pnpm
+    - run: pnpm install --frozen-lockfile
+      shell: bash
+    - name: Resolve Playwright version
+      if: inputs.playwright == 'true'
+      id: pw
+      shell: bash
+      run: echo "version=$(node -p "require('./package.json').devDependencies['playwright-core']")" >> "$GITHUB_OUTPUT"
+    - name: Cache Playwright browsers
+      if: inputs.playwright == 'true'
+      id: pw-cache
+      uses: actions/cache@v6
+      with:
+        path: ~/.cache/ms-playwright
+        key: playwright-${{ runner.os }}-${{ steps.pw.outputs.version }}
+    - name: Download chromium (cache miss only)
+      if: inputs.playwright == 'true' && steps.pw-cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: pnpm exec playwright-core install chromium
+    - name: Install chromium system libraries
+      if: inputs.playwright == 'true'
+      shell: bash
+      run: pnpm exec playwright-core install-deps chromium
