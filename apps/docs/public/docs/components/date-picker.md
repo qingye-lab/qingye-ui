@@ -1,6 +1,6 @@
 # 日期输入 DatePicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
 Source SHA-256: 2874fbc00dcb9d6f3ecdf9e421097e47d03d9ff810447d8a2d744435d3ccba60
@@ -18,8 +18,9 @@ value 是调用方持有的当地 Date。输入和日历选择只请求变更；
 - 年份可键到 5–6 位、分段可只填一半：这些键入中间态不是值，不上报也不清空已有值，焦点离开后回到已接受的日期；只有所有分段都被清空才是清除。
 
 ## Use and ownership
-- 编辑一个当地日期，或展开日历选择。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
+- 选一个日期，可键入，也可展开日历。
+- Avoid: 起止两个日期用 DateRangePicker；日期加时刻用 DateTimePicker。
+- Avoid: 只填时刻用 TimeField；页内常驻的日历用 Calendar。
 - Library: 展开、日历焦点
 - Application: 日期、约束、错误、提交结果
 

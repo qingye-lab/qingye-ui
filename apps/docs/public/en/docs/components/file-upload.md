@@ -1,6 +1,6 @@
 # FileUpload
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/file-upload
 Source: packages/ui/src/components/file-upload.tsx
 Source SHA-256: 9c5085b3e76d1365416ee5275b4396e1f81740f92e4e1d528dd4c9e1a42e67c9
@@ -21,8 +21,9 @@ The component manages local selection only. The application supplies upload stat
 - The chooser displays its action name and clears for reselection. The separate list expresses accepted files. Its decorative span creates no second interaction entry.
 
 ## Use and ownership
-- Choose or drop local files, retaining accepted files and real rejection reasons.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Choose or drop files in a form when the accepted set must be kept, listed and removable.
+- Avoid: Use FileTrigger to press once and hand files over without keeping a selection.
+- Avoid: The application presents upload progress and outcome; the component sends no request.
 - Library: Selection, drop, uncontrolled local collection, and actual rejection.
 - Application: Controlled collection, acceptance rules, upload state/progress, recovery, and outcomes.
 

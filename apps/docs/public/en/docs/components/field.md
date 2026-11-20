@@ -1,6 +1,6 @@
 # Field
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
 Source SHA-256: 8bf6a3b75be2b323a1fa09109535f1b90b02ac3ab333f114872add2881f1b47f

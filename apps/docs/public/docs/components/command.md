@@ -1,6 +1,6 @@
 # 命令面板 Command
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/command
 Source: packages/ui/src/components/command.tsx
 Source SHA-256: c7f5394e6236c173cce0773b9ee80ea7afaa65db6dca383596326bd0d9b5ff71
@@ -17,8 +17,9 @@ Source SHA-256: c7f5394e6236c173cce0773b9ee80ea7afaa65db6dca383596326bd0d9b5ff71
 - 按「候选值」选择文字用 Autocomplete 或 Combobox；命令面板选的是动作。
 
 ## Use and ownership
-- 输入框加一张常开的命令列表，用来跳到某处或执行某事。
-- Avoid: 不要把唯一的关键后果藏在临时浮层；直达与返回都需要成立。
+- 跳到某处或执行某事的命令面板，条目是动作而不是要填的值。
+- Avoid: 选一个值填进表单用 Select 或 Combobox。
+- Avoid: 少量固定动作用 Menu；输入建议用 Autocomplete。
 - Library: 查询文字、过滤、高亮、空态与组的收起
 - Application: 命令清单、onSelect 的效果、全局快捷键与对话框的打开
 

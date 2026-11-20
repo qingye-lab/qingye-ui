@@ -1,6 +1,6 @@
 # 日期时间范围 DateTimeRangePicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/date-time-range-picker
 Source: packages/ui/src/components/date-time-range-picker.tsx
 Source SHA-256: f0bf1dd0084422c8188b26900c7152b6394fe65411b1f5a8a794b68f18a53142
@@ -16,8 +16,9 @@ Source SHA-256: f0bf1dd0084422c8188b26900c7152b6394fe65411b1f5a8a794b68f18a53142
 - 弹层里只选了一天时，起止按同一天处理；没有默认的开始或结束时刻，也没有自动纠正。
 
 ## Use and ownership
-- 键入或在弹层里选起止日期和时间，完整且有序时才是确认值。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
+- 选起止两端都带时刻的无时区区间，如活动时段、维护窗口。
+- Avoid: 只有日期的区间用 DateRangePicker；单个日期时间用 DateTimePicker。
+- Avoid: 同一天内的两个时刻用 TimeRangeField。
 - Library: 展开、本次范围草稿、弹层里的日期与时间草稿、键入中间态、焦点返回
 - Application: 完整确认范围、允许的时刻、无效时的说明、提交结果
 

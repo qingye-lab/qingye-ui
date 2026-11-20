@@ -1,6 +1,6 @@
 # 确认动作 ConfirmAction
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
 Source SHA-256: f06004bed955d140e115ce34060d56d54831d3dbc8d17efe55605ec8fb1a643d
@@ -18,8 +18,9 @@ Source SHA-256: f06004bed955d140e115ce34060d56d54831d3dbc8d17efe55605ec8fb1a643d
 - 请求进行中确认框不可关闭（Esc、点外部、返回都不行）；结果一到，应用自己决定关闭。失败的对象与原因不由本组件保存，确认框关闭后也不会再出现：应用应在关闭前把它们写进页面（Alert 里列出哪些对象失败、原因，并提供重试或知道了），留到用户处理为止。见「失败结果留在页面上」。
 
 ## Use and ownership
-- 确认具体对象、版本与变更，内容改变后重新阅读。
-- Avoid: 不要让样式替代语义；空值、未知与零分别表达。
+- 需要确认具体对象、版本与变更，内容变化后须重新阅读的动作。
+- Avoid: 只需回应一个简单决定、无需核对内容用 AlertDialog。
+- Avoid: 一般的编辑或表单用 Dialog；操作结果用 Alert 或 Toast 告知。
 - Library: 展开、已读快照、失效提示、可选确认输入
 - Application: 对象、版本、变更、权限、动作状态与结果
 

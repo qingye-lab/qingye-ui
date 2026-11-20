@@ -1,6 +1,6 @@
 # Combobox
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
 Source SHA-256: 6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca
@@ -17,8 +17,9 @@ value is the confirmed candidate; inputValue is the filter draft. Emptying the q
 - For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading). An empty ComboboxEmpty uses the built-in "No options", worded and drawn like Select.
 
 ## Use and ownership
-- Filter candidates and confirm one value or a set, with query text separate from selection.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Many candidates that need filtering as you type, confirming one or several of them.
+- Avoid: Use Autocomplete when the typed text itself is the value; Select for few candidates, CheckboxGroup to see them all at once.
+- Avoid: Use TagInput when values do not come from candidates; Command to choose a command.
 - Library: Candidate keyboard behavior, focus, and uncontrolled query/confirmed value.
 - Application: Candidate data, controlled query/value, errors, and submission outcomes.
 

@@ -1,6 +1,6 @@
 # TimeField
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/time-field
 Source: packages/ui/src/components/time-field.tsx
 Source SHA-256: 937f151dd1ee52cbb707c4c4d6a087c0e7c791f4e723ba4cc751aa7237f82bcf
@@ -17,8 +17,9 @@ The value is zone-free text shaped like native input[type=time] (HH:mm or HH:mm:
 - There is no popup: a time of day has a small value space, and filling segments is faster than choosing from a list.
 
 ## Use and ownership
-- Fill in a time of day alone, segment by segment: hour, minute, second.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Fill in a single time of day, such as a reminder time or an opening time.
+- Avoid: Use TimeRangeField for a start and end time; DateTimePicker for a date with a time.
+- Avoid: Use DatePicker for a date only.
 - Library: Segment draft, typing buffer, and the focused segment.
 - Application: The time value, constraints, error text, and submission outcomes.
 

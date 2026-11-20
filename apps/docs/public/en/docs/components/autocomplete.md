@@ -1,6 +1,6 @@
 # Autocomplete
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
 Source SHA-256: 49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7
@@ -17,8 +17,9 @@ The text itself is the value. Highlighting does not change it; accepting a sugge
 - Use Command for a command palette.
 
 ## Use and ownership
-- Edit free text with optional suggestions.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- The typed text is the value and candidates are only acceptable suggestions (search terms, tag names, addresses).
+- Avoid: Use Combobox when the value must come from the candidates (Select when they are few and fixed).
+- Avoid: Use Command to run actions or navigate; use SearchInput for a plain search box.
 - Library: Suggestion highlighting, focus, and uncontrolled text.
 - Application: Controlled text, suggestion data, errors, and submission outcomes.
 

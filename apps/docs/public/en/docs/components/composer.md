@@ -1,6 +1,6 @@
 # Composer
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/composer
 Source: packages/ui/src/components/composer.tsx
 Source SHA-256: fef8f9c94f951cdabab88801f34d75427fb3c8b8a5d43b7a8170abdfa50b5fe7

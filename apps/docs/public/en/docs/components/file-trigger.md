@@ -1,6 +1,6 @@
 # FileTrigger
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/file-trigger
 Source: packages/ui/src/components/file-trigger.tsx
 Source SHA-256: 23cb93caa181ab49f3b19b3e3a030c60f68aa9624afa400f625ccde4e9c190c4
@@ -16,8 +16,9 @@ It only hands the selection to the application as soon as it is made: no retaine
 - Reading, parsing and uploading file contents belong to the application; accept checks only the file name and MIME type.
 
 ## Use and ownership
-- Press a button to choose files and hand them to the application at once, retaining no selection.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Press a button, choose files and hand them to the application at once, such as an import in a toolbar.
+- Avoid: Use FileUpload to retain the selection, list or remove files, submit with a form, or accept drag and drop.
+- Avoid: Rejected files come back only in details.rejected; the application must present them.
 - Library: Opening the chooser, splitting accepted from rejected by the rules, clearing the native input.
 - Application: Parsing and uploading the files, presenting rejection reasons.
 

@@ -3,7 +3,7 @@
   "name": "Qingye UI",
   "nameZh": "青野 UI",
   "package": "@qingye_lab/ui",
-  "version": "5.4.0",
+  "version": "5.4.1",
   "generatedBy": "scripts/gen-catalog.mjs",
   "scope": "Current entry points, source declarations and public guidance; browser and backend behavior are not inferred.",
   "components": [
@@ -2860,10 +2860,11 @@
           "进退相承"
         ],
         "whenToUse": [
-          "编辑自由文本，候选作为可接受的建议。"
+          "输入文字本身就是值，候选只是可接受的建议（搜索词、标签名、地址）。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "值必须来自候选用 Combobox（候选少且固定用 Select）。",
+          "执行命令或跳转用 Command；只是搜索框用 SearchInput。"
         ],
         "composition": [
           "Field + FieldLabel + Autocomplete / Input / actions / Popup / List / Item"
@@ -3003,10 +3004,11 @@
               "Continuity through change （进退相承）"
             ],
             "whenToUse": [
-              "Edit free text with optional suggestions."
+              "The typed text is the value and candidates are only acceptable suggestions (search terms, tag names, addresses)."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use Combobox when the value must come from the candidates (Select when they are few and fixed).",
+              "Use Command to run actions or navigate; use SearchInput for a plain search box."
             ],
             "composition": [
               "Field + FieldLabel + Autocomplete / Input / actions / Popup / List / Item"
@@ -13889,10 +13891,11 @@
           "进退相承"
         ],
         "whenToUse": [
-          "筛选候选并确认一个或一组值，查询文字与选择事实分别持有。"
+          "候选很多，需要边输入边筛选，并确认其中一个或几个值。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "输入的文字本身就是值用 Autocomplete；候选少用 Select，要一眼看全用 CheckboxGroup。",
+          "值不来自候选用 TagInput；选命令用 Command。"
         ],
         "composition": [
           "Field + FieldLabel + Combobox / Input / actions / Popup / List / Item"
@@ -14087,10 +14090,11 @@
               "Continuity through change （进退相承）"
             ],
             "whenToUse": [
-              "Filter candidates and confirm one value or a set, with query text separate from selection."
+              "Many candidates that need filtering as you type, confirming one or several of them."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use Autocomplete when the typed text itself is the value; Select for few candidates, CheckboxGroup to see them all at once.",
+              "Use TagInput when values do not come from candidates; Command to choose a command."
             ],
             "composition": [
               "Field + FieldLabel + Combobox / Input / actions / Popup / List / Item"
@@ -15019,10 +15023,11 @@
           "进退相承"
         ],
         "whenToUse": [
-          "输入框加一张常开的命令列表，用来跳到某处或执行某事。"
+          "跳到某处或执行某事的命令面板，条目是动作而不是要填的值。"
         ],
         "avoid": [
-          "不要把唯一的关键后果藏在临时浮层；直达与返回都需要成立。"
+          "选一个值填进表单用 Select 或 Combobox。",
+          "少量固定动作用 Menu；输入建议用 Autocomplete。"
         ],
         "composition": [
           "CommandDialog + CommandInput + CommandList + CommandGroup / CommandItem + CommandEmpty"
@@ -15207,10 +15212,11 @@
               "Continuity through change （进退相承）"
             ],
             "whenToUse": [
-              "A search box over an always-open list of commands, for jumping somewhere or doing something."
+              "A command palette for jumping somewhere or running something; items are actions, not values to fill in."
             ],
             "avoid": [
-              "Do not put the only explanation of a critical consequence in a temporary popup; support both direct access and return navigation."
+              "Use Select or Combobox to choose a value for a form.",
+              "Use Menu for a few fixed actions; Autocomplete for input suggestions."
             ],
             "composition": [
               "CommandDialog + CommandInput + CommandList + CommandGroup / CommandItem + CommandEmpty"
@@ -17176,10 +17182,11 @@
           "相成相制"
         ],
         "whenToUse": [
-          "确认具体对象、版本与变更，内容改变后重新阅读。"
+          "需要确认具体对象、版本与变更，内容变化后须重新阅读的动作。"
         ],
         "avoid": [
-          "不要让样式替代语义；空值、未知与零分别表达。"
+          "只需回应一个简单决定、无需核对内容用 AlertDialog。",
+          "一般的编辑或表单用 Dialog；操作结果用 Alert 或 Toast 告知。"
         ],
         "composition": [
           "ConfirmAction + 明确 snapshot/文字 + 应用 loading/onConfirm；结果用 Alert 或 Toast 表达"
@@ -17313,10 +17320,11 @@
               "Complementary roles and safeguards （相成相制）"
             ],
             "whenToUse": [
-              "Confirm a specific object, version, and change; review again when content changes."
+              "An action that needs confirmation of a specific object, version and change, and must be reread when the content changes."
             ],
             "avoid": [
-              "Do not substitute styling for semantics; distinguish empty, unknown, and zero values."
+              "Use AlertDialog for a simple decision that needs no review of content.",
+              "Use Dialog for ordinary editing or forms; report the outcome with Alert or Toast."
             ],
             "composition": [
               "ConfirmAction + explicit snapshot/text + application loading/onConfirm; express the result with Alert or Toast."
@@ -21128,10 +21136,11 @@
           "进退相承"
         ],
         "whenToUse": [
-          "编辑一个当地日期，或展开日历选择。"
+          "选一个日期，可键入，也可展开日历。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "起止两个日期用 DateRangePicker；日期加时刻用 DateTimePicker。",
+          "只填时刻用 TimeField；页内常驻的日历用 Calendar。"
         ],
         "composition": [
           "Field + FieldLabel + DatePicker + FieldDescription / FieldError"
@@ -21253,10 +21262,11 @@
               "Continuity through change （进退相承）"
             ],
             "whenToUse": [
-              "Edit one local date or choose it from a calendar."
+              "Choose a single date, by typing or from a calendar."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use DateRangePicker for a start and end date; DateTimePicker for a date with a time.",
+              "Use TimeField for a time only; Calendar for a calendar kept on the page."
             ],
             "composition": [
               "Field + FieldLabel + DatePicker + FieldDescription / FieldError"
@@ -21719,10 +21729,11 @@
           "相成相制"
         ],
         "whenToUse": [
-          "键入或在日历中选择起止日期，完整且有序时才是确认值。"
+          "选起止两个日期，如报表区间、入住与退房。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "单个日期用 DatePicker；起止还要带时刻用 DateTimeRangePicker。",
+          "只有起止时刻没有日期用 TimeRangeField。"
         ],
         "composition": [
           "Field + FieldLabel + DateRangePicker + FieldDescription / FieldError"
@@ -21855,10 +21866,11 @@
               "Complementary roles and safeguards （相成相制）"
             ],
             "whenToUse": [
-              "Type or pick start and end dates; only a complete, ordered range is a confirmed value."
+              "Choose a start and end date, such as a report period or check-in and check-out."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use DatePicker for a single date; DateTimeRangePicker when the range also carries times.",
+              "Use TimeRangeField for start and end times without dates."
             ],
             "composition": [
               "Field + FieldLabel + DateRangePicker + FieldDescription / FieldError"
@@ -22200,10 +22212,11 @@
           "相成相制"
         ],
         "whenToUse": [
-          "编辑完整的当地墙上日期与时间，或应用日历与时间草稿。"
+          "选一个带时刻的无时区墙上时间，如会议开始、发布计划。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "只要日期用 DatePicker，只要时刻用 TimeField。",
+          "起止两端都要时刻用 DateTimeRangePicker；需要 UTC 瞬间或时区由应用另行处理。"
         ],
         "composition": [
           "Field + FieldLabel + DateTimePicker + FieldDescription / FieldError"
@@ -22316,10 +22329,11 @@
               "Complementary roles and safeguards （相成相制）"
             ],
             "whenToUse": [
-              "Edit complete local wall-clock date/time, or apply calendar and time drafts."
+              "Choose one wall-clock date and time without a time zone, such as a meeting start or a scheduled release."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use DatePicker for a date only and TimeField for a time only.",
+              "Use DateTimeRangePicker when both ends need a time; the application handles UTC instants and time zones."
             ],
             "composition": [
               "Field + FieldLabel + DateTimePicker + FieldDescription / FieldError"
@@ -22730,10 +22744,11 @@
           "相成相制"
         ],
         "whenToUse": [
-          "键入或在弹层里选起止日期和时间，完整且有序时才是确认值。"
+          "选起止两端都带时刻的无时区区间，如活动时段、维护窗口。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "只有日期的区间用 DateRangePicker；单个日期时间用 DateTimePicker。",
+          "同一天内的两个时刻用 TimeRangeField。"
         ],
         "composition": [
           "Field + FieldLabel + DateTimeRangePicker + FieldDescription / FieldError"
@@ -22852,10 +22867,11 @@
               "Complementary roles and safeguards （相成相制）"
             ],
             "whenToUse": [
-              "Type or pick a start and an end date and time; only a complete, ordered range is a confirmed value."
+              "Choose a range whose two ends both carry a wall-clock time, such as an event or a maintenance window."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use DateRangePicker for dates only; DateTimePicker for a single date and time.",
+              "Use TimeRangeField for two times within one day."
             ],
             "composition": [
               "Field + FieldLabel + DateTimeRangePicker + FieldDescription / FieldError"
@@ -27464,10 +27480,11 @@
           "进退相承"
         ],
         "whenToUse": [
-          "点按钮选文件，选完立即交给应用，不保留选择。"
+          "点按钮选文件，选完立即交给应用，如工具栏里的导入。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "要保留选择、列出文件、移除或随表单提交，或支持拖放用 FileUpload。",
+          "被拒绝的文件只在 details.rejected 里交回，应用须自己呈现。"
         ],
         "composition": [
           "Toolbar / PageHeader 动作区中的 FileTrigger + onSelect 里的 Toast"
@@ -27557,10 +27574,11 @@
               "Continuity through change （进退相承）"
             ],
             "whenToUse": [
-              "Press a button to choose files and hand them to the application at once, retaining no selection."
+              "Press a button, choose files and hand them to the application at once, such as an import in a toolbar."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use FileUpload to retain the selection, list or remove files, submit with a form, or accept drag and drop.",
+              "Rejected files come back only in details.rejected; the application must present them."
             ],
             "composition": [
               "FileTrigger in a toolbar or PageHeader actions, with a Toast raised from onSelect"
@@ -28051,10 +28069,11 @@
           "相成相制"
         ],
         "whenToUse": [
-          "选择或拖入本地文件，保留已接受集合与真实拒绝原因。"
+          "在表单里选择或拖入文件，需要保留已接受的集合、列出并可移除。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "点一下选完就交给应用、不保留选择用 FileTrigger。",
+          "上传进度与结果由应用呈现，组件不发请求；上传状态不要用它代替。"
         ],
         "composition": [
           "Field + FieldLabel + FileUpload + 实际规则说明/FieldError"
@@ -28199,10 +28218,11 @@
               "Complementary roles and safeguards （相成相制）"
             ],
             "whenToUse": [
-              "Choose or drop local files, retaining accepted files and real rejection reasons."
+              "Choose or drop files in a form when the accepted set must be kept, listed and removable."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use FileTrigger to press once and hand files over without keeping a selection.",
+              "The application presents upload progress and outcome; the component sends no request."
             ],
             "composition": [
               "Field + FieldLabel + FileUpload + actual rule explanation/FieldError"
@@ -60678,10 +60698,11 @@
           "进退相承"
         ],
         "whenToUse": [
-          "只填一个时刻，按时、分、秒分段输入。"
+          "只填一个时刻，如提醒时间、营业开始。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "起止两个时刻用 TimeRangeField；日期加时刻用 DateTimePicker。",
+          "只要日期用 DatePicker。"
         ],
         "composition": [
           "Field + FieldLabel + TimeField + FieldDescription / FieldError"
@@ -60817,10 +60838,11 @@
               "Continuity through change （进退相承）"
             ],
             "whenToUse": [
-              "Fill in a time of day alone, segment by segment: hour, minute, second."
+              "Fill in a single time of day, such as a reminder time or an opening time."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use TimeRangeField for a start and end time; DateTimePicker for a date with a time.",
+              "Use DatePicker for a date only."
             ],
             "composition": [
               "Field + FieldLabel + TimeField + FieldDescription / FieldError"
@@ -61206,7 +61228,8 @@
           "在一个编辑边界里填起止两个时刻，如营业时间、班次。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "单个时刻用 TimeField；起止还要带日期用 DateTimeRangePicker。",
+          "跨日的区间须显式传 allowCrossMidnight，否则结束早于开始会判为无效。"
         ],
         "composition": [
           "Field + FieldLabel + TimeRangeField + FieldDescription / FieldError"
@@ -61324,10 +61347,11 @@
               "Complementary roles and safeguards （相成相制）"
             ],
             "whenToUse": [
-              "Fill in a start and an end time of day in one edit boundary, such as opening hours or a shift."
+              "Fill in a start and end time within one editing boundary, such as opening hours or a shift."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use TimeField for a single time; DateTimeRangePicker when the range also needs dates.",
+              "A range that crosses midnight needs allowCrossMidnight, otherwise an end before the start is invalid."
             ],
             "composition": [
               "Field + FieldLabel + TimeRangeField + FieldDescription / FieldError"
@@ -69877,8 +69901,8 @@
   },
   "ai": {
     "skill": "ai/SKILL.md",
-    "index": "ai/v5.4.0/llms.txt",
-    "components": "ai/v5.4.0/components"
+    "index": "ai/v5.4.1/llms.txt",
+    "components": "ai/v5.4.1/components"
   },
   "localized": {
     "en": {
@@ -69886,8 +69910,8 @@
       "styleContract": "ai/style.en.md",
       "philosophy": "ai/design-philosophy.en.md",
       "skill": "ai/SKILL.en.md",
-      "index": "ai/v5.4.0/en/llms.txt",
-      "components": "ai/v5.4.0/en/components"
+      "index": "ai/v5.4.1/en/llms.txt",
+      "components": "ai/v5.4.1/en/components"
     }
   },
   "registry": {

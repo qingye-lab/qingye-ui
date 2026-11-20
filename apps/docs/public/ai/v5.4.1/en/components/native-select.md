@@ -1,0 +1,123 @@
+# NativeSelect
+
+Package: @qingye_lab/ui@5.4.1
+Import: @qingye_lab/ui/components/native-select
+Source: packages/ui/src/components/native-select.tsx
+Source SHA-256: c79d1ce39764a22c4952574d981ffccb7e4d732c9e1be7816a5a3154dad1745f
+
+Keep the platform picker, native options and form values.
+
+## Decision
+Native size names visible list rows only and no longer doubles as a geometry profile; the single-value form follows the density axis with one geometry library-wide. multiple keeps multi-value form data and platform list capacity.
+
+## Notes
+- select has no read-only attribute; use actual disabled state or static output when a value cannot change.
+- FieldControl uses a single-string value protocol; multiple does not use that input registration protocol.
+
+## Use and ownership
+- Fixed options suit the platform's native picker.
+- Avoid: Using native select when search, dynamic candidates, or command menus are required.
+- Library: Input roles, geometry wiring, and native option semantics.
+- Application: Options, values, disabled facts, and errors.
+
+## Composition
+- Use Label independently; compose a single value through FieldControl render within Field. Multiple values use an explicit native naming relationship.
+
+## Responsive behavior
+- One geometry for the single-value form, following the density axis; narrow height adds 4px, coarse pointers read touch-target, and multiple rows are not fixed to a single-line height.
+
+## Customization
+- Retain the platform arrow. In the single-value form className/style belong to the wrapper, where width goes (w-full fills); selectClassName and render belong to the actual select. The list form has no wrapper, so all of them land on the select.
+
+## Current exports
+- NativeSelect: function; owner native-select; PASS; props: NativeSelectProps
+- NativeSelectProps: type; owner native-select; PASS
+
+## Props declared by this library
+Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
+
+### NativeSelect
+- `selectClassName?`: `string | undefined`. 真实 select 的样式入口。单值形态的 className / style 属于外框（图标定位在那里，宽度也写在那里）；列表形态没有外框，两者都落在 select。
+- plus 289 inherited (@types/react 288, @base-ui/react 1); not expanded, see the installed declarations
+
+## Dependencies and providers
+- Runtime: @base-ui/react, @tabler/icons-react, clsx, tailwind-merge
+- Optional peers: none recorded
+- Required providers: none
+- Locale: does not read UILocale
+
+## Curated API
+Written descriptions; the list above is the type-resolved fact.
+
+### NativeSelect
+A real select with native option and optgroup children.
+- size / multiple / disabled / required / name: native select props. Native rows, multiple values, disabled state, constraints and form name.
+- value / defaultValue / onChange: native select props. Controlled and uncontrolled values; multiple values use string arrays.
+- render / ref / ARIA: useRender.ComponentProps<select>. Props, events and ref reach the actual select; render must preserve a native value-selecting element.
+- className / style: useRender.ComponentProps<select>. On the wrapper in the single-value form (the icon is positioned there), so width goes here; on the select in the list form (multiple or size above 1), which has no wrapper.
+- selectClassName: string. Styles for the actual select in both forms.
+
+## Keyboard
+- Tab / Arrow keys / Platform picker keys: Uses native selection behavior on the current platform.
+
+## Source examples
+### 密度
+Source: apps/docs/src/content/native-select/demos/01-density.tsx
+```tsx
+import { Field, FieldControl, FieldGroup, FieldLabel } from "@qingye_lab/ui/components/field";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
+
+export const meta = { title: "密度", titleEn: "Density" };
+
+// 原生 size 只表示列表显示行数；单值形态的几何跟随密度轴。
+export default function Demo() {
+  return (
+    <FieldGroup className="grid w-full sm:grid-cols-2 items-start gap-(--qy-field-group-gap)">
+      {(["default", "compact"] as const).map((density) => (
+        <div data-density={density} key={density}>
+          <Field>
+            <FieldLabel>{density === "compact" ? "紧凑" : "默认"}</FieldLabel>
+            <FieldControl defaultValue="one" render={
+              <NativeSelect>
+                <option value="one">按名称排序</option>
+                <option value="two">按时间排序</option>
+              </NativeSelect>
+            } />
+          </Field>
+        </div>
+      ))}
+    </FieldGroup>
+  );
+}
+```
+
+### 多选与禁用
+Source: apps/docs/src/content/native-select/demos/02-list-and-disabled.tsx
+```tsx
+import { useId } from "react";
+import { Label } from "@qingye_lab/ui/components/label";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
+
+export const meta = { title: "多选与禁用", titleEn: "Multiple and disabled" };
+export default function Demo() {
+  const id = useId();
+  // 多选形态是原生列表；选项是真实的同步频率，不是甲乙丙。
+  return <Stack gap="fields" className="w-full max-w-sm">
+    <Stack gap="field"><Label htmlFor={`${id}-multiple`}>触发时机</Label><NativeSelect id={`${id}-multiple`} multiple size={4} defaultValue={["daily"]}><optgroup label="定期"><option value="hourly">每小时一次</option><option value="daily">每天一次</option><option value="weekly">每周一次</option></optgroup><optgroup label="手动"><option value="manual">只在手动触发时</option></optgroup></NativeSelect></Stack>
+    <Stack gap="field"><Label htmlFor={`${id}-disabled`}>保留策略（不可更改）</Label><NativeSelect id={`${id}-disabled`} disabled><option value="daily">每天一次</option></NativeSelect></Stack>
+  </Stack>;
+}
+```
+
+### 字段错误
+Source: apps/docs/src/content/native-select/demos/03-field.tsx
+```tsx
+import { Field, FieldControl, FieldError, FieldLabel } from "@qingye_lab/ui/components/field";
+import { NativeSelect } from "@qingye_lab/ui/components/native-select";
+
+export const meta = { title: "字段错误", titleEn: "Field error" };
+export default function Demo() {
+  return <Field invalid className="w-full max-w-sm"><FieldLabel>同步频率</FieldLabel><FieldControl render={<NativeSelect><option value="">请选择</option><option value="daily">每天一次</option><option value="hourly">每小时一次</option></NativeSelect>} /><FieldError>请选择同步频率</FieldError></Field>;
+}
+```

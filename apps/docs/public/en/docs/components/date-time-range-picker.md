@@ -1,6 +1,6 @@
 # DateTimeRangePicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/date-time-range-picker
 Source: packages/ui/src/components/date-time-range-picker.tsx
 Source SHA-256: f0bf1dd0084422c8188b26900c7152b6394fe65411b1f5a8a794b68f18a53142
@@ -16,8 +16,9 @@ The value is { from, to }; each end is a DateTimePicker value (zone-free local t
 - With only one day chosen in the popup, both ends fall on that day. There is no default start or end time and no automatic repair.
 
 ## Use and ownership
-- Type or pick a start and an end date and time; only a complete, ordered range is a confirmed value.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Choose a range whose two ends both carry a wall-clock time, such as an event or a maintenance window.
+- Avoid: Use DateRangePicker for dates only; DateTimePicker for a single date and time.
+- Avoid: Use TimeRangeField for two times within one day.
 - Library: Opening, the current range draft, the popup's date and time draft, in-between typing, and focus return.
 - Application: The complete confirmed range, the permitted moments, the explanation when invalid, and submission outcomes.
 

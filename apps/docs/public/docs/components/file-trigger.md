@@ -1,6 +1,6 @@
 # 文件触发 FileTrigger
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/file-trigger
 Source: packages/ui/src/components/file-trigger.tsx
 Source SHA-256: 23cb93caa181ab49f3b19b3e3a030c60f68aa9624afa400f625ccde4e9c190c4
@@ -16,8 +16,9 @@ Source SHA-256: 23cb93caa181ab49f3b19b3e3a030c60f68aa9624afa400f625ccde4e9c190c4
 - 文件内容校验、解析和上传属于应用；accept 只判断文件名与 MIME 类型，不读内容。
 
 ## Use and ownership
-- 点按钮选文件，选完立即交给应用，不保留选择。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
+- 点按钮选文件，选完立即交给应用，如工具栏里的导入。
+- Avoid: 要保留选择、列出文件、移除或随表单提交，或支持拖放用 FileUpload。
+- Avoid: 被拒绝的文件只在 details.rejected 里交回，应用须自己呈现。
 - Library: 打开选择框、按规则分出接受与拒绝、清空原生 input
 - Application: 拿到文件后的解析与上传、拒绝原因的呈现
 

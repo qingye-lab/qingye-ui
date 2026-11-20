@@ -1,6 +1,6 @@
 # 日期时间 DateTimePicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
 Source SHA-256: ffa594e825dabe5935b253a86f90638a5b73fac7089de3996641e0af6d7461ca
@@ -16,8 +16,9 @@ value 是 YYYY-MM-DDTHH:mm[:ss[.SSS]] 的无时区 wall-clock 文本。它不表
 - 浏览器显示格式可随用户环境变化，提交保持无时区的本地文本。
 
 ## Use and ownership
-- 编辑完整的当地墙上日期与时间，或应用日历与时间草稿。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
+- 选一个带时刻的无时区墙上时间，如会议开始、发布计划。
+- Avoid: 只要日期用 DatePicker，只要时刻用 TimeField。
+- Avoid: 起止两端都要时刻用 DateTimeRangePicker；需要 UTC 瞬间或时区由应用另行处理。
 - Library: 展开、日期/时间草稿、键盘与焦点
 - Application: 确认 wall-clock 文本、时区/DST 规则、约束与提交结果
 

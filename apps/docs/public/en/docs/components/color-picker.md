@@ -1,6 +1,6 @@
 # ColorPicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/color-picker
 Source: packages/ui/src/components/color-picker.tsx
 Source SHA-256: aacdb9bc0a3ecbe1c0081eff0149c5f5f097de7d58c4d93f77cedd7042e41afd

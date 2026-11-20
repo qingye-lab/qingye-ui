@@ -1,6 +1,6 @@
 # DatePicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
 Source SHA-256: 2874fbc00dcb9d6f3ecdf9e421097e47d03d9ff810447d8a2d744435d3ccba60
@@ -18,8 +18,9 @@ The caller owns the local Date. Input and calendar selection request changes; cl
 - The year can be typed to five or six digits and a segment can be left half-filled. These in-between entries are not values: they neither report nor clear the accepted date, and the input returns to it once focus leaves. Only emptying every segment clears.
 
 ## Use and ownership
-- Edit one local date or choose it from a calendar.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Choose a single date, by typing or from a calendar.
+- Avoid: Use DateRangePicker for a start and end date; DateTimePicker for a date with a time.
+- Avoid: Use TimeField for a time only; Calendar for a calendar kept on the page.
 - Library: Opening and calendar focus.
 - Application: Dates, constraints, errors, and submission outcomes.
 

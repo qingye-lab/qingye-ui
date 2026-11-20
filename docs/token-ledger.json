@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-11-03T09:04:52.256Z",
-  "revision": "7819b8e456ef905a764a6228f9393cb8a3301b9c",
+  "generatedAt": "2026-11-20T00:36:36.170Z",
+  "revision": "e5122c521c51708b24ecd5775cd8267512cc7a00",
   "static": {
     "fingerprint": {
-      "sha256": "901f1f1c5b116b6c97d8a60d9d10d58803d893888f922c67a6aa642b9bed74a4",
+      "sha256": "d7b55d7b25df2666f99c3b22d37163c3db90a035337a1cf64c791417ec5be109",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -177,7 +177,7 @@
         },
         {
           "path": "apps/docs/src/content/autocomplete/meta.ts",
-          "sha256": "329214bdd9edf984fa4512764b275f5b68f85b3842175a6e0096f2d846803829"
+          "sha256": "4b7d513364968fe95e5f668736b3fdceed0a5a4dea908f64fe86eba995724b38"
         },
         {
           "path": "apps/docs/src/content/avatar-group/cover.tsx",
@@ -629,7 +629,7 @@
         },
         {
           "path": "apps/docs/src/content/combobox/meta.ts",
-          "sha256": "758576a2f46d2c96653e4e4c9c54dcb014884f566d16ce81e05cf1dae3e73388"
+          "sha256": "eb74b79020d39067c059bfaa6254d4055e7597d0be4271f3a86c80f8474d7e1d"
         },
         {
           "path": "apps/docs/src/content/command/cover.tsx",
@@ -645,7 +645,7 @@
         },
         {
           "path": "apps/docs/src/content/command/meta.ts",
-          "sha256": "b514f5e75d4d8d1968a1df4e1cd1e8404fceadeeebed7f812617f05779baff21"
+          "sha256": "8589f0c574bdc69c7b9fe6def620175960cec60db914cf6a77faa7299365295d"
         },
         {
           "path": "apps/docs/src/content/composer/cover.tsx",
@@ -693,7 +693,7 @@
         },
         {
           "path": "apps/docs/src/content/confirm-action/meta.ts",
-          "sha256": "2e899f62e5c5be1733e51bef1f0f4d92dbab1c5d88c2feda769bf29b918665fa"
+          "sha256": "b60df94314c6930311ddff7fbe32bafc08701e3853ff9ee326c2c9be26ac3261"
         },
         {
           "path": "apps/docs/src/content/confirm/cover.tsx",
@@ -829,7 +829,7 @@
         },
         {
           "path": "apps/docs/src/content/date-picker/meta.ts",
-          "sha256": "0b19423823e6cda45f839c68ed0ace50d7738e1bab2d2134c2d223b613b24a25"
+          "sha256": "bc8ea3d2dab3bfbe9b19de7f210be57e0c45bb39339da77fa4322ccdec5b18ed"
         },
         {
           "path": "apps/docs/src/content/date-range-picker/cover.tsx",
@@ -853,7 +853,7 @@
         },
         {
           "path": "apps/docs/src/content/date-range-picker/meta.ts",
-          "sha256": "b9d299a785c925e10d87da28e826ce4059590ff7080c43069f6ba87dae7cfab3"
+          "sha256": "d0ed2dd31bd8f5097f85a0da1e07795e58e5aaa1256cf8f882a0d5b20a9405cb"
         },
         {
           "path": "apps/docs/src/content/date-time-picker/cover.tsx",
@@ -873,7 +873,7 @@
         },
         {
           "path": "apps/docs/src/content/date-time-picker/meta.ts",
-          "sha256": "2754ee7861cf4f5a5d808467610aeed744d70fd901916a9174e18d2e1ca7bb59"
+          "sha256": "4b9763f24197a3d764dc617ccdb9b1e27167c95406955b764f5eee931a482fdb"
         },
         {
           "path": "apps/docs/src/content/date-time-range-picker/cover.tsx",
@@ -893,7 +893,7 @@
         },
         {
           "path": "apps/docs/src/content/date-time-range-picker/meta.ts",
-          "sha256": "400e9f78ce1e5be55f8131e0fc5c3f1707aab8988901ccddee0ba16c15be3351"
+          "sha256": "9973010aecc586ca7410648b894503493378fd3626396a2f25be37bb6fbd9afa"
         },
         {
           "path": "apps/docs/src/content/description-list/cover.tsx",
@@ -1045,7 +1045,7 @@
         },
         {
           "path": "apps/docs/src/content/file-trigger/meta.ts",
-          "sha256": "c9defc8dd98ddc297ba73437e0f4c11223795e9fcefd1a38c7ffdabad58a8118"
+          "sha256": "84e787e60e5e447bf925ff9a94cf8cc885480cf6e49bb2b5e619a8b11eb9f7ab"
         },
         {
           "path": "apps/docs/src/content/file-upload/cover.tsx",
@@ -1069,7 +1069,7 @@
         },
         {
           "path": "apps/docs/src/content/file-upload/meta.ts",
-          "sha256": "9fa88b0823acf78b9dc0d30e5193c666d1f442c373cf68f2d06dc86ab288070e"
+          "sha256": "9e7a58157fda048be2b92ec8c20fc8dce3fcae5abe67d49a18ffeefd79b8a3f6"
         },
         {
           "path": "apps/docs/src/content/filter-bar/cover.tsx",
@@ -2149,7 +2149,7 @@
         },
         {
           "path": "apps/docs/src/content/time-field/meta.ts",
-          "sha256": "780b3d572a40322409c16e85f7eafb309b2b63cc48e9679279f66f0906846f20"
+          "sha256": "766a3b3d1fde02f481951e6138b464a3f7644e766042f61230892d8a9b8c433f"
         },
         {
           "path": "apps/docs/src/content/time-range-field/cover.tsx",
@@ -2169,7 +2169,7 @@
         },
         {
           "path": "apps/docs/src/content/time-range-field/meta.ts",
-          "sha256": "38bc01cc94aab5408c12131a568c428effc4ec223a738ba58d76dfe3134eafdf"
+          "sha256": "172fbc40152dbd29dc37549f304347c229e7d1c51931cd4be4354e61f5a3002a"
         },
         {
           "path": "apps/docs/src/content/timeline/cover.tsx",
@@ -2805,7 +2805,7 @@
         },
         {
           "path": "packages/ui/package.json",
-          "sha256": "128f7ddde6f088a2521964298dff1cb5fc5a0d7475fb25b780f411e3328ff776"
+          "sha256": "058f25fc1c65d649ebf77f6ca61a4cfabda4b3ea8592a4001d82ccc7c0e05821"
         },
         {
           "path": "packages/ui/prose.css",
@@ -601195,7 +601195,7 @@
     "method": "Root inline important custom-property override; computed styles and geometry on real existing rendered parts; value restored after each probe."
   },
   "computation": {
-    "staleRuntime": false,
+    "staleRuntime": true,
     "scope": "Only the selected probes and recorded theme/viewport/state combinations. PASS for no-change proves measured non-effect, never universal non-consumption.",
     "cases": [
       {
@@ -601205,9 +601205,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601237,9 +601237,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601269,9 +601269,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601293,9 +601293,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601317,9 +601317,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "field-group-relationship-gap:light:desktop:1100x900:fine"
       },
@@ -601330,9 +601330,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "field-group-relationship-gap:dark:desktop:1100x900:fine"
       },
@@ -601343,9 +601343,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "button-primary:light:desktop:1100x900:fine"
       },
@@ -601356,9 +601356,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "button-primary:dark:desktop:1100x900:fine"
       },
@@ -601369,9 +601369,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "button-radius:light:desktop:1100x900:fine"
       },
@@ -601382,9 +601382,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "button-radius:dark:desktop:1100x900:fine"
       },
@@ -601395,9 +601395,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "button-control:light:desktop:1100x900:fine"
       },
@@ -601408,9 +601408,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "button-control:dark:desktop:1100x900:fine"
       },
@@ -601421,9 +601421,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601461,9 +601461,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601495,9 +601495,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601529,9 +601529,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601561,9 +601561,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601593,9 +601593,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601625,9 +601625,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601657,9 +601657,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601689,9 +601689,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601721,9 +601721,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601753,9 +601753,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601785,9 +601785,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601817,9 +601817,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601849,9 +601849,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "select-highlight:light:desktop:1100x900:fine"
       },
@@ -601862,9 +601862,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "select-highlight:dark:desktop:1100x900:fine"
       },
@@ -601875,9 +601875,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "select-control:light:desktop:1100x900:fine"
       },
@@ -601888,9 +601888,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "select-control:dark:desktop:1100x900:fine"
       },
@@ -601901,9 +601901,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601933,9 +601933,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -601965,9 +601965,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "panel-padding:light:desktop:1100x900:fine"
       },
@@ -601978,9 +601978,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "panel-padding:dark:desktop:1100x900:fine"
       },
@@ -601991,9 +601991,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -602015,9 +602015,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -602039,9 +602039,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "native-select-control:light:desktop:1100x900:fine"
       },
@@ -602052,9 +602052,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "native-select-control:dark:desktop:1100x900:fine"
       },
@@ -602065,9 +602065,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "input-group-control:light:desktop:1100x900:fine"
       },
@@ -602078,9 +602078,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "input-group-control:dark:desktop:1100x900:fine"
       },
@@ -602091,9 +602091,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-radius:light:desktop:1100x900:fine"
       },
@@ -602104,9 +602104,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-radius:dark:desktop:1100x900:fine"
       },
@@ -602117,9 +602117,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-item-radius:light:desktop:1100x900:fine"
       },
@@ -602130,9 +602130,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-item-radius:dark:desktop:1100x900:fine"
       },
@@ -602143,9 +602143,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-surface:light:desktop:1100x900:fine"
       },
@@ -602156,9 +602156,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-surface:dark:desktop:1100x900:fine"
       },
@@ -602169,9 +602169,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-border:light:desktop:1100x900:fine"
       },
@@ -602182,9 +602182,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-border:dark:desktop:1100x900:fine"
       },
@@ -602195,9 +602195,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-selected:light:desktop:1100x900:fine"
       },
@@ -602208,9 +602208,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-selected:dark:desktop:1100x900:fine"
       },
@@ -602221,9 +602221,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-selected-foreground:light:desktop:1100x900:fine"
       },
@@ -602234,9 +602234,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "UNVERIFIED",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Runtime effect has no matching static path",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [],
         "evidenceId": "track-selected-foreground:dark:desktop:1100x900:fine"
       },
@@ -602247,9 +602247,9 @@
         "theme": "light",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -602271,9 +602271,9 @@
         "theme": "dark",
         "viewport": "desktop",
         "pointer": "fine",
-        "status": "PASS",
-        "observation": "OBSERVED_CHANGE",
-        "reason": "Matching static path and observed property change in this case",
+        "status": "NOT_RUN",
+        "observation": "NOT_OBSERVED",
+        "reason": "Recorded runtime evidence is stale after source/style changes",
         "staticRecordSources": [
           {
             "source": {
@@ -602290,10 +602290,10 @@
       }
     ],
     "counts": {
-      "PASS": 23,
+      "PASS": 0,
       "FAIL": 0,
-      "UNVERIFIED": 30,
-      "NOT_RUN": 0
+      "UNVERIFIED": 0,
+      "NOT_RUN": 53
     }
   },
   "probePlan": [
