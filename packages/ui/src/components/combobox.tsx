@@ -10,6 +10,8 @@ import { popupOffset, useFloatingLayer } from "../floating-layer";
 import { inputAdjunctClassName } from "../input-adjunct";
 import { overlayGroupLabelClassName, overlaySeparatorClassName } from "../overlay-group";
 import { candidateEmptyClassName, candidateItemClassName, overlayItemClassName } from "../overlay-item";
+import { labelledByFallback, useExternalLabelledBy } from "../external-labels";
+import { useInputRef } from "../input-facts";
 import { cn } from "../utils";
 import { Button } from "./button";
 import { Input } from "./input";
@@ -40,10 +42,13 @@ export function ComboboxControl({ className, style, ...props }: InputGroupProps)
   // 渲染为原语的 InputGroup：候选面以整条编辑边界为锚点，与边界同宽、从边界下沿展开。
   return <InControl.Provider value={true}><ComboboxPrimitive.InputGroup data-slot="combobox-control" render={<InputGroup {...props} style={multiple ? { ...chipFrameStyle, ...style } : style} className={cn("flex-nowrap", multiple && "items-start gap-(--qy-tag-inset) p-(--qy-tag-inset)", className)} />} /></InControl.Provider>;
 }
-export function ComboboxInput({ render, onChange, ...props }: ComboboxPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>) {
+export function ComboboxInput({ render, onChange, onFocus, ref, ...props }: ComboboxPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>) {
   const inControl = React.useContext(InControl);
   const chips = React.useContext(Multiple) && inControl;
-  return <ComboboxPrimitive.Input data-slot="combobox-input" {...props} onChange={event => { onChange?.(event); if (event.currentTarget.disabled || event.currentTarget.readOnly) event.preventBaseUIHandler(); }} render={(elementProps, state) => <Input nativeInput {...elementProps} unstyled={inControl} {...(chips ? { controlClassName: cn(chipDraftControlClassName, "min-w-[min(100%,var(--qy-field-min-text))]"), className: cn("px-(--qy-tag-padding)", elementProps.className) } : inControl ? { controlClassName: "flex-1" } : {})} render={typeof render === "function" ? inputProps => render(inputProps, state) : render} />} />;
+  // Field 之外用 htmlFor 关联的 label 经 aria-labelledby 引用，打开时名称不随 label 被隐藏而消失（见 external-labels.ts）。
+  const [inputRef, setInputRef] = useInputRef(ref);
+  const [externalLabels, refreshLabels] = useExternalLabelledBy(inputRef);
+  return <ComboboxPrimitive.Input data-slot="combobox-input" {...props} ref={setInputRef} onFocus={event => { onFocus?.(event); refreshLabels(); }} onChange={event => { onChange?.(event); if (event.currentTarget.disabled || event.currentTarget.readOnly) event.preventBaseUIHandler(); }} render={(elementProps, state) => <Input nativeInput {...elementProps} aria-labelledby={labelledByFallback(elementProps, externalLabels)} unstyled={inControl} {...(chips ? { controlClassName: cn(chipDraftControlClassName, "min-w-[min(100%,var(--qy-field-min-text))]"), className: cn("px-(--qy-tag-padding)", elementProps.className) } : inControl ? { controlClassName: "flex-1" } : {})} render={typeof render === "function" ? inputProps => render(inputProps, state) : render} />} />;
 }
 // 多选的编辑边界里，附属动作与已选项同高（一枚项高的正方形），停在第一行；单选时铺满边界内高。
 function adjunctClassName(inControl: boolean, chips: boolean, className: string | undefined) {

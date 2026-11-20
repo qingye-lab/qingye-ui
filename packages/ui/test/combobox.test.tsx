@@ -4,6 +4,7 @@ import { createRef, useState } from "react";
 import { expect, test, vi } from "vitest";
 import { Combobox, ComboboxChip, ComboboxChips, ComboboxClear, ComboboxCollection, ComboboxControl, ComboboxEmpty, ComboboxGroup, ComboboxGroupLabel, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxSelect, ComboboxSeparator, ComboboxStatus, ComboboxTrigger, ComboboxValue } from "../src/components/combobox";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../src/components/field";
+import { Label } from "../src/components/label";
 
 const items = ["甲", "乙", "丙"];
 const parts = <><div className="flex"><ComboboxInput /><ComboboxClear /><ComboboxTrigger /></div><ComboboxPopup><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup></>;
@@ -214,4 +215,26 @@ test("a chip's remove button names what it removes even when the chip content is
   expect(screen.getByRole("button", { name: "移除 节点内容" })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: /文字内容/ })).toBeInTheDocument();
   expect(screen.getByTitle("文字内容")).toHaveTextContent("文字内容");
+});
+
+// 弹层打开时 Base UI 把输入框以外的内容标 aria-hidden，同级 label 也在其中；名称改经 aria-labelledby 引用而保留。
+test.each([
+  ["native label", () => <label htmlFor="owner">负责人</label>],
+  ["Label", () => <Label htmlFor="owner">负责人</Label>],
+])("a %s associated through htmlFor still names the input while the popup is open", async (_, Name) => {
+  const user = userEvent.setup();
+  render(<div><Name /><ComboboxSelect items={items} itemToStringLabel={item => item} emptyContent="没有匹配项" inputProps={{ id: "owner" }} /></div>);
+  expect(screen.getByRole("combobox", { name: "负责人" })).toHaveAttribute("id", "owner");
+  await user.click(screen.getByRole("combobox", { name: "负责人" }));
+  await user.keyboard("{ArrowDown}");
+  expect(await screen.findByRole("listbox")).toBeInTheDocument();
+  expect(screen.getByText("负责人")).toHaveAttribute("aria-hidden", "true");
+  expect(screen.getByRole("combobox", { name: "负责人" })).toHaveAttribute("id", "owner");
+});
+
+test("an explicit caller name keeps precedence over an associated label", () => {
+  render(<div><label htmlFor="owner">负责人</label><ComboboxSelect items={items} itemToStringLabel={item => item} emptyContent="没有匹配项" inputProps={{ id: "owner", "aria-label": "指派对象" }} /></div>);
+  const input = screen.getByRole("combobox", { name: "指派对象" });
+  expect(input).not.toHaveAttribute("aria-labelledby");
+  expect(screen.getByText("负责人")).not.toHaveAttribute("id");
 });

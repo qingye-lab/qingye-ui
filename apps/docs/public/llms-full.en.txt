@@ -858,7 +858,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: 49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7
+Source SHA-256: 5cf83f38384cca7006817ab2ec20690e3d9a44704c6dc9d1fcd3c05a60f4b219
 
 Edit free text with optional suggestions.
 
@@ -870,6 +870,7 @@ The text itself is the value. Highlighting does not change it; accepting a sugge
 - An empty set does not imply an error or service failure. Supply empty content from real facts; an empty AutocompleteEmpty uses the built-in "No options".
 - Caller positioning style merges last; colors, corners, highlights, and focus use existing theme roles.
 - Use Command for a command palette.
+- Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears.
 
 ### Use and ownership
 - The typed text is the value and candidates are only acceptable suggestions (search terms, tag names, addresses).
@@ -2970,7 +2971,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca
+Source SHA-256: 5aa948694e5d19fabbe1bf3b65c12a316ea3cba703240beb983921397e056160
 
 Filter candidates and confirm one value or a set, with query text separate from selection.
 
@@ -2982,6 +2983,7 @@ value is the confirmed candidate; inputValue is the filter draft. Emptying the q
 - Popup caller style merges last; layer overrides can change the default order.
 - Popup surfaces and highlights use existing theme presets with internal focus signals.
 - For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading). An empty ComboboxEmpty uses the built-in "No options", worded and drawn like Select.
+- Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears.
 
 ### Use and ownership
 - Many candidates that need filtering as you type, confirming one or several of them.
@@ -6876,6 +6878,7 @@ Use FieldLabel inside Field. A standalone Label associates one control through h
 
 ### Notes
 - Label owns no disabled state; the named control uses its real disabled attribute.
+- For popup inputs such as Combobox and Autocomplete, associate through htmlFor or use Field; do not wrap the control in a label with its text in a child element, because that name disappears while the popup is open.
 
 ### Use and ownership
 - A native control needs a persistent readable name.

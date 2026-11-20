@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-20T00:36:37.354Z",
-  "revision": "e5122c521c51708b24ecd5775cd8267512cc7a00",
+  "generatedAt": "2026-11-20T11:02:50.240Z",
+  "revision": "b0607698073d10a3dcc6f4618a07bdf541351ad1",
   "fingerprint": {
-    "sha256": "575e4a5a982ded610f5258e20685c3653db9462382cc29aadf9176a0ae6a0523",
+    "sha256": "2d4478583e107f6862685d956c2f8a247784ee7e89f7ec738e377f2719848cc2",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -28,7 +28,7 @@
       },
       {
         "path": "apps/docs/src/content/autocomplete/meta.ts",
-        "sha256": "4b7d513364968fe95e5f668736b3fdceed0a5a4dea908f64fe86eba995724b38"
+        "sha256": "e2bbac2068bf32791a4d076d4c03ea86a4df4da10abbb6d8d15ac9f862f2ae04"
       },
       {
         "path": "apps/docs/src/content/avatar-group/meta.ts",
@@ -100,7 +100,7 @@
       },
       {
         "path": "apps/docs/src/content/combobox/meta.ts",
-        "sha256": "eb74b79020d39067c059bfaa6254d4055e7597d0be4271f3a86c80f8474d7e1d"
+        "sha256": "2e28d31ea2c61892cdfe68c1fe200e32c2cff82d1baaf219eb8ee70d3757ed2f"
       },
       {
         "path": "apps/docs/src/content/command/meta.ts",
@@ -224,7 +224,7 @@
       },
       {
         "path": "apps/docs/src/content/label/meta.ts",
-        "sha256": "9b9faccb1966034b4d1a9f96069d739d11b660ebf450983dc7f569c456018eeb"
+        "sha256": "cf844ecaf9aeca4a1ca961c2841b720ee8749f44fad283d147f82d05118bf2f0"
       },
       {
         "path": "apps/docs/src/content/layout/meta.ts",
@@ -480,7 +480,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "422fae45eff92fb5457f183b79c647c1c7df5dc69884ea01e5d8d3106777e830"
+        "sha256": "614f1b6be9d5d693cea655fbfc21252910ae674e950ac988ec59cb9bc3552812"
       },
       {
         "path": "packages/ui/motion.css",
@@ -512,7 +512,7 @@
       },
       {
         "path": "packages/ui/src/components/autocomplete.tsx",
-        "sha256": "49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7"
+        "sha256": "5cf83f38384cca7006817ab2ec20690e3d9a44704c6dc9d1fcd3c05a60f4b219"
       },
       {
         "path": "packages/ui/src/components/avatar-group.tsx",
@@ -584,7 +584,7 @@
       },
       {
         "path": "packages/ui/src/components/combobox.tsx",
-        "sha256": "6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca"
+        "sha256": "5aa948694e5d19fabbe1bf3b65c12a316ea3cba703240beb983921397e056160"
       },
       {
         "path": "packages/ui/src/components/command.tsx",
@@ -2282,7 +2282,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 34
+            "line": 36
           }
         },
         {
@@ -2290,7 +2290,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 59
+            "line": 64
           }
         },
         {
@@ -2298,7 +2298,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 103
+            "line": 108
           }
         },
         {
@@ -2306,7 +2306,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 40
+            "line": 42
           }
         },
         {
@@ -2314,7 +2314,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 82
+            "line": 87
           }
         },
         {
@@ -2322,7 +2322,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 91
+            "line": 96
           }
         },
         {
@@ -2330,7 +2330,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 95
+            "line": 100
           }
         },
         {
@@ -2338,7 +2338,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 48
+            "line": 50
           }
         },
         {
@@ -2346,7 +2346,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 78
+            "line": 83
           }
         },
         {
@@ -2354,7 +2354,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 22
+            "line": 24
           }
         },
         {
@@ -2362,7 +2362,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 74
+            "line": 79
           }
         },
         {
@@ -2370,7 +2370,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 67
+            "line": 72
           }
         },
         {
@@ -2378,7 +2378,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 65
+            "line": 70
           }
         },
         {
@@ -2387,7 +2387,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 116
+            "line": 121
           }
         },
         {
@@ -2395,7 +2395,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 23
+            "line": 25
           }
         },
         {
@@ -2403,7 +2403,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 99
+            "line": 104
           }
         },
         {
@@ -2411,7 +2411,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 110
+            "line": 115
           }
         },
         {
@@ -2419,7 +2419,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 104
+            "line": 109
           }
         },
         {
@@ -2427,7 +2427,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 53
+            "line": 58
           }
         }
       ],
@@ -2564,13 +2564,15 @@
           "需要只能确认候选中的一个值时用 Combobox。",
           "空集合不代表错误或服务失败；空提示由调用方根据真实情况提供；省略 children 时用内置的「没有可选项」。",
           "caller 定位 style 最后合并；颜色、圆角、高亮与焦点读取现有主题角色。",
-          "命令面板用 Command。"
+          "命令面板用 Command。",
+          "命名用 Field + FieldLabel，或用 Label 的 htmlFor 指向输入框 id，候选面打开时名称保留。不要用 label 包住整个控件、把文字放进子元素：打开时候选面以外的内容对读屏隐藏，这样写的名称会消失。"
         ],
         "notesEn": [
           "Use Combobox when a value must be confirmed from candidates.",
           "An empty set does not imply an error or service failure. Supply empty content from real facts; an empty AutocompleteEmpty uses the built-in \"No options\".",
           "Caller positioning style merges last; colors, corners, highlights, and focus use existing theme roles.",
-          "Use Command for a command palette."
+          "Use Command for a command palette.",
+          "Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears."
         ],
         "design": {
           "methods": [
@@ -2635,11 +2637,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 34
+              "line": 36
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 34
+              "line": 36
             },
             "status": "PRESENT"
           },
@@ -2648,11 +2650,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 40
+              "line": 42
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 40
+              "line": 42
             },
             "status": "PRESENT"
           },
@@ -2661,11 +2663,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 48
+              "line": 50
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 48
+              "line": 50
             },
             "status": "PRESENT"
           },
@@ -2674,11 +2676,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 53
+              "line": 58
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 53
+              "line": 58
             },
             "status": "PRESENT"
           },
@@ -2687,11 +2689,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 59
+              "line": 64
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 59
+              "line": 64
             },
             "status": "PRESENT"
           },
@@ -2700,11 +2702,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 67
+              "line": 72
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 67
+              "line": 72
             },
             "status": "PRESENT"
           },
@@ -2713,11 +2715,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 74
+              "line": 79
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 74
+              "line": 79
             },
             "status": "PRESENT"
           },
@@ -2726,11 +2728,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 78
+              "line": 83
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 78
+              "line": 83
             },
             "status": "PRESENT"
           },
@@ -2739,11 +2741,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 91
+              "line": 96
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 91
+              "line": 96
             },
             "status": "PRESENT"
           },
@@ -2752,11 +2754,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 95
+              "line": 100
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 95
+              "line": 100
             },
             "status": "PRESENT"
           },
@@ -2765,11 +2767,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 99
+              "line": 104
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 99
+              "line": 104
             },
             "status": "PRESENT"
           },
@@ -2778,11 +2780,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 103
+              "line": 108
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 103
+              "line": 108
             },
             "status": "PRESENT"
           },
@@ -2791,11 +2793,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 82
+              "line": 87
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 82
+              "line": 87
             },
             "status": "PRESENT"
           },
@@ -2804,11 +2806,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 110
+              "line": 115
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 110
+              "line": 115
             },
             "status": "PRESENT"
           },
@@ -2817,11 +2819,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 116
+              "line": 121
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 116
+              "line": 121
             },
             "status": "PRESENT"
           }
@@ -7677,7 +7679,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 26
+            "line": 28
           }
         },
         {
@@ -7685,7 +7687,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 77
+            "line": 82
           }
         },
         {
@@ -7693,7 +7695,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 72
+            "line": 77
           }
         },
         {
@@ -7701,7 +7703,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 69
+            "line": 74
           }
         },
         {
@@ -7709,7 +7711,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 59
+            "line": 64
           }
         },
         {
@@ -7717,7 +7719,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 132
+            "line": 137
           }
         },
         {
@@ -7725,7 +7727,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 38
+            "line": 40
           }
         },
         {
@@ -7733,7 +7735,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 111
+            "line": 116
           }
         },
         {
@@ -7741,7 +7743,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 120
+            "line": 125
           }
         },
         {
@@ -7749,7 +7751,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 124
+            "line": 129
           }
         },
         {
@@ -7757,7 +7759,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 43
+            "line": 45
           }
         },
         {
@@ -7765,7 +7767,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 103
+            "line": 108
           }
         },
         {
@@ -7773,7 +7775,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 99
+            "line": 104
           }
         },
         {
@@ -7781,7 +7783,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 92
+            "line": 97
           }
         },
         {
@@ -7789,7 +7791,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 90
+            "line": 95
           }
         },
         {
@@ -7798,7 +7800,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/combobox/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 178
+            "line": 183
           }
         },
         {
@@ -7806,7 +7808,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 21
+            "line": 23
           }
         },
         {
@@ -7814,7 +7816,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 164
+            "line": 169
           }
         },
         {
@@ -7822,7 +7824,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 143
+            "line": 148
           }
         },
         {
@@ -7830,7 +7832,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 128
+            "line": 133
           }
         },
         {
@@ -7838,7 +7840,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 138
+            "line": 143
           }
         },
         {
@@ -7846,7 +7848,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 133
+            "line": 138
           }
         },
         {
@@ -7854,7 +7856,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 52
+            "line": 57
           }
         },
         {
@@ -7862,7 +7864,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 67
+            "line": 72
           }
         }
       ],
@@ -8058,13 +8060,15 @@
           "从当前查询到候选的过滤与空内容必须对应实际数据。",
           "Popup 的 caller style 最后合并；覆写层级可能改变默认顺序。",
           "候选浮层表面与高亮采用既有主题预设，焦点信号在盒内。",
-          "异步候选由应用持有请求、取消与失败；传 filter={null} 关闭内置过滤，用 ComboboxStatus 说明加载与结果数，用 ComboboxEmpty 说明没有结果（加载期间不要显示它）。ComboboxEmpty 省略 children 时用内置的「没有可选项」，与 Select 同一说法与画法。"
+          "异步候选由应用持有请求、取消与失败；传 filter={null} 关闭内置过滤，用 ComboboxStatus 说明加载与结果数，用 ComboboxEmpty 说明没有结果（加载期间不要显示它）。ComboboxEmpty 省略 children 时用内置的「没有可选项」，与 Select 同一说法与画法。",
+          "命名用 Field + FieldLabel，或用 Label 的 htmlFor 指向输入框 id，候选面打开时名称保留。不要用 label 包住整个控件、把文字放进子元素：打开时候选面以外的内容对读屏隐藏，这样写的名称会消失。"
         ],
         "notesEn": [
           "Filtering and empty content must reflect the real candidate data.",
           "Popup caller style merges last; layer overrides can change the default order.",
           "Popup surfaces and highlights use existing theme presets with internal focus signals.",
-          "For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading). An empty ComboboxEmpty uses the built-in \"No options\", worded and drawn like Select."
+          "For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading). An empty ComboboxEmpty uses the built-in \"No options\", worded and drawn like Select.",
+          "Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears."
         ],
         "design": {
           "methods": [
@@ -8129,11 +8133,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 164
+              "line": 169
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 164
+              "line": 169
             },
             "status": "PRESENT"
           },
@@ -8142,11 +8146,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 26
+              "line": 28
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 26
+              "line": 28
             },
             "status": "PRESENT"
           },
@@ -8155,11 +8159,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 38
+              "line": 40
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 38
+              "line": 40
             },
             "status": "PRESENT"
           },
@@ -8168,11 +8172,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 43
+              "line": 45
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 43
+              "line": 45
             },
             "status": "PRESENT"
           },
@@ -8181,11 +8185,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 52
+              "line": 57
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 52
+              "line": 57
             },
             "status": "PRESENT"
           },
@@ -8194,11 +8198,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 59
+              "line": 64
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 59
+              "line": 64
             },
             "status": "PRESENT"
           },
@@ -8207,11 +8211,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 67
+              "line": 72
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 67
+              "line": 72
             },
             "status": "PRESENT"
           },
@@ -8220,11 +8224,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 69
+              "line": 74
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 69
+              "line": 74
             },
             "status": "PRESENT"
           },
@@ -8233,11 +8237,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 77
+              "line": 82
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 77
+              "line": 82
             },
             "status": "PRESENT"
           },
@@ -8246,11 +8250,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 92
+              "line": 97
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 92
+              "line": 97
             },
             "status": "PRESENT"
           },
@@ -8259,11 +8263,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 99
+              "line": 104
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 99
+              "line": 104
             },
             "status": "PRESENT"
           },
@@ -8272,11 +8276,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 103
+              "line": 108
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 103
+              "line": 108
             },
             "status": "PRESENT"
           },
@@ -8285,11 +8289,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 120
+              "line": 125
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 120
+              "line": 125
             },
             "status": "PRESENT"
           },
@@ -8298,11 +8302,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 124
+              "line": 129
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 124
+              "line": 129
             },
             "status": "PRESENT"
           },
@@ -8311,11 +8315,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 128
+              "line": 133
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 128
+              "line": 133
             },
             "status": "PRESENT"
           },
@@ -8324,11 +8328,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 132
+              "line": 137
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 132
+              "line": 137
             },
             "status": "PRESENT"
           },
@@ -8337,11 +8341,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 111
+              "line": 116
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 111
+              "line": 116
             },
             "status": "PRESENT"
           },
@@ -8350,11 +8354,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 138
+              "line": 143
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 138
+              "line": 143
             },
             "status": "PRESENT"
           },
@@ -8363,11 +8367,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 178
+              "line": 183
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 178
+              "line": 183
             },
             "status": "PRESENT"
           }
@@ -18296,10 +18300,12 @@
           }
         ],
         "notes": [
-          "Label 不拥有禁用状态；被命名控件使用自己的真实 disabled。"
+          "Label 不拥有禁用状态；被命名控件使用自己的真实 disabled。",
+          "Combobox、Autocomplete 这类弹层输入框用 htmlFor 关联或放进 Field；不要用 label 包住控件、把文字放进子元素，弹层打开时这样写的名称会消失。"
         ],
         "notesEn": [
-          "Label owns no disabled state; the named control uses its real disabled attribute."
+          "Label owns no disabled state; the named control uses its real disabled attribute.",
+          "For popup inputs such as Combobox and Autocomplete, associate through htmlFor or use Field; do not wrap the control in a label with its text in a child element, because that name disappears while the popup is open."
         ],
         "usageResolution": [
           {
@@ -45923,6 +45929,9 @@
     "scripts/ai-eval/runs/self-fe0a301a-t03-good/evaluation/vitest.config.mjs",
     "scripts/ai-eval/runs/self-fe0a301a-t04-bad/evaluation/vitest.config.mjs",
     "scripts/ai-eval/runs/self-fe0a301a-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/s1/evaluate.mjs",
+    "scripts/ai-eval/s1/freeze.mjs",
+    "scripts/ai-eval/s1/run.mjs",
     "scripts/ai-eval/selftest.mjs",
     "scripts/ai-eval/summarize.mjs",
     "scripts/ai-eval/tool.mjs",

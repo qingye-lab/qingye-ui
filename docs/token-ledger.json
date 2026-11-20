@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-11-20T00:36:36.170Z",
-  "revision": "e5122c521c51708b24ecd5775cd8267512cc7a00",
+  "generatedAt": "2026-11-20T11:02:51.310Z",
+  "revision": "b0607698073d10a3dcc6f4618a07bdf541351ad1",
   "static": {
     "fingerprint": {
-      "sha256": "d7b55d7b25df2666f99c3b22d37163c3db90a035337a1cf64c791417ec5be109",
+      "sha256": "890da090dc68f30238afe713b2571b4430ea9d32ee0af5ec0ad9314f33425fa0",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -177,7 +177,7 @@
         },
         {
           "path": "apps/docs/src/content/autocomplete/meta.ts",
-          "sha256": "4b7d513364968fe95e5f668736b3fdceed0a5a4dea908f64fe86eba995724b38"
+          "sha256": "e2bbac2068bf32791a4d076d4c03ea86a4df4da10abbb6d8d15ac9f862f2ae04"
         },
         {
           "path": "apps/docs/src/content/avatar-group/cover.tsx",
@@ -629,7 +629,7 @@
         },
         {
           "path": "apps/docs/src/content/combobox/meta.ts",
-          "sha256": "eb74b79020d39067c059bfaa6254d4055e7597d0be4271f3a86c80f8474d7e1d"
+          "sha256": "2e28d31ea2c61892cdfe68c1fe200e32c2cff82d1baaf219eb8ee70d3757ed2f"
         },
         {
           "path": "apps/docs/src/content/command/cover.tsx",
@@ -1285,7 +1285,7 @@
         },
         {
           "path": "apps/docs/src/content/label/meta.ts",
-          "sha256": "9b9faccb1966034b4d1a9f96069d739d11b660ebf450983dc7f569c456018eeb"
+          "sha256": "cf844ecaf9aeca4a1ca961c2841b720ee8749f44fad283d147f82d05118bf2f0"
         },
         {
           "path": "apps/docs/src/content/layout/cover.tsx",
@@ -2861,7 +2861,7 @@
         },
         {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "sha256": "49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7"
+          "sha256": "5cf83f38384cca7006817ab2ec20690e3d9a44704c6dc9d1fcd3c05a60f4b219"
         },
         {
           "path": "packages/ui/src/components/avatar-group.tsx",
@@ -2933,7 +2933,7 @@
         },
         {
           "path": "packages/ui/src/components/combobox.tsx",
-          "sha256": "6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca"
+          "sha256": "5aa948694e5d19fabbe1bf3b65c12a316ea3cba703240beb983921397e056160"
         },
         {
           "path": "packages/ui/src/components/command.tsx",
@@ -3322,6 +3322,10 @@
         {
           "path": "packages/ui/src/draft-surface.tsx",
           "sha256": "0dd15064f1c1330d1b68702b8e46b4be2a27785849357f75def575e38be17b04"
+        },
+        {
+          "path": "packages/ui/src/external-labels.ts",
+          "sha256": "dec09f28564f4ee83fbacd5db2607db20003bc56353eeabb2a2b6b73f83ad2bf"
         },
         {
           "path": "packages/ui/src/file-rules.ts",
@@ -20365,7 +20369,7 @@
         "className": "pe-(--qy-input-group-padding)",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -20396,7 +20400,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -20435,7 +20439,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -20482,7 +20486,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -20529,7 +20533,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -20568,7 +20572,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -20607,7 +20611,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -20654,7 +20658,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -20701,7 +20705,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -20756,7 +20760,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -20819,7 +20823,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -20882,7 +20886,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -20937,7 +20941,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21000,7 +21004,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21055,7 +21059,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21110,7 +21114,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21157,7 +21161,7 @@
         "className": "text-muted-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 45
+          "line": 47
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21188,7 +21192,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21227,7 +21231,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21274,7 +21278,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21329,7 +21333,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21392,7 +21396,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21455,7 +21459,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21526,7 +21530,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21581,7 +21585,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21620,7 +21624,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21667,7 +21671,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21722,7 +21726,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21753,7 +21757,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21792,7 +21796,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21839,7 +21843,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21886,7 +21890,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21925,7 +21929,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21956,7 +21960,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -21995,7 +21999,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22042,7 +22046,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22089,7 +22093,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22144,7 +22148,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22207,7 +22211,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22270,7 +22274,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22325,7 +22329,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22388,7 +22392,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22443,7 +22447,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22498,7 +22502,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22545,7 +22549,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22584,7 +22588,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22631,7 +22635,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22686,7 +22690,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22741,7 +22745,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22788,7 +22792,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22843,7 +22847,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22890,7 +22894,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -22945,7 +22949,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23000,7 +23004,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23047,7 +23051,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23094,7 +23098,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23133,7 +23137,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23164,7 +23168,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23203,7 +23207,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23250,7 +23254,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23297,7 +23301,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23336,7 +23340,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23375,7 +23379,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23422,7 +23426,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23469,7 +23473,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23524,7 +23528,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23587,7 +23591,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23650,7 +23654,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23705,7 +23709,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23768,7 +23772,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23823,7 +23827,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23878,7 +23882,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23925,7 +23929,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23956,7 +23960,7 @@
         "className": "shadow-raised",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -23989,7 +23993,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24030,7 +24034,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24079,7 +24083,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24136,7 +24140,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24193,7 +24197,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24242,7 +24246,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24291,7 +24295,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24348,7 +24352,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24405,7 +24409,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24470,7 +24474,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24543,7 +24547,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24616,7 +24620,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24681,7 +24685,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24754,7 +24758,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24819,7 +24823,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24884,7 +24888,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24941,7 +24945,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 71
+          "line": 76
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24964,7 +24968,7 @@
         "className": "p-(--qy-overlay-inset)",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 76
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -24995,7 +24999,7 @@
         "className": "p-(--qy-overlay-inset)",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 76
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -25034,7 +25038,7 @@
         "className": "p-(--qy-overlay-inset)",
         "source": {
           "path": "packages/ui/src/components/autocomplete.tsx",
-          "line": 76
+          "line": 81
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -80696,7 +80700,7 @@
         "className": "gap-(--qy-tag-inset)",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 70
+          "line": 75
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -80721,7 +80725,7 @@
         "className": "focus-visible:ring-(length:--qy-focus-quiet-width)",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -80754,7 +80758,7 @@
         "className": "focus-visible:ring-(length:--qy-focus-quiet-width)",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -80787,7 +80791,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -80828,7 +80832,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -80877,7 +80881,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -80934,7 +80938,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -80991,7 +80995,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81040,7 +81044,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81089,7 +81093,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81146,7 +81150,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81203,7 +81207,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81268,7 +81272,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81341,7 +81345,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81414,7 +81418,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81479,7 +81483,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81552,7 +81556,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81617,7 +81621,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81682,7 +81686,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81739,7 +81743,7 @@
         "className": "focus-visible:ring-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 85
+          "line": 90
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81770,7 +81774,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81809,7 +81813,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81856,7 +81860,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81911,7 +81915,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -81974,7 +81978,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82037,7 +82041,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82108,7 +82112,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82163,7 +82167,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82202,7 +82206,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82249,7 +82253,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82304,7 +82308,7 @@
         "className": "rounded-overlay",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82335,7 +82339,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82374,7 +82378,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82421,7 +82425,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82468,7 +82472,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82507,7 +82511,7 @@
         "className": "border-border",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82538,7 +82542,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82577,7 +82581,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82624,7 +82628,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82671,7 +82675,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82726,7 +82730,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82789,7 +82793,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82852,7 +82856,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82907,7 +82911,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -82970,7 +82974,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83025,7 +83029,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83080,7 +83084,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83127,7 +83131,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83166,7 +83170,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83213,7 +83217,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83268,7 +83272,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83323,7 +83327,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83370,7 +83374,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83425,7 +83429,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83472,7 +83476,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83527,7 +83531,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83582,7 +83586,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83629,7 +83633,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83676,7 +83680,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83715,7 +83719,7 @@
         "className": "bg-surface-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83746,7 +83750,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83785,7 +83789,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83832,7 +83836,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83879,7 +83883,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83918,7 +83922,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -83957,7 +83961,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84004,7 +84008,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84051,7 +84055,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84106,7 +84110,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84169,7 +84173,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84232,7 +84236,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84287,7 +84291,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84350,7 +84354,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84405,7 +84409,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84460,7 +84464,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84507,7 +84511,7 @@
         "className": "text-foreground",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84538,7 +84542,7 @@
         "className": "shadow-raised",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84571,7 +84575,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84612,7 +84616,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84661,7 +84665,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84718,7 +84722,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84775,7 +84779,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84824,7 +84828,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84873,7 +84877,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84930,7 +84934,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -84987,7 +84991,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -85052,7 +85056,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -85125,7 +85129,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -85198,7 +85202,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -85263,7 +85267,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -85336,7 +85340,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -85401,7 +85405,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -85466,7 +85470,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -85523,7 +85527,7 @@
         "className": "focus-visible:border-ring",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 96
+          "line": 101
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -85546,7 +85550,7 @@
         "className": "p-(--qy-overlay-inset)",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 100
+          "line": 105
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -85577,7 +85581,7 @@
         "className": "p-(--qy-overlay-inset)",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 100
+          "line": 105
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -85616,7 +85620,7 @@
         "className": "p-(--qy-overlay-inset)",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 100
+          "line": 105
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -593233,7 +593237,7 @@
         "className": "gap-(--qy-tag-inset)",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 41
+          "line": 43
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -593242,7 +593246,7 @@
         "className": "p-(--qy-tag-inset)",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 41
+          "line": 43
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -593251,7 +593255,7 @@
         "className": "min-w-[min(100%,var(--qy-field-min-text))]",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 46
+          "line": 51
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },
@@ -593260,7 +593264,7 @@
         "className": "px-(--qy-tag-padding)",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 46
+          "line": 51
         },
         "reason": "No exact className/slot binding; candidate only, excluded from consumer records"
       },
@@ -593269,7 +593273,7 @@
         "className": "[&_svg]:size-(--qy-fill-icon)",
         "source": {
           "path": "packages/ui/src/components/combobox.tsx",
-          "line": 106
+          "line": 111
         },
         "reason": "Unsupported class/property mapping; no runtime claim"
       },

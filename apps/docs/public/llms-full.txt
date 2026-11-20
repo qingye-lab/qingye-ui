@@ -1205,7 +1205,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: 49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7
+Source SHA-256: 5cf83f38384cca7006817ab2ec20690e3d9a44704c6dc9d1fcd3c05a60f4b219
 
 编辑自由文本，候选作为可接受的建议。
 
@@ -1217,6 +1217,7 @@ Source SHA-256: 49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7
 - 空集合不代表错误或服务失败；空提示由调用方根据真实情况提供；省略 children 时用内置的「没有可选项」。
 - caller 定位 style 最后合并；颜色、圆角、高亮与焦点读取现有主题角色。
 - 命令面板用 Command。
+- 命名用 Field + FieldLabel，或用 Label 的 htmlFor 指向输入框 id，候选面打开时名称保留。不要用 label 包住整个控件、把文字放进子元素：打开时候选面以外的内容对读屏隐藏，这样写的名称会消失。
 
 ### Use and ownership
 - 输入文字本身就是值，候选只是可接受的建议（搜索词、标签名、地址）。
@@ -3317,7 +3318,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca
+Source SHA-256: 5aa948694e5d19fabbe1bf3b65c12a316ea3cba703240beb983921397e056160
 
 筛选候选并确认一个或一组值，查询文字与选择事实分别持有。
 
@@ -3329,6 +3330,7 @@ value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保
 - Popup 的 caller style 最后合并；覆写层级可能改变默认顺序。
 - 候选浮层表面与高亮采用既有主题预设，焦点信号在盒内。
 - 异步候选由应用持有请求、取消与失败；传 filter={null} 关闭内置过滤，用 ComboboxStatus 说明加载与结果数，用 ComboboxEmpty 说明没有结果（加载期间不要显示它）。ComboboxEmpty 省略 children 时用内置的「没有可选项」，与 Select 同一说法与画法。
+- 命名用 Field + FieldLabel，或用 Label 的 htmlFor 指向输入框 id，候选面打开时名称保留。不要用 label 包住整个控件、把文字放进子元素：打开时候选面以外的内容对读屏隐藏，这样写的名称会消失。
 
 ### Use and ownership
 - 候选很多，需要边输入边筛选，并确认其中一个或几个值。
@@ -7223,6 +7225,7 @@ Field 内使用 FieldLabel。通用 Label 用 htmlFor 或原生嵌套关联一�
 
 ### Notes
 - Label 不拥有禁用状态；被命名控件使用自己的真实 disabled。
+- Combobox、Autocomplete 这类弹层输入框用 htmlFor 关联或放进 Field；不要用 label 包住控件、把文字放进子元素，弹层打开时这样写的名称会消失。
 
 ### Use and ownership
 - 原生控件需要持续可读的名称。

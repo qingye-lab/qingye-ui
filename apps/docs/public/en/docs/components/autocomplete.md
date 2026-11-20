@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: 49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7
+Source SHA-256: 5cf83f38384cca7006817ab2ec20690e3d9a44704c6dc9d1fcd3c05a60f4b219
 
 Edit free text with optional suggestions.
 
@@ -15,6 +15,7 @@ The text itself is the value. Highlighting does not change it; accepting a sugge
 - An empty set does not imply an error or service failure. Supply empty content from real facts; an empty AutocompleteEmpty uses the built-in "No options".
 - Caller positioning style merges last; colors, corners, highlights, and focus use existing theme roles.
 - Use Command for a command palette.
+- Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears.
 
 ## Use and ownership
 - The typed text is the value and candidates are only acceptable suggestions (search terms, tag names, addresses).
