@@ -83,3 +83,15 @@ test("loading: the control shows one busy mark, input and list are busy, Status 
   expect(container.querySelector("[data-slot=autocomplete-busy]")).toBeNull();
   expect(await screen.findByText("没有可选项")).toBeInTheDocument();
 });
+
+// 与 Combobox 同一处理：打开后同级 label 被标 aria-hidden，名称经 aria-labelledby 保留。
+test("a label associated through htmlFor still names the input while suggestions are open", async () => {
+  const user = userEvent.setup();
+  render(<div><label htmlFor="word">文字</label><Autocomplete items={items}><AutocompleteControl><AutocompleteInput id="word" /></AutocompleteControl>{popup}</Autocomplete></div>);
+  expect(screen.getByRole("combobox", { name: "文字" })).toHaveAttribute("id", "word");
+  await user.click(screen.getByRole("combobox", { name: "文字" }));
+  await user.keyboard("{ArrowDown}");
+  expect(await screen.findByRole("listbox")).toBeInTheDocument();
+  expect(screen.getByText("文字")).toHaveAttribute("aria-hidden", "true");
+  expect(screen.getByRole("combobox", { name: "文字" })).toHaveAttribute("id", "word");
+});

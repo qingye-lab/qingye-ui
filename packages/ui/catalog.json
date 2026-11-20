@@ -2025,7 +2025,8 @@
         "需要只能确认候选中的一个值时用 Combobox。",
         "空集合不代表错误或服务失败；空提示由调用方根据真实情况提供；省略 children 时用内置的「没有可选项」。",
         "caller 定位 style 最后合并；颜色、圆角、高亮与焦点读取现有主题角色。",
-        "命令面板用 Command。"
+        "命令面板用 Command。",
+        "命名用 Field + FieldLabel，或用 Label 的 htmlFor 指向输入框 id，候选面打开时名称保留。不要用 label 包住整个控件、把文字放进子元素：打开时候选面以外的内容对读屏隐藏，这样写的名称会消失。"
       ],
       "keywords": [
         "autocomplete",
@@ -2125,14 +2126,14 @@
                 "name": "items",
                 "optional": true,
                 "type": "readonly Value[] | readonly AutocompleteItemGroup<Value>[] | undefined",
-                "declaredAt": "packages/ui/src/components/autocomplete.tsx:24"
+                "declaredAt": "packages/ui/src/components/autocomplete.tsx:26"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "候选正在取回：与 ComboboxSelect 的 `loading` 同名同义，同一套候选状态。\n输入框末端出现忙碌标记（与 Button、InputGroup 同一个），输入与列表写 `aria-busy`；\n「正在加载」由 AutocompleteStatus 播报（一件事实一个播报者），此时 AutocompleteEmpty 不出声——\n等待与「没有结果」是两件事，应用此刻并不知道后者。输入始终可用，等待不禁用输入。",
-                "declaredAt": "packages/ui/src/components/autocomplete.tsx:31"
+                "declaredAt": "packages/ui/src/components/autocomplete.tsx:33"
               }
             ],
             "inheritedCount": 32,
@@ -2299,13 +2300,13 @@
                 "name": "container",
                 "optional": true,
                 "type": "AutocompletePrimitive.Portal.Props[\"container\"]",
-                "declaredAt": "packages/ui/src/components/autocomplete.tsx:65"
+                "declaredAt": "packages/ui/src/components/autocomplete.tsx:70"
               },
               {
                 "name": "positionerProps",
                 "optional": true,
                 "type": "AutocompletePrimitive.Positioner.Props",
-                "declaredAt": "packages/ui/src/components/autocomplete.tsx:65"
+                "declaredAt": "packages/ui/src/components/autocomplete.tsx:70"
               }
             ],
             "inheritedCount": 280,
@@ -2500,7 +2501,7 @@
           "owner": "autocomplete",
           "module": "@qingye_lab/ui/components/autocomplete",
           "propsType": "AutocompletePrimitive.Input.Props & React.RefAttributes<HTMLInputElement>",
-          "signature": "AutocompleteInput({ render, onChange, ...props }: AutocompletePrimitive.Input.Props & React.RefAttributes<HTMLInputElement>)",
+          "signature": "AutocompleteInput({ render, onChange, onFocus, ref, ...props }: AutocompletePrimitive.Input.Props & React.RefAttributes<HTMLInputElement>)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -2761,7 +2762,7 @@
           },
           {
             "name": "InControl",
-            "declaredAt": "packages/ui/src/components/autocomplete.tsx:19",
+            "declaredAt": "packages/ui/src/components/autocomplete.tsx:21",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2770,7 +2771,7 @@
           },
           {
             "name": "Loading",
-            "declaredAt": "packages/ui/src/components/autocomplete.tsx:20",
+            "declaredAt": "packages/ui/src/components/autocomplete.tsx:22",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2788,7 +2789,7 @@
           },
           {
             "name": "ReadOnly",
-            "declaredAt": "packages/ui/src/components/autocomplete.tsx:18",
+            "declaredAt": "packages/ui/src/components/autocomplete.tsx:20",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2885,7 +2886,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/autocomplete.tsx",
-        "sha256": "49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7",
+        "sha256": "5cf83f38384cca7006817ab2ec20690e3d9a44704c6dc9d1fcd3c05a60f4b219",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "输入文字本身就是值。移动候选高亮不改变文本；确认建议才请求替换，文本无需匹配候选也可提交。",
@@ -2899,7 +2900,8 @@
             "Use Combobox when a value must be confirmed from candidates.",
             "An empty set does not imply an error or service failure. Supply empty content from real facts; an empty AutocompleteEmpty uses the built-in \"No options\".",
             "Caller positioning style merges last; colors, corners, highlights, and focus use existing theme roles.",
-            "Use Command for a command palette."
+            "Use Command for a command palette.",
+            "Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears."
           ],
           "api": [
             {
@@ -12784,7 +12786,8 @@
         "从当前查询到候选的过滤与空内容必须对应实际数据。",
         "Popup 的 caller style 最后合并；覆写层级可能改变默认顺序。",
         "候选浮层表面与高亮采用既有主题预设，焦点信号在盒内。",
-        "异步候选由应用持有请求、取消与失败；传 filter={null} 关闭内置过滤，用 ComboboxStatus 说明加载与结果数，用 ComboboxEmpty 说明没有结果（加载期间不要显示它）。ComboboxEmpty 省略 children 时用内置的「没有可选项」，与 Select 同一说法与画法。"
+        "异步候选由应用持有请求、取消与失败；传 filter={null} 关闭内置过滤，用 ComboboxStatus 说明加载与结果数，用 ComboboxEmpty 说明没有结果（加载期间不要显示它）。ComboboxEmpty 省略 children 时用内置的「没有可选项」，与 Select 同一说法与画法。",
+        "命名用 Field + FieldLabel，或用 Label 的 htmlFor 指向输入框 id，候选面打开时名称保留。不要用 label 包住整个控件、把文字放进子元素：打开时候选面以外的内容对读屏隐藏，这样写的名称会消失。"
       ],
       "keywords": [
         "combobox",
@@ -12947,7 +12950,7 @@
                 "optional": true,
                 "type": "string",
                 "doc": "移除动作的对象名；children 是纯文字时取 children。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:74"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:79"
               }
             ],
             "inheritedCount": 278,
@@ -13134,13 +13137,13 @@
                 "name": "container",
                 "optional": true,
                 "type": "ComboboxPrimitive.Portal.Props[\"container\"]",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:90"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:95"
               },
               {
                 "name": "positionerProps",
                 "optional": true,
                 "type": "ComboboxPrimitive.Positioner.Props",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:90"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:95"
               }
             ],
             "inheritedCount": 280,
@@ -13168,59 +13171,59 @@
                 "name": "clearable",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:153"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:158"
               },
               {
                 "name": "controlProps",
                 "optional": true,
                 "type": "InputGroupProps | undefined",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:155"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:160"
               },
               {
                 "name": "emptyContent",
                 "optional": false,
                 "type": "React.ReactNode",
                 "doc": "当前查询已完成且没有候选时的内容，由应用说明查询对象。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:150"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:155"
               },
               {
                 "name": "inputProps",
                 "optional": true,
                 "type": "React.ComponentProps<typeof ComboboxInput> | undefined",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:154"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:159"
               },
               {
                 "name": "items",
                 "optional": false,
                 "type": "readonly Value[]",
                 "doc": "平铺候选；分组、多选或自定义解剖使用 Combobox 的公开部件。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:145"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:150"
               },
               {
                 "name": "itemToStringLabel",
                 "optional": false,
                 "type": "(item: Value) => string",
                 "doc": "输入框、过滤与候选共用的可读名称；富候选另用 renderItem。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:147"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:152"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "只表达调用方的请求事实，不发请求、不推断失败。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:152"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:157"
               },
               {
                 "name": "popupProps",
                 "optional": true,
                 "type": "ComboboxPopupProps | undefined",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:156"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:161"
               },
               {
                 "name": "renderItem",
                 "optional": true,
                 "type": "((item: Value) => React.ReactNode) | undefined",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:148"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:153"
               }
             ],
             "inheritedCount": 34,
@@ -13455,7 +13458,7 @@
           "owner": "combobox",
           "module": "@qingye_lab/ui/components/combobox",
           "propsType": "ComboboxPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>",
-          "signature": "ComboboxInput({ render, onChange, ...props }: ComboboxPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>)",
+          "signature": "ComboboxInput({ render, onChange, onFocus, ref, ...props }: ComboboxPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -13764,7 +13767,7 @@
           },
           {
             "name": "InControl",
-            "declaredAt": "packages/ui/src/components/combobox.tsx:19",
+            "declaredAt": "packages/ui/src/components/combobox.tsx:21",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13782,7 +13785,7 @@
           },
           {
             "name": "Multiple",
-            "declaredAt": "packages/ui/src/components/combobox.tsx:20",
+            "declaredAt": "packages/ui/src/components/combobox.tsx:22",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13791,7 +13794,7 @@
           },
           {
             "name": "ReadOnly",
-            "declaredAt": "packages/ui/src/components/combobox.tsx:18",
+            "declaredAt": "packages/ui/src/components/combobox.tsx:20",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13914,7 +13917,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/combobox.tsx",
-        "sha256": "6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca",
+        "sha256": "5aa948694e5d19fabbe1bf3b65c12a316ea3cba703240beb983921397e056160",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保留候选，明确清除选择才请求空值；自由文本值用 Autocomplete。候选很多且要选几个时用 multiple；候选少而需要一眼看全用 CheckboxGroup，值不来自候选用 TagInput。",
@@ -13928,7 +13931,8 @@
             "Filtering and empty content must reflect the real candidate data.",
             "Popup caller style merges last; layer overrides can change the default order.",
             "Popup surfaces and highlights use existing theme presets with internal focus signals.",
-            "For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading). An empty ComboboxEmpty uses the built-in \"No options\", worded and drawn like Select."
+            "For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading). An empty ComboboxEmpty uses the built-in \"No options\", worded and drawn like Select.",
+            "Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears."
           ],
           "api": [
             {
@@ -33637,7 +33641,8 @@
       ],
       "docs": "/docs/components/label",
       "notes": [
-        "Label 不拥有禁用状态；被命名控件使用自己的真实 disabled。"
+        "Label 不拥有禁用状态；被命名控件使用自己的真实 disabled。",
+        "Combobox、Autocomplete 这类弹层输入框用 htmlFor 关联或放进 Field；不要用 label 包住控件、把文字放进子元素，弹层打开时这样写的名称会消失。"
       ],
       "keywords": [
         "label",
@@ -33827,7 +33832,8 @@
           "category": "Forms",
           "decisions": "Use FieldLabel inside Field. A standalone Label associates one control through htmlFor or native nesting; a placeholder cannot replace it.",
           "notes": [
-            "Label owns no disabled state; the named control uses its real disabled attribute."
+            "Label owns no disabled state; the named control uses its real disabled attribute.",
+            "For popup inputs such as Combobox and Autocomplete, associate through htmlFor or use Field; do not wrap the control in a label with its text in a child element, because that name disappears while the popup is open."
           ],
           "api": [
             {

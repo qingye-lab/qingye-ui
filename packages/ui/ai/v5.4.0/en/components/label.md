@@ -12,6 +12,7 @@ Use FieldLabel inside Field. A standalone Label associates one control through h
 
 ## Notes
 - Label owns no disabled state; the named control uses its real disabled attribute.
+- For popup inputs such as Combobox and Autocomplete, associate through htmlFor or use Field; do not wrap the control in a label with its text in a child element, because that name disappears while the popup is open.
 
 ## Use and ownership
 - A native control needs a persistent readable name.

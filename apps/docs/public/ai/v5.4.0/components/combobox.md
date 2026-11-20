@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca
+Source SHA-256: 5aa948694e5d19fabbe1bf3b65c12a316ea3cba703240beb983921397e056160
 
 筛选候选并确认一个或一组值，查询文字与选择事实分别持有。
 
@@ -15,6 +15,7 @@ value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保
 - Popup 的 caller style 最后合并；覆写层级可能改变默认顺序。
 - 候选浮层表面与高亮采用既有主题预设，焦点信号在盒内。
 - 异步候选由应用持有请求、取消与失败；传 filter={null} 关闭内置过滤，用 ComboboxStatus 说明加载与结果数，用 ComboboxEmpty 说明没有结果（加载期间不要显示它）。ComboboxEmpty 省略 children 时用内置的「没有可选项」，与 Select 同一说法与画法。
+- 命名用 Field + FieldLabel，或用 Label 的 htmlFor 指向输入框 id，候选面打开时名称保留。不要用 label 包住整个控件、把文字放进子元素：打开时候选面以外的内容对读屏隐藏，这样写的名称会消失。
 
 ## Use and ownership
 - 筛选候选并确认一个或一组值，查询文字与选择事实分别持有。

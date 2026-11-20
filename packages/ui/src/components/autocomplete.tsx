@@ -10,6 +10,8 @@ import { popupOffset, useFloatingLayer } from "../floating-layer";
 import { inputAdjunctClassName } from "../input-adjunct";
 import { overlayGroupLabelClassName, overlaySeparatorClassName } from "../overlay-group";
 import { candidateEmptyClassName, candidateItemClassName, overlayItemClassName } from "../overlay-item";
+import { labelledByFallback, useExternalLabelledBy } from "../external-labels";
+import { useInputRef } from "../input-facts";
 import { cn } from "../utils";
 import { Button } from "./button";
 import { Input } from "./input";
@@ -45,10 +47,13 @@ export function AutocompleteControl({ className, children, ...props }: InputGrou
     {loading ? <BusyMark className="order-2 self-center ps-0 pe-(--qy-input-group-padding) text-muted-foreground" data-slot="autocomplete-busy" /> : null}
   </InputGroup>} /></InControl.Provider>;
 }
-export function AutocompleteInput({ render, onChange, ...props }: AutocompletePrimitive.Input.Props & React.RefAttributes<HTMLInputElement>) {
+export function AutocompleteInput({ render, onChange, onFocus, ref, ...props }: AutocompletePrimitive.Input.Props & React.RefAttributes<HTMLInputElement>) {
   const inControl = React.useContext(InControl);
   const loading = React.useContext(Loading);
-  return <AutocompletePrimitive.Input data-slot="autocomplete-input" aria-busy={loading || undefined} {...props} onChange={event => { onChange?.(event); if (event.currentTarget.disabled || event.currentTarget.readOnly) event.preventBaseUIHandler(); }} render={(elementProps, state) => <Input nativeInput {...elementProps} unstyled={inControl} {...(inControl ? { controlClassName: "flex-1" } : {})} render={typeof render === "function" ? inputProps => render(inputProps, state) : render} />} />;
+  // Field 之外用 htmlFor 关联的 label 经 aria-labelledby 引用，打开时名称不随 label 被隐藏而消失（见 external-labels.ts）。
+  const [inputRef, setInputRef] = useInputRef(ref);
+  const [externalLabels, refreshLabels] = useExternalLabelledBy(inputRef);
+  return <AutocompletePrimitive.Input data-slot="autocomplete-input" aria-busy={loading || undefined} {...props} ref={setInputRef} onFocus={event => { onFocus?.(event); refreshLabels(); }} onChange={event => { onChange?.(event); if (event.currentTarget.disabled || event.currentTarget.readOnly) event.preventBaseUIHandler(); }} render={(elementProps, state) => <Input nativeInput {...elementProps} aria-labelledby={labelledByFallback(elementProps, externalLabels)} unstyled={inControl} {...(inControl ? { controlClassName: "flex-1" } : {})} render={typeof render === "function" ? inputProps => render(inputProps, state) : render} />} />;
 }
 export function AutocompleteTrigger({ render, children, ...props }: AutocompletePrimitive.Trigger.Props & React.RefAttributes<HTMLButtonElement>) {
   const inControl = React.useContext(InControl);
