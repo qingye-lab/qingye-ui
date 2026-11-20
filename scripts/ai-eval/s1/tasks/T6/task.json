@@ -1,0 +1,2 @@
+{ "id": "T6", "title": "邀请成员表单（字段错误、忙碌与失败恢复）", "editable": ["src/InviteForm.tsx"], "hidden": ["T6.test.tsx"],
+  "wrong": { "no-alert": ["发送失败"], "manual-error": ["已是成员"], "disabled-loading": ["发送中"] } }

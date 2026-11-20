@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "reason": "初始冻结",
+  "generatedAt": "2026-11-20T00:47:22.602Z",
+  "fingerprint": "4b5f5625d3e581b63bec48cf5d72f34c3e4c5fea51459339426f939d69eae314",
+  "versions": {
+    "claude": "2.1.326 (Claude Code)",
+    "codex": "codex-cli 0.169.0"
+  },
+  "fileCount": 23,
+  "files": {
+    "conditions/d05/AGENTS.md": "2034289005cc14eef92523059f48860896d7e85a0efdf6d16b5ecee64c4e0b04",
+    "conditions/d05/CLAUDE.md": "336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49",
+    "conditions/d05/design.md": "0bd3daf8a8820c38219ca8a228bf852890ba6bff8e94ecac3a1909f587dc095e",
+    "conditions/d05/package.overlay.json": "18c0a7efa8eb361ef1fbe54fb85b32441895159791ed5fbccc9b71a200d603de",
+    "conditions/d05/ui.config.json": "6bdb30798523032857f1bbd9ec2928351e2dd376781dac4a95569ccbe1bcca44",
+    "evaluate.mjs": "4fd1f8d31355c1bac6a241feaf96677e13c1ef0efe05d2e027e128799b339cb1",
+    "fixture/index.html": "2e5a97efd937955296f68bb1a5633c800bf20cd91a4fb1a7c18ef5467e209ad1",
+    "fixture/package.json": "bb8cfb0f0a5c16e48c35c04d4e2a0d5eb0de652f7b44b8485aba10df03caabd6",
+    "fixture/README.md": "f26efc0431a9fff76c9e4d64ff6a1d3d86193117b884c9317851e3fa36899a56",
+    "fixture/src/main.tsx": "de77a33f9d8a3de68f5173bd94f80a9320a160b36e81ae7277a504f9ef8c64bb",
+    "fixture/src/test/setup.ts": "f1d07ce05f8792e0a574c4cf4ec1308ee2870a5ce630b2f4710f826d7106fc71",
+    "fixture/src/theme.css": "6a2582a084b4bea51daf5531369f8da3c9c8c37785e91bfcc633b9f5c62b471b",
+    "fixture/tsconfig.json": "c4774e010f20953a5c43236d2187d3cde020633348a4ce5eed17d7a7bfa3b016",
+    "fixture/vitest.config.ts": "f2d632cb6861c8f65fbf9e1e9d0206032ce8deba379c9dd38a3cf68bf357f501",
+    "private/T0.test.tsx": "b86e678edb813956a7d04c78e19df65b4a9ae19e38698866d0b8a384b93a6fce",
+    "prompt.txt": "df4e514046460d568e6895bb84f17eee5778a1b6f26e4a91ebcb2c0e359cd542",
+    "reference/T0/src/Hello.tsx": "936ee770b8007a6c4432f62530df05a843989e1cf71041b4d0c28014f7308564",
+    "run.mjs": "137075a8e682b654bf72644b72317999d1716f41ab9c45cac7a8e1af8c4b64db",
+    "tasks/T0/files/src/Hello.tsx": "b656263b49c8353b6c8447f098bf863691773848e1f4874855efd7ee27c225a0",
+    "tasks/T0/task.json": "e55b4dedfc757c530f6bca43058b1f165f17e5755c7664e67a1fbf7620ee9307",
+    "tasks/T0/TASK.md": "3eb1dc89bb7f331bedf1d41fa4af52a637d48fac7e41655a1daee6292b09e6c1",
+    "vendor/qingye_lab-ui-5.4.1.tgz": "e5aa2080ab31f5a724df19e00dc49e0d44c71fa3a4fd16073b2cd6c37c969bb8",
+    "vendor/qingye-tooling-0.5.0.tgz": "a81d44831e0e02793c7c549ed17f990d9d533a1fc64a4698eb05aac872e6ceb9"
+  }
+}

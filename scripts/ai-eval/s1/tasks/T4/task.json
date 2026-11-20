@@ -1,0 +1,6 @@
+{ "id": "T4", "title": "应用顶栏（react-router）", "editable": ["src/AppTopBar.tsx"], "hidden": ["T4.test.tsx"],
+  "wrong": {
+    "button-render-link": ["新建报表"],
+    "plain-anchor": ["应用内跳转"],
+    "title-tooltip": ["提示"]
+  } }

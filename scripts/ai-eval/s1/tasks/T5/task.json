@@ -1,0 +1,2 @@
+{ "id": "T5", "title": "笔记工作台（相近组件与库缺口）", "editable": ["src/NoteSearch.tsx", "src/MentionComposer.tsx", "src/RichNote.tsx"], "hidden": ["T5-search.test.tsx", "T5-composer.test.tsx", "T5-rich.test.tsx"],
+  "wrong": { "plain-search": ["搜索框来自库"], "textarea-mention": ["候选", "消息框来自库"] } }
