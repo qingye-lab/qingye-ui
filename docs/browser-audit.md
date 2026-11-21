@@ -75,3 +75,20 @@ DOCS_URL=http://localhost:5193 node scripts/axe-audit.mjs [slug…] [--only ligh
 - `color-contrast` 默认关闭：`--contrast` 打开后 0 违例、257 个节点无法判定（`color-mix()`、半透明面、SVG 文字），对比度由本库自己的门禁承担。
 
 接入 CI 的建议：扫描现已零违例，可把 `node scripts/axe-audit.mjs` 放到 `ci.yml` 的 Browser audit 之后（需要 docs 服务；可复用 `run-browser-audit.mjs` 的 preview 管理，当前脚本只读 `DOCS_URL`，尚未与 preview 运行器整合）。
+
+## 可访问名称区分检查（只报告，浏览器检查不接入 CI）
+
+读屏用户、自动化测试和 AI 都靠“角色 + 可访问名称”找控件；同处同名的两个控件只能退到下标去区分。`scripts/name-audit.mjs` 取页面的无障碍树（Playwright `locator.ariaSnapshot()`），由 `scripts/lib/name-check.mjs` 解析并检查，单测在 `scripts/lib/name-check.test.mjs`（进 CI，纯字符串夹具，不开浏览器）。
+
+```sh
+node scripts/run-browser-audit.mjs --names [--site] [--only light-desktop] [--report file.json] [--strict]
+```
+
+- 默认每个 playground 的每个 `[data-demo]` 各取一份树、各自为根（不同 demo 之间同名是正常的）；`--site` 改扫官网页面，以 `main`（没有则 `body`）为根，页集取自构建产生的 `apps/docs/public/sitemap.xml`（首页、`/docs/*`、全部组件详情页）加 `/components` 与 `/examples` 下各示例路由，只扫默认语言。默认只跑 `light-desktop`：名称不随主题变化，本库不要求移动端。
+- **R2 同处同名**：同一作用域内，可操作角色（button、link、checkbox、radio、switch、combobox、textbox、searchbox、spinbutton、slider、tab、menuitem、menuitemcheckbox、menuitemradio）角色和名称（trim 后）都相同的出现不少于 2 次。
+- **作用域**是最近的、名称非空的 region / form / navigation / main / complementary / banner / contentinfo / search / dialog / alertdialog / group / radiogroup / toolbar / tablist / menu / menubar 祖先，没有则为根。两个分别命名的 region、两个 fieldset 里各有一个“城市”不算重复。**listitem、row、cell 不是作用域**：行内重复的“删除”应当带上对象，这类重复要被报出来，再由人判断。
+- **R3 重复地标不可区分**：同一根下，navigation / complementary / form / search / region / main / banner / contentinfo 里角色相同、名称也相同（包括都为空）的出现不少于 2 次。
+- 名称为空的控件不在此检查：`axe-audit.mjs` 的 `button-name`、`link-name`、`label` 等 WCAG 规则已覆盖，不重复。
+- 状态：每页 `PASS` / `FAIL`；加载失败或页面抛错为 `NOT_RUN`。**只报告不阻断**：只有 FAIL 时退出码为 0，有 `NOT_RUN` 或运行失败为 1；加 `--strict` 则 FAIL 也退出 1，留给以后改成门禁。
+- **UNVERIFIED**：静置态的树里没有未打开的弹层、菜单、对话框内容，它们里面的重名不在覆盖范围内。
+- 报告结果是线索：同名是否真的造成歧义、该改名称还是改结构，要人工判断；本检查不修任何东西。

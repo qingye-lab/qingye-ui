@@ -27,7 +27,7 @@ jobs:
         run: |
           pnpm test
           node scripts/lib/facts-ledger.test.mjs
-          node --test scripts/lib/process-exit.test.mjs scripts/lib/delivery-contracts.test.mjs
+          node --test scripts/lib/process-exit.test.mjs scripts/lib/delivery-contracts.test.mjs scripts/lib/name-check.test.mjs
           pnpm --filter @qingye_lab/ui exec vitest run --config ../../apps/studio/test/preview.config.ts
 
   audit:

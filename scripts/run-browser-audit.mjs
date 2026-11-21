@@ -12,11 +12,12 @@ const args = process.argv.slice(2);
 const fixture = args.includes('--fixture-overflow');
 const foundations = args.includes('--foundations');
 const consumerMigration = args.includes('--consumer-migration');
+const names = args.includes('--names');
 if (args.includes('--date-range-proof')) throw new Error('--date-range-proof is retired: audit current date components with date-picker date-range-picker, or use --patterns for current composition contracts. Historical proof evidence remains preserved.');
 const patterns = args.includes('--patterns');
-if ([foundations, patterns, consumerMigration].filter(Boolean).length > 1) throw new Error('select one browser entry');
-if (fixture && (foundations || patterns || consumerMigration)) throw new Error('overflow fixture is only supported by audit');
-const auditArgs = args.filter((arg) => !['--fixture-overflow', '--foundations', '--patterns', '--consumer-migration'].includes(arg));
+if ([foundations, patterns, consumerMigration, names].filter(Boolean).length > 1) throw new Error('select one browser entry');
+if (fixture && (foundations || patterns || consumerMigration || names)) throw new Error('overflow fixture is only supported by audit');
+const auditArgs = args.filter((arg) => !['--fixture-overflow', '--foundations', '--patterns', '--consumer-migration', '--names'].includes(arg));
 const members = (group) => execFileSync('ps', ['-axo', 'pid=,ppid=,pgid='], { encoding: 'utf8' })
   .trim().split('\n').map((line) => line.trim().split(/\s+/).map(Number))
   .filter((entry) => entry[2] === group);
@@ -64,7 +65,7 @@ try {
   if (!ready) throw new Error('preview readiness timed out after 30s');
   if (interrupted) throw new Error('audit runner interrupted before audit');
   console.log(`preview ready after ${Date.now() - started}ms`);
-  audit = spawn(process.execPath, [fileURLToPath(new URL(consumerMigration ? './verify-consumer-migration.mjs' : patterns ? './verify-task-patterns.mjs' : foundations ? './verify-ui-foundations.mjs' : './audit.mjs', import.meta.url)), ...auditArgs], {
+  audit = spawn(process.execPath, [fileURLToPath(new URL(consumerMigration ? './verify-consumer-migration.mjs' : names ? './name-audit.mjs' : patterns ? './verify-task-patterns.mjs' : foundations ? './verify-ui-foundations.mjs' : './audit.mjs', import.meta.url)), ...auditArgs], {
     cwd: root,
     env: { ...process.env, DOCS_URL: base, ...(fixture ? { AUDIT_FIXTURE_OVERFLOW: '1' } : {}) },
     stdio: 'inherit',

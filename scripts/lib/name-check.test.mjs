@@ -1,0 +1,95 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { findNameIssues, parseAriaSnapshot } from "./name-check.mjs";
+
+const issues = (text) => findNameIssues(parseAriaSnapshot(text));
+const rules = (text, rule) => issues(text).filter((i) => i.rule === rule);
+
+test("parser reads roles, names, attributes, inline text, children and drops property lines", () => {
+  const tree = parseAriaSnapshot([
+    "- main:",
+    "  - 'link \"Go: home\"':",
+    "    - /url: /x",
+    "  - button \"say \\\"hi\\\"\": x",
+    "  - 'button \"it''s: ok\"': \"y\"",
+    "  - checkbox \"c\" [checked]",
+    "  - text: loose",
+    "  - heading \"H\" [level=2]",
+    "  - list:",
+    "    - listitem:",
+    "      - link \"two\":",
+    "        - /url: /y",
+  ].join("\n"));
+  const [main] = tree.children;
+  assert.equal(main.role, "main");
+  assert.deepEqual(main.children.map((n) => [n.role, n.name]), [
+    ["link", "Go: home"], ["button", 'say "hi"'], ["button", "it's: ok"],
+    ["checkbox", "c"], ["heading", "H"], ["list", ""],
+  ]);
+  assert.equal(main.children[0].children.length, 0);
+  assert.equal(main.children[5].children[0].children[0].name, "two");
+});
+
+test("R2 reports the same operable role and name twice in unnamed blocks", () => {
+  const found = rules('- generic:\n  - combobox "负责人": 张三\n- generic:\n  - combobox "负责人": 李四', "R2");
+  assert.equal(found.length, 1);
+  assert.deepEqual([found[0].role, found[0].name, found[0].count, found[0].scope], ["combobox", "负责人", 2, "(root)"]);
+});
+
+test("R2 does not report the same control inside separately named regions", () => {
+  const text = [
+    '- region "甲":', '  - combobox "负责人": 张三',
+    '- region "乙":', '  - combobox "负责人": 李四',
+  ].join("\n");
+  assert.deepEqual(rules(text, "R2"), []);
+});
+
+test("R2 does not report one field name in two named groups (fieldsets)", () => {
+  const text = [
+    '- group "寄件人":', '  - textbox "城市": 上海',
+    '- group "收件人":', '  - textbox "城市": 北京',
+  ].join("\n");
+  assert.deepEqual(rules(text, "R2"), []);
+});
+
+test("R2 reports repeated names inside one named group, with the scope path", () => {
+  const found = rules('- region "R":\n  - group "G":\n    - button "保存"\n    - button "保存"', "R2");
+  assert.equal(found.length, 1);
+  assert.equal(found[0].scope, 'region "R" > group "G"');
+});
+
+test("R2 reports per-row actions: listitem is not a scope", () => {
+  const text = [
+    "- list:",
+    "  - listitem:", '    - button "删除"',
+    "  - listitem:", '    - button "删除"',
+    "  - listitem:", '    - button "删除"',
+  ].join("\n");
+  const found = rules(text, "R2");
+  assert.equal(found.length, 1);
+  assert.equal(found[0].count, 3);
+});
+
+test("R2 does not report different roles with one name, nor different names", () => {
+  assert.deepEqual(rules('- button "搜索"\n- link "搜索"\n- button "清除"', "R2"), []);
+});
+
+test("R2 ignores repeated empty names (axe owns those)", () => {
+  assert.deepEqual(rules("- button\n- button\n- button []", "R2"), []);
+});
+
+test("R3 reports two unnamed navigations", () => {
+  const found = rules('- navigation:\n  - link "a"\n- navigation:\n  - link "b"', "R3");
+  assert.equal(found.length, 1);
+  assert.deepEqual([found[0].role, found[0].name, found[0].count], ["navigation", "", 2]);
+});
+
+test("R3 reports two navigations with the same name", () => {
+  assert.equal(rules('- navigation "主导航"\n- navigation "主导航"', "R3").length, 1);
+});
+
+test("R3 does not report distinct names, a single landmark, or non-landmarks", () => {
+  assert.deepEqual(rules('- navigation "主导航"\n- navigation "页脚"', "R3"), []);
+  assert.deepEqual(rules("- navigation:\n  - link \"a\"", "R3"), []);
+  assert.deepEqual(rules("- group:\n- group:", "R3"), []);
+});
