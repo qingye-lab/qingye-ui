@@ -1,0 +1,2 @@
+{ "id": "T8", "title": "草稿编辑冲突（需要决策的失败）", "editable": ["src/DraftEditor.tsx"], "hidden": ["T8.test.tsx"],
+  "wrong": { "toast-actions": ["冲突说明与两项决定留在工作面或确认结构"], "retry-only": ["冲突说明与两项决定留在工作面或确认结构", "覆盖保存以 force 重新提交", "重新载入用服务器文本替换草稿"] } }

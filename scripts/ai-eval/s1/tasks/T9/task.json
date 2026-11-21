@@ -1,0 +1,2 @@
+{ "id": "T9", "title": "标签输入（文字本身就是值）", "editable": ["src/TagField.tsx"], "hidden": ["T9.test.tsx"],
+  "wrong": { "combobox": ["新标签名原样提交"], "match-only": ["新标签名原样提交"], "plain-input": ["选择建议后提交该建议"] } }

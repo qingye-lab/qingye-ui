@@ -1,0 +1,2 @@
+{ "id": "T23", "title": "目录的显示条件（少于两个目的地不渲染）", "editable": ["src/ArticleToc.tsx"], "hidden": ["T23.test.tsx"],
+  "wrong": { "always-render": ["只有一节时不渲染目录"], "hand-rolled": ["目录来自库"] } }

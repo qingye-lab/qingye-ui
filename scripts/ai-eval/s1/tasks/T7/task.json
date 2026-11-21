@@ -1,0 +1,2 @@
+{ "id": "T7", "title": "发布按钮的阻止原因（禁用原因可见）", "editable": ["src/PublishBar.tsx"], "hidden": ["T7.test.tsx"],
+  "wrong": { "tooltip-reason": ["阻止原因无需悬停"], "title-attr": ["阻止原因无需悬停"], "hidden-button": ["仍显示但不能执行", "发布按钮来自库"] } }

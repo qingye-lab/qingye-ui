@@ -1,0 +1,2 @@
+{ "id": "T18", "title": "昵称保存结果未知", "editable": ["src/NicknameField.tsx"], "hidden": ["T18.test.tsx"],
+  "wrong": { "error-alert": ["结果未知时不报告失败", "未知状态来自库"], "auto-retry": ["不自动重试"] } }

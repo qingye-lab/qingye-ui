@@ -1,0 +1,2 @@
+{ "id": "T28", "title": "数据导入进度", "editable": ["src/ImportPanel.tsx"], "hidden": ["T28.test.tsx"],
+  "wrong": { "fake-progress": ["导入期间进度条不报告比例"], "zero-value": ["导入期间进度条不报告比例"], "spinner-only": ["点击“导入”调用 startImport", "导入期间进度条不报告比例", "进度条来自库"] } }

@@ -1,0 +1,2 @@
+{ "id": "T14", "title": "成员行操作菜单（查看资料与停用）", "editable": ["src/MemberRowMenu.tsx"], "hidden": ["T14.test.tsx"],
+  "wrong": { "onclick-navigate": ["查看资料是菜单里的链接"], "anchor-in-item": ["查看资料是菜单里的链接"] } }

@@ -20,7 +20,7 @@ const meta = existsSync(side('meta.json')) ? json(side('meta.json')) : {};
 const taskId = meta.task ?? runId.match(/^(T\d+)-/)?.[1];
 const taskInfo = json(resolve(here, 'tasks', taskId, 'task.json'));
 const reasons = [];
-const result = { runId, task: taskId, cond: meta.cond ?? null, agent: meta.agent ?? null, selftest: meta.selftest ?? null, rep: meta.rep ?? null, agentRun: { exitCode: meta.exitCode ?? null, signal: meta.signal ?? null, timedOut: meta.timedOut ?? false, durationSeconds: meta.durationSeconds ?? null, version: meta.version ?? null }, evaluatedAt: new Date().toISOString() };
+const result = { runId, task: taskId, cond: meta.cond ?? null, agent: meta.agent ?? null, selftest: meta.selftest ?? null, rep: meta.rep ?? null, agentRun: { exitCode: meta.exitCode ?? null, signal: meta.signal ?? null, timedOut: meta.timedOut ?? false, durationSeconds: meta.durationSeconds ?? null, version: meta.version ?? null, model: meta.isolation?.model ?? null, effort: meta.isolation?.effort ?? null, profile: meta.agentProfile ?? null, network: meta.isolation?.network ?? null }, evaluatedAt: new Date().toISOString() };
 
 // 1. 先取 git 变更（此时还没放入隐藏测试）
 const porcelain = sh('git', ['status', '--porcelain', '-uall']).stdout.split('\n').filter(Boolean).map(l => l.slice(3).replace(/^"|"$/g, ''));
@@ -122,8 +122,24 @@ const transcriptPath = side('transcript.jsonl');
 const transcript = existsSync(transcriptPath) ? read(transcriptPath) : null;
 const hits = transcript ? markers.filter(m => transcript.includes(m)) : [];
 if (transcript) {
-  // 同级运行目录（其他格的答案、带完整指南的模板、自测目录）：路径进入另一运行目录或模板
-  const siblings = [...new Set((transcript.match(/qingye-s1-(?:runs|dn)\/(?:T\d|_template|_strip)[A-Za-z0-9_.\/-]*/g) ?? []).filter(p => !p.includes(runId) && !runId.startsWith(p.replace(/^qingye-s1-(?:runs|dn)\//, ''))))]; // 后者是 Claude 进度摘要里被截断的本次路径
+  // 同级运行目录（其他格的答案、带完整指南的模板、自测目录）：路径进入另一运行目录或模板。
+  // v15：运行根目录名按 qingye-s1-<名> 推导（含 n0-dn 等新根）；逐个 JSON 字符串、逐行判定。
+  // 只出现在沙箱拒绝行（Operation not permitted / Permission denied）的路径没有读到内容，记入 blockedSiblingAttempts，不算污染；其余出现（代理动作、正常工具结果、文本）照旧算污染。
+  const siblingRe = /qingye-s1-[a-z0-9-]+\/(?:T\d|_template|_strip)[A-Za-z0-9_.\/-]*/g;
+  const ownPrefix = (p) => p.replace(/^qingye-s1-[a-z0-9-]+\//, '');
+  const isOther = (p) => !p.includes(runId) && !runId.startsWith(ownPrefix(p)); // 后者是 Claude 进度摘要里的前缀或通配符
+  const denied = /Operation not permitted|Permission denied/;
+  const siblingSet = new Set(), blockedSet = new Set();
+  for (const line of transcript.split('\n')) {
+    let event; try { event = JSON.parse(line); } catch { event = line; }
+    (function walk(v) {
+      if (typeof v === 'string') { for (const l of v.split('\n')) for (const p of (l.match(siblingRe) ?? []).filter(isOther)) (denied.test(l) ? blockedSet : siblingSet).add(p); }
+      else if (Array.isArray(v)) v.forEach(walk);
+      else if (v && typeof v === 'object') Object.values(v).forEach(walk);
+    })(event);
+  }
+  const siblings = [...siblingSet];
+  result.blockedSiblingAttempts = [...blockedSet].filter(p => !siblingSet.has(p)).slice(0, 10);
   hits.push(...siblings.slice(0, 5).map(p => 'sibling:' + p));
   // 从网络或本机全局缓存取本库的包或文档。只看代理的动作（命令、搜索、抓取），不看它读到的文件内容
   const library = /qingye[_-]lab|xflux/i; // 运行根目录名也含 qingye，不能只匹配 qingye
@@ -132,6 +148,8 @@ if (transcript) {
     const actions = [];
     if (event.item?.type === 'web_search') actions.push(['web', JSON.stringify(event.item.query ?? '') + JSON.stringify(event.item.action ?? '')]);
     if (event.item?.type === 'command_execution') actions.push(['cmd', String(event.item.command ?? '')]);
+    // v15：Codex 托管连接器（如 codex_apps 的 search_service.web_run）不受 web_search 开关约束，按联网动作检查
+    if (event.item?.type === 'mcp_tool_call') actions.push(['web', JSON.stringify({ server: event.item.server, tool: event.item.tool, arguments: event.item.arguments })]);
     for (const block of event.message?.content ?? []) {
       if (block?.type !== 'tool_use') continue;
       if (/^Web(?:Fetch|Search)$/.test(block.name)) actions.push(['web', JSON.stringify(block.input ?? {})]);

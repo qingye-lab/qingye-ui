@@ -1,0 +1,2 @@
+{ "id": "T20", "title": "请求取消不等于已取消（后台导出任务）", "editable": ["src/ExportTask.tsx"], "hidden": ["T20.test.tsx"],
+  "wrong": { "optimistic": ["仍为运行中时界面不出现已取消", "取消来晚了"], "no-feedback": ["点击取消后界面与点击前不同"] } }

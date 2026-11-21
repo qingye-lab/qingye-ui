@@ -1,0 +1,1 @@
+{"id": "T13", "title": "成员列表刷新（保留有效内容）", "editable": ["src/MemberList.tsx"], "hidden": ["T13.test.tsx"], "wrong": {"skeleton-on-refresh": ["刷新期间保留原有列表节点", "刷新失败保留原列表并告知失败"], "error-replaces": ["刷新失败保留原列表并告知失败"], "keep-on-switch": ["切换团队期间不显示上一团队的成员"]}}

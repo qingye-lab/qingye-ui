@@ -1,0 +1,2 @@
+{ "id": "T11", "title": "设置页结构（页面标题与分节）", "editable": ["src/SettingsPage.tsx"], "hidden": ["T11.test.tsx"],
+  "wrong": { "card-sections": ["每个分节是由标题命名的区域", "分节不使用卡片外框", "页面标题行与分节来自库"], "native-sections": ["页面标题行与分节来自库"] } }

@@ -1,0 +1,2 @@
+{ "id": "T17", "title": "申请提交的结局", "editable": ["src/ApplyForm.tsx"], "hidden": ["T17.test.tsx"],
+  "wrong": { "alert-beside": ["结局取代申请表单", "结局来自库"], "empty-success": ["结局来自库"] } }

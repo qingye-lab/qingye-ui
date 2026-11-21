@@ -1,0 +1,2 @@
+{ "id": "T27", "title": "任务状态筛选", "editable": ["src/StatusFilter.tsx"], "hidden": ["T27.test.tsx"],
+  "wrong": { "apply-on-close": ["未点“应用”就收起浮层不调用 onApply"], "live-apply": ["勾选时不立即调用 onApply", "未点“应用”就收起浮层不调用 onApply"], "native-panel": ["浮层来自库"] } }

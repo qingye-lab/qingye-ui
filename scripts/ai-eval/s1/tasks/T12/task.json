@@ -1,0 +1,2 @@
+{ "id": "T12", "title": "存储用量读数（测量与进度）", "editable": ["src/StorageUsage.tsx"], "hidden": ["T12.test.tsx"],
+  "wrong": { "progress": ["用量以测量值呈现", "用量不是任务进度", "来自库"], "zero-unknown": ["未知用量不画成 0"] } }

@@ -1,0 +1,2 @@
+{ "id": "T21", "title": "文件行的操作入口（右键菜单不是唯一入口）", "editable": ["src/FileRow.tsx"], "hidden": ["T21.test.tsx"],
+  "wrong": { "context-only": ["不使用右键也能执行重命名", "不使用右键也能执行删除", "命令集合与右键菜单一致"], "different-commands": ["不使用右键也能执行删除", "命令集合与右键菜单一致"] } }
