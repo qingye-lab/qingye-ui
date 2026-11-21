@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
-Source SHA-256: 8d97141f492627f220e38c903da4c49540311794074937e3d4b82be9ec0b857d
+Source SHA-256: f4e51a4407103bc3e69e9f6612457ef1004296c3c79aa640a6305d7c0145cfdd
 
 本页内几个段落之间走动的纵向目录：当前位置把一条清墨基线上自己那一段加深为焦墨，不新增形状。
 
@@ -17,10 +17,10 @@ Toc 不读路由、不做平滑滚动：<a href="#id"> 是原生锚点跳转，�
 
 ## Use and ownership
 - 一篇长文或文档页需要在几个段落间快速定位，并看到自己读到了哪一节。
-- Avoid: 少于两个目的地时目录没有意义，由调用方决定是否渲染（Toc 本身只在 items 为空时不渲染）。
+- Avoid: 为只有一节的页面另写是否渲染 Toc 的判断：少于两个目的地时 Toc 自己不渲染（按条目数算，一个 h2 下两个 h3 是三项）。
 - Avoid: 跨页面的目的地用 Breadcrumb 或 NavigationMenu；Toc 只表达同一页内的位置。
-- Library: 目录的排版、层级缩进、当前项的视觉表达。
-- Application: 标题的真实 id、滚动容器、吸顶偏移、是否需要目录（少于两项时渲染与否）。
+- Library: 目录的排版、层级缩进、当前项的视觉表达；少于两项时不渲染。
+- Application: 标题的真实 id、滚动容器、吸顶偏移、版面里是否为目录留栏。
 
 ## Composition
 - items 可以手写，也可以用 useTocHeadings 从容器里扫描 h2/h3[id]（Prose 渲染的标题天然满足）。
@@ -60,7 +60,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 ### Toc
-目录容器；渲染为 nav，没有条目时不渲染。
+目录容器；渲染为 nav，少于两项时不渲染。
 - items: { id: string; label: string; level: 2 | 3 }[]. 目的地列表；id 对应页面上真实存在的锚点。
 - current: string. 当前所在目的地的 id；缺省时没有条目带 aria-current。
 - render / ref / className / style / 原生属性: useRender.ComponentProps<"nav">. 属性、事件与 ref 透传实际元素。

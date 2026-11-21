@@ -1952,12 +1952,14 @@ Source SHA-256: 33bee148386b5e78157da9af6787ff6d23f8bb88bb47d5ae1aed705c86ef02df
 - 执行有对象与后果的命令、提交表单或停止当前任务。
 - Avoid: 导航用原生链接。
 - Avoid: 把结果写进按钮：忙碌结束不等于成功，失败与结果未知用 Alert、Toast 或 FieldError 表达。
+- Avoid: 把禁用原因只放在 Tooltip 或 title 里：触屏上提示不会出现，原因就读不到。禁用条件要能被读到（design.md「判断可被机器读到的部分必须写下来」），原因写成按钮旁的页内文字。
 - Library: 原生与非原生命令语义、焦点、忙碌时的激活保护与读屏说法。
 - Application: 对象、范围、后果、权限、请求事实、核实、恢复与取消后台任务。
 
 ### Composition
 - 有不可逆后果的动作：按钮只是入口，打开 AlertDialog（或 ConfirmAction），后果写在对话框的说明里；确认条件、权限与远端核实属于应用。
 - 按下后保持的二态（已选中、已开启）用 Toggle；几个里选一个用 SegmentedControl，可多选用 ToggleGroup。Button 只触发动作，不持有选中。
+- 能先操作再纠错的（多数表单提交）不禁用按钮，提交后用 FieldError 或 Alert 就地说明。确需禁用时用 aria-disabled 保持按钮可聚焦，原因写在按钮旁的可见文字里，并用 aria-describedby 关联。
 
 ### Responsive behavior
 - 尺寸按位置选择；长标签可换行增高，图标形态保留同档几何；触摸命中区独立于外观。
@@ -2052,7 +2054,7 @@ export default function Demo() {
 }
 ```
 
-7 more examples: see the component page and its Markdown file.
+8 more examples: see the component page and its Markdown file.
 
 ## 动作组 ButtonGroup
 
@@ -12923,7 +12925,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
-Source SHA-256: 8d97141f492627f220e38c903da4c49540311794074937e3d4b82be9ec0b857d
+Source SHA-256: f4e51a4407103bc3e69e9f6612457ef1004296c3c79aa640a6305d7c0145cfdd
 
 本页内几个段落之间走动的纵向目录：当前位置把一条清墨基线上自己那一段加深为焦墨，不新增形状。
 
@@ -12937,10 +12939,10 @@ Toc 不读路由、不做平滑滚动：<a href="#id"> 是原生锚点跳转，�
 
 ### Use and ownership
 - 一篇长文或文档页需要在几个段落间快速定位，并看到自己读到了哪一节。
-- Avoid: 少于两个目的地时目录没有意义，由调用方决定是否渲染（Toc 本身只在 items 为空时不渲染）。
+- Avoid: 为只有一节的页面另写是否渲染 Toc 的判断：少于两个目的地时 Toc 自己不渲染（按条目数算，一个 h2 下两个 h3 是三项）。
 - Avoid: 跨页面的目的地用 Breadcrumb 或 NavigationMenu；Toc 只表达同一页内的位置。
-- Library: 目录的排版、层级缩进、当前项的视觉表达。
-- Application: 标题的真实 id、滚动容器、吸顶偏移、是否需要目录（少于两项时渲染与否）。
+- Library: 目录的排版、层级缩进、当前项的视觉表达；少于两项时不渲染。
+- Application: 标题的真实 id、滚动容器、吸顶偏移、版面里是否为目录留栏。
 
 ### Composition
 - items 可以手写，也可以用 useTocHeadings 从容器里扫描 h2/h3[id]（Prose 渲染的标题天然满足）。
@@ -12980,7 +12982,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 #### Toc
-目录容器；渲染为 nav，没有条目时不渲染。
+目录容器；渲染为 nav，少于两项时不渲染。
 - items: { id: string; label: string; level: 2 | 3 }[]. 目的地列表；id 对应页面上真实存在的锚点。
 - current: string. 当前所在目的地的 id；缺省时没有条目带 aria-current。
 - render / ref / className / style / 原生属性: useRender.ComponentProps<"nav">. 属性、事件与 ref 透传实际元素。
@@ -13380,7 +13382,7 @@ Source SHA-256: 4dd9b24c79431acd6f078c8ffae3d40788c79a47f11561f55ceb4429e8a8aab6
 ### Notes
 - 纯图标按钮自带 aria-label；打开时 aria-describedby 关联提示，保留已有说明。
 - 提示只承载短文本。需要点击帮助或交互内容时用 Popover，需要持续依据时用正文。
-- 直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因直接可见。
+- 直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因写成页内可见文字：触屏上提示不会出现，只放在提示里的原因在那里读不到。
 - 触发器不自带控件：提示附在调用方给出的控件上。该控件必须能获得键盘焦点，所以不是 span。
 
 ### Use and ownership

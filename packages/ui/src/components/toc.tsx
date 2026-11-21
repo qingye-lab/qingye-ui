@@ -17,6 +17,11 @@ export type TocItem = { id: string; label: string; level: 2 | 3 };
  * 字重（避免文字变宽、整排跳动，navLineItemClassNameVertical 的字重随 text-support 走，
  * 不随当前状态变化）。
  *
+ * 少于两个目的地不渲染（用户裁决 2026-11-21）：只有一项时没有可以走动的地方，读者只能跳到
+ * 正在读的这一节，一项的列表不是目录（名实相符）。条目数 Toc 自己拿得到，不依赖应用事实，
+ * 所以由组件判断，与 Pagination 单页时不渲染同理。按条目数算，不按 h2 算：一个 h2 下两个 h3
+ * 是三项，照常渲染。版面里要不要为目录留栏，仍由调用方按 items.length 决定。
+ *
  * 本库不读路由、不做平滑滚动：<a href="#id"> 是原生锚点跳转；路由集成、滚动行为、
  * scroll-padding-top 这类页面级细节留给项目（Toc 不知道页面有没有吸顶头部）。
  *
@@ -68,12 +73,12 @@ export type TocProps = Omit<useRender.ComponentProps<"nav">, "children"> & {
 
 export function Toc({ items, current, render, className, ...props }: TocProps) {
   const { messages } = useUILocale();
-  // useRender 内部用了 hook，要无条件调用；用 enabled 表达「没有条目就不渲染」，
+  // useRender 内部用了 hook，要无条件调用；用 enabled 表达「少于两项就不渲染」，
   // 不能用提前 return 跳过这次调用（rules-of-hooks：hook 调用次数不能随条件变化）。
   return useRender({
     defaultTagName: "nav",
     render,
-    enabled: items.length > 0,
+    enabled: items.length >= 2,
     props: mergeProps({
       "data-slot": "toc",
       "aria-label": messages.toc,
