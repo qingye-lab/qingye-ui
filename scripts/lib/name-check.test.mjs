@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { findNameIssues, parseAriaSnapshot } from "./name-check.mjs";
+import { findNameIssues, parseAriaSnapshot, splitSpecimens } from "./name-check.mjs";
 
 const issues = (text) => findNameIssues(parseAriaSnapshot(text));
 const rules = (text, rule) => issues(text).filter((i) => i.rule === rule);
@@ -101,4 +101,17 @@ test("R2 treats same-name links to the same /url as one object, but reports diff
   assert.equal(rules(footnotes, "R2").length, 1);
   const noUrl = ["- main:", "  - link \"Open\"", "  - link \"Open\""].join("\n");
   assert.equal(rules(noUrl, "R2").length, 1);
+});
+
+test("specimens: R2 moves to its own list only when every match is inside a marked region", () => {
+  const r2 = { rule: "R2", role: "button", name: "保存", scope: "(root)", count: 2 };
+  const r3 = { rule: "R3", role: "navigation", name: "", scope: "(root)", count: 2 };
+  assert.deepEqual(splitSpecimens([r2], [[true, true]]), { issues: [], specimens: [r2] });
+  // one match outside the specimen: a real repeat, stays a finding
+  assert.deepEqual(splitSpecimens([r2], [[true, false]]), { issues: [r2], specimens: [] });
+  // nothing located: stays a finding rather than being hidden
+  assert.deepEqual(splitSpecimens([r2], [[]]), { issues: [r2], specimens: [] });
+  assert.deepEqual(splitSpecimens([r2], []), { issues: [r2], specimens: [] });
+  // landmarks are never specimens
+  assert.deepEqual(splitSpecimens([r3], [[true, true]]), { issues: [r3], specimens: [] });
 });

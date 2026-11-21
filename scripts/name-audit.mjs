@@ -7,7 +7,10 @@
 //   --list prints the page ids that would run (site: routes, matched exactly) and exits.
 //
 // Status words follow the repository convention:
-//   FAIL     at least one R2/R3 finding on the page (exit 0 unless --strict)
+//   FAIL     at least one R2/R3 finding on the page (exit 0 unless --strict); specimens count too
+//   SPECIMEN (column, not a status) an R2 whose every match sits inside a [data-specimen] region the demo
+//            or page declared (one control laid out in several looks). Reported in its own list; the page
+//            stays FAIL and --strict still fails on it. The script holds no list of pages or names.
 //   NOT_RUN  the page failed to load or threw (exit 1)
 //   PASS     no finding
 //   UNVERIFIED (scope note) popups, menus and dialogs that are not open at rest are not in the tree.
@@ -18,7 +21,7 @@
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { closeWithTimeout, selectVariants, withBrowser } from "./browser-runtime.mjs";
-import { findNameIssues, parseAriaSnapshot } from "./lib/name-check.mjs";
+import { findNameIssues, parseAriaSnapshot, splitSpecimens } from "./lib/name-check.mjs";
 
 const args = process.argv.slice(2);
 const valueFlags = new Set(["--only", "--report"]);
@@ -78,6 +81,18 @@ function siteRoutes() {
   return [...routes].map((path) => ({ id: path, path }));
 }
 
+/** The finding's scope (`region "a" > group "b"`, every segment named) as a locator under the unit root. */
+function scopeOf(root, path) {
+  if (path === "(root)") return root;
+  let scope = root;
+  for (const segment of path.split(" > ")) {
+    const m = /^(\w+) "(.*)"$/.exec(segment);
+    if (!m) return root;
+    scope = scope.getByRole(m[1], { name: m[2], exact: true });
+  }
+  return scope;
+}
+
 const pages = site ? siteRoutes() : playgroundPages();
 const selected = requested.length && site ? pages.filter((p) => requested.includes(p.path)) : pages;
 
@@ -87,6 +102,7 @@ if (args.includes("--list")) {
 }
 
 const findings = []; // { page, variant, unit, rule, role, name, scope, count }
+const specimens = []; // same shape; R2 inside a declared [data-specimen] region
 const results = []; // { page, variant, status, units, findings }
 const problems = [];
 let interrupted = false;
@@ -117,7 +133,7 @@ try {
               await main.waitFor({ timeout: 8000 }).catch(() => {});
               const root = (await page.locator("main").count()) ? main : page.locator("body");
               await page.waitForTimeout(250);
-              snapshots.push({ unit: "main", text: await root.ariaSnapshot() });
+              snapshots.push({ unit: "main", root, text: await root.ariaSnapshot() });
             } else {
               await page.waitForFunction(() =>
                 document.querySelector("[data-playground] [data-demo]") ||
@@ -126,19 +142,28 @@ try {
               await page.waitForTimeout(250);
               const demos = page.locator("[data-playground] [data-demo]");
               const count = await demos.count();
-              for (let i = 0; i < count; i++) snapshots.push({ unit: `demo ${i + 1}`, text: await demos.nth(i).ariaSnapshot() });
+              for (let i = 0; i < count; i++) snapshots.push({ unit: `demo ${i + 1}`, root: demos.nth(i), text: await demos.nth(i).ariaSnapshot() });
             }
             if (pageError) throw new Error(`page error: ${pageError}`);
             const own = [];
+            const ownSpecimens = [];
             for (const s of snapshots) {
-              for (const issue of findNameIssues(parseAriaSnapshot(s.text))) own.push({ page: target.id, variant: v.name, unit: s.unit, ...issue });
+              const issues = findNameIssues(parseAriaSnapshot(s.text));
+              // Is each control with this role and name inside a region the demo/page marked as a specimen?
+              const flags = await Promise.all(issues.map((issue) => issue.rule !== "R2" ? [] :
+                scopeOf(s.root, issue.scope).getByRole(issue.role, { name: issue.name, exact: true })
+                  .evaluateAll((els) => els.map((el) => el.closest("[data-specimen]") !== null))));
+              const split = splitSpecimens(issues, flags);
+              for (const issue of split.issues) own.push({ page: target.id, variant: v.name, unit: s.unit, ...issue });
+              for (const issue of split.specimens) ownSpecimens.push({ page: target.id, variant: v.name, unit: s.unit, ...issue });
             }
             findings.push(...own);
-            const status = own.length ? "FAIL" : "PASS";
-            results.push({ page: target.id, variant: v.name, status, units: snapshots.length, findings: own.length });
-            console.log(`names ${target.id} [${v.name}] ${status} units ${snapshots.length} R2 ${own.filter((f) => f.rule === "R2").length} R3 ${own.filter((f) => f.rule === "R3").length}`);
+            specimens.push(...ownSpecimens);
+            const status = own.length || ownSpecimens.length ? "FAIL" : "PASS";
+            results.push({ page: target.id, variant: v.name, status, units: snapshots.length, findings: own.length, specimens: ownSpecimens.length });
+            console.log(`names ${target.id} [${v.name}] ${status} units ${snapshots.length} R2 ${own.filter((f) => f.rule === "R2").length} R3 ${own.filter((f) => f.rule === "R3").length} specimen ${ownSpecimens.length}`);
           } catch (error) {
-            results.push({ page: target.id, variant: v.name, status: "NOT_RUN", units: 0, findings: 0 });
+            results.push({ page: target.id, variant: v.name, status: "NOT_RUN", units: 0, findings: 0, specimens: 0 });
             problems.push(`NOT_RUN ${target.id} [${v.name}] ${error.message.split("\n")[0].slice(0, 160)}`);
           }
         }
@@ -154,35 +179,42 @@ try {
 process.off("SIGINT", onInterrupt);
 process.off("SIGTERM", onInterrupt);
 
-/** (rule, role, name) -> { count, pages } */
-const aggregate = new Map();
-for (const f of findings) {
-  const key = `${f.rule}\0${f.role}\0${f.name}`;
-  const entry = aggregate.get(key) ?? { rule: f.rule, role: f.role, name: f.name, occurrences: 0, pages: new Set() };
-  entry.occurrences++;
-  entry.pages.add(f.page);
-  aggregate.set(key, entry);
+/** (rule, role, name) -> { count, pages }, most widespread first */
+function rank(list) {
+  const aggregate = new Map();
+  for (const f of list) {
+    const key = `${f.rule}\0${f.role}\0${f.name}`;
+    const entry = aggregate.get(key) ?? { rule: f.rule, role: f.role, name: f.name, occurrences: 0, pages: new Set() };
+    entry.occurrences++;
+    entry.pages.add(f.page);
+    aggregate.set(key, entry);
+  }
+  return [...aggregate.values()].sort((a, b) => b.pages.size - a.pages.size || b.occurrences - a.occurrences);
 }
-const ranked = [...aggregate.values()].sort((a, b) => b.pages.size - a.pages.size || b.occurrences - a.occurrences);
+const ranked = rank(findings);
+const rankedSpecimens = rank(specimens);
+const listed = (e) => ({ rule: e.rule, role: e.role, name: e.name, occurrences: e.occurrences, pages: [...e.pages] });
 const count = (status) => results.filter((r) => r.status === status).length;
 const counts = { PASS: count("PASS"), FAIL: count("FAIL"), NOT_RUN: count("NOT_RUN") };
 const byRule = { R2: findings.filter((f) => f.rule === "R2").length, R3: findings.filter((f) => f.rule === "R3").length };
-const status = problems.length ? "NOT_RUN" : findings.length ? "FAIL" : "PASS";
-const exitCode = problems.length || (strict && findings.length) ? 1 : 0;
+const status = problems.length ? "NOT_RUN" : findings.length || specimens.length ? "FAIL" : "PASS";
+const exitCode = problems.length || (strict && (findings.length || specimens.length)) ? 1 : 0;
 const report = {
   base, mode: site ? "site" : "playground", strict, variants: variants.map((v) => v.name),
   scopeNote: "UNVERIFIED: popups, menus and dialogs that are not open at rest are not in the tree.",
-  pages: results.length, counts, findingsByRule: byRule, status, exitCode,
-  aggregate: ranked.map((e) => ({ rule: e.rule, role: e.role, name: e.name, occurrences: e.occurrences, pages: [...e.pages] })),
-  findings, results, problems,
+  pages: results.length, counts, findingsByRule: byRule, specimenCount: specimens.length, status, exitCode,
+  aggregate: ranked.map(listed), specimenAggregate: rankedSpecimens.map(listed),
+  findings, specimens, results, problems,
 };
 if (reportPath) writeFileSync(reportPath, `${JSON.stringify(report, null, 2)}\n`);
-console.log(`\n${report.mode}: ${results.length} page run(s): PASS ${counts.PASS} FAIL ${counts.FAIL} NOT_RUN ${counts.NOT_RUN}; findings R2 ${byRule.R2} R3 ${byRule.R3}`);
+console.log(`\n${report.mode}: ${results.length} page run(s): PASS ${counts.PASS} FAIL ${counts.FAIL} NOT_RUN ${counts.NOT_RUN}; findings R2 ${byRule.R2} R3 ${byRule.R3}; specimen ${specimens.length}`);
 for (const e of ranked.slice(0, 20)) {
   const where = [...e.pages];
   console.log(`  ${e.rule} ${e.role} "${e.name}" ×${e.occurrences} on ${where.length} page(s): ${where.slice(0, 4).join(", ")}${where.length > 4 ? ", …" : ""}`);
 }
 if (ranked.length > 20) console.log(`  … ${ranked.length - 20} more (see --report)`);
+if (rankedSpecimens.length) console.log("SPECIMEN  declared side-by-side looks of one control (data-specimen); still counted:");
+for (const e of rankedSpecimens) console.log(`  ${e.rule} ${e.role} "${e.name}" ×${e.occurrences} on ${e.pages.size} page(s): ${[...e.pages].slice(0, 4).join(", ")}${e.pages.size > 4 ? ", …" : ""}`);
 console.log("UNVERIFIED  popups, menus and dialogs that are not open at rest are not in the tree.");
 if (problems.length) console.log(`\n${problems.join("\n")}`);
 console.log(`\n${status}${strict ? " (strict)" : " (report only)"}`);

@@ -88,6 +88,7 @@ node scripts/run-browser-audit.mjs --names [--site] [--only light-desktop] [--re
 - **R2 同处同名**：同一作用域内，可操作角色（button、link、checkbox、radio、switch、combobox、textbox、searchbox、spinbutton、slider、tab、menuitem、menuitemcheckbox、menuitemradio）角色和名称（trim 后）都相同的出现不少于 2 次。
 - **作用域**是最近的、名称非空的 region / form / navigation / main / complementary / banner / contentinfo / search / dialog / alertdialog / group / radiogroup / toolbar / tablist / menu / menubar 祖先，没有则为根。两个分别命名的 region、两个 fieldset 里各有一个“城市”不算重复。**listitem、row、cell 不是作用域**：行内重复的“删除”应当带上对象，这类重复要被报出来，再由人判断。
 - **R3 重复地标不可区分**：同一根下，navigation / complementary / form / search / region / main / banner / contentinfo 里角色相同、名称也相同（包括都为空）的出现不少于 2 次。
+- **样张单列**：同一个控件的几种外观或状态并列（尺寸、变体、忙碌与禁用）时名称相同是有意的。由 demo 或页面自己声明：demo 在 `meta` 写 `specimen: true`（渲染为 `data-specimen`），页面直接给容器加 `data-specimen`。一条 R2 的作用域内，同角色同名的控件全部落在声明的区域里，才单列为样张；有一个在外、或一个也定位不到，仍是普通发现。R3 不单列。样张仍计数、在报告的 `specimens` / `specimenAggregate` 与终端 `SPECIMEN` 段输出，所在页仍为 `FAIL`，`--strict` 也照样失败；脚本里不写页面或名称名单。`specimen` 只用于演示目的就是并列比较的情形，真实用法里同名仍须改名称。
 - 名称为空的控件不在此检查：`axe-audit.mjs` 的 `button-name`、`link-name`、`label` 等 WCAG 规则已覆盖，不重复。
 - 状态：每页 `PASS` / `FAIL`；加载失败或页面抛错为 `NOT_RUN`。**只报告不阻断**：只有 FAIL 时退出码为 0，有 `NOT_RUN` 或运行失败为 1；加 `--strict` 则 FAIL 也退出 1，留给以后改成门禁。
 - **UNVERIFIED**：静置态的树里没有未打开的弹层、菜单、对话框内容，它们里面的重名不在覆盖范围内。

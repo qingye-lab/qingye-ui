@@ -28,7 +28,7 @@ export function DemoFrame({ slug, demo }: { slug: string; demo: LoadedDemo }) {
   const Demo = demo.default;
   const id = `demo-${demo.id}`;
   return (
-    <Prose aria-labelledby={id} className="component-demo" data-demo={demo.id} framed={false} render={<section />}>
+    <Prose aria-labelledby={id} className="component-demo" data-demo={demo.id} data-specimen={meta.specimen ? "" : undefined} framed={false} render={<section />}>
       <H3 id={id}>{meta.title}</H3>
       {meta.description ? <p className="component-demo-description" data-slot="docs-demo-description">{meta.description}</p> : null}
       <Collapsible className="component-demo-frame">

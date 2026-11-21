@@ -133,3 +133,20 @@ export function findNameIssues(tree) {
   }
   return issues;
 }
+
+/**
+ * Separates findings that sit inside a specimen: a region whose author marked it `data-specimen`
+ * because it lays one control out side by side in several looks or states, so equal names are intended.
+ * `flags[i]` lists, for issues[i], whether each control with that role and name under the root is inside
+ * such a region. Only R2 can be a specimen, and only when every match is inside one; when nothing was
+ * located (empty list) the finding stays a finding. Specimens are still reported, in their own list.
+ */
+export function splitSpecimens(issues, flags) {
+  const kept = [];
+  const specimens = [];
+  issues.forEach((issue, i) => {
+    const inside = flags[i] ?? [];
+    (issue.rule === "R2" && inside.length > 0 && inside.every(Boolean) ? specimens : kept).push(issue);
+  });
+  return { issues: kept, specimens };
+}

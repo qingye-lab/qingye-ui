@@ -1,6 +1,6 @@
 import { Button } from "@qingye_lab/ui/components/button";
 
-export const meta = { title: "变体与色调", titleEn: "Variants and tones" };
+export const meta = { title: "变体与色调", titleEn: "Variants and tones", specimen: true };
 
 export default function Demo() {
   return (
