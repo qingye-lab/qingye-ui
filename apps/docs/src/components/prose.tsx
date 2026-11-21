@@ -2,7 +2,7 @@ import { cn } from "@qingye_lab/ui";
 import { linkClassName } from "@qingye_lab/ui/components/link";
 import { Prose, type ProseProps } from "@qingye_lab/ui/components/prose";
 import { IconLink } from "@tabler/icons-react";
-import { useEffect, type ComponentProps, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type ComponentProps, type ReactNode } from "react";
 import { useLocation } from "react-router-dom";
 import { Link } from "./locale-link";
 import { syncDocumentHead } from "@/lib/document-head";
@@ -77,11 +77,31 @@ export function PageHeader({
   );
 }
 
+/*
+ * A heading's permalink is an adjunct of the heading: it is named "action + heading" like the library's adjunct
+ * buttons, so it never shares a name with a link to a page of the same title (the components overview links
+ * "Layout" the component beside the "Layout" category heading). The heading keeps its own name through
+ * aria-labelledby on the text, otherwise the link's label would become the heading's name. The text is read
+ * after render because headings may hold markup.
+ */
 function Anchor({ id, children }: { id: string; children: ReactNode }) {
   const onHashClick = useHashLink();
+  const en = useDocsLocale() === "en";
+  const textRef = useRef<HTMLSpanElement>(null);
+  const [text, setText] = useState("");
+  useLayoutEffect(() => {
+    const next = textRef.current?.textContent?.replace(/\s+/g, " ").trim() ?? "";
+    setText((previous) => (previous === next ? previous : next));
+  });
   return (
-    <a className="group/anchor focus-ring inline-flex max-w-full items-baseline gap-(--qy-space-2) rounded-sm" data-slot="docs-heading-anchor" href={`#${id}`} onClick={(event) => onHashClick(event, id)}>
-      <span className="min-w-0 [overflow-wrap:anywhere]">{children}</span>
+    <a
+      aria-label={text ? (en ? `Link to section ${text}` : `本节链接 ${text}`) : undefined}
+      className="group/anchor focus-ring inline-flex max-w-full items-baseline gap-(--qy-space-2) rounded-sm"
+      data-slot="docs-heading-anchor"
+      href={`#${id}`}
+      onClick={(event) => onHashClick(event, id)}
+    >
+      <span className="min-w-0 [overflow-wrap:anywhere]" id={`${id}-text`} ref={textRef}>{children}</span>
       <IconLink
         aria-hidden="true"
         className="size-(--qy-control-sm-icon) shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover/anchor:opacity-100 group-focus-visible/anchor:opacity-100"
@@ -93,6 +113,7 @@ function Anchor({ id, children }: { id: string; children: ReactNode }) {
 export function H2({ id, children, className }: { id: string; children: ReactNode; className?: string }) {
   return (
     <h2
+      aria-labelledby={`${id}-text`}
       className={cn("docs-section-heading", className)}
       data-toc="2"
       id={id}
@@ -105,6 +126,7 @@ export function H2({ id, children, className }: { id: string; children: ReactNod
 export function H3({ id, children, className }: { id: string; children: ReactNode; className?: string }) {
   return (
     <h3
+      aria-labelledby={`${id}-text`}
       className={cn("docs-section-heading", className)}
       data-toc="3"
       id={id}
