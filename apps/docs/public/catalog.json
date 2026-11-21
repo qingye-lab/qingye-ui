@@ -36652,7 +36652,6 @@
         "meter",
         "gauge",
         "measure",
-        "level",
         "仪表",
         "度量",
         "用量",
@@ -36673,8 +36672,8 @@
             {
               "name": "segments",
               "type": "number",
-              "description": "离散的 n 级：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；(value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。级别名用 getAriaValueText 给出。",
-              "descriptionEn": "A discrete scale of n levels: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Name levels with getAriaValueText."
+              "description": "以 n 个整格计的读数：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；(value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。实际读数与单位用 getAriaValueText 给出。",
+              "descriptionEn": "A reading counted in n whole cells: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Give the actual reading and unit with getAriaValueText."
             },
             {
               "name": "tone",
@@ -36737,7 +36736,7 @@
                 "name": "segments",
                 "optional": true,
                 "type": "number",
-                "doc": "这个量是离散的 n 级时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。\n格间空隙是透明的，规则见 utilities.css 的读数轨道分格。",
+                "doc": "读数本身以整格计（如四格里剩几格）时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。\n格间空隙是透明的，规则见 utilities.css 的读数轨道分格。",
                 "declaredAt": "packages/ui/src/components/meter.tsx:15"
               },
               {
@@ -36884,7 +36883,7 @@
           "kind": "type",
           "owner": "meter",
           "module": "@qingye_lab/ui/components/meter",
-          "signature": "React.ComponentProps<typeof MeterPrimitive.Root> & {\n  /** 状态类别：由调用方声明，组件不从数值猜好坏（随类赋彩）。不给时指示用主色。 */\n  tone?: Tone;\n  /**\n   * 这个量是离散的 n 级时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。\n   * 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。\n   */\n  segments?: number;\n}",
+          "signature": "React.ComponentProps<typeof MeterPrimitive.Root> & {\n  /** 状态类别：由调用方声明，组件不从数值猜好坏（随类赋彩）。不给时指示用主色。 */\n  tone?: Tone;\n  /**\n   * 读数本身以整格计（如四格里剩几格）时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。\n   * 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。\n   */\n  segments?: number;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -36915,7 +36914,7 @@
       "types": [
         {
           "name": "MeterProps",
-          "definition": "export type MeterProps = React.ComponentProps<typeof MeterPrimitive.Root> & {\n  /** 状态类别：由调用方声明，组件不从数值猜好坏（随类赋彩）。不给时指示用主色。 */\n  tone?: Tone;\n  /**\n   * 这个量是离散的 n 级时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。\n   * 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。\n   */\n  segments?: number;\n};"
+          "definition": "export type MeterProps = React.ComponentProps<typeof MeterPrimitive.Root> & {\n  /** 状态类别：由调用方声明，组件不从数值猜好坏（随类赋彩）。不给时指示用主色。 */\n  tone?: Tone;\n  /**\n   * 读数本身以整格计（如四格里剩几格）时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。\n   * 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。\n   */\n  segments?: number;\n};"
         }
       ],
       "usageImports": [
@@ -37013,15 +37012,16 @@
         },
         {
           "id": "levels",
-          "title": "三级的级别",
+          "title": "以整格计的读数",
           "source": "apps/docs/src/content/meter/demos/02-levels.tsx",
           "imports": [
             "@/lib/types",
+            "@qingye_lab/ui/components/layout",
             "@qingye_lab/ui/components/meter"
           ],
           "providers": [],
-          "code": "import { Meter, MeterIndicator, MeterTrack } from \"@qingye_lab/ui/components/meter\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"三级的级别\", titleEn: \"Three levels\" } satisfies DemoMeta;\nconst levels = [\"低\", \"中\", \"高\"];\nconst rows: { name: string; level: 1 | 2 | 3; tone: \"danger\" | \"warning\" | \"info\" }[] = [\n  { name: \"三号蚕室温度偏离\", level: 3, tone: \"danger\" },\n  { name: \"一号蚕室湿度偏离\", level: 2, tone: \"warning\" },\n  { name: \"二号蚕室桑叶余量\", level: 1, tone: \"info\" },\n];\nexport default function Demo() {\n  return <ul className=\"m-0 grid w-full max-w-xs list-none gap-(--qy-field-gap) p-0\">{rows.map(row => <li key={row.name} className=\"flex min-w-0 items-center justify-between gap-(--qy-panel-gap)\">\n    <span className=\"min-w-0 text-body wrap-anywhere\">{row.name}</span>\n    <Meter className=\"w-16 shrink-0\" aria-label={`${row.name}级别`} value={row.level} min={0} max={3} segments={3} tone={row.tone} getAriaValueText={(_, value) => levels[value - 1]!}><MeterTrack><MeterIndicator /></MeterTrack></Meter>\n  </li>)}</ul>;\n}\n",
-          "sha256": "7cc03ce2057c77802c948501b85d04ac61fd278b71a92c1acb97322045d07a1a"
+          "code": "import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from \"@qingye_lab/ui/components/meter\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"以整格计的读数\", titleEn: \"Readings in whole cells\" } satisfies DemoMeta;\nconst rows = [\n  { name: \"一号蚕室桑叶余量\", value: 3 },\n  { name: \"二号蚕室桑叶余量\", value: 1 },\n  { name: \"三号蚕室桑叶余量\", value: 0 },\n];\nconst reading = (value: number) => `${value} / 4 筐`;\nexport default function Demo() {\n  return <Stack gap=\"fields\" className=\"w-full max-w-xs\">{rows.map(row => <Meter key={row.name} value={row.value} min={0} max={4} segments={4} getAriaValueText={(_, value) => reading(value)}>\n    <Inline gap=\"actions\"><MeterLabel>{row.name}</MeterLabel><MeterValue className=\"ms-auto\">{(_, value) => reading(value)}</MeterValue></Inline>\n    <MeterTrack><MeterIndicator /></MeterTrack>\n  </Meter>)}</Stack>;\n}\n",
+          "sha256": "69d5ccc2f47bb4c4530deb97074bdb2d82603b1c8ad3a56af4d2f2fc04b8ab79"
         }
       ],
       "design": {
@@ -37030,14 +37030,15 @@
           "布白有用"
         ],
         "whenToUse": [
-          "表达测量值及单位。"
+          "表达一个有效范围内的测量值及单位，读屏读出读数。"
         ],
         "avoid": [
-          "任务完成比例使用 Progress；未知测量不要填0。"
+          "任务完成比例使用 Progress；未知测量不要填0。",
+          "对象带有一个有次序的级别、读出的是级别名称（如高、中、低）时用 SeverityMark；对象处于哪一种状态用 StatusDot。"
         ],
         "composition": [
           "Label 关联名称，Value 展示实际读数，轨与指示不猜测好坏。",
-          "密集列表里的级别用 segments={3} 加 tone，不用 StatusDot：状态与程度是两件事。"
+          "segments 只给本身以整格计的读数分格，getAriaValueText 读出实际读数与单位；一行对象的级别用 SeverityMark。"
         ],
         "stateOwner": {
           "library": [
@@ -37056,16 +37057,16 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/meter.tsx",
-        "sha256": "9579a5e1dcfc8e727b00a72c3e2b16e1be3853063a55fdc4af3cd6a927040c7c",
+        "sha256": "3b1233fa556bb4efd1a827ee8adfc0c4e36155e61816f0c7f378a8b23e793ca9",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "任务完成比例使用 Progress；未知测量不要填0。级别是「几级里的第几级」，用 segments 分格；状态类别 tone 由调用方声明，色相之外格数仍读得出级别。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。",
+      "decisions": "任务完成比例使用 Progress；未知测量不要填0。读数本身是若干整格时用 segments 分格，读屏读出的仍是读数；对象的有序级别读出的是级别名称，用 SeverityMark。状态类别 tone 由调用方声明，色相之外格数或读数仍承担同一事实。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。",
       "localized": {
         "en": {
           "title": "Meter",
           "description": "A real measurement over a valid range.",
           "category": "Feedback",
-          "decisions": "Use Progress for task completion. Unknown measurements must not become zero. A level is \"which of n steps\", so use segments; tone is declared by the caller, and the cell count still reads without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).",
+          "decisions": "Use Progress for task completion. Unknown measurements must not become zero. When the reading itself counts whole cells, use segments and the screen reader still reads the reading; an ordered level of an object reads as the level's name, so use SeverityMark. tone is declared by the caller, and the cell count or reading still carries the fact without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).",
           "notes": [],
           "api": [
             {
@@ -37082,8 +37083,8 @@
                 {
                   "name": "segments",
                   "type": "number",
-                  "description": "A discrete scale of n levels: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Name levels with getAriaValueText.",
-                  "descriptionEn": "A discrete scale of n levels: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Name levels with getAriaValueText."
+                  "description": "A reading counted in n whole cells: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Give the actual reading and unit with getAriaValueText.",
+                  "descriptionEn": "A reading counted in n whole cells: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Give the actual reading and unit with getAriaValueText."
                 },
                 {
                   "name": "tone",
@@ -37139,14 +37140,15 @@
               "Space supports the task （布白有用）"
             ],
             "whenToUse": [
-              "Present measured values and units."
+              "Present a measurement over a valid range, with its unit; screen readers read the reading."
             ],
             "avoid": [
-              "Use Progress for task completion. Unknown measurements must not become zero."
+              "Use Progress for task completion. Unknown measurements must not become zero.",
+              "Use SeverityMark when an object has an ordered level read as its name (such as high, medium, low); use StatusDot for which state an object is in."
             ],
             "composition": [
               "Label associates the name, Value presents the actual reading, and track/indicator infer no judgment.",
-              "A level in a dense list uses segments={3} with tone, not StatusDot: status and degree are two facts."
+              "segments only splits a reading that itself counts whole cells; getAriaValueText reads the actual reading and unit. A row's level uses SeverityMark."
             ],
             "stateOwner": {
               "library": [
@@ -51391,16 +51393,17 @@
           "随境取度"
         ],
         "whenToUse": [
-          "一行对象带有一个有次序的级别，需要不占一列文字就能比较高低。"
+          "一行对象带有一个有次序的级别（严重程度、优先级），读出的是级别名称，需要不占一列文字就能比较高低。"
         ],
         "avoid": [
           "对象处于哪一种状态用 StatusDot：状态之间没有次序。",
-          "有单位的测量值用 Meter；任务完成比例用 Progress。",
+          "范围内的测量读数用 Meter，读数本身以整格计时用 Meter 的 segments；任务完成比例用 Progress。",
           "不用色相区分格数相同的两个级别。"
         ],
         "composition": [
           "同一列里的标记用同一个 max。",
           "name=\"hidden\" 时名称仍是可访问名称；同一行或表头要有文字让看得见的读者知道这一列是级别。",
+          "读屏只读 label，不读格数与一共几级：名称本身要分得出高低（如高、中、低）。",
           "与 StatusDot 同行时两种标记同高、同一条行中线。"
         ],
         "stateOwner": {
@@ -51490,16 +51493,17 @@
               "Adapt to context （随境取度）"
             ],
             "whenToUse": [
-              "A row's object has an ordered level that must be comparable without spending a text column."
+              "A row's object has an ordered level (severity, priority) read as its name, and it must be comparable without spending a text column."
             ],
             "avoid": [
               "Use StatusDot for which state an object is in: states have no order.",
-              "Use Meter for a measurement with a unit and Progress for task completion.",
+              "Use Meter for a measured reading over a range, with segments when the reading itself counts whole cells; use Progress for task completion.",
               "Do not tell two levels with the same cell count apart by hue."
             ],
             "composition": [
               "Marks in one column share one max.",
               "With name=\"hidden\" the name remains the accessible name; the row or the column header must still tell sighted readers that the column is a level.",
+              "Screen readers read only label, not the cell count or the number of levels: the names themselves must tell high from low (such as high, medium, low).",
               "Beside a StatusDot both marks have the same height and share one row midline."
             ],
             "stateOwner": {

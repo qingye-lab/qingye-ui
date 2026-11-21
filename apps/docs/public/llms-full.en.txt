@@ -7430,22 +7430,23 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/meter
 Source: packages/ui/src/components/meter.tsx
-Source SHA-256: 9579a5e1dcfc8e727b00a72c3e2b16e1be3853063a55fdc4af3cd6a927040c7c
+Source SHA-256: 3b1233fa556bb4efd1a827ee8adfc0c4e36155e61816f0c7f378a8b23e793ca9
 
 A real measurement over a valid range.
 
 ### Decision
-Use Progress for task completion. Unknown measurements must not become zero. A level is "which of n steps", so use segments; tone is declared by the caller, and the cell count still reads without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).
+Use Progress for task completion. Unknown measurements must not become zero. When the reading itself counts whole cells, use segments and the screen reader still reads the reading; an ordered level of an object reads as the level's name, so use SeverityMark. tone is declared by the caller, and the cell count or reading still carries the fact without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).
 
 ### Use and ownership
-- Present measured values and units.
+- Present a measurement over a valid range, with its unit; screen readers read the reading.
 - Avoid: Use Progress for task completion. Unknown measurements must not become zero.
+- Avoid: Use SeverityMark when an object has an ordered level read as its name (such as high, medium, low); use StatusDot for which state an object is in.
 - Library: Native semantics, public composition, and centralized roles.
 - Application: Objects, content, values, states, and request outcomes.
 
 ### Composition
 - Label associates the name, Value presents the actual reading, and track/indicator infer no judgment.
-- A level in a dense list uses segments={3} with tone, not StatusDot: status and degree are two facts.
+- segments only splits a reading that itself counts whole cells; getAriaValueText reads the actual reading and unit. A row's level uses SeverityMark.
 
 ### Responsive behavior
 - Measurement names and formatted readings wrap; an independent measurement role controls track thickness.
@@ -7466,7 +7467,7 @@ Use Progress for task completion. Unknown measurements must not become zero. A l
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Meter
-- `segments?`: `number`. 这个量是离散的 n 级时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。
+- `segments?`: `number`. 读数本身以整格计（如四格里剩几格）时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。
 - `tone?`: `"info" | "warning" | "danger" | "success"`. 状态类别：由调用方声明，组件不从数值猜好坏（随类赋彩）。不给时指示用主色。
 - plus 284 inherited (@types/react 274, @base-ui/react 10); not expanded, see the installed declarations
 
@@ -7499,7 +7500,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### Meter
 Label associates the name, Value presents the actual reading, and track/indicator infer no judgment.
 - value / min / max: number. A known finite value in an increasing range; out-of-range, nonfinite, or reversed inputs throw RangeError.
-- segments: number. A discrete scale of n levels: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Name levels with getAriaValueText.
+- segments: number. A reading counted in n whole cells: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Give the actual reading and unit with getAriaValueText.
 - tone: "danger" | "warning" | "success" | "info". The indicator's status category, declared by the caller; the component does not guess good or bad from the value. The root carries data-tone. Omitted, the primary color is used. An invalid value throws RangeError.
 - format / locale / getAriaValueText: Base UI Meter props. Actual units and accessible readings; locale defaults to UILocale.
 - render / ref / native props: current public component props. Forward attributes, events, and refs to the actual element; adjust presentation through className/style.
@@ -10352,9 +10353,9 @@ The level is carried by the number of filled cells and tone is only an accompany
 - In forced colors filled cells are solid CanvasText and empty cells are an outline; tone hues collapse to one color.
 
 ### Use and ownership
-- A row's object has an ordered level that must be comparable without spending a text column.
+- A row's object has an ordered level (severity, priority) read as its name, and it must be comparable without spending a text column.
 - Avoid: Use StatusDot for which state an object is in: states have no order.
-- Avoid: Use Meter for a measurement with a unit and Progress for task completion.
+- Avoid: Use Meter for a measured reading over a range, with segments when the reading itself counts whole cells; use Progress for task completion.
 - Avoid: Do not tell two levels with the same cell count apart by hue.
 - Library: The mapping from level to filled cells, the image semantics and the accessible name.
 - Application: The level value, the number of levels, and each level's name and category.
@@ -10362,6 +10363,7 @@ The level is carried by the number of filled cells and tone is only an accompany
 ### Composition
 - Marks in one column share one max.
 - With name="hidden" the name remains the accessible name; the row or the column header must still tell sighted readers that the column is a level.
+- Screen readers read only label, not the cell count or the number of levels: the names themselves must tell high from low (such as high, medium, low).
 - Beside a StatusDot both marks have the same height and share one row midline.
 
 ### Responsive behavior

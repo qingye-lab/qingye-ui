@@ -16,9 +16,9 @@ The level is carried by the number of filled cells and tone is only an accompany
 - In forced colors filled cells are solid CanvasText and empty cells are an outline; tone hues collapse to one color.
 
 ## Use and ownership
-- A row's object has an ordered level that must be comparable without spending a text column.
+- A row's object has an ordered level (severity, priority) read as its name, and it must be comparable without spending a text column.
 - Avoid: Use StatusDot for which state an object is in: states have no order.
-- Avoid: Use Meter for a measurement with a unit and Progress for task completion.
+- Avoid: Use Meter for a measured reading over a range, with segments when the reading itself counts whole cells; use Progress for task completion.
 - Avoid: Do not tell two levels with the same cell count apart by hue.
 - Library: The mapping from level to filled cells, the image semantics and the accessible name.
 - Application: The level value, the number of levels, and each level's name and category.
@@ -26,6 +26,7 @@ The level is carried by the number of filled cells and tone is only an accompany
 ## Composition
 - Marks in one column share one max.
 - With name="hidden" the name remains the accessible name; the row or the column header must still tell sighted readers that the column is a level.
+- Screen readers read only label, not the cell count or the number of levels: the names themselves must tell high from low (such as high, medium, low).
 - Beside a StatusDot both marks have the same height and share one row midline.
 
 ## Responsive behavior

@@ -16,22 +16,23 @@ export default {
     "MeterIndicator",
     "MeterPrimitive"
   ],
-  "keywords": ["meter", "gauge", "measure", "level", "仪表", "度量", "用量", "容量"],
-  "decisions": "任务完成比例使用 Progress；未知测量不要填0。级别是「几级里的第几级」，用 segments 分格；状态类别 tone 由调用方声明，色相之外格数仍读得出级别。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。", decisionsEn: "Use Progress for task completion. Unknown measurements must not become zero. A level is \"which of n steps\", so use segments; tone is declared by the caller, and the cell count still reads without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).",
+  "keywords": ["meter", "gauge", "measure", "仪表", "度量", "用量", "容量"],
+  "decisions": "任务完成比例使用 Progress；未知测量不要填0。读数本身是若干整格时用 segments 分格，读屏读出的仍是读数；对象的有序级别读出的是级别名称，用 SeverityMark。状态类别 tone 由调用方声明，色相之外格数或读数仍承担同一事实。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。", decisionsEn: "Use Progress for task completion. Unknown measurements must not become zero. When the reading itself counts whole cells, use segments and the screen reader still reads the reading; an ordered level of an object reads as the level's name, so use SeverityMark. tone is declared by the caller, and the cell count or reading still carries the fact without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).",
   "design": {
     "methods": [
       "名实相符",
       "布白有用"
     ],
     "whenToUse": [
-      "表达测量值及单位。"
+      "表达一个有效范围内的测量值及单位，读屏读出读数。"
     ],
     "avoid": [
-      "任务完成比例使用 Progress；未知测量不要填0。"
+      "任务完成比例使用 Progress；未知测量不要填0。",
+      "对象带有一个有次序的级别、读出的是级别名称（如高、中、低）时用 SeverityMark；对象处于哪一种状态用 StatusDot。"
     ],
     "composition": [
       "Label 关联名称，Value 展示实际读数，轨与指示不猜测好坏。",
-      "密集列表里的级别用 segments={3} 加 tone，不用 StatusDot：状态与程度是两件事。"
+      "segments 只给本身以整格计的读数分格，getAriaValueText 读出实际读数与单位；一行对象的级别用 SeverityMark。"
     ],
     "stateOwner": {
       "library": [
@@ -47,7 +48,7 @@ export default {
     "customization": [
       "使用公开 render/ref、ARIA、事件与样式；不混用主题三轴。"
     ]
-  }, designEn: {"whenToUse":["Present measured values and units."],"avoid":["Use Progress for task completion. Unknown measurements must not become zero."],"composition":["Label associates the name, Value presents the actual reading, and track/indicator infer no judgment.","A level in a dense list uses segments={3} with tone, not StatusDot: status and degree are two facts."],"stateOwner":{"library":["Native semantics, public composition, and centralized roles."],"application":["Objects, content, values, states, and request outcomes."]},"responsive":["Measurement names and formatted readings wrap; an independent measurement role controls track thickness."],"customization":["Public render/refs, ARIA, events, and styles; keep theme axes independent."]},
+  }, designEn: {"whenToUse":["Present a measurement over a valid range, with its unit; screen readers read the reading."],"avoid":["Use Progress for task completion. Unknown measurements must not become zero.","Use SeverityMark when an object has an ordered level read as its name (such as high, medium, low); use StatusDot for which state an object is in."],"composition":["Label associates the name, Value presents the actual reading, and track/indicator infer no judgment.","segments only splits a reading that itself counts whole cells; getAriaValueText reads the actual reading and unit. A row's level uses SeverityMark."],"stateOwner":{"library":["Native semantics, public composition, and centralized roles."],"application":["Objects, content, values, states, and request outcomes."]},"responsive":["Measurement names and formatted readings wrap; an independent measurement role controls track thickness."],"customization":["Public render/refs, ARIA, events, and styles; keep theme axes independent."]},
   "api": [
     {
       "name": "Meter",
@@ -61,7 +62,7 @@ export default {
         {
           "name": "segments",
           "type": "number",
-          "description": "离散的 n 级：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；(value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。级别名用 getAriaValueText 给出。", descriptionEn: "A discrete scale of n levels: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Name levels with getAriaValueText."
+          "description": "以 n 个整格计的读数：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；(value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。实际读数与单位用 getAriaValueText 给出。", descriptionEn: "A reading counted in n whole cells: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Give the actual reading and unit with getAriaValueText."
         },
         {
           "name": "tone",
