@@ -1,6 +1,8 @@
 # 让 AI 读得懂 Qingye 界面 · 方案
 
-> 状态：**待用户确认（2026-11-21）**。确认前不改代码、不改 `design.md`。
+> 状态：**已确认，执行中（2026-11-21）**。用户裁决"都做，先只报告"：三件事都做，检查第一轮只报告、不阻断 CI。
+> 执行中的调整：检查不放进会阻断的 `scripts/audit.mjs`，改为独立的 `scripts/name-audit.mjs`，经 `scripts/run-browser-audit.mjs --names` 运行；
+> R1（无名称控件）已由 `scripts/axe-audit.mjs` 的 WCAG 规则覆盖，新检查只做 R2、R3。
 > 起因：S2-OPEN 验证（`docs/architecture-review/S2_OPEN_Plan_2026-11-21.md` 第七节）后，用户问"不接 ui-sdk，自己做类似效果是否值得"。
 > 主 agent 的回答：完整的组件级 AI 接口现在不值得做（架构稿 D-07 仍冻结）；值得做的是一层薄的语义约定与检查。本文件是这层的方案。
 
