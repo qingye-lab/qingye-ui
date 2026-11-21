@@ -96,7 +96,7 @@
 | demo 与官网页 | `cffa10b9`、`5fe91a25`、`d6022f98` | 行内操作带对象名，重复地标与同名区域改名，样张放进以小节标题命名的 group |
 
 全量扫描（对开发服务器，每批 10 页，`light-desktop`）：playground 114 页 99 PASS、15 FAIL；官网 150 页 128 PASS、22 FAIL；页面 NOT_RUN 为 0（有 5 批在 Chrome 收尾时超时，事后核对无残留进程，不影响页面结果）。英文页未扫。
-静止态之外的弹层、菜单、对话框仍是 UNVERIFIED。剩余发现分两类，都待用户裁决，未修：
+静止态之外的弹层、菜单、对话框仍是 UNVERIFIED。剩余发现分两类，当时待用户裁决；用户已按推荐裁决，实施见下文「附属按钮改名与样张单列」：
 
 1. **库内附属按钮的名称不带所属字段**（同一区域放两个同类字段即撞名）：Combobox / Autocomplete 的“展开选项”“清除选择”，日期类的“选择日期”“清除日期”及范围、日期时间变体，NumberField 的“增加”“减少”，PasswordInput 的“显示密码”，TagInput 的“添加标签”与“移除 X”，官网 CodeBlock 的“复制代码”，Sidebar 开关的“工作区导航”（两个侧栏各一个），DataTable 内置分页的 `navigation "分页"`（R3）。
    推荐做法与 React Aria 相同：名称 = 动作 + 字段标签（`aria-labelledby="自身id 字段标签id"`，本库 Combobox 的 ChipRemove 已是此写法）。这会改变这些按钮的可访问名称，按精确名称写的测试或脚本须改，属契约变更。
@@ -106,3 +106,38 @@
 在验证包副本里跑 `pnpm verify`。证据存于验证包 `results-5fe91a25/`（验证包提交 `7d4f567`），`f2db7b2` 的原证据未改动。
 探针 PASS；C 通道 O1–O5 全部 PASS；A 通道 O3、O5 PASS，O1、O2、O4 FAIL，与修复前一致。
 验证包页面不含 Transfer，本次只说明 Select、Combobox、Input、Dialog 路径没有退化；Transfer 由其单测与 name-audit 覆盖。
+
+### 附属按钮改名与样张单列（2026-11-21，用户裁决「按推荐实施」）
+
+| 步骤 | 提交 | 结果 |
+|---|---|---|
+| 共用取名：`useAdjunctName`，NumberField、PasswordInput 接入 | `bb151a30` | 名称 = 动作 + 字段标签；字段标签取所在 Field 的 FieldLabel，或调用处给的标签 id；调用方显式给名称时以调用方为准 |
+| 检查器单列样张 | `f9416f70` | demo 元数据 `specimen: true` 让该 demo 区域带 `data-specimen`；一条 R2 在其作用域里的同名控件**全部**落在样张区域内才单列，R3 不单列；样张照常计数、所在页仍为 FAIL、`--strict` 照样失败；脚本里没有页面或名称名单 |
+| 其余附属按钮 | `248e687a`（`!`，契约变更） | Combobox / Autocomplete 的展开与清除，四个日期组件的日历与清除（范围组件引用范围标签），TagInput 的添加与“移除 X”，Sidebar 开关，CodeBlock 复制，DataTable 分页地标 |
+
+三处没有现成字段标签、由实现者按同一原则定的默认做法：
+
+1. **Sidebar 开关**：调用方没给名称、也没有子元素时，名称跟随所控制的侧栏导航的名称；侧栏导航没名称时仍是“工作区导航”。
+2. **CodeBlock 复制**：名称 = 动作 + 代码区域的名称；区域名称是泛称“代码”时只读动作。
+3. **DataTable 分页地标**：依次取 `pagination["aria-label"]`、字符串 caption、表格的 `aria-labelledby`、表格的 `aria-label`，都没有时为“分页”。
+
+契约影响：上述按钮的可访问名称变了，按精确旧名称写的测试或脚本须改为按动作开头匹配，或带上字段标签；`getByLabelText(字段标签)` 现在也会命中这些按钮。
+
+全量复扫（同口径，`light-desktop`，每批 10 页；改动前一次取自这些提交之前的工作区）：
+
+| 范围 | 改动前 | 改动后 |
+|---|---|---|
+| playground 114 页 | 100 PASS、14 FAIL，发现 29 条 | 109 PASS、5 FAIL，普通发现 0 条，样张 7 条 |
+| 官网 150 页 | 136 PASS、14 FAIL，发现 22 条 | 144 PASS、6 FAIL，普通发现 0 条，样张 8 条 |
+
+改动后剩下的 FAIL 页只含样张：Button（删除、新建设备、保存）、Toggle、Composer、CopyButton、InputModalityProvider，官网另有基础判断页的“同步”。`section` 页第一次扫描时导航被打断（NOT_RUN），单独补扫为 PASS。英文页未扫；弹层、菜单、对话框打开后的状态仍是 UNVERIFIED。
+
+C 通道复验：在 `248e687a` 上 `pnpm pack`（sha256 `23a98185c06520144dcf4a15dd94f9d27b03dc16e0e73942a2c4a502b8d269f9`，lockfile integrity 已变，安装的 `dist/` 含 `adjunct-name.js`），在验证包副本里跑 `pnpm verify`。证据存于验证包 `results-248e687a/`（验证包提交 `872ccc1`），此前证据未改动。
+探针 PASS；C 通道 O1–O5 全部 PASS；A 通道 O3、O5 PASS，O1、O2、O4 FAIL，与改名前一致。驱动脚本不按附属按钮名称定位，这次只说明改名没有让这些路径退化。
+
+遗留，未处理：
+
+- 字段只靠 `aria-label` 或外部 label 命名时，附属按钮仍只读动作。
+- 无标题的代码块，区域名称本身带“代码：”前缀，复制按钮读作“复制代码 代码：…”，有重复。
+- DataTable 的 caption 是 ReactNode 时分页回退为“分页”；DataTablePattern 根元素的 `aria-label` 不作为表名来源。
+- 日期时间类中文文案“选择日期和时间”的句式与其他日期组件不同。
