@@ -8,7 +8,7 @@ import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab
 import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
 import { StatusDot } from "@qingye_lab/ui/components/status-dot";
 import { Switch } from "@qingye_lab/ui/components/switch";
-import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
+import { useId, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { STEPS, useAppearanceKey } from "./foundations-ledger";
 import "./foundations.css";
 
@@ -182,6 +182,7 @@ export const SPECIMENS: Record<string, (props: Locale) => ReactNode> = {
 
 /** 基础判断页：同一组内容在默认与紧凑密度里并排，读数取自渲染出的元素。 */
 export function DensitySpecimen({ en }: Locale) {
+  const id = useId();
   const [root, text] = useReadout((el) => {
     return [...el.querySelectorAll<HTMLElement>("[data-density]")].map((column) => {
       const input = column.querySelector<HTMLElement>("[data-slot=input]")!;
@@ -194,8 +195,8 @@ export function DensitySpecimen({ en }: Locale) {
   });
   const [base = "", compact = ""] = text.split("|");
   const column = (density: "default" | "compact", label: string, reading: string) => (
-    <div className="spec-density-column" data-density={density}>
-      <p className="spec-readout">{label}</p>
+    <div aria-labelledby={`${id}-${density}`} className="spec-density-column" data-density={density} role="group">
+      <p className="spec-readout" id={`${id}-${density}`}>{label}</p>
       <Field>
         <FieldLabel>{t(en, "名称", "Name")}</FieldLabel>
         <Input defaultValue={t(en, "青野", "Qingye")} />

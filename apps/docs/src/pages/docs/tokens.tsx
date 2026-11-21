@@ -141,7 +141,7 @@ export default function TokensPage() {
           <ArticleSection className="ledger-section" key={section.id}>
             <H2 id={headingId}>{en ? section.title.en : section.title.zh}</H2>
             <p className="ledger-origin" data-slot="docs-origin">{en ? section.origin.en : section.origin.zh}</p>
-            {all ? <Specimen en={en} /> : null}
+            {all ? <div role="group" aria-labelledby={headingId}><Specimen en={en} /></div> : null}
             <TableContainer data-density="compact">
               <Table aria-labelledby={headingId} className="ledger-table">
                 <TableHeader><TableRow>{head.map((label) => <TableHead key={label}>{label}</TableHead>)}</TableRow></TableHeader>

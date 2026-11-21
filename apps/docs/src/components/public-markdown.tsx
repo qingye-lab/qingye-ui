@@ -86,7 +86,7 @@ function emphasis(value: string): ReactNode[] {
 }
 
 /** Markers become superscript numbers linking to the note list at the end of the page. */
-function cited(value: string): ReactNode[] {
+function cited(value: string, en: boolean): ReactNode[] {
   const parts = value.split(CITATIONS);
   const out: ReactNode[] = [];
   for (let index = 0; index < parts.length; index += 2) {
@@ -104,7 +104,7 @@ function cited(value: string): ReactNode[] {
     out.push(<span className="whitespace-nowrap" key={`${index}-cite`}>
       {carry}
       <sup className={cn("docs-ref", CLOSING_CJK.test(carry) && "-ms-[0.4em]")}>
-        {numbers.map((number, i) => <Fragment key={number}>{i > 0 && ","}<a className="focus-ring rounded-sm text-muted-foreground hover:text-foreground" href={`#note-${number}`} id={`cite-${number}`}>{number}</a></Fragment>)}
+        {numbers.map((number, i) => <Fragment key={number}>{i > 0 && ","}<a aria-label={`${en ? "Note" : "注"} ${number}`} className="focus-ring rounded-sm text-muted-foreground hover:text-foreground" href={`#note-${number}`} id={`cite-${number}`}>{number}</a></Fragment>)}
       </sup>
     </span>);
   }
@@ -118,11 +118,11 @@ function headingContent(block: PublicHeading): ReactNode {
   return <><span className="inline-block min-w-[1.5em] text-muted-foreground numeric">{String(block.method).padStart(2, "0")}</span> {bilingual ? <><span lang="zh-CN">{bilingual[1]}</span>{bilingual[2]}</> : block.text}</>;
 }
 
-export function PublicMarkdown({ document, groups = [], notesTitle }: { document: PublicDocument; groups?: readonly MethodGroup[]; notesTitle?: string }) {
+export function PublicMarkdown({ document, groups = [], notesTitle, en = false }: { document: PublicDocument; groups?: readonly MethodGroup[]; notesTitle?: string; en?: boolean }) {
   const out: ReactNode[] = [];
   for (const [index, block] of document.blocks.entries()) {
     if (block.type === "paragraph") {
-      out.push(<P key={index}>{block.text.split("\n").map((line, i) => <Fragment key={i}>{i > 0 && <br />}{cited(line)}</Fragment>)}</P>);
+      out.push(<P key={index}>{block.text.split("\n").map((line, i) => <Fragment key={i}>{i > 0 && <br />}{cited(line, en)}</Fragment>)}</P>);
       continue;
     }
     const group = block.method ? groups.find(item => item.start === block.method) : undefined;
@@ -137,7 +137,7 @@ export function PublicMarkdown({ document, groups = [], notesTitle }: { document
     out.push(<ol data-slot="docs-notes" className="m-0 mb-(--qy-space-module) flex max-w-(--docs-measure) list-none flex-col gap-(--qy-field-gap) p-0 text-support text-muted-foreground" key="notes">
       {[...document.notes].sort(([a], [b]) => a - b).map(([number, note]) => (
         <li className="grid grid-cols-[calc(2*var(--qy-cai))_minmax(0,1fr)]" id={`note-${number}`} key={number}>
-          <a aria-label={`${number}`} className="focus-ring w-fit rounded-sm numeric hover:text-foreground" href={`#cite-${number}`}>{number}</a>
+          <a aria-label={`${en ? "Back to reference" : "返回正文"} ${number}`} className="focus-ring w-fit rounded-sm numeric hover:text-foreground" href={`#cite-${number}`}>{number}</a>
           <span className="min-w-0 [overflow-wrap:anywhere]">{emphasis(note)}</span>
         </li>
       ))}

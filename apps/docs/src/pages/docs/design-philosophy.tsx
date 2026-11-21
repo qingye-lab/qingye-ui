@@ -26,6 +26,6 @@ export default function DesignPhilosophyPage() {
       {/* The English guide is saved under the same file name projects refer to. */}
       <a className={cn(buttonVariants({ variant: "bordered" }), "mt-(--qy-field-gap) w-fit")} download={en ? "design.md" : true} href={en ? "/design.en.md" : "/design.md"}>{en ? "Download design.md" : "下载 design.md"}</a>
     </PageHeader>
-    <PublicMarkdown document={doc} groups={GROUPS[locale]} notesTitle={en ? "Sources" : "来源简注"} />
+    <PublicMarkdown document={doc} en={en} groups={GROUPS[locale]} notesTitle={en ? "Sources" : "来源简注"} />
   </Article>;
 }

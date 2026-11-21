@@ -112,8 +112,8 @@ function ExamplesIndex() {
                 </ul>
               </div>
               <div className="examples-actions">
-                <Link className={buttonVariants({ variant: "bordered" })} to={`/examples/${example.id}`}>{en ? "Open" : "打开"}</Link>
-                <a className={buttonVariants({ variant: "quiet" })} href={repoFile(example.source)} rel="noreferrer" target="_blank">{en ? "Source" : "源码"}</a>
+                <Link aria-label={`${en ? "Open" : "打开"} ${t(example.title)}`} className={buttonVariants({ variant: "bordered" })} to={`/examples/${example.id}`}>{en ? "Open" : "打开"}</Link>
+                <a aria-label={`${en ? "Source" : "源码"} ${t(example.title)}`} className={buttonVariants({ variant: "quiet" })} href={repoFile(example.source)} rel="noreferrer" target="_blank">{en ? "Source" : "源码"}</a>
               </div>
             </div>
           </li>
