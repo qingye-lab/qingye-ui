@@ -93,3 +93,12 @@ test("R3 does not report distinct names, a single landmark, or non-landmarks", (
   assert.deepEqual(rules("- navigation:\n  - link \"a\"", "R3"), []);
   assert.deepEqual(rules("- group:\n- group:", "R3"), []);
 });
+
+test("R2 treats same-name links to the same /url as one object, but reports different targets", () => {
+  const same = ["- main:", "  - link \"Button\":", "    - /url: /components/button", "  - paragraph:", "    - link \"Button\":", "      - /url: /components/button"].join("\n");
+  assert.deepEqual(rules(same, "R2"), []);
+  const footnotes = ["- main:", "  - link \"11\":", "    - /url: \"#note-11\"", "  - link \"11\":", "    - /url: \"#cite-11\""].join("\n");
+  assert.equal(rules(footnotes, "R2").length, 1);
+  const noUrl = ["- main:", "  - link \"Open\"", "  - link \"Open\""].join("\n");
+  assert.equal(rules(noUrl, "R2").length, 1);
+});

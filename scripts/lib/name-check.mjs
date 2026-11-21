@@ -2,6 +2,8 @@
 // `locator.ariaSnapshot()` text. Pure functions, no browser. See docs/browser-audit.md.
 //
 //   R2  within one scope, two operable elements share role and name
+//       (links that share a name AND the same /url are one object reached twice — WCAG 2.4.4 —
+//       so they are not reported; a link without a known /url never takes that exemption)
 //   R3  two landmarks of the same role share a name (including both unnamed)
 //
 // An operable element with an EMPTY name is not this check's business: axe's
@@ -70,6 +72,14 @@ export function parseAriaSnapshot(text) {
     if (!parsed) continue;
     if (!after) after = parsed.rest;
     while (stack.length > 1 && stack[stack.length - 1].indent >= indent) stack.pop();
+    if (parsed.role === "/url") {
+      const value = parsed.rest.replace(/^:\s*/, "");
+      let url = value;
+      if (value.startsWith('"')) { try { url = JSON.parse(value); } catch { url = value.slice(1, -1); } }
+      else if (value.startsWith("'")) url = singleQuoted(value)[0];
+      stack[stack.length - 1].node.url = url;
+      continue;
+    }
     if (parsed.role === "text" || parsed.role.startsWith("/")) continue;
     const node = { role: parsed.role, name: parsed.name, children: [] };
     stack[stack.length - 1].node.children.push(node);
@@ -89,7 +99,10 @@ export function findNameIssues(tree) {
       const name = child.name.trim();
       if (OPERABLE.has(child.role) && name) {
         const key = `${child.role}\0${name}`;
-        scope.seen.set(key, (scope.seen.get(key) ?? 0) + 1);
+        const entry = scope.seen.get(key) ?? { count: 0, urls: new Set() };
+        entry.count += 1;
+        entry.urls.add(child.url);
+        scope.seen.set(key, entry);
       }
       if (LANDMARKS.has(child.role)) {
         const key = `${child.role}\0${name}`;
@@ -106,9 +119,10 @@ export function findNameIssues(tree) {
   const scopes = [top];
   walk(tree, top);
   for (const scope of scopes) {
-    for (const [key, count] of scope.seen) {
+    for (const [key, { count, urls }] of scope.seen) {
       if (count < 2) continue;
       const [role, name] = key.split("\0");
+      if (role === "link" && urls.size === 1 && !urls.has(undefined)) continue;
       issues.push({ rule: "R2", role, name, scope: scope.path, count });
     }
   }
