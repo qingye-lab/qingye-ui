@@ -1,6 +1,6 @@
 # 输入框 Input
 
-Package: @qingye_lab/ui@5.4.1
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
 Source SHA-256: 1276c09d538105d1b2f715ed2df7d99bff636526763bba4c200346a7823104a7

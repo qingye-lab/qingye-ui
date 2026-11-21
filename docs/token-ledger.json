@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-11-21T08:39:09.991Z",
-  "revision": "b1c08c8ab1e1b7d41ab4eec77da8ab9b781b828a",
+  "generatedAt": "2026-11-21T09:04:39.558Z",
+  "revision": "023d6a3ac2c60de4346790c078c2e44c279482bf",
   "static": {
     "fingerprint": {
-      "sha256": "01022eb5a69f659cc816d3d056e5dd57c6215026d64443ad5a87859e80a542a3",
+      "sha256": "e8821a2333df674c69be9344f2f9831aaa628ae8e80b83106bb3c08665927ce7",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -2809,7 +2809,7 @@
         },
         {
           "path": "packages/ui/package.json",
-          "sha256": "058f25fc1c65d649ebf77f6ca61a4cfabda4b3ea8592a4001d82ccc7c0e05821"
+          "sha256": "d49956262caf86cbc6a0a1f694de7b4b46599de0509fd1a2dee500d157bdfe92"
         },
         {
           "path": "packages/ui/prose.css",
@@ -3329,7 +3329,7 @@
         },
         {
           "path": "packages/ui/src/external-labels.ts",
-          "sha256": "dec09f28564f4ee83fbacd5db2607db20003bc56353eeabb2a2b6b73f83ad2bf"
+          "sha256": "3c8c8a759b0171c0a1b57eab88e2797154161ba8869f09702cc2b5a5f76f9ad5"
         },
         {
           "path": "packages/ui/src/file-rules.ts",

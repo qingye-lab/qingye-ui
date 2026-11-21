@@ -1,6 +1,6 @@
 # TagInput
 
-Package: @qingye_lab/ui@5.4.1
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
 Source SHA-256: 8ec39c7dd44653e74738178db40ee5a62a4a34d551a80a03181428338f8035ec
