@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: dff96cde72e893230e62af74be7b834f9fbe557e58f8c71442fbea516644a727
+Source SHA-256: 786bfc7ee2c0644823a7fdc3fc1a682373296f5d71eb24dfed5d7f265612dd9d
 
 Edit an optional number and adjust it by a declared step.
 

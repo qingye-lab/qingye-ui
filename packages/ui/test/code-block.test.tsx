@@ -1,6 +1,8 @@
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { CodeBlock } from "../src/components/code-block";
+import { UILocaleProvider } from "../src/locale";
+import { enUS } from "../src/locales/en-US";
 
 afterEach(() => { vi.unstubAllGlobals(); vi.restoreAllMocks(); });
 describe("CodeBlock", () => {
@@ -8,28 +10,28 @@ describe("CodeBlock", () => {
     let resolve!: () => void; const writeText = vi.fn(() => new Promise<void>(done => { resolve = done; }));
     vi.stubGlobal("navigator", { clipboard: { writeText } });
     const code = "  <tag>\n\tvalue  \n"; const { container } = render(<CodeBlock code={code} language="text" />);
-    expect(container.querySelector("pre > code")?.textContent).toBe(code); fireEvent.click(screen.getByRole("button", { name: "复制代码" })); expect(writeText).toHaveBeenCalledWith(code); expect(screen.queryByRole("button", { name: "已复制" })).toBeNull(); resolve(); await waitFor(() => expect(screen.getByRole("button", { name: "已复制" })).toBeInTheDocument());
+    expect(container.querySelector("pre > code")?.textContent).toBe(code); fireEvent.click(screen.getByRole("button", { name: /^复制代码/ })); expect(writeText).toHaveBeenCalledWith(code); expect(screen.queryByRole("button", { name: /^已复制/ })).toBeNull(); resolve(); await waitFor(() => expect(screen.getByRole("button", { name: /^已复制/ })).toBeInTheDocument());
   });
   it("keeps manual-copy text on rejection and calls the error callback", async () => {
     const failure = new Error("denied"); const onCopyError = vi.fn(); vi.stubGlobal("navigator", { clipboard: { writeText: vi.fn().mockRejectedValue(failure) } });
     const { container } = render(<CodeBlock code="unaltered" onCopyError={onCopyError} />); fireEvent.click(screen.getByRole("button")); await waitFor(() => expect(screen.getByRole("status")).toHaveTextContent("复制失败，请手动复制")); expect(onCopyError).toHaveBeenCalledWith(failure); expect(container.querySelector("code")?.textContent).toBe("unaltered");
   });
   it("does not carry success over to changed text and can omit the copy action", async () => {
-    vi.stubGlobal("navigator", { clipboard: { writeText: vi.fn().mockResolvedValue(undefined) } }); const { rerender } = render(<CodeBlock code="first" />); fireEvent.click(screen.getByRole("button")); await waitFor(() => expect(screen.getByRole("button", { name: "已复制" })).toBeInTheDocument()); rerender(<CodeBlock code="second" />); expect(screen.getByRole("button", { name: "复制代码" })).toBeInTheDocument(); rerender(<CodeBlock code="second" copyable={false} />); expect(screen.queryByRole("button")).toBeNull();
+    vi.stubGlobal("navigator", { clipboard: { writeText: vi.fn().mockResolvedValue(undefined) } }); const { rerender } = render(<CodeBlock code="first" />); fireEvent.click(screen.getByRole("button")); await waitFor(() => expect(screen.getByRole("button", { name: /^已复制/ })).toBeInTheDocument()); rerender(<CodeBlock code="second" />); expect(screen.getByRole("button", { name: /^复制代码/ })).toBeInTheDocument(); rerender(<CodeBlock code="second" copyable={false} />); expect(screen.queryByRole("button")).toBeNull();
   });
   it("copies `code`, not the highlighted children, and names the copy button the same with or without a title bar", async () => {
     const writeText = vi.fn().mockResolvedValue(undefined); vi.stubGlobal("navigator", { clipboard: { writeText } });
     for (const title of [undefined, "a.ts"]) {
       const { container, unmount } = render(<CodeBlock code="const a = 1;" {...(title ? { title } : {})}><span>const</span> a = 1;</CodeBlock>);
-      expect(container.querySelector("pre > code")).toHaveTextContent("const a = 1;"); fireEvent.click(screen.getByRole("button", { name: "复制代码" })); expect(writeText).toHaveBeenLastCalledWith("const a = 1;");
-      await waitFor(() => expect(screen.getByRole("button", { name: "已复制" })).toBeInTheDocument()); unmount();
+      expect(container.querySelector("pre > code")).toHaveTextContent("const a = 1;"); fireEvent.click(screen.getByRole("button", { name: /^复制代码/ })); expect(writeText).toHaveBeenLastCalledWith("const a = 1;");
+      await waitFor(() => expect(screen.getByRole("button", { name: /^已复制/ })).toBeInTheDocument()); unmount();
     }
   });
   it("renders a string title in the header and a node title as given, ahead of the copy button", () => {
     const { rerender, container } = render(<CodeBlock code="x" title="values.js" />);
     expect(container.querySelector("[data-slot=code-block-header]")).toHaveTextContent("values.js");
     rerender(<CodeBlock code="x" title={<button type="button">pnpm</button>} />);
-    expect([...container.querySelectorAll("[data-slot=code-block-header] button")].map(node => node.textContent || node.getAttribute("aria-label"))).toEqual(["pnpm", "复制代码"]);
+    expect([...container.querySelectorAll("[data-slot=code-block-header] button")].map(node => node.textContent || node.getAttribute("aria-label"))).toEqual(["pnpm", "复制代码 代码：x"]);
     rerender(<CodeBlock code="x" />); expect(container.querySelector("[data-slot=code-block-header]")).toBeNull();
   });
 });
@@ -69,11 +71,32 @@ describe("CodeBlock maxLines and the scroll region", () => {
     overflow();
     for (const title of [undefined, "a.ts"]) {
       const { container, unmount } = render(<CodeBlock code="x" maxLines={2} {...(title ? { title } : {})} />);
-      expect(container.querySelector("pre")!.contains(screen.getByRole("button", { name: "复制代码" }))).toBe(false); unmount();
+      expect(container.querySelector("pre")!.contains(screen.getByRole("button", { name: /^复制代码/ }))).toBe(false); unmount();
     }
   });
   it("rejects a maxLines that is not a positive integer", () => {
     expect(() => render(<CodeBlock code="x" maxLines={0} />)).toThrow(/positive integer/);
     expect(() => render(<CodeBlock code="x" maxLines={2.5} />)).toThrow(/positive integer/);
+  });
+});
+
+describe("CodeBlock copy button name", () => {
+  it("reads the action then the region name, so two blocks on one page stay distinguishable", () => {
+    render(<><CodeBlock code="a" title="a.ts" /><CodeBlock code="b" title="b.ts" /></>);
+    expect(screen.getByRole("button", { name: "复制代码 a.ts" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "复制代码 b.ts" })).toBeInTheDocument();
+  });
+  it("falls back to the bare action when nothing tells the block apart", () => {
+    render(<CodeBlock code="" />);
+    expect(screen.getByRole("button", { name: "复制代码" })).toBeInTheDocument();
+  });
+  it("the copied state keeps the region name", async () => {
+    vi.stubGlobal("navigator", { clipboard: { writeText: vi.fn().mockResolvedValue(undefined) } });
+    render(<CodeBlock code="a" title="a.ts" />); fireEvent.click(screen.getByRole("button", { name: "复制代码 a.ts" }));
+    await waitFor(() => expect(screen.getByRole("button", { name: "已复制 a.ts" })).toBeInTheDocument());
+  });
+  it("en-US reads the same way", () => {
+    render(<UILocaleProvider locale={enUS}><CodeBlock code="a" title="a.ts" /></UILocaleProvider>);
+    expect(screen.getByRole("button", { name: "Copy code a.ts" })).toBeInTheDocument();
   });
 });

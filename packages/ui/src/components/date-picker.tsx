@@ -9,6 +9,7 @@ import { DraftSurface } from "../draft-surface";
 import { formatPeriod, isSamePeriod, parsePeriod, periodWithinBounds, type DateGranularity, type PeriodGranularity } from "../date-granularity";
 import { useUILocale } from "../locale";
 import { inputAdjunctClassName, withHiddenIndicator } from "../input-adjunct";
+import { useAdjunctName } from "../adjunct-name";
 import { InputGroupReadOnlyNote } from "../input-readonly-note";
 import { cn } from "../utils";
 import { Button } from "./button";
@@ -48,6 +49,8 @@ export function DatePicker(allProps: DatePickerProps) {
   const { value: valueProp, defaultValue, onValueChange, min, max, granularity = "day", name, form, disabled = false, readOnly = false, inputProps = {}, calendarProps = {}, className, render, ref, ...props } = allProps;
   const { code, messages } = useUILocale();
   const period: PeriodGranularity | undefined = granularity === "day" ? undefined : granularity;
+  const clearName = useAdjunctName(messages.clearDate, {});
+  const openName = useAdjunctName(period ? { week: messages.selectWeek, month: messages.selectMonth, quarter: messages.selectQuarter, year: messages.selectYear }[period] : messages.selectDate, {});
   const rules = React.useMemo(() => weekRulesFor(code, calendarProps), [code, calendarProps.weekStartsOn, calendarProps.firstWeekContainsDate, calendarProps.locale]);
   // 受控与否看 `value` 属性在不在，而不是它是不是 undefined：此前 `value` 就是必须由调用方持有的受控入口，
   // 空值也是 `value={undefined}`，这样既有用法的行为（拒绝变更则保持原值）一点不变。
@@ -154,8 +157,8 @@ export function DatePicker(allProps: DatePickerProps) {
           })} />
         {readOnlyNow && !disabled ? <InputGroupReadOnlyNote /> : null}
         {/* 清除后按钮随值消失，焦点回到输入（同 SearchInput 的清空），不落到 body。 */}
-        {value && editable && <Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.clearDate} onClick={event => { typing.release(); change(undefined, event); inputRef.current?.focus(); }}><IconX aria-hidden="true" /></Button>}
-        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={period ? { week: messages.selectWeek, month: messages.selectMonth, quarter: messages.selectQuarter, year: messages.selectYear }[period] : messages.selectDate} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
+        {value && editable && <Button variant="quiet" shape="icon" className={inputAdjunctClassName} {...clearName} onClick={event => { typing.release(); change(undefined, event); inputRef.current?.focus(); }}><IconX aria-hidden="true" /></Button>}
+        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} {...openName} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
       </InputGroup>
       {period && (fieldName ?? name) && value && <input type="hidden" name={fieldName ?? name} value={formatLocalDate(value)} form={form} disabled={disabled || facts.disabled} />}
       {/* 再点已选的日期或周期不是清除（清除有自己的按钮）：required 让它仍给出日期，值没变就不上报，只收起日历。 */}

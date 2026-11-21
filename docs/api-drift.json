@@ -1022,19 +1022,19 @@
       "component": "sidebar",
       "part": "SidebarLink",
       "prop": "count",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:236"
     },
     {
       "component": "sidebar",
       "part": "SidebarLink",
       "prop": "max",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:236"
     },
     {
       "component": "sidebar",
       "part": "SidebarSub",
       "prop": "children",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:298"
+      "declaredAt": "packages/ui/src/components/sidebar.tsx:303"
     },
     {
       "component": "theme-provider",

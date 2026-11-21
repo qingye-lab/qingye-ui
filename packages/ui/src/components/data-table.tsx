@@ -675,6 +675,7 @@ function PatternSelectionCell<TData>({ row, column }: CellContext<TData, unknown
 
 /** Standard configuration-based table. Use DataTable with a caller-owned instance for advanced TanStack features. */
 export function DataTablePattern<TData>({ data, columns, getRowId, mode = "client", state, defaultState, onStateChange, pagination = false, selection, selectionAppearance = "row", virtualization, stickyHeader = false, stickyHeaderOffset, activeRow, caption, emptyContent, busy = false, error, tableProps, className, ...props }: DataTablePatternProps<TData>) {
+  const { messages } = useUILocale();
   const [internalState, setInternalState] = React.useState<DataTablePatternState>(() => ({ sorting: [], pagination: { page: 1, pageSize: 10 }, rowSelection: {}, activeRowId: null, ...defaultState }));
   const source = state ?? internalState;
   if (pagination && mode === "server" && pagination.totalCount === undefined) throw new Error("Server DataTable pagination requires totalCount, or null with explicit hasNextPage.");
@@ -720,11 +721,21 @@ export function DataTablePattern<TData>({ data, columns, getRowId, mode = "clien
       return { ...previous, pagination: normalizePaginationValue({ page: next.pageIndex + 1, pageSize: next.pageSize }, totalCount) };
     }, "pagination"),
   });
+  // 内置分页的名称：调用方给的 pagination["aria-label"] 优先；否则「分页 + 表名」，同页两张表的两个分页地标才分得出。
+  // 表名来源依次为：caption（字符串或数字，包一层带 id 的 span 供引用）、tableProps 的 aria-labelledby、tableProps 的 aria-label；都没有时保持「分页」。
+  const paginationId = React.useId(); const captionId = React.useId();
+  const captionText = typeof caption === "string" || typeof caption === "number";
+  const captionNode = captionText && pagination ? <span id={captionId}>{caption}</span> : caption;
+  const tableLabelledBy = tableProps?.["aria-labelledby"]?.trim(), tableLabel = tableProps?.["aria-label"];
+  const paginationName: { id?: string; "aria-label"?: string; "aria-labelledby"?: string } = !pagination ? {} : pagination["aria-label"] ? { "aria-label": pagination["aria-label"] }
+    : captionText ? { id: paginationId, "aria-label": messages.pagination, "aria-labelledby": `${paginationId} ${captionId}` }
+    : tableLabelledBy ? { id: paginationId, "aria-label": messages.pagination, "aria-labelledby": `${paginationId} ${tableLabelledBy}` }
+    : tableLabel ? { "aria-label": `${messages.pagination} ${tableLabel}` } : {};
   return <div data-slot="data-table-pattern" {...props} className={cn("flex min-w-0 flex-col gap-(--qy-panel-gap)", virtualization && virtualization.height === undefined && fillParentClassName, className)}>
-    <DataTable<TData> {...tableProps} table={table} caption={caption} emptyContent={emptyContent} busy={busy} error={error} activeRowId={current.activeRowId} selectionAppearance={selectionAppearance} {...(virtualization ? { virtualization } : {})} {...(stickyHeader ? { stickyHeader } : {})} {...(stickyHeaderOffset !== undefined ? { stickyHeaderOffset } : {})} {...(activeRow?.trigger === "row" ? { onRowActivate: (row, event) => {
+    <DataTable<TData> {...tableProps} table={table} caption={captionNode} emptyContent={emptyContent} busy={busy} error={error} activeRowId={current.activeRowId} selectionAppearance={selectionAppearance} {...(virtualization ? { virtualization } : {})} {...(stickyHeader ? { stickyHeader } : {})} {...(stickyHeaderOffset !== undefined ? { stickyHeaderOffset } : {})} {...(activeRow?.trigger === "row" ? { onRowActivate: (row, event) => {
       update(previous => ({ ...previous, activeRowId: row.id }), "active-row");
       activeRow.onActivate?.(row.original, event);
     } } : {})} />
-    {pagination && <PaginationPattern busy={busy} value={source.pagination} onValueChange={next => update(previous => ({ ...previous, pagination: next }), "pagination")} {...(totalCount === null ? { totalCount: null, hasNextPage: pagination.hasNextPage! } : { totalCount })} {...(pagination.pageSizeOptions ? { pageSizeOptions: pagination.pageSizeOptions } : {})} {...(pagination["aria-label"] ? { "aria-label": pagination["aria-label"] } : {})} />}
+    {pagination && <PaginationPattern busy={busy} value={source.pagination} onValueChange={next => update(previous => ({ ...previous, pagination: next }), "pagination")} {...(totalCount === null ? { totalCount: null, hasNextPage: pagination.hasNextPage! } : { totalCount })} {...(pagination.pageSizeOptions ? { pageSizeOptions: pagination.pageSizeOptions } : {})} {...paginationName} />}
   </div>;
 }

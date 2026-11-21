@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: 8ec39c7dd44653e74738178db40ee5a62a4a34d551a80a03181428338f8035ec
+Source SHA-256: 44d566b6318373e105746d955a5d882edfab472998d4e7dd773ab4c033894a94
 
 Confirm a string collection while keeping its unconfirmed draft.
 

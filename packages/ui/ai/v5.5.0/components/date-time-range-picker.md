@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-time-range-picker
 Source: packages/ui/src/components/date-time-range-picker.tsx
-Source SHA-256: f0bf1dd0084422c8188b26900c7152b6394fe65411b1f5a8a794b68f18a53142
+Source SHA-256: 5fb69c5e60a02e1cd93a2f29d8587132c98249bc64b654f538d260e6da69d00d
 
 键入或在弹层里选起止日期和时间，完整且有序时才是确认值。
 

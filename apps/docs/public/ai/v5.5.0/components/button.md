@@ -104,7 +104,7 @@ Source: apps/docs/src/content/button/demos/01-variants.tsx
 ```tsx
 import { Button } from "@qingye_lab/ui/components/button";
 
-export const meta = { title: "变体与色调", titleEn: "Variants and tones" };
+export const meta = { title: "变体与色调", titleEn: "Variants and tones", specimen: true };
 
 export default function Demo() {
   return (
@@ -148,7 +148,7 @@ Source: apps/docs/src/content/button/demos/03-icon-sizes.tsx
 import { Button } from "@qingye_lab/ui/components/button";
 import { IconPlus } from "@tabler/icons-react";
 
-export const meta = { title: "图标形态", titleEn: "Icon shape" };
+export const meta = { title: "图标形态", titleEn: "Icon shape", specimen: true };
 
 export default function Demo() {
   return <>
@@ -204,7 +204,7 @@ Source: apps/docs/src/content/button/demos/06-states.tsx
 import { Button } from "@qingye_lab/ui/components/button";
 import { IconDeviceFloppy } from "@tabler/icons-react";
 
-export const meta = { title: "忙碌与禁用", titleEn: "Busy and disabled" };
+export const meta = { title: "忙碌与禁用", titleEn: "Busy and disabled", specimen: true };
 
 export default function Demo() {
   return (

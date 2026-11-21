@@ -860,7 +860,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: 5cf83f38384cca7006817ab2ec20690e3d9a44704c6dc9d1fcd3c05a60f4b219
+Source SHA-256: 51bf128271c99f851a611ad3e924a89c7994b8715660684eda0c14a21d2d736e
 
 Edit free text with optional suggestions.
 
@@ -1689,7 +1689,7 @@ Source: apps/docs/src/content/button/demos/01-variants.tsx
 ```tsx
 import { Button } from "@qingye_lab/ui/components/button";
 
-export const meta = { title: "变体与色调", titleEn: "Variants and tones" };
+export const meta = { title: "变体与色调", titleEn: "Variants and tones", specimen: true };
 
 export default function Demo() {
   return (
@@ -2656,7 +2656,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
-Source SHA-256: 1217799cec61621af3b4b3e2351b19de2c3197655267d7fc87ada9b27b9890ae
+Source SHA-256: cc312db8ff3d49ad4d90c74f6f66c7f0ee415ae293562ab6038dd06bac55b644
 
 Literal text with an optional title bar and actual copy results.
 
@@ -2975,7 +2975,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 5aa948694e5d19fabbe1bf3b65c12a316ea3cba703240beb983921397e056160
+Source SHA-256: 34ab9b17a816edd43e409738b00234525fe8bded001f559e592443c2e9974ff7
 
 Filter candidates and confirm one value or a set, with query text separate from selection.
 
@@ -4042,7 +4042,7 @@ The hook behind CopyButton, for when you need your own button form or trigger. I
 Source: apps/docs/src/content/copy-button/demos/01-copy.tsx
 ```tsx
 import { CopyButton } from "@qingye_lab/ui/components/copy-button";
-export const meta = { title: "复制文本", titleEn: "Copy text" };
+export const meta = { title: "复制文本", titleEn: "Copy text", specimen: true };
 export default function Demo() {
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)"><code className="text-body">Qingye</code><CopyButton value="Qingye" /><CopyButton value="Qingye" shape="icon" /><CopyButton value="Qingye" disabled /></div>;
 }
@@ -4148,7 +4148,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 150b236250585679cc9891aef9aec40ab46b80dbbc0516f08b0e48dca47f3580
+Source SHA-256: 98dcb4d987b9357dfafbec39b16d0f93d2932a8ac228051a31be014180a44d7d
 
 Comparison, sorting, scoped selection and optional virtualization for a caller-owned collection.
 
@@ -4356,7 +4356,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: 2874fbc00dcb9d6f3ecdf9e421097e47d03d9ff810447d8a2d744435d3ccba60
+Source SHA-256: 245e2533c9e657624a23dd0cb3eb843bd957a8fd7e93bbe7c279cff137260165
 
 Edit one local date or choose it from a calendar.
 
@@ -4454,7 +4454,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 9ba2abc7c00e37716a489e1ef61f4ed8a5d9d2e353db9accee0fd37f4a61c98c
+Source SHA-256: 6e9a60b95afa9666517df9b7b5b5d24205e5ddc771c46ac47f29ea3fd1b702a3
 
 Type or pick start and end dates; only a complete, ordered range is a confirmed value.
 
@@ -4560,7 +4560,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: ffa594e825dabe5935b253a86f90638a5b73fac7089de3996641e0af6d7461ca
+Source SHA-256: 8b1da0e00eb83996da2d5a76c7e069ffbba1c66275a991c8dff53ca80825dc3f
 
 Edit complete local wall-clock date/time, or apply calendar and time drafts.
 
@@ -4654,7 +4654,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-time-range-picker
 Source: packages/ui/src/components/date-time-range-picker.tsx
-Source SHA-256: f0bf1dd0084422c8188b26900c7152b6394fe65411b1f5a8a794b68f18a53142
+Source SHA-256: 5fb69c5e60a02e1cd93a2f29d8587132c98249bc64b654f538d260e6da69d00d
 
 Type or pick a start and an end date and time; only a complete, ordered range is a confirmed value.
 
@@ -6643,7 +6643,7 @@ import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import { Text } from "@qingye_lab/ui/components/typography";
 import { useEffect, useState } from "react";
 
-export const meta = { title: "输入方式", titleEn: "Input modality" };
+export const meta = { title: "输入方式", titleEn: "Input modality", specimen: true };
 
 export default function Demo() {
   const [input, setInput] = useState<string | null>(null);
@@ -7806,7 +7806,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: dff96cde72e893230e62af74be7b834f9fbe557e58f8c71442fbea516644a727
+Source SHA-256: 786bfc7ee2c0644823a7fdc3fc1a682373296f5d71eb24dfed5d7f265612dd9d
 
 Edit an optional number and adjust it by a declared step.
 
@@ -8350,7 +8350,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/password-input
 Source: packages/ui/src/components/password-input.tsx
-Source SHA-256: d979e4856bb9c60fc9b12a6418bd99fa1067317850359c6843c8caeab43e87d3
+Source SHA-256: b91f9ab639ef984dd076d97e6f3d322bde1a6e22b2bdbe433c668df84aecdb4b
 
 Enter a password and switch to plain text to check it.
 
@@ -10437,7 +10437,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: c1a2e83537c08c137c4b2a0266f85d16a4f021a4fd5586adc06de2a85434351c
+Source SHA-256: f0e221174a48efacb54ea6303c19cf9b31c9246c4f9a16fe40dd2df1430cf3f7
 
 Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 
@@ -11794,7 +11794,7 @@ export default function Demo() { return <Tabs defaultValue="text"><TabsList aria
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: 8ec39c7dd44653e74738178db40ee5a62a4a34d551a80a03181428338f8035ec
+Source SHA-256: 44d566b6318373e105746d955a5d882edfab472998d4e7dd773ab4c033894a94
 
 Confirm a string collection while keeping its unconfirmed draft.
 
@@ -12782,7 +12782,7 @@ import { useState } from "react";
 import { IconBold, IconItalic } from "@tabler/icons-react";
 import { Toggle } from "@qingye_lab/ui/components/toggle";
 
-export const meta = { title: "切换态", titleEn: "Toggled state" };
+export const meta = { title: "切换态", titleEn: "Toggled state", specimen: true };
 export default function Demo() {
   const [pressed, setPressed] = useState(true);
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)">

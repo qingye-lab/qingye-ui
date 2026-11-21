@@ -115,7 +115,7 @@ test("Field name and error and input/root render/ref/event forwarding remain rea
   expect(rootRef.current).toHaveAttribute("data-root", "yes");
   expect(input).toHaveAttribute("data-input", "yes");
   expect(input).toBeDisabled();
-  expect(screen.getByRole("button", { name: "移除 青叶" })).toBeDisabled();
+  expect(screen.getByRole("button", { name: "移除 青叶 标签" })).toBeDisabled();
   expect(container.querySelector('input[type="hidden"]')).toBeDisabled();
   rerender(<Field invalid><FieldLabel>标签</FieldLabel><TagInput defaultValue={["青叶"]} inputProps={{ ref: inputRef, onFocus: focus }} /><FieldDescription>页面分类</FieldDescription><FieldError>分类待确认</FieldError></Field>);
   expect(input).toHaveAccessibleDescription("页面分类 分类待确认");
@@ -369,4 +369,25 @@ test("a long tag keeps its full text reachable after truncation", () => {
   const long = "一个很长很长的标签".repeat(10);
   render(<TagInput defaultValue={[long]} inputProps={{ "aria-label": "标签" }} />);
   expect(screen.getByTitle(long)).toHaveTextContent(long);
+});
+
+test("add and remove buttons carry the field label after the action; two fields stay distinguishable, outside a Field names are unchanged, and the visible text still opens the add name", () => {
+  const { unmount } = render(<form>
+    <Field><FieldLabel>关键词</FieldLabel><TagInput defaultValue={["设计"]} /></Field>
+    <Field><FieldLabel>作者</FieldLabel><TagInput defaultValue={["设计"]} max={3} /></Field>
+  </form>);
+  expect(screen.getByRole("button", { name: "添加标签 关键词" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "添加标签（最多 3 个） 作者" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "移除 设计 关键词" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "移除 设计 作者" })).toBeInTheDocument();
+  unmount();
+  render(<TagInput defaultValue={["设计"]} inputProps={{ "aria-label": "标签" }} />);
+  expect(screen.getByRole("button", { name: "添加标签" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "移除 设计" })).toBeInTheDocument();
+});
+
+test("en-US: tag add and remove buttons read action then field label", () => {
+  render(<UILocaleProvider locale={enUS}><Field><FieldLabel>Keywords</FieldLabel><TagInput defaultValue={["ui"]} /></Field></UILocaleProvider>);
+  expect(screen.getByRole("button", { name: "Add tag Keywords" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Remove ui Keywords" })).toBeInTheDocument();
 });

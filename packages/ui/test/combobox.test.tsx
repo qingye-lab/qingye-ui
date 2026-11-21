@@ -5,7 +5,8 @@ import { expect, test, vi } from "vitest";
 import { Combobox, ComboboxChip, ComboboxChips, ComboboxClear, ComboboxCollection, ComboboxControl, ComboboxEmpty, ComboboxGroup, ComboboxGroupLabel, ComboboxInput, ComboboxItem, ComboboxList, ComboboxPopup, ComboboxSelect, ComboboxSeparator, ComboboxStatus, ComboboxTrigger, ComboboxValue } from "../src/components/combobox";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../src/components/field";
 import { Label } from "../src/components/label";
-
+import { UILocaleProvider } from "../src/locale";
+import { enUS } from "../src/locales/en-US";
 const items = ["甲", "乙", "丙"];
 const parts = <><div className="flex"><ComboboxInput /><ComboboxClear /><ComboboxTrigger /></div><ComboboxPopup><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup></>;
 
@@ -25,7 +26,7 @@ test("query draft does not submit as a candidate; keyboard confirmation and clea
   await userEvent.keyboard("{ArrowDown}{Enter}");
   expect(input).toHaveValue("乙");
   expect(new FormData(container.querySelector("form")!).getAll("choice")).toEqual(["乙"]);
-  await userEvent.click(screen.getByRole("button", { name: "清除选择" }));
+  await userEvent.click(screen.getByRole("button", { name: "清除选择 候选" }));
   expect(new FormData(container.querySelector("form")!).getAll("choice")).toEqual([""]);
 });
 
@@ -49,7 +50,7 @@ test("controlled refusal and canceled changes retain the selected value, Escape 
 test.each(["readOnly", "disabled", "fieldDisabled"])("%s prevents candidate changes and preserves correct submission", async state => {
   const change = vi.fn();
   const { container } = render(<form><Field name="choice" disabled={state === "fieldDisabled"}><FieldLabel>候选</FieldLabel><Combobox items={items} defaultValue="甲" onValueChange={change} disabled={state === "disabled"} readOnly={state === "readOnly"}>{parts}</Combobox></Field></form>);
-  await userEvent.click(screen.getByRole("button", { name: "展开选项" }));
+  await userEvent.click(screen.getByRole("button", { name: "展开选项 候选" }));
   fireEvent.change(screen.getByRole("combobox"), { target: { value: "乙" } });
   expect(change).not.toHaveBeenCalled();
   expect(new FormData(container.querySelector("form")!).getAll("choice")).toEqual(state === "readOnly" ? ["甲"] : []);
@@ -144,7 +145,7 @@ test("the convenience composition keeps confirmed objects separate from query ed
   expect(input).toHaveValue("李一鸣");
   expect(formValue()).toBe("2");
   expect(onKeyDown).toHaveBeenCalled();
-  await userEvent.click(screen.getByRole("button", { name: "清除选择" }));
+  await userEvent.click(screen.getByRole("button", { name: "清除选择 负责人" }));
   expect(formValue()).toBe("");
   expect(input).toHaveValue("");
   expect(input).toHaveFocus();
@@ -244,4 +245,25 @@ test("an explicit caller name keeps precedence over an associated label", () => 
   const input = screen.getByRole("combobox", { name: "指派对象" });
   expect(input).not.toHaveAttribute("aria-labelledby");
   expect(screen.getByText("负责人")).not.toHaveAttribute("id");
+});
+
+test("trigger and clear carry the field label after the action; two fields stay distinguishable, outside a Field the name is the action alone, and en-US follows", () => {
+  const { unmount } = render(<form>
+    <Field><FieldLabel>负责人</FieldLabel><Combobox items={items} defaultValue="甲">{parts}</Combobox></Field>
+    <Field><FieldLabel>评审人</FieldLabel><Combobox items={items} defaultValue="乙">{parts}</Combobox></Field>
+  </form>);
+  expect(screen.getByRole("button", { name: "展开选项 负责人" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "展开选项 评审人" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除选择 负责人" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除选择 评审人" })).toBeInTheDocument();
+  unmount();
+  render(<Combobox items={items} defaultValue="甲" aria-label="单独">{parts}</Combobox>);
+  expect(screen.getByRole("button", { name: "展开选项" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除选择" })).toBeInTheDocument();
+});
+
+test("en-US: combobox trigger and clear read action then field label", () => {
+  render(<UILocaleProvider locale={enUS}><Field><FieldLabel>Owner</FieldLabel><Combobox items={items} defaultValue="甲">{parts}</Combobox></Field></UILocaleProvider>);
+  expect(screen.getByRole("button", { name: "Show options Owner" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Clear selection Owner" })).toBeInTheDocument();
 });

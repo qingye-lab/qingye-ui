@@ -28,6 +28,8 @@ function loadDrawerHost() {
 export interface SidebarChangeDetails { event: React.MouseEvent; cancel(): void }
 type SidebarState = {
   collapsed: boolean; contentId: string; defaultContentId: string; setContentId: React.Dispatch<React.SetStateAction<string>>;
+  /** nav 登记的名称（调用方给的 aria-labelledby / aria-label）；开关无 children 时跟随它，两个侧栏的开关才分得出。 */
+  contentName: { labelledBy?: string | undefined; label?: string | undefined }; setContentName: (name: { labelledBy?: string | undefined; label?: string | undefined }) => void;
   toggle: React.RefObject<HTMLButtonElement | null>; content: React.RefObject<HTMLElement | null>; contentFocused: React.RefObject<boolean>;
   change(event: React.MouseEvent): void;
   /** 侧栏正承载在窄屏抽屉里（见 Sidebar 的 drawer）：永远展开，收起按钮换成关闭，点去往新页面的条目后关闭抽屉。 */
@@ -86,7 +88,8 @@ export type SidebarProps = useRender.ComponentProps<"div"> & {
  * 避免过渡途中出现换行或文字被压缩的跳动。
  */
 export function Sidebar({ collapsed, defaultCollapsed = false, onCollapsedChange, drawer = false, drawerHandle, render, className, ...props }: SidebarProps) {
-  const [local, setLocal] = React.useState(defaultCollapsed); const defaultContentId = React.useId(); const [contentId, setContentId] = React.useState(defaultContentId); const toggle = React.useRef<HTMLButtonElement | null>(null); const content = React.useRef<HTMLElement | null>(null); const contentFocused = React.useRef(false);
+  const [local, setLocal] = React.useState(defaultCollapsed); const defaultContentId = React.useId(); const [contentId, setContentId] = React.useState(defaultContentId); const [contentName, setName] = React.useState<{ labelledBy?: string | undefined; label?: string | undefined }>({});
+  const setContentName = React.useCallback((next: { labelledBy?: string | undefined; label?: string | undefined }) => setName(prev => prev.labelledBy === next.labelledBy && prev.label === next.label ? prev : next), []); const toggle = React.useRef<HTMLButtonElement | null>(null); const content = React.useRef<HTMLElement | null>(null); const contentFocused = React.useRef(false);
   const narrow = useMediaQuery("max-sm"); const workspaceHandle = useWorkspaceSidebarHandle(); const handle = drawerHandle ?? workspaceHandle;
   const inDrawer = drawer && narrow; const [drawerOpen, setDrawerOpen] = useSidebarDrawerOpen(drawer ? handle : null);
   const [Host, setHost] = React.useState(() => drawerHost);
@@ -103,7 +106,7 @@ export function Sidebar({ collapsed, defaultCollapsed = false, onCollapsedChange
   // 抽屉里没有「收起成 rail」这回事：宽度由抽屉给，永远展开。
   const current = inDrawer ? false : collapsed ?? local;
   const context: SidebarState = {
-    collapsed: current, contentId, defaultContentId, setContentId, toggle, content, contentFocused,
+    collapsed: current, contentId, defaultContentId, setContentId, contentName, setContentName, toggle, content, contentFocused,
     inDrawer, closeDrawer: inDrawer ? () => setDrawerOpen(false) : null,
     change(event) { let canceled = false; onCollapsedChange?.(!current, { event, cancel() { canceled = true; } }); if (!canceled && collapsed === undefined) setLocal(!current); },
   };
@@ -132,13 +135,13 @@ export function SidebarDrawerTrigger({ handle, className, children, onClick, ref
     className={cn("sm:hidden", className)}>{children ?? <IconMenu2 aria-hidden="true" className="rtl:-scale-x-100" />}</Button>;
 }
 export type SidebarToggleProps = ButtonProps;
-// 无 children 时名称固定为 messages.sidebar，展开/收起只由 aria-expanded 表达（ARIA disclosure）：状态不读两遍。
+// 无 children 时名称跟随它控制的 nav：nav 的 aria-labelledby / aria-label 原样沿用，都没有则为 messages.sidebar；展开/收起只由 aria-expanded 表达（ARIA disclosure）：状态不读两遍。
 export function SidebarToggle({ children, ref, onClick, className, ...props }: SidebarToggleProps) {
   const context = useSidebar(); const { messages } = useUILocale();
   // 抽屉里没有可收起的 rail：这一格换成关闭，位置与名称（messages.close）都是关闭抽屉的通行写法。
   // 抽屉是受控的，关闭就是把 Sidebar 持有的开合状态置为关，不需要抽屉自己的 Close 部件。
   if (context.inDrawer) return <div data-slot="sidebar-toggle-row" className="flex justify-end"><Button data-slot="sidebar-toggle" variant="quiet" shape="icon" aria-label={messages.close} {...props} className={cn("text-muted-foreground hover:text-foreground", className)} ref={ref} onClick={event => { onClick?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) context.closeDrawer?.(); }}>{children ?? <IconX aria-hidden="true" />}</Button></div>;
-  return <div data-slot="sidebar-toggle-row" className="flex justify-end"><Button data-slot="sidebar-toggle" variant="quiet" shape={children == null ? "icon" : "label"} aria-label={children == null ? messages.sidebar : undefined} aria-expanded={!context.collapsed} aria-controls={context.contentId} {...props} className={cn("text-muted-foreground hover:text-foreground", className)} ref={node => { context.toggle.current = node; if (typeof ref === "function") { const cleanup = ref(node); if (typeof cleanup === "function") return () => { context.toggle.current = null; cleanup(); }; } else if (ref) ref.current = node; }} onClick={event => { onClick?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) context.change(event); }}>{children ?? (context.collapsed ? <IconLayoutSidebarLeftExpand aria-hidden="true" className="rtl:-scale-x-100" /> : <IconLayoutSidebarLeftCollapse aria-hidden="true" className="rtl:-scale-x-100" />)}</Button></div>;
+  return <div data-slot="sidebar-toggle-row" className="flex justify-end"><Button data-slot="sidebar-toggle" variant="quiet" shape={children == null ? "icon" : "label"} {...(children == null && props["aria-label"] === undefined && props["aria-labelledby"] === undefined ? (context.contentName.labelledBy ? { "aria-labelledby": context.contentName.labelledBy } : { "aria-label": context.contentName.label ?? messages.sidebar }) : {})} aria-expanded={!context.collapsed} aria-controls={context.contentId} {...props} className={cn("text-muted-foreground hover:text-foreground", className)} ref={node => { context.toggle.current = node; if (typeof ref === "function") { const cleanup = ref(node); if (typeof cleanup === "function") return () => { context.toggle.current = null; cleanup(); }; } else if (ref) ref.current = node; }} onClick={event => { onClick?.(event); if (!event.defaultPrevented && !event.baseUIHandlerPrevented) context.change(event); }}>{children ?? (context.collapsed ? <IconLayoutSidebarLeftExpand aria-hidden="true" className="rtl:-scale-x-100" /> : <IconLayoutSidebarLeftCollapse aria-hidden="true" className="rtl:-scale-x-100" />)}</Button></div>;
 }
 export type SidebarHeaderProps = useRender.ComponentProps<"div">;
 /**
@@ -166,6 +169,8 @@ export type SidebarContentProps = useRender.ComponentProps<"nav">;
 export function SidebarContent({ id, render, className, onFocusCapture, onBlurCapture, ref, ...props }: SidebarContentProps) {
   const context = useSidebar(); const { messages } = useUILocale(); const actualId = id ?? context.defaultContentId;
   React.useLayoutEffect(() => { context.setContentId(actualId); }, [actualId, context.setContentId]);
+  const navLabelledBy = props["aria-labelledby"], navLabel = props["aria-label"], setContentName = context.setContentName;
+  React.useLayoutEffect(() => { setContentName({ labelledBy: navLabelledBy, label: navLabel }); }, [navLabelledBy, navLabel, setContentName]);
   // 回退到 Toggle 的条件是「焦点所在之处收起后不可达」，不是「侧栏收起」本身——
   // rail 仍渲染同一个条目（只是换成图标），焦点留在原地才是进退相承：改变布局不打断正在
   // 发生的位置。两种情况算不可达：(1) 焦点原本落在一个二级面板（SidebarSubContent）里，

@@ -14,7 +14,7 @@ test("unfinished range is draft; Apply submits only a complete named pair, clear
   }
   const { container } = render(<UILocaleProvider locale={enUS}><Example /></UILocaleProvider>);
   const form = container.querySelector("form")!;
-  await userEvent.click(screen.getByRole("button", { name: "Select date range" }));
+  await userEvent.click(screen.getByRole("button", { name: "Select date range 范围" }));
   await userEvent.click(await screen.findByRole("button", { name: /October 3, 2026/ }));
   expect(screen.getByRole("button", { name: "Apply" })).toBeDisabled();
   expect(Array.from(new FormData(form).entries())).toEqual([]);
@@ -28,7 +28,7 @@ test("unfinished range is draft; Apply submits only a complete named pair, clear
   expect(end).toHaveAccessibleName("范围 End date");
   expect(start).toHaveAccessibleDescription("当地日期范围");
   expect(end).toHaveAccessibleDescription("当地日期范围");
-  await userEvent.click(screen.getByRole("button", { name: "Select date range" }));
+  await userEvent.click(screen.getByRole("button", { name: "Select date range 范围" }));
   await userEvent.click(await screen.findByRole("button", { name: "Clear" }));
   expect(Array.from(new FormData(form).entries())).toEqual([]);
 });
@@ -222,7 +222,7 @@ test("month granularity: a range is picked on the month grid, committed from the
   const change = vi.fn();
   const { container } = render(<UILocaleProvider locale={enUS}><form><Field name="range"><FieldLabel>范围</FieldLabel><DateRangePicker granularity="month" onValueChange={change} calendarProps={{ defaultMonth: new Date(2026, 0) }} /></Field></form></UILocaleProvider>);
   const start = screen.getByRole("textbox", { name: /Start date/ }), end = screen.getByRole("textbox", { name: /End date/ });
-  await userEvent.click(screen.getByRole("button", { name: "Select date range" }));
+  await userEvent.click(screen.getByRole("button", { name: "Select date range 范围" }));
   await userEvent.click(await screen.findByRole("button", { name: "February 2026" }));
   await userEvent.click(screen.getByRole("button", { name: "April 2026" }));
   expect(start).toHaveValue("2/2026");
@@ -319,4 +319,25 @@ test("empty native ends show a locale hint each, and the caller's placeholder wi
 test("a filled native range carries no hint", () => {
   const { container } = render(<UILocaleProvider locale={enUS}><DateRangePicker defaultValue={{ from: new Date(2026, 9, 3), to: new Date(2026, 9, 5) }} /></UILocaleProvider>);
   expect(container.querySelectorAll("[data-slot=input-hint]")).toHaveLength(0);
+});
+
+test("inside a Field the calendar and clear buttons read action + the whole field's label; two ranges are distinguishable", () => {
+  render(<form>
+    <Field name="a"><FieldLabel>报告周期</FieldLabel><DateRangePicker defaultValue={{ from: new Date(2026, 9, 3), to: new Date(2026, 9, 5) }} /></Field>
+    <Field name="b"><FieldLabel>对比周期</FieldLabel><DateRangePicker defaultValue={{ from: new Date(2026, 8, 3), to: new Date(2026, 8, 5) }} /></Field>
+  </form>);
+  expect(screen.getByRole("button", { name: "选择日期范围 报告周期" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "选择日期范围 对比周期" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除日期范围 报告周期" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除日期范围 对比周期" })).toBeInTheDocument();
+});
+
+test("in English the range buttons read action + label; outside a Field the name is the action alone", () => {
+  const { unmount } = render(<UILocaleProvider locale={enUS}><Field name="a"><FieldLabel>Reporting period</FieldLabel><DateRangePicker defaultValue={{ from: new Date(2026, 9, 3), to: new Date(2026, 9, 5) }} /></Field></UILocaleProvider>);
+  expect(screen.getByRole("button", { name: "Select date range Reporting period" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Clear date range Reporting period" })).toBeInTheDocument();
+  unmount();
+  render(<UILocaleProvider locale={enUS}><DateRangePicker defaultValue={{ from: new Date(2026, 9, 3), to: new Date(2026, 9, 5) }} inputProps={{ "aria-label": "Range" }} /></UILocaleProvider>);
+  expect(screen.getByRole("button", { name: "Select date range" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Clear date range" })).toBeInTheDocument();
 });

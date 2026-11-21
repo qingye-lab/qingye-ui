@@ -4,6 +4,7 @@ import { Autocomplete as AutocompletePrimitive } from "@base-ui/react/autocomple
 import { IconChevronDown, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { BusyMark } from "../busy-mark";
+import { useAdjunctName } from "../adjunct-name";
 import { useUILocale } from "../locale";
 import { type CandidateStatusOptions, useCandidateStatus } from "../candidate-status";
 import { popupOffset, useFloatingLayer } from "../floating-layer";
@@ -59,13 +60,15 @@ export function AutocompleteTrigger({ render, children, ...props }: Autocomplete
   const inControl = React.useContext(InControl);
   const readOnly = React.useContext(ReadOnly);
   const { messages } = useUILocale();
-  return <AutocompletePrimitive.Trigger data-slot="autocomplete-trigger" aria-label={messages.showOptions} {...props} disabled={readOnly || props.disabled} aria-labelledby={props["aria-labelledby"] ?? ""} render={(elementProps, state) => <Button variant={inControl ? "quiet" : "bordered"} shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconChevronDown aria-hidden="true" />}</AutocompletePrimitive.Trigger>;
+  const name = useAdjunctName(messages.showOptions, props);
+  return <AutocompletePrimitive.Trigger data-slot="autocomplete-trigger" {...props} {...name} disabled={readOnly || props.disabled} aria-labelledby={name["aria-labelledby"] ?? ""} render={(elementProps, state) => <Button variant={inControl ? "quiet" : "bordered"} shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconChevronDown aria-hidden="true" />}</AutocompletePrimitive.Trigger>;
 }
 export function AutocompleteClear({ render, children, ...props }: AutocompletePrimitive.Clear.Props & React.RefAttributes<HTMLButtonElement>) {
   const inControl = React.useContext(InControl);
   const readOnly = React.useContext(ReadOnly);
   const { messages } = useUILocale();
-  return <AutocompletePrimitive.Clear data-slot="autocomplete-clear" aria-label={messages.clearSelection} {...props} disabled={readOnly || props.disabled} render={(elementProps, state) => <Button variant="quiet" shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconX aria-hidden="true" />}</AutocompletePrimitive.Clear>;
+  const name = useAdjunctName(messages.clearSelection, props);
+  return <AutocompletePrimitive.Clear data-slot="autocomplete-clear" {...props} {...name} disabled={readOnly || props.disabled} render={(elementProps, state) => <Button variant="quiet" shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconX aria-hidden="true" />}</AutocompletePrimitive.Clear>;
 }
 export type AutocompletePopupProps = AutocompletePrimitive.Popup.Props & React.RefAttributes<HTMLDivElement> & { container?: AutocompletePrimitive.Portal.Props["container"]; positionerProps?: AutocompletePrimitive.Positioner.Props };
 // 边界与阴影档同 Popover（见 popover.tsx 的 PopoverPopup）：border-border 线 + shadow-raised。

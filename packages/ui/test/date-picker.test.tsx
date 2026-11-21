@@ -14,26 +14,26 @@ test("native editing and calendar selection share the controlled local date and 
     return <form><Field name="date" invalid><FieldLabel>日期</FieldLabel><DatePicker value={value} onValueChange={setValue} inputProps={{ ref, render: <input data-custom="yes" /> }} /><FieldDescription>当地日期</FieldDescription><FieldError>待核对</FieldError></Field></form>;
   }
   const { container } = render(<UILocaleProvider locale={enUS}><Example /></UILocaleProvider>);
-  const input = screen.getByLabelText("日期") as HTMLInputElement;
+  const input = screen.getByLabelText("日期", { selector: "input" }) as HTMLInputElement;
   expect(ref.current).toBe(input);
   expect(input).toHaveAccessibleDescription("当地日期 待核对");
   expect(input).toHaveAttribute("aria-invalid", "true");
   fireEvent.change(input, { target: { value: "2026-10-04" } });
   expect(new FormData(container.querySelector("form")!).get("date")).toBe("2026-10-04");
-  const trigger = screen.getByRole("button", { name: "Select date" });
+  const trigger = screen.getByRole("button", { name: "Select date 日期" });
   await userEvent.click(trigger);
   await userEvent.click(await screen.findByRole("button", { name: /October 5, 2026/ }));
   expect(input).toHaveValue("2026-10-05");
   await waitFor(() => expect(trigger).toHaveFocus());
-  await userEvent.click(screen.getByRole("button", { name: "Clear date" }));
+  await userEvent.click(screen.getByRole("button", { name: "Clear date 日期" }));
   expect(input).toHaveValue("");
 });
 
 test.each(["readOnly", "disabled", "fieldDisabled"])("%s blocks edits and calendar actions with truthful form participation", async state => {
   const change = vi.fn();
   const { container } = render(<form><Field disabled={state === "fieldDisabled"} name="date"><FieldLabel>日期</FieldLabel><DatePicker value={new Date(2026, 9, 3)} onValueChange={change} disabled={state === "disabled"} readOnly={state === "readOnly"} /></Field></form>);
-  expect(screen.getByRole("button", { name: "选择日期" })).toBeDisabled();
-  fireEvent.change(screen.getByLabelText("日期"), { target: { value: "2026-10-04" } });
+  expect(screen.getByRole("button", { name: "选择日期 日期" })).toBeDisabled();
+  fireEvent.change(screen.getByLabelText("日期", { selector: "input" }), { target: { value: "2026-10-04" } });
   expect(change).not.toHaveBeenCalled();
   expect(new FormData(container.querySelector("form")!).get("date")).toBe(state === "readOnly" ? "2026-10-03" : null);
 });
@@ -166,7 +166,7 @@ test("the clear action returns focus to the input; read-only says so beside the 
   const { rerender } = render(<DatePicker defaultValue={new Date(2026, 9, 3)} onValueChange={change} inputProps={{ "aria-label": "日期" }} />);
   await userEvent.click(screen.getByRole("button", { name: "清除日期" }));
   expect(change).toHaveBeenCalledWith(undefined, expect.anything());
-  expect(screen.getByLabelText("日期")).toHaveFocus();
+  expect(screen.getByLabelText("日期", { selector: "input" })).toHaveFocus();
   expect(screen.queryByText("只读")).not.toBeInTheDocument();
   rerender(<DatePicker value={new Date(2026, 9, 3)} onValueChange={change} readOnly inputProps={{ "aria-label": "日期" }} />);
   expect(screen.getByText("只读")).toBeInTheDocument();
@@ -180,11 +180,11 @@ test("month granularity: the value is normalized to the month start, shown as lo
     return <form><Field name="period"><FieldLabel>月份</FieldLabel><DatePicker granularity="month" value={value} onValueChange={next => { onValueChange(next); setValue(next); }} /></Field></form>;
   }
   const { container } = render(<UILocaleProvider locale={enUS}><Example /></UILocaleProvider>);
-  const input = screen.getByLabelText("月份") as HTMLInputElement;
+  const input = screen.getByLabelText("月份", { selector: "input" }) as HTMLInputElement;
   expect(input).toHaveAttribute("type", "text");
   expect(input).toHaveValue("11/2026");
   expect(new FormData(container.querySelector("form")!).get("period")).toBe("2026-11-18");
-  const trigger = screen.getByRole("button", { name: "Select month" });
+  const trigger = screen.getByRole("button", { name: "Select month 月份" });
   await userEvent.click(trigger);
   expect(await screen.findByRole("grid")).toBeInTheDocument();
   await userEvent.click(screen.getByRole("button", { name: "Next year" }));
@@ -282,4 +282,26 @@ test("clicking a different day still changes the value", async () => {
   await userEvent.click(await screen.findByRole("button", { name: /November 4, 2026/ }));
   expect(change).toHaveBeenCalledTimes(1);
   expect(screen.getByLabelText("date input")).toHaveValue("2026-11-04");
+});
+
+test("inside a Field the calendar and clear buttons read action + field label; two fields stay distinguishable; outside a Field the name is the action alone", () => {
+  render(<form>
+    <Field name="a"><FieldLabel>开始日期</FieldLabel><DatePicker defaultValue={new Date(2026, 9, 3)} /></Field>
+    <Field name="b"><FieldLabel>结束日期</FieldLabel><DatePicker defaultValue={new Date(2026, 9, 5)} /></Field>
+  </form>);
+  expect(screen.getByRole("button", { name: "选择日期 开始日期" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "选择日期 结束日期" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除日期 开始日期" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除日期 结束日期" })).toBeInTheDocument();
+});
+
+test("outside a Field the buttons keep the action-only name", () => {
+  render(<DatePicker defaultValue={new Date(2026, 9, 3)} inputProps={{ "aria-label": "日期" }} />);
+  expect(screen.getByRole("button", { name: "选择日期" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除日期" })).toBeInTheDocument();
+});
+
+test("a period picker's calendar button names the period and the field label", () => {
+  render(<UILocaleProvider locale={enUS}><Field name="m"><FieldLabel>Billing month</FieldLabel><DatePicker granularity="month" /></Field></UILocaleProvider>);
+  expect(screen.getByRole("button", { name: "Select month Billing month" })).toBeInTheDocument();
 });

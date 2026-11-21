@@ -89,7 +89,7 @@ The hook behind CopyButton, for when you need your own button form or trigger. I
 Source: apps/docs/src/content/copy-button/demos/01-copy.tsx
 ```tsx
 import { CopyButton } from "@qingye_lab/ui/components/copy-button";
-export const meta = { title: "复制文本", titleEn: "Copy text" };
+export const meta = { title: "复制文本", titleEn: "Copy text", specimen: true };
 export default function Demo() {
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)"><code className="text-body">Qingye</code><CopyButton value="Qingye" /><CopyButton value="Qingye" shape="icon" /><CopyButton value="Qingye" disabled /></div>;
 }

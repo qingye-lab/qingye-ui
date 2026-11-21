@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 5aa948694e5d19fabbe1bf3b65c12a316ea3cba703240beb983921397e056160
+Source SHA-256: 34ab9b17a816edd43e409738b00234525fe8bded001f559e592443c2e9974ff7
 
 Filter candidates and confirm one value or a set, with query text separate from selection.
 

@@ -8,6 +8,7 @@ import * as React from "react";
 import { intersectNativeBounds, mergeCalendarBounds, readNativeEntry, useCustomValidity, useInputFacts, useInputRef, useTypingText, warnEmptyBounds } from "../input-facts";
 import { DraftSurface } from "../draft-surface";
 import { inputAdjunctClassName, withHiddenIndicator } from "../input-adjunct";
+import { useAdjunctName } from "../adjunct-name";
 import { InputGroupReadOnlyNote } from "../input-readonly-note";
 import { comparableTime, validLocalTime } from "../local-time";
 import { useUILocale } from "../locale";
@@ -155,6 +156,9 @@ export function DateTimeRangePicker(allProps: DateTimeRangePickerProps) {
     setWiring(previous => previous.id === next.id && previous.label === next.label && previous.described === next.described ? previous : next);
   });
   const named = (self: string, label: string) => wiring.label && self ? { "aria-label": label, "aria-labelledby": `${wiring.label} ${self}` } : { "aria-label": label };
+  // 附属按钮：动作在前、整个字段的标签在后；不照抄 named()（那是给开始/结束输入的「标签在前」）。
+  const clearName = useAdjunctName(messages.clearDateTimeRange, {}, wiring.label);
+  const openName = useAdjunctName(messages.selectDateTimeRange, {}, wiring.label);
 
   const handleEntry = (end: "from" | "to") => (event: InputEvents["change"]) => {
     (end === "from" ? onStartChange : onEndChange)?.(event);
@@ -225,8 +229,8 @@ export function DateTimeRangePicker(allProps: DateTimeRangePickerProps) {
           onChange={handleEntry("to")} onBlur={handleBlur("to")} />
         {readOnlyNow && !disabled ? <InputGroupReadOnlyNote /> : null}
         {/* 与 DateRangePicker 同一套清除：确认值非空且可编辑时出现；清除也放弃未采纳的键入与草稿，焦点回到起点输入。 */}
-        {value && editable && <Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.clearDateTimeRange} onClick={event => { releaseTyping(); change(undefined, event); setDraftState(undefined); startRef.current?.focus(); }}><IconX aria-hidden="true" /></Button>}
-        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.selectDateTimeRange} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
+        {value && editable && <Button variant="quiet" shape="icon" className={inputAdjunctClassName} {...clearName} onClick={event => { releaseTyping(); change(undefined, event); setDraftState(undefined); startRef.current?.focus(); }}><IconX aria-hidden="true" /></Button>}
+        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} {...openName} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
       </InputGroup>
       <PopoverPopup align="start" anchor={boundaryRef}><div className="grid gap-(--qy-field-group-gap)">
         <Calendar {...calendarProps} {...bounds} month={calendarProps.month ?? visibleMonth} onMonthChange={month => { setVisibleMonth(month); calendarProps.onMonthChange?.(month); }}

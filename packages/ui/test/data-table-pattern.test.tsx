@@ -2,6 +2,8 @@ import * as React from "react";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
+import { UILocaleProvider } from "../src/locale";
+import { enUS } from "../src/locales/en-US";
 import { DataTablePattern, type DataTablePatternColumn, type DataTablePatternState } from "../src/components/data-table";
 
 type Entry = { id: string; label: string; count: number };
@@ -252,5 +254,32 @@ describe("DataTablePattern", () => {
     try {
       expect(() => render(<DataTablePattern data={data} columns={[{ ...columns[1]! }]} getRowId={getRowId} emptyContent="没有条目" activeRow={{ trigger: "row" }} />)).toThrow("rowHeader");
     } finally { error.mockRestore(); }
+  });
+});
+
+describe("DataTablePattern pagination name", () => {
+  const paging = { pageSizeOptions: [1, 2] as const };
+  const table = (extra: object) => <DataTablePattern data={data} columns={columns} getRowId={getRowId} pagination={paging} {...extra} />;
+  it("is the bare 分页 when the table has no name", () => {
+    render(table({}));
+    expect(screen.getByRole("navigation", { name: "分页" })).toBeInTheDocument();
+  });
+  it("two tables with captions get distinguishable pagination landmarks", () => {
+    render(<>{table({ caption: "订单" })}{table({ caption: "客户" })}</>);
+    expect(screen.getByRole("navigation", { name: "分页 订单" })).toBeInTheDocument();
+    expect(screen.getByRole("navigation", { name: "分页 客户" })).toBeInTheDocument();
+  });
+  it("uses the table's aria-label / aria-labelledby when there is no caption", () => {
+    render(<>{table({ tableProps: { "aria-label": "日志" } })}<span id="t2">审计</span>{table({ tableProps: { "aria-labelledby": "t2" } })}</>);
+    expect(screen.getByRole("navigation", { name: "分页 日志" })).toBeInTheDocument();
+    expect(screen.getByRole("navigation", { name: "分页 审计" })).toBeInTheDocument();
+  });
+  it("the caller's pagination aria-label wins", () => {
+    render(table({ caption: "订单", pagination: { ...paging, "aria-label": "订单翻页" } }));
+    expect(screen.getByRole("navigation", { name: "订单翻页" })).toBeInTheDocument();
+  });
+  it("en-US", () => {
+    render(<UILocaleProvider locale={enUS}>{table({ caption: "Orders" })}</UILocaleProvider>);
+    expect(screen.getByRole("navigation", { name: "Pagination Orders" })).toBeInTheDocument();
   });
 });

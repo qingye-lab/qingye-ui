@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
-Source SHA-256: 1217799cec61621af3b4b3e2351b19de2c3197655267d7fc87ada9b27b9890ae
+Source SHA-256: cc312db8ff3d49ad4d90c74f6f66c7f0ee415ae293562ab6038dd06bac55b644
 
 文本原样展示、可选标题栏与真实复制结果。
 
