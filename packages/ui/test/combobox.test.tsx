@@ -232,6 +232,13 @@ test.each([
   expect(screen.getByRole("combobox", { name: "负责人" })).toHaveAttribute("id", "owner");
 });
 
+// 外部 label 与包裹 label 并存时保持原生取名，两段文字都在名称里。
+test("an associated label next to a wrapping label keeps both in the name", () => {
+  render(<div><label htmlFor="owner">负责人</label><label>范围 <ComboboxSelect items={items} itemToStringLabel={item => item} emptyContent="没有匹配项" inputProps={{ id: "owner" }} /></label></div>);
+  const input = screen.getByRole("combobox", { name: /负责人.*范围/ });
+  expect(input).not.toHaveAttribute("aria-labelledby");
+});
+
 test("an explicit caller name keeps precedence over an associated label", () => {
   render(<div><label htmlFor="owner">负责人</label><ComboboxSelect items={items} itemToStringLabel={item => item} emptyContent="没有匹配项" inputProps={{ id: "owner", "aria-label": "指派对象" }} /></div>);
   const input = screen.getByRole("combobox", { name: "指派对象" });

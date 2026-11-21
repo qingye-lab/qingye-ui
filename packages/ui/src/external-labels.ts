@@ -13,11 +13,13 @@ import * as React from "react";
  *
  * 只转外部的 label：包住输入框的 label 若被引用，取名时会把输入框自己的值也算进去；
  * 它的文字是直接文本时，打开后本来就保留名称。包裹写法里文字放进子元素的情形无法这样修复，见组件文档。
+ * 外部 label 与包裹 label 同时存在时整体不转：aria-labelledby 只引用外部那个，会替换掉原生取名，
+ * 弹层关着时也丢掉包裹 label 的文字；保持原生取名，代价是打开时只剩包裹 label 的名称（与未加此处理时相同）。
  * 调用方显式给了 aria-label / aria-labelledby，或在 Field 里时，由调用处的优先级决定，不用这里的结果。
  */
 
 /**
- * 用 htmlFor/id 关联到输入框、且不包住它的 label 的 id 列表（空格分隔）。缺 id 的 label 补一个稳定 id。
+ * 用 htmlFor/id 关联到输入框的 label 的 id 列表（空格分隔）；有 label 包住输入框时为空。缺 id 的 label 补一个稳定 id。
  * 返回的 refresh 交给输入框的 onFocus：打开通常伴随聚焦，聚焦时再核对一次，覆盖输入框没重新渲染而 label 已变的情形。
  */
 export function useExternalLabelledBy(inputRef: React.RefObject<HTMLInputElement | null>): [string | undefined, () => void] {
@@ -34,7 +36,8 @@ export function useExternalLabelledBy(inputRef: React.RefObject<HTMLInputElement
       setIds(undefined);
       return;
     }
-    const labels = Array.from(input.labels ?? []).filter(label => !label.contains(input));
+    const all = Array.from(input.labels ?? []);
+    const labels = all.some(label => label.contains(input)) ? [] : all;
     const next = labels.map((label, index) => {
       // 调用方的 label 没有 id 时才写入；已有的 id 原样引用。
       if (!label.id) label.id = `${uid}-label-${index}`;
