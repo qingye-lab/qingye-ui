@@ -22,12 +22,14 @@ A button only triggers an action, and busy is its only state: while busy it reta
 - Run a command with an object and consequence, submit a form, or stop the current task.
 - Avoid: Use native links for navigation.
 - Avoid: Writing the result into the button: the end of busy does not establish success; express failure and unknown results with Alert, Toast or FieldError.
+- Avoid: Putting the disabled reason only in a Tooltip or title: hints never appear on touch screens, so the reason cannot be read there. Disabled conditions must be readable (design.md: judgments machines can read must be written down); write the reason as visible text beside the button.
 - Library: Native and non-native command semantics, focus, and the activation guard and screen-reader wording while busy.
 - Application: Objects, scope, consequences, permissions, request facts, verification, recovery, and background cancellation.
 
 ## Composition
 - For an irreversible action the button is only the entry: it opens AlertDialog (or ConfirmAction), whose description states the consequence. Applications own confirmation criteria, permissions, and remote verification.
 - A two-state fact that persists after pressing (selected, on) is a Toggle; one of several is SegmentedControl, several of several is ToggleGroup. Button triggers an action and holds no selection.
+- When users can act first and correct afterwards (most form submissions), keep the button enabled and explain in place with FieldError or Alert after submitting. When disabling is necessary, use aria-disabled so the button stays focusable, put the reason in visible text beside it, and link it with aria-describedby.
 
 ## Responsive behavior
 - Choose dimensions for position; long labels may wrap and grow, icons retain matching geometry, and touch targets remain separate from appearance.
@@ -261,6 +263,27 @@ export default function Demo() {
         </Alert>
       )}
       <div><Button loading={phase === "saving"} onClick={save}>保存</Button></div>
+    </Stack>
+  );
+}
+```
+
+### 禁用原因写在按钮旁
+Source: apps/docs/src/content/button/demos/09-disabled-reason.tsx
+```tsx
+import { Button } from "@qingye_lab/ui/components/button";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import * as React from "react";
+
+export const meta = { title: "禁用原因写在按钮旁", titleEn: "The disabled reason sits beside the button" };
+
+// 原因是页内文字，不放进提示：触屏上提示不会出现。aria-disabled 让按钮仍可聚焦，读屏经 aria-describedby 读到原因。
+export default function Demo() {
+  const reason = React.useId();
+  return (
+    <Stack gap="field" className="w-full max-w-md">
+      <div><Button aria-disabled aria-describedby={reason}>发布</Button></div>
+      <p id={reason} className="m-0 text-support text-muted-foreground">需要编辑权限，请联系空间管理员。</p>
     </Stack>
   );
 }

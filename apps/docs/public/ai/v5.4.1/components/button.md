@@ -22,12 +22,14 @@ Source SHA-256: 33bee148386b5e78157da9af6787ff6d23f8bb88bb47d5ae1aed705c86ef02df
 - 执行有对象与后果的命令、提交表单或停止当前任务。
 - Avoid: 导航用原生链接。
 - Avoid: 把结果写进按钮：忙碌结束不等于成功，失败与结果未知用 Alert、Toast 或 FieldError 表达。
+- Avoid: 把禁用原因只放在 Tooltip 或 title 里：触屏上提示不会出现，原因就读不到。禁用条件要能被读到（design.md「判断可被机器读到的部分必须写下来」），原因写成按钮旁的页内文字。
 - Library: 原生与非原生命令语义、焦点、忙碌时的激活保护与读屏说法。
 - Application: 对象、范围、后果、权限、请求事实、核实、恢复与取消后台任务。
 
 ## Composition
 - 有不可逆后果的动作：按钮只是入口，打开 AlertDialog（或 ConfirmAction），后果写在对话框的说明里；确认条件、权限与远端核实属于应用。
 - 按下后保持的二态（已选中、已开启）用 Toggle；几个里选一个用 SegmentedControl，可多选用 ToggleGroup。Button 只触发动作，不持有选中。
+- 能先操作再纠错的（多数表单提交）不禁用按钮，提交后用 FieldError 或 Alert 就地说明。确需禁用时用 aria-disabled 保持按钮可聚焦，原因写在按钮旁的可见文字里，并用 aria-describedby 关联。
 
 ## Responsive behavior
 - 尺寸按位置选择；长标签可换行增高，图标形态保留同档几何；触摸命中区独立于外观。
@@ -261,6 +263,27 @@ export default function Demo() {
         </Alert>
       )}
       <div><Button loading={phase === "saving"} onClick={save}>保存</Button></div>
+    </Stack>
+  );
+}
+```
+
+### 禁用原因写在按钮旁
+Source: apps/docs/src/content/button/demos/09-disabled-reason.tsx
+```tsx
+import { Button } from "@qingye_lab/ui/components/button";
+import { Stack } from "@qingye_lab/ui/components/layout";
+import * as React from "react";
+
+export const meta = { title: "禁用原因写在按钮旁", titleEn: "The disabled reason sits beside the button" };
+
+// 原因是页内文字，不放进提示：触屏上提示不会出现。aria-disabled 让按钮仍可聚焦，读屏经 aria-describedby 读到原因。
+export default function Demo() {
+  const reason = React.useId();
+  return (
+    <Stack gap="field" className="w-full max-w-md">
+      <div><Button aria-disabled aria-describedby={reason}>发布</Button></div>
+      <p id={reason} className="m-0 text-support text-muted-foreground">需要编辑权限，请联系空间管理员。</p>
     </Stack>
   );
 }

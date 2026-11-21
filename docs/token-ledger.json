@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-11-21T08:16:35.788Z",
-  "revision": "edeed5c65e9ae3a9079e92ffb9f6aa2625340023",
+  "generatedAt": "2026-11-21T08:39:09.991Z",
+  "revision": "b1c08c8ab1e1b7d41ab4eec77da8ab9b781b828a",
   "static": {
     "fingerprint": {
-      "sha256": "1c49aed69e043fd7b40ad86cb44afa64680d851b337aef58e6ed4a4bf9576667",
+      "sha256": "01022eb5a69f659cc816d3d056e5dd57c6215026d64443ad5a87859e80a542a3",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -320,8 +320,12 @@
           "sha256": "8fa8e1c0f743d7bdb35c6086bd622a7f58551df17c933122db788d025e9eb12b"
         },
         {
+          "path": "apps/docs/src/content/button/demos/09-disabled-reason.tsx",
+          "sha256": "87ca9989e95eed72aeb903f24bed120cb96749b7e074a11b6c65cfa19005fc25"
+        },
+        {
           "path": "apps/docs/src/content/button/meta.ts",
-          "sha256": "97445f98890066001f9ceaec1e40359c068849fe96735a37e2550e538b96f1f3"
+          "sha256": "986c76faee731cb6de959c2e67f81d97aa1041644d39cdd370ec5a9c449a0e38"
         },
         {
           "path": "apps/docs/src/content/calendar/cover.tsx",
@@ -2233,7 +2237,7 @@
         },
         {
           "path": "apps/docs/src/content/toc/meta.ts",
-          "sha256": "eef50cbdb3f45eb2d2e8b59e26a2c4040279e4bc3c57f711935e29c132ec1bde"
+          "sha256": "199a04e7fe59b245b153f1d158a3048b173c0949df19bfc8454733fabc24fcd0"
         },
         {
           "path": "apps/docs/src/content/toggle-group/cover.tsx",
@@ -2301,7 +2305,7 @@
         },
         {
           "path": "apps/docs/src/content/tooltip/meta.ts",
-          "sha256": "8b812684e8cacbb609408d1f74f527921451257e6c988df27a19be1605cb37f1"
+          "sha256": "2d135fe9509e209b89ac1e3a365e2d11c653e0186dd5a13d9dc23f5b9b44eef6"
         },
         {
           "path": "apps/docs/src/content/tour/cover.tsx",
@@ -3253,7 +3257,7 @@
         },
         {
           "path": "packages/ui/src/components/toc.tsx",
-          "sha256": "8d97141f492627f220e38c903da4c49540311794074937e3d4b82be9ec0b857d"
+          "sha256": "f4e51a4407103bc3e69e9f6612457ef1004296c3c79aa640a6305d7c0145cfdd"
         },
         {
           "path": "packages/ui/src/components/toggle-group.tsx",
@@ -529360,7 +529364,7 @@
         "className": "ps-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/toc.tsx",
-          "line": 44
+          "line": 49
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -529391,7 +529395,7 @@
         "className": "ps-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/toc.tsx",
-          "line": 44
+          "line": 49
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -529430,7 +529434,7 @@
         "className": "ps-(--qy-field-gap)",
         "source": {
           "path": "packages/ui/src/components/toc.tsx",
-          "line": 44
+          "line": 49
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -529453,7 +529457,7 @@
         "className": "ps-[calc(var(--qy-field-gap)+var(--qy-level-indent))]",
         "source": {
           "path": "packages/ui/src/components/toc.tsx",
-          "line": 45
+          "line": 50
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -529484,7 +529488,7 @@
         "className": "ps-[calc(var(--qy-field-gap)+var(--qy-level-indent))]",
         "source": {
           "path": "packages/ui/src/components/toc.tsx",
-          "line": 45
+          "line": 50
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -529523,7 +529527,7 @@
         "className": "ps-[calc(var(--qy-field-gap)+var(--qy-level-indent))]",
         "source": {
           "path": "packages/ui/src/components/toc.tsx",
-          "line": 45
+          "line": 50
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -529546,7 +529550,7 @@
         "className": "ps-[calc(var(--qy-field-gap)+var(--qy-level-indent))]",
         "source": {
           "path": "packages/ui/src/components/toc.tsx",
-          "line": 45
+          "line": 50
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -529577,7 +529581,7 @@
         "className": "ps-[calc(var(--qy-field-gap)+var(--qy-level-indent))]",
         "source": {
           "path": "packages/ui/src/components/toc.tsx",
-          "line": 45
+          "line": 50
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -529616,7 +529620,7 @@
         "className": "ps-[calc(var(--qy-field-gap)+var(--qy-level-indent))]",
         "source": {
           "path": "packages/ui/src/components/toc.tsx",
-          "line": 45
+          "line": 50
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -529639,7 +529643,7 @@
         "className": "py-(--qy-fen)",
         "source": {
           "path": "packages/ui/src/components/toc.tsx",
-          "line": 90
+          "line": 95
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },
@@ -529670,7 +529674,7 @@
         "className": "py-(--qy-fen)",
         "source": {
           "path": "packages/ui/src/components/toc.tsx",
-          "line": 90
+          "line": 95
         },
         "mapping": "AST class literal + bounded utility and custom-property forwarding; cascade not established"
       },

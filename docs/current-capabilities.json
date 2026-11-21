@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-20T11:02:50.240Z",
-  "revision": "b0607698073d10a3dcc6f4618a07bdf541351ad1",
+  "generatedAt": "2026-11-21T08:39:21.128Z",
+  "revision": "b1c08c8ab1e1b7d41ab4eec77da8ab9b781b828a",
   "fingerprint": {
-    "sha256": "2d4478583e107f6862685d956c2f8a247784ee7e89f7ec738e377f2719848cc2",
+    "sha256": "ea1d3c1cee87abc836bb6b59198580c13e54766610fb53a2b4281f2090fb5748",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -56,7 +56,7 @@
       },
       {
         "path": "apps/docs/src/content/button/meta.ts",
-        "sha256": "97445f98890066001f9ceaec1e40359c068849fe96735a37e2550e538b96f1f3"
+        "sha256": "986c76faee731cb6de959c2e67f81d97aa1041644d39cdd370ec5a9c449a0e38"
       },
       {
         "path": "apps/docs/src/content/calendar/meta.ts",
@@ -244,7 +244,7 @@
       },
       {
         "path": "apps/docs/src/content/meter/meta.ts",
-        "sha256": "7bc65aea900b39f5c450d3dc973c21362f4680ddb073d464a7a8e0af4a04bd18"
+        "sha256": "34cfde4ad13f768caa89168d3a87cd990563cf72b4b53026951ac133dc6fd1af"
       },
       {
         "path": "apps/docs/src/content/native-select/meta.ts",
@@ -344,7 +344,7 @@
       },
       {
         "path": "apps/docs/src/content/severity-mark/meta.ts",
-        "sha256": "74c5473738fce18f53edc4ba2456746b76d79b29f5781ee3855609d7c1fcbe69"
+        "sha256": "8ff938ae061d499ed01f03713bcac5a59f42c82e0b4a1c098df4666fb619e7b6"
       },
       {
         "path": "apps/docs/src/content/sidebar/meta.ts",
@@ -420,7 +420,7 @@
       },
       {
         "path": "apps/docs/src/content/toc/meta.ts",
-        "sha256": "eef50cbdb3f45eb2d2e8b59e26a2c4040279e4bc3c57f711935e29c132ec1bde"
+        "sha256": "199a04e7fe59b245b153f1d158a3048b173c0949df19bfc8454733fabc24fcd0"
       },
       {
         "path": "apps/docs/src/content/toggle-group/meta.ts",
@@ -436,7 +436,7 @@
       },
       {
         "path": "apps/docs/src/content/tooltip/meta.ts",
-        "sha256": "8b812684e8cacbb609408d1f74f527921451257e6c988df27a19be1605cb37f1"
+        "sha256": "2d135fe9509e209b89ac1e3a365e2d11c653e0186dd5a13d9dc23f5b9b44eef6"
       },
       {
         "path": "apps/docs/src/content/tour/meta.ts",
@@ -480,7 +480,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "614f1b6be9d5d693cea655fbfc21252910ae674e950ac988ec59cb9bc3552812"
+        "sha256": "f99d4d238767824ed996c06e0129581c21c633fc3c50867df3be54cc771e249e"
       },
       {
         "path": "packages/ui/motion.css",
@@ -728,7 +728,7 @@
       },
       {
         "path": "packages/ui/src/components/meter.tsx",
-        "sha256": "9579a5e1dcfc8e727b00a72c3e2b16e1be3853063a55fdc4af3cd6a927040c7c"
+        "sha256": "3b1233fa556bb4efd1a827ee8adfc0c4e36155e61816f0c7f378a8b23e793ca9"
       },
       {
         "path": "packages/ui/src/components/native-select.tsx",
@@ -904,7 +904,7 @@
       },
       {
         "path": "packages/ui/src/components/toc.tsx",
-        "sha256": "8d97141f492627f220e38c903da4c49540311794074937e3d4b82be9ec0b857d"
+        "sha256": "f4e51a4407103bc3e69e9f6612457ef1004296c3c79aa640a6305d7c0145cfdd"
       },
       {
         "path": "packages/ui/src/components/toggle-group.tsx",
@@ -4567,11 +4567,13 @@
           ],
           "avoid": [
             "导航用原生链接。",
-            "把结果写进按钮：忙碌结束不等于成功，失败与结果未知用 Alert、Toast 或 FieldError 表达。"
+            "把结果写进按钮：忙碌结束不等于成功，失败与结果未知用 Alert、Toast 或 FieldError 表达。",
+            "把禁用原因只放在 Tooltip 或 title 里：触屏上提示不会出现，原因就读不到。禁用条件要能被读到（design.md「判断可被机器读到的部分必须写下来」），原因写成按钮旁的页内文字。"
           ],
           "composition": [
             "有不可逆后果的动作：按钮只是入口，打开 AlertDialog（或 ConfirmAction），后果写在对话框的说明里；确认条件、权限与远端核实属于应用。",
-            "按下后保持的二态（已选中、已开启）用 Toggle；几个里选一个用 SegmentedControl，可多选用 ToggleGroup。Button 只触发动作，不持有选中。"
+            "按下后保持的二态（已选中、已开启）用 Toggle；几个里选一个用 SegmentedControl，可多选用 ToggleGroup。Button 只触发动作，不持有选中。",
+            "能先操作再纠错的（多数表单提交）不禁用按钮，提交后用 FieldError 或 Alert 就地说明。确需禁用时用 aria-disabled 保持按钮可聚焦，原因写在按钮旁的可见文字里，并用 aria-describedby 关联。"
           ],
           "stateOwner": {
             "library": [
@@ -4594,11 +4596,13 @@
           ],
           "avoid": [
             "Use native links for navigation.",
-            "Writing the result into the button: the end of busy does not establish success; express failure and unknown results with Alert, Toast or FieldError."
+            "Writing the result into the button: the end of busy does not establish success; express failure and unknown results with Alert, Toast or FieldError.",
+            "Putting the disabled reason only in a Tooltip or title: hints never appear on touch screens, so the reason cannot be read there. Disabled conditions must be readable (design.md: judgments machines can read must be written down); write the reason as visible text beside the button."
           ],
           "composition": [
             "For an irreversible action the button is only the entry: it opens AlertDialog (or ConfirmAction), whose description states the consequence. Applications own confirmation criteria, permissions, and remote verification.",
-            "A two-state fact that persists after pressing (selected, on) is a Toggle; one of several is SegmentedControl, several of several is ToggleGroup. Button triggers an action and holds no selection."
+            "A two-state fact that persists after pressing (selected, on) is a Toggle; one of several is SegmentedControl, several of several is ToggleGroup. Button triggers an action and holds no selection.",
+            "When users can act first and correct afterwards (most form submissions), keep the button enabled and explain in place with FieldError or Alert after submitting. When disabling is necessary, use aria-disabled so the button stays focusable, put the reason in visible text beside it, and link it with aria-describedby."
           ],
           "stateOwner": {
             "library": [
@@ -19883,28 +19887,28 @@
           "meter",
           "gauge",
           "measure",
-          "level",
           "仪表",
           "度量",
           "用量",
           "容量"
         ],
-        "decisions": "任务完成比例使用 Progress；未知测量不要填0。级别是「几级里的第几级」，用 segments 分格；状态类别 tone 由调用方声明，色相之外格数仍读得出级别。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。",
-        "decisionsEn": "Use Progress for task completion. Unknown measurements must not become zero. A level is \"which of n steps\", so use segments; tone is declared by the caller, and the cell count still reads without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).",
+        "decisions": "任务完成比例使用 Progress；未知测量不要填0。读数本身是若干整格时用 segments 分格，读屏读出的仍是读数；对象的有序级别读出的是级别名称，用 SeverityMark。状态类别 tone 由调用方声明，色相之外格数或读数仍承担同一事实。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。",
+        "decisionsEn": "Use Progress for task completion. Unknown measurements must not become zero. When the reading itself counts whole cells, use segments and the screen reader still reads the reading; an ordered level of an object reads as the level's name, so use SeverityMark. tone is declared by the caller, and the cell count or reading still carries the fact without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).",
         "design": {
           "methods": [
             "名实相符",
             "布白有用"
           ],
           "whenToUse": [
-            "表达测量值及单位。"
+            "表达一个有效范围内的测量值及单位，读屏读出读数。"
           ],
           "avoid": [
-            "任务完成比例使用 Progress；未知测量不要填0。"
+            "任务完成比例使用 Progress；未知测量不要填0。",
+            "对象带有一个有次序的级别、读出的是级别名称（如高、中、低）时用 SeverityMark；对象处于哪一种状态用 StatusDot。"
           ],
           "composition": [
             "Label 关联名称，Value 展示实际读数，轨与指示不猜测好坏。",
-            "密集列表里的级别用 segments={3} 加 tone，不用 StatusDot：状态与程度是两件事。"
+            "segments 只给本身以整格计的读数分格，getAriaValueText 读出实际读数与单位；一行对象的级别用 SeverityMark。"
           ],
           "stateOwner": {
             "library": [
@@ -19923,14 +19927,15 @@
         },
         "designEn": {
           "whenToUse": [
-            "Present measured values and units."
+            "Present a measurement over a valid range, with its unit; screen readers read the reading."
           ],
           "avoid": [
-            "Use Progress for task completion. Unknown measurements must not become zero."
+            "Use Progress for task completion. Unknown measurements must not become zero.",
+            "Use SeverityMark when an object has an ordered level read as its name (such as high, medium, low); use StatusDot for which state an object is in."
           ],
           "composition": [
             "Label associates the name, Value presents the actual reading, and track/indicator infer no judgment.",
-            "A level in a dense list uses segments={3} with tone, not StatusDot: status and degree are two facts."
+            "segments only splits a reading that itself counts whole cells; getAriaValueText reads the actual reading and unit. A row's level uses SeverityMark."
           ],
           "stateOwner": {
             "library": [
@@ -19962,8 +19967,8 @@
               {
                 "name": "segments",
                 "type": "number",
-                "description": "离散的 n 级：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；(value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。级别名用 getAriaValueText 给出。",
-                "descriptionEn": "A discrete scale of n levels: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Name levels with getAriaValueText."
+                "description": "以 n 个整格计的读数：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；(value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。实际读数与单位用 getAriaValueText 给出。",
+                "descriptionEn": "A reading counted in n whole cells: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Give the actual reading and unit with getAriaValueText."
               },
               {
                 "name": "tone",
@@ -27625,16 +27630,17 @@
             "随境取度"
           ],
           "whenToUse": [
-            "一行对象带有一个有次序的级别，需要不占一列文字就能比较高低。"
+            "一行对象带有一个有次序的级别（严重程度、优先级），读出的是级别名称，需要不占一列文字就能比较高低。"
           ],
           "avoid": [
             "对象处于哪一种状态用 StatusDot：状态之间没有次序。",
-            "有单位的测量值用 Meter；任务完成比例用 Progress。",
+            "范围内的测量读数用 Meter，读数本身以整格计时用 Meter 的 segments；任务完成比例用 Progress。",
             "不用色相区分格数相同的两个级别。"
           ],
           "composition": [
             "同一列里的标记用同一个 max。",
             "name=\"hidden\" 时名称仍是可访问名称；同一行或表头要有文字让看得见的读者知道这一列是级别。",
+            "读屏只读 label，不读格数与一共几级：名称本身要分得出高低（如高、中、低）。",
             "与 StatusDot 同行时两种标记同高、同一条行中线。"
           ],
           "stateOwner": {
@@ -27654,16 +27660,17 @@
         },
         "designEn": {
           "whenToUse": [
-            "A row's object has an ordered level that must be comparable without spending a text column."
+            "A row's object has an ordered level (severity, priority) read as its name, and it must be comparable without spending a text column."
           ],
           "avoid": [
             "Use StatusDot for which state an object is in: states have no order.",
-            "Use Meter for a measurement with a unit and Progress for task completion.",
+            "Use Meter for a measured reading over a range, with segments when the reading itself counts whole cells; use Progress for task completion.",
             "Do not tell two levels with the same cell count apart by hue."
           ],
           "composition": [
             "Marks in one column share one max.",
             "With name=\"hidden\" the name remains the accessible name; the row or the column header must still tell sighted readers that the column is a level.",
+            "Screen readers read only label, not the cell count or the number of levels: the names themselves must tell high from low (such as high, medium, low).",
             "Beside a StatusDot both marks have the same height and share one row midline."
           ],
           "stateOwner": {
@@ -33584,7 +33591,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 110
+            "line": 115
           }
         },
         {
@@ -33592,7 +33599,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 69
+            "line": 74
           }
         },
         {
@@ -33608,7 +33615,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 58
+            "line": 63
           }
         },
         {
@@ -33616,7 +33623,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 143
+            "line": 148
           }
         },
         {
@@ -33624,7 +33631,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 119
+            "line": 124
           }
         },
         {
@@ -33632,7 +33639,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 151
+            "line": 156
           }
         }
       ],
@@ -33673,7 +33680,7 @@
             "一篇长文或文档页需要在几个段落间快速定位，并看到自己读到了哪一节。"
           ],
           "avoid": [
-            "少于两个目的地时目录没有意义，由调用方决定是否渲染（Toc 本身只在 items 为空时不渲染）。",
+            "为只有一节的页面另写是否渲染 Toc 的判断：少于两个目的地时 Toc 自己不渲染（按条目数算，一个 h2 下两个 h3 是三项）。",
             "跨页面的目的地用 Breadcrumb 或 NavigationMenu；Toc 只表达同一页内的位置。"
           ],
           "composition": [
@@ -33683,10 +33690,10 @@
           ],
           "stateOwner": {
             "library": [
-              "目录的排版、层级缩进、当前项的视觉表达。"
+              "目录的排版、层级缩进、当前项的视觉表达；少于两项时不渲染。"
             ],
             "application": [
-              "标题的真实 id、滚动容器、吸顶偏移、是否需要目录（少于两项时渲染与否）。"
+              "标题的真实 id、滚动容器、吸顶偏移、版面里是否为目录留栏。"
             ]
           },
           "responsive": [
@@ -33701,7 +33708,7 @@
             "A long article or documentation page needs quick movement between sections, with visible confirmation of the current one."
           ],
           "avoid": [
-            "A single destination makes no table of contents; the caller decides whether to render one (Toc itself only withholds rendering when items is empty).",
+            "Writing your own check for whether to render Toc on a single-section page: Toc renders nothing with fewer than two destinations (counted as items, so one h2 with two h3s is three).",
             "Use Breadcrumb or NavigationMenu for destinations across pages; Toc only expresses position within the current page."
           ],
           "composition": [
@@ -33711,10 +33718,10 @@
           ],
           "stateOwner": {
             "library": [
-              "The table of contents' layout, level indent, and the current item's visual expression."
+              "The table of contents' layout, level indent, and the current item's visual expression; it renders nothing with fewer than two items."
             ],
             "application": [
-              "Headings' actual ids, the scroll container, sticky-header offsets, and whether a table of contents is needed at all."
+              "Headings' actual ids, the scroll container, sticky-header offsets, and whether the layout reserves a column for the contents."
             ]
           },
           "responsive": [
@@ -33724,8 +33731,8 @@
         "api": [
           {
             "name": "Toc",
-            "description": "目录容器；渲染为 nav，没有条目时不渲染。",
-            "descriptionEn": "The table of contents container; renders as nav, and renders nothing when there are no items.",
+            "description": "目录容器；渲染为 nav，少于两项时不渲染。",
+            "descriptionEn": "The table of contents container; renders as nav, and renders nothing with fewer than two items.",
             "props": [
               {
                 "name": "items",
@@ -33792,11 +33799,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 69
+              "line": 74
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 69
+              "line": 74
             },
             "status": "PRESENT"
           },
@@ -33805,11 +33812,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 110
+              "line": 115
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 110
+              "line": 115
             },
             "status": "PRESENT"
           },
@@ -33818,11 +33825,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 119
+              "line": 124
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 119
+              "line": 124
             },
             "status": "PRESENT"
           },
@@ -33831,11 +33838,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 151
+              "line": 156
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 151
+              "line": 156
             },
             "status": "PRESENT"
           }
@@ -35018,13 +35025,13 @@
         "notes": [
           "纯图标按钮自带 aria-label；打开时 aria-describedby 关联提示，保留已有说明。",
           "提示只承载短文本。需要点击帮助或交互内容时用 Popover，需要持续依据时用正文。",
-          "直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因直接可见。",
+          "直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因写成页内可见文字：触屏上提示不会出现，只放在提示里的原因在那里读不到。",
           "触发器不自带控件：提示附在调用方给出的控件上。该控件必须能获得键盘焦点，所以不是 span。"
         ],
         "notesEn": [
           "Icon buttons supply aria-label. While open, aria-describedby links the hint and preserves existing descriptions.",
           "Use short text only. Use Popover for click help or interactive content, and visible text for persistent information.",
-          "Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Keep the reason visible.",
+          "Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Write the disabled reason as visible text on the page: hints never appear on touch screens, so a reason that lives only in a hint cannot be read there.",
           "The trigger brings no control of its own: the hint attaches to the caller's control, which must be keyboard focusable, so it is not a span."
         ],
         "design": {

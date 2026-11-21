@@ -1605,12 +1605,14 @@ A button only triggers an action, and busy is its only state: while busy it reta
 - Run a command with an object and consequence, submit a form, or stop the current task.
 - Avoid: Use native links for navigation.
 - Avoid: Writing the result into the button: the end of busy does not establish success; express failure and unknown results with Alert, Toast or FieldError.
+- Avoid: Putting the disabled reason only in a Tooltip or title: hints never appear on touch screens, so the reason cannot be read there. Disabled conditions must be readable (design.md: judgments machines can read must be written down); write the reason as visible text beside the button.
 - Library: Native and non-native command semantics, focus, and the activation guard and screen-reader wording while busy.
 - Application: Objects, scope, consequences, permissions, request facts, verification, recovery, and background cancellation.
 
 ### Composition
 - For an irreversible action the button is only the entry: it opens AlertDialog (or ConfirmAction), whose description states the consequence. Applications own confirmation criteria, permissions, and remote verification.
 - A two-state fact that persists after pressing (selected, on) is a Toggle; one of several is SegmentedControl, several of several is ToggleGroup. Button triggers an action and holds no selection.
+- When users can act first and correct afterwards (most form submissions), keep the button enabled and explain in place with FieldError or Alert after submitting. When disabling is necessary, use aria-disabled so the button stays focusable, put the reason in visible text beside it, and link it with aria-describedby.
 
 ### Responsive behavior
 - Choose dimensions for position; long labels may wrap and grow, icons retain matching geometry, and touch targets remain separate from appearance.
@@ -1705,7 +1707,7 @@ export default function Demo() {
 }
 ```
 
-7 more examples: see the component page and its Markdown file.
+8 more examples: see the component page and its Markdown file.
 
 ## ButtonGroup
 
@@ -12578,7 +12580,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.4.1
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
-Source SHA-256: 8d97141f492627f220e38c903da4c49540311794074937e3d4b82be9ec0b857d
+Source SHA-256: f4e51a4407103bc3e69e9f6612457ef1004296c3c79aa640a6305d7c0145cfdd
 
 A vertical in-page table of contents for moving between sections; the current location deepens its own segment of an existing thin line instead of adding a new shape.
 
@@ -12592,10 +12594,10 @@ Toc neither reads routing nor performs smooth scrolling: <a href="#id"> is a nat
 
 ### Use and ownership
 - A long article or documentation page needs quick movement between sections, with visible confirmation of the current one.
-- Avoid: A single destination makes no table of contents; the caller decides whether to render one (Toc itself only withholds rendering when items is empty).
+- Avoid: Writing your own check for whether to render Toc on a single-section page: Toc renders nothing with fewer than two destinations (counted as items, so one h2 with two h3s is three).
 - Avoid: Use Breadcrumb or NavigationMenu for destinations across pages; Toc only expresses position within the current page.
-- Library: The table of contents' layout, level indent, and the current item's visual expression.
-- Application: Headings' actual ids, the scroll container, sticky-header offsets, and whether a table of contents is needed at all.
+- Library: The table of contents' layout, level indent, and the current item's visual expression; it renders nothing with fewer than two items.
+- Application: Headings' actual ids, the scroll container, sticky-header offsets, and whether the layout reserves a column for the contents.
 
 ### Composition
 - items can be written by hand, or scanned from a container's h2/h3[id] with useTocHeadings (headings Prose renders already satisfy this).
@@ -12635,7 +12637,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 #### Toc
-The table of contents container; renders as nav, and renders nothing when there are no items.
+The table of contents container; renders as nav, and renders nothing with fewer than two items.
 - items: { id: string; label: string; level: 2 | 3 }[]. The destination list; id must match an anchor that actually exists on the page.
 - current: string. The id of the current destination; omitted means no item carries aria-current.
 - render / ref / className / style / native props: useRender.ComponentProps<"nav">. Forward attributes, events and refs to the actual element.
@@ -13035,7 +13037,7 @@ Controls supply their own text or aria-label. Hints supplement it. Keep conseque
 ### Notes
 - Icon buttons supply aria-label. While open, aria-describedby links the hint and preserves existing descriptions.
 - Use short text only. Use Popover for click help or interactive content, and visible text for persistent information.
-- Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Keep the reason visible.
+- Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Write the disabled reason as visible text on the page: hints never appear on touch screens, so a reason that lives only in a hint cannot be read there.
 - The trigger brings no control of its own: the hint attaches to the caller's control, which must be keyboard focusable, so it is not a span.
 
 ### Use and ownership
