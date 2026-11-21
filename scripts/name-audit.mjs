@@ -6,8 +6,9 @@
 //     [--site] [--lang en] [--popups] [--only light-desktop] [--report file.json] [--strict] [--list]
 //   --list prints the page ids that would run (site: routes, matched exactly) and exits.
 //   --lang en scans the English pages (/en/playground/<slug>, or the site's /en routes) instead of the default language.
-//   --popups also opens every [aria-haspopup] trigger in each unit, one at a time, and checks the opened popup
-//            (dialog, alertdialog, menu, listbox) as a unit of its own, then closes it with Escape.
+//   --popups also opens every opener in each unit, one at a time (click; hover for hover cards, right click for
+//            context menus, ArrowDown for an input that does not open on click), checks a popup as a unit of its own
+//            and the openers inside it one level down, re-reads the unit after an in-place disclosure, then closes it.
 //
 // Status words follow the repository convention:
 //   FAIL     at least one R2/R3 finding on the page (exit 0 unless --strict); specimens count too
@@ -17,9 +18,10 @@
 //   NOT_RUN  the page failed to load or threw (exit 1)
 //   PASS     no finding
 //   UNVERIFIED (scope note) without --popups, popups, menus and dialogs that are not open at rest are not in the tree;
-//            with it, popups opened from inside a popup, by hover or by keyboard only, and triggers without
-//            aria-haspopup are still not visited; each page also lists the triggers it could not check:
-//            popupUnopened (clicked, nothing new opened), popupHidden (not visible at rest), popupCapped (past 24).
+//            with it, popups two levels down, tree/grid row expansion, tooltips and narrow-viewport-only openers are
+//            still not visited; each page also lists the openers it could not check: popupUnopened (nothing new
+//            appeared; search inputs that list results only for a typed query are marked so), popupHidden (not visible at rest), popupCapped (past the cap). Disabled, read-only and
+//            inert/aria-hidden openers are counted apart (popupSkipped): they are not meant to open or not exposed.
 //
 // Default: every [data-playground] [data-demo] is a root of its own (the same name in two demos is
 // fine). --site scans the site's pages with <main> (else <body>) as the root, default language unless --lang en.
@@ -105,41 +107,136 @@ function scopeOf(root, path) {
   return scope;
 }
 
-const POPUP = '[role="dialog"], [role="alertdialog"], [role="menu"], [role="listbox"]';
-const TRIGGER = '[aria-haspopup]:not([aria-haspopup="false"]):not([disabled]):not([aria-disabled="true"])';
+// Popup candidates: ARIA popup roles, plus anything Base UI marks open (disclosure panels, positioners).
+// Tooltips are left out: they hold no controls by definition.
+const CANDIDATE = '[role="dialog"], [role="alertdialog"], [role="menu"], [role="listbox"], [role="tree"], [role="grid"], [data-open]';
+// Openers: declared popup triggers, collapsed disclosures, hover cards (hover) and context menus (right click).
+// Tree/grid rows and options expand in place inside a widget and are not openers here.
+const TRIGGER = ['[aria-haspopup]:not([aria-haspopup="false"])', '[aria-expanded="false"]', '[data-slot="hover-card-trigger"]', '[data-slot="context-menu-trigger"]']
+  .map((s) => `${s}:not([role="treeitem"]):not([role="row"]):not([role="option"]):not([data-slot^="tooltip"])`).join(", ");
+const MAX_TRIGGERS = 24;
+const MAX_NESTED = 12;
+let openerCount = 0;
+
+/** How to open a trigger, or why it is skipped (it cannot open, or it is not exposed to assistive tech). */
+const describe = (el) => {
+  const skip = el.closest('[inert], [aria-hidden="true"]') ? "inert"
+    : el.matches(':disabled, [aria-disabled="true"], [data-disabled]') ? "disabled"
+    : el.matches('[aria-readonly="true"], [readonly], [data-readonly]') ? "readonly" : null;
+  const text = (v) => (v ?? "").replace(/\s+/g, " ").trim();
+  const label = text(el.getAttribute("aria-label")) || text(el.labels?.[0]?.textContent) || text(el.textContent)
+    || text(el.getAttribute("placeholder")) || el.getAttribute("data-slot") || el.tagName.toLowerCase();
+  return {
+    skip, label: label.slice(0, 40),
+    hover: el.matches('[data-slot="hover-card-trigger"]'), context: el.matches('[data-slot="context-menu-trigger"]'),
+    input: el.matches("input, textarea, [contenteditable='true']"), collapsed: el.getAttribute("aria-expanded") === "false",
+  };
+};
+
+/** Marks every visible candidate as already there, and the trigger as the one being tried. */
+const markRest = (trigger) => trigger.evaluate((t, candidate) => {
+  for (const name of ["data-name-audit-seen", "data-name-audit-trigger"]) for (const el of document.querySelectorAll(`[${name}]`)) el.removeAttribute(name);
+  for (const el of document.querySelectorAll(candidate)) if (el.checkVisibility()) el.setAttribute("data-name-audit-seen", "");
+  t.setAttribute("data-name-audit-trigger", "");
+}, CANDIDATE);
+
+/** Waits for the outermost new visible candidates that do not hold the trigger; tags each with an id and returns the ids. */
+const findNew = (page, timeout) => page.waitForFunction((candidate) => {
+  const trigger = document.querySelector("[data-name-audit-trigger]");
+  const fresh = [...document.querySelectorAll(candidate)].filter((el) => !el.hasAttribute("data-name-audit-seen")
+    && el.checkVisibility() && !(trigger && el.contains(trigger))
+    && !el.matches('[data-slot^="tooltip"]') && !el.querySelector('[data-slot="tooltip-popup"]')
+    // a backdrop or an empty positioner shell is not a popup of its own
+    && (el.textContent.trim() || el.querySelector("input, button, select, textarea, [role]")));
+  const outer = fresh.filter((el) => !fresh.some((o) => o !== el && o.contains(el)));
+  if (!outer.length) return false;
+  return outer.map((el) => {
+    const id = String((window.__nameAuditId = (window.__nameAuditId ?? 0) + 1));
+    el.setAttribute("data-name-audit-popup", id);
+    el.setAttribute("data-name-audit-seen", "");
+    return id;
+  });
+}, CANDIDATE, { timeout, polling: 100 }).then((handle) => handle.jsonValue()).catch(() => []);
+
+/** Opens the way the trigger asks: hover, right click, or click; an input that does not open on click gets ArrowDown. */
+async function openWith(page, trigger, how) {
+  await markRest(trigger);
+  if (how.hover) await trigger.hover({ timeout: 2000 }).catch(() => {});
+  else await trigger.click({ timeout: 2000, ...(how.context ? { button: "right" } : {}) }).catch(() => {});
+  let ids = await findNew(page, how.hover ? 1500 : 700);
+  if (!ids.length && how.input) {
+    await trigger.press("ArrowDown").catch(() => {});
+    ids = await findNew(page, 700);
+  }
+  if (ids.length) await page.waitForTimeout(150);
+  return ids;
+}
+
+const shownAny = (page, ids) => page.evaluate((list) => list.some((id) => document.querySelector(`[data-name-audit-popup="${id}"]`)?.checkVisibility()), ids);
+
+/** Escape (or moving the pointer off a hover card); a disclosure that stays open is toggled by its trigger. */
+async function closeFrom(page, trigger, how, ids) {
+  if (how.hover) await page.mouse.move(0, 0); else await page.keyboard.press("Escape");
+  await page.waitForTimeout(150);
+  const open = async () => await shownAny(page, ids) || (how.collapsed && await trigger.getAttribute("aria-expanded", { timeout: 1000 }).catch(() => null) === "true");
+  if (await open() && !how.hover && !how.context) {
+    await trigger.click({ timeout: 1000 }).catch(() => {});
+    await page.waitForTimeout(150);
+  }
+  return !(await open());
+}
 
 /**
- * Opens each popup trigger in a unit, one at a time, and checks the opened popup as a unit of its own;
- * returns what was tried so nothing passes silently: popups checked, triggers past the cap, triggers not
- * visible at rest, and the labels of visible triggers whose click opened nothing new (those stay UNVERIFIED).
- * The popup is the newest visible dialog/menu/listbox that was not visible before the click. The page is reloaded when Escape does
- * not close the popup or the click navigated, so the next trigger starts from rest.
+ * Opens each opener in a unit, one at a time, and checks what opened: a popup outside the unit as a unit of its
+ * own (and, one level down, the openers inside it), a disclosure inside the unit by re-reading the whole unit.
+ * Returns a tally so nothing passes silently. The page is reloaded when the opener cannot be closed or it navigated.
  */
-const MAX_TRIGGERS = 24;
-async function openPopups(page, unit, check) {
-  const tally = { opened: 0, hidden: 0, capped: 0, unopened: [] };
-  const triggers = unit.root.locator(TRIGGER);
-  const all = await triggers.count();
-  const total = Math.min(all, MAX_TRIGGERS);
+async function openPopups(page, unit, check, depth = 0, reopen = null) {
+  const tally = { opened: 0, nested: 0, expanded: 0, hidden: 0, capped: 0, readonly: 0, disabled: 0, inert: 0, unopened: [] };
+  const all = await unit.root.locator(TRIGGER).count();
+  const total = Math.min(all, depth ? MAX_NESTED : MAX_TRIGGERS);
   tally.capped = all - total;
   const url = page.url();
-  const visible = () => page.locator(POPUP).filter({ visible: true });
   for (let i = 0; i < total; i++) {
-    const trigger = triggers.nth(i);
+    if (reopen && !(await unit.root.isVisible().catch(() => false)) && !(await reopen())) {
+      tally.unopened.push(...Array.from({ length: total - i }, (_, k) => `${unit.unit} > #${i + k + 1} (parent did not reopen)`));
+      break;
+    }
+    // Pin the opener: once it opens, aria-expanded flips and a TRIGGER locator would no longer resolve to it.
+    const pin = String(++openerCount);
+    const tagged = await unit.root.locator(TRIGGER).nth(i).evaluate((el, value) => el.setAttribute("data-name-audit-opener", value), pin).then(() => true, () => false);
+    const trigger = page.locator(`[data-name-audit-opener="${pin}"]`);
+    const how = tagged ? await trigger.evaluate(describe).catch(() => null) : null;
+    if (!how) { tally.unopened.push(`${unit.unit} > #${i + 1} (gone)`); continue; }
+    if (how.skip) { tally[how.skip]++; continue; }
     if (!(await trigger.isVisible().catch(() => false))) { tally.hidden++; continue; }
-    const label = ((await trigger.getAttribute("aria-label")) ?? (await trigger.textContent()) ?? "").replace(/\s+/g, " ").trim().slice(0, 40);
-    const before = await visible().count();
-    await trigger.click({ timeout: 2000 }).catch(() => {});
-    await page.waitForTimeout(300);
-    const after = visible();
-    if (await after.count() > before) {
-      const popup = after.last();
-      await check({ unit: `${unit.unit} > popup "${label}"`, root: popup, text: await popup.ariaSnapshot() });
-      tally.opened++;
-    } else tally.unopened.push(`${unit.unit} > "${label}"`);
-    await page.keyboard.press("Escape");
-    await page.waitForTimeout(150);
-    if (page.url() !== url || await visible().count() > before) {
+    const ids = await openWith(page, trigger, how);
+    const inside = await unit.root.evaluate((root, list) => list.map((id) => root.contains(document.querySelector(`[data-name-audit-popup="${id}"]`))), ids).catch(() => ids.map(() => false));
+    const expandedInPlace = !ids.length && how.collapsed && await trigger.getAttribute("aria-expanded", { timeout: 1000 }).catch(() => null) === "true";
+    if (inside.some(Boolean) || expandedInPlace) {
+      await check({ unit: `${unit.unit} > expanded "${how.label}"`, base: unit.base ?? unit.unit, root: unit.root, text: await unit.root.ariaSnapshot() });
+      tally.expanded++;
+    }
+    for (const [k, id] of [...ids].entries()) {
+      if (inside[k]) continue;
+      const popup = { unit: `${unit.unit} > popup "${how.label}"`, id, root: page.locator(`[data-name-audit-popup="${id}"]`) };
+      await check({ ...popup, text: await popup.root.ariaSnapshot() });
+      tally[depth ? "nested" : "opened"]++;
+      if (depth === 0) {
+        const again = async () => {
+          const next = (await openWith(page, trigger, how))[0];
+          if (next) Object.assign(popup, { id: next, root: page.locator(`[data-name-audit-popup="${next}"]`) });
+          return Boolean(next);
+        };
+        const inner = await openPopups(page, popup, check, 1, again);
+        for (const key of ["nested", "expanded", "hidden", "capped", "readonly", "disabled", "inert"]) tally[key] += inner[key] + (key === "nested" ? inner.opened : 0);
+        tally.unopened.push(...inner.unopened);
+        if (popup.id !== id) ids.push(popup.id); // reopened: close the live copy too
+      }
+    }
+    if (!ids.length && !expandedInPlace) tally.unopened.push(`${unit.unit} > "${how.label}"${how.input ? " (input: may open only on a typed query)" : ""}`);
+    const closed = await closeFrom(page, trigger, how, ids);
+    if (!closed || page.url() !== url) {
       await page.goto(url, { waitUntil: "networkidle", timeout: 30000 });
       await page.waitForTimeout(250);
     }
@@ -200,6 +297,7 @@ try {
             }
             const own = [];
             const ownSpecimens = [];
+            const reported = new Set(); // a unit re-read after a disclosure opens reports only what is new
             // Checked while the unit is on screen: a popup unit is only resolvable while it is open.
             const check = async (s) => {
               const issues = findNameIssues(parseAriaSnapshot(s.text));
@@ -208,21 +306,27 @@ try {
                 scopeOf(s.root, issue.scope).getByRole(issue.role, { name: issue.name, exact: true })
                   .evaluateAll((els) => els.map((el) => el.closest("[data-specimen]") !== null))));
               const split = splitSpecimens(issues, flags);
-              for (const issue of split.issues) own.push({ page: target.id, variant: v.name, unit: s.unit, ...issue });
-              for (const issue of split.specimens) ownSpecimens.push({ page: target.id, variant: v.name, unit: s.unit, ...issue });
+              const fresh = (issue) => {
+                const key = [s.base ?? s.unit, issue.rule, issue.role, issue.name, issue.scope].join("\0");
+                return !reported.has(key) && reported.add(key);
+              };
+              for (const issue of split.issues.filter(fresh)) own.push({ page: target.id, variant: v.name, unit: s.unit, ...issue });
+              for (const issue of split.specimens.filter(fresh)) ownSpecimens.push({ page: target.id, variant: v.name, unit: s.unit, ...issue });
             };
             for (const s of snapshots) await check(s);
-            const popup = { popupUnits: 0, popupHidden: 0, popupCapped: 0, popupUnopened: [] };
+            const popup = { popupUnits: 0, popupNested: 0, popupExpanded: 0, popupHidden: 0, popupCapped: 0, popupSkipped: { readonly: 0, disabled: 0, inert: 0 }, popupUnopened: [] };
             if (popups) for (const s of snapshots) {
               const t = await openPopups(page, s, check);
-              popup.popupUnits += t.opened; popup.popupHidden += t.hidden; popup.popupCapped += t.capped; popup.popupUnopened.push(...t.unopened);
+              popup.popupUnits += t.opened; popup.popupNested += t.nested; popup.popupExpanded += t.expanded;
+              popup.popupHidden += t.hidden; popup.popupCapped += t.capped; popup.popupUnopened.push(...t.unopened);
+              for (const key of ["readonly", "disabled", "inert"]) popup.popupSkipped[key] += t[key];
             }
             if (pageError) throw new Error(`page error: ${pageError}`);
             findings.push(...own);
             specimens.push(...ownSpecimens);
             const status = own.length || ownSpecimens.length ? "FAIL" : "PASS";
             results.push({ page: target.id, variant: v.name, status, units: snapshots.length, ...(popups ? popup : {}), findings: own.length, specimens: ownSpecimens.length });
-            console.log(`names ${target.id} [${v.name}] ${status} units ${snapshots.length}+${popup.popupUnits}${popups ? ` (unopened ${popup.popupUnopened.length}, hidden ${popup.popupHidden}, capped ${popup.popupCapped})` : ""} R2 ${own.filter((f) => f.rule === "R2").length} R3 ${own.filter((f) => f.rule === "R3").length} specimen ${ownSpecimens.length}`);
+            console.log(`names ${target.id} [${v.name}] ${status} units ${snapshots.length}${popups ? `+${popup.popupUnits}+${popup.popupNested} nested, expanded ${popup.popupExpanded} (unopened ${popup.popupUnopened.length}, hidden ${popup.popupHidden}, capped ${popup.popupCapped})` : ""} R2 ${own.filter((f) => f.rule === "R2").length} R3 ${own.filter((f) => f.rule === "R3").length} specimen ${ownSpecimens.length}`);
           } catch (error) {
             results.push({ page: target.id, variant: v.name, status: "NOT_RUN", units: 0, findings: 0, specimens: 0 });
             problems.push(`NOT_RUN ${target.id} [${v.name}] ${error.message.split("\n")[0].slice(0, 160)}`);
@@ -263,7 +367,7 @@ const exitCode = problems.length || (strict && (findings.length || specimens.len
 const report = {
   base, mode: site ? "site" : "playground", lang, popups, strict, variants: variants.map((v) => v.name),
   scopeNote: popups
-    ? "UNVERIFIED: popups opened from inside a popup, by hover or keyboard only, or by triggers without aria-haspopup; per page, triggers whose click opened nothing (popupUnopened), triggers hidden at rest (popupHidden) and triggers past the per-unit cap (popupCapped)."
+    ? "UNVERIFIED: popups two levels down, tree/grid row expansion, tooltips and openers shown only at narrow widths; per page, openers after which nothing new appeared (popupUnopened; a search input that lists results only for a typed query is marked so), openers hidden at rest (popupHidden) and openers past the cap (popupCapped)."
     : "UNVERIFIED: popups, menus and dialogs that are not open at rest are not in the tree.",
   pages: results.length, counts, findingsByRule: byRule, specimenCount: specimens.length, status, exitCode,
   aggregate: ranked.map(listed), specimenAggregate: rankedSpecimens.map(listed),
