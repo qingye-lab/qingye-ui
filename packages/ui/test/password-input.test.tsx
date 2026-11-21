@@ -54,7 +54,7 @@ test.each(["disabled", "field", "fieldset"] as const)("the toggle is disabled wi
   const onVisibleChange = vi.fn();
   const input = <PasswordInput autoComplete="current-password" aria-label="密码" defaultValue="qingye" disabled={source === "disabled"} onVisibleChange={onVisibleChange} />;
   render(source === "field" ? <Field disabled><FieldLabel>密码</FieldLabel>{input}</Field> : source === "fieldset" ? <fieldset disabled>{input}</fieldset> : input);
-  const toggle = screen.getByRole("button", { name: "显示密码" });
+  const toggle = screen.getByRole("button", { name: source === "field" ? "显示密码 密码" : "显示密码" });
   expect(toggle).toBeDisabled();
   await userEvent.click(toggle);
   expect(onVisibleChange).not.toHaveBeenCalled();
@@ -92,4 +92,10 @@ test("development warns once when autoComplete is missing, and says nothing when
 test("pasting is never intercepted (WCAG 3.3.8)", () => {
   render(<PasswordInput aria-label="密码" autoComplete="current-password" />);
   expect(fireEvent.paste(screen.getByLabelText("密码"), { clipboardData: { getData: () => "qingye", types: ["text/plain"] } })).toBe(true);
+});
+
+test("the reveal toggle carries the field label after the action inside a Field", () => {
+  render(<form><Field><FieldLabel>当前密码</FieldLabel><PasswordInput autoComplete="current-password" /></Field><Field><FieldLabel>新密码</FieldLabel><PasswordInput autoComplete="new-password" /></Field></form>);
+  expect(screen.getByRole("button", { name: "显示密码 当前密码" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "显示密码 新密码" })).toBeInTheDocument();
 });

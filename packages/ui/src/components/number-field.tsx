@@ -3,6 +3,7 @@
 import { NumberField as NumberFieldPrimitive } from "@base-ui/react/number-field";
 import { IconArrowsHorizontal, IconArrowsVertical, IconMinus, IconPlus } from "@tabler/icons-react";
 import * as React from "react";
+import { useAdjunctName } from "../adjunct-name";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 import { fillStateByData } from "../fill-state";
@@ -94,7 +95,8 @@ const stepClass = "self-stretch min-h-0 sm:min-h-0 p-0 w-[calc(var(--qy-number-h
 
 export function NumberFieldDecrement({ className, children, render, nativeButton = true, ...props }: NumberFieldPrimitive.Decrement.Props & React.RefAttributes<HTMLButtonElement>) {
   const { messages } = useUILocale();
-  return <NumberFieldPrimitive.Decrement data-slot="number-field-decrement" aria-label={messages.decrease} {...props} nativeButton={nativeButton}
+  const name = useAdjunctName(messages.decrease, props);
+  return <NumberFieldPrimitive.Decrement data-slot="number-field-decrement" {...props} {...name} nativeButton={nativeButton}
     className={state => cn(stepClass, typeof className === "function" ? className(state) : className)}
     render={(elementProps, state) => <Button variant="quiet" shape="icon" {...elementProps} nativeButton={nativeButton} className={elementProps.className ?? ""}
       render={typeof render === "function" ? buttonProps => render(buttonProps, state) : render}
@@ -104,7 +106,8 @@ export function NumberFieldDecrement({ className, children, render, nativeButton
 
 export function NumberFieldIncrement({ className, children, render, nativeButton = true, ...props }: NumberFieldPrimitive.Increment.Props & React.RefAttributes<HTMLButtonElement>) {
   const { messages } = useUILocale();
-  return <NumberFieldPrimitive.Increment data-slot="number-field-increment" aria-label={messages.increase} {...props} nativeButton={nativeButton}
+  const name = useAdjunctName(messages.increase, props);
+  return <NumberFieldPrimitive.Increment data-slot="number-field-increment" {...props} {...name} nativeButton={nativeButton}
     className={state => cn(stepClass, typeof className === "function" ? className(state) : className)}
     render={(elementProps, state) => <Button variant="quiet" shape="icon" {...elementProps} nativeButton={nativeButton} className={elementProps.className ?? ""}
       render={typeof render === "function" ? buttonProps => render(buttonProps, state) : render}
