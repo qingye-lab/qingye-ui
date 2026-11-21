@@ -2887,7 +2887,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/autocomplete.tsx",
-        "sha256": "51bf128271c99f851a611ad3e924a89c7994b8715660684eda0c14a21d2d736e",
+        "sha256": "b56390332369882f40dd618b614736dbecb995da1634da99f97332f6d7f1cf2c",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "输入文字本身就是值。移动候选高亮不改变文本；确认建议才请求替换，文本无需匹配候选也可提交。",
@@ -11557,7 +11557,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/code-block.tsx",
-        "sha256": "cc312db8ff3d49ad4d90c74f6f66c7f0ee415ae293562ab6038dd06bac55b644",
+        "sha256": "9649e32b6c3151ff361e2fc7c986031b6b61040d1a75bdaa3bccdbc65974bbb9",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "pre/code 保留空白、字符与完整宽度，库自己不做语法高亮：已高亮的标记由调用方经 children 给出，复制的仍是 code。代码面只用一条清墨容器线划出范围，底只比所坐之处深半个清染。复制复用 useCopyToClipboard；只有写入成功才显示已复制，失败保留手动复制内容。",
@@ -13937,7 +13937,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/combobox.tsx",
-        "sha256": "34ab9b17a816edd43e409738b00234525fe8bded001f559e592443c2e9974ff7",
+        "sha256": "81e5928924575a0502406debc3548efedf59479e2abb2130abc4636146650cf7",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保留候选，明确清除选择才请求空值；自由文本值用 Autocomplete。候选很多且要选几个时用 multiple；候选少而需要一眼看全用 CheckboxGroup，值不来自候选用 TagInput。",
@@ -20569,7 +20569,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/data-table.tsx",
-        "sha256": "98dcb4d987b9357dfafbec39b16d0f93d2932a8ac228051a31be014180a44d7d",
+        "sha256": "5201b000e6a6a16fc01f5c6a3a943bf6cc6b6e2d4e441d8072ee080e85aa970b",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。虚拟化只改变当前行模型的渲染窗口，不改变全选与分页范围。",
@@ -21183,7 +21183,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-picker.tsx",
-        "sha256": "245e2533c9e657624a23dd0cb3eb843bd957a8fd7e93bbe7c279cff137260165",
+        "sha256": "7cb05d8df7e219e97b2e27a8c8ba4953ffebad3e5e4e0de66d143cdcc3b2dcdd",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是调用方持有的当地 Date。输入和日历选择只请求变更；清除请求 undefined，Escape 关闭日历并保留已接受值。",
@@ -21776,7 +21776,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-range-picker.tsx",
-        "sha256": "6e9a60b95afa9666517df9b7b5b5d24205e5ddc771c46ac47f29ea3fd1b702a3",
+        "sha256": "547901bf0e2fb9822258fd84c11109001569873d4d1a5020cc8a2a95bd9d2c7e",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "只有完整且有序的 from/to 才是确认值。起止两个原生日期输入与弹层日历共用同一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid 并通过 onInvalid 交给应用说明，库不静默交换端点。日历里的选择与预设只写草稿，取消或 Escape 保留原确认值，应用才请求替换。",
@@ -22259,7 +22259,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-time-picker.tsx",
-        "sha256": "8b1da0e00eb83996da2d5a76c7e069ffbba1c66275a991c8dff53ca80825dc3f",
+        "sha256": "2563a486ab93477cb5bfc927d99d67b598829707973d52d9908c94a4d6157e8b",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是 YYYY-MM-DDTHH:mm[:ss[.SSS]] 的无时区 wall-clock 文本。它不表示 UTC 瞬间；时区、DST、业务可用时段由应用决定。空时间不会自动补当前时间。",
@@ -22450,7 +22450,7 @@
             {
               "name": "inputProps / endInputProps",
               "type": "Input props",
-              "description": "起点输入（Field 标签指向它）与终点输入的 ref/render/ARIA/events/step 等；step 同时带到弹层里的时间输入。两个输入默认名称是「Field 标签 + 开始 / 结束日期和时间」。",
+              "description": "起点输入（Field 标签指向它）与终点输入的 ref/render/ARIA/events/step 等；step 同时带到弹层里的时间输入。两个输入默认名称是「Field 标签 + 开始 / 结束日期时间」。",
               "descriptionEn": "ref, render, ARIA, events, step and so on for the start input (the one a Field label points to) and the end input; step is carried to the popup's time inputs. By default the two names are the Field label plus Start / End date and time."
             },
             {
@@ -22791,7 +22791,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-time-range-picker.tsx",
-        "sha256": "5fb69c5e60a02e1cd93a2f29d8587132c98249bc64b654f538d260e6da69d00d",
+        "sha256": "805cc6ee326e851685c577adde997f7071db6eff96e12a21ddd11fc50442d710",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "值是 { from, to }，两端各是 DateTimePicker 的值（无时区的本地文本 YYYY-MM-DDTHH:mm[:ss[.SSS]]），而不是 DateRangePicker 的 Date：时间不能放进只含日期的 Date，也不会因此猜一个时区。只有完整且有序的 from/to 才是确认值；起止相同是有效的零长度范围。两个原生 datetime-local 输入共用一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid，起点输入带原生校验信息让表单提交被拦下，并通过 onInvalid 交给应用说明。弹层里是日历区间加两个时间输入，同一天时结束时刻早于开始时刻会在弹层里提示并不能应用；取消或 Escape 保留原确认值。",
@@ -39048,7 +39048,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/number-field.tsx",
-        "sha256": "786bfc7ee2c0644823a7fdc3fc1a682373296f5d71eb24dfed5d7f265612dd9d",
+        "sha256": "fd8dc4dc0d76b55c59175e4697ce16f1c98f0bd3e6afa4cf3cd836497722d340",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "直接编辑超出范围时保留原值，提交由浏览器范围约束检查；步进仍限制在 min/max。空、负号和未完成小数不会被替换为 0。",
@@ -41878,7 +41878,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/password-input.tsx",
-        "sha256": "b91f9ab639ef984dd076d97e6f3d322bde1a6e22b2bdbe433c668df84aecdb4b",
+        "sha256": "2cc5609ba3e912efe39c5fc9eb5a4dd9dbd280a509dd635309654d833a0b140b",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "密码输入是组合，不是 Input 的一个模式：编辑边界（InputGroup）里放输入与一个显示密码的开关，都是公开部件。输入框只承载值；开关是附在边界上的另一个动作，名称固定为「显示密码」，按下与否由 aria-pressed 表达。开关不改内容、不提交表单；强度、规则与校验由应用给出。",
@@ -59207,7 +59207,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tag-input.tsx",
-        "sha256": "44d566b6318373e105746d955a5d882edfab472998d4e7dd773ab4c033894a94",
+        "sha256": "2427982c90382e34627b781ce5b3c64a73456920ff2939538c746fc5dd3239a2",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "Enter 或添加按钮才确认；两端空白去除，精确字符串去重且区分大小写。空项、重复项及受控拒绝不会清空草稿。",

@@ -162,16 +162,30 @@ test.each(["disabled", "readOnly"] as const)("%s: dragging the scrub area never 
   if (state === "disabled") expect(area).toHaveAttribute("data-disabled");
 });
 
-test("step buttons carry the field label after the action, so two fields in one region stay distinguishable", () => {
+test("step buttons carry the field label after the action, so two fields in one region stay distinguishable", async () => {
   render(<form>
     <Field><FieldLabel>数量</FieldLabel><NumberField defaultValue={1}>{parts}</NumberField></Field>
     <Field><FieldLabel>库存</FieldLabel><NumberField defaultValue={1}>{parts}</NumberField></Field>
-    <NumberField aria-label="单价" defaultValue={1}>{parts}</NumberField>
+    <NumberField defaultValue={1}><NumberFieldGroup><NumberFieldDecrement /><NumberFieldInput aria-label="单价" /><NumberFieldIncrement /></NumberFieldGroup></NumberField>
   </form>);
   expect(screen.getByRole("button", { name: "增加 数量" })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "减少 库存" })).toBeInTheDocument();
-  // 字段只靠 aria-label 命名时没有可引用的标签元素：只读动作，与改动前相同。
-  expect(screen.getByRole("button", { name: "增加" })).toBeInTheDocument();
+  // 字段只靠 aria-label 命名时没有可引用的标签元素：取它的文字接在动作后。
+  expect(await screen.findByRole("button", { name: "增加 单价" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "减少 单价" })).toBeInTheDocument();
+});
+
+test("step buttons read an external <label for>: by reference when it has an id, by text when it has none", async () => {
+  render(<form>
+    <label id="qty-label" htmlFor="qty">数量</label>
+    <NumberField defaultValue={1}><NumberFieldGroup><NumberFieldDecrement /><NumberFieldInput id="qty" /><NumberFieldIncrement /></NumberFieldGroup></NumberField>
+    <label htmlFor="stock">库存</label>
+    <NumberField defaultValue={1}><NumberFieldGroup><NumberFieldDecrement /><NumberFieldInput id="stock" /><NumberFieldIncrement /></NumberFieldGroup></NumberField>
+  </form>);
+  const byRef = await screen.findByRole("button", { name: "增加 数量" });
+  expect(byRef.getAttribute("aria-labelledby")).toContain("qty-label");
+  const byText = await screen.findByRole("button", { name: "增加 库存" });
+  expect(byText).not.toHaveAttribute("aria-labelledby");
 });
 
 test("a caller name on a step button wins over the composed name", () => {

@@ -247,7 +247,7 @@ test("an explicit caller name keeps precedence over an associated label", () => 
   expect(screen.getByText("负责人")).not.toHaveAttribute("id");
 });
 
-test("trigger and clear carry the field label after the action; two fields stay distinguishable, outside a Field the name is the action alone, and en-US follows", () => {
+test("trigger and clear carry the field label after the action; two fields stay distinguishable, with no field label found the name is the action alone, and en-US follows", () => {
   const { unmount } = render(<form>
     <Field><FieldLabel>负责人</FieldLabel><Combobox items={items} defaultValue="甲">{parts}</Combobox></Field>
     <Field><FieldLabel>评审人</FieldLabel><Combobox items={items} defaultValue="乙">{parts}</Combobox></Field>
@@ -266,4 +266,16 @@ test("en-US: combobox trigger and clear read action then field label", () => {
   render(<UILocaleProvider locale={enUS}><Field><FieldLabel>Owner</FieldLabel><Combobox items={items} defaultValue="甲">{parts}</Combobox></Field></UILocaleProvider>);
   expect(screen.getByRole("button", { name: "Show options Owner" })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "Clear selection Owner" })).toBeInTheDocument();
+});
+
+test("outside a Field the trigger and clear read an external label, and an aria-label alone, after the action", () => {
+  const controlled = (id?: string) => <><ComboboxControl><ComboboxInput {...(id ? { id } : {})} /><ComboboxClear /><ComboboxTrigger /></ComboboxControl><ComboboxPopup><ComboboxList>{(item: string) => <ComboboxItem key={item} value={item}>{item}</ComboboxItem>}</ComboboxList></ComboboxPopup></>;
+  render(<form>
+    <label htmlFor="owner-a">负责人</label>
+    <Combobox items={items} defaultValue="甲">{controlled("owner-a")}</Combobox>
+    <Combobox items={items} defaultValue="乙"><ComboboxControl><ComboboxInput aria-label="评审人" /><ComboboxClear /><ComboboxTrigger /></ComboboxControl></Combobox>
+  </form>);
+  expect(screen.getByRole("button", { name: "展开选项 负责人" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除选择 负责人" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "展开选项 评审人" })).toBeInTheDocument();
 });

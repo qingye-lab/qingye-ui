@@ -43,7 +43,7 @@ test("caller rejection/cancellation keeps the accepted value; Escape returns foc
   render(<UILocaleProvider locale={enUS}><DatePicker value={new Date(2026, 9, 3)} onValueChange={change} inputProps={{ "aria-label": "Date", onChange: event => event.preventBaseUIHandler() }} /></UILocaleProvider>);
   fireEvent.change(screen.getByLabelText("Date"), { target: { value: "2026-10-04" } });
   expect(change).not.toHaveBeenCalled();
-  const trigger = screen.getByRole("button", { name: "Select date" });
+  const trigger = screen.getByRole("button", { name: "Select date Date" });
   await userEvent.click(trigger);
   await screen.findByRole("button", { name: /October 3, 2026/ });
   await userEvent.keyboard("{Escape}");
@@ -128,7 +128,7 @@ test("defaultValue makes it uncontrolled: edits stick without onValueChange, and
   expect(new FormData(container.querySelector("form")!).get("d")).toBe("2026-10-09");
   fireEvent.reset(container.querySelector("form")!);
   await waitFor(() => expect(input).toHaveValue("2026-10-03"));
-  await userEvent.click(screen.getByRole("button", { name: "选择日期" }));
+  await userEvent.click(screen.getByRole("button", { name: "选择日期 Date" }));
   await userEvent.click(await screen.findByRole("button", { name: /2026年10月15日/ }));
   expect(input).toHaveValue("2026-10-15");
 });
@@ -139,7 +139,7 @@ test("min and max constrain the native input and the calendar from one declarati
   const input = screen.getByLabelText("Date");
   expect(input).toHaveAttribute("min", "2026-10-08");
   expect(input).toHaveAttribute("max", "2026-10-20");
-  await userEvent.click(screen.getByRole("button", { name: "Select date" }));
+  await userEvent.click(screen.getByRole("button", { name: "Select date Date" }));
   expect(await screen.findByRole("button", { name: /October 4, 2026/ })).toBeDisabled();
   expect(screen.getByRole("button", { name: /October 21, 2026/ })).toBeDisabled();
   expect(screen.getByRole("button", { name: /October 12, 2026/ })).toBeEnabled();
@@ -156,15 +156,15 @@ test("contradictory min and max warn in development", () => {
 
 test("an outer fieldset disabled at runtime disables the calendar entry too", async () => {
   const { container } = render(<fieldset id="outer"><fieldset><DatePicker value={new Date(2026, 9, 3)} onValueChange={() => {}} inputProps={{ "aria-label": "Date" }} /></fieldset></fieldset>);
-  expect(screen.getByRole("button", { name: "选择日期" })).toBeEnabled();
+  expect(screen.getByRole("button", { name: "选择日期 Date" })).toBeEnabled();
   container.querySelector("#outer")!.setAttribute("disabled", "");
-  await waitFor(() => expect(screen.getByRole("button", { name: "选择日期" })).toBeDisabled());
+  await waitFor(() => expect(screen.getByRole("button", { name: "选择日期 Date" })).toBeDisabled());
 });
 
 test("the clear action returns focus to the input; read-only says so beside the value and offers no clear", async () => {
   const change = vi.fn();
   const { rerender } = render(<DatePicker defaultValue={new Date(2026, 9, 3)} onValueChange={change} inputProps={{ "aria-label": "日期" }} />);
-  await userEvent.click(screen.getByRole("button", { name: "清除日期" }));
+  await userEvent.click(screen.getByRole("button", { name: "清除日期 日期" }));
   expect(change).toHaveBeenCalledWith(undefined, expect.anything());
   expect(screen.getByLabelText("日期", { selector: "input" })).toHaveFocus();
   expect(screen.queryByText("只读")).not.toBeInTheDocument();
@@ -241,7 +241,7 @@ test("week granularity shows the week number text and the calendar selects a who
   render(<UILocaleProvider locale={{ ...enUS, messages: { ...enUS.messages, periodWeek: "{year} 年第 {week} 周" } }}><DatePicker granularity="week" inputProps={{ "aria-label": "周" }} calendarProps={{ weekStartsOn: 1, firstWeekContainsDate: 4 }} defaultValue={new Date(2026, 10, 4)} onValueChange={onValueChange} /></UILocaleProvider>);
   const input = screen.getByLabelText("周") as HTMLInputElement;
   expect(input).toHaveValue("2026 年第 45 周");
-  await userEvent.click(screen.getByRole("button", { name: "Select week" }));
+  await userEvent.click(screen.getByRole("button", { name: "Select week 周" }));
   await userEvent.click(await screen.findByRole("button", { name: /November 12, 2026/ }));
   const picked = onValueChange.mock.calls[0]![0] as Date;
   expect([picked.getMonth(), picked.getDate()]).toEqual([10, 9]);
@@ -251,7 +251,7 @@ test("week granularity shows the week number text and the calendar selects a who
 test("a disabled granular picker cannot be opened", () => {
   render(<UILocaleProvider locale={enUS}><DatePicker granularity="month" inputProps={{ "aria-label": "月" }} disabled defaultValue={new Date(2026, 10, 1)} /></UILocaleProvider>);
   expect(screen.getByLabelText("月")).toBeDisabled();
-  expect(screen.getByRole("button", { name: "Select month" })).toBeDisabled();
+  expect(screen.getByRole("button", { name: "Select month 月" })).toBeDisabled();
 });
 
 test.each([
@@ -265,26 +265,26 @@ test.each([
   const input = screen.getByLabelText("date input") as HTMLInputElement;
   const before = input.value;
   expect(before).not.toBe("");
-  const name = { day: "Select date", week: "Select week", month: "Select month" }[granularity];
+  const name = `${{ day: "Select date", week: "Select week", month: "Select month" }[granularity]} date input`;
   await userEvent.click(screen.getByRole("button", { name }));
   const target = await screen.findByRole("button", { name: cell });
   await userEvent.click(target);
   expect(change).not.toHaveBeenCalled();
   expect(input).toHaveValue(before);
   await waitFor(() => expect(screen.queryByRole("grid")).toBeNull());
-  expect(screen.getByRole("button", { name: "Clear date" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Clear date date input" })).toBeInTheDocument();
 });
 
 test("clicking a different day still changes the value", async () => {
   const change = vi.fn();
   render(<UILocaleProvider locale={enUS}><DatePicker defaultValue={new Date(2026, 10, 3)} onValueChange={change} inputProps={{ "aria-label": "date input" }} /></UILocaleProvider>);
-  await userEvent.click(screen.getByRole("button", { name: "Select date" }));
+  await userEvent.click(screen.getByRole("button", { name: "Select date date input" }));
   await userEvent.click(await screen.findByRole("button", { name: /November 4, 2026/ }));
   expect(change).toHaveBeenCalledTimes(1);
   expect(screen.getByLabelText("date input")).toHaveValue("2026-11-04");
 });
 
-test("inside a Field the calendar and clear buttons read action + field label; two fields stay distinguishable; outside a Field the name is the action alone", () => {
+test("inside a Field the calendar and clear buttons read action + field label; two fields stay distinguishable", () => {
   render(<form>
     <Field name="a"><FieldLabel>开始日期</FieldLabel><DatePicker defaultValue={new Date(2026, 9, 3)} /></Field>
     <Field name="b"><FieldLabel>结束日期</FieldLabel><DatePicker defaultValue={new Date(2026, 9, 5)} /></Field>
@@ -295,13 +295,22 @@ test("inside a Field the calendar and clear buttons read action + field label; t
   expect(screen.getByRole("button", { name: "清除日期 结束日期" })).toBeInTheDocument();
 });
 
-test("outside a Field the buttons keep the action-only name", () => {
+test("outside a Field the buttons read the input's aria-label after the action", () => {
   render(<DatePicker defaultValue={new Date(2026, 9, 3)} inputProps={{ "aria-label": "日期" }} />);
-  expect(screen.getByRole("button", { name: "选择日期" })).toBeInTheDocument();
-  expect(screen.getByRole("button", { name: "清除日期" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "选择日期 日期" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除日期 日期" })).toBeInTheDocument();
 });
 
 test("a period picker's calendar button names the period and the field label", () => {
   render(<UILocaleProvider locale={enUS}><Field name="m"><FieldLabel>Billing month</FieldLabel><DatePicker granularity="month" /></Field></UILocaleProvider>);
   expect(screen.getByRole("button", { name: "Select month Billing month" })).toBeInTheDocument();
+});
+
+test("outside a Field the buttons read an external label after the action: by reference with an id, by text without", () => {
+  render(<form>
+    <label id="start-label" htmlFor="start">开始日期</label><DatePicker defaultValue={new Date(2026, 9, 3)} inputProps={{ id: "start" }} />
+    <label htmlFor="end">结束日期</label><DatePicker defaultValue={new Date(2026, 9, 5)} inputProps={{ id: "end" }} />
+  </form>);
+  expect(screen.getByRole("button", { name: "选择日期 开始日期" }).getAttribute("aria-labelledby")).toContain("start-label");
+  expect(screen.getByRole("button", { name: "清除日期 结束日期" })).not.toHaveAttribute("aria-labelledby");
 });

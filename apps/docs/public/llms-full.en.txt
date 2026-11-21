@@ -860,7 +860,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: 51bf128271c99f851a611ad3e924a89c7994b8715660684eda0c14a21d2d736e
+Source SHA-256: b56390332369882f40dd618b614736dbecb995da1634da99f97332f6d7f1cf2c
 
 Edit free text with optional suggestions.
 
@@ -2656,7 +2656,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
-Source SHA-256: cc312db8ff3d49ad4d90c74f6f66c7f0ee415ae293562ab6038dd06bac55b644
+Source SHA-256: 9649e32b6c3151ff361e2fc7c986031b6b61040d1a75bdaa3bccdbc65974bbb9
 
 Literal text with an optional title bar and actual copy results.
 
@@ -2975,7 +2975,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 34ab9b17a816edd43e409738b00234525fe8bded001f559e592443c2e9974ff7
+Source SHA-256: 81e5928924575a0502406debc3548efedf59479e2abb2130abc4636146650cf7
 
 Filter candidates and confirm one value or a set, with query text separate from selection.
 
@@ -4148,7 +4148,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 98dcb4d987b9357dfafbec39b16d0f93d2932a8ac228051a31be014180a44d7d
+Source SHA-256: 5201b000e6a6a16fc01f5c6a3a943bf6cc6b6e2d4e441d8072ee080e85aa970b
 
 Comparison, sorting, scoped selection and optional virtualization for a caller-owned collection.
 
@@ -4356,7 +4356,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: 245e2533c9e657624a23dd0cb3eb843bd957a8fd7e93bbe7c279cff137260165
+Source SHA-256: 7cb05d8df7e219e97b2e27a8c8ba4953ffebad3e5e4e0de66d143cdcc3b2dcdd
 
 Edit one local date or choose it from a calendar.
 
@@ -4454,7 +4454,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 6e9a60b95afa9666517df9b7b5b5d24205e5ddc771c46ac47f29ea3fd1b702a3
+Source SHA-256: 547901bf0e2fb9822258fd84c11109001569873d4d1a5020cc8a2a95bd9d2c7e
 
 Type or pick start and end dates; only a complete, ordered range is a confirmed value.
 
@@ -4560,7 +4560,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: 8b1da0e00eb83996da2d5a76c7e069ffbba1c66275a991c8dff53ca80825dc3f
+Source SHA-256: 2563a486ab93477cb5bfc927d99d67b598829707973d52d9908c94a4d6157e8b
 
 Edit complete local wall-clock date/time, or apply calendar and time drafts.
 
@@ -4654,7 +4654,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-time-range-picker
 Source: packages/ui/src/components/date-time-range-picker.tsx
-Source SHA-256: 5fb69c5e60a02e1cd93a2f29d8587132c98249bc64b654f538d260e6da69d00d
+Source SHA-256: 805cc6ee326e851685c577adde997f7071db6eff96e12a21ddd11fc50442d710
 
 Type or pick a start and an end date and time; only a complete, ordered range is a confirmed value.
 
@@ -7806,7 +7806,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: 786bfc7ee2c0644823a7fdc3fc1a682373296f5d71eb24dfed5d7f265612dd9d
+Source SHA-256: fd8dc4dc0d76b55c59175e4697ce16f1c98f0bd3e6afa4cf3cd836497722d340
 
 Edit an optional number and adjust it by a declared step.
 
@@ -8350,7 +8350,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/password-input
 Source: packages/ui/src/components/password-input.tsx
-Source SHA-256: b91f9ab639ef984dd076d97e6f3d322bde1a6e22b2bdbe433c668df84aecdb4b
+Source SHA-256: 2cc5609ba3e912efe39c5fc9eb5a4dd9dbd280a509dd635309654d833a0b140b
 
 Enter a password and switch to plain text to check it.
 
@@ -11794,7 +11794,7 @@ export default function Demo() { return <Tabs defaultValue="text"><TabsList aria
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: 44d566b6318373e105746d955a5d882edfab472998d4e7dd773ab4c033894a94
+Source SHA-256: 2427982c90382e34627b781ce5b3c64a73456920ff2939538c746fc5dd3239a2
 
 Confirm a string collection while keeping its unconfirmed draft.
 

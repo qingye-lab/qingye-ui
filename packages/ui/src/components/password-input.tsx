@@ -42,7 +42,7 @@ export function PasswordInput({ visible: visibleProp, defaultVisible = false, on
   const [uncontrolledVisible, setUncontrolledVisible] = React.useState(defaultVisible);
   const visible = visibleProp ?? uncontrolledVisible;
   // 名称 = 动作 + 字段标签（见 adjunct-name.ts）；showLabel 是调用方给的完整名称，原样使用。
-  const toggleName = useAdjunctName(messages.showPassword, { "aria-label": showLabel });
+  const toggleName = useAdjunctName(messages.showPassword, { "aria-label": showLabel }, () => inputRef.current);
   return (
     <InputGroup data-slot="password-input" data-readonly={facts.readOnly ? "" : undefined} className={cn("flex-nowrap", controlClassName)}>
       <Input

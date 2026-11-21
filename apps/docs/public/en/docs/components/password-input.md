@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/password-input
 Source: packages/ui/src/components/password-input.tsx
-Source SHA-256: b91f9ab639ef984dd076d97e6f3d322bde1a6e22b2bdbe433c668df84aecdb4b
+Source SHA-256: 2cc5609ba3e912efe39c5fc9eb5a4dd9dbd280a509dd635309654d833a0b140b
 
 Enter a password and switch to plain text to check it.
 

@@ -188,7 +188,7 @@ test("read-only keeps values and hides the entry points to change them", () => {
   expect(new FormData(container.querySelector("form")!).get("slot.to")).toBe("2026-10-05T17:00");
 });
 
-test("inside a Field the buttons read action + the whole field's label; two fields are distinguishable; outside a Field the action alone", () => {
+test("inside a Field the buttons read action + the whole field's label; two fields are distinguishable; an aria-label on the start input does not name the range buttons", () => {
   const value = { from: "2026-10-03T09:00", to: "2026-10-05T17:00" };
   const { unmount } = render(<form>
     <Field name="a"><FieldLabel>报告时段</FieldLabel><DateTimeRangePicker defaultValue={value} /></Field>

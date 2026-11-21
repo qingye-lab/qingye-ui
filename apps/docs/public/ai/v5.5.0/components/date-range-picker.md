@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 6e9a60b95afa9666517df9b7b5b5d24205e5ddc771c46ac47f29ea3fd1b702a3
+Source SHA-256: 547901bf0e2fb9822258fd84c11109001569873d4d1a5020cc8a2a95bd9d2c7e
 
 键入或在日历中选择起止日期，完整且有序时才是确认值。
 

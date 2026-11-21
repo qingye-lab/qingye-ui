@@ -49,11 +49,13 @@ export function CodeBlock({ code, language, title, children, wrap = false, maxLi
   // 可聚焦的滚动区必须有名称：读屏要知道 Tab 停在了什么上。名称取标题（字符串或数字）；没有标题时取「语言（或「代码」）+ 第一行」，
   // 同一页的几段代码名称才各不相同（地标名称须可区分），读到名称也就知道是哪一段。第一行截到 40 个字符（预设）。
   const firstLine = code.split("\n").map(line => line.trim()).find(Boolean) ?? "";
-  const regionName = labelTitle ? String(title) : firstLine ? messages.codeRegionNamed(language || messages.codeRegion, firstLine.length > 40 ? `${firstLine.slice(0, 40)}…` : firstLine) : language || messages.codeRegion;
-  // 复制按钮的名称 = 动作 + 代码区域的名称（与上面的区域同名同源），同页两段代码的两枚按钮才分得出；
-  // 区域名称退到泛称「代码」（没有标题、语言、内容可辨）时只读动作。
+  const shortLine = firstLine.length > 40 ? `${firstLine.slice(0, 40)}…` : firstLine;
+  const regionName = labelTitle ? String(title) : firstLine ? messages.codeRegionNamed(language || messages.codeRegion, shortLine) : language || messages.codeRegion;
+  // 复制按钮的名称 = 动作 + 这段代码的辨识部分（与上面的区域同源），同页两段代码的两枚按钮才分得出。
+  // 没有标题和语言时区域名称以泛称「代码」开头，动作「复制代码」已说了这个词，按钮只接第一行；什么都没有时只读动作。
+  const copyTarget = labelTitle ? String(title) : language ? (firstLine ? messages.codeRegionNamed(language, shortLine) : language) : shortLine;
   const copyAction = copied ? messages.copied : messages.copyCode;
-  const copyName = regionName === messages.codeRegion ? copyAction : `${copyAction} ${regionName}`;
+  const copyName = copyTarget ? `${copyAction} ${copyTarget}` : copyAction;
   /*
    * 骨法用笔：代码面的范围只用一种边界机制——一条清墨容器线（border-border）。底（--qy-code-surface）
    * 取页面底纸本身（用户 2026-10-12），坐在卡片上比卡片深一级、说「这是另一种材料」；坐在页面底纸上与页面无底色差，

@@ -31,7 +31,7 @@ describe("CodeBlock", () => {
     const { rerender, container } = render(<CodeBlock code="x" title="values.js" />);
     expect(container.querySelector("[data-slot=code-block-header]")).toHaveTextContent("values.js");
     rerender(<CodeBlock code="x" title={<button type="button">pnpm</button>} />);
-    expect([...container.querySelectorAll("[data-slot=code-block-header] button")].map(node => node.textContent || node.getAttribute("aria-label"))).toEqual(["pnpm", "复制代码 代码：x"]);
+    expect([...container.querySelectorAll("[data-slot=code-block-header] button")].map(node => node.textContent || node.getAttribute("aria-label"))).toEqual(["pnpm", "复制代码 x"]);
     rerender(<CodeBlock code="x" />); expect(container.querySelector("[data-slot=code-block-header]")).toBeNull();
   });
 });
@@ -98,5 +98,9 @@ describe("CodeBlock copy button name", () => {
   it("en-US reads the same way", () => {
     render(<UILocaleProvider locale={enUS}><CodeBlock code="a" title="a.ts" /></UILocaleProvider>);
     expect(screen.getByRole("button", { name: "Copy code a.ts" })).toBeInTheDocument();
+  });
+  it("an untitled block without a language names the copy button by its first line, without repeating the region word", () => {
+    render(<CodeBlock code={"pnpm add @qingye_lab/ui\npnpm dev"} />);
+    expect(screen.getByRole("button", { name: "复制代码 pnpm add @qingye_lab/ui" })).toBeInTheDocument();
   });
 });

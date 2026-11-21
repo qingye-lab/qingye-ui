@@ -269,6 +269,10 @@ describe("DataTablePattern pagination name", () => {
     expect(screen.getByRole("navigation", { name: "分页 订单" })).toBeInTheDocument();
     expect(screen.getByRole("navigation", { name: "分页 客户" })).toBeInTheDocument();
   });
+  it("a node caption names the pagination by its text", () => {
+    render(table({ caption: <strong>订单</strong> }));
+    expect(screen.getByRole("navigation", { name: "分页 订单" })).toBeInTheDocument();
+  });
   it("uses the table's aria-label / aria-labelledby when there is no caption", () => {
     render(<>{table({ tableProps: { "aria-label": "日志" } })}<span id="t2">审计</span>{table({ tableProps: { "aria-labelledby": "t2" } })}</>);
     expect(screen.getByRole("navigation", { name: "分页 日志" })).toBeInTheDocument();

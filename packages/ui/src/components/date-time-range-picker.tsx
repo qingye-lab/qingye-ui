@@ -147,7 +147,7 @@ export function DateTimeRangePicker(allProps: DateTimeRangePickerProps) {
   useCustomValidity(startRef, invalid === "order" ? messages.dateTimeRangeOrder : invalid === "bounds" ? messages.dateOutOfRange : invalid === "incomplete" ? messages.dateIncomplete : "");
 
   const field = fieldName ?? name;
-  // 两个输入各要一个名称：Field 的标签 + 「开始 / 结束日期和时间」；没有标签时只有后者（接线同 DateRangePicker）。
+  // 两个输入各要一个名称：Field 的标签 + 「开始 / 结束日期时间」；没有标签时只有后者（接线同 DateRangePicker）。
   const [wiring, setWiring] = React.useState<{ id: string; label: string | undefined; described: string | undefined }>({ id: "", label: undefined, described: undefined });
   React.useLayoutEffect(() => {
     const input = startRef.current;
@@ -157,8 +157,10 @@ export function DateTimeRangePicker(allProps: DateTimeRangePickerProps) {
   });
   const named = (self: string, label: string) => wiring.label && self ? { "aria-label": label, "aria-labelledby": `${wiring.label} ${self}` } : { "aria-label": label };
   // 附属按钮：动作在前、整个字段的标签在后；不照抄 named()（那是给开始/结束输入的「标签在前」）。
-  const clearName = useAdjunctName(messages.clearDateTimeRange, {}, wiring.label);
-  const openName = useAdjunctName(messages.selectDateTimeRange, {}, wiring.label);
+  // 字段标签没有 id（如外部 <label for> 未写 id）时，取起点输入关联的 label 的文字。
+  const rangeOwner = () => startRef.current?.labels?.[0];
+  const clearName = useAdjunctName(messages.clearDateTimeRange, {}, wiring.label ?? rangeOwner);
+  const openName = useAdjunctName(messages.selectDateTimeRange, {}, wiring.label ?? rangeOwner);
 
   const handleEntry = (end: "from" | "to") => (event: InputEvents["change"]) => {
     (end === "from" ? onStartChange : onEndChange)?.(event);

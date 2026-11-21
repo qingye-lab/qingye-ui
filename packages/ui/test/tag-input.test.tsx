@@ -57,7 +57,7 @@ test("IME Enter does not confirm; the completed draft remains until an explicit 
 test("controlled rejection and canceled acceptance both retain the draft", async () => {
   const change = vi.fn();
   const { rerender } = render(<TagInput value={[]} onValueChange={change} defaultDraft="青叶" inputProps={{ "aria-label": "标签" }} />);
-  await userEvent.click(screen.getByRole("button", { name: "添加标签" }));
+  await userEvent.click(screen.getByRole("button", { name: "添加标签 标签" }));
   expect(screen.getByRole("textbox")).toHaveValue("青叶");
   expect(screen.queryByRole("listitem")).not.toBeInTheDocument();
   rerender(<TagInput value={["远程项"]} onValueChange={change} defaultDraft="青叶" inputProps={{ "aria-label": "标签" }} />);
@@ -85,11 +85,11 @@ test("empty-draft Backspace first focuses a confirmed tag; Delete removes it and
   render(<TagInput defaultValue={["青叶", "界面"]} inputProps={{ "aria-label": "标签" }} />);
   await userEvent.click(screen.getByRole("textbox"));
   await userEvent.keyboard("{Backspace}");
-  expect(screen.getByRole("button", { name: "移除 界面" })).toHaveFocus();
+  expect(screen.getByRole("button", { name: "移除 界面 标签" })).toHaveFocus();
   expect(screen.getAllByRole("listitem")).toHaveLength(2);
   await userEvent.keyboard("{Delete}");
   expect(screen.getAllByRole("listitem")).toHaveLength(1);
-  expect(screen.getByRole("button", { name: "移除 青叶" })).toHaveFocus();
+  expect(screen.getByRole("button", { name: "移除 青叶 标签" })).toHaveFocus();
   await userEvent.keyboard("{ArrowRight}");
   expect(screen.getByRole("textbox")).toHaveFocus();
 });
@@ -102,7 +102,7 @@ test.each(["disabled", "readOnly"] as const)("%s also blocks confirmed-item acti
   expect(change).not.toHaveBeenCalled();
   expect(new FormData(container.querySelector("form")!).getAll("tags")).toEqual(state === "disabled" ? [] : ["Qingye"]);
   if (state === "readOnly") expect(screen.queryByRole("button", { name: "Remove Qingye" })).not.toBeInTheDocument();
-  else expect(screen.getByRole("button", { name: "Remove Qingye" })).toBeDisabled();
+  else expect(screen.getByRole("button", { name: "Remove Qingye Tags" })).toBeDisabled();
 });
 
 test("Field name and error and input/root render/ref/event forwarding remain reachable", async () => {
@@ -157,7 +157,7 @@ test("required means at least one tag: the draft input carries the native flag o
   expect(input).not.toHaveAttribute("required");
   expect(input).toHaveAttribute("aria-required", "true");
   expect(form.checkValidity()).toBe(true);
-  await userEvent.click(screen.getByRole("button", { name: "移除 界面" }));
+  await userEvent.click(screen.getByRole("button", { name: "移除 界面 标签" }));
   expect(input).toHaveAttribute("required");
 });
 
@@ -258,16 +258,16 @@ test("splitOn waits for composition to end before reading a separator", () => {
 test("max: reaching it disables the draft and the add action with the reason, but not the tags or their form fields", async () => {
   const { container } = render(<form><TagInput name="tags" max={2} defaultValue={["a"]} inputProps={{ "aria-label": "标签" }} /></form>);
   const input = screen.getByRole("textbox");
-  expect(screen.getByRole("button", { name: "添加标签（最多 2 个）" })).toBeEnabled();
+  expect(screen.getByRole("button", { name: "添加标签（最多 2 个） 标签" })).toBeEnabled();
   expect(input).toHaveAccessibleDescription("最多 2 个标签");
   await userEvent.type(input, "b{Enter}");
   expect(input).toBeDisabled();
-  expect(screen.getByRole("button", { name: "添加标签（最多 2 个）" })).toBeDisabled();
+  expect(screen.getByRole("button", { name: "添加标签（最多 2 个） 标签" })).toBeDisabled();
   expect(screen.getByRole("status")).toHaveTextContent("最多 2 个标签");
   expect(input).toHaveAccessibleDescription("最多 2 个标签");
-  expect(screen.getByRole("button", { name: "移除 b" })).toHaveFocus();
+  expect(screen.getByRole("button", { name: "移除 b 标签" })).toHaveFocus();
   expect(new FormData(container.querySelector("form")!).getAll("tags")).toEqual(["a", "b"]);
-  await userEvent.click(screen.getByRole("button", { name: "移除 b" }));
+  await userEvent.click(screen.getByRole("button", { name: "移除 b 标签" }));
   expect(input).toBeEnabled();
   expect(screen.queryByRole("status")).not.toBeInTheDocument();
 });
@@ -300,7 +300,7 @@ test("addOnBlur takes the draft in when focus leaves, but not when it only moves
   const change = vi.fn();
   render(<div><TagInput addOnBlur onValueChange={change} inputProps={{ "aria-label": "标签" }} /><button>别处</button></div>);
   await userEvent.type(screen.getByRole("textbox"), "青叶");
-  await userEvent.click(screen.getByRole("button", { name: "添加标签" }));
+  await userEvent.click(screen.getByRole("button", { name: "添加标签 标签" }));
   expect(change).toHaveBeenCalledOnce();
   expect(screen.getByRole("textbox")).toHaveFocus();
   await userEvent.type(screen.getByRole("textbox"), "界面");
@@ -346,9 +346,9 @@ test("under rtl layout the arrow keys follow it: toward the tags is ArrowRight",
   await userEvent.keyboard("{ArrowLeft}");
   expect(input).toHaveFocus();
   await userEvent.keyboard("{ArrowRight}");
-  expect(screen.getByRole("button", { name: "移除 界面" })).toHaveFocus();
+  expect(screen.getByRole("button", { name: "移除 界面 标签" })).toHaveFocus();
   await userEvent.keyboard("{ArrowRight}");
-  expect(screen.getByRole("button", { name: "移除 青叶" })).toHaveFocus();
+  expect(screen.getByRole("button", { name: "移除 青叶 标签" })).toHaveFocus();
   await userEvent.keyboard("{ArrowLeft}{ArrowLeft}");
   expect(input).toHaveFocus();
   spy.mockRestore();
@@ -371,7 +371,7 @@ test("a long tag keeps its full text reachable after truncation", () => {
   expect(screen.getByTitle(long)).toHaveTextContent(long);
 });
 
-test("add and remove buttons carry the field label after the action; two fields stay distinguishable, outside a Field names are unchanged, and the visible text still opens the add name", () => {
+test("add and remove buttons carry the field label after the action; two fields stay distinguishable, outside a Field the input's aria-label follows the action, and the visible text still opens the add name", () => {
   const { unmount } = render(<form>
     <Field><FieldLabel>关键词</FieldLabel><TagInput defaultValue={["设计"]} /></Field>
     <Field><FieldLabel>作者</FieldLabel><TagInput defaultValue={["设计"]} max={3} /></Field>
@@ -382,12 +382,18 @@ test("add and remove buttons carry the field label after the action; two fields 
   expect(screen.getByRole("button", { name: "移除 设计 作者" })).toBeInTheDocument();
   unmount();
   render(<TagInput defaultValue={["设计"]} inputProps={{ "aria-label": "标签" }} />);
-  expect(screen.getByRole("button", { name: "添加标签" })).toBeInTheDocument();
-  expect(screen.getByRole("button", { name: "移除 设计" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "添加标签 标签" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "移除 设计 标签" })).toBeInTheDocument();
 });
 
 test("en-US: tag add and remove buttons read action then field label", () => {
   render(<UILocaleProvider locale={enUS}><Field><FieldLabel>Keywords</FieldLabel><TagInput defaultValue={["ui"]} /></Field></UILocaleProvider>);
   expect(screen.getByRole("button", { name: "Add tag Keywords" })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "Remove ui Keywords" })).toBeInTheDocument();
+});
+
+test("outside a Field add and remove read an external label after the action", () => {
+  render(<form><label htmlFor="kw">关键词</label><TagInput defaultValue={["设计"]} inputProps={{ id: "kw" }} /></form>);
+  expect(screen.getByRole("button", { name: "添加标签 关键词" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "移除 设计 关键词" })).toBeInTheDocument();
 });

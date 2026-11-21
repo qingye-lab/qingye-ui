@@ -9,7 +9,7 @@ import { DraftSurface } from "../draft-surface";
 import { formatPeriod, isSamePeriod, parsePeriod, periodWithinBounds, type DateGranularity, type PeriodGranularity } from "../date-granularity";
 import { useUILocale } from "../locale";
 import { inputAdjunctClassName, withHiddenIndicator } from "../input-adjunct";
-import { useAdjunctName } from "../adjunct-name";
+import { inControl, useAdjunctName } from "../adjunct-name";
 import { InputGroupReadOnlyNote } from "../input-readonly-note";
 import { cn } from "../utils";
 import { Button } from "./button";
@@ -49,8 +49,8 @@ export function DatePicker(allProps: DatePickerProps) {
   const { value: valueProp, defaultValue, onValueChange, min, max, granularity = "day", name, form, disabled = false, readOnly = false, inputProps = {}, calendarProps = {}, className, render, ref, ...props } = allProps;
   const { code, messages } = useUILocale();
   const period: PeriodGranularity | undefined = granularity === "day" ? undefined : granularity;
-  const clearName = useAdjunctName(messages.clearDate, {});
-  const openName = useAdjunctName(period ? { week: messages.selectWeek, month: messages.selectMonth, quarter: messages.selectQuarter, year: messages.selectYear }[period] : messages.selectDate, {});
+  const clearName = useAdjunctName(messages.clearDate, {}, inControl("date-picker-control"));
+  const openName = useAdjunctName(period ? { week: messages.selectWeek, month: messages.selectMonth, quarter: messages.selectQuarter, year: messages.selectYear }[period] : messages.selectDate, {}, inControl("date-picker-control"));
   const rules = React.useMemo(() => weekRulesFor(code, calendarProps), [code, calendarProps.weekStartsOn, calendarProps.firstWeekContainsDate, calendarProps.locale]);
   // 受控与否看 `value` 属性在不在，而不是它是不是 undefined：此前 `value` 就是必须由调用方持有的受控入口，
   // 空值也是 `value={undefined}`，这样既有用法的行为（拒绝变更则保持原值）一点不变。

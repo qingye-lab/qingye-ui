@@ -3,7 +3,7 @@
 import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox";
 import { IconCheck, IconChevronDown, IconX } from "@tabler/icons-react";
 import * as React from "react";
-import { useAdjunctName } from "../adjunct-name";
+import { inControl as fieldIn, useAdjunctName } from "../adjunct-name";
 import { useUILocale } from "../locale";
 import { chipActionClassName, chipClassName, chipDraftControlClassName, chipFrameStyle, chipTextClassName } from "../chip";
 import { type CandidateStatusOptions, useCandidateStatus } from "../candidate-status";
@@ -60,7 +60,7 @@ export function ComboboxTrigger({ render, children, ...props }: ComboboxPrimitiv
   const chips = React.useContext(Multiple) && inControl;
   const readOnly = React.useContext(ReadOnly);
   const { messages } = useUILocale();
-  const name = useAdjunctName(messages.showOptions, props);
+  const name = useAdjunctName(messages.showOptions, props, fieldIn("combobox-control", "combobox-input"));
   return <ComboboxPrimitive.Trigger data-slot="combobox-trigger" {...props} {...name} disabled={readOnly || props.disabled} aria-labelledby={name["aria-labelledby"] ?? ""} render={(elementProps, state) => <Button variant={inControl ? "quiet" : "bordered"} shape="icon" {...(chips ? { size: "xs" as const } : {})} {...elementProps} className={adjunctClassName(inControl, chips, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconChevronDown aria-hidden="true" />}</ComboboxPrimitive.Trigger>;
 }
 export function ComboboxClear({ render, children, ...props }: ComboboxPrimitive.Clear.Props & React.RefAttributes<HTMLButtonElement>) {
@@ -68,7 +68,7 @@ export function ComboboxClear({ render, children, ...props }: ComboboxPrimitive.
   const chips = React.useContext(Multiple) && inControl;
   const readOnly = React.useContext(ReadOnly);
   const { messages } = useUILocale();
-  const name = useAdjunctName(messages.clearSelection, props);
+  const name = useAdjunctName(messages.clearSelection, props, fieldIn("combobox-control", "combobox-input"));
   return <ComboboxPrimitive.Clear data-slot="combobox-clear" {...props} {...name} disabled={readOnly || props.disabled} render={(elementProps, state) => <Button variant="quiet" shape="icon" {...(chips ? { size: "xs" as const } : {})} {...elementProps} className={adjunctClassName(inControl, chips, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconX aria-hidden="true" />}</ComboboxPrimitive.Clear>;
 }
 /** 读取已确认的值；多选时用它把每个已选值摆成 ComboboxChip。 */

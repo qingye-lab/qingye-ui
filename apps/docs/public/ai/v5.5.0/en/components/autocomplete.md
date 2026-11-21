@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: 51bf128271c99f851a611ad3e924a89c7994b8715660684eda0c14a21d2d736e
+Source SHA-256: b56390332369882f40dd618b614736dbecb995da1634da99f97332f6d7f1cf2c
 
 Edit free text with optional suggestions.
 

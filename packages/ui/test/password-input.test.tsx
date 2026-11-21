@@ -15,7 +15,7 @@ test("it is a composition of public parts: one boundary holding the real passwor
   expect(input).toHaveAttribute("type", "password");
   expect(input).toHaveAttribute("autocapitalize", "none");
   expect(input).toHaveAttribute("spellcheck", "false");
-  const toggle = screen.getByRole("button", { name: "显示密码" });
+  const toggle = screen.getByRole("button", { name: "显示密码 密码" });
   expect(toggle).toHaveAttribute("data-slot", "password-input-toggle");
   expect(toggle).toHaveAttribute("aria-pressed", "false");
   expect(toggle).toHaveAttribute("aria-controls", input.id);
@@ -26,12 +26,12 @@ test("the toggle switches visibility under a stable name, keeps the value and do
   const onVisibleChange = vi.fn(); const onSubmit = vi.fn((event: React.FormEvent) => event.preventDefault());
   render(<form onSubmit={onSubmit}><PasswordInput autoComplete="current-password" aria-label="密码" defaultValue="qingye" onVisibleChange={onVisibleChange} /></form>);
   const input = screen.getByLabelText("密码");
-  const toggle = screen.getByRole("button", { name: "显示密码" });
+  const toggle = screen.getByRole("button", { name: "显示密码 密码" });
   await user.click(toggle);
   expect(input).toHaveAttribute("type", "text");
   expect(input).toHaveValue("qingye");
   expect(toggle).toHaveAttribute("aria-pressed", "true");
-  expect(toggle).toHaveAccessibleName("显示密码");
+  expect(toggle).toHaveAccessibleName("显示密码 密码");
   expect(onVisibleChange).toHaveBeenLastCalledWith(true);
   await user.keyboard(" ");
   expect(input).toHaveAttribute("type", "password");
@@ -43,7 +43,7 @@ test("controlled visibility changes only when the caller accepts it", async () =
   const user = userEvent.setup();
   const onVisibleChange = vi.fn();
   const { rerender } = render(<PasswordInput autoComplete="current-password" aria-label="密码" visible={false} onVisibleChange={onVisibleChange} />);
-  await user.click(screen.getByRole("button", { name: "显示密码" }));
+  await user.click(screen.getByRole("button", { name: "显示密码 密码" }));
   expect(onVisibleChange).toHaveBeenCalledWith(true);
   expect(screen.getByLabelText("密码")).toHaveAttribute("type", "password");
   rerender(<PasswordInput autoComplete="current-password" aria-label="密码" visible onVisibleChange={onVisibleChange} />);
@@ -54,7 +54,7 @@ test.each(["disabled", "field", "fieldset"] as const)("the toggle is disabled wi
   const onVisibleChange = vi.fn();
   const input = <PasswordInput autoComplete="current-password" aria-label="密码" defaultValue="qingye" disabled={source === "disabled"} onVisibleChange={onVisibleChange} />;
   render(source === "field" ? <Field disabled><FieldLabel>密码</FieldLabel>{input}</Field> : source === "fieldset" ? <fieldset disabled>{input}</fieldset> : input);
-  const toggle = screen.getByRole("button", { name: source === "field" ? "显示密码 密码" : "显示密码" });
+  const toggle = screen.getByRole("button", { name: "显示密码 密码" });
   expect(toggle).toBeDisabled();
   await userEvent.click(toggle);
   expect(onVisibleChange).not.toHaveBeenCalled();
@@ -68,7 +68,7 @@ test("className, ref and id belong to the real input, controlClassName to the bo
   expect(input).toHaveAttribute("id", "pw");
   expect(input).toHaveClass("caller-input");
   expect(container.querySelector("[data-slot=password-input]")).toHaveClass("caller-boundary");
-  expect(screen.getByRole("button", { name: enUS.messages.showPassword })).toHaveAttribute("aria-controls", "pw");
+  expect(screen.getByRole("button", { name: `${enUS.messages.showPassword} Password` })).toHaveAttribute("aria-controls", "pw");
 });
 
 test("a Field label names the password input, not the toggle", () => {
@@ -96,6 +96,12 @@ test("pasting is never intercepted (WCAG 3.3.8)", () => {
 
 test("the reveal toggle carries the field label after the action inside a Field", () => {
   render(<form><Field><FieldLabel>当前密码</FieldLabel><PasswordInput autoComplete="current-password" /></Field><Field><FieldLabel>新密码</FieldLabel><PasswordInput autoComplete="new-password" /></Field></form>);
+  expect(screen.getByRole("button", { name: "显示密码 当前密码" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "显示密码 新密码" })).toBeInTheDocument();
+});
+
+test("outside a Field the reveal toggle reads an external label, or the input's aria-label, after the action", () => {
+  render(<form><label htmlFor="pw-now">当前密码</label><PasswordInput id="pw-now" autoComplete="current-password" /><PasswordInput aria-label="新密码" autoComplete="new-password" /></form>);
   expect(screen.getByRole("button", { name: "显示密码 当前密码" })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "显示密码 新密码" })).toBeInTheDocument();
 });

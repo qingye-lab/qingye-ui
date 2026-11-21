@@ -722,13 +722,14 @@ export function DataTablePattern<TData>({ data, columns, getRowId, mode = "clien
     }, "pagination"),
   });
   // 内置分页的名称：调用方给的 pagination["aria-label"] 优先；否则「分页 + 表名」，同页两张表的两个分页地标才分得出。
-  // 表名来源依次为：caption（字符串或数字，包一层带 id 的 span 供引用）、tableProps 的 aria-labelledby、tableProps 的 aria-label；都没有时保持「分页」。
+  // 表名来源依次为：caption（包一层带 id 的 span 供引用，ReactNode 也一样——引用取的是其中的文字）、tableProps 的 aria-labelledby、tableProps 的 aria-label；都没有时保持「分页」。
+  // 根元素是无角色的 div，ARIA 不允许给它命名，它的 aria-label 不作为表名来源；表名写在 caption 或 tableProps 上。
   const paginationId = React.useId(); const captionId = React.useId();
-  const captionText = typeof caption === "string" || typeof caption === "number";
-  const captionNode = captionText && pagination ? <span id={captionId}>{caption}</span> : caption;
+  const hasCaption = caption !== undefined && caption !== null && caption !== "" && typeof caption !== "boolean";
+  const captionNode = hasCaption && pagination ? <span id={captionId}>{caption}</span> : caption;
   const tableLabelledBy = tableProps?.["aria-labelledby"]?.trim(), tableLabel = tableProps?.["aria-label"];
   const paginationName: { id?: string; "aria-label"?: string; "aria-labelledby"?: string } = !pagination ? {} : pagination["aria-label"] ? { "aria-label": pagination["aria-label"] }
-    : captionText ? { id: paginationId, "aria-label": messages.pagination, "aria-labelledby": `${paginationId} ${captionId}` }
+    : hasCaption ? { id: paginationId, "aria-label": messages.pagination, "aria-labelledby": `${paginationId} ${captionId}` }
     : tableLabelledBy ? { id: paginationId, "aria-label": messages.pagination, "aria-labelledby": `${paginationId} ${tableLabelledBy}` }
     : tableLabel ? { "aria-label": `${messages.pagination} ${tableLabel}` } : {};
   return <div data-slot="data-table-pattern" {...props} className={cn("flex min-w-0 flex-col gap-(--qy-panel-gap)", virtualization && virtualization.height === undefined && fillParentClassName, className)}>

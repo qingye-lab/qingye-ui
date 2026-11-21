@@ -332,7 +332,7 @@ test("inside a Field the calendar and clear buttons read action + the whole fiel
   expect(screen.getByRole("button", { name: "清除日期范围 对比周期" })).toBeInTheDocument();
 });
 
-test("in English the range buttons read action + label; outside a Field the name is the action alone", () => {
+test("in English the range buttons read action + label; an aria-label on the start input names only that input, so the range buttons keep the action alone", () => {
   const { unmount } = render(<UILocaleProvider locale={enUS}><Field name="a"><FieldLabel>Reporting period</FieldLabel><DateRangePicker defaultValue={{ from: new Date(2026, 9, 3), to: new Date(2026, 9, 5) }} /></Field></UILocaleProvider>);
   expect(screen.getByRole("button", { name: "Select date range Reporting period" })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "Clear date range Reporting period" })).toBeInTheDocument();
@@ -340,4 +340,10 @@ test("in English the range buttons read action + label; outside a Field the name
   render(<UILocaleProvider locale={enUS}><DateRangePicker defaultValue={{ from: new Date(2026, 9, 3), to: new Date(2026, 9, 5) }} inputProps={{ "aria-label": "Range" }} /></UILocaleProvider>);
   expect(screen.getByRole("button", { name: "Select date range" })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "Clear date range" })).toBeInTheDocument();
+});
+
+test("outside a Field the range buttons read the label associated with the start input", () => {
+  render(<form><label htmlFor="period">报告周期</label><DateRangePicker defaultValue={{ from: new Date(2026, 9, 3), to: new Date(2026, 9, 5) }} inputProps={{ id: "period" }} /></form>);
+  expect(screen.getByRole("button", { name: "选择日期范围 报告周期" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除日期范围 报告周期" })).toBeInTheDocument();
 });

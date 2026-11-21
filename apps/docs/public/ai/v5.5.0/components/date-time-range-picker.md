@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-time-range-picker
 Source: packages/ui/src/components/date-time-range-picker.tsx
-Source SHA-256: 5fb69c5e60a02e1cd93a2f29d8587132c98249bc64b654f538d260e6da69d00d
+Source SHA-256: 805cc6ee326e851685c577adde997f7071db6eff96e12a21ddd11fc50442d710
 
 键入或在弹层里选起止日期和时间，完整且有序时才是确认值。
 
@@ -74,7 +74,7 @@ Written descriptions; the list above is the type-resolved fact.
 - name / form: string. 确认的起止序列化为 name.from 与 name.to（与 DateRangePicker 同名规则），值是同样的本地文本。Field 可提供 name；两个输入本身不提交，草稿不入表单。
 - disabled / readOnly: boolean; default false. 禁用阻止一切；只读时两个输入可聚焦、读屏读出值，但不能改值，弹层入口也不开。Field 禁用同样约束附属动作。只读确认值仍提交，禁用排除。确认值非空且可编辑时，边界内有清除动作，清除后焦点回到起点输入。
 - calendarProps: CalendarProps except owned selection props. 日历的其余属性（默认月份、禁用日等）；mode 固定 range。键入的值不受日历禁用日约束，只受 min / max 约束。
-- inputProps / endInputProps: Input props. 起点输入（Field 标签指向它）与终点输入的 ref/render/ARIA/events/step 等；step 同时带到弹层里的时间输入。两个输入默认名称是「Field 标签 + 开始 / 结束日期和时间」。
+- inputProps / endInputProps: Input props. 起点输入（Field 标签指向它）与终点输入的 ref/render/ARIA/events/step 等；step 同时带到弹层里的时间输入。两个输入默认名称是「Field 标签 + 开始 / 结束日期时间」。
 - render / ref / className / style / ARIA / events: div composition props. 属于组合根；输入命名与错误由 Field 公共组合提供。
 
 ## Keyboard

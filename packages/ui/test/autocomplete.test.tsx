@@ -97,7 +97,7 @@ test("a label associated through htmlFor still names the input while suggestions
   expect(screen.getByRole("combobox", { name: "文字" })).toHaveAttribute("id", "word");
 });
 
-test("trigger and clear carry the field label after the action; two fields stay distinguishable, outside a Field the name is the action alone, and en-US follows", () => {
+test("trigger and clear carry the field label after the action; two fields stay distinguishable, with no field label found the name is the action alone, and en-US follows", () => {
   const parts = <><AutocompleteInput /><AutocompleteClear /><AutocompleteTrigger />{popup}</>;
   const { unmount } = render(<form>
     <Field><FieldLabel>负责人</FieldLabel><Autocomplete items={items} defaultValue="青叶">{parts}</Autocomplete></Field>

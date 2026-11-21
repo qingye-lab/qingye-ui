@@ -6,7 +6,7 @@ import { useRender } from "@base-ui/react/use-render";
 import { IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { flushSync } from "react-dom";
-import { useAdjunctName } from "../adjunct-name";
+import { type AdjunctOwner, useAdjunctName } from "../adjunct-name";
 import { useUILocale } from "../locale";
 import { chipActionClassName, chipClassName, chipDraftControlClassName, chipFrameStyle, chipTextClassName } from "../chip";
 import { cn } from "../utils";
@@ -79,8 +79,8 @@ function DraftInputSurface({ elementProps, state, render, limit, onBase }: { ele
 }
 
 /** 每个标签的移除按钮：名称是「移除 X」+ 所属字段标签；hook 不能放在 map 里，故单独成件。 */
-function TagRemoveButton({ action, ...props }: { action: string } & React.ComponentProps<typeof Button>) {
-  const name = useAdjunctName(action, props);
+function TagRemoveButton({ action, owner, ...props }: { action: string; owner: AdjunctOwner } & React.ComponentProps<typeof Button>) {
+  const name = useAdjunctName(action, props, owner);
   return <Button {...props} {...name} />;
 }
 
@@ -95,8 +95,10 @@ export function TagInput({
   const feedbackId = React.useId();
   const limitId = React.useId();
   // 添加按钮：有上限时名称写上限（aria-label）；否则名称来自可见文字，只在 Field 内借 aria-labelledby 拼上字段标签，不设 aria-label 以免盖掉可见文字（WCAG 2.5.3）。
-  const addAdjunct = useAdjunctName(max !== undefined ? messages.addTagWithLimit(max) : messages.addTag, {});
-  const addName = max !== undefined ? addAdjunct : { id: addAdjunct.id, "aria-labelledby": addAdjunct["aria-labelledby"] };
+  // 字段标签只有文字（aria-label 或无 id 的 label）时名称写成「添加标签 文字」，仍以可见文字开头。
+  const inputOwner = React.useCallback(() => inputRef.current, []);
+  const addAdjunct = useAdjunctName(max !== undefined ? messages.addTagWithLimit(max) : messages.addTag, {}, inputOwner);
+  const addName = max !== undefined || addAdjunct["aria-label"] !== messages.addTag ? addAdjunct : { id: addAdjunct.id, "aria-labelledby": addAdjunct["aria-labelledby"] };
   const [uncontrolledValue, setUncontrolledValue] = React.useState<readonly string[]>(defaultValue);
   const [uncontrolledDraft, setUncontrolledDraft] = React.useState(defaultDraft);
   const [feedback, setFeedback] = React.useState<string | null>(null);
@@ -285,7 +287,7 @@ export function TagInput({
         {value.length > 0 && <ul data-slot="tag-input-items" className="flex min-w-0 max-w-full flex-wrap gap-(--qy-tag-inset)">
           {value.map((tag, index) => <li key={`${index}:${tag}`} data-slot="tag-input-item" className={chipClassName} data-readonly={blocked.readOnly ? "" : undefined}>
             <span data-slot="tag-input-value" title={tag} className={cn("min-w-0 truncate", chipTextClassName)}>{tag}</span>
-            {!blocked.readOnly && <TagRemoveButton action={messages.removeTag(tag)} ref={node => { removeRefs.current[index] = node; }} data-slot="tag-input-remove" size="xs" variant="quiet" shape="icon" type="button" disabled={blocked.disabled}
+            {!blocked.readOnly && <TagRemoveButton action={messages.removeTag(tag)} owner={inputOwner} ref={node => { removeRefs.current[index] = node; }} data-slot="tag-input-remove" size="xs" variant="quiet" shape="icon" type="button" disabled={blocked.disabled}
               className={chipActionClassName}
               onClick={event => remove(index, event)}
               onKeyDown={event => {
