@@ -130,14 +130,32 @@
 | playground 114 页 | 100 PASS、14 FAIL，发现 29 条 | 109 PASS、5 FAIL，普通发现 0 条，样张 7 条 |
 | 官网 150 页 | 136 PASS、14 FAIL，发现 22 条 | 144 PASS、6 FAIL，普通发现 0 条，样张 8 条 |
 
-改动后剩下的 FAIL 页只含样张：Button（删除、新建设备、保存）、Toggle、Composer、CopyButton、InputModalityProvider，官网另有基础判断页的“同步”。`section` 页第一次扫描时导航被打断（NOT_RUN），单独补扫为 PASS。英文页未扫；弹层、菜单、对话框打开后的状态仍是 UNVERIFIED。
+改动后剩下的 FAIL 页只含样张：Button（删除、新建设备、保存）、Toggle、Composer、CopyButton、InputModalityProvider，官网另有基础判断页的“同步”。`section` 页第一次扫描时导航被打断（NOT_RUN），单独补扫为 PASS。英文页未扫；弹层、菜单、对话框打开后的状态仍是 UNVERIFIED（这两项随后已补，见下文「遗留的处理」）。
 
 C 通道复验：在 `248e687a` 上 `pnpm pack`（sha256 `23a98185c06520144dcf4a15dd94f9d27b03dc16e0e73942a2c4a502b8d269f9`，lockfile integrity 已变，安装的 `dist/` 含 `adjunct-name.js`），在验证包副本里跑 `pnpm verify`。证据存于验证包 `results-248e687a/`（验证包提交 `872ccc1`），此前证据未改动。
 探针 PASS；C 通道 O1–O5 全部 PASS；A 通道 O3、O5 PASS，O1、O2、O4 FAIL，与改名前一致。驱动脚本不按附属按钮名称定位，这次只说明改名没有让这些路径退化。
 
-遗留，未处理：
+遗留的处理（2026-11-21，`edd11080`、`578b8fc1`、`02830d4c`）：
 
-- 字段只靠 `aria-label` 或外部 label 命名时，附属按钮仍只读动作。
-- 无标题的代码块，区域名称本身带“代码：”前缀，复制按钮读作“复制代码 代码：…”，有重复。
-- DataTable 的 caption 是 ReactNode 时分页回退为“分页”；DataTablePattern 根元素的 `aria-label` 不作为表名来源。
-- 日期时间类中文文案“选择日期和时间”的句式与其他日期组件不同。
+- **字段只靠 `aria-label` 或外部 label 命名**：附属按钮在渲染后按字段自己的命名来源取标签，依次为 aria-labelledby → 关联的 `<label>`（有 id 就引用，没有就取文字；包住字段的 label 只取文字）→ aria-label 的文字。覆盖 Combobox、Autocomplete、NumberField、DatePicker、DateTimePicker、PasswordInput、TagInput 与两个范围选择器。NumberField 的 `aria-label` 要写在 `NumberFieldInput` 上，写在根上只落到外层 div。范围选择器只认开始输入框的 `<label>`：开始框上的 `aria-label` 只说明开始框，不能当整段范围的名称。
+- **无标题代码块**：复制按钮以代码首行命名，读作“复制代码 pnpm add @qingye_lab/ui”，不再重复“代码：”。
+- **DataTable 的 ReactNode caption**：分页取 caption 的文字，读作“分页 订单”。DataTablePattern 根元素的 `aria-label` 仍不作为名称来源：根是通用 div，ARIA 不允许给它命名。
+- **日期时间文案**：中文统一为“日期时间”（清除日期时间、选择日期时间、开始日期时间、结束日期时间）。
+- **英文页与弹层**：`name-audit.mjs` 加 `--lang en` 与 `--popups`，见 `docs/browser-audit.md`。英文官网首次扫描发现 `/en/components` 与 `/en/docs/components` 各 2 条 R2：分类标题自带的锚点链接与组件卡片链接都叫“Layout”“Typography”，去向不同（中文卡片读作“布局Layout”，未撞名）。处理：标题锚点按附属动作命名为“本节链接 标题”/“Link to section 标题”，标题本身经 aria-labelledby 保持原名，目录不变，外观与交互不变。
+
+复扫（`light-desktop`，每批 8 页）：
+
+| 范围 | 结果 |
+|---|---|
+| playground 中文 114 页 + 弹层 | 109 PASS、5 FAIL（只含样张 7 条），检查弹层 105 个，普通发现 0 |
+| playground 英文 114 页 + 弹层 | 同上 |
+| 官网中文 150 页 | 144 PASS、6 FAIL（只含样张 8 条），普通发现 0 |
+| 官网英文 150 页 | 锚点改名前 142 PASS、8 FAIL，普通发现 4 条；改名后 144 PASS、6 FAIL，普通发现 0 |
+| 官网弹层，中英文各 24 页 | 24 PASS，检查弹层 46 个，普通发现 0 |
+
+官网的弹层扫描只覆盖首页、`/components` 与各示例路由，共 24 页，不是 150 页；组件详情页的弹层由 playground 那一遍覆盖。
+
+仍为 UNVERIFIED：
+
+- 点开后没有新弹层出现的触发器，playground 14 个、官网 5 个（每种语言）：Autocomplete 与 Command 要输入才展开；Select 的只读与 demo 3 的三个“请选择”；TreeSelect 的 4 个，它的弹层可能不是 dialog / menu / listbox 角色，未核实；官网 `/components` 上的 5 个同类触发器。Sidebar 有 1 个触发器静置时不可见。
+- 从弹层里再打开的弹层、只靠悬停或键盘打开的弹层、没有 `aria-haspopup` 的触发器。
