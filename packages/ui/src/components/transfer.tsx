@@ -80,18 +80,20 @@ function TransferList({ title, items, checked, onCheckedChange, query, onQueryCh
     >
       {/* 全选 + 标题 + 计数是同一行：标题给整组命名，计数是组的描述（读屏读到「已选 n / m」）。 */}
       <div className="flex min-w-0 items-start gap-(--qy-field-gap)">
-        <Checkbox parent aria-label={messages.transferSelectAll} disabled={disabled || enabledKeys.length === 0} />
+        {/* 放进 Field 时 Field 会把字段标签经 aria-labelledby 注入内部控件，压过 aria-label；所以全选、筛选与条目都显式用 labelledby 取名。名称文本对读屏隐藏，避免浏览模式下读两遍。 */}
+        <span id={`${id}-all`} aria-hidden="true" className="sr-only">{messages.transferSelectAll}</span>
+        <Checkbox parent aria-labelledby={`${id}-all`} disabled={disabled || enabledKeys.length === 0} />
         <span id={`${id}-title`} className="min-w-0 flex-1 text-label-mobile text-foreground wrap-break-word sm:text-label">{title}</span>
         <span id={`${id}-count`} className="text-support-mobile text-muted-foreground tabular-nums sm:text-support">{picked.length} / {visible.length}</span>
       </div>
-      {searchable && <SearchInput aria-label={messages.transferFilter(title)} value={query} disabled={disabled} onChange={event => onQueryChange(event.target.value)} onClear={() => onQueryChange("")} />}
+      {searchable && <><span id={`${id}-filter`} aria-hidden="true" className="sr-only">{messages.transferFilter(title)}</span><SearchInput aria-labelledby={`${id}-filter`} value={query} disabled={disabled} onChange={event => onQueryChange(event.target.value)} onClear={() => onQueryChange("")} /></>}
       {/* 预设：列表区固定 16rem（h-64）高度，使两侧同高、移动时版面不跳；超出滚动。可用 listClassName 改。 */}
       <div data-slot="transfer-items" className={cn("flex min-h-0 flex-col gap-(--qy-field-gap) overflow-y-auto", "h-64", listClassName)}>
         {visible.length === 0
           ? <p className="m-0 text-support-mobile text-muted-foreground sm:text-support">{items.length === 0 ? messages.transferEmpty : messages.transferNoMatch}</p>
           : visible.map(item => <label key={item.value} data-slot="transfer-item" className={cn("flex min-w-0 cursor-pointer items-start gap-(--qy-field-gap)", (disabled || item.disabled) && "cursor-not-allowed opacity-disabled")}>
-            <Checkbox value={item.value} disabled={disabled || item.disabled} />
-            <span className="min-w-0 flex-1 text-label-mobile text-foreground wrap-break-word sm:text-label">{item.label}</span>
+            <Checkbox value={item.value} aria-labelledby={`${id}-i${items.indexOf(item)}`} disabled={disabled || item.disabled} />
+            <span id={`${id}-i${items.indexOf(item)}`} className="min-w-0 flex-1 text-label-mobile text-foreground wrap-break-word sm:text-label">{item.label}</span>
           </label>)}
       </div>
     </CheckboxGroup>

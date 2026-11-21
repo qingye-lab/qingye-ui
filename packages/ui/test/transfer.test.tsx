@@ -2,6 +2,7 @@ import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { useState } from "react";
 import { expect, test, vi } from "vitest";
+import { Field, FieldLabel } from "../src/components/field";
 import { Transfer, type TransferItem } from "../src/components/transfer";
 import { UILocaleProvider } from "../src/locale";
 import { enUS } from "../src/locales/en-US";
@@ -182,4 +183,11 @@ test("rejects duplicate or unnamed items", () => {
   expect(() => render(<Transfer items={[{ value: "a", label: "A" }, { value: "a", label: "B" }]} />)).toThrow(/repeats the value "a"/);
   expect(() => render(<Transfer items={[{ value: "a", label: " " }]} />)).toThrow(/nonempty label/);
   error.mockRestore();
+});
+
+test("inside a labelled Field, controls keep their own accessible names", () => {
+  render(<Field><FieldLabel>树种</FieldLabel><Transfer items={items} searchable /></Field>);
+  expect(box("候选", "苹果")).toBeInTheDocument();
+  expect(within(list("候选")).getByRole("checkbox", { name: "全选" })).toBeInTheDocument();
+  expect(within(list("候选")).getByRole("searchbox", { name: "筛选候选" })).toBeInTheDocument();
 });
