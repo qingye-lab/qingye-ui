@@ -4497,7 +4497,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 5201b000e6a6a16fc01f5c6a3a943bf6cc6b6e2d4e441d8072ee080e85aa970b
+Source SHA-256: 02c5537f5b7059f3756aab2b5b3fb9d3405b7f7e5cd6f2508bb5e35fbd304395
 
 调用方真实集合的比较、排序、范围选择与可选虚拟化。
 
@@ -4803,7 +4803,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 547901bf0e2fb9822258fd84c11109001569873d4d1a5020cc8a2a95bd9d2c7e
+Source SHA-256: 0d0834aa70a325fc41b42045d1bc6db3d550265f91ac2c1276384c7099b5bb0c
 
 键入或在日历中选择起止日期，完整且有序时才是确认值。
 
@@ -5003,7 +5003,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-time-range-picker
 Source: packages/ui/src/components/date-time-range-picker.tsx
-Source SHA-256: 805cc6ee326e851685c577adde997f7071db6eff96e12a21ddd11fc50442d710
+Source SHA-256: ea0c19ac00afd1c2cb244948594c9dcb6c081e74fa647a7a66e90d74ca5d7594
 
 键入或在弹层里选起止日期和时间，完整且有序时才是确认值。
 
@@ -10786,7 +10786,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: f0e221174a48efacb54ea6303c19cf9b31c9246c4f9a16fe40dd2df1430cf3f7
+Source SHA-256: 3098b18a94f563faac4c8c907aa14400940981b3411c62438738b6d35d1e9039
 
 长期导航、收起为图标 rail 与二级子级。
 
@@ -13644,7 +13644,7 @@ export default function Demo() {
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/transfer
 Source: packages/ui/src/components/transfer.tsx
-Source SHA-256: f38e76778b41e156fd69123ec811322b98d9d1d717106af15b59cfd0ff07c4c6
+Source SHA-256: a8fb40e9cf2f0175303dded681f41fa34c4e549ce2fa5c1e77a8c11cfba2b52b
 
 把条目在「候选」与「已选」两个列表之间移动，值是已选一侧的键。
 

@@ -105,3 +105,11 @@ test("outside a Field the reveal toggle reads an external label, or the input's 
   expect(screen.getByRole("button", { name: "显示密码 当前密码" })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "显示密码 新密码" })).toBeInTheDocument();
 });
+
+test("a wrapping label's text is copied into the toggle name and followed when the text changes in place", async () => {
+  render(<label><span data-testid="text">当前密码</span><PasswordInput autoComplete="current-password" /></label>);
+  expect(screen.getByRole("button", { name: "显示密码 当前密码" })).toBeInTheDocument();
+  // 只改 DOM 文字，不让按钮重新渲染：名称仍须跟上。
+  screen.getByTestId("text").textContent = "旧密码";
+  expect(await screen.findByRole("button", { name: "显示密码 旧密码" })).toBeInTheDocument();
+});

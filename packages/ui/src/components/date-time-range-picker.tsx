@@ -157,10 +157,12 @@ export function DateTimeRangePicker(allProps: DateTimeRangePickerProps) {
   });
   const named = (self: string, label: string) => wiring.label && self ? { "aria-label": label, "aria-labelledby": `${wiring.label} ${self}` } : { "aria-label": label };
   // 附属按钮：动作在前、整个字段的标签在后；不照抄 named()（那是给开始/结束输入的「标签在前」）。
-  // 字段标签没有 id（如外部 <label for> 未写 id）时，取起点输入关联的 label 的文字。
+  // 字段标签依次取：Field 的标签 → 调用方给起点输入的 aria-labelledby → 起点输入关联的 label（没有 id 时取文字）。
+  // 不按起点输入自己的命名取：它默认的 aria-label 是「开始日期」这类分端名称，不是整个范围的名称。
   const rangeOwner = () => startRef.current?.labels?.[0];
-  const clearName = useAdjunctName(messages.clearDateTimeRange, {}, wiring.label ?? rangeOwner);
-  const openName = useAdjunctName(messages.selectDateTimeRange, {}, wiring.label ?? rangeOwner);
+  const rangeLabel = wiring.label ?? (startRest["aria-labelledby"]?.trim() || undefined);
+  const clearName = useAdjunctName(messages.clearDateTimeRange, {}, rangeLabel ?? rangeOwner);
+  const openName = useAdjunctName(messages.selectDateTimeRange, {}, rangeLabel ?? rangeOwner);
 
   const handleEntry = (end: "from" | "to") => (event: InputEvents["change"]) => {
     (end === "from" ? onStartChange : onEndChange)?.(event);

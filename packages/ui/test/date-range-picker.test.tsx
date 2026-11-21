@@ -347,3 +347,9 @@ test("outside a Field the range buttons read the label associated with the start
   expect(screen.getByRole("button", { name: "选择日期范围 报告周期" })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "清除日期范围 报告周期" })).toBeInTheDocument();
 });
+
+test("adjunct buttons take the range's name from aria-labelledby given to the start input, not from the start input's own label", () => {
+  render(<><h3 id="stay">入住期间</h3><DateRangePicker inputProps={{ "aria-labelledby": "stay" }} defaultValue={{ from: new Date(2026, 0, 2), to: new Date(2026, 0, 5) }} /></>);
+  expect(screen.getByRole("button", { name: "选择日期范围 入住期间" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除日期范围 入住期间" })).toBeInTheDocument();
+});

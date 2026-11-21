@@ -324,3 +324,11 @@ describe("SidebarToggle name follows its nav", () => {
     expect(screen.getByRole("button", { name: "Workspace navigation" })).toBeInTheDocument();
   });
 });
+
+it("a toggle without children drops the navigation's name once that navigation unmounts", () => {
+  const tree = (withContent: boolean) => <Sidebar><SidebarToggle />{withContent && <SidebarContent aria-label="页面"><SidebarLink href="/a">A</SidebarLink></SidebarContent>}</Sidebar>;
+  const { rerender } = render(tree(true));
+  expect(screen.getByRole("button", { name: "页面" })).toBeInTheDocument();
+  rerender(tree(false));
+  expect(screen.queryByRole("button", { name: "页面" })).not.toBeInTheDocument();
+});

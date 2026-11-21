@@ -47,6 +47,17 @@ export function useExternalLabelledBy(inputRef: React.RefObject<HTMLInputElement
   }, [inputRef, uid]);
   // 每次渲染后核对一次：label 可能晚于输入框挂载，或改了 id。结果不变时不触发重渲染。
   React.useLayoutEffect(refresh);
+  // label 由别的组件渲染，重新挂载时这里补的 id 随旧节点一起丢掉，而输入框未必重新渲染。
+  // 监听这些 label 所在父节点的子节点变化，换了节点就立即补回 id，不等下一次聚焦。
+  React.useEffect(() => {
+    const input = inputRef.current;
+    if (!ids || !input || typeof MutationObserver === "undefined") return;
+    const parents = new Set(Array.from(input.labels ?? []).map(label => label.parentNode).filter((node): node is ParentNode & Node => node !== null));
+    if (parents.size === 0) return;
+    const observer = new MutationObserver(refresh);
+    parents.forEach(parent => observer.observe(parent, { childList: true }));
+    return () => observer.disconnect();
+  }, [ids, inputRef, refresh]);
   return [ids, refresh];
 }
 

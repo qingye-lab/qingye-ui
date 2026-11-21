@@ -67,6 +67,8 @@ function TransferList({ title, items, checked, onCheckedChange, query, onQueryCh
   const { messages } = useUILocale();
   const id = React.useId();
   const needle = query.trim().toLocaleLowerCase();
+  // 每项的 id 取它在完整列表里的位置（不随筛选变），一次建表，避免逐行 indexOf。
+  const order = React.useMemo(() => new Map(items.map((item, index) => [item, index])), [items]);
   const visible = needle === "" ? items : items.filter(item => item.label.toLocaleLowerCase().includes(needle));
   const visibleKeys = new Set(visible.map(item => item.value));
   const enabledKeys = visible.filter(item => !item.disabled).map(item => item.value);
@@ -92,8 +94,8 @@ function TransferList({ title, items, checked, onCheckedChange, query, onQueryCh
         {visible.length === 0
           ? <p className="m-0 text-support-mobile text-muted-foreground sm:text-support">{items.length === 0 ? messages.transferEmpty : messages.transferNoMatch}</p>
           : visible.map(item => <label key={item.value} data-slot="transfer-item" className={cn("flex min-w-0 cursor-pointer items-start gap-(--qy-field-gap)", (disabled || item.disabled) && "cursor-not-allowed opacity-disabled")}>
-            <Checkbox value={item.value} aria-labelledby={`${id}-i${items.indexOf(item)}`} disabled={disabled || item.disabled} />
-            <span id={`${id}-i${items.indexOf(item)}`} className="min-w-0 flex-1 text-label-mobile text-foreground wrap-break-word sm:text-label">{item.label}</span>
+            <Checkbox value={item.value} aria-labelledby={`${id}-i${order.get(item)}`} disabled={disabled || item.disabled} />
+            <span id={`${id}-i${order.get(item)}`} className="min-w-0 flex-1 text-label-mobile text-foreground wrap-break-word sm:text-label">{item.label}</span>
           </label>)}
       </div>
     </CheckboxGroup>

@@ -170,7 +170,8 @@ export function SidebarContent({ id, render, className, onFocusCapture, onBlurCa
   const context = useSidebar(); const { messages } = useUILocale(); const actualId = id ?? context.defaultContentId;
   React.useLayoutEffect(() => { context.setContentId(actualId); }, [actualId, context.setContentId]);
   const navLabelledBy = props["aria-labelledby"], navLabel = props["aria-label"], setContentName = context.setContentName;
-  React.useLayoutEffect(() => { setContentName({ labelledBy: navLabelledBy, label: navLabel }); }, [navLabelledBy, navLabel, setContentName]);
+  // 卸载时撤回登记：否则 Toggle 仍沿用已不存在的导航区名称。
+  React.useLayoutEffect(() => { setContentName({ labelledBy: navLabelledBy, label: navLabel }); return () => setContentName({}); }, [navLabelledBy, navLabel, setContentName]);
   // 回退到 Toggle 的条件是「焦点所在之处收起后不可达」，不是「侧栏收起」本身——
   // rail 仍渲染同一个条目（只是换成图标），焦点留在原地才是进退相承：改变布局不打断正在
   // 发生的位置。两种情况算不可达：(1) 焦点原本落在一个二级面板（SidebarSubContent）里，

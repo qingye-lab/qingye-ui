@@ -189,10 +189,12 @@ export function DateRangePicker(allProps: DateRangePickerProps) {
   });
   const named = (self: string, label: string) => wiring.label && self ? { "aria-label": label, "aria-labelledby": `${wiring.label} ${self}` } : { "aria-label": label };
   // 附属按钮：动作在前、整个字段的标签在后；不照抄 named()（那是给开始/结束输入的「标签在前」）。
-  // 字段标签没有 id（如外部 <label for> 未写 id）时，取起点输入关联的 label 的文字。
+  // 字段标签依次取：Field 的标签 → 调用方给起点输入的 aria-labelledby → 起点输入关联的 label（没有 id 时取文字）。
+  // 不按起点输入自己的命名取：它默认的 aria-label 是「开始日期」这类分端名称，不是整个范围的名称。
   const rangeOwner = () => startRef.current?.labels?.[0];
-  const clearName = useAdjunctName(messages.clearDateRange, {}, wiring.label ?? rangeOwner);
-  const openName = useAdjunctName(messages.selectDateRange, {}, wiring.label ?? rangeOwner);
+  const rangeLabel = wiring.label ?? (startRest["aria-labelledby"]?.trim() || undefined);
+  const clearName = useAdjunctName(messages.clearDateRange, {}, rangeLabel ?? rangeOwner);
+  const openName = useAdjunctName(messages.selectDateRange, {}, rangeLabel ?? rangeOwner);
 
   // 周期输入的采纳：失焦或回车时解析，空文本是清除这一端，解析不了就让文字留着（上面的 heldText 把它标为无法识别）。
   const commitText = (end: "from" | "to", raw: string, event: React.SyntheticEvent) => {

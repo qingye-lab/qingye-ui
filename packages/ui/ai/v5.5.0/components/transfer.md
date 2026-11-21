@@ -3,7 +3,7 @@
 Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/transfer
 Source: packages/ui/src/components/transfer.tsx
-Source SHA-256: f38e76778b41e156fd69123ec811322b98d9d1d717106af15b59cfd0ff07c4c6
+Source SHA-256: a8fb40e9cf2f0175303dded681f41fa34c4e549ce2fa5c1e77a8c11cfba2b52b
 
 把条目在「候选」与「已选」两个列表之间移动，值是已选一侧的键。
 

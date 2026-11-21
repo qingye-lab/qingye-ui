@@ -20569,7 +20569,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/data-table.tsx",
-        "sha256": "5201b000e6a6a16fc01f5c6a3a943bf6cc6b6e2d4e441d8072ee080e85aa970b",
+        "sha256": "02c5537f5b7059f3756aab2b5b3fb9d3405b7f7e5cd6f2508bb5e35fbd304395",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。虚拟化只改变当前行模型的渲染窗口，不改变全选与分页范围。",
@@ -21776,7 +21776,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-range-picker.tsx",
-        "sha256": "547901bf0e2fb9822258fd84c11109001569873d4d1a5020cc8a2a95bd9d2c7e",
+        "sha256": "0d0834aa70a325fc41b42045d1bc6db3d550265f91ac2c1276384c7099b5bb0c",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "只有完整且有序的 from/to 才是确认值。起止两个原生日期输入与弹层日历共用同一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid 并通过 onInvalid 交给应用说明，库不静默交换端点。日历里的选择与预设只写草稿，取消或 Escape 保留原确认值，应用才请求替换。",
@@ -22791,7 +22791,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-time-range-picker.tsx",
-        "sha256": "805cc6ee326e851685c577adde997f7071db6eff96e12a21ddd11fc50442d710",
+        "sha256": "ea0c19ac00afd1c2cb244948594c9dcb6c081e74fa647a7a66e90d74ca5d7594",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "值是 { from, to }，两端各是 DateTimePicker 的值（无时区的本地文本 YYYY-MM-DDTHH:mm[:ss[.SSS]]），而不是 DateRangePicker 的 Date：时间不能放进只含日期的 Date，也不会因此猜一个时区。只有完整且有序的 from/to 才是确认值；起止相同是有效的零长度范围。两个原生 datetime-local 输入共用一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid，起点输入带原生校验信息让表单提交被拦下，并通过 onInvalid 交给应用说明。弹层里是日历区间加两个时间输入，同一天时结束时刻早于开始时刻会在弹层里提示并不能应用；取消或 Escape 保留原确认值。",
@@ -51799,19 +51799,19 @@
                 "name": "count",
                 "optional": true,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:236"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
               },
               {
                 "name": "icon",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:236"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:236"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
               }
             ],
             "inheritedCount": 291,
@@ -51980,25 +51980,25 @@
                 "name": "active",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:238"
               },
               {
                 "name": "count",
                 "optional": true,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:236"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
               },
               {
                 "name": "icon",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:236"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:236"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
               }
             ],
             "inheritedCount": 289,
@@ -52021,7 +52021,7 @@
                 "name": "children",
                 "optional": false,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:303"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:304"
               }
             ],
             "inheritedCount": 281,
@@ -52060,7 +52060,7 @@
                 "name": "icon",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:302"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:303"
               }
             ],
             "inheritedCount": 289,
@@ -52242,17 +52242,17 @@
             {
               "part": "SidebarLink",
               "prop": "count",
-              "declaredAt": "packages/ui/src/components/sidebar.tsx:236"
+              "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
             },
             {
               "part": "SidebarLink",
               "prop": "max",
-              "declaredAt": "packages/ui/src/components/sidebar.tsx:236"
+              "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
             },
             {
               "part": "SidebarSub",
               "prop": "children",
-              "declaredAt": "packages/ui/src/components/sidebar.tsx:303"
+              "declaredAt": "packages/ui/src/components/sidebar.tsx:304"
             }
           ]
         }
@@ -52756,7 +52756,7 @@
         "contexts": [
           {
             "name": "GroupLabelContext",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:202",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:203",
             "defaultValue": "null",
             "withoutProvider": "nullable",
             "providedBy": [
@@ -52808,7 +52808,7 @@
           },
           {
             "name": "SidebarSubLabelContext",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:301",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:302",
             "defaultValue": "null",
             "withoutProvider": "nullable",
             "providedBy": [
@@ -52955,7 +52955,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/sidebar.tsx",
-        "sha256": "f0e221174a48efacb54ea6303c19cf9b31c9246c4f9a16fe40dd2df1430cf3f7",
+        "sha256": "3098b18a94f563faac4c8c907aa14400940981b3411c62438738b6d35d1e9039",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "收起是图标 rail，不是隐藏：导航与链接保持挂载，名称切到视觉隐藏（可访问名称不变），用 Tooltip 补足可见名称；二级子级展开态用内嵌面板，rail 态换成同一组内容的 Popover，开合记忆不因侧栏收起而改变。active 与路由由应用明确提供。",
@@ -66417,7 +66417,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/transfer.tsx",
-        "sha256": "f38e76778b41e156fd69123ec811322b98d9d1d717106af15b59cfd0ff07c4c6",
+        "sha256": "a8fb40e9cf2f0175303dded681f41fa34c4e549ce2fa5c1e77a8c11cfba2b52b",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "穿梭框解决的是「从一大批里挑出一小批并能回头调整」，所以两侧都是完整的列表，而不是一个下拉加一排标签。它的值只是右侧的键数组，勾选状态是临时的，不进入值。条目多时由应用先做筛选或分页，本组件不做虚拟滚动：固定高度的列表在几百项内足够，更大的数据量应换成 Combobox 或 Table 里的选择。",

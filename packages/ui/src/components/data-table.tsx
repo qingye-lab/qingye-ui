@@ -721,14 +721,16 @@ export function DataTablePattern<TData>({ data, columns, getRowId, mode = "clien
       return { ...previous, pagination: normalizePaginationValue({ page: next.pageIndex + 1, pageSize: next.pageSize }, totalCount) };
     }, "pagination"),
   });
-  // 内置分页的名称：调用方给的 pagination["aria-label"] 优先；否则「分页 + 表名」，同页两张表的两个分页地标才分得出。
+  // 内置分页的名称：调用方给的 pagination["aria-label"] 优先（含显式的 ""）；否则「分页 + 表名」，同页两张表的两个分页地标才分得出。
   // 表名来源依次为：caption（包一层带 id 的 span 供引用，ReactNode 也一样——引用取的是其中的文字）、tableProps 的 aria-labelledby、tableProps 的 aria-label；都没有时保持「分页」。
   // 根元素是无角色的 div，ARIA 不允许给它命名，它的 aria-label 不作为表名来源；表名写在 caption 或 tableProps 上。
   const paginationId = React.useId(); const captionId = React.useId();
   const hasCaption = caption !== undefined && caption !== null && caption !== "" && typeof caption !== "boolean";
-  const captionNode = hasCaption && pagination ? <span id={captionId}>{caption}</span> : caption;
+  // 记住包好的 caption：每次渲染新建元素会让 DataTable 以 caption 为依赖的虚拟化测量每次重跑。
+  const wrapCaption = hasCaption && Boolean(pagination);
+  const captionNode = React.useMemo(() => wrapCaption ? <span id={captionId}>{caption}</span> : caption, [wrapCaption, captionId, caption]);
   const tableLabelledBy = tableProps?.["aria-labelledby"]?.trim(), tableLabel = tableProps?.["aria-label"];
-  const paginationName: { id?: string; "aria-label"?: string; "aria-labelledby"?: string } = !pagination ? {} : pagination["aria-label"] ? { "aria-label": pagination["aria-label"] }
+  const paginationName: { id?: string; "aria-label"?: string; "aria-labelledby"?: string } = !pagination ? {} : pagination["aria-label"] !== undefined ? { "aria-label": pagination["aria-label"] }
     : hasCaption ? { id: paginationId, "aria-label": messages.pagination, "aria-labelledby": `${paginationId} ${captionId}` }
     : tableLabelledBy ? { id: paginationId, "aria-label": messages.pagination, "aria-labelledby": `${paginationId} ${tableLabelledBy}` }
     : tableLabel ? { "aria-label": `${messages.pagination} ${tableLabel}` } : {};

@@ -17,7 +17,7 @@ import * as React from "react";
  *   3. 调用处给的查找函数（函数 owner）在渲染后找到的字段元素，按它自己的命名来源取：
  *      aria-labelledby（去掉指向字段自己的 id）→ 关联的 <label>（有 id 就引用，没有就取文字；
  *      包住字段的 label 只取文字，引用它会把字段的值算进去）→ aria-label 的文字。
- *      取到的是文字时，名称直接写成「动作 文字」；文字不随标签后续改动实时更新，按钮下次渲染时再核对。
+ *      取到的是文字时，名称直接写成「动作 文字」；同时监听字段的命名属性与标签文字，变了就重算，不等按钮重新渲染。
  * 都没有时只读动作。调用方显式给附属按钮 aria-label 或 aria-labelledby 时一律以调用方为准，这里不追加。
  */
 
@@ -66,13 +66,30 @@ export function useAdjunctName(action: string, props: NameProps, owner?: Adjunct
   const id = props.id ?? uid;
   const lookup = !explicit && !fixed && typeof owner === "function" ? owner : undefined;
   const [found, setFound] = React.useState<Source | null>(null);
-  // 每次渲染后核对：字段与标签可能晚于按钮挂载，或改了命名。结果不变时不触发重渲染。
-  React.useLayoutEffect(() => {
+  // 查找并重算；返回找到的字段，供监听使用。lookup 多为每次渲染新建的箭头函数，经 ref 取最新的一份。
+  const sync = React.useRef<() => Element | null>(() => null);
+  sync.current = () => {
     const button = lookup && typeof document !== "undefined" ? document.getElementById(id) : null;
-    const field = button ? lookup!(button) : null;
+    const field = button ? lookup!(button) ?? null : null;
     const next = field ? ownerSource(field) : null;
     setFound(previous => sameSource(previous, next) ? previous : next);
-  });
+    return field;
+  };
+  // 每次渲染后核对：字段与标签可能晚于按钮挂载，或改了命名。结果不变时不触发重渲染。
+  React.useLayoutEffect(() => { sync.current(); });
+  // 名称是复制来的文字时，标签文字或字段的 aria-label 改了而按钮没重新渲染，名称会过期：监听这两处。
+  // 引用 id 的名称由浏览器实时计算，不需要监听。
+  const copied = Boolean(lookup && found && "text" in found);
+  React.useEffect(() => {
+    if (!copied || typeof MutationObserver === "undefined") return;
+    const field = sync.current();
+    if (!field) return;
+    const observer = new MutationObserver(() => { sync.current(); });
+    observer.observe(field, { attributes: true, attributeFilter: ["aria-label", "aria-labelledby", "id"] });
+    const label = field instanceof HTMLLabelElement ? field : (field as HTMLInputElement).labels?.[0];
+    if (label) observer.observe(label, { childList: true, characterData: true, subtree: true });
+    return () => observer.disconnect();
+  }, [copied, found]);
   if (explicit) return { ...(own !== undefined ? { "aria-label": own } : {}), ...(ownBy !== undefined ? { "aria-labelledby": ownBy } : {}) };
   const by = fixed || (lookup && found && "by" in found ? found.by : undefined);
   if (by) return { id, "aria-label": action, "aria-labelledby": `${id} ${by}` };
