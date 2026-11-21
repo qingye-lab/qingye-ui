@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "package": "@qingye_lab/ui",
+  "publicEntry": "src/main.tsx",
+  "styleEntry": "src/theme.css",
+  "theme": { "source": "ui.theme.json", "generated": "ui.theme.generated.css", "mode": "class" },
+  "scan": ["src"],
+  "compositions": [],
+  "tokenSources": [],
+  "adapters": [],
+  "diagnostics": { "preset": "personal", "mode": "report", "report": ".qingye/report.json" }
+}

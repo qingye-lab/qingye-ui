@@ -1,9 +1,9 @@
 # DateRangePicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 9ba2abc7c00e37716a489e1ef61f4ed8a5d9d2e353db9accee0fd37f4a61c98c
+Source SHA-256: 0d0834aa70a325fc41b42045d1bc6db3d550265f91ac2c1276384c7099b5bb0c
 
 Type or pick start and end dates; only a complete, ordered range is a confirmed value.
 
@@ -17,8 +17,9 @@ Only a complete, ordered from/to is a confirmed value. The two native date input
 - Read-only does not open the popup: the value is there, focusable and readable, but it cannot change.
 
 ## Use and ownership
-- Type or pick start and end dates; only a complete, ordered range is a confirmed value.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Choose a start and end date, such as a report period or check-in and check-out.
+- Avoid: Use DatePicker for a single date; DateTimeRangePicker when the range also carries times.
+- Avoid: Use TimeRangeField for start and end times without dates.
 - Library: Opening, the current range draft, in-between typing, and focus return.
 - Application: Complete confirmed ranges, permitted dates, preset values, the explanation when invalid, and submission outcomes.
 

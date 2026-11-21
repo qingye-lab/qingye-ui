@@ -1,9 +1,9 @@
 # 代码 CodeBlock
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
-Source SHA-256: 1217799cec61621af3b4b3e2351b19de2c3197655267d7fc87ada9b27b9890ae
+Source SHA-256: 9649e32b6c3151ff361e2fc7c986031b6b61040d1a75bdaa3bccdbc65974bbb9
 
 文本原样展示、可选标题栏与真实复制结果。
 

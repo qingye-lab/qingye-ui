@@ -1,9 +1,9 @@
 # DataTable
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 150b236250585679cc9891aef9aec40ab46b80dbbc0516f08b0e48dca47f3580
+Source SHA-256: 02c5537f5b7059f3756aab2b5b3fb9d3405b7f7e5cd6f2508bb5e35fbd304395
 
 Comparison, sorting, scoped selection and optional virtualization for a caller-owned collection.
 
@@ -493,7 +493,7 @@ export default function Demo() {
     { accessorKey: "synced", header: english ? "Last synchronized" : "最近同步", meta: { fit: true } },
     { accessorKey: "owner", header: english ? "Owner" : "负责人", minSize: 96, maxSize: 160, meta: { grow: 1 } },
     { accessorKey: "note", header: english ? "Description" : "描述", minSize: 200, meta: { grow: 3 } },
-    { id: "actions", header: () => <span className="sr-only">{english ? "Actions" : "操作"}</span>, meta: { fit: true }, cell: () => <><Button variant="quiet" size="sm">{english ? "Edit" : "编辑"}</Button><Button variant="quiet" size="sm">{english ? "Delete" : "删除"}</Button></> },
+    { id: "actions", header: () => <span className="sr-only">{english ? "Actions" : "操作"}</span>, meta: { fit: true }, cell: ({ row }) => <><Button variant="quiet" size="sm" aria-label={`${english ? "Edit" : "编辑"} ${row.original.name}`}>{english ? "Edit" : "编辑"}</Button><Button variant="quiet" size="sm" aria-label={`${english ? "Delete" : "删除"} ${row.original.name}`}>{english ? "Delete" : "删除"}</Button></> },
   ];
   const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), autoResetAll: false });
   return <DataTable table={table} caption={english ? "Local collection · 3 entries" : "本地集合 · 3 项"} emptyContent={english ? "No local entries" : "本地集合没有条目"} />;

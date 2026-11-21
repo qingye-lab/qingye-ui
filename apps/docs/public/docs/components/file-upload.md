@@ -1,6 +1,6 @@
 # 文件输入 FileUpload
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/file-upload
 Source: packages/ui/src/components/file-upload.tsx
 Source SHA-256: 9c5085b3e76d1365416ee5275b4396e1f81740f92e4e1d528dd4c9e1a42e67c9
@@ -21,8 +21,9 @@ Source SHA-256: 9c5085b3e76d1365416ee5275b4396e1f81740f92e4e1d528dd4c9e1a42e67c9
 - 选择入口只显示操作名称，原生 chooser 清空用于重选；已接受文件事实以独立集合呈现。装饰 span 不创建第二交互入口。
 
 ## Use and ownership
-- 选择或拖入本地文件，保留已接受集合与真实拒绝原因。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
+- 在表单里选择或拖入文件，需要保留已接受的集合、列出并可移除。
+- Avoid: 点一下选完就交给应用、不保留选择用 FileTrigger。
+- Avoid: 上传进度与结果由应用呈现，组件不发请求；上传状态不要用它代替。
 - Library: 选择、拖放、非受控本地集合、真实拒绝
 - Application: 受控集合、接受规则、上传状态/进度、恢复与结果
 

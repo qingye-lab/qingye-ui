@@ -77,11 +77,28 @@ export function PageHeader({
   );
 }
 
+/*
+ * A heading's permalink is an adjunct of the heading: it is named "action + heading" like the library's adjunct
+ * buttons, so it never shares a name with a link to a page of the same title (the components overview links
+ * "Layout" the component beside the "Layout" category heading). The heading keeps its own name through
+ * aria-labelledby on the text, otherwise the link's label would become the heading's name. The link names itself
+ * by aria-labelledby on its own aria-label (the action) and the heading text, so the name is present in the first
+ * render and follows the text without reading the DOM.
+ */
 function Anchor({ id, children }: { id: string; children: ReactNode }) {
   const onHashClick = useHashLink();
+  const en = useDocsLocale() === "en";
   return (
-    <a className="group/anchor focus-ring inline-flex max-w-full items-baseline gap-(--qy-space-2) rounded-sm" data-slot="docs-heading-anchor" href={`#${id}`} onClick={(event) => onHashClick(event, id)}>
-      <span className="min-w-0 [overflow-wrap:anywhere]">{children}</span>
+    <a
+      aria-label={en ? "Link to section" : "本节链接"}
+      aria-labelledby={`${id}-anchor ${id}-text`}
+      className="group/anchor focus-ring inline-flex max-w-full items-baseline gap-(--qy-space-2) rounded-sm"
+      data-slot="docs-heading-anchor"
+      href={`#${id}`}
+      id={`${id}-anchor`}
+      onClick={(event) => onHashClick(event, id)}
+    >
+      <span className="min-w-0 [overflow-wrap:anywhere]" id={`${id}-text`}>{children}</span>
       <IconLink
         aria-hidden="true"
         className="size-(--qy-control-sm-icon) shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover/anchor:opacity-100 group-focus-visible/anchor:opacity-100"
@@ -93,6 +110,7 @@ function Anchor({ id, children }: { id: string; children: ReactNode }) {
 export function H2({ id, children, className }: { id: string; children: ReactNode; className?: string }) {
   return (
     <h2
+      aria-labelledby={`${id}-text`}
       className={cn("docs-section-heading", className)}
       data-toc="2"
       id={id}
@@ -105,6 +123,7 @@ export function H2({ id, children, className }: { id: string; children: ReactNod
 export function H3({ id, children, className }: { id: string; children: ReactNode; className?: string }) {
   return (
     <h3
+      aria-labelledby={`${id}-text`}
       className={cn("docs-section-heading", className)}
       data-toc="3"
       id={id}

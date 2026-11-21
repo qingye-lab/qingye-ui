@@ -1,6 +1,6 @@
 # 跳转链接 SkipLink
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/skip-link
 Source: packages/ui/src/components/skip-link.tsx
 Source SHA-256: 4333b6b70cefd7211580107717851060f8942bbe39dc19982442c7da5363f79e
@@ -74,7 +74,7 @@ export default function Demo() {
   return <Stack gap="panel">
     <SkipLink href="#skip-demo-main" className="static opacity-100 pointer-events-auto self-start">跳到正文</SkipLink>
     <nav aria-label="示例导航"><Stack gap="pair"><Link href="#a">首页</Link><Link href="#b">文档</Link><Link href="#c">更新记录</Link></Stack></nav>
-    <main id="skip-demo-main" className="outline-none focus-visible:ring-2"><Text>正文从这里开始。</Text></main>
+    <div id="skip-demo-main" className="outline-none focus-visible:ring-2"><Text>正文从这里开始。</Text></div>
   </Stack>;
 }
 ```

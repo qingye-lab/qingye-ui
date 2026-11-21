@@ -1,9 +1,9 @@
 # DateTimePicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: ffa594e825dabe5935b253a86f90638a5b73fac7089de3996641e0af6d7461ca
+Source SHA-256: 2563a486ab93477cb5bfc927d99d67b598829707973d52d9908c94a4d6157e8b
 
 Edit complete local wall-clock date/time, or apply calendar and time drafts.
 
@@ -16,8 +16,9 @@ value is unzoned YYYY-MM-DDTHH:mm[:ss[.SSS]] wall-clock text, not a UTC instant.
 - The browser's display may vary by environment; submission remains unzoned local text.
 
 ## Use and ownership
-- Edit complete local wall-clock date/time, or apply calendar and time drafts.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Choose one wall-clock date and time without a time zone, such as a meeting start or a scheduled release.
+- Avoid: Use DatePicker for a date only and TimeField for a time only.
+- Avoid: Use DateTimeRangePicker when both ends need a time; the application handles UTC instants and time zones.
 - Library: Opening, date/time drafts, keyboard, and focus.
 - Application: Confirmed wall-clock text, zone/DST rules, constraints, and submission outcomes.
 

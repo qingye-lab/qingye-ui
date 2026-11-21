@@ -3,7 +3,7 @@
   "name": "Qingye UI",
   "nameZh": "青野 UI",
   "package": "@qingye_lab/ui",
-  "version": "5.4.0",
+  "version": "5.5.0",
   "generatedBy": "scripts/gen-catalog.mjs",
   "scope": "Current entry points, source declarations and public guidance; browser and backend behavior are not inferred.",
   "components": [
@@ -2025,7 +2025,8 @@
         "需要只能确认候选中的一个值时用 Combobox。",
         "空集合不代表错误或服务失败；空提示由调用方根据真实情况提供；省略 children 时用内置的「没有可选项」。",
         "caller 定位 style 最后合并；颜色、圆角、高亮与焦点读取现有主题角色。",
-        "命令面板用 Command。"
+        "命令面板用 Command。",
+        "命名用 Field + FieldLabel，或用 Label 的 htmlFor 指向输入框 id，候选面打开时名称保留。不要用 label 包住整个控件、把文字放进子元素：打开时候选面以外的内容对读屏隐藏，这样写的名称会消失。"
       ],
       "keywords": [
         "autocomplete",
@@ -2125,14 +2126,14 @@
                 "name": "items",
                 "optional": true,
                 "type": "readonly Value[] | readonly AutocompleteItemGroup<Value>[] | undefined",
-                "declaredAt": "packages/ui/src/components/autocomplete.tsx:24"
+                "declaredAt": "packages/ui/src/components/autocomplete.tsx:27"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "候选正在取回：与 ComboboxSelect 的 `loading` 同名同义，同一套候选状态。\n输入框末端出现忙碌标记（与 Button、InputGroup 同一个），输入与列表写 `aria-busy`；\n「正在加载」由 AutocompleteStatus 播报（一件事实一个播报者），此时 AutocompleteEmpty 不出声——\n等待与「没有结果」是两件事，应用此刻并不知道后者。输入始终可用，等待不禁用输入。",
-                "declaredAt": "packages/ui/src/components/autocomplete.tsx:31"
+                "declaredAt": "packages/ui/src/components/autocomplete.tsx:34"
               }
             ],
             "inheritedCount": 32,
@@ -2299,13 +2300,13 @@
                 "name": "container",
                 "optional": true,
                 "type": "AutocompletePrimitive.Portal.Props[\"container\"]",
-                "declaredAt": "packages/ui/src/components/autocomplete.tsx:65"
+                "declaredAt": "packages/ui/src/components/autocomplete.tsx:73"
               },
               {
                 "name": "positionerProps",
                 "optional": true,
                 "type": "AutocompletePrimitive.Positioner.Props",
-                "declaredAt": "packages/ui/src/components/autocomplete.tsx:65"
+                "declaredAt": "packages/ui/src/components/autocomplete.tsx:73"
               }
             ],
             "inheritedCount": 280,
@@ -2500,7 +2501,7 @@
           "owner": "autocomplete",
           "module": "@qingye_lab/ui/components/autocomplete",
           "propsType": "AutocompletePrimitive.Input.Props & React.RefAttributes<HTMLInputElement>",
-          "signature": "AutocompleteInput({ render, onChange, ...props }: AutocompletePrimitive.Input.Props & React.RefAttributes<HTMLInputElement>)",
+          "signature": "AutocompleteInput({ render, onChange, onFocus, ref, ...props }: AutocompletePrimitive.Input.Props & React.RefAttributes<HTMLInputElement>)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -2761,7 +2762,7 @@
           },
           {
             "name": "InControl",
-            "declaredAt": "packages/ui/src/components/autocomplete.tsx:19",
+            "declaredAt": "packages/ui/src/components/autocomplete.tsx:22",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2770,7 +2771,7 @@
           },
           {
             "name": "Loading",
-            "declaredAt": "packages/ui/src/components/autocomplete.tsx:20",
+            "declaredAt": "packages/ui/src/components/autocomplete.tsx:23",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2788,7 +2789,7 @@
           },
           {
             "name": "ReadOnly",
-            "declaredAt": "packages/ui/src/components/autocomplete.tsx:18",
+            "declaredAt": "packages/ui/src/components/autocomplete.tsx:21",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -2860,10 +2861,11 @@
           "进退相承"
         ],
         "whenToUse": [
-          "编辑自由文本，候选作为可接受的建议。"
+          "输入文字本身就是值，候选只是可接受的建议（搜索词、标签名、地址）。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "值必须来自候选用 Combobox（候选少且固定用 Select）。",
+          "执行命令或跳转用 Command；只是搜索框用 SearchInput。"
         ],
         "composition": [
           "Field + FieldLabel + Autocomplete / Input / actions / Popup / List / Item"
@@ -2885,7 +2887,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/autocomplete.tsx",
-        "sha256": "49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7",
+        "sha256": "b56390332369882f40dd618b614736dbecb995da1634da99f97332f6d7f1cf2c",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "输入文字本身就是值。移动候选高亮不改变文本；确认建议才请求替换，文本无需匹配候选也可提交。",
@@ -2899,7 +2901,8 @@
             "Use Combobox when a value must be confirmed from candidates.",
             "An empty set does not imply an error or service failure. Supply empty content from real facts; an empty AutocompleteEmpty uses the built-in \"No options\".",
             "Caller positioning style merges last; colors, corners, highlights, and focus use existing theme roles.",
-            "Use Command for a command palette."
+            "Use Command for a command palette.",
+            "Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears."
           ],
           "api": [
             {
@@ -3003,10 +3006,11 @@
               "Continuity through change （进退相承）"
             ],
             "whenToUse": [
-              "Edit free text with optional suggestions."
+              "The typed text is the value and candidates are only acceptable suggestions (search terms, tag names, addresses)."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use Combobox when the value must come from the candidates (Select when they are few and fixed).",
+              "Use Command to run actions or navigate; use SearchInput for a plain search box."
             ],
             "composition": [
               "Field + FieldLabel + Autocomplete / Input / actions / Popup / List / Item"
@@ -6136,8 +6140,8 @@
             "@qingye_lab/ui/components/button"
           ],
           "providers": [],
-          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\n\nexport const meta = { title: \"变体与色调\", titleEn: \"Variants and tones\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"flex w-full flex-col gap-(--qy-section-gap)\">\n      <div className=\"flex flex-wrap gap-(--qy-action-gap)\">\n        <Button>保存</Button>\n        <Button variant=\"bordered\">取消</Button>\n        <Button variant=\"quiet\">编辑</Button>\n      </div>\n      <div className=\"flex flex-wrap gap-(--qy-action-gap)\">\n        <Button tone=\"danger\">删除</Button>\n        <Button tone=\"danger\" variant=\"bordered\">删除</Button>\n        <Button tone=\"danger\" variant=\"quiet\">删除</Button>\n      </div>\n    </div>\n  );\n}\n",
-          "sha256": "9cb5ee1d0b2648cd232171e275256087e0a7ba7dc6f27aeb0733148125104125"
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\n\nexport const meta = { title: \"变体与色调\", titleEn: \"Variants and tones\", specimen: true };\n\nexport default function Demo() {\n  return (\n    <div className=\"flex w-full flex-col gap-(--qy-section-gap)\">\n      <div className=\"flex flex-wrap gap-(--qy-action-gap)\">\n        <Button>保存</Button>\n        <Button variant=\"bordered\">取消</Button>\n        <Button variant=\"quiet\">编辑</Button>\n      </div>\n      <div className=\"flex flex-wrap gap-(--qy-action-gap)\">\n        <Button tone=\"danger\">删除</Button>\n        <Button tone=\"danger\" variant=\"bordered\">删除</Button>\n        <Button tone=\"danger\" variant=\"quiet\">删除</Button>\n      </div>\n    </div>\n  );\n}\n",
+          "sha256": "c35cf2dfa7b771378fdaf8e5546a069e951abd394d6a988af357538d056c430d"
         },
         {
           "id": "sizes",
@@ -6159,8 +6163,8 @@
             "@tabler/icons-react"
           ],
           "providers": [],
-          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { IconPlus } from \"@tabler/icons-react\";\n\nexport const meta = { title: \"图标形态\", titleEn: \"Icon shape\" };\n\nexport default function Demo() {\n  return <>\n    {([\"xs\", \"sm\", \"md\", \"lg\", \"xl\"] as const).map((size) => (\n      <Button aria-label=\"新建设备\" key={size} shape=\"icon\" size={size} variant=\"quiet\">\n        <IconPlus aria-hidden=\"true\" />\n      </Button>\n    ))}\n  </>;\n}\n",
-          "sha256": "329ac24163e20c9a2821714bcae26af4d28a84a4979414add64f057e56d3416e"
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { IconPlus } from \"@tabler/icons-react\";\n\nexport const meta = { title: \"图标形态\", titleEn: \"Icon shape\", specimen: true };\n\nexport default function Demo() {\n  return <>\n    {([\"xs\", \"sm\", \"md\", \"lg\", \"xl\"] as const).map((size) => (\n      <Button aria-label=\"新建设备\" key={size} shape=\"icon\" size={size} variant=\"quiet\">\n        <IconPlus aria-hidden=\"true\" />\n      </Button>\n    ))}\n  </>;\n}\n",
+          "sha256": "dd0ffe15945c450e6673d715173aafb58ce689e7d8846cc099756d07ac3c09a7"
         },
         {
           "id": "with-icon",
@@ -6195,8 +6199,8 @@
             "@tabler/icons-react"
           ],
           "providers": [],
-          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { IconDeviceFloppy } from \"@tabler/icons-react\";\n\nexport const meta = { title: \"忙碌与禁用\", titleEn: \"Busy and disabled\" };\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full gap-(--qy-section-gap)\">\n      <div className=\"flex flex-wrap gap-(--qy-action-gap)\">\n        <Button>保存</Button>\n        <Button loading>保存</Button>\n        <Button disabled>保存</Button>\n      </div>\n      <div className=\"flex flex-wrap gap-(--qy-action-gap)\">\n        <Button aria-label=\"保存\" shape=\"icon\" variant=\"quiet\"><IconDeviceFloppy aria-hidden=\"true\" /></Button>\n        <Button aria-label=\"保存\" loading shape=\"icon\" variant=\"quiet\"><IconDeviceFloppy aria-hidden=\"true\" /></Button>\n        <Button aria-label=\"保存\" disabled shape=\"icon\" variant=\"quiet\"><IconDeviceFloppy aria-hidden=\"true\" /></Button>\n      </div>\n    </div>\n  );\n}\n",
-          "sha256": "40cfd9cc096fa13ca4d53c6445d8d2096f601d89201b9f0397d2243dd189521b"
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { IconDeviceFloppy } from \"@tabler/icons-react\";\n\nexport const meta = { title: \"忙碌与禁用\", titleEn: \"Busy and disabled\", specimen: true };\n\nexport default function Demo() {\n  return (\n    <div className=\"grid w-full gap-(--qy-section-gap)\">\n      <div className=\"flex flex-wrap gap-(--qy-action-gap)\">\n        <Button>保存</Button>\n        <Button loading>保存</Button>\n        <Button disabled>保存</Button>\n      </div>\n      <div className=\"flex flex-wrap gap-(--qy-action-gap)\">\n        <Button aria-label=\"保存\" shape=\"icon\" variant=\"quiet\"><IconDeviceFloppy aria-hidden=\"true\" /></Button>\n        <Button aria-label=\"保存\" loading shape=\"icon\" variant=\"quiet\"><IconDeviceFloppy aria-hidden=\"true\" /></Button>\n        <Button aria-label=\"保存\" disabled shape=\"icon\" variant=\"quiet\"><IconDeviceFloppy aria-hidden=\"true\" /></Button>\n      </div>\n    </div>\n  );\n}\n",
+          "sha256": "31ceaba846486b9f9a787615dcc0a63afcd761750fae54fef98b709f47bd07a5"
         },
         {
           "id": "boundary",
@@ -6222,6 +6226,19 @@
           "providers": [],
           "code": "import { Alert, AlertDescription, AlertTitle } from \"@qingye_lab/ui/components/alert\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport * as React from \"react\";\n\nexport const meta = { title: \"结果由提示组件表达\", titleEn: \"Results belong to feedback components\" };\n\n// 按钮只有忙碌一种状态；失败是另一件事实，写在就地说明里，按钮回到可用。\nexport default function Demo() {\n  const [phase, setPhase] = React.useState<\"idle\" | \"saving\" | \"failed\">(\"idle\");\n  const timer = React.useRef<number | undefined>(undefined);\n  React.useEffect(() => () => window.clearTimeout(timer.current), []);\n  const save = () => { setPhase(\"saving\"); timer.current = window.setTimeout(() => setPhase(\"failed\"), 900); };\n  return (\n    <Stack gap=\"fields\" className=\"w-full max-w-md\">\n      {phase === \"failed\" && (\n        <Alert tone=\"danger\">\n          <div className=\"grid gap-1\"><AlertTitle>保存未完成</AlertTitle><AlertDescription>连接中断，填写的内容仍在。</AlertDescription></div>\n        </Alert>\n      )}\n      <div><Button loading={phase === \"saving\"} onClick={save}>保存</Button></div>\n    </Stack>\n  );\n}\n",
           "sha256": "8fa8e1c0f743d7bdb35c6086bd622a7f58551df17c933122db788d025e9eb12b"
+        },
+        {
+          "id": "disabled-reason",
+          "title": "禁用原因写在按钮旁",
+          "source": "apps/docs/src/content/button/demos/09-disabled-reason.tsx",
+          "imports": [
+            "@qingye_lab/ui/components/button",
+            "@qingye_lab/ui/components/layout",
+            "react"
+          ],
+          "providers": [],
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport * as React from \"react\";\n\nexport const meta = { title: \"禁用原因写在按钮旁\", titleEn: \"The disabled reason sits beside the button\" };\n\n// 原因是页内文字，不放进提示：触屏上提示不会出现。aria-disabled 让按钮仍可聚焦，读屏经 aria-describedby 读到原因。\nexport default function Demo() {\n  const reason = React.useId();\n  return (\n    <Stack gap=\"field\" className=\"w-full max-w-md\">\n      <div><Button aria-disabled aria-describedby={reason}>发布</Button></div>\n      <p id={reason} className=\"m-0 text-support text-muted-foreground\">需要编辑权限，请联系空间管理员。</p>\n    </Stack>\n  );\n}\n",
+          "sha256": "87ca9989e95eed72aeb903f24bed120cb96749b7e074a11b6c65cfa19005fc25"
         }
       ],
       "design": {
@@ -6236,11 +6253,13 @@
         ],
         "avoid": [
           "导航用原生链接。",
-          "把结果写进按钮：忙碌结束不等于成功，失败与结果未知用 Alert、Toast 或 FieldError 表达。"
+          "把结果写进按钮：忙碌结束不等于成功，失败与结果未知用 Alert、Toast 或 FieldError 表达。",
+          "把禁用原因只放在 Tooltip 或 title 里：触屏上提示不会出现，原因就读不到。禁用条件要能被读到（design.md「判断可被机器读到的部分必须写下来」），原因写成按钮旁的页内文字。"
         ],
         "composition": [
           "有不可逆后果的动作：按钮只是入口，打开 AlertDialog（或 ConfirmAction），后果写在对话框的说明里；确认条件、权限与远端核实属于应用。",
-          "按下后保持的二态（已选中、已开启）用 Toggle；几个里选一个用 SegmentedControl，可多选用 ToggleGroup。Button 只触发动作，不持有选中。"
+          "按下后保持的二态（已选中、已开启）用 Toggle；几个里选一个用 SegmentedControl，可多选用 ToggleGroup。Button 只触发动作，不持有选中。",
+          "能先操作再纠错的（多数表单提交）不禁用按钮，提交后用 FieldError 或 Alert 就地说明。确需禁用时用 aria-disabled 保持按钮可聚焦，原因写在按钮旁的可见文字里，并用 aria-describedby 关联。"
         ],
         "stateOwner": {
           "library": [
@@ -6380,11 +6399,13 @@
             ],
             "avoid": [
               "Use native links for navigation.",
-              "Writing the result into the button: the end of busy does not establish success; express failure and unknown results with Alert, Toast or FieldError."
+              "Writing the result into the button: the end of busy does not establish success; express failure and unknown results with Alert, Toast or FieldError.",
+              "Putting the disabled reason only in a Tooltip or title: hints never appear on touch screens, so the reason cannot be read there. Disabled conditions must be readable (design.md: judgments machines can read must be written down); write the reason as visible text beside the button."
             ],
             "composition": [
               "For an irreversible action the button is only the entry: it opens AlertDialog (or ConfirmAction), whose description states the consequence. Applications own confirmation criteria, permissions, and remote verification.",
-              "A two-state fact that persists after pressing (selected, on) is a Toggle; one of several is SegmentedControl, several of several is ToggleGroup. Button triggers an action and holds no selection."
+              "A two-state fact that persists after pressing (selected, on) is a Toggle; one of several is SegmentedControl, several of several is ToggleGroup. Button triggers an action and holds no selection.",
+              "When users can act first and correct afterwards (most form submissions), keep the button enabled and explain in place with FieldError or Alert after submitting. When disabling is necessary, use aria-disabled so the button stays focusable, put the reason in visible text beside it, and link it with aria-describedby."
             ],
             "stateOwner": {
               "library": [
@@ -11536,7 +11557,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/code-block.tsx",
-        "sha256": "1217799cec61621af3b4b3e2351b19de2c3197655267d7fc87ada9b27b9890ae",
+        "sha256": "9649e32b6c3151ff361e2fc7c986031b6b61040d1a75bdaa3bccdbc65974bbb9",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "pre/code 保留空白、字符与完整宽度，库自己不做语法高亮：已高亮的标记由调用方经 children 给出，复制的仍是 code。代码面只用一条清墨容器线划出范围，底只比所坐之处深半个清染。复制复用 useCopyToClipboard；只有写入成功才显示已复制，失败保留手动复制内容。",
@@ -12784,7 +12805,8 @@
         "从当前查询到候选的过滤与空内容必须对应实际数据。",
         "Popup 的 caller style 最后合并；覆写层级可能改变默认顺序。",
         "候选浮层表面与高亮采用既有主题预设，焦点信号在盒内。",
-        "异步候选由应用持有请求、取消与失败；传 filter={null} 关闭内置过滤，用 ComboboxStatus 说明加载与结果数，用 ComboboxEmpty 说明没有结果（加载期间不要显示它）。ComboboxEmpty 省略 children 时用内置的「没有可选项」，与 Select 同一说法与画法。"
+        "异步候选由应用持有请求、取消与失败；传 filter={null} 关闭内置过滤，用 ComboboxStatus 说明加载与结果数，用 ComboboxEmpty 说明没有结果（加载期间不要显示它）。ComboboxEmpty 省略 children 时用内置的「没有可选项」，与 Select 同一说法与画法。",
+        "命名用 Field + FieldLabel，或用 Label 的 htmlFor 指向输入框 id，候选面打开时名称保留。不要用 label 包住整个控件、把文字放进子元素：打开时候选面以外的内容对读屏隐藏，这样写的名称会消失。"
       ],
       "keywords": [
         "combobox",
@@ -12947,7 +12969,7 @@
                 "optional": true,
                 "type": "string",
                 "doc": "移除动作的对象名；children 是纯文字时取 children。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:74"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:82"
               }
             ],
             "inheritedCount": 278,
@@ -13134,13 +13156,13 @@
                 "name": "container",
                 "optional": true,
                 "type": "ComboboxPrimitive.Portal.Props[\"container\"]",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:90"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:98"
               },
               {
                 "name": "positionerProps",
                 "optional": true,
                 "type": "ComboboxPrimitive.Positioner.Props",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:90"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:98"
               }
             ],
             "inheritedCount": 280,
@@ -13168,59 +13190,59 @@
                 "name": "clearable",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:153"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:161"
               },
               {
                 "name": "controlProps",
                 "optional": true,
                 "type": "InputGroupProps | undefined",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:155"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:163"
               },
               {
                 "name": "emptyContent",
                 "optional": false,
                 "type": "React.ReactNode",
                 "doc": "当前查询已完成且没有候选时的内容，由应用说明查询对象。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:150"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:158"
               },
               {
                 "name": "inputProps",
                 "optional": true,
                 "type": "React.ComponentProps<typeof ComboboxInput> | undefined",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:154"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:162"
               },
               {
                 "name": "items",
                 "optional": false,
                 "type": "readonly Value[]",
                 "doc": "平铺候选；分组、多选或自定义解剖使用 Combobox 的公开部件。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:145"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:153"
               },
               {
                 "name": "itemToStringLabel",
                 "optional": false,
                 "type": "(item: Value) => string",
                 "doc": "输入框、过滤与候选共用的可读名称；富候选另用 renderItem。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:147"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:155"
               },
               {
                 "name": "loading",
                 "optional": true,
                 "type": "boolean",
                 "doc": "只表达调用方的请求事实，不发请求、不推断失败。",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:152"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:160"
               },
               {
                 "name": "popupProps",
                 "optional": true,
                 "type": "ComboboxPopupProps | undefined",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:156"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:164"
               },
               {
                 "name": "renderItem",
                 "optional": true,
                 "type": "((item: Value) => React.ReactNode) | undefined",
-                "declaredAt": "packages/ui/src/components/combobox.tsx:148"
+                "declaredAt": "packages/ui/src/components/combobox.tsx:156"
               }
             ],
             "inheritedCount": 34,
@@ -13455,7 +13477,7 @@
           "owner": "combobox",
           "module": "@qingye_lab/ui/components/combobox",
           "propsType": "ComboboxPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>",
-          "signature": "ComboboxInput({ render, onChange, ...props }: ComboboxPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>)",
+          "signature": "ComboboxInput({ render, onChange, onFocus, ref, ...props }: ComboboxPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>)",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -13764,7 +13786,7 @@
           },
           {
             "name": "InControl",
-            "declaredAt": "packages/ui/src/components/combobox.tsx:19",
+            "declaredAt": "packages/ui/src/components/combobox.tsx:22",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13782,7 +13804,7 @@
           },
           {
             "name": "Multiple",
-            "declaredAt": "packages/ui/src/components/combobox.tsx:20",
+            "declaredAt": "packages/ui/src/components/combobox.tsx:23",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13791,7 +13813,7 @@
           },
           {
             "name": "ReadOnly",
-            "declaredAt": "packages/ui/src/components/combobox.tsx:18",
+            "declaredAt": "packages/ui/src/components/combobox.tsx:21",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -13889,10 +13911,11 @@
           "进退相承"
         ],
         "whenToUse": [
-          "筛选候选并确认一个或一组值，查询文字与选择事实分别持有。"
+          "候选很多，需要边输入边筛选，并确认其中一个或几个值。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "输入的文字本身就是值用 Autocomplete；候选少用 Select，要一眼看全用 CheckboxGroup。",
+          "值不来自候选用 TagInput；选命令用 Command。"
         ],
         "composition": [
           "Field + FieldLabel + Combobox / Input / actions / Popup / List / Item"
@@ -13914,7 +13937,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/combobox.tsx",
-        "sha256": "6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca",
+        "sha256": "81e5928924575a0502406debc3548efedf59479e2abb2130abc4636146650cf7",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是确认候选，inputValue 是过滤草稿。清空过滤文字继续保留候选，明确清除选择才请求空值；自由文本值用 Autocomplete。候选很多且要选几个时用 multiple；候选少而需要一眼看全用 CheckboxGroup，值不来自候选用 TagInput。",
@@ -13928,7 +13951,8 @@
             "Filtering and empty content must reflect the real candidate data.",
             "Popup caller style merges last; layer overrides can change the default order.",
             "Popup surfaces and highlights use existing theme presets with internal focus signals.",
-            "For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading). An empty ComboboxEmpty uses the built-in \"No options\", worded and drawn like Select."
+            "For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading). An empty ComboboxEmpty uses the built-in \"No options\", worded and drawn like Select.",
+            "Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears."
           ],
           "api": [
             {
@@ -14087,10 +14111,11 @@
               "Continuity through change （进退相承）"
             ],
             "whenToUse": [
-              "Filter candidates and confirm one value or a set, with query text separate from selection."
+              "Many candidates that need filtering as you type, confirming one or several of them."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use Autocomplete when the typed text itself is the value; Select for few candidates, CheckboxGroup to see them all at once.",
+              "Use TagInput when values do not come from candidates; Command to choose a command."
             ],
             "composition": [
               "Field + FieldLabel + Combobox / Input / actions / Popup / List / Item"
@@ -15019,10 +15044,11 @@
           "进退相承"
         ],
         "whenToUse": [
-          "输入框加一张常开的命令列表，用来跳到某处或执行某事。"
+          "跳到某处或执行某事的命令面板，条目是动作而不是要填的值。"
         ],
         "avoid": [
-          "不要把唯一的关键后果藏在临时浮层；直达与返回都需要成立。"
+          "选一个值填进表单用 Select 或 Combobox。",
+          "少量固定动作用 Menu；输入建议用 Autocomplete。"
         ],
         "composition": [
           "CommandDialog + CommandInput + CommandList + CommandGroup / CommandItem + CommandEmpty"
@@ -15207,10 +15233,11 @@
               "Continuity through change （进退相承）"
             ],
             "whenToUse": [
-              "A search box over an always-open list of commands, for jumping somewhere or doing something."
+              "A command palette for jumping somewhere or running something; items are actions, not values to fill in."
             ],
             "avoid": [
-              "Do not put the only explanation of a critical consequence in a temporary popup; support both direct access and return navigation."
+              "Use Select or Combobox to choose a value for a form.",
+              "Use Menu for a few fixed actions; Autocomplete for input suggestions."
             ],
             "composition": [
               "CommandDialog + CommandInput + CommandList + CommandGroup / CommandItem + CommandEmpty"
@@ -16073,8 +16100,8 @@
             "@qingye_lab/ui/components/composer"
           ],
           "providers": [],
-          "code": "import { Composer, ComposerInput, ComposerSubmit, ComposerToolbar, type ComposerSegment } from \"@qingye_lab/ui/components/composer\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"状态与行数\", titleEn: \"States and rows\" } satisfies DemoMeta;\n\nconst filled: ComposerSegment[] = [\n  { type: \"text\", text: \"请 \" },\n  { type: \"token\", trigger: \"@\", id: \"u1\", label: \"林青\" },\n  { type: \"text\", text: \" 看一下这份稿子。\" },\n];\n\nexport default function Demo() {\n  return <div className=\"grid w-full grid-cols-1 gap-(--qy-space-4) sm:grid-cols-2\">\n    <Composer defaultValue={filled} readOnly><ComposerInput aria-label=\"只读\" /></Composer>\n    <Composer defaultValue={filled} disabled><ComposerInput aria-label=\"禁用\" /><ComposerToolbar><ComposerSubmit /></ComposerToolbar></Composer>\n    <Composer><ComposerInput aria-label=\"三行起始，最多五行\" placeholder=\"三行起始，最多五行\" minRows={3} maxRows={5} /></Composer>\n    <Composer submitOn=\"mod-enter\"><ComposerInput aria-label=\"Ctrl/⌘+Enter 发送\" placeholder=\"Ctrl/⌘+Enter 发送\" /><ComposerToolbar><ComposerSubmit /></ComposerToolbar></Composer>\n  </div>;\n}\n",
-          "sha256": "c6a61027ca6d8311d6d0ebaa421d86050e1d405c960256d167fbc49aea1e8cc0"
+          "code": "import { Composer, ComposerInput, ComposerSubmit, ComposerToolbar, type ComposerSegment } from \"@qingye_lab/ui/components/composer\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"状态与行数\", titleEn: \"States and rows\", specimen: true } satisfies DemoMeta;\n\nconst filled: ComposerSegment[] = [\n  { type: \"text\", text: \"请 \" },\n  { type: \"token\", trigger: \"@\", id: \"u1\", label: \"林青\" },\n  { type: \"text\", text: \" 看一下这份稿子。\" },\n];\n\nexport default function Demo() {\n  return <div className=\"grid w-full grid-cols-1 gap-(--qy-space-4) sm:grid-cols-2\">\n    <Composer defaultValue={filled} readOnly><ComposerInput aria-label=\"只读\" /></Composer>\n    <Composer defaultValue={filled} disabled><ComposerInput aria-label=\"禁用\" /><ComposerToolbar><ComposerSubmit /></ComposerToolbar></Composer>\n    <Composer><ComposerInput aria-label=\"三行起始，最多五行\" placeholder=\"三行起始，最多五行\" minRows={3} maxRows={5} /></Composer>\n    <Composer submitOn=\"mod-enter\"><ComposerInput aria-label=\"Ctrl/⌘+Enter 发送\" placeholder=\"Ctrl/⌘+Enter 发送\" /><ComposerToolbar><ComposerSubmit /></ComposerToolbar></Composer>\n  </div>;\n}\n",
+          "sha256": "83100c7f9135c75dd0ef5982a766c462857f1897ec341eea8274fcaf141cbcca"
         }
       ],
       "design": {
@@ -17176,10 +17203,11 @@
           "相成相制"
         ],
         "whenToUse": [
-          "确认具体对象、版本与变更，内容改变后重新阅读。"
+          "需要确认具体对象、版本与变更，内容变化后须重新阅读的动作。"
         ],
         "avoid": [
-          "不要让样式替代语义；空值、未知与零分别表达。"
+          "只需回应一个简单决定、无需核对内容用 AlertDialog。",
+          "一般的编辑或表单用 Dialog；操作结果用 Alert 或 Toast 告知。"
         ],
         "composition": [
           "ConfirmAction + 明确 snapshot/文字 + 应用 loading/onConfirm；结果用 Alert 或 Toast 表达"
@@ -17313,10 +17341,11 @@
               "Complementary roles and safeguards （相成相制）"
             ],
             "whenToUse": [
-              "Confirm a specific object, version, and change; review again when content changes."
+              "An action that needs confirmation of a specific object, version and change, and must be reread when the content changes."
             ],
             "avoid": [
-              "Do not substitute styling for semantics; distinguish empty, unknown, and zero values."
+              "Use AlertDialog for a simple decision that needs no review of content.",
+              "Use Dialog for ordinary editing or forms; report the outcome with Alert or Toast."
             ],
             "composition": [
               "ConfirmAction + explicit snapshot/text + application loading/onConfirm; express the result with Alert or Toast."
@@ -18788,8 +18817,8 @@
             "@qingye_lab/ui/components/copy-button"
           ],
           "providers": [],
-          "code": "import { CopyButton } from \"@qingye_lab/ui/components/copy-button\";\nexport const meta = { title: \"复制文本\", titleEn: \"Copy text\" };\nexport default function Demo() {\n  return <div className=\"flex flex-wrap items-center gap-(--qy-action-gap)\"><code className=\"text-body\">Qingye</code><CopyButton value=\"Qingye\" /><CopyButton value=\"Qingye\" shape=\"icon\" /><CopyButton value=\"Qingye\" disabled /></div>;\n}\n",
-          "sha256": "158f9e2b6b691ad3da423cfe1a2202cec8ff9d923ea9608d19002e26c5971aff"
+          "code": "import { CopyButton } from \"@qingye_lab/ui/components/copy-button\";\nexport const meta = { title: \"复制文本\", titleEn: \"Copy text\", specimen: true };\nexport default function Demo() {\n  return <div className=\"flex flex-wrap items-center gap-(--qy-action-gap)\"><code className=\"text-body\">Qingye</code><CopyButton value=\"Qingye\" /><CopyButton value=\"Qingye\" shape=\"icon\" /><CopyButton value=\"Qingye\" disabled /></div>;\n}\n",
+          "sha256": "17ab1c3b684fe1e544396f002a855dd3d18a05e8baf217ce830fe1cf0a1722b9"
         },
         {
           "id": "sizes",
@@ -20501,8 +20530,8 @@
             "@tanstack/react-table"
           ],
           "providers": [],
-          "code": "import { getCoreRowModel, useReactTable, type ColumnDef } from \"@tanstack/react-table\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { DataTable } from \"@qingye_lab/ui/components/data-table\";\nimport { StatusDot, type StatusDotStatus } from \"@qingye_lab/ui/components/status-dot\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"按内容、按比例与上限\", titleEn: \"Content, proportion and limits\" } satisfies DemoMeta;\n\ntype Entry = { id: string; name: string; status: string; dot: StatusDotStatus; synced: string; owner: string; note: string };\nexport default function Demo() {\n  const english = useUILocale().code.startsWith(\"en\");\n  const data: Entry[] = english ? [\n    { id: \"sensors\", name: \"Connected devices\", status: \"Online\", dot: \"online\", synced: \"2026-11-03 14:20\", owner: \"Lin\", note: \"Workshop sensors and the remote sites that report through the gateway.\" },\n    { id: \"roles\", name: \"Permissions and roles\", status: \"Draft\", dot: \"neutral\", synced: \"2026-11-02 09:05\", owner: \"Zhou\", note: \"Who may view, edit and export each collection.\" },\n    { id: \"sync\", name: \"Sync and export\", status: \"Synchronizing\", dot: \"neutral\", synced: \"2026-10-30 22:41\", owner: \"Xu\", note: \"Nightly export to the shared archive.\" },\n  ] : [\n    { id: \"sensors\", name: \"接入设备\", status: \"在线\", dot: \"online\", synced: \"2026-11-03 14:20\", owner: \"林\", note: \"车间传感器，以及经网关上报的远端站点。\" },\n    { id: \"roles\", name: \"权限与角色\", status: \"草稿\", dot: \"neutral\", synced: \"2026-11-02 09:05\", owner: \"周\", note: \"谁可以查看、编辑和导出各个集合。\" },\n    { id: \"sync\", name: \"同步与导出\", status: \"同步中\", dot: \"neutral\", synced: \"2026-10-30 22:41\", owner: \"徐\", note: \"每晚导出到共享归档。\" },\n  ];\n  const columns: ColumnDef<Entry>[] = [\n    { accessorKey: \"name\", header: english ? \"Name\" : \"名称\", meta: { rowHeader: true, fit: true } },\n    { accessorKey: \"status\", header: english ? \"Status\" : \"状态\", meta: { fit: true }, cell: ({ row }) => <StatusDot status={row.original.dot} label={row.original.status} /> },\n    { accessorKey: \"synced\", header: english ? \"Last synchronized\" : \"最近同步\", meta: { fit: true } },\n    { accessorKey: \"owner\", header: english ? \"Owner\" : \"负责人\", minSize: 96, maxSize: 160, meta: { grow: 1 } },\n    { accessorKey: \"note\", header: english ? \"Description\" : \"描述\", minSize: 200, meta: { grow: 3 } },\n    { id: \"actions\", header: () => <span className=\"sr-only\">{english ? \"Actions\" : \"操作\"}</span>, meta: { fit: true }, cell: () => <><Button variant=\"quiet\" size=\"sm\">{english ? \"Edit\" : \"编辑\"}</Button><Button variant=\"quiet\" size=\"sm\">{english ? \"Delete\" : \"删除\"}</Button></> },\n  ];\n  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), autoResetAll: false });\n  return <DataTable table={table} caption={english ? \"Local collection · 3 entries\" : \"本地集合 · 3 项\"} emptyContent={english ? \"No local entries\" : \"本地集合没有条目\"} />;\n}\n",
-          "sha256": "774e66516bb7400c36d6df66ceeb895295c8dbd42a66f6a5a9420f9981e98c86"
+          "code": "import { getCoreRowModel, useReactTable, type ColumnDef } from \"@tanstack/react-table\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { DataTable } from \"@qingye_lab/ui/components/data-table\";\nimport { StatusDot, type StatusDotStatus } from \"@qingye_lab/ui/components/status-dot\";\nimport { useUILocale } from \"@qingye_lab/ui/locale\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"按内容、按比例与上限\", titleEn: \"Content, proportion and limits\" } satisfies DemoMeta;\n\ntype Entry = { id: string; name: string; status: string; dot: StatusDotStatus; synced: string; owner: string; note: string };\nexport default function Demo() {\n  const english = useUILocale().code.startsWith(\"en\");\n  const data: Entry[] = english ? [\n    { id: \"sensors\", name: \"Connected devices\", status: \"Online\", dot: \"online\", synced: \"2026-11-03 14:20\", owner: \"Lin\", note: \"Workshop sensors and the remote sites that report through the gateway.\" },\n    { id: \"roles\", name: \"Permissions and roles\", status: \"Draft\", dot: \"neutral\", synced: \"2026-11-02 09:05\", owner: \"Zhou\", note: \"Who may view, edit and export each collection.\" },\n    { id: \"sync\", name: \"Sync and export\", status: \"Synchronizing\", dot: \"neutral\", synced: \"2026-10-30 22:41\", owner: \"Xu\", note: \"Nightly export to the shared archive.\" },\n  ] : [\n    { id: \"sensors\", name: \"接入设备\", status: \"在线\", dot: \"online\", synced: \"2026-11-03 14:20\", owner: \"林\", note: \"车间传感器，以及经网关上报的远端站点。\" },\n    { id: \"roles\", name: \"权限与角色\", status: \"草稿\", dot: \"neutral\", synced: \"2026-11-02 09:05\", owner: \"周\", note: \"谁可以查看、编辑和导出各个集合。\" },\n    { id: \"sync\", name: \"同步与导出\", status: \"同步中\", dot: \"neutral\", synced: \"2026-10-30 22:41\", owner: \"徐\", note: \"每晚导出到共享归档。\" },\n  ];\n  const columns: ColumnDef<Entry>[] = [\n    { accessorKey: \"name\", header: english ? \"Name\" : \"名称\", meta: { rowHeader: true, fit: true } },\n    { accessorKey: \"status\", header: english ? \"Status\" : \"状态\", meta: { fit: true }, cell: ({ row }) => <StatusDot status={row.original.dot} label={row.original.status} /> },\n    { accessorKey: \"synced\", header: english ? \"Last synchronized\" : \"最近同步\", meta: { fit: true } },\n    { accessorKey: \"owner\", header: english ? \"Owner\" : \"负责人\", minSize: 96, maxSize: 160, meta: { grow: 1 } },\n    { accessorKey: \"note\", header: english ? \"Description\" : \"描述\", minSize: 200, meta: { grow: 3 } },\n    { id: \"actions\", header: () => <span className=\"sr-only\">{english ? \"Actions\" : \"操作\"}</span>, meta: { fit: true }, cell: ({ row }) => <><Button variant=\"quiet\" size=\"sm\" aria-label={`${english ? \"Edit\" : \"编辑\"} ${row.original.name}`}>{english ? \"Edit\" : \"编辑\"}</Button><Button variant=\"quiet\" size=\"sm\" aria-label={`${english ? \"Delete\" : \"删除\"} ${row.original.name}`}>{english ? \"Delete\" : \"删除\"}</Button></> },\n  ];\n  const table = useReactTable({ data, columns, getRowId: row => row.id, getCoreRowModel: getCoreRowModel(), autoResetAll: false });\n  return <DataTable table={table} caption={english ? \"Local collection · 3 entries\" : \"本地集合 · 3 项\"} emptyContent={english ? \"No local entries\" : \"本地集合没有条目\"} />;\n}\n",
+          "sha256": "9a9e924d70220fed9f7557576e798beb4eb6c6666a33c9b969027c5298e0166b"
         }
       ],
       "design": {
@@ -20540,7 +20569,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/data-table.tsx",
-        "sha256": "150b236250585679cc9891aef9aec40ab46b80dbbc0516f08b0e48dca47f3580",
+        "sha256": "02c5537f5b7059f3756aab2b5b3fb9d3405b7f7e5cd6f2508bb5e35fbd304395",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "常用集合用 DataTablePattern 配置数据、列与稳定 ID；高级 TanStack 组合继续使用 DataTable。服务端模式不排序或切片传入页；完整跨页选择保存在 rowSelection ID 映射中。虚拟化只改变当前行模型的渲染窗口，不改变全选与分页范围。",
@@ -20879,77 +20908,77 @@
                 "name": "calendarProps",
                 "optional": true,
                 "type": "Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\" | \"granularity\">",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:41"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:42"
               },
               {
                 "name": "defaultValue",
                 "optional": true,
                 "type": "Date | undefined",
                 "doc": "非受控的初值，原生表单 reset 会回到它。",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:25"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:26"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:39"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:40"
               },
               {
                 "name": "form",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:38"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:39"
               },
               {
                 "name": "granularity",
                 "optional": true,
                 "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
                 "doc": "选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`，规范为该周期的起点（周：区域的周起始日；月、季、年：当月 / 季 / 年的第一天）；\n输入框改为文本，按区域的格式显示与解析（如「2026 年第 44 周」「2026 年 11 月」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n提交的 `name` 仍是周期起点的 ISO 日期。",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:37"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:38"
               },
               {
                 "name": "inputProps",
                 "optional": true,
                 "type": "Omit<InputProps, \"value\" | \"defaultValue\" | \"type\" | \"size\" | \"name\" | \"form\" | \"disabled\" | \"readOnly\" | \"onValueChange\">",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:40"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:41"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "Date | undefined",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:31"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:32"
               },
               {
                 "name": "min",
                 "optional": true,
                 "type": "Date | undefined",
                 "doc": "可选的最早 / 最晚日期，一处声明同时约束原生输入（min / max 属性）与日历（禁用范围与可翻到的月份）。\n与 `inputProps.min/max`、`calendarProps.disabled/startMonth/endMonth` 并存，同时给出时取交集。",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:31"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:32"
               },
               {
                 "name": "name",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:38"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:39"
               },
               {
                 "name": "onValueChange",
                 "optional": true,
                 "type": "((value: Date | undefined, event: React.SyntheticEvent) => void) | undefined",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:26"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:27"
               },
               {
                 "name": "readOnly",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:39"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:40"
               },
               {
                 "name": "value",
                 "optional": true,
                 "type": "Date | undefined",
                 "doc": "受控日期；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。",
-                "declaredAt": "packages/ui/src/components/date-picker.tsx:23"
+                "declaredAt": "packages/ui/src/components/date-picker.tsx:24"
               }
             ],
             "inheritedCount": 278,
@@ -21128,10 +21157,11 @@
           "进退相承"
         ],
         "whenToUse": [
-          "编辑一个当地日期，或展开日历选择。"
+          "选一个日期，可键入，也可展开日历。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "起止两个日期用 DateRangePicker；日期加时刻用 DateTimePicker。",
+          "只填时刻用 TimeField；页内常驻的日历用 Calendar。"
         ],
         "composition": [
           "Field + FieldLabel + DatePicker + FieldDescription / FieldError"
@@ -21153,7 +21183,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-picker.tsx",
-        "sha256": "2874fbc00dcb9d6f3ecdf9e421097e47d03d9ff810447d8a2d744435d3ccba60",
+        "sha256": "7cb05d8df7e219e97b2e27a8c8ba4953ffebad3e5e4e0de66d143cdcc3b2dcdd",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是调用方持有的当地 Date。输入和日历选择只请求变更；清除请求 undefined，Escape 关闭日历并保留已接受值。",
@@ -21253,10 +21283,11 @@
               "Continuity through change （进退相承）"
             ],
             "whenToUse": [
-              "Edit one local date or choose it from a calendar."
+              "Choose a single date, by typing or from a calendar."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use DateRangePicker for a start and end date; DateTimePicker for a date with a time.",
+              "Use TimeField for a time only; Calendar for a calendar kept on the page."
             ],
             "composition": [
               "Field + FieldLabel + DatePicker + FieldDescription / FieldError"
@@ -21390,100 +21421,100 @@
                 "name": "calendarProps",
                 "optional": true,
                 "type": "Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\" | \"granularity\"> & { min?: number; max?: number; excludeDisabled?: boolean }",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:61"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:62"
               },
               {
                 "name": "defaultValue",
                 "optional": true,
                 "type": "DateRangeValue | undefined",
                 "doc": "非受控的初值，原生表单 reset 会回到它。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:37"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:38"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:56"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:57"
               },
               {
                 "name": "endInputProps",
                 "optional": true,
                 "type": "NativeInputProps",
                 "doc": "终点日期输入。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:60"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:61"
               },
               {
                 "name": "form",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:56"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:57"
               },
               {
                 "name": "granularity",
                 "optional": true,
                 "type": "\"day\" | \"week\" | \"month\" | \"quarter\" | \"year\"",
                 "doc": "选择的粒度，默认 `\"day\"`。非 `\"day\"` 时值仍是 `Date`：`from` 是首个周期的起点，`to` 是末个周期的**最后一天**（传入的非边界日期会被规范到这两个日子）；\n两个输入改为文本，按区域的格式显示与解析（如「2026 年第 44 周」），键入在失焦或回车时才采纳；`min` / `max` 与周期有交集即可选。\n此时 `calendarProps.min` / `max`（天数限制）按规范后的整段天数计算，`excludeDisabled` 按周期判断（范围不得跨过整个被禁用的周期）；不提供多选；`presets` 的范围同样被规范到周期边界。提交的 `name.from` / `name.to` 是这两个 ISO 日期。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:53"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:54"
               },
               {
                 "name": "inputProps",
                 "optional": true,
                 "type": "NativeInputProps",
                 "doc": "起点日期输入（也是 Field 标签指向的输入）。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:58"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:59"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "Date | undefined",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:47"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:48"
               },
               {
                 "name": "min",
                 "optional": true,
                 "type": "Date | undefined",
                 "doc": "可选的最早 / 最晚日期，一处声明同时约束两个原生输入与日历（同 DatePicker）。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:47"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:48"
               },
               {
                 "name": "name",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:56"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:57"
               },
               {
                 "name": "onInvalid",
                 "optional": true,
                 "type": "((draft: DateRangeDraft, reason: DateRangeInvalidReason) => void) | undefined",
                 "doc": "键入或选择得出的草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`）：键入是逐段的，\n填第二个日期之前只有一端、改终点时暂时早于起点，都是正常的中间状态。草稿变成可提交时，调用方会收到 `onValueChange`。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:45"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:46"
               },
               {
                 "name": "onValueChange",
                 "optional": true,
                 "type": "((value: DateRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined",
                 "doc": "只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:39"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:40"
               },
               {
                 "name": "presets",
                 "optional": true,
                 "type": "readonly DateRangePreset[] | undefined",
                 "doc": "常用范围，显示在弹层里日历旁；点击只写入草稿，仍须「应用」。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:55"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:56"
               },
               {
                 "name": "readOnly",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:56"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:57"
               },
               {
                 "name": "value",
                 "optional": true,
                 "type": "DateRangeValue | undefined",
                 "doc": "受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。",
-                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:35"
+                "declaredAt": "packages/ui/src/components/date-range-picker.tsx:36"
               }
             ],
             "inheritedCount": 277,
@@ -21719,10 +21750,11 @@
           "相成相制"
         ],
         "whenToUse": [
-          "键入或在日历中选择起止日期，完整且有序时才是确认值。"
+          "选起止两个日期，如报表区间、入住与退房。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "单个日期用 DatePicker；起止还要带时刻用 DateTimeRangePicker。",
+          "只有起止时刻没有日期用 TimeRangeField。"
         ],
         "composition": [
           "Field + FieldLabel + DateRangePicker + FieldDescription / FieldError"
@@ -21744,7 +21776,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-range-picker.tsx",
-        "sha256": "9ba2abc7c00e37716a489e1ef61f4ed8a5d9d2e353db9accee0fd37f4a61c98c",
+        "sha256": "0d0834aa70a325fc41b42045d1bc6db3d550265f91ac2c1276384c7099b5bb0c",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "只有完整且有序的 from/to 才是确认值。起止两个原生日期输入与弹层日历共用同一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid 并通过 onInvalid 交给应用说明，库不静默交换端点。日历里的选择与预设只写草稿，取消或 Escape 保留原确认值，应用才请求替换。",
@@ -21855,10 +21887,11 @@
               "Complementary roles and safeguards （相成相制）"
             ],
             "whenToUse": [
-              "Type or pick start and end dates; only a complete, ordered range is a confirmed value."
+              "Choose a start and end date, such as a report period or check-in and check-out."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use DatePicker for a single date; DateTimeRangePicker when the range also carries times.",
+              "Use TimeRangeField for start and end times without dates."
             ],
             "composition": [
               "Field + FieldLabel + DateRangePicker + FieldDescription / FieldError"
@@ -21971,70 +22004,70 @@
                 "name": "calendarProps",
                 "optional": true,
                 "type": "Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:33"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:34"
               },
               {
                 "name": "defaultValue",
                 "optional": true,
                 "type": "string | undefined",
                 "doc": "非受控的初值（同样的无时区文本），原生表单 reset 会回到它。",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:24"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:25"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:31"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:32"
               },
               {
                 "name": "form",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:31"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:32"
               },
               {
                 "name": "inputProps",
                 "optional": true,
                 "type": "Omit<InputProps, \"value\" | \"defaultValue\" | \"type\" | \"size\" | \"name\" | \"form\" | \"disabled\" | \"readOnly\" | \"onValueChange\">",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:32"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:33"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:30"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:31"
               },
               {
                 "name": "min",
                 "optional": true,
                 "type": "string | undefined",
                 "doc": "可选的最早 / 最晚时刻（同样的无时区文本），一处声明同时约束原生输入、日历的禁用日期、\n弹层里时间输入的边界日，并使超出范围的草稿不能应用。与 `inputProps.min/max`、`calendarProps.disabled` 并存，同时给出时取交集。",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:30"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:31"
               },
               {
                 "name": "name",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:31"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:32"
               },
               {
                 "name": "onValueChange",
                 "optional": true,
                 "type": "((value: string | undefined, event: React.SyntheticEvent) => void) | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:25"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:26"
               },
               {
                 "name": "readOnly",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:31"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:32"
               },
               {
                 "name": "value",
                 "optional": true,
                 "type": "string | undefined",
                 "doc": "Local wall-clock text, YYYY-MM-DDTHH:mm[:ss[.SSS]]; no zone or instant is inferred. **传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。",
-                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:22"
+                "declaredAt": "packages/ui/src/components/date-time-picker.tsx:23"
               }
             ],
             "inheritedCount": 278,
@@ -22200,10 +22233,11 @@
           "相成相制"
         ],
         "whenToUse": [
-          "编辑完整的当地墙上日期与时间，或应用日历与时间草稿。"
+          "选一个带时刻的无时区墙上时间，如会议开始、发布计划。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "只要日期用 DatePicker，只要时刻用 TimeField。",
+          "起止两端都要时刻用 DateTimeRangePicker；需要 UTC 瞬间或时区由应用另行处理。"
         ],
         "composition": [
           "Field + FieldLabel + DateTimePicker + FieldDescription / FieldError"
@@ -22225,7 +22259,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-time-picker.tsx",
-        "sha256": "ffa594e825dabe5935b253a86f90638a5b73fac7089de3996641e0af6d7461ca",
+        "sha256": "2563a486ab93477cb5bfc927d99d67b598829707973d52d9908c94a4d6157e8b",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "value 是 YYYY-MM-DDTHH:mm[:ss[.SSS]] 的无时区 wall-clock 文本。它不表示 UTC 瞬间；时区、DST、业务可用时段由应用决定。空时间不会自动补当前时间。",
@@ -22316,10 +22350,11 @@
               "Complementary roles and safeguards （相成相制）"
             ],
             "whenToUse": [
-              "Edit complete local wall-clock date/time, or apply calendar and time drafts."
+              "Choose one wall-clock date and time without a time zone, such as a meeting start or a scheduled release."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use DatePicker for a date only and TimeField for a time only.",
+              "Use DateTimeRangePicker when both ends need a time; the application handles UTC instants and time zones."
             ],
             "composition": [
               "Field + FieldLabel + DateTimePicker + FieldDescription / FieldError"
@@ -22415,7 +22450,7 @@
             {
               "name": "inputProps / endInputProps",
               "type": "Input props",
-              "description": "起点输入（Field 标签指向它）与终点输入的 ref/render/ARIA/events/step 等；step 同时带到弹层里的时间输入。两个输入默认名称是「Field 标签 + 开始 / 结束日期和时间」。",
+              "description": "起点输入（Field 标签指向它）与终点输入的 ref/render/ARIA/events/step 等；step 同时带到弹层里的时间输入。两个输入默认名称是「Field 标签 + 开始 / 结束日期时间」。",
               "descriptionEn": "ref, render, ARIA, events, step and so on for the start input (the one a Field label points to) and the end input; step is carried to the popup's time inputs. By default the two names are the Field label plus Start / End date and time."
             },
             {
@@ -22441,86 +22476,86 @@
                 "name": "calendarProps",
                 "optional": true,
                 "type": "Omit<CalendarProps, \"mode\" | \"selected\" | \"onSelect\" | \"required\">",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:48"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:49"
               },
               {
                 "name": "defaultValue",
                 "optional": true,
                 "type": "DateTimeRangeValue | undefined",
                 "doc": "非受控的初值，原生表单 reset 会回到它。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:33"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:34"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:43"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:44"
               },
               {
                 "name": "endInputProps",
                 "optional": true,
                 "type": "NativeInputProps",
                 "doc": "终点输入。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:47"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:48"
               },
               {
                 "name": "form",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:43"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:44"
               },
               {
                 "name": "inputProps",
                 "optional": true,
                 "type": "NativeInputProps",
                 "doc": "起点输入（也是 Field 标签指向的输入）。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:45"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:46"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:42"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:43"
               },
               {
                 "name": "min",
                 "optional": true,
                 "type": "string | undefined",
                 "doc": "可选的最早 / 最晚时刻（无时区文本），一处声明同时约束两个原生输入、日历的可选日与边界日的时间输入。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:42"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:43"
               },
               {
                 "name": "name",
                 "optional": true,
                 "type": "string | undefined",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:43"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:44"
               },
               {
                 "name": "onInvalid",
                 "optional": true,
                 "type": "((draft: DateTimeRangeDraft, reason: DateTimeRangeInvalidReason) => void) | undefined",
                 "doc": "草稿无法提交时通知应用，由应用决定怎么说（FieldError 等）：库不替它写文案。\n只在焦点离开整个字段、弹层也已关闭后通知（并同时给两个输入标 `aria-invalid`、挂原生校验信息），原因同 DateRangePicker。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:40"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:41"
               },
               {
                 "name": "onValueChange",
                 "optional": true,
                 "type": "((value: DateTimeRangeValue | undefined, event: React.SyntheticEvent) => void) | undefined",
                 "doc": "只有完整且有序（且在 min / max 内）的范围，或清除（`undefined`）才会请求变更。起止相同是有效的零长度范围。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:35"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:36"
               },
               {
                 "name": "readOnly",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:43"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:44"
               },
               {
                 "name": "value",
                 "optional": true,
                 "type": "DateTimeRangeValue | undefined",
                 "doc": "受控的完整范围；`undefined` 表示空。**传了 `value` 这个属性**（含 `value={undefined}`）就是受控，不传才是非受控。",
-                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:31"
+                "declaredAt": "packages/ui/src/components/date-time-range-picker.tsx:32"
               }
             ],
             "inheritedCount": 277,
@@ -22730,10 +22765,11 @@
           "相成相制"
         ],
         "whenToUse": [
-          "键入或在弹层里选起止日期和时间，完整且有序时才是确认值。"
+          "选起止两端都带时刻的无时区区间，如活动时段、维护窗口。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "只有日期的区间用 DateRangePicker；单个日期时间用 DateTimePicker。",
+          "同一天内的两个时刻用 TimeRangeField。"
         ],
         "composition": [
           "Field + FieldLabel + DateTimeRangePicker + FieldDescription / FieldError"
@@ -22755,7 +22791,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/date-time-range-picker.tsx",
-        "sha256": "f0bf1dd0084422c8188b26900c7152b6394fe65411b1f5a8a794b68f18a53142",
+        "sha256": "ea0c19ac00afd1c2cb244948594c9dcb6c081e74fa647a7a66e90d74ca5d7594",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "值是 { from, to }，两端各是 DateTimePicker 的值（无时区的本地文本 YYYY-MM-DDTHH:mm[:ss[.SSS]]），而不是 DateRangePicker 的 Date：时间不能放进只含日期的 Date，也不会因此猜一个时区。只有完整且有序的 from/to 才是确认值；起止相同是有效的零长度范围。两个原生 datetime-local 输入共用一份草稿：键入得出完整有序的范围即请求变更；只填一端、反向或越界不提交，焦点离开后两个输入标 aria-invalid，起点输入带原生校验信息让表单提交被拦下，并通过 onInvalid 交给应用说明。弹层里是日历区间加两个时间输入，同一天时结束时刻早于开始时刻会在弹层里提示并不能应用；取消或 Escape 保留原确认值。",
@@ -22852,10 +22888,11 @@
               "Complementary roles and safeguards （相成相制）"
             ],
             "whenToUse": [
-              "Type or pick a start and an end date and time; only a complete, ordered range is a confirmed value."
+              "Choose a range whose two ends both carry a wall-clock time, such as an event or a maintenance window."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use DateRangePicker for dates only; DateTimePicker for a single date and time.",
+              "Use TimeRangeField for two times within one day."
             ],
             "composition": [
               "Field + FieldLabel + DateTimeRangePicker + FieldDescription / FieldError"
@@ -27464,10 +27501,11 @@
           "进退相承"
         ],
         "whenToUse": [
-          "点按钮选文件，选完立即交给应用，不保留选择。"
+          "点按钮选文件，选完立即交给应用，如工具栏里的导入。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "要保留选择、列出文件、移除或随表单提交，或支持拖放用 FileUpload。",
+          "被拒绝的文件只在 details.rejected 里交回，应用须自己呈现。"
         ],
         "composition": [
           "Toolbar / PageHeader 动作区中的 FileTrigger + onSelect 里的 Toast"
@@ -27557,10 +27595,11 @@
               "Continuity through change （进退相承）"
             ],
             "whenToUse": [
-              "Press a button to choose files and hand them to the application at once, retaining no selection."
+              "Press a button, choose files and hand them to the application at once, such as an import in a toolbar."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use FileUpload to retain the selection, list or remove files, submit with a form, or accept drag and drop.",
+              "Rejected files come back only in details.rejected; the application must present them."
             ],
             "composition": [
               "FileTrigger in a toolbar or PageHeader actions, with a Toast raised from onSelect"
@@ -28051,10 +28090,11 @@
           "相成相制"
         ],
         "whenToUse": [
-          "选择或拖入本地文件，保留已接受集合与真实拒绝原因。"
+          "在表单里选择或拖入文件，需要保留已接受的集合、列出并可移除。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "点一下选完就交给应用、不保留选择用 FileTrigger。",
+          "上传进度与结果由应用呈现，组件不发请求；上传状态不要用它代替。"
         ],
         "composition": [
           "Field + FieldLabel + FileUpload + 实际规则说明/FieldError"
@@ -28199,10 +28239,11 @@
               "Complementary roles and safeguards （相成相制）"
             ],
             "whenToUse": [
-              "Choose or drop local files, retaining accepted files and real rejection reasons."
+              "Choose or drop files in a form when the accepted set must be kept, listed and removable."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use FileTrigger to press once and hand files over without keeping a selection.",
+              "The application presents upload progress and outcome; the component sends no request."
             ],
             "composition": [
               "Field + FieldLabel + FileUpload + actual rule explanation/FieldError"
@@ -32272,8 +32313,8 @@
             "@qingye_lab/ui/components/number-field"
           ],
           "providers": [],
-          "code": "import { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { InputGroup, InputGroupAddon, InputGroupNumberField, InputGroupText } from \"@qingye_lab/ui/components/input-group\";\nimport { NumberFieldGroup, NumberFieldInput } from \"@qingye_lab/ui/components/number-field\";\n\nexport const meta = { title: \"数值区间\", titleEn: \"Number range\" };\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-sm\" name=\"price\" role=\"group\" aria-labelledby=\"price-range-label\">\n      <FieldLabel id=\"price-range-label\" nativeLabel={false} render={<span />}>价格</FieldLabel>\n      <InputGroup>\n        <InputGroupNumberField name=\"priceMin\" defaultValue={100} min={0}>\n          <NumberFieldGroup unstyled><NumberFieldInput aria-label=\"最低价\" /></NumberFieldGroup>\n        </InputGroupNumberField>\n        <InputGroupAddon><InputGroupText>至</InputGroupText></InputGroupAddon>\n        <InputGroupNumberField name=\"priceMax\" defaultValue={500} min={0}>\n          <NumberFieldGroup unstyled><NumberFieldInput aria-label=\"最高价\" /></NumberFieldGroup>\n        </InputGroupNumberField>\n      </InputGroup>\n    </Field>\n  );\n}\n",
-          "sha256": "ea558732ee9b20a5f10f1587eb0713bfa92a205005d209d111f8d7635eb63372"
+          "code": "import { Field, FieldLabel } from \"@qingye_lab/ui/components/field\";\nimport { InputGroup, InputGroupAddon, InputGroupNumberField, InputGroupText } from \"@qingye_lab/ui/components/input-group\";\nimport { NumberFieldGroup, NumberFieldInput } from \"@qingye_lab/ui/components/number-field\";\n\nexport const meta = { title: \"数值区间\", titleEn: \"Number range\" };\n\nexport default function Demo() {\n  return (\n    <Field className=\"w-full max-w-sm\" name=\"price\" role=\"group\" aria-labelledby=\"price-range-label\">\n      <FieldLabel id=\"price-range-label\" nativeLabel={false} render={<span />}>价格</FieldLabel>\n      <InputGroup>\n        <InputGroupNumberField name=\"priceMin\" defaultValue={100} min={0}>\n          <NumberFieldGroup unstyled><NumberFieldInput id=\"price-min\" aria-label=\"最低价\" aria-labelledby=\"price-range-label price-min\" /></NumberFieldGroup>\n        </InputGroupNumberField>\n        <InputGroupAddon><InputGroupText>至</InputGroupText></InputGroupAddon>\n        <InputGroupNumberField name=\"priceMax\" defaultValue={500} min={0}>\n          <NumberFieldGroup unstyled><NumberFieldInput id=\"price-max\" aria-label=\"最高价\" aria-labelledby=\"price-range-label price-max\" /></NumberFieldGroup>\n        </InputGroupNumberField>\n      </InputGroup>\n    </Field>\n  );\n}\n",
+          "sha256": "6e2030ec3e2976205d6fd9c12d097f064a6caf53d45b4ea6c0d4c6af860be9f3"
         }
       ],
       "design": {
@@ -32631,8 +32672,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Text } from \"@qingye_lab/ui/components/typography\";\nimport { useEffect, useState } from \"react\";\n\nexport const meta = { title: \"输入方式\", titleEn: \"Input modality\" };\n\nexport default function Demo() {\n  const [input, setInput] = useState<string | null>(null);\n  useEffect(() => {\n    const root = document.documentElement;\n    const read = () => setInput(root.getAttribute(\"data-ui-input\"));\n    read();\n    const observer = new MutationObserver(read);\n    observer.observe(root, { attributeFilter: [\"data-ui-input\"] });\n    return () => observer.disconnect();\n  }, []);\n\n  return (\n    <Stack gap=\"panel\">\n      <Inline gap=\"actions\"><Button>按钮</Button><Button variant=\"bordered\">按钮</Button></Inline>\n      <Text step=\"support\" className=\"text-muted-foreground\">输入方式：{input === \"keyboard\" ? \"键盘\" : input === \"pointer\" ? \"指针\" : \"待检测\"}</Text>\n    </Stack>\n  );\n}\n",
-          "sha256": "76a72915c8e67faa5d73e1257b697b807f08f796ff48a97034c64e8a7233f2bf"
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport { Text } from \"@qingye_lab/ui/components/typography\";\nimport { useEffect, useState } from \"react\";\n\nexport const meta = { title: \"输入方式\", titleEn: \"Input modality\", specimen: true };\n\nexport default function Demo() {\n  const [input, setInput] = useState<string | null>(null);\n  useEffect(() => {\n    const root = document.documentElement;\n    const read = () => setInput(root.getAttribute(\"data-ui-input\"));\n    read();\n    const observer = new MutationObserver(read);\n    observer.observe(root, { attributeFilter: [\"data-ui-input\"] });\n    return () => observer.disconnect();\n  }, []);\n\n  return (\n    <Stack gap=\"panel\">\n      <Inline gap=\"actions\"><Button>按钮</Button><Button variant=\"bordered\">按钮</Button></Inline>\n      <Text step=\"support\" className=\"text-muted-foreground\">输入方式：{input === \"keyboard\" ? \"键盘\" : input === \"pointer\" ? \"指针\" : \"待检测\"}</Text>\n    </Stack>\n  );\n}\n",
+          "sha256": "634b37c1c123798255736ebc413704f1f6edc51e862e646281f3f6da4c07d7c8"
         },
         {
           "id": "custom",
@@ -33216,8 +33257,8 @@
             "@qingye_lab/ui/components/layout"
           ],
           "providers": [],
-          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from \"@qingye_lab/ui/components/item\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"悬停显现的次要动作\", titleEn: \"Secondary actions on hover\" } satisfies DemoMeta;\n\nconst rows = [\n  { name: \"春季蚕室记录\", note: \"温度 24℃，湿度 72%\", time: \"08:30\" },\n  { name: \"夏季蚕室记录\", note: \"温度 27℃，湿度 68%\", time: \"昨天\" },\n  { name: \"秋季蚕室记录\", note: \"温度 22℃，湿度 75%\", time: \"周一\" },\n  { name: \"冬季蚕室记录\", note: \"温度 18℃，湿度 70%\", time: \"10 月 6 日\" },\n];\n\nexport default function Demo() {\n  return <Stack gap=\"field\" render={<ul />} className=\"m-0 w-full max-w-lg list-none p-0\">\n    {rows.map(row => <Item render={<li />} key={row.name}>\n      <ItemContent><ItemTitle>{row.name}</ItemTitle><ItemDescription>{row.note}</ItemDescription></ItemContent>\n      <ItemActions reveal=\"hover\" resting={<time>{row.time}</time>}>\n        <Button variant=\"quiet\" size=\"sm\">重命名</Button>\n        <Button variant=\"quiet\" size=\"sm\">归档</Button>\n      </ItemActions>\n    </Item>)}\n  </Stack>;\n}\n",
-          "sha256": "0f7a4d932e920afe5c136e06b537b5d1cdd8abda540a19475a772a8c4492f408"
+          "code": "import { Button } from \"@qingye_lab/ui/components/button\";\nimport { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from \"@qingye_lab/ui/components/item\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"悬停显现的次要动作\", titleEn: \"Secondary actions on hover\" } satisfies DemoMeta;\n\nconst rows = [\n  { name: \"春季蚕室记录\", note: \"温度 24℃，湿度 72%\", time: \"08:30\" },\n  { name: \"夏季蚕室记录\", note: \"温度 27℃，湿度 68%\", time: \"昨天\" },\n  { name: \"秋季蚕室记录\", note: \"温度 22℃，湿度 75%\", time: \"周一\" },\n  { name: \"冬季蚕室记录\", note: \"温度 18℃，湿度 70%\", time: \"10 月 6 日\" },\n];\n\nexport default function Demo() {\n  return <Stack gap=\"field\" render={<ul />} className=\"m-0 w-full max-w-lg list-none p-0\">\n    {rows.map(row => <Item render={<li />} key={row.name}>\n      <ItemContent><ItemTitle>{row.name}</ItemTitle><ItemDescription>{row.note}</ItemDescription></ItemContent>\n      <ItemActions reveal=\"hover\" resting={<time>{row.time}</time>}>\n        <Button variant=\"quiet\" size=\"sm\" aria-label={`重命名 ${row.name}`}>重命名</Button>\n        <Button variant=\"quiet\" size=\"sm\" aria-label={`归档 ${row.name}`}>归档</Button>\n      </ItemActions>\n    </Item>)}\n  </Stack>;\n}\n",
+          "sha256": "670b224bdf28f6aa29809886942ccf241dbf63815758bd72be29256e24b983aa"
         },
         {
           "id": "row-link",
@@ -33637,7 +33678,8 @@
       ],
       "docs": "/docs/components/label",
       "notes": [
-        "Label 不拥有禁用状态；被命名控件使用自己的真实 disabled。"
+        "Label 不拥有禁用状态；被命名控件使用自己的真实 disabled。",
+        "Combobox、Autocomplete 这类弹层输入框用 htmlFor 关联或放进 Field；不要用 label 包住控件、把文字放进子元素，弹层打开时这样写的名称会消失。"
       ],
       "keywords": [
         "label",
@@ -33827,7 +33869,8 @@
           "category": "Forms",
           "decisions": "Use FieldLabel inside Field. A standalone Label associates one control through htmlFor or native nesting; a placeholder cannot replace it.",
           "notes": [
-            "Label owns no disabled state; the named control uses its real disabled attribute."
+            "Label owns no disabled state; the named control uses its real disabled attribute.",
+            "For popup inputs such as Combobox and Autocomplete, associate through htmlFor or use Field; do not wrap the control in a label with its text in a child element, because that name disappears while the popup is open."
           ],
           "api": [
             {
@@ -36626,7 +36669,6 @@
         "meter",
         "gauge",
         "measure",
-        "level",
         "仪表",
         "度量",
         "用量",
@@ -36647,8 +36689,8 @@
             {
               "name": "segments",
               "type": "number",
-              "description": "离散的 n 级：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；(value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。级别名用 getAriaValueText 给出。",
-              "descriptionEn": "A discrete scale of n levels: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Name levels with getAriaValueText."
+              "description": "以 n 个整格计的读数：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；(value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。实际读数与单位用 getAriaValueText 给出。",
+              "descriptionEn": "A reading counted in n whole cells: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Give the actual reading and unit with getAriaValueText."
             },
             {
               "name": "tone",
@@ -36711,7 +36753,7 @@
                 "name": "segments",
                 "optional": true,
                 "type": "number",
-                "doc": "这个量是离散的 n 级时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。\n格间空隙是透明的，规则见 utilities.css 的读数轨道分格。",
+                "doc": "读数本身以整格计（如四格里剩几格）时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。\n格间空隙是透明的，规则见 utilities.css 的读数轨道分格。",
                 "declaredAt": "packages/ui/src/components/meter.tsx:15"
               },
               {
@@ -36858,7 +36900,7 @@
           "kind": "type",
           "owner": "meter",
           "module": "@qingye_lab/ui/components/meter",
-          "signature": "React.ComponentProps<typeof MeterPrimitive.Root> & {\n  /** 状态类别：由调用方声明，组件不从数值猜好坏（随类赋彩）。不给时指示用主色。 */\n  tone?: Tone;\n  /**\n   * 这个量是离散的 n 级时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。\n   * 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。\n   */\n  segments?: number;\n}",
+          "signature": "React.ComponentProps<typeof MeterPrimitive.Root> & {\n  /** 状态类别：由调用方声明，组件不从数值猜好坏（随类赋彩）。不给时指示用主色。 */\n  tone?: Tone;\n  /**\n   * 读数本身以整格计（如四格里剩几格）时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。\n   * 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。\n   */\n  segments?: number;\n}",
           "status": "PASS",
           "declarationStatus": "PASS",
           "typeResolution": "UNVERIFIED"
@@ -36889,7 +36931,7 @@
       "types": [
         {
           "name": "MeterProps",
-          "definition": "export type MeterProps = React.ComponentProps<typeof MeterPrimitive.Root> & {\n  /** 状态类别：由调用方声明，组件不从数值猜好坏（随类赋彩）。不给时指示用主色。 */\n  tone?: Tone;\n  /**\n   * 这个量是离散的 n 级时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。\n   * 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。\n   */\n  segments?: number;\n};"
+          "definition": "export type MeterProps = React.ComponentProps<typeof MeterPrimitive.Root> & {\n  /** 状态类别：由调用方声明，组件不从数值猜好坏（随类赋彩）。不给时指示用主色。 */\n  tone?: Tone;\n  /**\n   * 读数本身以整格计（如四格里剩几格）时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。\n   * 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。\n   */\n  segments?: number;\n};"
         }
       ],
       "usageImports": [
@@ -36987,15 +37029,16 @@
         },
         {
           "id": "levels",
-          "title": "三级的级别",
+          "title": "以整格计的读数",
           "source": "apps/docs/src/content/meter/demos/02-levels.tsx",
           "imports": [
             "@/lib/types",
+            "@qingye_lab/ui/components/layout",
             "@qingye_lab/ui/components/meter"
           ],
           "providers": [],
-          "code": "import { Meter, MeterIndicator, MeterTrack } from \"@qingye_lab/ui/components/meter\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"三级的级别\", titleEn: \"Three levels\" } satisfies DemoMeta;\nconst levels = [\"低\", \"中\", \"高\"];\nconst rows: { name: string; level: 1 | 2 | 3; tone: \"danger\" | \"warning\" | \"info\" }[] = [\n  { name: \"三号蚕室温度偏离\", level: 3, tone: \"danger\" },\n  { name: \"一号蚕室湿度偏离\", level: 2, tone: \"warning\" },\n  { name: \"二号蚕室桑叶余量\", level: 1, tone: \"info\" },\n];\nexport default function Demo() {\n  return <ul className=\"m-0 grid w-full max-w-xs list-none gap-(--qy-field-gap) p-0\">{rows.map(row => <li key={row.name} className=\"flex min-w-0 items-center justify-between gap-(--qy-panel-gap)\">\n    <span className=\"min-w-0 text-body wrap-anywhere\">{row.name}</span>\n    <Meter className=\"w-16 shrink-0\" aria-label={`${row.name}级别`} value={row.level} min={0} max={3} segments={3} tone={row.tone} getAriaValueText={(_, value) => levels[value - 1]!}><MeterTrack><MeterIndicator /></MeterTrack></Meter>\n  </li>)}</ul>;\n}\n",
-          "sha256": "7cc03ce2057c77802c948501b85d04ac61fd278b71a92c1acb97322045d07a1a"
+          "code": "import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from \"@qingye_lab/ui/components/meter\";\nimport { Inline, Stack } from \"@qingye_lab/ui/components/layout\";\nimport type { DemoMeta } from \"@/lib/types\";\nexport const meta = { title: \"以整格计的读数\", titleEn: \"Readings in whole cells\" } satisfies DemoMeta;\nconst rows = [\n  { name: \"一号蚕室桑叶余量\", value: 3 },\n  { name: \"二号蚕室桑叶余量\", value: 1 },\n  { name: \"三号蚕室桑叶余量\", value: 0 },\n];\nconst reading = (value: number) => `${value} / 4 筐`;\nexport default function Demo() {\n  return <Stack gap=\"fields\" className=\"w-full max-w-xs\">{rows.map(row => <Meter key={row.name} value={row.value} min={0} max={4} segments={4} getAriaValueText={(_, value) => reading(value)}>\n    <Inline gap=\"actions\"><MeterLabel>{row.name}</MeterLabel><MeterValue className=\"ms-auto\">{(_, value) => reading(value)}</MeterValue></Inline>\n    <MeterTrack><MeterIndicator /></MeterTrack>\n  </Meter>)}</Stack>;\n}\n",
+          "sha256": "69d5ccc2f47bb4c4530deb97074bdb2d82603b1c8ad3a56af4d2f2fc04b8ab79"
         }
       ],
       "design": {
@@ -37004,14 +37047,15 @@
           "布白有用"
         ],
         "whenToUse": [
-          "表达测量值及单位。"
+          "表达一个有效范围内的测量值及单位，读屏读出读数。"
         ],
         "avoid": [
-          "任务完成比例使用 Progress；未知测量不要填0。"
+          "任务完成比例使用 Progress；未知测量不要填0。",
+          "对象带有一个有次序的级别、读出的是级别名称（如高、中、低）时用 SeverityMark；对象处于哪一种状态用 StatusDot。"
         ],
         "composition": [
           "Label 关联名称，Value 展示实际读数，轨与指示不猜测好坏。",
-          "密集列表里的级别用 segments={3} 加 tone，不用 StatusDot：状态与程度是两件事。"
+          "segments 只给本身以整格计的读数分格，getAriaValueText 读出实际读数与单位；一行对象的级别用 SeverityMark。"
         ],
         "stateOwner": {
           "library": [
@@ -37030,16 +37074,16 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/meter.tsx",
-        "sha256": "9579a5e1dcfc8e727b00a72c3e2b16e1be3853063a55fdc4af3cd6a927040c7c",
+        "sha256": "3b1233fa556bb4efd1a827ee8adfc0c4e36155e61816f0c7f378a8b23e793ca9",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "任务完成比例使用 Progress；未知测量不要填0。级别是「几级里的第几级」，用 segments 分格；状态类别 tone 由调用方声明，色相之外格数仍读得出级别。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。",
+      "decisions": "任务完成比例使用 Progress；未知测量不要填0。读数本身是若干整格时用 segments 分格，读屏读出的仍是读数；对象的有序级别读出的是级别名称，用 SeverityMark。状态类别 tone 由调用方声明，色相之外格数或读数仍承担同一事实。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。",
       "localized": {
         "en": {
           "title": "Meter",
           "description": "A real measurement over a valid range.",
           "category": "Feedback",
-          "decisions": "Use Progress for task completion. Unknown measurements must not become zero. A level is \"which of n steps\", so use segments; tone is declared by the caller, and the cell count still reads without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).",
+          "decisions": "Use Progress for task completion. Unknown measurements must not become zero. When the reading itself counts whole cells, use segments and the screen reader still reads the reading; an ordered level of an object reads as the level's name, so use SeverityMark. tone is declared by the caller, and the cell count or reading still carries the fact without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).",
           "notes": [],
           "api": [
             {
@@ -37056,8 +37100,8 @@
                 {
                   "name": "segments",
                   "type": "number",
-                  "description": "A discrete scale of n levels: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Name levels with getAriaValueText.",
-                  "descriptionEn": "A discrete scale of n levels: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Name levels with getAriaValueText."
+                  "description": "A reading counted in n whole cells: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Give the actual reading and unit with getAriaValueText.",
+                  "descriptionEn": "A reading counted in n whole cells: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Give the actual reading and unit with getAriaValueText."
                 },
                 {
                   "name": "tone",
@@ -37113,14 +37157,15 @@
               "Space supports the task （布白有用）"
             ],
             "whenToUse": [
-              "Present measured values and units."
+              "Present a measurement over a valid range, with its unit; screen readers read the reading."
             ],
             "avoid": [
-              "Use Progress for task completion. Unknown measurements must not become zero."
+              "Use Progress for task completion. Unknown measurements must not become zero.",
+              "Use SeverityMark when an object has an ordered level read as its name (such as high, medium, low); use StatusDot for which state an object is in."
             ],
             "composition": [
               "Label associates the name, Value presents the actual reading, and track/indicator infer no judgment.",
-              "A level in a dense list uses segments={3} with tone, not StatusDot: status and degree are two facts."
+              "segments only splits a reading that itself counts whole cells; getAriaValueText reads the actual reading and unit. A row's level uses SeverityMark."
             ],
             "stateOwner": {
               "library": [
@@ -38593,7 +38638,7 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "由 InputGroup 提供共同边界时使用：不带默认宽度与边界外的只读说明（外框承担），数值几何与语义不变。",
-                "declaredAt": "packages/ui/src/components/number-field.tsx:14"
+                "declaredAt": "packages/ui/src/components/number-field.tsx:15"
               }
             ],
             "inheritedCount": 296,
@@ -38633,7 +38678,7 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "由 InputGroup 提供共同边界时使用：不自己画边框、底色与状态，几何与原生语义不变。",
-                "declaredAt": "packages/ui/src/components/number-field.tsx:63"
+                "declaredAt": "packages/ui/src/components/number-field.tsx:64"
               }
             ],
             "inheritedCount": 278,
@@ -38923,6 +38968,7 @@
           "@base-ui/react/button",
           "@base-ui/react/direction-provider",
           "@base-ui/react/input",
+          "@base-ui/react/internals/labelable-provider",
           "@base-ui/react/merge-props",
           "@base-ui/react/number-field",
           "@base-ui/react/use-render"
@@ -39002,7 +39048,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/number-field.tsx",
-        "sha256": "dff96cde72e893230e62af74be7b834f9fbe557e58f8c71442fbea516644a727",
+        "sha256": "fd8dc4dc0d76b55c59175e4697ce16f1c98f0bd3e6afa4cf3cd836497722d340",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "直接编辑超出范围时保留原值，提交由浏览器范围约束检查；步进仍限制在 min/max。空、负号和未完成小数不会被替换为 0。",
@@ -41596,7 +41642,7 @@
                 "name": "defaultVisible",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/password-input.tsx:17"
+                "declaredAt": "packages/ui/src/components/password-input.tsx:18"
               },
               {
                 "name": "nativeInput",
@@ -41609,14 +41655,14 @@
                 "name": "onVisibleChange",
                 "optional": true,
                 "type": "(visible: boolean) => void",
-                "declaredAt": "packages/ui/src/components/password-input.tsx:18"
+                "declaredAt": "packages/ui/src/components/password-input.tsx:19"
               },
               {
                 "name": "showLabel",
                 "optional": true,
                 "type": "string",
                 "doc": "开关的稳定名称，默认从 locale 读取；aria-pressed 表达密码当前是否可见。",
-                "declaredAt": "packages/ui/src/components/password-input.tsx:20"
+                "declaredAt": "packages/ui/src/components/password-input.tsx:21"
               },
               {
                 "name": "size",
@@ -41630,7 +41676,7 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "密码当前是否以明文显示；与 defaultVisible 分别支持受控与非受控。",
-                "declaredAt": "packages/ui/src/components/password-input.tsx:16"
+                "declaredAt": "packages/ui/src/components/password-input.tsx:17"
               }
             ],
             "inheritedCount": 308,
@@ -41832,7 +41878,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/password-input.tsx",
-        "sha256": "d979e4856bb9c60fc9b12a6418bd99fa1067317850359c6843c8caeab43e87d3",
+        "sha256": "2cc5609ba3e912efe39c5fc9eb5a4dd9dbd280a509dd635309654d833a0b140b",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "密码输入是组合，不是 Input 的一个模式：编辑边界（InputGroup）里放输入与一个显示密码的开关，都是公开部件。输入框只承载值；开关是附在边界上的另一个动作，名称固定为「显示密码」，按下与否由 aria-pressed 表达。开关不改内容、不提交表单；强度、规则与校验由应用给出。",
@@ -47848,8 +47894,8 @@
             "@qingye_lab/ui/components/scroll-area"
           ],
           "providers": [],
-          "code": "import { ScrollArea } from \"@qingye_lab/ui/components/scroll-area\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nexport const meta = { title: \"边缘渐隐\", titleEn: \"Edge fade\" };\nexport default function Demo() {\n  return <Stack>\n    <ScrollArea fade aria-label=\"完整条目\" style={{ maxHeight: \"calc(var(--qy-control-md) * 5)\" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className=\"flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)\">条目 {index + 1}</div>)}</ScrollArea>\n    <ScrollArea fade aria-label=\"完整字符序列\"><pre className=\"w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body\">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>\n  </Stack>;\n}\n",
-          "sha256": "7053ab035d3e65799d8854a413c670255517285bb8ece5c64ab277e240c389cb"
+          "code": "import { ScrollArea } from \"@qingye_lab/ui/components/scroll-area\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nexport const meta = { title: \"边缘渐隐\", titleEn: \"Edge fade\" };\nexport default function Demo() {\n  return <Stack>\n    <ScrollArea fade aria-label=\"渐隐条目\" style={{ maxHeight: \"calc(var(--qy-control-md) * 5)\" }}>{Array.from({ length: 20 }, (_, index) => <div key={index} className=\"flex min-h-(--qy-control-md-narrow) items-center px-(--qy-control-md-padding) text-body sm:min-h-(--qy-control-md)\">条目 {index + 1}</div>)}</ScrollArea>\n    <ScrollArea fade aria-label=\"渐隐字符序列\"><pre className=\"w-max px-(--qy-control-md-padding) py-(--qy-field-gap) text-body\">甲 乙 丙 丁 戊 己 庚 辛 壬 癸 · A B C D E F G H I J K L M N O P Q R S T U V W X Y Z</pre></ScrollArea>\n  </Stack>;\n}\n",
+          "sha256": "69ae45b0134ad39a0c3c39220f94adf85704bfd31bd28182b1321cdf128487cc"
         }
       ],
       "design": {
@@ -51365,16 +51411,17 @@
           "随境取度"
         ],
         "whenToUse": [
-          "一行对象带有一个有次序的级别，需要不占一列文字就能比较高低。"
+          "一行对象带有一个有次序的级别（严重程度、优先级），读出的是级别名称，需要不占一列文字就能比较高低。"
         ],
         "avoid": [
           "对象处于哪一种状态用 StatusDot：状态之间没有次序。",
-          "有单位的测量值用 Meter；任务完成比例用 Progress。",
+          "范围内的测量读数用 Meter，读数本身以整格计时用 Meter 的 segments；任务完成比例用 Progress。",
           "不用色相区分格数相同的两个级别。"
         ],
         "composition": [
           "同一列里的标记用同一个 max。",
           "name=\"hidden\" 时名称仍是可访问名称；同一行或表头要有文字让看得见的读者知道这一列是级别。",
+          "读屏只读 label，不读格数与一共几级：名称本身要分得出高低（如高、中、低）。",
           "与 StatusDot 同行时两种标记同高、同一条行中线。"
         ],
         "stateOwner": {
@@ -51464,16 +51511,17 @@
               "Adapt to context （随境取度）"
             ],
             "whenToUse": [
-              "A row's object has an ordered level that must be comparable without spending a text column."
+              "A row's object has an ordered level (severity, priority) read as its name, and it must be comparable without spending a text column."
             ],
             "avoid": [
               "Use StatusDot for which state an object is in: states have no order.",
-              "Use Meter for a measurement with a unit and Progress for task completion.",
+              "Use Meter for a measured reading over a range, with segments when the reading itself counts whole cells; use Progress for task completion.",
               "Do not tell two levels with the same cell count apart by hue."
             ],
             "composition": [
               "Marks in one column share one max.",
               "With name=\"hidden\" the name remains the accessible name; the row or the column header must still tell sighted readers that the column is a level.",
+              "Screen readers read only label, not the cell count or the number of levels: the names themselves must tell high from low (such as high, medium, low).",
               "Beside a StatusDot both marks have the same height and share one row midline."
             ],
             "stateOwner": {
@@ -51702,33 +51750,33 @@
                 "name": "collapsed",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:47"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:49"
               },
               {
                 "name": "defaultCollapsed",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:47"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:49"
               },
               {
                 "name": "drawer",
                 "optional": true,
                 "type": "boolean",
                 "doc": "窄屏（< 40rem，与全库同一个点）把侧栏收进一个从起始侧滑出的抽屉，由 SidebarDrawerTrigger 打开；更宽时仍是原位的侧栏。\n断点固定、不开放配置（用户裁决 2026-10-31）：SidebarDrawerTrigger 的 sm:hidden 与它是同一个点。\n40rem 以上一律是原位侧栏，库不按宽度自动收起；中等宽度要不要收成 rail 由应用用 collapsed / defaultCollapsed 决定。\n抽屉里就是同一份 children：当前项照常标出，点去往新页面的条目后抽屉关闭。服务端渲染按「够宽」输出，窄屏客户端挂载后换成抽屉。",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:54"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:56"
               },
               {
                 "name": "drawerHandle",
                 "optional": true,
                 "type": "SidebarDrawerHandle",
                 "doc": "抽屉与它的触发按钮之间的关联。在 Workspace 里省略即可（外壳持有一个）；不在 Workspace 里时，用 createSidebarDrawerHandle() 创建并同时交给 SidebarDrawerTrigger。",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:56"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:58"
               },
               {
                 "name": "onCollapsedChange",
                 "optional": true,
                 "type": "(collapsed: boolean, details: SidebarChangeDetails) => void",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:47"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:49"
               }
             ],
             "inheritedCount": 281,
@@ -51751,19 +51799,19 @@
                 "name": "count",
                 "optional": true,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
               },
               {
                 "name": "icon",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
               }
             ],
             "inheritedCount": 291,
@@ -51814,7 +51862,7 @@
                 "name": "handle",
                 "optional": true,
                 "type": "SidebarDrawerHandle",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:124"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:127"
               },
               {
                 "name": "loading",
@@ -51932,25 +51980,25 @@
                 "name": "active",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:232"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:238"
               },
               {
                 "name": "count",
                 "optional": true,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
               },
               {
                 "name": "icon",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "number",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
               }
             ],
             "inheritedCount": 289,
@@ -51973,7 +52021,7 @@
                 "name": "children",
                 "optional": false,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:298"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:304"
               }
             ],
             "inheritedCount": 281,
@@ -52012,7 +52060,7 @@
                 "name": "icon",
                 "optional": true,
                 "type": "React.ReactNode",
-                "declaredAt": "packages/ui/src/components/sidebar.tsx:297"
+                "declaredAt": "packages/ui/src/components/sidebar.tsx:303"
               }
             ],
             "inheritedCount": 289,
@@ -52194,17 +52242,17 @@
             {
               "part": "SidebarLink",
               "prop": "count",
-              "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
+              "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
             },
             {
               "part": "SidebarLink",
               "prop": "max",
-              "declaredAt": "packages/ui/src/components/sidebar.tsx:231"
+              "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
             },
             {
               "part": "SidebarSub",
               "prop": "children",
-              "declaredAt": "packages/ui/src/components/sidebar.tsx:298"
+              "declaredAt": "packages/ui/src/components/sidebar.tsx:304"
             }
           ]
         }
@@ -52708,7 +52756,7 @@
         "contexts": [
           {
             "name": "GroupLabelContext",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:197",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:203",
             "defaultValue": "null",
             "withoutProvider": "nullable",
             "providedBy": [
@@ -52717,7 +52765,7 @@
           },
           {
             "name": "InSubPanel",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:38",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:40",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52726,7 +52774,7 @@
           },
           {
             "name": "InSubTree",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:44",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:46",
             "defaultValue": "false",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52744,7 +52792,7 @@
           },
           {
             "name": "SidebarContext",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:36",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:38",
             "defaultValue": "null",
             "withoutProvider": "throws",
             "providedBy": [
@@ -52760,7 +52808,7 @@
           },
           {
             "name": "SidebarSubLabelContext",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:296",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:302",
             "defaultValue": "null",
             "withoutProvider": "nullable",
             "providedBy": [
@@ -52769,7 +52817,7 @@
           },
           {
             "name": "SubTriggerHasIcon",
-            "declaredAt": "packages/ui/src/components/sidebar.tsx:40",
+            "declaredAt": "packages/ui/src/components/sidebar.tsx:42",
             "defaultValue": "true",
             "withoutProvider": "default-value",
             "providedBy": [
@@ -52907,7 +52955,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/sidebar.tsx",
-        "sha256": "c1a2e83537c08c137c4b2a0266f85d16a4f021a4fd5586adc06de2a85434351c",
+        "sha256": "3098b18a94f563faac4c8c907aa14400940981b3411c62438738b6d35d1e9039",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "收起是图标 rail，不是隐藏：导航与链接保持挂载，名称切到视觉隐藏（可访问名称不变），用 Tooltip 补足可见名称；二级子级展开态用内嵌面板，rail 态换成同一组内容的 Popover，开合记忆不因侧栏收起而改变。active 与路由由应用明确提供。",
@@ -53827,8 +53875,8 @@
             "@qingye_lab/ui/components/typography"
           ],
           "providers": [],
-          "code": "import { Link } from \"@qingye_lab/ui/components/link\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport { SkipLink } from \"@qingye_lab/ui/components/skip-link\";\nimport { Text } from \"@qingye_lab/ui/components/typography\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"越过导航\", titleEn: \"Bypass the navigation\" } satisfies DemoMeta;\n\n// 真实页面里它固定在视口一角，只在获得焦点时现身；这里为了在样例中可见，改为静态并常显。\n// 目标 <main> 本身不可聚焦，点击后组件会补 tabindex=\"-1\" 并把焦点移过去。\nexport default function Demo() {\n  return <Stack gap=\"panel\">\n    <SkipLink href=\"#skip-demo-main\" className=\"static opacity-100 pointer-events-auto self-start\">跳到正文</SkipLink>\n    <nav aria-label=\"示例导航\"><Stack gap=\"pair\"><Link href=\"#a\">首页</Link><Link href=\"#b\">文档</Link><Link href=\"#c\">更新记录</Link></Stack></nav>\n    <main id=\"skip-demo-main\" className=\"outline-none focus-visible:ring-2\"><Text>正文从这里开始。</Text></main>\n  </Stack>;\n}\n",
-          "sha256": "aeb7949cf57d747eacb1a762ec86439c45b164adf2a577961d7795741db70045"
+          "code": "import { Link } from \"@qingye_lab/ui/components/link\";\nimport { Stack } from \"@qingye_lab/ui/components/layout\";\nimport { SkipLink } from \"@qingye_lab/ui/components/skip-link\";\nimport { Text } from \"@qingye_lab/ui/components/typography\";\nimport type { DemoMeta } from \"@/lib/types\";\n\nexport const meta = { title: \"越过导航\", titleEn: \"Bypass the navigation\" } satisfies DemoMeta;\n\n// 真实页面里它固定在视口一角，只在获得焦点时现身；这里为了在样例中可见，改为静态并常显。\n// 目标 <main> 本身不可聚焦，点击后组件会补 tabindex=\"-1\" 并把焦点移过去。\nexport default function Demo() {\n  return <Stack gap=\"panel\">\n    <SkipLink href=\"#skip-demo-main\" className=\"static opacity-100 pointer-events-auto self-start\">跳到正文</SkipLink>\n    <nav aria-label=\"示例导航\"><Stack gap=\"pair\"><Link href=\"#a\">首页</Link><Link href=\"#b\">文档</Link><Link href=\"#c\">更新记录</Link></Stack></nav>\n    <div id=\"skip-demo-main\" className=\"outline-none focus-visible:ring-2\"><Text>正文从这里开始。</Text></div>\n  </Stack>;\n}\n",
+          "sha256": "eb2a9e7f9aa806efefd5c867ce7afa0badee55536ce73f7a13f4a26398e47d02"
         }
       ],
       "design": {
@@ -58848,102 +58896,102 @@
                 "optional": true,
                 "type": "boolean",
                 "doc": "草稿输入失焦时，把非空草稿当作一次 Enter 收下；焦点只是移到本组件的其他按钮时不触发。默认 false。",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:60"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:61"
               },
               {
                 "name": "defaultDraft",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:41"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:42"
               },
               {
                 "name": "defaultValue",
                 "optional": true,
                 "type": "readonly string[]",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:38"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:39"
               },
               {
                 "name": "disabled",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:45"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:46"
               },
               {
                 "name": "draft",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:40"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:41"
               },
               {
                 "name": "form",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:44"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:45"
               },
               {
                 "name": "inputProps",
                 "optional": true,
                 "type": "Omit<InputProps, \"value\" | \"defaultValue\" | \"onValueChange\" | \"name\" | \"size\" | \"required\">",
                 "doc": "FieldLabel 注册真实草稿入口；额外属性、render 与 ref 也属于该入口。`required` 属于 TagInput 本身。",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:67"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:68"
               },
               {
                 "name": "max",
                 "optional": true,
                 "type": "number",
                 "doc": "标签数量上限，正整数。达到后草稿输入与添加按钮禁用并说明原因；已有集合超出时完整呈现，不截断。",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:58"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:59"
               },
               {
                 "name": "name",
                 "optional": true,
                 "type": "string",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:43"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:44"
               },
               {
                 "name": "onDraftChange",
                 "optional": true,
                 "type": "(draft: string) => void",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:42"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:43"
               },
               {
                 "name": "onValueChange",
                 "optional": true,
                 "type": "(value: string[], details: TagInputChangeDetails) => void",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:39"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:40"
               },
               {
                 "name": "readOnly",
                 "optional": true,
                 "type": "boolean",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:46"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:47"
               },
               {
                 "name": "required",
                 "optional": true,
                 "type": "boolean",
                 "doc": "至少要有一个已确认的标签。原生校验落在草稿输入上，但只在没有任何标签时才带 `required`：\n有标签而草稿为空不算缺失。草稿里有字、尚无标签时，提交前先按 Enter 的规则收下（见 `validate`）。",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:51"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:52"
               },
               {
                 "name": "splitOn",
                 "optional": true,
                 "type": "string | RegExp",
                 "doc": "键入或粘贴到分隔符时拆成多个标签（字符串按字面，正则按匹配；不要带捕获组，捕获内容会被当作标签）。\n默认不拆：逗号、空格在有些任务里就是标签的一部分。键入分隔符收下其前的部分，粘贴则收下全部。",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:56"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:57"
               },
               {
                 "name": "validate",
                 "optional": true,
                 "type": "(tag: string, tags: readonly string[]) => string | undefined",
                 "doc": "自定义拒绝：返回文案即拒绝该标签，文案就地显示并进入草稿输入的可访问描述；返回 undefined 即接受。\n在空值、重复与数量上限判断之后才调用，第二个参数是当前已确认的标签。",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:65"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:66"
               },
               {
                 "name": "value",
                 "optional": true,
                 "type": "readonly string[]",
-                "declaredAt": "packages/ui/src/components/tag-input.tsx:37"
+                "declaredAt": "packages/ui/src/components/tag-input.tsx:38"
               }
             ],
             "inheritedCount": 278,
@@ -59159,7 +59207,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/tag-input.tsx",
-        "sha256": "8ec39c7dd44653e74738178db40ee5a62a4a34d551a80a03181428338f8035ec",
+        "sha256": "2427982c90382e34627b781ce5b3c64a73456920ff2939538c746fc5dd3239a2",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "Enter 或添加按钮才确认；两端空白去除，精确字符串去重且区分大小写。空项、重复项及受控拒绝不会清空草稿。",
@@ -60678,10 +60726,11 @@
           "进退相承"
         ],
         "whenToUse": [
-          "只填一个时刻，按时、分、秒分段输入。"
+          "只填一个时刻，如提醒时间、营业开始。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "起止两个时刻用 TimeRangeField；日期加时刻用 DateTimePicker。",
+          "只要日期用 DatePicker。"
         ],
         "composition": [
           "Field + FieldLabel + TimeField + FieldDescription / FieldError"
@@ -60817,10 +60866,11 @@
               "Continuity through change （进退相承）"
             ],
             "whenToUse": [
-              "Fill in a time of day alone, segment by segment: hour, minute, second."
+              "Fill in a single time of day, such as a reminder time or an opening time."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use TimeRangeField for a start and end time; DateTimePicker for a date with a time.",
+              "Use DatePicker for a date only."
             ],
             "composition": [
               "Field + FieldLabel + TimeField + FieldDescription / FieldError"
@@ -61206,7 +61256,8 @@
           "在一个编辑边界里填起止两个时刻，如营业时间、班次。"
         ],
         "avoid": [
-          "不能仅用 placeholder 代替名称；失败后不要无故清空输入。"
+          "单个时刻用 TimeField；起止还要带日期用 DateTimeRangePicker。",
+          "跨日的区间须显式传 allowCrossMidnight，否则结束早于开始会判为无效。"
         ],
         "composition": [
           "Field + FieldLabel + TimeRangeField + FieldDescription / FieldError"
@@ -61324,10 +61375,11 @@
               "Complementary roles and safeguards （相成相制）"
             ],
             "whenToUse": [
-              "Fill in a start and an end time of day in one edit boundary, such as opening hours or a shift."
+              "Fill in a start and end time within one editing boundary, such as opening hours or a shift."
             ],
             "avoid": [
-              "Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it."
+              "Use TimeField for a single time; DateTimeRangePicker when the range also needs dates.",
+              "A range that crosses midnight needs allowCrossMidnight, otherwise an end before the start is invalid."
             ],
             "composition": [
               "Field + FieldLabel + TimeRangeField + FieldDescription / FieldError"
@@ -62594,8 +62646,8 @@
       "api": [
         {
           "name": "Toc",
-          "description": "目录容器；渲染为 nav，没有条目时不渲染。",
-          "descriptionEn": "The table of contents container; renders as nav, and renders nothing when there are no items.",
+          "description": "目录容器；渲染为 nav，少于两项时不渲染。",
+          "descriptionEn": "The table of contents container; renders as nav, and renders nothing with fewer than two items.",
           "props": [
             {
               "name": "items",
@@ -62661,13 +62713,13 @@
                 "optional": true,
                 "type": "string | undefined",
                 "doc": "当前所在目的地的 id；缺省时没有条目带 aria-current，纯展示一份目录。类型显式带\n`| undefined`：useTocScrollSpy 在没有命中任何目的地时返回 undefined，这个值需要能\n直接传入（exactOptionalPropertyTypes 下，`current?: string` 只允许省略整个属性，\n不允许显式传 undefined）。",
-                "declaredAt": "packages/ui/src/components/toc.tsx:66"
+                "declaredAt": "packages/ui/src/components/toc.tsx:71"
               },
               {
                 "name": "items",
                 "optional": false,
                 "type": "TocItem[]",
-                "declaredAt": "packages/ui/src/components/toc.tsx:59"
+                "declaredAt": "packages/ui/src/components/toc.tsx:64"
               }
             ],
             "inheritedCount": 280,
@@ -62915,7 +62967,7 @@
           "一篇长文或文档页需要在几个段落间快速定位，并看到自己读到了哪一节。"
         ],
         "avoid": [
-          "少于两个目的地时目录没有意义，由调用方决定是否渲染（Toc 本身只在 items 为空时不渲染）。",
+          "为只有一节的页面另写是否渲染 Toc 的判断：少于两个目的地时 Toc 自己不渲染（按条目数算，一个 h2 下两个 h3 是三项）。",
           "跨页面的目的地用 Breadcrumb 或 NavigationMenu；Toc 只表达同一页内的位置。"
         ],
         "composition": [
@@ -62925,10 +62977,10 @@
         ],
         "stateOwner": {
           "library": [
-            "目录的排版、层级缩进、当前项的视觉表达。"
+            "目录的排版、层级缩进、当前项的视觉表达；少于两项时不渲染。"
           ],
           "application": [
-            "标题的真实 id、滚动容器、吸顶偏移、是否需要目录（少于两项时渲染与否）。"
+            "标题的真实 id、滚动容器、吸顶偏移、版面里是否为目录留栏。"
           ]
         },
         "responsive": [
@@ -62940,7 +62992,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/toc.tsx",
-        "sha256": "8d97141f492627f220e38c903da4c49540311794074937e3d4b82be9ec0b857d",
+        "sha256": "f4e51a4407103bc3e69e9f6612457ef1004296c3c79aa640a6305d7c0145cfdd",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "Toc 不读路由、不做平滑滚动：<a href=\"#id\"> 是原生锚点跳转，吸顶偏移、路由集成这类页面细节留给项目。当前位置（current）由调用方传入，组件不猜测滚动位置；useTocScrollSpy 是可选工具，不是 Toc 的隐藏依赖。",
@@ -62958,8 +63010,8 @@
           "api": [
             {
               "name": "Toc",
-              "description": "The table of contents container; renders as nav, and renders nothing when there are no items.",
-              "descriptionEn": "The table of contents container; renders as nav, and renders nothing when there are no items.",
+              "description": "The table of contents container; renders as nav, and renders nothing with fewer than two items.",
+              "descriptionEn": "The table of contents container; renders as nav, and renders nothing with fewer than two items.",
               "props": [
                 {
                   "name": "items",
@@ -63022,7 +63074,7 @@
               "A long article or documentation page needs quick movement between sections, with visible confirmation of the current one."
             ],
             "avoid": [
-              "A single destination makes no table of contents; the caller decides whether to render one (Toc itself only withholds rendering when items is empty).",
+              "Writing your own check for whether to render Toc on a single-section page: Toc renders nothing with fewer than two destinations (counted as items, so one h2 with two h3s is three).",
               "Use Breadcrumb or NavigationMenu for destinations across pages; Toc only expresses position within the current page."
             ],
             "composition": [
@@ -63032,10 +63084,10 @@
             ],
             "stateOwner": {
               "library": [
-                "The table of contents' layout, level indent, and the current item's visual expression."
+                "The table of contents' layout, level indent, and the current item's visual expression; it renders nothing with fewer than two items."
               ],
               "application": [
-                "Headings' actual ids, the scroll container, sticky-header offsets, and whether a table of contents is needed at all."
+                "Headings' actual ids, the scroll container, sticky-header offsets, and whether the layout reserves a column for the contents."
               ]
             },
             "responsive": [
@@ -63305,8 +63357,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { useState } from \"react\";\nimport { IconBold, IconItalic } from \"@tabler/icons-react\";\nimport { Toggle } from \"@qingye_lab/ui/components/toggle\";\n\nexport const meta = { title: \"切换态\", titleEn: \"Toggled state\" };\nexport default function Demo() {\n  const [pressed, setPressed] = useState(true);\n  return <div className=\"flex flex-wrap items-center gap-(--qy-action-gap)\">\n    <Toggle pressed={pressed} onPressedChange={setPressed}>加粗</Toggle>\n    <Toggle shape=\"icon\" aria-label=\"斜体\"><IconItalic aria-hidden=\"true\" /></Toggle>\n    <Toggle disabled defaultPressed><IconBold aria-hidden=\"true\" />加粗</Toggle>\n    <span className={pressed ? \"text-body-strong text-foreground\" : \"text-body text-foreground\"}>Aa 字</span>\n  </div>;\n}\n",
-          "sha256": "39aa6375bdc2938c54286b122731016e850bb9bc4d306889e19327b382f98afd"
+          "code": "import { useState } from \"react\";\nimport { IconBold, IconItalic } from \"@tabler/icons-react\";\nimport { Toggle } from \"@qingye_lab/ui/components/toggle\";\n\nexport const meta = { title: \"切换态\", titleEn: \"Toggled state\", specimen: true };\nexport default function Demo() {\n  const [pressed, setPressed] = useState(true);\n  return <div className=\"flex flex-wrap items-center gap-(--qy-action-gap)\">\n    <Toggle pressed={pressed} onPressedChange={setPressed}>加粗</Toggle>\n    <Toggle shape=\"icon\" aria-label=\"斜体\"><IconItalic aria-hidden=\"true\" /></Toggle>\n    <Toggle disabled defaultPressed><IconBold aria-hidden=\"true\" />加粗</Toggle>\n    <span className={pressed ? \"text-body-strong text-foreground\" : \"text-body text-foreground\"}>Aa 字</span>\n  </div>;\n}\n",
+          "sha256": "4340e5e0007bd0c911091c0872775b91f7048f9f1e5e235e05606cc6602e5d24"
         },
         {
           "id": "sizes",
@@ -64627,7 +64679,7 @@
       "notes": [
         "纯图标按钮自带 aria-label；打开时 aria-describedby 关联提示，保留已有说明。",
         "提示只承载短文本。需要点击帮助或交互内容时用 Popover，需要持续依据时用正文。",
-        "直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因直接可见。",
+        "直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因写成页内可见文字：触屏上提示不会出现，只放在提示里的原因在那里读不到。",
         "触发器不自带控件：提示附在调用方给出的控件上。该控件必须能获得键盘焦点，所以不是 span。"
       ],
       "keywords": [
@@ -65257,7 +65309,7 @@
           "notes": [
             "Icon buttons supply aria-label. While open, aria-describedby links the hint and preserves existing descriptions.",
             "Use short text only. Use Popover for click help or interactive content, and visible text for persistent information.",
-            "Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Keep the reason visible.",
+            "Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Write the disabled reason as visible text on the page: hints never appear on touch screens, so a reason that lives only in a hint cannot be read there.",
             "The trigger brings no control of its own: the hint attaches to the caller's control, which must be keyboard focusable, so it is not a span."
           ],
           "api": [
@@ -66365,7 +66417,7 @@
       },
       "sourceFacts": {
         "file": "packages/ui/src/components/transfer.tsx",
-        "sha256": "33edceaba8c73967d2c63e2a6120ec744e68eff44d41db0816c2075cecfa06c8",
+        "sha256": "a8fb40e9cf2f0175303dded681f41fa34c4e549ce2fa5c1e77a8c11cfba2b52b",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
       "decisions": "穿梭框解决的是「从一大批里挑出一小批并能回头调整」，所以两侧都是完整的列表，而不是一个下拉加一排标签。它的值只是右侧的键数组，勾选状态是临时的，不进入值。条目多时由应用先做筛选或分页，本组件不做虚拟滚动：固定高度的列表在几百项内足够，更大的数据量应换成 Combobox 或 Table 里的选择。",
@@ -68636,8 +68688,8 @@
             "react"
           ],
           "providers": [],
-          "code": "import { useRef, useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { VirtualList, type VirtualListActions } from \"@qingye_lab/ui/components/virtual-list\";\n\nexport const meta = { title: \"动态记录与阅读位置\", titleEn: \"Measured records and reading continuity\" };\ntype Entry = { id: number; text: string; expanded?: boolean };\nconst initial: Entry[] = Array.from({ length: 60 }, (_, id) => ({\n  id,\n  text: id % 3 === 0 ? \"窄屏复核已完成，补充了长标题换行和键盘返回的验证记录。\" : \"本次检查已完成，记录保留供后续复核。\",\n}));\nconst getKey = (entry: Entry) => entry.id;\nconst estimate = 72;\n\nexport default function Demo() {\n  const [entries, setEntries] = useState(initial);\n  const actions = useRef<VirtualListActions>(null);\n  const next = useRef(initial.length);\n  const previous = useRef(-1);\n  return <div className=\"grid gap-(--qy-action-gap)\">\n    <div className=\"flex flex-wrap gap-(--qy-action-gap)\">\n      <Button variant=\"bordered\" onClick={() => {\n        const id = previous.current--;\n        setEntries(current => [{ id, text: \"更早的检查记录：当时尚未发现新增问题，保留原始观察。\" }, ...current]);\n      }}>更早记录</Button>\n      <Button variant=\"bordered\" onClick={() => {\n        const id = next.current++;\n        setEntries(current => [...current, { id, text: \"刚完成一轮复核，新的观察已加入记录。\" }]);\n      }}>新增记录</Button>\n      <Button variant=\"quiet\" onClick={() => actions.current?.scrollToIndex(Math.floor(entries.length / 2), { align: \"start\" })}>查看中段</Button>\n      <Button variant=\"quiet\" onClick={() => actions.current?.scrollToEnd()}>跳到最新</Button>\n    </div>\n    <VirtualList aria-label=\"检查记录\" items={entries} getKey={getKey} measurement=\"dynamic\" itemSize={estimate} height={estimate * 4} actionsRef={actions} followEnd\n      renderItem={entry => <div className=\"grid gap-(--qy-space-2) px-(--qy-control-md-padding) py-(--qy-space-3)\">\n        <div className=\"flex items-center justify-between gap-(--qy-space-2)\">\n          <span className=\"text-support text-muted-foreground\">记录 {entry.id + 1}</span>\n          <Button size=\"xs\" variant=\"quiet\" aria-expanded={entry.expanded ?? false} onClick={() => setEntries(current => current.map(item => item.id === entry.id ? { ...item, expanded: !item.expanded } : item))}>{entry.expanded ? \"收起\" : \"详情\"}</Button>\n        </div>\n        <p className=\"text-body\">{entry.text}</p>\n        {entry.expanded && <p className=\"text-body\">复核范围包含手机窄屏、放大文字与连续键盘操作。当前记录只表达已完成的检查；待验证项仍由项目单独跟踪。详情展开后继续保留正在阅读的位置。</p>}\n      </div>} />\n  </div>;\n}\n",
-          "sha256": "4d4398590f6bb262690a18378bceef57ed13026b7d4f28ca5d93b71ea3fae06e"
+          "code": "import { useRef, useState } from \"react\";\nimport { Button } from \"@qingye_lab/ui/components/button\";\nimport { VirtualList, type VirtualListActions } from \"@qingye_lab/ui/components/virtual-list\";\n\nexport const meta = { title: \"动态记录与阅读位置\", titleEn: \"Measured records and reading continuity\" };\ntype Entry = { id: number; text: string; expanded?: boolean };\nconst initial: Entry[] = Array.from({ length: 60 }, (_, id) => ({\n  id,\n  text: id % 3 === 0 ? \"窄屏复核已完成，补充了长标题换行和键盘返回的验证记录。\" : \"本次检查已完成，记录保留供后续复核。\",\n}));\nconst getKey = (entry: Entry) => entry.id;\nconst estimate = 72;\n\nexport default function Demo() {\n  const [entries, setEntries] = useState(initial);\n  const actions = useRef<VirtualListActions>(null);\n  const next = useRef(initial.length);\n  const previous = useRef(-1);\n  return <div className=\"grid gap-(--qy-action-gap)\">\n    <div className=\"flex flex-wrap gap-(--qy-action-gap)\">\n      <Button variant=\"bordered\" onClick={() => {\n        const id = previous.current--;\n        setEntries(current => [{ id, text: \"更早的检查记录：当时尚未发现新增问题，保留原始观察。\" }, ...current]);\n      }}>更早记录</Button>\n      <Button variant=\"bordered\" onClick={() => {\n        const id = next.current++;\n        setEntries(current => [...current, { id, text: \"刚完成一轮复核，新的观察已加入记录。\" }]);\n      }}>新增记录</Button>\n      <Button variant=\"quiet\" onClick={() => actions.current?.scrollToIndex(Math.floor(entries.length / 2), { align: \"start\" })}>查看中段</Button>\n      <Button variant=\"quiet\" onClick={() => actions.current?.scrollToEnd()}>跳到最新</Button>\n    </div>\n    <VirtualList aria-label=\"检查记录\" items={entries} getKey={getKey} measurement=\"dynamic\" itemSize={estimate} height={estimate * 4} actionsRef={actions} followEnd\n      renderItem={entry => <div className=\"grid gap-(--qy-space-2) px-(--qy-control-md-padding) py-(--qy-space-3)\">\n        <div className=\"flex items-center justify-between gap-(--qy-space-2)\">\n          <span className=\"text-support text-muted-foreground\">记录 {entry.id + 1}</span>\n          <Button size=\"xs\" variant=\"quiet\" aria-expanded={entry.expanded ?? false} aria-label={`${entry.expanded ? \"收起\" : \"详情\"} 记录 ${entry.id + 1}`} onClick={() => setEntries(current => current.map(item => item.id === entry.id ? { ...item, expanded: !item.expanded } : item))}>{entry.expanded ? \"收起\" : \"详情\"}</Button>\n        </div>\n        <p className=\"text-body\">{entry.text}</p>\n        {entry.expanded && <p className=\"text-body\">复核范围包含手机窄屏、放大文字与连续键盘操作。当前记录只表达已完成的检查；待验证项仍由项目单独跟踪。详情展开后继续保留正在阅读的位置。</p>}\n      </div>} />\n  </div>;\n}\n",
+          "sha256": "ad3d12a763882f8c16cf0deb050431b4bf0de1e4099457adec90530100ce9be2"
         }
       ],
       "design": {
@@ -69838,7 +69890,7 @@
   "patterns": [],
   "designGuide": {
     "file": "design.md",
-    "sha256": "e809ed3053e1226b836d71d3e169aec9b53c188730b9151196a4ebfa9740d123",
+    "sha256": "c8fa01e1f4c0b9e003938bc7b3a40873de07f633f62eb7844b94326c259016ab",
     "styleContract": {
       "file": "ai/style.md",
       "section": "设计契约",
@@ -69877,8 +69929,8 @@
   },
   "ai": {
     "skill": "ai/SKILL.md",
-    "index": "ai/v5.4.0/llms.txt",
-    "components": "ai/v5.4.0/components"
+    "index": "ai/v5.5.0/llms.txt",
+    "components": "ai/v5.5.0/components"
   },
   "localized": {
     "en": {
@@ -69886,8 +69938,8 @@
       "styleContract": "ai/style.en.md",
       "philosophy": "ai/design-philosophy.en.md",
       "skill": "ai/SKILL.en.md",
-      "index": "ai/v5.4.0/en/llms.txt",
-      "components": "ai/v5.4.0/en/components"
+      "index": "ai/v5.5.0/en/llms.txt",
+      "components": "ai/v5.5.0/en/components"
     }
   },
   "registry": {

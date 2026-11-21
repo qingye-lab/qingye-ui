@@ -1,0 +1,2 @@
+{ "id": "T10", "title": "图表时间粒度（单值选择的控件选用）", "editable": ["src/GranularityPicker.tsx"], "hidden": ["T10.test.tsx"],
+  "wrong": { "tabs": ["粒度是一组互斥单选值"], "toggle-group": ["粒度是一组互斥单选值", "再次点击当前粒度不会取消选择"] } }

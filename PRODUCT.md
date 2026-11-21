@@ -27,10 +27,10 @@ Qingye UI（青野）是基于 Base UI 与 Tailwind CSS 4 的 React 组件库，
 
 ## Capabilities and Constraints
 
-- 87 个组件，分为 Foundation、Primitive、Pattern 三层；不含业务逻辑。
+- 114 个组件，分为 Foundation、Primitive、Pattern 三层；不含业务逻辑。
 - 官网是第一方消费项目，交互控件必须复用 `@qingye_lab/ui`，不另造基础控件。
 - 中英双语路由（`/` 与 `/en`）；只做桌面端，不做移动端页面适配。
-- 包通过 GitHub Release 分发，没有发布到 npm。安装命令不得写成 `npm install @qingye_lab/ui`。
+- 包发布到 npm（`@qingye_lab/ui`）；GitHub Release 同时附带同版本 tgz，供无法访问 npm 时安装。
 
 ## Brand Commitments
 

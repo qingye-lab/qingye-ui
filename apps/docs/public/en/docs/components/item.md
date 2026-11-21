@@ -1,6 +1,6 @@
 # Item
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/item
 Source: packages/ui/src/components/item.tsx
 Source SHA-256: 1f8aeb2d275d1293494b4ae60f7022b715f9ccbba1a5d159822caa9439489d23
@@ -156,8 +156,8 @@ export default function Demo() {
     {rows.map(row => <Item render={<li />} key={row.name}>
       <ItemContent><ItemTitle>{row.name}</ItemTitle><ItemDescription>{row.note}</ItemDescription></ItemContent>
       <ItemActions reveal="hover" resting={<time>{row.time}</time>}>
-        <Button variant="quiet" size="sm">重命名</Button>
-        <Button variant="quiet" size="sm">归档</Button>
+        <Button variant="quiet" size="sm" aria-label={`重命名 ${row.name}`}>重命名</Button>
+        <Button variant="quiet" size="sm" aria-label={`归档 ${row.name}`}>归档</Button>
       </ItemActions>
     </Item>)}
   </Stack>;

@@ -1,6 +1,6 @@
 # 时间输入 TimeField
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/time-field
 Source: packages/ui/src/components/time-field.tsx
 Source SHA-256: 937f151dd1ee52cbb707c4c4d6a087c0e7c791f4e723ba4cc751aa7237f82bcf
@@ -17,8 +17,9 @@ value 是与原生 input[type=time] 同形的无时区文本（HH:mm、HH:mm:ss�
 - 没有弹层：时刻的取值空间很小，直接分段填比从列表里选更快。
 
 ## Use and ownership
-- 只填一个时刻，按时、分、秒分段输入。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
+- 只填一个时刻，如提醒时间、营业开始。
+- Avoid: 起止两个时刻用 TimeRangeField；日期加时刻用 DateTimePicker。
+- Avoid: 只要日期用 DatePicker。
 - Library: 分段草稿、键入缓冲、焦点所在段
 - Application: 时间值、约束、错误说明、提交结果
 

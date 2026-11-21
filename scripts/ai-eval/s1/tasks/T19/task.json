@@ -1,0 +1,2 @@
+{ "id": "T19", "title": "收件人记号移除后的键盘操作", "editable": ["src/RecipientList.tsx"], "hidden": ["T19.test.tsx"],
+  "wrong": { "no-focus": ["键盘移除中间一位后", "只剩一位时移除它"], "hand-rolled": ["记号来自库"] } }

@@ -1,0 +1,4 @@
+{
+  "devDependencies": { "@qingye/tooling": "file:./vendor/qingye-tooling-0.5.0.tgz" },
+  "scripts": { "check:ui": "qingye-ui check --project ." }
+}

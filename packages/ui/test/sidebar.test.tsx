@@ -3,6 +3,7 @@ import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
 import { UILocaleProvider } from "../src/locale";
+import { enUS } from "../src/locales/en-US";
 import { Avatar, AvatarFallback } from "../src/components/avatar";
 import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuTrigger } from "../src/components/menu";
 import { Drawer, DrawerClose, DrawerContent, DrawerPopup, DrawerTrigger } from "../src/components/drawer";
@@ -25,15 +26,15 @@ describe("Sidebar", () => {
   });
   it("collapses into an icon rail, not a hidden panel: content and real links stay in the accessibility tree", async () => {
     const user = userEvent.setup(); render(<Sidebar><SidebarToggle /><SidebarContent id="actual-nav" aria-label="页面"><SidebarLink href="/a" active icon={dot}>A</SidebarLink><SidebarLink href="/b" icon={dot}>B</SidebarLink></SidebarContent></Sidebar>);
-    expect(screen.getByRole("button", { name: "工作区导航" })).toHaveAttribute("aria-controls", "actual-nav");
+    expect(screen.getByRole("button", { name: "页面" })).toHaveAttribute("aria-controls", "actual-nav");
     expect(screen.getByRole("link", { name: "A" })).toHaveAttribute("aria-current", "page");
-    await user.click(screen.getByRole("button", { name: "工作区导航" }));
+    await user.click(screen.getByRole("button", { name: "页面" }));
     // 收起是 rail：导航与两个链接仍然挂载、仍然是真实链接，只是名称切到视觉隐藏（sr-only），
     // 不再像旧版那样整段 hidden——2026-10 的裁决要求收起态显示一列图标而不是消失。
     expect(screen.getByRole("navigation")).toBeInTheDocument();
     expect(screen.getAllByRole("link")).toHaveLength(2);
     expect(screen.getByRole("link", { name: "A" })).toHaveAttribute("aria-current", "page");
-    await user.click(screen.getByRole("button", { name: "工作区导航" }));
+    await user.click(screen.getByRole("button", { name: "页面" }));
     expect(screen.getAllByRole("link")).toHaveLength(2);
   });
   it("keeps focus on a rail item after a controlled collapse, since it is still reachable there", async () => {
@@ -278,7 +279,7 @@ describe("Sidebar", () => {
       const spy = narrow(false);
       render(shell(() => {}));
       expect(screen.getByRole("navigation", { name: "页面" })).toBeInTheDocument();
-      expect(screen.getByRole("button", { name: "工作区导航" })).toHaveAttribute("aria-expanded", "true");
+      expect(screen.getByRole("button", { name: "页面" })).toHaveAttribute("aria-expanded", "true");
       spy.mockRestore();
     });
     it("needs a Workspace or a shared handle", () => {
@@ -298,4 +299,36 @@ describe("Sidebar", () => {
     expect(() => render(tree(true))).toThrow(/at most two levels/);
     error.mockRestore();
   });
+});
+
+describe("SidebarToggle name follows its nav", () => {
+  it("keeps the default name when the nav has none of its own", () => {
+    render(<Sidebar><SidebarToggle /><SidebarContent><SidebarLink href="#a">A</SidebarLink></SidebarContent></Sidebar>);
+    expect(screen.getByRole("button", { name: "工作区导航" })).toBeInTheDocument();
+  });
+  it("two sidebars with their own nav names get distinguishable toggles (aria-label and aria-labelledby)", () => {
+    render(<>
+      <Sidebar><SidebarToggle /><SidebarContent aria-label="项目导航"><SidebarLink href="#a">A</SidebarLink></SidebarContent></Sidebar>
+      <span id="admin-name">管理导航</span>
+      <Sidebar><SidebarToggle /><SidebarContent aria-labelledby="admin-name"><SidebarLink href="#b">B</SidebarLink></SidebarContent></Sidebar>
+    </>);
+    expect(screen.getByRole("button", { name: "项目导航" })).toHaveAttribute("aria-controls");
+    expect(screen.getByRole("button", { name: "管理导航" })).toHaveAttribute("aria-labelledby", "admin-name");
+  });
+  it("an explicit toggle name wins over the nav's", () => {
+    render(<Sidebar><SidebarToggle aria-label="折叠" /><SidebarContent aria-label="项目导航"><SidebarLink href="#a">A</SidebarLink></SidebarContent></Sidebar>);
+    expect(screen.getByRole("button", { name: "折叠" })).toBeInTheDocument();
+  });
+  it("en-US default name", () => {
+    render(<UILocaleProvider locale={enUS}><Sidebar><SidebarToggle /><SidebarContent><SidebarLink href="#a">A</SidebarLink></SidebarContent></Sidebar></UILocaleProvider>);
+    expect(screen.getByRole("button", { name: "Workspace navigation" })).toBeInTheDocument();
+  });
+});
+
+it("a toggle without children drops the navigation's name once that navigation unmounts", () => {
+  const tree = (withContent: boolean) => <Sidebar><SidebarToggle />{withContent && <SidebarContent aria-label="页面"><SidebarLink href="/a">A</SidebarLink></SidebarContent>}</Sidebar>;
+  const { rerender } = render(tree(true));
+  expect(screen.getByRole("button", { name: "页面" })).toBeInTheDocument();
+  rerender(tree(false));
+  expect(screen.queryByRole("button", { name: "页面" })).not.toBeInTheDocument();
 });

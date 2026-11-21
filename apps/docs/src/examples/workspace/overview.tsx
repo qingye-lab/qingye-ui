@@ -108,7 +108,7 @@ export default function Overview() {
             {attention.map(item => <Item key={item.id} render={<li />} className="border-t border-border">
               <ItemContent><ItemLink render={<RouterLink to={`${BASE}/collections/${item.id}`} />} className="truncate">{item.name}</ItemLink></ItemContent>
               <ItemActions resting={<StatusDot status={syncDot[item.state]} label={`${item.state} · ${item.synced}`} className="text-muted-foreground" />}>
-                <Button size="sm" variant="quiet">重新同步</Button>
+                <Button aria-label={`重新同步 ${item.name}`} size="sm" variant="quiet">重新同步</Button>
               </ItemActions>
             </Item>)}
           </ul>

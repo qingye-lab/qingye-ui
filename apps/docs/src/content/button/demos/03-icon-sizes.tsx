@@ -1,7 +1,7 @@
 import { Button } from "@qingye_lab/ui/components/button";
 import { IconPlus } from "@tabler/icons-react";
 
-export const meta = { title: "图标形态", titleEn: "Icon shape" };
+export const meta = { title: "图标形态", titleEn: "Icon shape", specimen: true };
 
 export default function Demo() {
   return <>

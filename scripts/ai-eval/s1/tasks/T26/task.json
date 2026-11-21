@@ -1,0 +1,2 @@
+{ "id": "T26", "title": "套餐变更摘要", "editable": ["src/PlanChange.tsx"], "hidden": ["T26.test.tsx"],
+  "wrong": { "in-panel": ["不可退款无需展开"], "in-panel-kept": ["不可退款无需展开"], "native-details": ["三个分节默认收起", "分节来自库"] } }

@@ -1,6 +1,6 @@
 # 图表 Chart
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
 Source SHA-256: 2520f2b39351f8ffe7b60cb12afb200d3e3cab3b64c402eebcff4f19fd9db480

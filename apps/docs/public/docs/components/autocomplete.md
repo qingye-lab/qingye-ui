@@ -1,9 +1,9 @@
 # 建议输入 Autocomplete
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: 49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7
+Source SHA-256: b56390332369882f40dd618b614736dbecb995da1634da99f97332f6d7f1cf2c
 
 编辑自由文本，候选作为可接受的建议。
 
@@ -15,10 +15,12 @@ Source SHA-256: 49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7
 - 空集合不代表错误或服务失败；空提示由调用方根据真实情况提供；省略 children 时用内置的「没有可选项」。
 - caller 定位 style 最后合并；颜色、圆角、高亮与焦点读取现有主题角色。
 - 命令面板用 Command。
+- 命名用 Field + FieldLabel，或用 Label 的 htmlFor 指向输入框 id，候选面打开时名称保留。不要用 label 包住整个控件、把文字放进子元素：打开时候选面以外的内容对读屏隐藏，这样写的名称会消失。
 
 ## Use and ownership
-- 编辑自由文本，候选作为可接受的建议。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
+- 输入文字本身就是值，候选只是可接受的建议（搜索词、标签名、地址）。
+- Avoid: 值必须来自候选用 Combobox（候选少且固定用 Select）。
+- Avoid: 执行命令或跳转用 Command；只是搜索框用 SearchInput。
 - Library: 建议高亮、焦点、非受控文本
 - Application: 受控文本、建议数据、错误与提交结果
 

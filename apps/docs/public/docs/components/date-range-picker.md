@@ -1,9 +1,9 @@
 # 日期范围 DateRangePicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 9ba2abc7c00e37716a489e1ef61f4ed8a5d9d2e353db9accee0fd37f4a61c98c
+Source SHA-256: 0d0834aa70a325fc41b42045d1bc6db3d550265f91ac2c1276384c7099b5bb0c
 
 键入或在日历中选择起止日期，完整且有序时才是确认值。
 
@@ -17,8 +17,9 @@ Source SHA-256: 9ba2abc7c00e37716a489e1ef61f4ed8a5d9d2e353db9accee0fd37f4a61c98c
 - 只读时不开弹层：值在、可聚焦、可读出，不能改。
 
 ## Use and ownership
-- 键入或在日历中选择起止日期，完整且有序时才是确认值。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
+- 选起止两个日期，如报表区间、入住与退房。
+- Avoid: 单个日期用 DatePicker；起止还要带时刻用 DateTimeRangePicker。
+- Avoid: 只有起止时刻没有日期用 TimeRangeField。
 - Library: 展开、本次范围草稿、键入中间态、焦点返回
 - Application: 完整确认范围、允许日期、预设的取值、无效时的说明、提交结果
 

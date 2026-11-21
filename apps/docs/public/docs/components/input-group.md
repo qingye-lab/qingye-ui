@@ -1,6 +1,6 @@
 # 输入组合 InputGroup
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
 Source SHA-256: f88486029dc36fd228d2cee9649a1d29061e04dae1e4fc3998238074ca90e72c
@@ -300,11 +300,11 @@ export default function Demo() {
       <FieldLabel id="price-range-label" nativeLabel={false} render={<span />}>价格</FieldLabel>
       <InputGroup>
         <InputGroupNumberField name="priceMin" defaultValue={100} min={0}>
-          <NumberFieldGroup unstyled><NumberFieldInput aria-label="最低价" /></NumberFieldGroup>
+          <NumberFieldGroup unstyled><NumberFieldInput id="price-min" aria-label="最低价" aria-labelledby="price-range-label price-min" /></NumberFieldGroup>
         </InputGroupNumberField>
         <InputGroupAddon><InputGroupText>至</InputGroupText></InputGroupAddon>
         <InputGroupNumberField name="priceMax" defaultValue={500} min={0}>
-          <NumberFieldGroup unstyled><NumberFieldInput aria-label="最高价" /></NumberFieldGroup>
+          <NumberFieldGroup unstyled><NumberFieldInput id="price-max" aria-label="最高价" aria-labelledby="price-range-label price-max" /></NumberFieldGroup>
         </InputGroupNumberField>
       </InputGroup>
     </Field>

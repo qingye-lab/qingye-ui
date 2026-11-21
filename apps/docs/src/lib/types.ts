@@ -108,6 +108,12 @@ export interface ComponentMeta extends LocalizedMeta {
 export interface DemoMeta extends LocalizedMeta {
   /** Render the preview without padding, e.g. for full-width tables. */
   flush?: boolean;
+  /**
+   * 样张：同一个控件的几种外观或状态并列（尺寸、变体、忙碌与禁用），名称相同是有意的。
+   * 渲染为 `data-specimen`；`scripts/name-audit.mjs` 把落在其中的同名发现单列，仍计数、仍输出，页面不因此算 PASS。
+   * 只在演示目的就是并列比较时使用；行内操作、表单等真实用法同名仍须改名称。
+   */
+  specimen?: boolean;
 }
 
 export interface DemoModule {

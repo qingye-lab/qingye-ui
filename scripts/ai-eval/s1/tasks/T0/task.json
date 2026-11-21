@@ -1,0 +1,1 @@
+{ "id": "T0", "title": "冒烟题", "editable": ["src/Hello.tsx"], "hidden": ["T0.test.tsx"], "wrong": { "plain-button": ["[api]"] } }

@@ -17,6 +17,6 @@ export default {
     { name: "htmlFor", type: "string", description: "实际控件的 id。", descriptionEn: "The actual control id." },
     { name: "render / ref / 原生属性", nameEn: "render / ref / native props", type: "useRender.ComponentProps<label>", description: "保留标签语义、事件、ref 与原生属性。替换标签元素后需显式维护命名关系。", descriptionEn: "Preserves semantics, events, ref and native attributes. An alternate tag must provide an explicit naming relationship." },
   ] }],
-  notes: ["Label 不拥有禁用状态；被命名控件使用自己的真实 disabled。"],
-  notesEn: ["Label owns no disabled state; the named control uses its real disabled attribute."],
+  notes: ["Label 不拥有禁用状态；被命名控件使用自己的真实 disabled。", "Combobox、Autocomplete 这类弹层输入框用 htmlFor 关联或放进 Field；不要用 label 包住控件、把文字放进子元素，弹层打开时这样写的名称会消失。"],
+  notesEn: ["Label owns no disabled state; the named control uses its real disabled attribute.", "For popup inputs such as Combobox and Autocomplete, associate through htmlFor or use Field; do not wrap the control in a label with its text in a child element, because that name disappears while the popup is open."],
 } satisfies ComponentMeta;

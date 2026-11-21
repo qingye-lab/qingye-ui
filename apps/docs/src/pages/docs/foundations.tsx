@@ -92,7 +92,7 @@ export default function FoundationsPage() {
           <H2 id={id}>{pick(title)}</H2>
           <p className="fd-origin" data-slot="docs-origin">{pick(origin)}</p>
           <p className="fd-text">{pick(text)}</p>
-          {Specimen ? <Specimen en={en} /> : null}
+          {Specimen ? <div role="group" aria-labelledby={id} data-specimen=""><Specimen en={en} /></div> : null}
           <p className="fd-links" data-slot="docs-links">
             {links.map((link) => <A href={link.href} key={link.href}>{en ? link.en : link.zh}</A>)}
           </p>

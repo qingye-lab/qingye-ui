@@ -13,7 +13,7 @@ test("a date-only draft never invents time or submission; complete Apply and cle
     return <form><Field name="when"><FieldLabel>日期时间</FieldLabel><DateTimePicker value={value} onValueChange={setValue} calendarProps={{ defaultMonth: new Date(2026, 9) }} /></Field></form>;
   }
   const { container } = render(<UILocaleProvider locale={enUS}><Example /></UILocaleProvider>);
-  await userEvent.click(screen.getByRole("button", { name: "Select date and time" }));
+  await userEvent.click(screen.getByRole("button", { name: "Select date and time 日期时间" }));
   await userEvent.click(await screen.findByRole("button", { name: /October 3, 2026/ }));
   expect(screen.getByLabelText("Time")).toHaveValue("");
   expect(screen.getByRole("button", { name: "Apply" })).toBeDisabled();
@@ -21,9 +21,9 @@ test("a date-only draft never invents time or submission; complete Apply and cle
   fireEvent.change(screen.getByLabelText("Time"), { target: { value: "12:30" } });
   await userEvent.click(screen.getByRole("button", { name: "Apply" }));
   expect(new FormData(container.querySelector("form")!).getAll("when")).toEqual(["2026-10-03T12:30"]);
-  await userEvent.click(screen.getByRole("button", { name: "Select date and time" }));
+  await userEvent.click(screen.getByRole("button", { name: "Select date and time 日期时间" }));
   await userEvent.click(await screen.findByRole("button", { name: "Clear" }));
-  expect(screen.getByLabelText("日期时间")).toHaveValue("");
+  expect(screen.getByLabelText("日期时间", { selector: "input" })).toHaveValue("");
 });
 
 test("controlled rejection/readonly preserve local wall-clock text, invalid zoned values fail", async () => {
@@ -63,7 +63,7 @@ test("a five-digit year the platform accepts as text is held as typing, never ha
 test("min and max bound the native input and the calendar, and a draft outside them cannot be applied", async () => {
   render(<UILocaleProvider locale={enUS}><DateTimePicker min="2026-10-05T09:00" max="2026-10-20T18:00" inputProps={{ "aria-label": "When" }} calendarProps={{ defaultMonth: new Date(2026, 9) }} /></UILocaleProvider>);
   expect(screen.getByLabelText("When")).toHaveAttribute("min", "2026-10-05T09:00");
-  await userEvent.click(screen.getByRole("button", { name: "Select date and time" }));
+  await userEvent.click(screen.getByRole("button", { name: "Select date and time When" }));
   expect(await screen.findByRole("button", { name: /October 4, 2026/ })).toBeDisabled();
   await userEvent.click(screen.getByRole("button", { name: /October 5, 2026/ }));
   fireEvent.change(screen.getByLabelText("Time"), { target: { value: "08:00" } });
@@ -99,13 +99,13 @@ test("a half-typed or out-of-range entry is kept on blur, marked invalid with a 
 test("the clear action empties the value, returns focus to the input and is absent when read-only, which says so", async () => {
   const change = vi.fn();
   const { rerender } = render(<DateTimePicker defaultValue="2026-10-03T12:30" onValueChange={change} inputProps={{ "aria-label": "时刻" }} />);
-  await userEvent.click(screen.getByRole("button", { name: "清除日期和时间" }));
+  await userEvent.click(screen.getByRole("button", { name: "清除日期时间 时刻" }));
   expect(change).toHaveBeenCalledWith(undefined, expect.anything());
   expect(screen.getByLabelText("时刻")).toHaveFocus();
-  expect(screen.queryByRole("button", { name: "清除日期和时间" })).not.toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: "清除日期时间" })).not.toBeInTheDocument();
   rerender(<DateTimePicker value="2026-10-03T12:30" onValueChange={change} readOnly inputProps={{ "aria-label": "时刻" }} />);
   expect(screen.getByText("只读")).toBeInTheDocument();
-  expect(screen.queryByRole("button", { name: "清除日期和时间" })).not.toBeInTheDocument();
+  expect(screen.queryByRole("button", { name: "清除日期时间" })).not.toBeInTheDocument();
 });
 
 test("a value with milliseconds is accepted as-is, in any precision, and reaches the native input and form unchanged", () => {
@@ -135,7 +135,7 @@ test("a native entry with milliseconds is reported, and min/max compare on the f
 test("the time draft in the popover keeps milliseconds and Apply emits them", async () => {
   const change = vi.fn();
   render(<UILocaleProvider locale={enUS}><DateTimePicker defaultValue="2026-10-03T09:12:34.567" onValueChange={change} inputProps={{ "aria-label": "When", step: 0.001 }} /></UILocaleProvider>);
-  await userEvent.click(screen.getByRole("button", { name: "Select date and time" }));
+  await userEvent.click(screen.getByRole("button", { name: "Select date and time When" }));
   const time = await screen.findByLabelText("Time");
   expect(time).toHaveValue("09:12:34.567");
   fireEvent.change(time, { target: { value: "09:12:35.001" } });
@@ -146,7 +146,7 @@ test("the time draft in the popover keeps milliseconds and Apply emits them", as
 test("clicking the draft's day again keeps the draft, so Apply stays available", async () => {
   const change = vi.fn();
   render(<UILocaleProvider locale={enUS}><DateTimePicker defaultValue="2026-11-03T09:30" onValueChange={change} inputProps={{ "aria-label": "when" }} /></UILocaleProvider>);
-  await userEvent.click(screen.getByRole("button", { name: "Select date and time" }));
+  await userEvent.click(screen.getByRole("button", { name: "Select date and time when" }));
   const day = await screen.findByRole("button", { name: /November 3, 2026/ });
   await userEvent.click(day);
   expect(screen.getByRole("button", { name: "Apply" })).toBeEnabled();
@@ -154,4 +154,23 @@ test("clicking the draft's day again keeps the draft, so Apply stays available",
   await userEvent.click(screen.getByRole("button", { name: "Apply" }));
   expect(change).toHaveBeenLastCalledWith("2026-11-03T09:30", expect.anything());
   expect(screen.getByLabelText("when")).toHaveValue("2026-11-03T09:30");
+});
+
+test("inside a Field the buttons read action + field label, in the active language", () => {
+  render(<UILocaleProvider locale={enUS}><Field name="when"><FieldLabel>Starts</FieldLabel><DateTimePicker defaultValue="2026-10-03T09:00" /></Field></UILocaleProvider>);
+  expect(screen.getByRole("button", { name: "Select date and time Starts" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Clear date and time Starts" })).toBeInTheDocument();
+});
+
+test("two fields side by side have distinguishable buttons; outside a Field the input's aria-label follows the action", () => {
+  const { unmount } = render(<form>
+    <Field name="a"><FieldLabel>开始</FieldLabel><DateTimePicker defaultValue="2026-10-03T09:00" /></Field>
+    <Field name="b"><FieldLabel>结束</FieldLabel><DateTimePicker defaultValue="2026-10-03T10:00" /></Field>
+  </form>);
+  expect(screen.getByRole("button", { name: "选择日期时间 开始" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除日期时间 结束" })).toBeInTheDocument();
+  unmount();
+  render(<DateTimePicker defaultValue="2026-10-03T09:00" inputProps={{ "aria-label": "时间" }} />);
+  expect(screen.getByRole("button", { name: "选择日期时间 时间" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除日期时间 时间" })).toBeInTheDocument();
 });

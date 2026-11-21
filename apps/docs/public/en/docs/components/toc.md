@@ -1,9 +1,9 @@
 # Toc
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
-Source SHA-256: 8d97141f492627f220e38c903da4c49540311794074937e3d4b82be9ec0b857d
+Source SHA-256: f4e51a4407103bc3e69e9f6612457ef1004296c3c79aa640a6305d7c0145cfdd
 
 A vertical in-page table of contents for moving between sections; the current location deepens its own segment of an existing thin line instead of adding a new shape.
 
@@ -17,10 +17,10 @@ Toc neither reads routing nor performs smooth scrolling: <a href="#id"> is a nat
 
 ## Use and ownership
 - A long article or documentation page needs quick movement between sections, with visible confirmation of the current one.
-- Avoid: A single destination makes no table of contents; the caller decides whether to render one (Toc itself only withholds rendering when items is empty).
+- Avoid: Writing your own check for whether to render Toc on a single-section page: Toc renders nothing with fewer than two destinations (counted as items, so one h2 with two h3s is three).
 - Avoid: Use Breadcrumb or NavigationMenu for destinations across pages; Toc only expresses position within the current page.
-- Library: The table of contents' layout, level indent, and the current item's visual expression.
-- Application: Headings' actual ids, the scroll container, sticky-header offsets, and whether a table of contents is needed at all.
+- Library: The table of contents' layout, level indent, and the current item's visual expression; it renders nothing with fewer than two items.
+- Application: Headings' actual ids, the scroll container, sticky-header offsets, and whether the layout reserves a column for the contents.
 
 ## Composition
 - items can be written by hand, or scanned from a container's h2/h3[id] with useTocHeadings (headings Prose renders already satisfy this).
@@ -60,7 +60,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 ### Toc
-The table of contents container; renders as nav, and renders nothing when there are no items.
+The table of contents container; renders as nav, and renders nothing with fewer than two items.
 - items: { id: string; label: string; level: 2 | 3 }[]. The destination list; id must match an anchor that actually exists on the page.
 - current: string. The id of the current destination; omitted means no item carries aria-current.
 - render / ref / className / style / native props: useRender.ComponentProps<"nav">. Forward attributes, events and refs to the actual element.

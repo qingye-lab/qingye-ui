@@ -1,0 +1,2 @@
+{ "id": "T29", "title": "服务器负载", "editable": ["src/ServerLoad.tsx"], "hidden": ["T29.test.tsx"],
+  "wrong": { "status-dot": ["负载读作三级中的第几级"], "badge-tone": ["负载读作三级中的第几级"], "meter-percent": ["负载读作三级中的第几级"] } }

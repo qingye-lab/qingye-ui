@@ -73,7 +73,7 @@ test("the remote example preserves a confirmed form value while a newer query lo
   expect(await screen.findByText("没有匹配的位置")).toBeVisible();
   expect(selected()).toBe("东区车库");
   await userEvent.keyboard("{Escape}");
-  await userEvent.click(screen.getByRole("button", { name: "清除选择" }));
+  await userEvent.click(screen.getByRole("button", { name: "清除选择 位置" }));
   expect(selected()).toBe("");
 });
 

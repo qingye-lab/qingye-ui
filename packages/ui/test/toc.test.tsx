@@ -35,10 +35,19 @@ test("current is controlled by the caller; changing the prop moves the marker wi
   expect(screen.getByRole("link", { name: "结果与恢复" })).toHaveAttribute("aria-current", "location");
 });
 
-test("an empty item list renders nothing — useRender stays unconditional via enabled, not an early return", () => {
-  const { container } = render(<Toc items={[]} />);
-  expect(container).toBeEmptyDOMElement();
-  expect(screen.queryByRole("navigation")).toBeNull();
+test("fewer than two destinations render nothing — useRender stays unconditional via enabled, not an early return", () => {
+  for (const list of [[], items.slice(0, 1)]) {
+    const { container, unmount } = render(<Toc items={list} />);
+    expect(container).toBeEmptyDOMElement();
+    expect(screen.queryByRole("navigation")).toBeNull();
+    unmount();
+  }
+});
+
+test("two destinations are enough to render, counted as items rather than h2 sections", () => {
+  render(<Toc items={items.slice(0, 2)} />);
+  expect(screen.getByRole("navigation", { name: "本页目录" })).toBeInTheDocument();
+  expect(screen.getAllByRole("link")).toHaveLength(2);
 });
 
 test("render swaps the element while keeping the accessible name and item list", () => {

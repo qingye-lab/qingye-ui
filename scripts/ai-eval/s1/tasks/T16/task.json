@@ -1,0 +1,2 @@
+{ "id": "T16", "title": "计费说明（图标帮助按钮与规则链接）", "editable": ["src/BillingHelp.tsx"], "hidden": ["T16.test.tsx"],
+  "wrong": { "tooltip-link": ["点击帮助按钮后出现计费规则链接", "键盘打开说明后可以聚焦到链接", "说明来自库的浮层"], "title-attr": ["点击帮助按钮后出现计费规则链接"] } }

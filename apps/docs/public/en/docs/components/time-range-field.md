@@ -1,6 +1,6 @@
 # TimeRangeField
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/time-range-field
 Source: packages/ui/src/components/time-range-field.tsx
 Source SHA-256: c39fe59d6990ae7bb22f03e31bc6ceccc0d6e0ad00e14cd867631e29a3534bf3
@@ -16,8 +16,9 @@ The value is { start, end }; each end is a TimeField value (zone-free HH:mm[:ss]
 - Crossing midnight is an explicit choice, not an automatic repair: the library never swaps the ends or edits a value when the order is wrong.
 
 ## Use and ownership
-- Fill in a start and an end time of day in one edit boundary, such as opening hours or a shift.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Fill in a start and end time within one editing boundary, such as opening hours or a shift.
+- Avoid: Use TimeField for a single time; DateTimeRangePicker when the range also needs dates.
+- Avoid: A range that crosses midnight needs allowCrossMidnight, otherwise an end before the start is invalid.
 - Library: Each end's segment draft and typing buffer, the focused segment, and the native check of the order.
 - Application: The start and end values, whether crossing midnight is allowed, the explanation when the order is wrong, and submission outcomes.
 

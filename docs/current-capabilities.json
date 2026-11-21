@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-03T09:04:50.738Z",
-  "revision": "7819b8e456ef905a764a6228f9393cb8a3301b9c",
+  "generatedAt": "2026-11-21T13:44:00.185Z",
+  "revision": "f041a94c9aa4723785405c50a00098da57a8f293",
   "fingerprint": {
-    "sha256": "63d6259bab0c9710c534d9995eb47a06e25cffe6393248215ba4651275a9d19c",
+    "sha256": "1afac5e8dde4e82f949dc12e8828ef221445bd74ce51f0a3b9dd2a6fb99e4598",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -28,7 +28,7 @@
       },
       {
         "path": "apps/docs/src/content/autocomplete/meta.ts",
-        "sha256": "329214bdd9edf984fa4512764b275f5b68f85b3842175a6e0096f2d846803829"
+        "sha256": "e2bbac2068bf32791a4d076d4c03ea86a4df4da10abbb6d8d15ac9f862f2ae04"
       },
       {
         "path": "apps/docs/src/content/avatar-group/meta.ts",
@@ -56,7 +56,7 @@
       },
       {
         "path": "apps/docs/src/content/button/meta.ts",
-        "sha256": "97445f98890066001f9ceaec1e40359c068849fe96735a37e2550e538b96f1f3"
+        "sha256": "986c76faee731cb6de959c2e67f81d97aa1041644d39cdd370ec5a9c449a0e38"
       },
       {
         "path": "apps/docs/src/content/calendar/meta.ts",
@@ -100,11 +100,11 @@
       },
       {
         "path": "apps/docs/src/content/combobox/meta.ts",
-        "sha256": "758576a2f46d2c96653e4e4c9c54dcb014884f566d16ce81e05cf1dae3e73388"
+        "sha256": "2e28d31ea2c61892cdfe68c1fe200e32c2cff82d1baaf219eb8ee70d3757ed2f"
       },
       {
         "path": "apps/docs/src/content/command/meta.ts",
-        "sha256": "b514f5e75d4d8d1968a1df4e1cd1e8404fceadeeebed7f812617f05779baff21"
+        "sha256": "8589f0c574bdc69c7b9fe6def620175960cec60db914cf6a77faa7299365295d"
       },
       {
         "path": "apps/docs/src/content/composer/meta.ts",
@@ -112,7 +112,7 @@
       },
       {
         "path": "apps/docs/src/content/confirm-action/meta.ts",
-        "sha256": "2e899f62e5c5be1733e51bef1f0f4d92dbab1c5d88c2feda769bf29b918665fa"
+        "sha256": "b60df94314c6930311ddff7fbe32bafc08701e3853ff9ee326c2c9be26ac3261"
       },
       {
         "path": "apps/docs/src/content/confirm/meta.ts",
@@ -136,19 +136,19 @@
       },
       {
         "path": "apps/docs/src/content/date-picker/meta.ts",
-        "sha256": "0b19423823e6cda45f839c68ed0ace50d7738e1bab2d2134c2d223b613b24a25"
+        "sha256": "bc8ea3d2dab3bfbe9b19de7f210be57e0c45bb39339da77fa4322ccdec5b18ed"
       },
       {
         "path": "apps/docs/src/content/date-range-picker/meta.ts",
-        "sha256": "b9d299a785c925e10d87da28e826ce4059590ff7080c43069f6ba87dae7cfab3"
+        "sha256": "d0ed2dd31bd8f5097f85a0da1e07795e58e5aaa1256cf8f882a0d5b20a9405cb"
       },
       {
         "path": "apps/docs/src/content/date-time-picker/meta.ts",
-        "sha256": "2754ee7861cf4f5a5d808467610aeed744d70fd901916a9174e18d2e1ca7bb59"
+        "sha256": "4b9763f24197a3d764dc617ccdb9b1e27167c95406955b764f5eee931a482fdb"
       },
       {
         "path": "apps/docs/src/content/date-time-range-picker/meta.ts",
-        "sha256": "400e9f78ce1e5be55f8131e0fc5c3f1707aab8988901ccddee0ba16c15be3351"
+        "sha256": "fabb8e8498731cab03128fb06e6652372693bb8ccc6bd84266eb510bfefb162d"
       },
       {
         "path": "apps/docs/src/content/description-list/meta.ts",
@@ -176,11 +176,11 @@
       },
       {
         "path": "apps/docs/src/content/file-trigger/meta.ts",
-        "sha256": "c9defc8dd98ddc297ba73437e0f4c11223795e9fcefd1a38c7ffdabad58a8118"
+        "sha256": "84e787e60e5e447bf925ff9a94cf8cc885480cf6e49bb2b5e619a8b11eb9f7ab"
       },
       {
         "path": "apps/docs/src/content/file-upload/meta.ts",
-        "sha256": "9fa88b0823acf78b9dc0d30e5193c666d1f442c373cf68f2d06dc86ab288070e"
+        "sha256": "9e7a58157fda048be2b92ec8c20fc8dce3fcae5abe67d49a18ffeefd79b8a3f6"
       },
       {
         "path": "apps/docs/src/content/filter-bar/meta.ts",
@@ -224,7 +224,7 @@
       },
       {
         "path": "apps/docs/src/content/label/meta.ts",
-        "sha256": "9b9faccb1966034b4d1a9f96069d739d11b660ebf450983dc7f569c456018eeb"
+        "sha256": "cf844ecaf9aeca4a1ca961c2841b720ee8749f44fad283d147f82d05118bf2f0"
       },
       {
         "path": "apps/docs/src/content/layout/meta.ts",
@@ -244,7 +244,7 @@
       },
       {
         "path": "apps/docs/src/content/meter/meta.ts",
-        "sha256": "7bc65aea900b39f5c450d3dc973c21362f4680ddb073d464a7a8e0af4a04bd18"
+        "sha256": "34cfde4ad13f768caa89168d3a87cd990563cf72b4b53026951ac133dc6fd1af"
       },
       {
         "path": "apps/docs/src/content/native-select/meta.ts",
@@ -344,7 +344,7 @@
       },
       {
         "path": "apps/docs/src/content/severity-mark/meta.ts",
-        "sha256": "74c5473738fce18f53edc4ba2456746b76d79b29f5781ee3855609d7c1fcbe69"
+        "sha256": "8ff938ae061d499ed01f03713bcac5a59f42c82e0b4a1c098df4666fb619e7b6"
       },
       {
         "path": "apps/docs/src/content/sidebar/meta.ts",
@@ -404,11 +404,11 @@
       },
       {
         "path": "apps/docs/src/content/time-field/meta.ts",
-        "sha256": "780b3d572a40322409c16e85f7eafb309b2b63cc48e9679279f66f0906846f20"
+        "sha256": "766a3b3d1fde02f481951e6138b464a3f7644e766042f61230892d8a9b8c433f"
       },
       {
         "path": "apps/docs/src/content/time-range-field/meta.ts",
-        "sha256": "38bc01cc94aab5408c12131a568c428effc4ec223a738ba58d76dfe3134eafdf"
+        "sha256": "172fbc40152dbd29dc37549f304347c229e7d1c51931cd4be4354e61f5a3002a"
       },
       {
         "path": "apps/docs/src/content/timeline/meta.ts",
@@ -420,7 +420,7 @@
       },
       {
         "path": "apps/docs/src/content/toc/meta.ts",
-        "sha256": "eef50cbdb3f45eb2d2e8b59e26a2c4040279e4bc3c57f711935e29c132ec1bde"
+        "sha256": "199a04e7fe59b245b153f1d158a3048b173c0949df19bfc8454733fabc24fcd0"
       },
       {
         "path": "apps/docs/src/content/toggle-group/meta.ts",
@@ -436,7 +436,7 @@
       },
       {
         "path": "apps/docs/src/content/tooltip/meta.ts",
-        "sha256": "8b812684e8cacbb609408d1f74f527921451257e6c988df27a19be1605cb37f1"
+        "sha256": "2d135fe9509e209b89ac1e3a365e2d11c653e0186dd5a13d9dc23f5b9b44eef6"
       },
       {
         "path": "apps/docs/src/content/tour/meta.ts",
@@ -468,11 +468,11 @@
       },
       {
         "path": "apps/docs/src/lib/types.ts",
-        "sha256": "9898803d0d5158c18fc9bb14b992f7731fdddc8b0252156bef8caa127d25cd6d"
+        "sha256": "0428b2f7c80618e72bcbd1f1fcd8311c896ebe9de80cbb6f6f6ecf6047e6e87e"
       },
       {
         "path": "design.md",
-        "sha256": "e809ed3053e1226b836d71d3e169aec9b53c188730b9151196a4ebfa9740d123"
+        "sha256": "c8fa01e1f4c0b9e003938bc7b3a40873de07f633f62eb7844b94326c259016ab"
       },
       {
         "path": "package.json",
@@ -480,7 +480,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "713507d76d0221fd234baa41959f665e3ae4318b4819b6135c8fd28dad7d3761"
+        "sha256": "7054ecc09f9d7b81b792e411a2974bca83f432a596139c67556b9020b25c95d0"
       },
       {
         "path": "packages/ui/motion.css",
@@ -488,7 +488,7 @@
       },
       {
         "path": "packages/ui/package.json",
-        "sha256": "128f7ddde6f088a2521964298dff1cb5fc5a0d7475fb25b780f411e3328ff776"
+        "sha256": "d49956262caf86cbc6a0a1f694de7b4b46599de0509fd1a2dee500d157bdfe92"
       },
       {
         "path": "packages/ui/prose.css",
@@ -512,7 +512,7 @@
       },
       {
         "path": "packages/ui/src/components/autocomplete.tsx",
-        "sha256": "49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7"
+        "sha256": "b56390332369882f40dd618b614736dbecb995da1634da99f97332f6d7f1cf2c"
       },
       {
         "path": "packages/ui/src/components/avatar-group.tsx",
@@ -572,7 +572,7 @@
       },
       {
         "path": "packages/ui/src/components/code-block.tsx",
-        "sha256": "1217799cec61621af3b4b3e2351b19de2c3197655267d7fc87ada9b27b9890ae"
+        "sha256": "9649e32b6c3151ff361e2fc7c986031b6b61040d1a75bdaa3bccdbc65974bbb9"
       },
       {
         "path": "packages/ui/src/components/collapsible.tsx",
@@ -584,7 +584,7 @@
       },
       {
         "path": "packages/ui/src/components/combobox.tsx",
-        "sha256": "6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca"
+        "sha256": "81e5928924575a0502406debc3548efedf59479e2abb2130abc4636146650cf7"
       },
       {
         "path": "packages/ui/src/components/command.tsx",
@@ -616,23 +616,23 @@
       },
       {
         "path": "packages/ui/src/components/data-table.tsx",
-        "sha256": "150b236250585679cc9891aef9aec40ab46b80dbbc0516f08b0e48dca47f3580"
+        "sha256": "02c5537f5b7059f3756aab2b5b3fb9d3405b7f7e5cd6f2508bb5e35fbd304395"
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
-        "sha256": "2874fbc00dcb9d6f3ecdf9e421097e47d03d9ff810447d8a2d744435d3ccba60"
+        "sha256": "7cb05d8df7e219e97b2e27a8c8ba4953ffebad3e5e4e0de66d143cdcc3b2dcdd"
       },
       {
         "path": "packages/ui/src/components/date-range-picker.tsx",
-        "sha256": "9ba2abc7c00e37716a489e1ef61f4ed8a5d9d2e353db9accee0fd37f4a61c98c"
+        "sha256": "0d0834aa70a325fc41b42045d1bc6db3d550265f91ac2c1276384c7099b5bb0c"
       },
       {
         "path": "packages/ui/src/components/date-time-picker.tsx",
-        "sha256": "ffa594e825dabe5935b253a86f90638a5b73fac7089de3996641e0af6d7461ca"
+        "sha256": "2563a486ab93477cb5bfc927d99d67b598829707973d52d9908c94a4d6157e8b"
       },
       {
         "path": "packages/ui/src/components/date-time-range-picker.tsx",
-        "sha256": "f0bf1dd0084422c8188b26900c7152b6394fe65411b1f5a8a794b68f18a53142"
+        "sha256": "ea0c19ac00afd1c2cb244948594c9dcb6c081e74fa647a7a66e90d74ca5d7594"
       },
       {
         "path": "packages/ui/src/components/description-list.tsx",
@@ -728,7 +728,7 @@
       },
       {
         "path": "packages/ui/src/components/meter.tsx",
-        "sha256": "9579a5e1dcfc8e727b00a72c3e2b16e1be3853063a55fdc4af3cd6a927040c7c"
+        "sha256": "3b1233fa556bb4efd1a827ee8adfc0c4e36155e61816f0c7f378a8b23e793ca9"
       },
       {
         "path": "packages/ui/src/components/native-select.tsx",
@@ -740,7 +740,7 @@
       },
       {
         "path": "packages/ui/src/components/number-field.tsx",
-        "sha256": "dff96cde72e893230e62af74be7b834f9fbe557e58f8c71442fbea516644a727"
+        "sha256": "fd8dc4dc0d76b55c59175e4697ce16f1c98f0bd3e6afa4cf3cd836497722d340"
       },
       {
         "path": "packages/ui/src/components/otp-field.tsx",
@@ -756,7 +756,7 @@
       },
       {
         "path": "packages/ui/src/components/password-input.tsx",
-        "sha256": "d979e4856bb9c60fc9b12a6418bd99fa1067317850359c6843c8caeab43e87d3"
+        "sha256": "2cc5609ba3e912efe39c5fc9eb5a4dd9dbd280a509dd635309654d833a0b140b"
       },
       {
         "path": "packages/ui/src/components/pending-value.tsx",
@@ -832,7 +832,7 @@
       },
       {
         "path": "packages/ui/src/components/sidebar.tsx",
-        "sha256": "c1a2e83537c08c137c4b2a0266f85d16a4f021a4fd5586adc06de2a85434351c"
+        "sha256": "3098b18a94f563faac4c8c907aa14400940981b3411c62438738b6d35d1e9039"
       },
       {
         "path": "packages/ui/src/components/skeleton.tsx",
@@ -876,7 +876,7 @@
       },
       {
         "path": "packages/ui/src/components/tag-input.tsx",
-        "sha256": "8ec39c7dd44653e74738178db40ee5a62a4a34d551a80a03181428338f8035ec"
+        "sha256": "2427982c90382e34627b781ce5b3c64a73456920ff2939538c746fc5dd3239a2"
       },
       {
         "path": "packages/ui/src/components/textarea.tsx",
@@ -904,7 +904,7 @@
       },
       {
         "path": "packages/ui/src/components/toc.tsx",
-        "sha256": "8d97141f492627f220e38c903da4c49540311794074937e3d4b82be9ec0b857d"
+        "sha256": "f4e51a4407103bc3e69e9f6612457ef1004296c3c79aa640a6305d7c0145cfdd"
       },
       {
         "path": "packages/ui/src/components/toggle-group.tsx",
@@ -928,7 +928,7 @@
       },
       {
         "path": "packages/ui/src/components/transfer.tsx",
-        "sha256": "33edceaba8c73967d2c63e2a6120ec744e68eff44d41db0816c2075cecfa06c8"
+        "sha256": "a8fb40e9cf2f0175303dded681f41fa34c4e549ce2fa5c1e77a8c11cfba2b52b"
       },
       {
         "path": "packages/ui/src/components/tree-select.tsx",
@@ -987,7 +987,7 @@
   "scope": "Implementation facts; PRESENT means source exists, not runtime acceptance. Internal docs are not added to package files.",
   "package": {
     "name": "@qingye_lab/ui",
-    "version": "5.4.0",
+    "version": "5.5.0",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
@@ -1091,7 +1091,8 @@
       "!ai/v5.0.0",
       "!ai/v5.1.0",
       "!ai/v5.2.0",
-      "!ai/v5.3.0"
+      "!ai/v5.3.0",
+      "!ai/v5.4.0"
     ],
     "source": "packages/ui/package.json"
   },
@@ -1414,7 +1415,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1844,7 +1845,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2080,7 +2081,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2258,7 +2259,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2281,7 +2282,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 34
+            "line": 37
           }
         },
         {
@@ -2289,7 +2290,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 59
+            "line": 66
           }
         },
         {
@@ -2297,7 +2298,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 103
+            "line": 111
           }
         },
         {
@@ -2305,7 +2306,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 40
+            "line": 43
           }
         },
         {
@@ -2313,7 +2314,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 82
+            "line": 90
           }
         },
         {
@@ -2321,7 +2322,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 91
+            "line": 99
           }
         },
         {
@@ -2329,7 +2330,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 95
+            "line": 103
           }
         },
         {
@@ -2337,7 +2338,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 48
+            "line": 51
           }
         },
         {
@@ -2345,7 +2346,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 78
+            "line": 86
           }
         },
         {
@@ -2353,7 +2354,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 22
+            "line": 25
           }
         },
         {
@@ -2361,7 +2362,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 74
+            "line": 82
           }
         },
         {
@@ -2369,7 +2370,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 67
+            "line": 75
           }
         },
         {
@@ -2377,7 +2378,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 65
+            "line": 73
           }
         },
         {
@@ -2386,7 +2387,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 116
+            "line": 124
           }
         },
         {
@@ -2394,7 +2395,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 23
+            "line": 26
           }
         },
         {
@@ -2402,7 +2403,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 99
+            "line": 107
           }
         },
         {
@@ -2410,7 +2411,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 110
+            "line": 118
           }
         },
         {
@@ -2418,7 +2419,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 104
+            "line": 112
           }
         },
         {
@@ -2426,7 +2427,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/autocomplete.tsx",
-            "line": 53
+            "line": 59
           }
         }
       ],
@@ -2563,19 +2564,28 @@
           "需要只能确认候选中的一个值时用 Combobox。",
           "空集合不代表错误或服务失败；空提示由调用方根据真实情况提供；省略 children 时用内置的「没有可选项」。",
           "caller 定位 style 最后合并；颜色、圆角、高亮与焦点读取现有主题角色。",
-          "命令面板用 Command。"
+          "命令面板用 Command。",
+          "命名用 Field + FieldLabel，或用 Label 的 htmlFor 指向输入框 id，候选面打开时名称保留。不要用 label 包住整个控件、把文字放进子元素：打开时候选面以外的内容对读屏隐藏，这样写的名称会消失。"
         ],
         "notesEn": [
           "Use Combobox when a value must be confirmed from candidates.",
           "An empty set does not imply an error or service failure. Supply empty content from real facts; an empty AutocompleteEmpty uses the built-in \"No options\".",
           "Caller positioning style merges last; colors, corners, highlights, and focus use existing theme roles.",
-          "Use Command for a command palette."
+          "Use Command for a command palette.",
+          "Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears."
         ],
         "design": {
           "methods": [
             "名实相符",
             "相成相制",
             "进退相承"
+          ],
+          "whenToUse": [
+            "输入文字本身就是值，候选只是可接受的建议（搜索词、标签名、地址）。"
+          ],
+          "avoid": [
+            "值必须来自候选用 Combobox（候选少且固定用 Select）。",
+            "执行命令或跳转用 Command；只是搜索框用 SearchInput。"
           ],
           "composition": [
             "Field + FieldLabel + Autocomplete / Input / actions / Popup / List / Item"
@@ -2596,6 +2606,13 @@
           ]
         },
         "designEn": {
+          "whenToUse": [
+            "The typed text is the value and candidates are only acceptable suggestions (search terms, tag names, addresses)."
+          ],
+          "avoid": [
+            "Use Combobox when the value must come from the candidates (Select when they are few and fixed).",
+            "Use Command to run actions or navigate; use SearchInput for a plain search box."
+          ],
           "composition": [
             "Field + FieldLabel + Autocomplete / Input / actions / Popup / List / Item"
           ],
@@ -2620,11 +2637,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 34
+              "line": 37
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 34
+              "line": 37
             },
             "status": "PRESENT"
           },
@@ -2633,11 +2650,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 40
+              "line": 43
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 40
+              "line": 43
             },
             "status": "PRESENT"
           },
@@ -2646,11 +2663,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 48
+              "line": 51
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 48
+              "line": 51
             },
             "status": "PRESENT"
           },
@@ -2659,11 +2676,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 53
+              "line": 59
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 53
+              "line": 59
             },
             "status": "PRESENT"
           },
@@ -2672,11 +2689,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 59
+              "line": 66
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 59
+              "line": 66
             },
             "status": "PRESENT"
           },
@@ -2685,11 +2702,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 67
+              "line": 75
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 67
+              "line": 75
             },
             "status": "PRESENT"
           },
@@ -2698,11 +2715,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 74
+              "line": 82
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 74
+              "line": 82
             },
             "status": "PRESENT"
           },
@@ -2711,11 +2728,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 78
+              "line": 86
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 78
+              "line": 86
             },
             "status": "PRESENT"
           },
@@ -2724,11 +2741,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 91
+              "line": 99
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 91
+              "line": 99
             },
             "status": "PRESENT"
           },
@@ -2737,11 +2754,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 95
+              "line": 103
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 95
+              "line": 103
             },
             "status": "PRESENT"
           },
@@ -2750,11 +2767,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 99
+              "line": 107
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 99
+              "line": 107
             },
             "status": "PRESENT"
           },
@@ -2763,11 +2780,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 103
+              "line": 111
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 103
+              "line": 111
             },
             "status": "PRESENT"
           },
@@ -2776,11 +2793,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 82
+              "line": 90
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 82
+              "line": 90
             },
             "status": "PRESENT"
           },
@@ -2789,11 +2806,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 110
+              "line": 118
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 110
+              "line": 118
             },
             "status": "PRESENT"
           },
@@ -2802,11 +2819,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 116
+              "line": 124
             },
             "rootEntry": {
               "path": "packages/ui/src/components/autocomplete.tsx",
-              "line": 116
+              "line": 124
             },
             "status": "PRESENT"
           }
@@ -2822,7 +2839,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3008,7 +3025,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3276,7 +3293,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3458,7 +3475,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3828,7 +3845,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4195,7 +4212,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4478,7 +4495,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4550,11 +4567,13 @@
           ],
           "avoid": [
             "导航用原生链接。",
-            "把结果写进按钮：忙碌结束不等于成功，失败与结果未知用 Alert、Toast 或 FieldError 表达。"
+            "把结果写进按钮：忙碌结束不等于成功，失败与结果未知用 Alert、Toast 或 FieldError 表达。",
+            "把禁用原因只放在 Tooltip 或 title 里：触屏上提示不会出现，原因就读不到。禁用条件要能被读到（design.md「判断可被机器读到的部分必须写下来」），原因写成按钮旁的页内文字。"
           ],
           "composition": [
             "有不可逆后果的动作：按钮只是入口，打开 AlertDialog（或 ConfirmAction），后果写在对话框的说明里；确认条件、权限与远端核实属于应用。",
-            "按下后保持的二态（已选中、已开启）用 Toggle；几个里选一个用 SegmentedControl，可多选用 ToggleGroup。Button 只触发动作，不持有选中。"
+            "按下后保持的二态（已选中、已开启）用 Toggle；几个里选一个用 SegmentedControl，可多选用 ToggleGroup。Button 只触发动作，不持有选中。",
+            "能先操作再纠错的（多数表单提交）不禁用按钮，提交后用 FieldError 或 Alert 就地说明。确需禁用时用 aria-disabled 保持按钮可聚焦，原因写在按钮旁的可见文字里，并用 aria-describedby 关联。"
           ],
           "stateOwner": {
             "library": [
@@ -4577,11 +4596,13 @@
           ],
           "avoid": [
             "Use native links for navigation.",
-            "Writing the result into the button: the end of busy does not establish success; express failure and unknown results with Alert, Toast or FieldError."
+            "Writing the result into the button: the end of busy does not establish success; express failure and unknown results with Alert, Toast or FieldError.",
+            "Putting the disabled reason only in a Tooltip or title: hints never appear on touch screens, so the reason cannot be read there. Disabled conditions must be readable (design.md: judgments machines can read must be written down); write the reason as visible text beside the button."
           ],
           "composition": [
             "For an irreversible action the button is only the entry: it opens AlertDialog (or ConfirmAction), whose description states the consequence. Applications own confirmation criteria, permissions, and remote verification.",
-            "A two-state fact that persists after pressing (selected, on) is a Toggle; one of several is SegmentedControl, several of several is ToggleGroup. Button triggers an action and holds no selection."
+            "A two-state fact that persists after pressing (selected, on) is a Toggle; one of several is SegmentedControl, several of several is ToggleGroup. Button triggers an action and holds no selection.",
+            "When users can act first and correct afterwards (most form submissions), keep the button enabled and explain in place with FieldError or Alert after submitting. When disabling is necessary, use aria-disabled so the button stays focusable, put the reason in visible text beside it, and link it with aria-describedby."
           ],
           "stateOwner": {
             "library": [
@@ -4775,7 +4796,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5106,7 +5127,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5284,7 +5305,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5577,7 +5598,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6153,7 +6174,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6392,7 +6413,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6634,7 +6655,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6839,7 +6860,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7048,7 +7069,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7336,7 +7357,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7639,7 +7660,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7662,7 +7683,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 26
+            "line": 29
           }
         },
         {
@@ -7670,7 +7691,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 77
+            "line": 85
           }
         },
         {
@@ -7678,7 +7699,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 72
+            "line": 80
           }
         },
         {
@@ -7686,7 +7707,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 69
+            "line": 77
           }
         },
         {
@@ -7694,7 +7715,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 59
+            "line": 66
           }
         },
         {
@@ -7702,7 +7723,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 132
+            "line": 140
           }
         },
         {
@@ -7710,7 +7731,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 38
+            "line": 41
           }
         },
         {
@@ -7718,7 +7739,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 111
+            "line": 119
           }
         },
         {
@@ -7726,7 +7747,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 120
+            "line": 128
           }
         },
         {
@@ -7734,7 +7755,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 124
+            "line": 132
           }
         },
         {
@@ -7742,7 +7763,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 43
+            "line": 46
           }
         },
         {
@@ -7750,7 +7771,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 103
+            "line": 111
           }
         },
         {
@@ -7758,7 +7779,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 99
+            "line": 107
           }
         },
         {
@@ -7766,7 +7787,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 92
+            "line": 100
           }
         },
         {
@@ -7774,7 +7795,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 90
+            "line": 98
           }
         },
         {
@@ -7783,7 +7804,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/combobox/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 178
+            "line": 186
           }
         },
         {
@@ -7791,7 +7812,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 21
+            "line": 24
           }
         },
         {
@@ -7799,7 +7820,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 164
+            "line": 172
           }
         },
         {
@@ -7807,7 +7828,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 143
+            "line": 151
           }
         },
         {
@@ -7815,7 +7836,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 128
+            "line": 136
           }
         },
         {
@@ -7823,7 +7844,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 138
+            "line": 146
           }
         },
         {
@@ -7831,7 +7852,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 133
+            "line": 141
           }
         },
         {
@@ -7839,7 +7860,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 52
+            "line": 58
           }
         },
         {
@@ -7847,7 +7868,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/combobox.tsx",
-            "line": 67
+            "line": 75
           }
         }
       ],
@@ -8043,19 +8064,28 @@
           "从当前查询到候选的过滤与空内容必须对应实际数据。",
           "Popup 的 caller style 最后合并；覆写层级可能改变默认顺序。",
           "候选浮层表面与高亮采用既有主题预设，焦点信号在盒内。",
-          "异步候选由应用持有请求、取消与失败；传 filter={null} 关闭内置过滤，用 ComboboxStatus 说明加载与结果数，用 ComboboxEmpty 说明没有结果（加载期间不要显示它）。ComboboxEmpty 省略 children 时用内置的「没有可选项」，与 Select 同一说法与画法。"
+          "异步候选由应用持有请求、取消与失败；传 filter={null} 关闭内置过滤，用 ComboboxStatus 说明加载与结果数，用 ComboboxEmpty 说明没有结果（加载期间不要显示它）。ComboboxEmpty 省略 children 时用内置的「没有可选项」，与 Select 同一说法与画法。",
+          "命名用 Field + FieldLabel，或用 Label 的 htmlFor 指向输入框 id，候选面打开时名称保留。不要用 label 包住整个控件、把文字放进子元素：打开时候选面以外的内容对读屏隐藏，这样写的名称会消失。"
         ],
         "notesEn": [
           "Filtering and empty content must reflect the real candidate data.",
           "Popup caller style merges last; layer overrides can change the default order.",
           "Popup surfaces and highlights use existing theme presets with internal focus signals.",
-          "For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading). An empty ComboboxEmpty uses the built-in \"No options\", worded and drawn like Select."
+          "For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading). An empty ComboboxEmpty uses the built-in \"No options\", worded and drawn like Select.",
+          "Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears."
         ],
         "design": {
           "methods": [
             "名实相符",
             "相成相制",
             "进退相承"
+          ],
+          "whenToUse": [
+            "候选很多，需要边输入边筛选，并确认其中一个或几个值。"
+          ],
+          "avoid": [
+            "输入的文字本身就是值用 Autocomplete；候选少用 Select，要一眼看全用 CheckboxGroup。",
+            "值不来自候选用 TagInput；选命令用 Command。"
           ],
           "composition": [
             "Field + FieldLabel + Combobox / Input / actions / Popup / List / Item"
@@ -8076,6 +8106,13 @@
           ]
         },
         "designEn": {
+          "whenToUse": [
+            "Many candidates that need filtering as you type, confirming one or several of them."
+          ],
+          "avoid": [
+            "Use Autocomplete when the typed text itself is the value; Select for few candidates, CheckboxGroup to see them all at once.",
+            "Use TagInput when values do not come from candidates; Command to choose a command."
+          ],
           "composition": [
             "Field + FieldLabel + Combobox / Input / actions / Popup / List / Item"
           ],
@@ -8100,11 +8137,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 164
+              "line": 172
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 164
+              "line": 172
             },
             "status": "PRESENT"
           },
@@ -8113,11 +8150,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 26
+              "line": 29
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 26
+              "line": 29
             },
             "status": "PRESENT"
           },
@@ -8126,11 +8163,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 38
+              "line": 41
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 38
+              "line": 41
             },
             "status": "PRESENT"
           },
@@ -8139,11 +8176,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 43
+              "line": 46
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 43
+              "line": 46
             },
             "status": "PRESENT"
           },
@@ -8152,11 +8189,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 52
+              "line": 58
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 52
+              "line": 58
             },
             "status": "PRESENT"
           },
@@ -8165,11 +8202,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 59
+              "line": 66
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 59
+              "line": 66
             },
             "status": "PRESENT"
           },
@@ -8178,11 +8215,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 67
+              "line": 75
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 67
+              "line": 75
             },
             "status": "PRESENT"
           },
@@ -8191,11 +8228,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 69
+              "line": 77
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 69
+              "line": 77
             },
             "status": "PRESENT"
           },
@@ -8204,11 +8241,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 77
+              "line": 85
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 77
+              "line": 85
             },
             "status": "PRESENT"
           },
@@ -8217,11 +8254,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 92
+              "line": 100
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 92
+              "line": 100
             },
             "status": "PRESENT"
           },
@@ -8230,11 +8267,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 99
+              "line": 107
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 99
+              "line": 107
             },
             "status": "PRESENT"
           },
@@ -8243,11 +8280,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 103
+              "line": 111
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 103
+              "line": 111
             },
             "status": "PRESENT"
           },
@@ -8256,11 +8293,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 120
+              "line": 128
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 120
+              "line": 128
             },
             "status": "PRESENT"
           },
@@ -8269,11 +8306,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 124
+              "line": 132
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 124
+              "line": 132
             },
             "status": "PRESENT"
           },
@@ -8282,11 +8319,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 128
+              "line": 136
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 128
+              "line": 136
             },
             "status": "PRESENT"
           },
@@ -8295,11 +8332,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 132
+              "line": 140
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 132
+              "line": 140
             },
             "status": "PRESENT"
           },
@@ -8308,11 +8345,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 111
+              "line": 119
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 111
+              "line": 119
             },
             "status": "PRESENT"
           },
@@ -8321,11 +8358,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 138
+              "line": 146
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 138
+              "line": 146
             },
             "status": "PRESENT"
           },
@@ -8334,11 +8371,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 178
+              "line": 186
             },
             "rootEntry": {
               "path": "packages/ui/src/components/combobox.tsx",
-              "line": 178
+              "line": 186
             },
             "status": "PRESENT"
           }
@@ -8354,7 +8391,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8714,6 +8751,13 @@
             "名实相符",
             "进退相承"
           ],
+          "whenToUse": [
+            "跳到某处或执行某事的命令面板，条目是动作而不是要填的值。"
+          ],
+          "avoid": [
+            "选一个值填进表单用 Select 或 Combobox。",
+            "少量固定动作用 Menu；输入建议用 Autocomplete。"
+          ],
           "composition": [
             "CommandDialog + CommandInput + CommandList + CommandGroup / CommandItem + CommandEmpty"
           ],
@@ -8733,6 +8777,13 @@
           ]
         },
         "designEn": {
+          "whenToUse": [
+            "A command palette for jumping somewhere or running something; items are actions, not values to fill in."
+          ],
+          "avoid": [
+            "Use Select or Combobox to choose a value for a form.",
+            "Use Menu for a few fixed actions; Autocomplete for input suggestions."
+          ],
           "composition": [
             "CommandDialog + CommandInput + CommandList + CommandGroup / CommandItem + CommandEmpty"
           ],
@@ -8868,7 +8919,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9476,7 +9527,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9657,6 +9708,13 @@
             "进退相承",
             "相成相制"
           ],
+          "whenToUse": [
+            "需要确认具体对象、版本与变更，内容变化后须重新阅读的动作。"
+          ],
+          "avoid": [
+            "只需回应一个简单决定、无需核对内容用 AlertDialog。",
+            "一般的编辑或表单用 Dialog；操作结果用 Alert 或 Toast 告知。"
+          ],
           "composition": [
             "ConfirmAction + 明确 snapshot/文字 + 应用 loading/onConfirm；结果用 Alert 或 Toast 表达"
           ],
@@ -9676,6 +9734,13 @@
           ]
         },
         "designEn": {
+          "whenToUse": [
+            "An action that needs confirmation of a specific object, version and change, and must be reread when the content changes."
+          ],
+          "avoid": [
+            "Use AlertDialog for a simple decision that needs no review of content.",
+            "Use Dialog for ordinary editing or forms; report the outcome with Alert or Toast."
+          ],
           "composition": [
             "ConfirmAction + explicit snapshot/text + application loading/onConfirm; express the result with Alert or Toast."
           ],
@@ -9733,7 +9798,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10000,7 +10065,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10577,7 +10642,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10813,7 +10878,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11019,7 +11084,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11548,7 +11613,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11571,7 +11636,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/date-picker.tsx",
-            "line": 47
+            "line": 48
           }
         },
         {
@@ -11579,7 +11644,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-picker.tsx",
-            "line": 21
+            "line": 22
           }
         }
       ],
@@ -11699,6 +11764,13 @@
             "相成相制",
             "进退相承"
           ],
+          "whenToUse": [
+            "选一个日期，可键入，也可展开日历。"
+          ],
+          "avoid": [
+            "起止两个日期用 DateRangePicker；日期加时刻用 DateTimePicker。",
+            "只填时刻用 TimeField；页内常驻的日历用 Calendar。"
+          ],
           "composition": [
             "Field + FieldLabel + DatePicker + FieldDescription / FieldError"
           ],
@@ -11718,6 +11790,13 @@
           ]
         },
         "designEn": {
+          "whenToUse": [
+            "Choose a single date, by typing or from a calendar."
+          ],
+          "avoid": [
+            "Use DateRangePicker for a start and end date; DateTimePicker for a date with a time.",
+            "Use TimeField for a time only; Calendar for a calendar kept on the page."
+          ],
           "composition": [
             "Field + FieldLabel + DatePicker + FieldDescription / FieldError"
           ],
@@ -11742,11 +11821,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/date-picker.tsx",
-              "line": 47
+              "line": 48
             },
             "rootEntry": {
               "path": "packages/ui/src/components/date-picker.tsx",
-              "line": 47
+              "line": 48
             },
             "status": "PRESENT"
           }
@@ -11762,7 +11841,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11785,7 +11864,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 24
+            "line": 25
           }
         },
         {
@@ -11793,7 +11872,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 29
+            "line": 30
           }
         },
         {
@@ -11801,7 +11880,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 70
+            "line": 71
           }
         },
         {
@@ -11809,7 +11888,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 33
+            "line": 34
           }
         },
         {
@@ -11817,7 +11896,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 31
+            "line": 32
           }
         },
         {
@@ -11825,7 +11904,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-range-picker.tsx",
-            "line": 22
+            "line": 23
           }
         }
       ],
@@ -11956,6 +12035,13 @@
             "进退相承",
             "相成相制"
           ],
+          "whenToUse": [
+            "选起止两个日期，如报表区间、入住与退房。"
+          ],
+          "avoid": [
+            "单个日期用 DatePicker；起止还要带时刻用 DateTimeRangePicker。",
+            "只有起止时刻没有日期用 TimeRangeField。"
+          ],
           "composition": [
             "Field + FieldLabel + DateRangePicker + FieldDescription / FieldError"
           ],
@@ -11975,6 +12061,13 @@
           ]
         },
         "designEn": {
+          "whenToUse": [
+            "Choose a start and end date, such as a report period or check-in and check-out."
+          ],
+          "avoid": [
+            "Use DatePicker for a single date; DateTimeRangePicker when the range also carries times.",
+            "Use TimeRangeField for start and end times without dates."
+          ],
           "composition": [
             "Field + FieldLabel + DateRangePicker + FieldDescription / FieldError"
           ],
@@ -11999,11 +12092,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/date-range-picker.tsx",
-              "line": 70
+              "line": 71
             },
             "rootEntry": {
               "path": "packages/ui/src/components/date-range-picker.tsx",
-              "line": 70
+              "line": 71
             },
             "status": "PRESENT"
           }
@@ -12019,7 +12112,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12042,7 +12135,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/date-time-picker.tsx",
-            "line": 43
+            "line": 44
           }
         },
         {
@@ -12050,7 +12143,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-time-picker.tsx",
-            "line": 20
+            "line": 21
           }
         }
       ],
@@ -12159,6 +12252,13 @@
             "进退相承",
             "相成相制"
           ],
+          "whenToUse": [
+            "选一个带时刻的无时区墙上时间，如会议开始、发布计划。"
+          ],
+          "avoid": [
+            "只要日期用 DatePicker，只要时刻用 TimeField。",
+            "起止两端都要时刻用 DateTimeRangePicker；需要 UTC 瞬间或时区由应用另行处理。"
+          ],
           "composition": [
             "Field + FieldLabel + DateTimePicker + FieldDescription / FieldError"
           ],
@@ -12178,6 +12278,13 @@
           ]
         },
         "designEn": {
+          "whenToUse": [
+            "Choose one wall-clock date and time without a time zone, such as a meeting start or a scheduled release."
+          ],
+          "avoid": [
+            "Use DatePicker for a date only and TimeField for a time only.",
+            "Use DateTimeRangePicker when both ends need a time; the application handles UTC instants and time zones."
+          ],
           "composition": [
             "Field + FieldLabel + DateTimePicker + FieldDescription / FieldError"
           ],
@@ -12202,11 +12309,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/date-time-picker.tsx",
-              "line": 43
+              "line": 44
             },
             "rootEntry": {
               "path": "packages/ui/src/components/date-time-picker.tsx",
-              "line": 43
+              "line": 44
             },
             "status": "PRESENT"
           }
@@ -12222,7 +12329,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12245,7 +12352,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-time-range-picker.tsx",
-            "line": 25
+            "line": 26
           }
         },
         {
@@ -12253,7 +12360,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-time-range-picker.tsx",
-            "line": 27
+            "line": 28
           }
         },
         {
@@ -12261,7 +12368,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/date-time-range-picker.tsx",
-            "line": 60
+            "line": 61
           }
         },
         {
@@ -12269,7 +12376,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-time-range-picker.tsx",
-            "line": 29
+            "line": 30
           }
         },
         {
@@ -12277,7 +12384,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/date-time-range-picker.tsx",
-            "line": 23
+            "line": 24
           }
         }
       ],
@@ -12350,7 +12457,7 @@
               {
                 "name": "inputProps / endInputProps",
                 "type": "Input props",
-                "description": "起点输入（Field 标签指向它）与终点输入的 ref/render/ARIA/events/step 等；step 同时带到弹层里的时间输入。两个输入默认名称是「Field 标签 + 开始 / 结束日期和时间」。",
+                "description": "起点输入（Field 标签指向它）与终点输入的 ref/render/ARIA/events/step 等；step 同时带到弹层里的时间输入。两个输入默认名称是「Field 标签 + 开始 / 结束日期时间」。",
                 "descriptionEn": "ref, render, ARIA, events, step and so on for the start input (the one a Field label points to) and the end input; step is carried to the popup's time inputs. By default the two names are the Field label plus Start / End date and time."
               },
               {
@@ -12395,6 +12502,13 @@
             "进退相承",
             "相成相制"
           ],
+          "whenToUse": [
+            "选起止两端都带时刻的无时区区间，如活动时段、维护窗口。"
+          ],
+          "avoid": [
+            "只有日期的区间用 DateRangePicker；单个日期时间用 DateTimePicker。",
+            "同一天内的两个时刻用 TimeRangeField。"
+          ],
           "composition": [
             "Field + FieldLabel + DateTimeRangePicker + FieldDescription / FieldError"
           ],
@@ -12414,6 +12528,13 @@
           ]
         },
         "designEn": {
+          "whenToUse": [
+            "Choose a range whose two ends both carry a wall-clock time, such as an event or a maintenance window."
+          ],
+          "avoid": [
+            "Use DateRangePicker for dates only; DateTimePicker for a single date and time.",
+            "Use TimeRangeField for two times within one day."
+          ],
           "composition": [
             "Field + FieldLabel + DateTimeRangePicker + FieldDescription / FieldError"
           ],
@@ -12438,11 +12559,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/date-time-range-picker.tsx",
-              "line": 60
+              "line": 61
             },
             "rootEntry": {
               "path": "packages/ui/src/components/date-time-range-picker.tsx",
-              "line": 60
+              "line": 61
             },
             "status": "PRESENT"
           }
@@ -12458,7 +12579,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12735,7 +12856,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13226,7 +13347,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13709,7 +13830,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13986,7 +14107,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14541,7 +14662,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14778,7 +14899,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14905,6 +15026,13 @@
             "名实相符",
             "进退相承"
           ],
+          "whenToUse": [
+            "点按钮选文件，选完立即交给应用，如工具栏里的导入。"
+          ],
+          "avoid": [
+            "要保留选择、列出文件、移除或随表单提交，或支持拖放用 FileUpload。",
+            "被拒绝的文件只在 details.rejected 里交回，应用须自己呈现。"
+          ],
           "composition": [
             "Toolbar / PageHeader 动作区中的 FileTrigger + onSelect 里的 Toast"
           ],
@@ -14924,6 +15052,13 @@
           ]
         },
         "designEn": {
+          "whenToUse": [
+            "Press a button, choose files and hand them to the application at once, such as an import in a toolbar."
+          ],
+          "avoid": [
+            "Use FileUpload to retain the selection, list or remove files, submit with a form, or accept drag and drop.",
+            "Rejected files come back only in details.rejected; the application must present them."
+          ],
           "composition": [
             "FileTrigger in a toolbar or PageHeader actions, with a Toast raised from onSelect"
           ],
@@ -14968,7 +15103,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15180,6 +15315,13 @@
             "进退相承",
             "相成相制"
           ],
+          "whenToUse": [
+            "在表单里选择或拖入文件，需要保留已接受的集合、列出并可移除。"
+          ],
+          "avoid": [
+            "点一下选完就交给应用、不保留选择用 FileTrigger。",
+            "上传进度与结果由应用呈现，组件不发请求；上传状态不要用它代替。"
+          ],
           "composition": [
             "Field + FieldLabel + FileUpload + 实际规则说明/FieldError"
           ],
@@ -15199,6 +15341,13 @@
           ]
         },
         "designEn": {
+          "whenToUse": [
+            "Choose or drop files in a form when the accepted set must be kept, listed and removable."
+          ],
+          "avoid": [
+            "Use FileTrigger to press once and hand files over without keeping a selection.",
+            "The application presents upload progress and outcome; the component sends no request."
+          ],
           "composition": [
             "Field + FieldLabel + FileUpload + actual rule explanation/FieldError"
           ],
@@ -15256,7 +15405,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15663,7 +15812,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15869,7 +16018,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16166,7 +16315,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16471,7 +16620,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16650,7 +16799,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17111,7 +17260,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17291,7 +17440,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17514,7 +17663,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17870,7 +18019,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18023,7 +18172,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18155,10 +18304,12 @@
           }
         ],
         "notes": [
-          "Label 不拥有禁用状态；被命名控件使用自己的真实 disabled。"
+          "Label 不拥有禁用状态；被命名控件使用自己的真实 disabled。",
+          "Combobox、Autocomplete 这类弹层输入框用 htmlFor 关联或放进 Field；不要用 label 包住控件、把文字放进子元素，弹层打开时这样写的名称会消失。"
         ],
         "notesEn": [
-          "Label owns no disabled state; the named control uses its real disabled attribute."
+          "Label owns no disabled state; the named control uses its real disabled attribute.",
+          "For popup inputs such as Combobox and Autocomplete, associate through htmlFor or use Field; do not wrap the control in a label with its text in a child element, because that name disappears while the popup is open."
         ],
         "usageResolution": [
           {
@@ -18186,7 +18337,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18523,7 +18674,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18703,7 +18854,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18883,7 +19034,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19639,7 +19790,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19736,28 +19887,28 @@
           "meter",
           "gauge",
           "measure",
-          "level",
           "仪表",
           "度量",
           "用量",
           "容量"
         ],
-        "decisions": "任务完成比例使用 Progress；未知测量不要填0。级别是「几级里的第几级」，用 segments 分格；状态类别 tone 由调用方声明，色相之外格数仍读得出级别。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。",
-        "decisionsEn": "Use Progress for task completion. Unknown measurements must not become zero. A level is \"which of n steps\", so use segments; tone is declared by the caller, and the cell count still reads without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).",
+        "decisions": "任务完成比例使用 Progress；未知测量不要填0。读数本身是若干整格时用 segments 分格，读屏读出的仍是读数；对象的有序级别读出的是级别名称，用 SeverityMark。状态类别 tone 由调用方声明，色相之外格数或读数仍承担同一事实。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。",
+        "decisionsEn": "Use Progress for task completion. Unknown measurements must not become zero. When the reading itself counts whole cells, use segments and the screen reader still reads the reading; an ordered level of an object reads as the level's name, so use SeverityMark. tone is declared by the caller, and the cell count or reading still carries the fact without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).",
         "design": {
           "methods": [
             "名实相符",
             "布白有用"
           ],
           "whenToUse": [
-            "表达测量值及单位。"
+            "表达一个有效范围内的测量值及单位，读屏读出读数。"
           ],
           "avoid": [
-            "任务完成比例使用 Progress；未知测量不要填0。"
+            "任务完成比例使用 Progress；未知测量不要填0。",
+            "对象带有一个有次序的级别、读出的是级别名称（如高、中、低）时用 SeverityMark；对象处于哪一种状态用 StatusDot。"
           ],
           "composition": [
             "Label 关联名称，Value 展示实际读数，轨与指示不猜测好坏。",
-            "密集列表里的级别用 segments={3} 加 tone，不用 StatusDot：状态与程度是两件事。"
+            "segments 只给本身以整格计的读数分格，getAriaValueText 读出实际读数与单位；一行对象的级别用 SeverityMark。"
           ],
           "stateOwner": {
             "library": [
@@ -19776,14 +19927,15 @@
         },
         "designEn": {
           "whenToUse": [
-            "Present measured values and units."
+            "Present a measurement over a valid range, with its unit; screen readers read the reading."
           ],
           "avoid": [
-            "Use Progress for task completion. Unknown measurements must not become zero."
+            "Use Progress for task completion. Unknown measurements must not become zero.",
+            "Use SeverityMark when an object has an ordered level read as its name (such as high, medium, low); use StatusDot for which state an object is in."
           ],
           "composition": [
             "Label associates the name, Value presents the actual reading, and track/indicator infer no judgment.",
-            "A level in a dense list uses segments={3} with tone, not StatusDot: status and degree are two facts."
+            "segments only splits a reading that itself counts whole cells; getAriaValueText reads the actual reading and unit. A row's level uses SeverityMark."
           ],
           "stateOwner": {
             "library": [
@@ -19815,8 +19967,8 @@
               {
                 "name": "segments",
                 "type": "number",
-                "description": "离散的 n 级：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；(value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。级别名用 getAriaValueText 给出。",
-                "descriptionEn": "A discrete scale of n levels: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Name levels with getAriaValueText."
+                "description": "以 n 个整格计的读数：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；(value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。实际读数与单位用 getAriaValueText 给出。",
+                "descriptionEn": "A reading counted in n whole cells: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Give the actual reading and unit with getAriaValueText."
               },
               {
                 "name": "tone",
@@ -19956,7 +20108,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20147,7 +20299,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20717,7 +20869,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20740,7 +20892,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 20
+            "line": 21
           }
         },
         {
@@ -20748,7 +20900,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 95
+            "line": 96
           }
         },
         {
@@ -20756,7 +20908,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 66
+            "line": 67
           }
         },
         {
@@ -20764,7 +20916,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 61
+            "line": 62
           }
         },
         {
@@ -20772,7 +20924,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 105
+            "line": 107
           }
         },
         {
@@ -20780,7 +20932,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 77
+            "line": 78
           }
         },
         {
@@ -20789,7 +20941,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/number-field/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 135
+            "line": 138
           }
         },
         {
@@ -20797,7 +20949,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 12
+            "line": 13
           }
         },
         {
@@ -20805,7 +20957,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 123
+            "line": 126
           }
         },
         {
@@ -20813,7 +20965,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/number-field.tsx",
-            "line": 115
+            "line": 118
           }
         }
       ],
@@ -21041,11 +21193,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 20
+              "line": 21
             },
             "rootEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 20
+              "line": 21
             },
             "status": "PRESENT"
           },
@@ -21054,11 +21206,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 66
+              "line": 67
             },
             "rootEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 66
+              "line": 67
             },
             "status": "PRESENT"
           },
@@ -21067,11 +21219,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 77
+              "line": 78
             },
             "rootEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 77
+              "line": 78
             },
             "status": "PRESENT"
           },
@@ -21080,11 +21232,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 95
+              "line": 96
             },
             "rootEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 95
+              "line": 96
             },
             "status": "PRESENT"
           },
@@ -21093,11 +21245,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 105
+              "line": 107
             },
             "rootEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 105
+              "line": 107
             },
             "status": "PRESENT"
           },
@@ -21106,11 +21258,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 123
+              "line": 126
             },
             "rootEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 123
+              "line": 126
             },
             "status": "PRESENT"
           },
@@ -21119,11 +21271,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 135
+              "line": 138
             },
             "rootEntry": {
               "path": "packages/ui/src/components/number-field.tsx",
-              "line": 135
+              "line": 138
             },
             "status": "PRESENT"
           }
@@ -21139,7 +21291,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21390,7 +21542,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21682,7 +21834,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22229,7 +22381,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22252,7 +22404,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/password-input.tsx",
-            "line": 31
+            "line": 32
           }
         },
         {
@@ -22260,7 +22412,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/password-input.tsx",
-            "line": 14
+            "line": 15
           }
         }
       ],
@@ -22423,11 +22575,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/password-input.tsx",
-              "line": 31
+              "line": 32
             },
             "rootEntry": {
               "path": "packages/ui/src/components/password-input.tsx",
-              "line": 31
+              "line": 32
             },
             "status": "PRESENT"
           }
@@ -22443,7 +22595,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22624,7 +22776,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23018,7 +23170,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23349,7 +23501,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23534,7 +23686,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23723,7 +23875,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24055,7 +24207,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24287,7 +24439,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24479,7 +24631,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24822,7 +24974,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25119,7 +25271,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25334,7 +25486,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25776,7 +25928,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26001,7 +26153,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26313,7 +26465,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26635,7 +26787,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27218,7 +27370,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27412,7 +27564,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27478,16 +27630,17 @@
             "随境取度"
           ],
           "whenToUse": [
-            "一行对象带有一个有次序的级别，需要不占一列文字就能比较高低。"
+            "一行对象带有一个有次序的级别（严重程度、优先级），读出的是级别名称，需要不占一列文字就能比较高低。"
           ],
           "avoid": [
             "对象处于哪一种状态用 StatusDot：状态之间没有次序。",
-            "有单位的测量值用 Meter；任务完成比例用 Progress。",
+            "范围内的测量读数用 Meter，读数本身以整格计时用 Meter 的 segments；任务完成比例用 Progress。",
             "不用色相区分格数相同的两个级别。"
           ],
           "composition": [
             "同一列里的标记用同一个 max。",
             "name=\"hidden\" 时名称仍是可访问名称；同一行或表头要有文字让看得见的读者知道这一列是级别。",
+            "读屏只读 label，不读格数与一共几级：名称本身要分得出高低（如高、中、低）。",
             "与 StatusDot 同行时两种标记同高、同一条行中线。"
           ],
           "stateOwner": {
@@ -27507,16 +27660,17 @@
         },
         "designEn": {
           "whenToUse": [
-            "A row's object has an ordered level that must be comparable without spending a text column."
+            "A row's object has an ordered level (severity, priority) read as its name, and it must be comparable without spending a text column."
           ],
           "avoid": [
             "Use StatusDot for which state an object is in: states have no order.",
-            "Use Meter for a measurement with a unit and Progress for task completion.",
+            "Use Meter for a measured reading over a range, with segments when the reading itself counts whole cells; use Progress for task completion.",
             "Do not tell two levels with the same cell count apart by hue."
           ],
           "composition": [
             "Marks in one column share one max.",
             "With name=\"hidden\" the name remains the accessible name; the row or the column header must still tell sighted readers that the column is a level.",
+            "Screen readers read only label, not the cell count or the number of levels: the names themselves must tell high from low (such as high, medium, low).",
             "Beside a StatusDot both marks have the same height and share one row midline."
           ],
           "stateOwner": {
@@ -27618,7 +27772,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27650,7 +27804,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 88
+            "line": 90
           }
         },
         {
@@ -27658,7 +27812,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 257
+            "line": 263
           }
         },
         {
@@ -27666,7 +27820,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 234
+            "line": 240
           }
         },
         {
@@ -27682,7 +27836,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 166
+            "line": 169
           }
         },
         {
@@ -27690,7 +27844,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 165
+            "line": 168
           }
         },
         {
@@ -27707,7 +27861,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 125
+            "line": 128
           }
         },
         {
@@ -27715,7 +27869,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 124
+            "line": 127
           }
         },
         {
@@ -27723,7 +27877,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 218
+            "line": 224
           }
         },
         {
@@ -27731,7 +27885,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 212
+            "line": 218
           }
         },
         {
@@ -27739,7 +27893,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 206
+            "line": 212
           }
         },
         {
@@ -27747,7 +27901,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 225
+            "line": 231
           }
         },
         {
@@ -27755,7 +27909,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 219
+            "line": 225
           }
         },
         {
@@ -27763,7 +27917,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 198
+            "line": 204
           }
         },
         {
@@ -27771,7 +27925,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 152
+            "line": 155
           }
         },
         {
@@ -27779,7 +27933,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 143
+            "line": 146
           }
         },
         {
@@ -27787,7 +27941,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 246
+            "line": 252
           }
         },
         {
@@ -27795,7 +27949,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 232
+            "line": 238
           }
         },
         {
@@ -27803,7 +27957,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 46
+            "line": 48
           }
         },
         {
@@ -27811,7 +27965,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 306
+            "line": 312
           }
         },
         {
@@ -27819,7 +27973,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 357
+            "line": 363
           }
         },
         {
@@ -27827,7 +27981,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 346
+            "line": 352
           }
         },
         {
@@ -27835,7 +27989,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 298
+            "line": 304
           }
         },
         {
@@ -27843,7 +27997,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 333
+            "line": 339
           }
         },
         {
@@ -27851,7 +28005,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 297
+            "line": 303
           }
         },
         {
@@ -27859,7 +28013,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 161
+            "line": 164
           }
         },
         {
@@ -27867,7 +28021,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 156
+            "line": 159
           }
         },
         {
@@ -27875,7 +28029,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 136
+            "line": 139
           }
         },
         {
@@ -27883,7 +28037,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/sidebar.tsx",
-            "line": 134
+            "line": 137
           }
         }
       ],
@@ -28148,11 +28302,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 88
+              "line": 90
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 88
+              "line": 90
             },
             "status": "PRESENT"
           },
@@ -28161,11 +28315,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 136
+              "line": 139
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 136
+              "line": 139
             },
             "status": "PRESENT"
           },
@@ -28174,11 +28328,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 125
+              "line": 128
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 125
+              "line": 128
             },
             "status": "PRESENT"
           },
@@ -28187,11 +28341,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 152
+              "line": 155
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 152
+              "line": 155
             },
             "status": "PRESENT"
           },
@@ -28200,11 +28354,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 161
+              "line": 164
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 161
+              "line": 164
             },
             "status": "PRESENT"
           },
@@ -28213,11 +28367,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 166
+              "line": 169
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 166
+              "line": 169
             },
             "status": "PRESENT"
           },
@@ -28226,11 +28380,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 206
+              "line": 212
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 206
+              "line": 212
             },
             "status": "PRESENT"
           },
@@ -28239,11 +28393,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 225
+              "line": 231
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 225
+              "line": 231
             },
             "status": "PRESENT"
           },
@@ -28252,11 +28406,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 218
+              "line": 224
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 218
+              "line": 224
             },
             "status": "PRESENT"
           },
@@ -28265,11 +28419,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 246
+              "line": 252
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 246
+              "line": 252
             },
             "status": "PRESENT"
           },
@@ -28278,11 +28432,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 257
+              "line": 263
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 257
+              "line": 263
             },
             "status": "PRESENT"
           },
@@ -28291,11 +28445,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 306
+              "line": 312
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 306
+              "line": 312
             },
             "status": "PRESENT"
           },
@@ -28304,11 +28458,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 333
+              "line": 339
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 333
+              "line": 339
             },
             "status": "PRESENT"
           },
@@ -28317,11 +28471,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 357
+              "line": 363
             },
             "rootEntry": {
               "path": "packages/ui/src/components/sidebar.tsx",
-              "line": 357
+              "line": 363
             },
             "status": "PRESENT"
           },
@@ -28350,7 +28504,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28648,7 +28802,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28818,7 +28972,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -29309,7 +29463,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -29529,7 +29683,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -29922,7 +30076,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30107,7 +30261,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30384,7 +30538,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30627,7 +30781,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31101,7 +31255,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31455,7 +31609,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31478,7 +31632,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tag-input.tsx",
-            "line": 81
+            "line": 88
           }
         },
         {
@@ -31486,7 +31640,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tag-input.tsx",
-            "line": 16
+            "line": 17
           }
         },
         {
@@ -31494,7 +31648,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/tag-input.tsx",
-            "line": 36
+            "line": 37
           }
         }
       ],
@@ -31704,11 +31858,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tag-input.tsx",
-              "line": 81
+              "line": 88
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tag-input.tsx",
-              "line": 81
+              "line": 88
             },
             "status": "PRESENT"
           }
@@ -31724,7 +31878,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31982,7 +32136,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32259,7 +32413,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32425,6 +32579,13 @@
             "名实相符",
             "进退相承"
           ],
+          "whenToUse": [
+            "只填一个时刻，如提醒时间、营业开始。"
+          ],
+          "avoid": [
+            "起止两个时刻用 TimeRangeField；日期加时刻用 DateTimePicker。",
+            "只要日期用 DatePicker。"
+          ],
           "composition": [
             "Field + FieldLabel + TimeField + FieldDescription / FieldError"
           ],
@@ -32444,6 +32605,13 @@
           ]
         },
         "designEn": {
+          "whenToUse": [
+            "Fill in a single time of day, such as a reminder time or an opening time."
+          ],
+          "avoid": [
+            "Use TimeRangeField for a start and end time; DateTimePicker for a date with a time.",
+            "Use DatePicker for a date only."
+          ],
           "composition": [
             "Field + FieldLabel + TimeField + FieldDescription / FieldError"
           ],
@@ -32488,7 +32656,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32644,6 +32812,13 @@
             "名实相符",
             "相成相制"
           ],
+          "whenToUse": [
+            "在一个编辑边界里填起止两个时刻，如营业时间、班次。"
+          ],
+          "avoid": [
+            "单个时刻用 TimeField；起止还要带日期用 DateTimeRangePicker。",
+            "跨日的区间须显式传 allowCrossMidnight，否则结束早于开始会判为无效。"
+          ],
           "composition": [
             "Field + FieldLabel + TimeRangeField + FieldDescription / FieldError"
           ],
@@ -32663,6 +32838,13 @@
           ]
         },
         "designEn": {
+          "whenToUse": [
+            "Fill in a start and end time within one editing boundary, such as opening hours or a shift."
+          ],
+          "avoid": [
+            "Use TimeField for a single time; DateTimeRangePicker when the range also needs dates.",
+            "A range that crosses midnight needs allowCrossMidnight, otherwise an end before the start is invalid."
+          ],
           "composition": [
             "Field + FieldLabel + TimeRangeField + FieldDescription / FieldError"
           ],
@@ -32707,7 +32889,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32999,7 +33181,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -33386,7 +33568,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -33409,7 +33591,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 110
+            "line": 115
           }
         },
         {
@@ -33417,7 +33599,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 69
+            "line": 74
           }
         },
         {
@@ -33433,7 +33615,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 58
+            "line": 63
           }
         },
         {
@@ -33441,7 +33623,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 143
+            "line": 148
           }
         },
         {
@@ -33449,7 +33631,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 119
+            "line": 124
           }
         },
         {
@@ -33457,7 +33639,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 151
+            "line": 156
           }
         }
       ],
@@ -33498,7 +33680,7 @@
             "一篇长文或文档页需要在几个段落间快速定位，并看到自己读到了哪一节。"
           ],
           "avoid": [
-            "少于两个目的地时目录没有意义，由调用方决定是否渲染（Toc 本身只在 items 为空时不渲染）。",
+            "为只有一节的页面另写是否渲染 Toc 的判断：少于两个目的地时 Toc 自己不渲染（按条目数算，一个 h2 下两个 h3 是三项）。",
             "跨页面的目的地用 Breadcrumb 或 NavigationMenu；Toc 只表达同一页内的位置。"
           ],
           "composition": [
@@ -33508,10 +33690,10 @@
           ],
           "stateOwner": {
             "library": [
-              "目录的排版、层级缩进、当前项的视觉表达。"
+              "目录的排版、层级缩进、当前项的视觉表达；少于两项时不渲染。"
             ],
             "application": [
-              "标题的真实 id、滚动容器、吸顶偏移、是否需要目录（少于两项时渲染与否）。"
+              "标题的真实 id、滚动容器、吸顶偏移、版面里是否为目录留栏。"
             ]
           },
           "responsive": [
@@ -33526,7 +33708,7 @@
             "A long article or documentation page needs quick movement between sections, with visible confirmation of the current one."
           ],
           "avoid": [
-            "A single destination makes no table of contents; the caller decides whether to render one (Toc itself only withholds rendering when items is empty).",
+            "Writing your own check for whether to render Toc on a single-section page: Toc renders nothing with fewer than two destinations (counted as items, so one h2 with two h3s is three).",
             "Use Breadcrumb or NavigationMenu for destinations across pages; Toc only expresses position within the current page."
           ],
           "composition": [
@@ -33536,10 +33718,10 @@
           ],
           "stateOwner": {
             "library": [
-              "The table of contents' layout, level indent, and the current item's visual expression."
+              "The table of contents' layout, level indent, and the current item's visual expression; it renders nothing with fewer than two items."
             ],
             "application": [
-              "Headings' actual ids, the scroll container, sticky-header offsets, and whether a table of contents is needed at all."
+              "Headings' actual ids, the scroll container, sticky-header offsets, and whether the layout reserves a column for the contents."
             ]
           },
           "responsive": [
@@ -33549,8 +33731,8 @@
         "api": [
           {
             "name": "Toc",
-            "description": "目录容器；渲染为 nav，没有条目时不渲染。",
-            "descriptionEn": "The table of contents container; renders as nav, and renders nothing when there are no items.",
+            "description": "目录容器；渲染为 nav，少于两项时不渲染。",
+            "descriptionEn": "The table of contents container; renders as nav, and renders nothing with fewer than two items.",
             "props": [
               {
                 "name": "items",
@@ -33617,11 +33799,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 69
+              "line": 74
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 69
+              "line": 74
             },
             "status": "PRESENT"
           },
@@ -33630,11 +33812,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 110
+              "line": 115
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 110
+              "line": 115
             },
             "status": "PRESENT"
           },
@@ -33643,11 +33825,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 119
+              "line": 124
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 119
+              "line": 124
             },
             "status": "PRESENT"
           },
@@ -33656,11 +33838,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 151
+              "line": 156
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 151
+              "line": 156
             },
             "status": "PRESENT"
           }
@@ -33676,7 +33858,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -33966,7 +34148,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -34218,7 +34400,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -34571,7 +34753,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -34843,13 +35025,13 @@
         "notes": [
           "纯图标按钮自带 aria-label；打开时 aria-describedby 关联提示，保留已有说明。",
           "提示只承载短文本。需要点击帮助或交互内容时用 Popover，需要持续依据时用正文。",
-          "直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因直接可见。",
+          "直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因写成页内可见文字：触屏上提示不会出现，只放在提示里的原因在那里读不到。",
           "触发器不自带控件：提示附在调用方给出的控件上。该控件必须能获得键盘焦点，所以不是 span。"
         ],
         "notesEn": [
           "Icon buttons supply aria-label. While open, aria-describedby links the hint and preserves existing descriptions.",
           "Use short text only. Use Popover for click help or interactive content, and visible text for persistent information.",
-          "Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Keep the reason visible.",
+          "Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Write the disabled reason as visible text on the page: hints never appear on touch screens, so a reason that lives only in a hint cannot be read there.",
           "The trigger brings no control of its own: the hint attaches to the caller's control, which must be keyboard focusable, so it is not a span."
         ],
         "design": {
@@ -35011,7 +35193,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -35245,7 +35427,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -35268,7 +35450,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/transfer.tsx",
-            "line": 110
+            "line": 114
           }
         },
         {
@@ -35487,11 +35669,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/transfer.tsx",
-              "line": 110
+              "line": 114
             },
             "rootEntry": {
               "path": "packages/ui/src/components/transfer.tsx",
-              "line": 110
+              "line": 114
             },
             "status": "PRESENT"
           }
@@ -35507,7 +35689,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -35758,7 +35940,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -36053,7 +36235,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -36357,7 +36539,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -36601,7 +36783,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -37104,7 +37286,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.4.0",
+        "version": "5.5.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -45754,6 +45936,9 @@
     "scripts/ai-eval/runs/self-fe0a301a-t03-good/evaluation/vitest.config.mjs",
     "scripts/ai-eval/runs/self-fe0a301a-t04-bad/evaluation/vitest.config.mjs",
     "scripts/ai-eval/runs/self-fe0a301a-t04-good/evaluation/vitest.config.mjs",
+    "scripts/ai-eval/s1/evaluate.mjs",
+    "scripts/ai-eval/s1/freeze.mjs",
+    "scripts/ai-eval/s1/run.mjs",
     "scripts/ai-eval/selftest.mjs",
     "scripts/ai-eval/summarize.mjs",
     "scripts/ai-eval/tool.mjs",
@@ -45769,11 +45954,14 @@
     "scripts/lib/component-provenance.mjs",
     "scripts/lib/delivery-contracts.test.mjs",
     "scripts/lib/facts-ledger.test.mjs",
+    "scripts/lib/name-check.mjs",
+    "scripts/lib/name-check.test.mjs",
     "scripts/lib/process-exit.mjs",
     "scripts/lib/process-exit.test.mjs",
     "scripts/lib/token-ledger-probes.mjs",
     "scripts/lib/token-ledger-static.mjs",
     "scripts/lib/ui-facts.mjs",
+    "scripts/name-audit.mjs",
     "scripts/run-browser-audit.mjs",
     "scripts/shot-el.mjs",
     "scripts/shot-page.mjs",

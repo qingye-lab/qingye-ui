@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IconBold, IconItalic } from "@tabler/icons-react";
 import { Toggle } from "@qingye_lab/ui/components/toggle";
 
-export const meta = { title: "切换态", titleEn: "Toggled state" };
+export const meta = { title: "切换态", titleEn: "Toggled state", specimen: true };
 export default function Demo() {
   const [pressed, setPressed] = useState(true);
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)">

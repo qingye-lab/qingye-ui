@@ -1,24 +1,25 @@
 # 测量 Meter
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/meter
 Source: packages/ui/src/components/meter.tsx
-Source SHA-256: 9579a5e1dcfc8e727b00a72c3e2b16e1be3853063a55fdc4af3cd6a927040c7c
+Source SHA-256: 3b1233fa556bb4efd1a827ee8adfc0c4e36155e61816f0c7f378a8b23e793ca9
 
 表达真实范围内的测量值。
 
 ## Decision
-任务完成比例使用 Progress；未知测量不要填0。级别是「几级里的第几级」，用 segments 分格；状态类别 tone 由调用方声明，色相之外格数仍读得出级别。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。
+任务完成比例使用 Progress；未知测量不要填0。读数本身是若干整格时用 segments 分格，读屏读出的仍是读数；对象的有序级别读出的是级别名称，用 SeverityMark。状态类别 tone 由调用方声明，色相之外格数或读数仍承担同一事实。值变化时填充长度过渡到新长度（首次渲染不动；减少动效或键盘操作下立即到位）。
 
 ## Use and ownership
-- 表达测量值及单位。
+- 表达一个有效范围内的测量值及单位，读屏读出读数。
 - Avoid: 任务完成比例使用 Progress；未知测量不要填0。
+- Avoid: 对象带有一个有次序的级别、读出的是级别名称（如高、中、低）时用 SeverityMark；对象处于哪一种状态用 StatusDot。
 - Library: 原生语义、公共组合与集中角色。
 - Application: 对象、内容、值、状态与请求结果。
 
 ## Composition
 - Label 关联名称，Value 展示实际读数，轨与指示不猜测好坏。
-- 密集列表里的级别用 segments={3} 加 tone，不用 StatusDot：状态与程度是两件事。
+- segments 只给本身以整格计的读数分格，getAriaValueText 读出实际读数与单位；一行对象的级别用 SeverityMark。
 
 ## Responsive behavior
 - 测量名称与格式化读数允许换行；轨厚由独立测量角色控制。
@@ -39,7 +40,7 @@ Source SHA-256: 9579a5e1dcfc8e727b00a72c3e2b16e1be3853063a55fdc4af3cd6a927040c7c
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Meter
-- `segments?`: `number`. 这个量是离散的 n 级时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。
+- `segments?`: `number`. 读数本身以整格计（如四格里剩几格）时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。
 - `tone?`: `"info" | "warning" | "danger" | "success"`. 状态类别：由调用方声明，组件不从数值猜好坏（随类赋彩）。不给时指示用主色。
 - plus 284 inherited (@types/react 274, @base-ui/react 10); not expanded, see the installed declarations
 
@@ -72,7 +73,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### Meter
 Label 关联名称，Value 展示实际读数，轨与指示不猜测好坏。
 - value / min / max: number. 已知有限值及递增范围；越界、非有限或倒置范围抛 RangeError。
-- segments: number. 离散的 n 级：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；(value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。级别名用 getAriaValueText 给出。
+- segments: number. 以 n 个整格计的读数：轨道按 n 个等宽格分开，格间留 2px 透明空隙。n 为 2 以上的整数；(value − min) 必须是 (max − min)/n 的整数倍，否则抛 RangeError。实际读数与单位用 getAriaValueText 给出。
 - tone: "danger" | "warning" | "success" | "info". 指示的状态类别，由调用方声明，组件不从数值猜好坏；根上带 data-tone。不给时用主色。非法值抛 RangeError。
 - format / locale / getAriaValueText: Base UI Meter props. 真实单位和可访问读数；locale 默认跟随 UILocale。
 - render / ref / 原生属性: current public component props. 属性、事件与ref透传实际元素；样式由className/style调整。
@@ -104,22 +105,23 @@ export const meta = { title: "测量值", titleEn: "Measurements" };
 export default function Demo() { return <Stack gap="fields" className="w-full max-w-sm">{[0,40,100].map(value => <Meter key={value} value={value}><MeterLabel>测量</MeterLabel><MeterValue /><MeterTrack><MeterIndicator /></MeterTrack></Meter>)}</Stack>; }
 ```
 
-### 三级的级别
+### 以整格计的读数
 Source: apps/docs/src/content/meter/demos/02-levels.tsx
 ```tsx
-import { Meter, MeterIndicator, MeterTrack } from "@qingye_lab/ui/components/meter";
+import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@qingye_lab/ui/components/meter";
+import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import type { DemoMeta } from "@/lib/types";
-export const meta = { title: "三级的级别", titleEn: "Three levels" } satisfies DemoMeta;
-const levels = ["低", "中", "高"];
-const rows: { name: string; level: 1 | 2 | 3; tone: "danger" | "warning" | "info" }[] = [
-  { name: "三号蚕室温度偏离", level: 3, tone: "danger" },
-  { name: "一号蚕室湿度偏离", level: 2, tone: "warning" },
-  { name: "二号蚕室桑叶余量", level: 1, tone: "info" },
+export const meta = { title: "以整格计的读数", titleEn: "Readings in whole cells" } satisfies DemoMeta;
+const rows = [
+  { name: "一号蚕室桑叶余量", value: 3 },
+  { name: "二号蚕室桑叶余量", value: 1 },
+  { name: "三号蚕室桑叶余量", value: 0 },
 ];
+const reading = (value: number) => `${value} / 4 筐`;
 export default function Demo() {
-  return <ul className="m-0 grid w-full max-w-xs list-none gap-(--qy-field-gap) p-0">{rows.map(row => <li key={row.name} className="flex min-w-0 items-center justify-between gap-(--qy-panel-gap)">
-    <span className="min-w-0 text-body wrap-anywhere">{row.name}</span>
-    <Meter className="w-16 shrink-0" aria-label={`${row.name}级别`} value={row.level} min={0} max={3} segments={3} tone={row.tone} getAriaValueText={(_, value) => levels[value - 1]!}><MeterTrack><MeterIndicator /></MeterTrack></Meter>
-  </li>)}</ul>;
+  return <Stack gap="fields" className="w-full max-w-xs">{rows.map(row => <Meter key={row.name} value={row.value} min={0} max={4} segments={4} getAriaValueText={(_, value) => reading(value)}>
+    <Inline gap="actions"><MeterLabel>{row.name}</MeterLabel><MeterValue className="ms-auto">{(_, value) => reading(value)}</MeterValue></Inline>
+    <MeterTrack><MeterIndicator /></MeterTrack>
+  </Meter>)}</Stack>;
 }
 ```

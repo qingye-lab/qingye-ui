@@ -1,0 +1,4 @@
+/* 项目品牌与主题覆盖写在这里 */
+html[data-brand="atlas"] {
+  --qy-primary: oklch(0.45 0.08 200);
+}

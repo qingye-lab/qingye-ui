@@ -7,6 +7,7 @@ import * as React from "react";
 import { intersectNativeBounds, mergeCalendarBounds, readNativeEntry, useInputFacts, useCustomValidity, useInputRef, useTypingText, warnEmptyBounds } from "../input-facts";
 import { useUILocale } from "../locale";
 import { inputAdjunctClassName, withHiddenIndicator } from "../input-adjunct";
+import { inControl, useAdjunctName } from "../adjunct-name";
 import { comparableTime, validLocalTime } from "../local-time";
 import { InputGroupReadOnlyNote } from "../input-readonly-note";
 import { cn } from "../utils";
@@ -50,6 +51,8 @@ export function DateTimePicker(allProps: DateTimePickerProps) {
   if (min && !validDateTime(min) || max && !validDateTime(max)) throw new RangeError("DateTimePicker min and max require complete local date/time text without a zone.");
   const { messages } = useUILocale();
   const timeId = React.useId();
+  const clearName = useAdjunctName(messages.clearDateTime, {}, inControl("date-time-picker-control"));
+  const openName = useAdjunctName(messages.selectDateTime, {}, inControl("date-time-picker-control"));
   const [open, setOpen] = React.useState(false);
   const [dateDraft, setDateDraft] = React.useState<Date | undefined>(parseLocalDate(value?.split("T")[0] ?? ""));
   const [timeDraft, setTimeDraft] = React.useState(value?.split("T")[1] ?? "");
@@ -121,8 +124,8 @@ export function DateTimePicker(allProps: DateTimePickerProps) {
           }} />
         {readOnlyNow && !disabled ? <InputGroupReadOnlyNote /> : null}
         {/* 与 DatePicker 同一套清除：值非空且可编辑时出现，清除后焦点回到输入。弹层里的「清除」是另一条路径，保留。 */}
-        {value && editable && <Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.clearDateTime} onClick={event => { typing.release(); change(undefined, event); inputRef.current?.focus(); }}><IconX aria-hidden="true" /></Button>}
-        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.selectDateTime} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
+        {value && editable && <Button variant="quiet" shape="icon" className={inputAdjunctClassName} {...clearName} onClick={event => { typing.release(); change(undefined, event); inputRef.current?.focus(); }}><IconX aria-hidden="true" /></Button>}
+        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} {...openName} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
       </InputGroup>
       <PopoverPopup align="start" anchor={boundaryRef}><div className="grid gap-(--qy-field-group-gap)"><Calendar {...(dateDraft ? { defaultMonth: dateDraft } : {})} {...calendarProps} {...bounds} mode="single" required selected={dateDraft} disabled={editable ? bounds.disabled : true} autoFocus onSelect={setDateDraft} />
         <div className="grid gap-(--qy-field-gap)"><Label htmlFor={timeId}>{messages.time}</Label><Input nativeInput id={timeId} type="time" value={timeDraft} disabled={!editable} step={inputProps.step} {...(timeMin ? { min: timeMin } : {})} {...(timeMax ? { max: timeMax } : {})} onChange={event => setTimeDraft(event.currentTarget.value)} /></div>

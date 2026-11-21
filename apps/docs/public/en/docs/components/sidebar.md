@@ -1,9 +1,9 @@
 # Sidebar
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: c1a2e83537c08c137c4b2a0266f85d16a4f021a4fd5586adc06de2a85434351c
+Source SHA-256: 3098b18a94f563faac4c8c907aa14400940981b3411c62438738b6d35d1e9039
 
 Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 

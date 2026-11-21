@@ -1,0 +1,2 @@
+{ "id": "T24", "title": "归档项目的操作菜单", "editable": ["src/ProjectActions.tsx"], "hidden": ["T24.test.tsx"],
+  "wrong": { "hidden-items": ["仍列在菜单里"], "enabled-noop": ["仍列在菜单里"], "native-list": ["菜单来自库"] } }

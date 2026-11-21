@@ -1,0 +1,2 @@
+{ "id": "T2", "title": "来源筛选表格（空值选项与列宽关系）", "editable": ["src/SourceFilterTable.tsx"], "hidden": ["T2.test.tsx"],
+  "wrong": { "no-all-item": ["全部来源"], "fixed-width": ["列宽"], "plain-table": ["来自库"] } }

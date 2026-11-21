@@ -1,6 +1,6 @@
 # 复制按钮 CopyButton
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/copy-button
 Source: packages/ui/src/components/copy-button.tsx
 Source SHA-256: 965565edbc2678a8309773c65d579ec3f47bd4dcea6736ea630fe959a6d25817
@@ -89,7 +89,7 @@ CopyButton 背后的 hook；需要自己的按钮外形或触发时机时直接�
 Source: apps/docs/src/content/copy-button/demos/01-copy.tsx
 ```tsx
 import { CopyButton } from "@qingye_lab/ui/components/copy-button";
-export const meta = { title: "复制文本", titleEn: "Copy text" };
+export const meta = { title: "复制文本", titleEn: "Copy text", specimen: true };
 export default function Demo() {
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)"><code className="text-body">Qingye</code><CopyButton value="Qingye" /><CopyButton value="Qingye" shape="icon" /><CopyButton value="Qingye" disabled /></div>;
 }

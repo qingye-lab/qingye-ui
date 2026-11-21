@@ -1,6 +1,6 @@
 # Command
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/command
 Source: packages/ui/src/components/command.tsx
 Source SHA-256: c7f5394e6236c173cce0773b9ee80ea7afaa65db6dca383596326bd0d9b5ff71
@@ -17,8 +17,9 @@ Items are commands (actions), not values filled into the input: selecting only f
 - Use Autocomplete or Combobox to choose a text value; a command palette chooses an action.
 
 ## Use and ownership
-- A search box over an always-open list of commands, for jumping somewhere or doing something.
-- Avoid: Do not put the only explanation of a critical consequence in a temporary popup; support both direct access and return navigation.
+- A command palette for jumping somewhere or running something; items are actions, not values to fill in.
+- Avoid: Use Select or Combobox to choose a value for a form.
+- Avoid: Use Menu for a few fixed actions; Autocomplete for input suggestions.
 - Library: Query text, filtering, highlight, the empty state, and group collapse.
 - Application: The list of commands, what onSelect does, the global shortcut, and opening the dialog.
 

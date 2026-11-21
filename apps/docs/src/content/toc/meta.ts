@@ -24,7 +24,7 @@ export default {
       "一篇长文或文档页需要在几个段落间快速定位，并看到自己读到了哪一节。"
     ],
     "avoid": [
-      "少于两个目的地时目录没有意义，由调用方决定是否渲染（Toc 本身只在 items 为空时不渲染）。",
+      "为只有一节的页面另写是否渲染 Toc 的判断：少于两个目的地时 Toc 自己不渲染（按条目数算，一个 h2 下两个 h3 是三项）。",
       "跨页面的目的地用 Breadcrumb 或 NavigationMenu；Toc 只表达同一页内的位置。"
     ],
     "composition": [
@@ -34,10 +34,10 @@ export default {
     ],
     "stateOwner": {
       "library": [
-        "目录的排版、层级缩进、当前项的视觉表达。"
+        "目录的排版、层级缩进、当前项的视觉表达；少于两项时不渲染。"
       ],
       "application": [
-        "标题的真实 id、滚动容器、吸顶偏移、是否需要目录（少于两项时渲染与否）。"
+        "标题的真实 id、滚动容器、吸顶偏移、版面里是否为目录留栏。"
       ]
     },
     "responsive": [
@@ -52,7 +52,7 @@ export default {
       "A long article or documentation page needs quick movement between sections, with visible confirmation of the current one."
     ],
     "avoid": [
-      "A single destination makes no table of contents; the caller decides whether to render one (Toc itself only withholds rendering when items is empty).",
+      "Writing your own check for whether to render Toc on a single-section page: Toc renders nothing with fewer than two destinations (counted as items, so one h2 with two h3s is three).",
       "Use Breadcrumb or NavigationMenu for destinations across pages; Toc only expresses position within the current page."
     ],
     "composition": [
@@ -62,10 +62,10 @@ export default {
     ],
     "stateOwner": {
       "library": [
-        "The table of contents' layout, level indent, and the current item's visual expression."
+        "The table of contents' layout, level indent, and the current item's visual expression; it renders nothing with fewer than two items."
       ],
       "application": [
-        "Headings' actual ids, the scroll container, sticky-header offsets, and whether a table of contents is needed at all."
+        "Headings' actual ids, the scroll container, sticky-header offsets, and whether the layout reserves a column for the contents."
       ]
     },
     "responsive": [
@@ -75,8 +75,8 @@ export default {
   "api": [
     {
       "name": "Toc",
-      "description": "目录容器；渲染为 nav，没有条目时不渲染。",
-      "descriptionEn": "The table of contents container; renders as nav, and renders nothing when there are no items.",
+      "description": "目录容器；渲染为 nav，少于两项时不渲染。",
+      "descriptionEn": "The table of contents container; renders as nav, and renders nothing with fewer than two items.",
       "props": [
         { "name": "items", "type": "{ id: string; label: string; level: 2 | 3 }[]", "description": "目的地列表；id 对应页面上真实存在的锚点。", "descriptionEn": "The destination list; id must match an anchor that actually exists on the page." },
         { "name": "current", "type": "string", "description": "当前所在目的地的 id；缺省时没有条目带 aria-current。", "descriptionEn": "The id of the current destination; omitted means no item carries aria-current." },

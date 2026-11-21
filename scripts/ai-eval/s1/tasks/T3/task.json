@@ -1,0 +1,2 @@
+{ "id": "T3", "title": "Atlas 品牌与密度（主题轴）", "editable": ["src/AtlasSettings.tsx", "src/theme.css", "index.html"], "hidden": ["T3.test.tsx"],
+  "wrong": { "theme-attr": ["品牌"], "per-input": ["紧凑"], "framed-table": ["外框"], "hard-color": ["颜色"] } }

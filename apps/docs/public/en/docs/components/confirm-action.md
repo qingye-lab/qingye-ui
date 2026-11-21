@@ -1,6 +1,6 @@
 # ConfirmAction
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
 Source SHA-256: f06004bed955d140e115ce34060d56d54831d3dbc8d17efe55605ec8fb1a643d
@@ -18,8 +18,9 @@ Confirmation targets the reviewed opening snapshot. Changed identity, version, c
 - While a request is in flight the dialog cannot be closed (not by Esc, outside press or Back); once the result arrives, the application decides when to close it. This component does not keep failed objects or their reasons, and they do not return once the dialog closes: the application should write them to the page before closing (an Alert listing which objects failed and why, with retry or dismiss) and keep them until the user deals with them. See "Failures stay on the page".
 
 ## Use and ownership
-- Confirm a specific object, version, and change; review again when content changes.
-- Avoid: Do not substitute styling for semantics; distinguish empty, unknown, and zero values.
+- An action that needs confirmation of a specific object, version and change, and must be reread when the content changes.
+- Avoid: Use AlertDialog for a simple decision that needs no review of content.
+- Avoid: Use Dialog for ordinary editing or forms; report the outcome with Alert or Toast.
 - Library: Open state, reviewed snapshot, invalidation notice, and optional confirmation input.
 - Application: Objects, versions, changes, permissions, action states, and outcomes.
 

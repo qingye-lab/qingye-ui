@@ -1,0 +1,163 @@
+phase,ruling_item,task,cond,config,network,runs,counted,pass,fail,excluded_contaminated,excluded_invalid,excluded_other,task_note,cell_status,cell_note
+P1,2,T1,D0,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P1,2,T1,D0,codex-xhigh,on,2,0,0,0,1,1,0,,RUN,
+P1,2,T4,D0,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P1,2,T4,D0,codex-xhigh,on,2,0,0,0,1,1,0,,RUN,
+P2,6,T1,D0,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P2,6,T1,D0,codex-xhigh,on,1,1,1,0,0,0,0,,RUN,
+P2,6,T3,D0,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P2,6,T3,D0,codex-xhigh,on,1,1,1,0,0,0,0,,RUN,
+P3,11,T2,D0,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P3,11,T2,D0,codex-xhigh,on,1,1,1,0,0,0,0,,RUN,
+P3,11,T4,D0,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P3,11,T4,D0,codex-xhigh,on,1,1,1,0,0,0,0,,RUN,
+P3,11,T5,D0,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P3,11,T5,D0,codex-xhigh,on,1,1,1,0,0,0,0,,RUN,
+P3,11,T6,D0,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P3,11,T6,D0,codex-xhigh,on,1,1,1,0,0,0,0,,RUN,
+P4,17,T1,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P4,17,T1,DN,codex-xhigh,on,1,1,1,0,0,0,0,,RUN,
+P4,17,T2,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P4,17,T2,DN,codex-xhigh,on,1,1,1,0,0,0,0,,RUN,
+P4,17,T3,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P4,17,T3,DN,codex-xhigh,on,1,1,1,0,0,0,0,,RUN,
+P4,17,T4,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P4,17,T4,DN,codex-xhigh,on,2,1,1,0,0,1,0,,RUN,
+P4,17,T5,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P4,17,T5,DN,codex-xhigh,on,2,1,1,0,0,1,0,,RUN,
+P4,17,T6,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+P4,17,T6,DN,codex-xhigh,on,1,0,0,0,0,1,0,,RUN,
+P5,17,T1,D0,codex-low,on,3,3,2,1,0,0,0,,RUN,
+P5,17,T1,DN,codex-low,on,3,3,3,0,0,0,0,,RUN,
+P5,17,T2,D0,codex-low,on,1,1,1,0,0,0,0,,RUN,
+P5,17,T2,DN,codex-low,on,1,1,1,0,0,0,0,,RUN,
+P5,17,T3,D0,codex-low,on,1,1,1,0,0,0,0,,RUN,
+P5,17,T3,DN,codex-low,on,1,1,1,0,0,0,0,,RUN,
+P5,17,T4,D0,codex-low,on,1,1,1,0,0,0,0,,RUN,
+P5,17,T4,DN,codex-low,on,1,1,1,0,0,0,0,,RUN,
+P5,17,T5,D0,codex-low,on,1,1,1,0,0,0,0,,RUN,
+P5,17,T5,DN,codex-low,on,1,1,1,0,0,0,0,,RUN,
+P5,17,T6,D0,codex-low,on,1,1,1,0,0,0,0,,RUN,
+P5,17,T6,DN,codex-low,on,1,1,1,0,0,0,0,,RUN,
+NA,17,T6,DN,codex-xhigh,on,1,0,0,0,0,0,1,,RUN,
+R1,19,T7,D0,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T7,D0,codex-low,on,3,3,3,0,0,0,0,,RUN,
+R1,19,T7,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T7,DN,codex-low,on,6,3,0,3,3,0,0,,RUN,
+R1,19,T8,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T8,DN,codex-low,on,2,1,1,0,1,0,0,,RUN,
+R1,19,T9,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T9,DN,codex-low,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T10,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T10,DN,codex-low,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T11,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T11,DN,codex-low,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T12,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T12,DN,codex-low,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T13,DN,claude-opus,on,1,1,1,0,0,0,0,刷新断言在 DN 包内有明文,RUN,
+R1,19,T13,DN,codex-low,on,1,1,1,0,0,0,0,刷新断言在 DN 包内有明文,RUN,
+R1,19,T14,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T14,DN,codex-low,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T15,DN,claude-opus,on,1,1,1,0,0,0,0,DN 包内有明文,RUN,
+R1,19,T15,DN,codex-low,on,1,1,1,0,0,0,0,DN 包内有明文,RUN,
+R1,19,T16,DN,claude-opus,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T16,DN,codex-low,on,1,1,1,0,0,0,0,,RUN,
+R1,19,T17,DN,claude-opus,on,1,1,1,0,0,0,0,DN 包内有明文,RUN,
+R1,19,T17,DN,codex-low,on,1,1,1,0,0,0,0,DN 包内有明文,RUN,
+R1,19,T18,DN,claude-opus,on,2,1,1,0,1,0,0,DN 包内有明文,RUN,
+R1,19,T18,DN,codex-low,on,1,1,1,0,0,0,0,DN 包内有明文,RUN,
+R2,21,T7,D0,codex-low,off,3,3,3,0,0,0,0,,RUN,
+R2,21,T7,DN,claude-opus,off,1,1,1,0,0,0,0,,RUN,
+R2,21,T7,DN,claude-sonnet-low,off,1,1,1,0,0,0,0,,RUN,
+R2,21,T7,DN,codex-low,off,3,3,1,2,0,0,0,,RUN,
+R2,21,T19,DN,claude-opus,off,1,1,1,0,0,0,0,,RUN,
+R2,21,T19,DN,claude-sonnet-low,off,1,1,1,0,0,0,0,,RUN,
+R2,21,T19,DN,codex-low,off,1,1,1,0,0,0,0,,RUN,
+R2,21,T20,DN,claude-opus,off,1,1,1,0,0,0,0,,RUN,
+R2,21,T20,DN,claude-sonnet-low,off,1,1,1,0,0,0,0,,RUN,
+R2,21,T20,DN,codex-low,off,1,1,1,0,0,0,0,,RUN,
+R2,21,T21,DN,claude-opus,off,1,1,1,0,0,0,0,,RUN,
+R2,21,T21,DN,claude-sonnet-low,off,1,1,1,0,0,0,0,,RUN,
+R2,21,T21,DN,codex-low,off,1,1,1,0,0,0,0,,RUN,
+R2,21,T22,DN,claude-opus,off,2,1,1,0,0,0,1,,RUN,
+R2,21,T22,DN,claude-sonnet-low,off,1,1,1,0,0,0,0,,RUN,
+R2,21,T22,DN,codex-low,off,1,1,1,0,0,0,0,,RUN,
+R2,21,T23,D0,claude-opus,off,3,3,3,0,0,0,0,可查性题：题面写“按本库约定”,RUN,
+R2,21,T23,D0,claude-sonnet-low,off,3,3,3,0,0,0,0,可查性题：题面写“按本库约定”,RUN,
+R2,21,T23,D0,codex-low,off,3,3,3,0,0,0,0,可查性题：题面写“按本库约定”,RUN,
+R2,21,T23,DN,claude-opus,off,4,3,2,1,0,1,0,可查性题：题面写“按本库约定”,RUN,
+R2,21,T23,DN,claude-sonnet-low,off,3,3,0,3,0,0,0,可查性题：题面写“按本库约定”,RUN,
+R2,21,T23,DN,codex-low,off,4,3,0,3,1,0,0,可查性题：题面写“按本库约定”,RUN,
+R3,23,T7,DN,claude-opus,off,3,3,3,0,0,0,0,,RUN,
+R3,23,T7,DN,claude-sonnet-low,off,3,3,3,0,0,0,0,,RUN,
+R3,23,T24,DN,claude-opus,off,3,3,3,0,0,0,0,,RUN,
+R3,23,T24,DN,claude-sonnet-low,off,3,3,3,0,0,0,0,,RUN,
+R3,23,T24,DN,codex-low,off,5,5,5,0,0,0,0,,RUN,
+R3,23,T25,DN,claude-opus,off,3,3,3,0,0,0,0,,RUN,
+R3,23,T25,DN,claude-sonnet-low,off,3,3,3,0,0,0,0,,RUN,
+R3,23,T25,DN,codex-low,off,5,5,5,0,0,0,0,,RUN,
+R3,23,T26,DN,claude-opus,off,3,3,3,0,0,0,0,,RUN,
+R3,23,T26,DN,claude-sonnet-low,off,3,3,3,0,0,0,0,,RUN,
+R3,23,T26,DN,codex-low,off,5,5,5,0,0,0,0,,RUN,
+R3,23,T27,DN,claude-opus,off,3,3,3,0,0,0,0,,RUN,
+R3,23,T27,DN,claude-sonnet-low,off,3,3,3,0,0,0,0,,RUN,
+R3,23,T27,DN,codex-low,off,5,5,5,0,0,0,0,,RUN,
+R3,23,T28,DN,claude-opus,off,3,3,3,0,0,0,0,可查性题：DN 源码有明文,RUN,
+R3,23,T28,DN,claude-sonnet-low,off,3,3,3,0,0,0,0,可查性题：DN 源码有明文,RUN,
+R3,23,T29,D0,claude-opus,off,3,3,0,3,0,0,0,题目缺陷：库内两份说明推荐冲突，不计入指南作用,RUN,
+R3,23,T29,D0,claude-sonnet-low,off,3,3,0,3,0,0,0,题目缺陷：库内两份说明推荐冲突，不计入指南作用,RUN,
+R3,23,T29,DN,claude-opus,off,3,3,0,3,0,0,0,题目缺陷：库内两份说明推荐冲突，不计入指南作用,RUN,
+R3,23,T29,DN,claude-sonnet-low,off,3,3,0,3,0,0,0,题目缺陷：库内两份说明推荐冲突，不计入指南作用,RUN,
+,24,T1,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T2,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T3,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T4,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T5,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T6,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T7,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T8,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T9,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T10,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T11,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T12,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T13,D05,全部配置,,0,0,0,0,0,0,0,刷新断言在 DN 包内有明文,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T14,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T15,D05,全部配置,,0,0,0,0,0,0,0,DN 包内有明文,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T16,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T17,D05,全部配置,,0,0,0,0,0,0,0,DN 包内有明文,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T18,D05,全部配置,,0,0,0,0,0,0,0,DN 包内有明文,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T19,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T20,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T21,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T22,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T23,D05,全部配置,,0,0,0,0,0,0,0,可查性题：题面写“按本库约定”,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T24,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T25,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T26,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T27,D05,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T28,D05,全部配置,,0,0,0,0,0,0,0,可查性题：DN 源码有明文,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T29,D05,全部配置,,0,0,0,0,0,0,0,题目缺陷：库内两份说明推荐冲突，不计入指南作用,NOT_RUN,正式矩阵按用户裁决跳过
+,24,T8,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T9,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T10,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T11,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T12,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T13,D0,全部配置,,0,0,0,0,0,0,0,刷新断言在 DN 包内有明文,NOT_RUN,这道题只跑了 DN
+,24,T14,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T15,D0,全部配置,,0,0,0,0,0,0,0,DN 包内有明文,NOT_RUN,这道题只跑了 DN
+,24,T16,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T17,D0,全部配置,,0,0,0,0,0,0,0,DN 包内有明文,NOT_RUN,这道题只跑了 DN
+,24,T18,D0,全部配置,,0,0,0,0,0,0,0,DN 包内有明文,NOT_RUN,这道题只跑了 DN
+,24,T19,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T20,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T21,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T22,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T24,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T25,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T26,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T27,D0,全部配置,,0,0,0,0,0,0,0,,NOT_RUN,这道题只跑了 DN
+,24,T28,D0,全部配置,,0,0,0,0,0,0,0,可查性题：DN 源码有明文,NOT_RUN,这道题只跑了 DN
+,24,T28,DN,codex-low,,0,0,0,0,0,0,0,可查性题：DN 源码有明文,NOT_RUN,第三轮 Codex 线被中止；有 1 次运行被终止，没有评分结果
+,24,T29,DN,codex-low,,0,0,0,0,0,0,0,题目缺陷：库内两份说明推荐冲突，不计入指南作用,NOT_RUN,第三轮 Codex 线被中止
+,24,T29,D0,codex-low,,0,0,0,0,0,0,0,题目缺陷：库内两份说明推荐冲突，不计入指南作用,NOT_RUN,第三轮 Codex 线被中止
+,24,T7,DN,codex-low（第三轮）,,0,0,0,0,0,0,0,,NOT_RUN,第三轮 Codex 线被中止；第一、二轮有数据

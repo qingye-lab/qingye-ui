@@ -1,9 +1,9 @@
 # 密码输入 PasswordInput
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/password-input
 Source: packages/ui/src/components/password-input.tsx
-Source SHA-256: d979e4856bb9c60fc9b12a6418bd99fa1067317850359c6843c8caeab43e87d3
+Source SHA-256: 2cc5609ba3e912efe39c5fc9eb5a4dd9dbd280a509dd635309654d833a0b140b
 
 输入密码，并可切换为明文核对。
 

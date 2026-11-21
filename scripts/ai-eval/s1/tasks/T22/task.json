@@ -1,0 +1,2 @@
+{ "id": "T22", "title": "必选的视图切换（不能全部松开）", "editable": ["src/ViewSwitch.tsx"], "hidden": ["T22.test.tsx"],
+  "wrong": { "toggle-guarded": ["[a11y]", "[api]"], "toggle-unguarded": ["[a11y]", "[api]", "不产生空值"] } }

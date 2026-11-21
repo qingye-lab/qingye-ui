@@ -1,6 +1,6 @@
 # Label
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/label
 Source: packages/ui/src/components/label.tsx
 Source SHA-256: 8fd751c16092f6e5c8f0709af79c56911c6b13e8ceb2ff5b7cff46bfb842c5e2
@@ -12,6 +12,7 @@ Use FieldLabel inside Field. A standalone Label associates one control through h
 
 ## Notes
 - Label owns no disabled state; the named control uses its real disabled attribute.
+- For popup inputs such as Combobox and Autocomplete, associate through htmlFor or use Field; do not wrap the control in a label with its text in a child element, because that name disappears while the popup is open.
 
 ## Use and ownership
 - A native control needs a persistent readable name.

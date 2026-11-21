@@ -1,6 +1,6 @@
 # 时间段 TimeRangeField
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/time-range-field
 Source: packages/ui/src/components/time-range-field.tsx
 Source SHA-256: c39fe59d6990ae7bb22f03e31bc6ceccc0d6e0ad00e14cd867631e29a3534bf3
@@ -17,7 +17,8 @@ Source SHA-256: c39fe59d6990ae7bb22f03e31bc6ceccc0d6e0ad00e14cd867631e29a3534bf3
 
 ## Use and ownership
 - 在一个编辑边界里填起止两个时刻，如营业时间、班次。
-- Avoid: 不能仅用 placeholder 代替名称；失败后不要无故清空输入。
+- Avoid: 单个时刻用 TimeField；起止还要带日期用 DateTimeRangePicker。
+- Avoid: 跨日的区间须显式传 allowCrossMidnight，否则结束早于开始会判为无效。
 - Library: 各端的分段草稿与键入缓冲、焦点所在分段、顺序的原生校验
 - Application: 起止的值、是否允许跨零点、顺序错误时的说明、提交结果
 

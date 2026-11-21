@@ -66,13 +66,13 @@ export default {
   notes: [
     "纯图标按钮自带 aria-label；打开时 aria-describedby 关联提示，保留已有说明。",
     "提示只承载短文本。需要点击帮助或交互内容时用 Popover，需要持续依据时用正文。",
-    "直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因直接可见。",
+    "直接 render 的 disabled 控件同时停用提示；render 函数/自定义控件内部禁用须同步 Trigger.disabled。禁用原因写成页内可见文字：触屏上提示不会出现，只放在提示里的原因在那里读不到。",
     "触发器不自带控件：提示附在调用方给出的控件上。该控件必须能获得键盘焦点，所以不是 span。",
   ],
   notesEn: [
     "Icon buttons supply aria-label. While open, aria-describedby links the hint and preserves existing descriptions.",
     "Use short text only. Use Popover for click help or interactive content, and visible text for persistent information.",
-    "Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Keep the reason visible.",
+    "Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Write the disabled reason as visible text on the page: hints never appear on touch screens, so a reason that lives only in a hint cannot be read there.",
     "The trigger brings no control of its own: the hint attaches to the caller's control, which must be keyboard focusable, so it is not a span.",
   ],
   design: {

@@ -1,9 +1,9 @@
 # Autocomplete
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: 49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7
+Source SHA-256: b56390332369882f40dd618b614736dbecb995da1634da99f97332f6d7f1cf2c
 
 Edit free text with optional suggestions.
 
@@ -15,10 +15,12 @@ The text itself is the value. Highlighting does not change it; accepting a sugge
 - An empty set does not imply an error or service failure. Supply empty content from real facts; an empty AutocompleteEmpty uses the built-in "No options".
 - Caller positioning style merges last; colors, corners, highlights, and focus use existing theme roles.
 - Use Command for a command palette.
+- Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears.
 
 ## Use and ownership
-- Edit free text with optional suggestions.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- The typed text is the value and candidates are only acceptable suggestions (search terms, tag names, addresses).
+- Avoid: Use Combobox when the value must come from the candidates (Select when they are few and fixed).
+- Avoid: Use Command to run actions or navigate; use SearchInput for a plain search box.
 - Library: Suggestion highlighting, focus, and uncontrolled text.
 - Application: Controlled text, suggestion data, errors, and submission outcomes.
 

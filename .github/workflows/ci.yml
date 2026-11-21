@@ -4,114 +4,148 @@ on:
   push:
     branches: [main]
   pull_request:
+    # docs/、根目录 *.md 都参与构建与测试（design.md、STANDARDS.md 会被生成脚本读取），不能整体忽略。
+    # 只跳过确定不影响任何检查的文件；push 到 main 始终运行，发布前要靠它确认提交已通过。
+    paths-ignore:
+      - LICENSE
+      - REVIEW-*.md
 
 permissions:
   contents: read
 
-# 四个作业并行，互不阻断：一次运行暴露全部失败。
-# 每个作业自己构建所需产物，不经 artifact 传递，作业之间没有先后。
+# 同一分支/PR 的新提交取消旧运行（仅 pull_request；main 上的运行不取消，保证每个提交都有结果）。
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   unit:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
       - name: Typecheck
         run: pnpm typecheck
       - name: Test
         run: |
           pnpm test
           node scripts/lib/facts-ledger.test.mjs
-          node --test scripts/lib/process-exit.test.mjs scripts/lib/delivery-contracts.test.mjs
+          node --test scripts/lib/process-exit.test.mjs scripts/lib/delivery-contracts.test.mjs scripts/lib/name-check.test.mjs
           pnpm --filter @qingye_lab/ui exec vitest run --config ../../apps/studio/test/preview.config.ts
 
-  audit:
+  # 库和 docs 只构建一次，audit 与 compositions 下载使用。
+  build-docs:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
       - name: Build library
         run: pnpm --filter @qingye_lab/ui build
       - name: Build docs
         run: pnpm --filter docs build
-      - name: Install audit browser
-        run: pnpm exec playwright-core install --with-deps chromium
-      - name: Browser audit
+      - uses: actions/upload-artifact@v7
+        with:
+          name: docs-build
+          path: |
+            packages/ui/dist
+            apps/docs/dist
+          if-no-files-found: error
+          retention-days: 1
+
+  # 组件页面按字母序切 3 片并行。
+  audit:
+    needs: build-docs
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
+        with:
+          playwright: "true"
+      - uses: actions/download-artifact@v8
+        with:
+          name: docs-build
+          path: .
+      - name: Browser audit (shard ${{ matrix.shard }}/3)
         run: |
+          slugs=$(node -e '
+            const fs = require("node:fs");
+            const dir = "apps/docs/src/content";
+            const all = fs.readdirSync(dir, { withFileTypes: true })
+              .filter((d) => d.isDirectory() && !d.name.startsWith(".")).map((d) => d.name).sort();
+            console.log(all.filter((_, i) => i % 3 === Number(process.argv[1])).join(" "));
+          ' "${{ matrix.shard }}")
+          test -n "$slugs"
           mkdir -p test-results/ci-audit
-          node scripts/run-browser-audit.mjs --report test-results/ci-audit/report.json
+          node scripts/run-browser-audit.mjs --report test-results/ci-audit/report-${{ matrix.shard }}.json $slugs
       - name: Upload browser audit evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: browser-audit-evidence
+          name: browser-audit-evidence-${{ matrix.shard }}
           path: test-results/ci-audit/
           if-no-files-found: warn
 
+  # 三组检查互相独立，并行跑；组内各步互不跳过。
   compositions:
+    needs: build-docs
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [foundations, patterns, studio]
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
         with:
-          node-version: 24
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
-      - name: Build library
-        run: pnpm --filter @qingye_lab/ui build
-      - name: Build Studio
-        run: pnpm studio:build
-      - name: Build docs
-        run: pnpm --filter docs build
-      - name: Install audit browser
-        id: browser
-        run: pnpm exec playwright-core install --with-deps chromium
-      # 四项检查各自独立：前一项失败不跳过后一项。
-      - name: Task patterns
-        run: node scripts/run-browser-audit.mjs --patterns
+          playwright: "true"
+      - uses: actions/download-artifact@v8
+        with:
+          name: docs-build
+          path: .
       - name: Foundations
-        if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
+        if: matrix.group == 'foundations'
         run: node scripts/run-browser-audit.mjs --foundations
+      - name: Task patterns
+        if: matrix.group == 'patterns'
+        run: node scripts/run-browser-audit.mjs --patterns
       - name: Consumer migration
-        if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
+        if: ${{ !cancelled() && matrix.group == 'patterns' }}
         run: node scripts/run-browser-audit.mjs --consumer-migration
+      - name: Build Studio
+        if: matrix.group == 'studio'
+        run: pnpm studio:build
       - name: Studio
-        if: ${{ !cancelled() && steps.browser.outcome == 'success' }}
+        if: matrix.group == 'studio'
         run: node scripts/verify-studio.mjs
       - name: Upload composition and theme evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
-          name: task-and-theme-evidence
+          name: task-and-theme-evidence-${{ matrix.group }}
           path: |
             test-results/task-patterns/
             test-results/consumer-migration/
             test-results/ui-foundations-final/
             test-results/studio/**/report.json
             test-results/studio/**/*.png
-          if-no-files-found: warn
+          if-no-files-found: ignore
 
   package:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v5
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/setup
         with:
-          node-version: 24
-          cache: pnpm
-      - run: pnpm install --frozen-lockfile
+          playwright: "true"
       - name: Build library
         run: pnpm --filter @qingye_lab/ui build
       - name: API tables match the types
@@ -124,8 +158,6 @@ jobs:
           pnpm --filter @qingye_lab/ui pack --pack-destination "$GITHUB_WORKSPACE/dist-pack"
           pnpm --filter @qingye/tooling pack --pack-destination "$GITHUB_WORKSPACE/dist-pack"
           ls dist-pack/*.tgz
-      - name: Install audit browser
-        run: pnpm exec playwright-core install --with-deps chromium
       - name: Verify installed package consumers
         run: node scripts/verify-packed-consumers.mjs --tgz "dist-pack/$(node -p "const p=require('./packages/ui/package.json'); p.name.slice(1).replace('/', '-')+'-'+p.version+'.tgz'")"
       - name: Verify installed tooling
@@ -133,7 +165,7 @@ jobs:
         run: node scripts/verify-packed-tooling.mjs "dist-pack/$(node -p "const p=require('./packages/ui/package.json'); p.name.slice(1).replace('/', '-')+'-'+p.version+'.tgz'")" "dist-pack/qingye-tooling-$(node -p "require('./packages/tooling/package.json').version").tgz"
       - name: Upload installed consumer evidence
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: installed-consumer-evidence
           path: |
@@ -143,8 +175,24 @@ jobs:
             test-results/packed-tooling/**/report.json
             test-results/packed-tooling/**/*.log
           if-no-files-found: warn
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: qingye-ui-package
           path: dist-pack/*.tgz
           if-no-files-found: error
+
+  # 汇总：分支保护只需要要求这一个检查。失败或取消都算失败，跳过算通过。
+  ci-ok:
+    if: always()
+    needs: [unit, build-docs, audit, compositions, package]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Require every job to pass
+        env:
+          RESULTS: ${{ join(needs.*.result, ' ') }}
+        run: |
+          echo "job results: $RESULTS"
+          for r in $RESULTS; do
+            case "$r" in success|skipped) ;; *) echo "::error::a CI job ended as '$r'"; exit 1;; esac
+          done

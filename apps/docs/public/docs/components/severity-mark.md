@@ -1,6 +1,6 @@
 # 级别 SeverityMark
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/severity-mark
 Source: packages/ui/src/components/severity-mark.tsx
 Source SHA-256: b5ee87babb7044c0d014e89a44df856883f2893ada42f347674a9100cc8b0bf3
@@ -16,9 +16,9 @@ Source SHA-256: b5ee87babb7044c0d014e89a44df856883f2893ada42f347674a9100cc8b0bf3
 - 强制颜色下已填的格是 CanvasText 实心，未填的格是一圈线；tone 的色相收成同一色。
 
 ## Use and ownership
-- 一行对象带有一个有次序的级别，需要不占一列文字就能比较高低。
+- 一行对象带有一个有次序的级别（严重程度、优先级），读出的是级别名称，需要不占一列文字就能比较高低。
 - Avoid: 对象处于哪一种状态用 StatusDot：状态之间没有次序。
-- Avoid: 有单位的测量值用 Meter；任务完成比例用 Progress。
+- Avoid: 范围内的测量读数用 Meter，读数本身以整格计时用 Meter 的 segments；任务完成比例用 Progress。
 - Avoid: 不用色相区分格数相同的两个级别。
 - Library: 格数与填充的对应、图形语义与可访问名称。
 - Application: 级别的数值、一共几级、每一级的名称与类别。
@@ -26,6 +26,7 @@ Source SHA-256: b5ee87babb7044c0d014e89a44df856883f2893ada42f347674a9100cc8b0bf3
 ## Composition
 - 同一列里的标记用同一个 max。
 - name="hidden" 时名称仍是可访问名称；同一行或表头要有文字让看得见的读者知道这一列是级别。
+- 读屏只读 label，不读格数与一共几级：名称本身要分得出高低（如高、中、低）。
 - 与 StatusDot 同行时两种标记同高、同一条行中线。
 
 ## Responsive behavior

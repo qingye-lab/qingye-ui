@@ -1,0 +1,194 @@
+phase,ruling_item,run_id,task,cond,config,model,effort,config_source,network,rep,freeze_run,freeze_scored,status,counted,exclude_reason,hidden_passed,hidden_failed,failed_categories,failed_assertions,tsc_errors,contaminated,out_of_scope_files,deps_added,protected_modified,agent_exit,duration_s,qingye_check,task_note
+P1,2,T1-D0-claude-1-20261120005414,T1,D0,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,3,11,PASS,yes,,7,0,,,0,no,0,0,0,0,407,UNVERIFIED,
+P1,2,T1-D0-codex-1-20261120005416,T1,D0,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,3,,INVALID,no,INVALID：退出码 2,0,7,api+behavior,数据区域控件来自库（带 data-slot）；远程候选原样显示，不在本地二次过滤；旧查询的迟到结果不覆盖新查询；选中负责人后回调成员 id；区域未改时“应用区域变更”不可用；先确认再提交：对话框显示名称、版本与变更，关闭不提交，确认提交一次；对话框打开期间版本变化，不得以旧版本提交,0,no,0,0,0,2,0,UNVERIFIED,
+P1,2,T1-D0-codex-1-20261120005658,T1,D0,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,4,11,UNVERIFIED,no,污染,7,0,,,0,yes,0,0,0,0,380,UNVERIFIED,
+P1,2,T4-D0-claude-1-20261120005418,T4,D0,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,3,11,PASS,yes,,7,0,,,0,no,0,0,0,0,149,UNVERIFIED,
+P1,2,T4-D0-codex-1-20261120005420,T4,D0,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,3,,INVALID,no,INVALID：退出码 2,0,7,a11y+behavior+api,“新建报表”是指向 /reports/new 的链接；点击“新建报表”在应用内跳转；搜索按钮名称为“搜索”，提示显示 ⌘K；点击搜索或按 ⌘K / Ctrl+K 调用 onOpenSearch；同步中显示库的不定进度条“正在同步”，未同步不显示；“打开导航”打开从左侧滑出、标题为“导航”的抽屉；抽屉里的链接在应用内跳转并关闭抽屉,0,no,0,0,0,2,0,UNVERIFIED,
+P1,2,T4-D0-codex-1-20261120005700,T4,D0,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,4,11,UNVERIFIED,no,污染,7,0,,,0,yes,0,0,0,0,375,UNVERIFIED,
+P2,6,T1-D0-claude-1-20261120025315,T1,D0,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,6,11,PASS,yes,,7,0,,,0,no,0,0,0,0,152,UNVERIFIED,
+P2,6,T1-D0-codex-1-20261120025310,T1,D0,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,6,11,PASS,yes,,7,0,,,0,no,0,0,0,0,706,UNVERIFIED,
+P2,6,T3-D0-claude-1-20261120025315,T3,D0,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,6,11,PASS,yes,,6,0,,,0,no,0,0,0,0,242,UNVERIFIED,
+P2,6,T3-D0-codex-1-20261120030519,T3,D0,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,6,11,PASS,yes,,6,0,,,0,no,0,0,0,0,530,UNVERIFIED,
+P3,11,T2-D0-claude-1-20261120034914,T2,D0,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,8,11,PASS,yes,,5,0,,,0,no,0,0,0,0,79,UNVERIFIED,
+P3,11,T2-D0-codex-1-20261120034917,T2,D0,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,8,11,PASS,yes,,5,0,,,0,no,0,0,0,0,635,UNVERIFIED,
+P3,11,T4-D0-claude-1-20261120034914,T4,D0,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,8,11,PASS,yes,,7,0,,,0,no,0,0,0,0,129,UNVERIFIED,
+P3,11,T4-D0-codex-1-20261120040015,T4,D0,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,8,11,PASS,yes,,7,0,,,0,no,0,0,0,0,688,UNVERIFIED,
+P3,11,T5-D0-claude-1-20261120034914,T5,D0,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,8,11,PASS,yes,,7,0,,,0,no,0,0,0,0,197,UNVERIFIED,
+P3,11,T5-D0-codex-1-20261120041158,T5,D0,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,8,11,PASS,yes,,7,0,,,0,no,0,0,0,0,456,UNVERIFIED,
+P3,11,T6-D0-claude-1-20261120034914,T6,D0,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,8,11,PASS,yes,,5,0,,,0,no,0,0,0,0,131,UNVERIFIED,
+P3,11,T6-D0-codex-1-20261120041946,T6,D0,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,8,11,PASS,yes,,5,0,,,0,no,0,0,0,0,426,UNVERIFIED,
+P4,17,T1-DN-claude-1-20261120055327,T1,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,9,11,PASS,yes,,7,0,,,0,no,0,0,0,0,159,NOT_RUN,
+P4,17,T1-DN-codex-1-20261120055331,T1,DN,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,9,11,PASS,yes,,7,0,,,0,no,0,0,0,0,656,NOT_RUN,
+P4,17,T2-DN-claude-1-20261120055327,T2,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,9,11,PASS,yes,,5,0,,,0,no,0,0,0,0,125,NOT_RUN,
+P4,17,T2-DN-codex-1-20261120060444,T2,DN,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,9,11,PASS,yes,,5,0,,,0,no,0,0,0,0,748,NOT_RUN,
+P4,17,T3-DN-claude-1-20261120055327,T3,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,9,11,PASS,yes,,6,0,,,0,no,0,0,0,0,168,NOT_RUN,
+P4,17,T3-DN-codex-1-20261120061723,T3,DN,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,9,11,PASS,yes,,6,0,,,0,no,0,0,0,0,854,NOT_RUN,
+P4,17,T4-DN-claude-1-20261120055327,T4,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,9,11,PASS,yes,,7,0,,,0,no,0,0,0,0,155,NOT_RUN,
+P4,17,T4-DN-codex-1-20261120063146,T4,DN,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,9,9,INVALID,no,INVALID：退出码 1,0,7,a11y+behavior+api,“新建报表”是指向 /reports/new 的链接；点击“新建报表”在应用内跳转；搜索按钮名称为“搜索”，提示显示 ⌘K；点击搜索或按 ⌘K / Ctrl+K 调用 onOpenSearch；同步中显示库的不定进度条“正在同步”，未同步不显示；“打开导航”打开从左侧滑出、标题为“导航”的抽屉；抽屉里的链接在应用内跳转并关闭抽屉,0,no,0,0,0,1,63,NOT_RUN,
+P4,17,T4-DN-codex-1-20261120070702,T4,DN,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,9,11,PASS,yes,,7,0,,,0,no,0,0,0,0,819,NOT_RUN,
+P4,17,T5-DN-claude-1-20261120055327,T5,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,9,11,PASS,yes,,7,0,,,0,no,0,0,0,0,221,NOT_RUN,
+P4,17,T5-DN-codex-1-20261120063258,T5,DN,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,9,9,INVALID,no,INVALID：退出码 1,0,7,api+behavior,[api] 消息框来自库（带 data-slot）；[behavior] 输入 @ 弹出候选，选中后发送带提及 id；[behavior] Enter 发送纯文字后清空输入区；[behavior] 正文编辑区可输入，内容变化回调 HTML；[api] 搜索框来自库（带 data-slot）；[behavior] 输入时回调当前文字；[behavior] 清除按钮清空搜索框并回调空字符串,0,no,0,0,0,1,15,NOT_RUN,
+P4,17,T5-DN-codex-1-20261120072052,T5,DN,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,9,11,PASS,yes,,7,0,,,0,no,0,0,0,0,359,NOT_RUN,
+P4,17,T6-DN-claude-1-20261120055327,T6,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,9,11,PASS,yes,,5,0,,,0,no,0,0,0,0,141,NOT_RUN,
+P4,17,T6-DN-codex-1-20261120063324,T6,DN,codex-xhigh,gpt-6.2-sol,xhigh,按冻结版本推定,on,1,9,9,INVALID,no,INVALID：退出码 1,0,5,a11y+behavior,[a11y] 邮箱已是成员：输入框无效，并关联错误原因；[behavior] 修改邮箱后错误消失，已是成员时不发送；[a11y] 发送中按钮表现为正在处理，重复点击只发送一次；[a11y] 发送失败立即告知，保留邮箱并可重试；[a11y] 只有图标的“清空”按钮清空邮箱,0,no,0,0,0,1,59,NOT_RUN,
+P5,17,T1-D0-codex-1-20261120075407,T1,D0,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,10,11,FAIL,yes,,4,3,behavior,远程候选原样显示，不在本地二次过滤；旧查询的迟到结果不覆盖新查询；选中负责人后回调成员 id,0,no,0,0,0,0,209,UNVERIFIED,
+P5,17,T1-D0-codex-2-20261120090415,T1,D0,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,2,11,11,PASS,yes,,7,0,,,0,no,0,0,0,0,156,UNVERIFIED,
+P5,17,T1-D0-codex-3-20261120090702,T1,D0,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,3,11,11,PASS,yes,,7,0,,,0,no,0,0,0,0,133,UNVERIFIED,
+P5,17,T1-DN-codex-1-20261120075748,T1,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,10,11,PASS,yes,,7,0,,,0,no,0,0,0,0,280,NOT_RUN,
+P5,17,T1-DN-codex-2-20261120090927,T1,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,2,11,11,PASS,yes,,7,0,,,0,no,0,0,0,0,192,NOT_RUN,
+P5,17,T1-DN-codex-3-20261120091251,T1,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,3,11,11,PASS,yes,,7,0,,,0,no,0,0,0,0,177,NOT_RUN,
+P5,17,T2-D0-codex-1-20261120080245,T2,D0,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,10,11,PASS,yes,,5,0,,,0,no,0,0,0,0,97,UNVERIFIED,
+P5,17,T2-DN-codex-1-20261120080432,T2,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,10,11,PASS,yes,,5,0,,,0,no,0,0,0,0,346,NOT_RUN,
+P5,17,T3-D0-codex-1-20261120081029,T3,D0,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,10,11,PASS,yes,,6,0,,,0,no,0,0,0,0,176,UNVERIFIED,
+P5,17,T3-DN-codex-1-20261120081337,T3,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,10,11,PASS,yes,,6,0,,,0,no,0,0,0,0,231,NOT_RUN,
+P5,17,T4-D0-codex-1-20261120081740,T4,D0,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,10,11,PASS,yes,,7,0,,,0,no,0,0,0,0,155,UNVERIFIED,
+P5,17,T4-DN-codex-1-20261120082027,T4,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,10,11,PASS,yes,,7,0,,,0,no,0,0,0,0,361,NOT_RUN,
+P5,17,T5-D0-codex-1-20261120082638,T5,D0,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,10,11,PASS,yes,,7,0,,,0,no,0,0,0,0,137,UNVERIFIED,
+P5,17,T5-DN-codex-1-20261120082906,T5,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,10,11,PASS,yes,,7,0,,,0,no,0,0,0,0,122,NOT_RUN,
+P5,17,T6-D0-codex-1-20261120083119,T6,D0,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,10,11,PASS,yes,,5,0,,,0,no,0,0,0,0,181,UNVERIFIED,
+P5,17,T6-DN-codex-1-20261120083438,T6,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,10,11,PASS,yes,,5,0,,,0,no,0,0,0,0,202,NOT_RUN,
+NA,17,T6-DN-codex-1-20261120072700,T6,DN,codex-xhigh,gpt-6.2-sol,xhigh,按运行时间推定,on,null,,11,PASS,no,无运行元数据（裁决第 17 条记为 ABORTED）,5,0,,,0,no,0,0,0,,,NOT_RUN,
+R1,19,T7-D0-claude-1-20261120171513,T7,D0,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,PASS,yes,,4,0,,,0,no,0,0,0,0,88,UNVERIFIED,
+R1,19,T7-D0-codex-1-20261120171513,T7,D0,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,PASS,yes,,4,0,,,0,no,0,0,0,0,94,UNVERIFIED,
+R1,19,T7-D0-codex-2-20261120171653,T7,D0,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,2,13,13,PASS,yes,,4,0,,,0,no,0,0,0,0,82,UNVERIFIED,
+R1,19,T7-D0-codex-3-20261120171740,T7,D0,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,3,13,13,PASS,yes,,4,0,,,0,no,0,0,0,0,103,UNVERIFIED,
+R1,19,T7-DN-claude-1-20261120164602,T7,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,PASS,yes,,4,0,,,0,no,0,0,0,0,101,NOT_RUN,
+R1,19,T7-DN-codex-1-20261120164800,T7,DN,codex-low,gpt-6.2-sol,low,记录,on,1,13,18,UNVERIFIED,no,污染,3,1,a11y,[a11y] 阻止原因无需悬停或聚焦即可读到,0,yes,0,0,0,0,113,NOT_RUN,
+R1,19,T7-DN-codex-1-20261120171236,T7,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,FAIL,yes,,3,1,a11y,[a11y] 阻止原因无需悬停或聚焦即可读到,0,no,0,0,0,0,114,NOT_RUN,
+R1,19,T7-DN-codex-2-20261120171513,T7,DN,codex-low,gpt-6.2-sol,low,记录,on,2,13,18,UNVERIFIED,no,污染,3,1,a11y,[a11y] 阻止原因无需悬停或聚焦即可读到,0,yes,0,0,0,0,135,NOT_RUN,
+R1,19,T7-DN-codex-2-20261120172017,T7,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,2,13,13,FAIL,yes,,3,1,a11y,[a11y] 阻止原因无需悬停或聚焦即可读到,0,no,0,0,0,0,77,NOT_RUN,
+R1,19,T7-DN-codex-3-20261120171659,T7,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,3,13,13,UNVERIFIED,no,污染,4,0,,,0,yes,0,0,0,0,173,NOT_RUN,
+R1,19,T7-DN-codex-3-20261120172017,T7,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,3,13,13,FAIL,yes,,3,1,a11y,[a11y] 阻止原因无需悬停或聚焦即可读到,0,no,0,0,0,0,144,NOT_RUN,
+R1,19,T8-DN-claude-1-20261120164800,T8,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,PASS,yes,,5,0,,,0,no,0,0,0,0,142,NOT_RUN,
+R1,19,T8-DN-codex-1-20261120164800,T8,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,UNVERIFIED,no,污染,5,0,,,0,yes,0,0,0,0,187,NOT_RUN,
+R1,19,T8-DN-codex-1-20261120171236,T8,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,PASS,yes,,5,0,,,0,no,0,0,0,0,117,NOT_RUN,
+R1,19,T9-DN-claude-1-20261120165007,T9,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,PASS,yes,,3,0,,,0,no,0,0,0,0,204,NOT_RUN,
+R1,19,T9-DN-codex-1-20261120165035,T9,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,PASS,yes,,3,0,,,0,no,0,0,0,0,202,NOT_RUN,
+R1,19,T10-DN-claude-1-20261120165120,T10,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,PASS,yes,,4,0,,,0,no,0,0,0,0,84,NOT_RUN,
+R1,19,T10-DN-codex-1-20261120165253,T10,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,PASS,yes,,4,0,,,0,no,0,0,0,0,194,NOT_RUN,
+R1,19,T11-DN-claude-1-20261120165342,T11,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,PASS,yes,,6,0,,,0,no,0,0,0,0,96,NOT_RUN,
+R1,19,T11-DN-codex-1-20261120165410,T11,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,PASS,yes,,6,0,,,0,no,0,0,0,0,137,NOT_RUN,
+R1,19,T12-DN-claude-1-20261120165526,T12,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,PASS,yes,,4,0,,,0,no,0,0,0,0,223,NOT_RUN,
+R1,19,T12-DN-codex-1-20261120165617,T12,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,PASS,yes,,4,0,,,0,no,0,0,0,0,105,NOT_RUN,
+R1,19,T13-DN-claude-1-20261120165639,T13,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,PASS,yes,,6,0,,,0,no,0,0,0,0,108,NOT_RUN,刷新断言在 DN 包内有明文
+R1,19,T13-DN-codex-1-20261120165812,T13,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,PASS,yes,,6,0,,,0,no,0,0,0,0,115,NOT_RUN,刷新断言在 DN 包内有明文
+R1,19,T14-DN-claude-1-20261120165838,T14,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,PASS,yes,,4,0,,,0,no,0,0,0,0,105,NOT_RUN,
+R1,19,T14-DN-codex-1-20261120165921,T14,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,PASS,yes,,4,0,,,0,no,0,0,0,0,127,NOT_RUN,
+R1,19,T15-DN-claude-1-20261120170021,T15,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,PASS,yes,,3,0,,,0,no,0,0,0,0,102,NOT_RUN,DN 包内有明文
+R1,19,T15-DN-codex-1-20261120170033,T15,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,PASS,yes,,3,0,,,0,no,0,0,0,0,97,NOT_RUN,DN 包内有明文
+R1,19,T16-DN-claude-1-20261120170858,T16,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,PASS,yes,,3,0,,,0,no,0,0,0,0,79,NOT_RUN,
+R1,19,T16-DN-codex-1-20261120171027,T16,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,PASS,yes,,3,0,,,0,no,0,0,0,0,85,NOT_RUN,
+R1,19,T17-DN-claude-1-20261120170138,T17,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,PASS,yes,,4,0,,,0,no,0,0,0,0,113,NOT_RUN,DN 包内有明文
+R1,19,T17-DN-codex-1-20261120170213,T17,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,PASS,yes,,4,0,,,0,no,0,0,0,0,117,NOT_RUN,DN 包内有明文
+R1,19,T18-DN-claude-1-20261120170221,T18,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,UNVERIFIED,no,污染,5,0,,,0,yes,0,0,0,0,386,NOT_RUN,DN 包内有明文
+R1,19,T18-DN-claude-1-20261120171236,T18,DN,claude-opus,claude-opus-5-5,cli-default,按冻结版本推定,on,1,13,13,PASS,yes,,5,0,,,0,no,0,0,0,0,101,NOT_RUN,DN 包内有明文
+R1,19,T18-DN-codex-1-20261120170340,T18,DN,codex-low,gpt-6.2-sol,low,按冻结版本推定,on,1,13,13,PASS,yes,,5,0,,,0,no,0,0,0,0,120,NOT_RUN,DN 包内有明文
+R2,21,T7-D0-codex.net-off-1-20261121031058,T7,D0,codex-low,gpt-6.2-sol,low,记录,off,1,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,87,UNVERIFIED,
+R2,21,T7-D0-codex.net-off-2-20261121031522,T7,D0,codex-low,gpt-6.2-sol,low,记录,off,2,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,78,UNVERIFIED,
+R2,21,T7-D0-codex.net-off-3-20261121031753,T7,D0,codex-low,gpt-6.2-sol,low,记录,off,3,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,143,UNVERIFIED,
+R2,21,T7-DN-claude.net-off-1-20261121025619,T7,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,93,NOT_RUN,
+R2,21,T7-DN-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121030001,T7,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,76,NOT_RUN,
+R2,21,T7-DN-codex.net-off-1-20261121025750,T7,DN,codex-low,gpt-6.2-sol,low,记录,off,1,14,15,FAIL,yes,,3,1,a11y,[a11y] 阻止原因无需悬停或聚焦即可读到,0,no,0,0,0,0,105,NOT_RUN,
+R2,21,T7-DN-codex.net-off-2-20261121031324,T7,DN,codex-low,gpt-6.2-sol,low,记录,off,2,14,15,FAIL,yes,,3,1,a11y,[a11y] 阻止原因无需悬停或聚焦即可读到,0,no,0,0,0,0,108,NOT_RUN,
+R2,21,T7-DN-codex.net-off-3-20261121031633,T7,DN,codex-low,gpt-6.2-sol,low,记录,off,3,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,109,NOT_RUN,
+R2,21,T19-DN-claude.net-off-1-20261121030001,T19,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,102,NOT_RUN,
+R2,21,T19-DN-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121030129,T19,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,76,NOT_RUN,
+R2,21,T19-DN-codex.net-off-1-20261121030001,T19,DN,codex-low,gpt-6.2-sol,low,记录,off,1,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,102,NOT_RUN,
+R2,21,T20-DN-claude.net-off-1-20261121030158,T20,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,14,15,PASS,yes,,5,0,,,0,no,0,0,0,0,117,NOT_RUN,
+R2,21,T20-DN-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121030255,T20,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,14,15,PASS,yes,,5,0,,,0,no,0,0,0,0,50,NOT_RUN,
+R2,21,T20-DN-codex.net-off-1-20261121030155,T20,DN,codex-low,gpt-6.2-sol,low,记录,off,1,14,15,PASS,yes,,5,0,,,0,no,0,0,0,0,141,NOT_RUN,
+R2,21,T21-DN-claude.net-off-1-20261121030407,T21,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,14,15,PASS,yes,,5,0,,,0,no,0,0,0,0,115,NOT_RUN,
+R2,21,T21-DN-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121030426,T21,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,14,15,PASS,yes,,5,0,,,0,no,0,0,0,0,54,NOT_RUN,
+R2,21,T21-DN-codex.net-off-1-20261121030355,T21,DN,codex-low,gpt-6.2-sol,low,记录,off,1,14,15,PASS,yes,,5,0,,,0,no,0,0,0,0,104,NOT_RUN,
+R2,21,T22-DN-claude.net-off-1-20261121030549,T22,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,14,15,PASS,no,代理进程退出码 143（评分为 PASS）,4,0,,,0,no,0,0,0,143,98,NOT_RUN,
+R2,21,T22-DN-claude.net-off-1-20261121031058,T22,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,134,NOT_RUN,
+R2,21,T22-DN-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121030611,T22,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,59,NOT_RUN,
+R2,21,T22-DN-codex.net-off-1-20261121030530,T22,DN,codex-low,gpt-6.2-sol,low,记录,off,1,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,106,NOT_RUN,
+R2,21,T23-D0-claude.net-off-1-20261121032043,T23,D0,claude-opus,claude-opus-5-5,cli-default,记录,off,1,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,70,UNVERIFIED,可查性题：题面写“按本库约定”
+R2,21,T23-D0-claude.net-off-2-20261121032043,T23,D0,claude-opus,claude-opus-5-5,cli-default,记录,off,2,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,86,UNVERIFIED,可查性题：题面写“按本库约定”
+R2,21,T23-D0-claude.net-off-3-20261121032222,T23,D0,claude-opus,claude-opus-5-5,cli-default,记录,off,3,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,71,UNVERIFIED,可查性题：题面写“按本库约定”
+R2,21,T23-D0-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121031257,T23,D0,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,51,UNVERIFIED,可查性题：题面写“按本库约定”
+R2,21,T23-D0-claude.m-claude-sonnet-5-5.e-low.net-off-2-20261121031543,T23,D0,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,2,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,41,UNVERIFIED,可查性题：题面写“按本库约定”
+R2,21,T23-D0-claude.m-claude-sonnet-5-5.e-low.net-off-3-20261121031844,T23,D0,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,3,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,53,UNVERIFIED,可查性题：题面写“按本库约定”
+R2,21,T23-D0-codex.net-off-1-20261121031236,T23,D0,codex-low,gpt-6.2-sol,low,记录,off,1,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,99,UNVERIFIED,可查性题：题面写“按本库约定”
+R2,21,T23-D0-codex.net-off-2-20261121031525,T23,D0,codex-low,gpt-6.2-sol,low,记录,off,2,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,84,UNVERIFIED,可查性题：题面写“按本库约定”
+R2,21,T23-D0-codex.net-off-3-20261121031832,T23,D0,codex-low,gpt-6.2-sol,low,记录,off,3,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,75,UNVERIFIED,可查性题：题面写“按本库约定”
+R2,21,T23-DN-claude.net-off-1-20261121030725,T23,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,14,15,INVALID,no,INVALID：退出码 143,2,2,behavior+api,[behavior] 三节时出现“本页目录”导航，含三个指向各节 #id 的链接；[api] 目录来自库（data-slot 以 toc 开头）,0,no,0,0,0,143,3,NOT_RUN,可查性题：题面写“按本库约定”
+R2,21,T23-DN-claude.net-off-1-20261121031058,T23,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,14,15,FAIL,yes,,3,1,behavior,[behavior] 只有一节时不渲染目录,0,no,0,0,0,0,107,NOT_RUN,可查性题：题面写“按本库约定”
+R2,21,T23-DN-claude.net-off-2-20261121032043,T23,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,2,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,100,NOT_RUN,可查性题：题面写“按本库约定”
+R2,21,T23-DN-claude.net-off-3-20261121032205,T23,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,3,14,15,PASS,yes,,4,0,,,0,no,0,0,0,0,116,NOT_RUN,可查性题：题面写“按本库约定”
+R2,21,T23-DN-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121030735,T23,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,14,15,FAIL,yes,,3,1,behavior,[behavior] 只有一节时不渲染目录,0,no,0,0,0,0,57,NOT_RUN,可查性题：题面写“按本库约定”
+R2,21,T23-DN-claude.m-claude-sonnet-5-5.e-low.net-off-2-20261121031426,T23,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,2,14,15,FAIL,yes,,3,1,behavior,[behavior] 只有一节时不渲染目录,0,no,0,0,0,0,51,NOT_RUN,可查性题：题面写“按本库约定”
+R2,21,T23-DN-claude.m-claude-sonnet-5-5.e-low.net-off-3-20261121031659,T23,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,3,14,15,FAIL,yes,,3,1,behavior,[behavior] 只有一节时不渲染目录,0,no,0,0,0,0,46,NOT_RUN,可查性题：题面写“按本库约定”
+R2,21,T23-DN-codex.net-off-1-20261121030719,T23,DN,codex-low,gpt-6.2-sol,low,记录,off,1,14,18,UNVERIFIED,no,污染,3,1,behavior,[behavior] 只有一节时不渲染目录,0,yes,0,0,0,0,144,NOT_RUN,可查性题：题面写“按本库约定”
+R2,21,T23-DN-codex.net-off-1-20261121032617,T23,DN,codex-low,gpt-6.2-sol,low,记录,off,1,14,15,FAIL,yes,,3,1,behavior,[behavior] 只有一节时不渲染目录,0,no,0,0,0,0,90,NOT_RUN,可查性题：题面写“按本库约定”
+R2,21,T23-DN-codex.net-off-2-20261121031357,T23,DN,codex-low,gpt-6.2-sol,low,记录,off,2,14,15,FAIL,yes,,3,1,behavior,[behavior] 只有一节时不渲染目录,0,no,0,0,0,0,98,NOT_RUN,可查性题：题面写“按本库约定”
+R2,21,T23-DN-codex.net-off-3-20261121031651,T23,DN,codex-low,gpt-6.2-sol,low,记录,off,3,14,15,FAIL,yes,,3,1,behavior,[behavior] 只有一节时不渲染目录,0,no,0,0,0,0,104,NOT_RUN,可查性题：题面写“按本库约定”
+R3,23,T7-DN-claude.net-off-1-20261121071859,T7,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,121,NOT_RUN,
+R3,23,T7-DN-claude.net-off-2-20261121072118,T7,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,2,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,126,NOT_RUN,
+R3,23,T7-DN-claude.net-off-3-20261121072344,T7,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,3,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,108,NOT_RUN,
+R3,23,T7-DN-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121070004,T7,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,46,NOT_RUN,
+R3,23,T7-DN-claude.m-claude-sonnet-5-5.e-low.net-off-2-20261121070112,T7,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,2,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,61,NOT_RUN,
+R3,23,T7-DN-claude.m-claude-sonnet-5-5.e-low.net-off-3-20261121070233,T7,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,3,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,60,NOT_RUN,
+R3,23,T24-DN-claude.net-off-1-20261121063909,T24,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,16,18,PASS,yes,,4,0,,,0,no,0,0,0,0,100,NOT_RUN,
+R3,23,T24-DN-claude.net-off-2-20261121064129,T24,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,2,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,93,NOT_RUN,
+R3,23,T24-DN-claude.net-off-3-20261121064323,T24,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,3,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,75,NOT_RUN,
+R3,23,T24-DN-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121063910,T24,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,46,NOT_RUN,
+R3,23,T24-DN-claude.m-claude-sonnet-5-5.e-low.net-off-2-20261121064035,T24,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,2,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,41,NOT_RUN,
+R3,23,T24-DN-claude.m-claude-sonnet-5-5.e-low.net-off-3-20261121064137,T24,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,3,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,66,NOT_RUN,
+R3,23,T24-DN-codex.net-off-1-20261121063908,T24,DN,codex-low,gpt-6.2-sol,low,记录,off,1,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,111,NOT_RUN,
+R3,23,T24-DN-codex.net-off-2-20261121064143,T24,DN,codex-low,gpt-6.2-sol,low,记录,off,2,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,84,NOT_RUN,
+R3,23,T24-DN-codex.net-off-3-20261121064331,T24,DN,codex-low,gpt-6.2-sol,low,记录,off,3,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,175,NOT_RUN,
+R3,23,T24-DN-codex.net-off-4-20261121064649,T24,DN,codex-low,gpt-6.2-sol,low,记录,off,4,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,84,NOT_RUN,
+R3,23,T24-DN-codex.net-off-5-20261121064844,T24,DN,codex-low,gpt-6.2-sol,low,记录,off,5,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,123,NOT_RUN,
+R3,23,T25-DN-claude.net-off-1-20261121064458,T25,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,16,16,PASS,yes,,6,0,,,0,no,0,0,0,0,97,NOT_RUN,
+R3,23,T25-DN-claude.net-off-2-20261121064657,T25,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,2,16,16,PASS,yes,,6,0,,,0,no,0,0,0,0,91,NOT_RUN,
+R3,23,T25-DN-claude.net-off-3-20261121064903,T25,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,3,16,16,PASS,yes,,6,0,,,0,no,0,0,0,0,77,NOT_RUN,
+R3,23,T25-DN-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121064305,T25,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,16,16,PASS,yes,,6,0,,,0,no,0,0,0,0,38,NOT_RUN,
+R3,23,T25-DN-claude.m-claude-sonnet-5-5.e-low.net-off-2-20261121064401,T25,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,2,16,16,PASS,yes,,6,0,,,0,no,0,0,0,0,42,NOT_RUN,
+R3,23,T25-DN-claude.m-claude-sonnet-5-5.e-low.net-off-3-20261121064504,T25,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,3,16,16,PASS,yes,,6,0,,,0,no,0,0,0,0,40,NOT_RUN,
+R3,23,T25-DN-codex.net-off-1-20261121065113,T25,DN,codex-low,gpt-6.2-sol,low,记录,off,1,16,16,PASS,yes,,6,0,,,0,no,0,0,0,0,95,NOT_RUN,
+R3,23,T25-DN-codex.net-off-2-20261121065320,T25,DN,codex-low,gpt-6.2-sol,low,记录,off,2,16,16,PASS,yes,,6,0,,,0,no,0,0,0,0,101,NOT_RUN,
+R3,23,T25-DN-codex.net-off-3-20261121065527,T25,DN,codex-low,gpt-6.2-sol,low,记录,off,3,16,16,PASS,yes,,6,0,,,0,no,0,0,0,0,102,NOT_RUN,
+R3,23,T25-DN-codex.net-off-4-20261121065734,T25,DN,codex-low,gpt-6.2-sol,low,记录,off,4,16,16,PASS,yes,,6,0,,,0,no,0,0,0,0,102,NOT_RUN,
+R3,23,T25-DN-codex.net-off-5-20261121065938,T25,DN,codex-low,gpt-6.2-sol,low,记录,off,5,16,16,PASS,yes,,6,0,,,0,no,0,0,0,0,91,NOT_RUN,
+R3,23,T26-DN-claude.net-off-1-20261121065043,T26,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,233,NOT_RUN,
+R3,23,T26-DN-claude.net-off-2-20261121065504,T26,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,2,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,82,NOT_RUN,
+R3,23,T26-DN-claude.net-off-3-20261121065649,T26,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,3,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,86,NOT_RUN,
+R3,23,T26-DN-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121064604,T26,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,16,17,PASS,yes,,4,0,,,0,no,0,0,0,0,39,NOT_RUN,
+R3,23,T26-DN-claude.m-claude-sonnet-5-5.e-low.net-off-2-20261121064707,T26,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,2,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,44,NOT_RUN,
+R3,23,T26-DN-claude.m-claude-sonnet-5-5.e-low.net-off-3-20261121064816,T26,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,3,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,42,NOT_RUN,
+R3,23,T26-DN-codex.net-off-1-20261121070132,T26,DN,codex-low,gpt-6.2-sol,low,记录,off,1,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,116,NOT_RUN,
+R3,23,T26-DN-codex.net-off-2-20261121070353,T26,DN,codex-low,gpt-6.2-sol,low,记录,off,2,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,100,NOT_RUN,
+R3,23,T26-DN-codex.net-off-3-20261121070555,T26,DN,codex-low,gpt-6.2-sol,low,记录,off,3,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,138,NOT_RUN,
+R3,23,T26-DN-codex.net-off-4-20261121070836,T26,DN,codex-low,gpt-6.2-sol,low,记录,off,4,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,99,NOT_RUN,
+R3,23,T26-DN-codex.net-off-5-20261121071036,T26,DN,codex-low,gpt-6.2-sol,low,记录,off,5,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,78,NOT_RUN,
+R3,23,T27-DN-claude.net-off-1-20261121065838,T27,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,156,NOT_RUN,
+R3,23,T27-DN-claude.net-off-2-20261121070139,T27,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,2,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,150,NOT_RUN,
+R3,23,T27-DN-claude.net-off-3-20261121070431,T27,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,3,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,141,NOT_RUN,
+R3,23,T27-DN-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121064922,T27,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,79,NOT_RUN,
+R3,23,T27-DN-claude.m-claude-sonnet-5-5.e-low.net-off-2-20261121065106,T27,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,2,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,65,NOT_RUN,
+R3,23,T27-DN-claude.m-claude-sonnet-5-5.e-low.net-off-3-20261121065240,T27,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,3,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,59,NOT_RUN,
+R3,23,T27-DN-codex.net-off-1-20261121071214,T27,DN,codex-low,gpt-6.2-sol,low,记录,off,1,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,137,NOT_RUN,
+R3,23,T27-DN-codex.net-off-2-20261121071455,T27,DN,codex-low,gpt-6.2-sol,low,记录,off,2,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,143,NOT_RUN,
+R3,23,T27-DN-codex.net-off-3-20261121071742,T27,DN,codex-low,gpt-6.2-sol,low,记录,off,3,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,130,NOT_RUN,
+R3,23,T27-DN-codex.net-off-4-20261121072013,T27,DN,codex-low,gpt-6.2-sol,low,记录,off,4,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,129,NOT_RUN,
+R3,23,T27-DN-codex.net-off-5-20261121072243,T27,DN,codex-low,gpt-6.2-sol,low,记录,off,5,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,136,NOT_RUN,
+R3,23,T28-DN-claude.net-off-1-20261121070715,T28,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,96,NOT_RUN,可查性题：DN 源码有明文
+R3,23,T28-DN-claude.net-off-2-20261121070915,T28,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,2,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,95,NOT_RUN,可查性题：DN 源码有明文
+R3,23,T28-DN-claude.net-off-3-20261121071109,T28,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,3,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,93,NOT_RUN,可查性题：DN 源码有明文
+R3,23,T28-DN-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121065401,T28,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,41,NOT_RUN,可查性题：DN 源码有明文
+R3,23,T28-DN-claude.m-claude-sonnet-5-5.e-low.net-off-2-20261121065508,T28,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,2,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,33,NOT_RUN,可查性题：DN 源码有明文
+R3,23,T28-DN-claude.m-claude-sonnet-5-5.e-low.net-off-3-20261121065605,T28,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,3,16,16,PASS,yes,,4,0,,,0,no,0,0,0,0,37,NOT_RUN,可查性题：DN 源码有明文
+R3,23,T29-D0-claude.net-off-1-20261121072938,T29,D0,claude-opus,claude-opus-5-5,cli-default,记录,off,1,17,17,FAIL,yes,,2,1,a11y,[a11y] 负载读作三级中的第几级,0,no,0,0,0,0,86,UNVERIFIED,题目缺陷：库内两份说明推荐冲突，不计入指南作用
+R3,23,T29-D0-claude.net-off-2-20261121073122,T29,D0,claude-opus,claude-opus-5-5,cli-default,记录,off,2,17,17,FAIL,yes,,2,1,a11y,[a11y] 负载读作三级中的第几级,0,no,0,0,0,0,127,UNVERIFIED,题目缺陷：库内两份说明推荐冲突，不计入指南作用
+R3,23,T29-D0-claude.net-off-3-20261121073344,T29,D0,claude-opus,claude-opus-5-5,cli-default,记录,off,3,17,17,FAIL,yes,,2,1,a11y,[a11y] 负载读作三级中的第几级,0,no,0,0,0,0,96,UNVERIFIED,题目缺陷：库内两份说明推荐冲突，不计入指南作用
+R3,23,T29-D0-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121072938,T29,D0,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,17,17,FAIL,yes,,2,1,a11y,[a11y] 负载读作三级中的第几级,0,no,0,0,0,0,38,UNVERIFIED,题目缺陷：库内两份说明推荐冲突，不计入指南作用
+R3,23,T29-D0-claude.m-claude-sonnet-5-5.e-low.net-off-2-20261121073033,T29,D0,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,2,17,17,FAIL,yes,,2,1,a11y,[a11y] 负载读作三级中的第几级,0,no,0,0,0,0,36,UNVERIFIED,题目缺陷：库内两份说明推荐冲突，不计入指南作用
+R3,23,T29-D0-claude.m-claude-sonnet-5-5.e-low.net-off-3-20261121073123,T29,D0,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,3,17,17,FAIL,yes,,2,1,a11y,[a11y] 负载读作三级中的第几级,0,no,0,0,0,0,40,UNVERIFIED,题目缺陷：库内两份说明推荐冲突，不计入指南作用
+R3,23,T29-DN-claude.net-off-1-20261121071304,T29,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,1,16,16,FAIL,yes,,2,1,a11y,[a11y] 负载读作三级中的第几级,0,no,0,0,0,0,88,NOT_RUN,题目缺陷：库内两份说明推荐冲突，不计入指南作用
+R3,23,T29-DN-claude.net-off-2-20261121071452,T29,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,2,16,16,FAIL,yes,,2,1,a11y,[a11y] 负载读作三级中的第几级,0,no,0,0,0,0,104,NOT_RUN,题目缺陷：库内两份说明推荐冲突，不计入指南作用
+R3,23,T29-DN-claude.net-off-3-20261121071659,T29,DN,claude-opus,claude-opus-5-5,cli-default,记录,off,3,16,16,FAIL,yes,,2,1,a11y,[a11y] 负载读作三级中的第几级,0,no,0,0,0,0,99,NOT_RUN,题目缺陷：库内两份说明推荐冲突，不计入指南作用
+R3,23,T29-DN-claude.m-claude-sonnet-5-5.e-low.net-off-1-20261121065705,T29,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,1,16,16,FAIL,yes,,2,1,a11y,[a11y] 负载读作三级中的第几级,0,no,0,0,0,0,38,NOT_RUN,题目缺陷：库内两份说明推荐冲突，不计入指南作用
+R3,23,T29-DN-claude.m-claude-sonnet-5-5.e-low.net-off-2-20261121065804,T29,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,2,16,16,FAIL,yes,,2,1,a11y,[a11y] 负载读作三级中的第几级,0,no,0,0,0,0,37,NOT_RUN,题目缺陷：库内两份说明推荐冲突，不计入指南作用
+R3,23,T29-DN-claude.m-claude-sonnet-5-5.e-low.net-off-3-20261121065903,T29,DN,claude-sonnet-low,claude-sonnet-5-5,low,记录,off,3,16,16,FAIL,yes,,2,1,a11y,[a11y] 负载读作三级中的第几级,0,no,0,0,0,0,40,NOT_RUN,题目缺陷：库内两份说明推荐冲突，不计入指南作用

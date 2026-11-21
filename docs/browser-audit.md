@@ -75,3 +75,26 @@ DOCS_URL=http://localhost:5193 node scripts/axe-audit.mjs [slug…] [--only ligh
 - `color-contrast` 默认关闭：`--contrast` 打开后 0 违例、257 个节点无法判定（`color-mix()`、半透明面、SVG 文字），对比度由本库自己的门禁承担。
 
 接入 CI 的建议：扫描现已零违例，可把 `node scripts/axe-audit.mjs` 放到 `ci.yml` 的 Browser audit 之后（需要 docs 服务；可复用 `run-browser-audit.mjs` 的 preview 管理，当前脚本只读 `DOCS_URL`，尚未与 preview 运行器整合）。
+
+## 可访问名称区分检查（只报告，浏览器检查不接入 CI）
+
+读屏用户、自动化测试和 AI 都靠“角色 + 可访问名称”找控件；同处同名的两个控件只能退到下标去区分。`scripts/name-audit.mjs` 取页面的无障碍树（Playwright `locator.ariaSnapshot()`），由 `scripts/lib/name-check.mjs` 解析并检查，单测在 `scripts/lib/name-check.test.mjs`（进 CI，纯字符串夹具，不开浏览器）。
+
+```sh
+node scripts/run-browser-audit.mjs --names [--site] [--lang en] [--popups] [--only light-desktop] [--report file.json] [--strict]
+```
+
+- 默认每个 playground 的每个 `[data-demo]` 各取一份树、各自为根（不同 demo 之间同名是正常的）；`--site` 改扫官网页面，以 `main`（没有则 `body`）为根，页集取自构建产生的 `apps/docs/public/sitemap.xml`（首页、`/docs/*`、全部组件详情页）加 `/components` 与 `/examples` 下各示例路由，默认只扫默认语言；`--lang en` 改扫英文页（playground 为 `/en/playground/<slug>`，官网为 `/en` 下的同一组路由）。默认只跑 `light-desktop`：名称不随主题变化，本库不要求移动端。
+- **R2 同处同名**：同一作用域内，可操作角色（button、link、checkbox、radio、switch、combobox、textbox、searchbox、spinbutton、slider、tab、menuitem、menuitemcheckbox、menuitemradio）角色和名称（trim 后）都相同的出现不少于 2 次。
+- **作用域**是最近的、名称非空的 region / form / navigation / main / complementary / banner / contentinfo / search / dialog / alertdialog / group / radiogroup / toolbar / tablist / menu / menubar 祖先，没有则为根。两个分别命名的 region、两个 fieldset 里各有一个“城市”不算重复。**listitem、row、cell 不是作用域**：行内重复的“删除”应当带上对象，这类重复要被报出来，再由人判断。
+- **R3 重复地标不可区分**：同一根下，navigation / complementary / form / search / region / main / banner / contentinfo 里角色相同、名称也相同（包括都为空）的出现不少于 2 次。
+- **样张单列**：同一个控件的几种外观或状态并列（尺寸、变体、忙碌与禁用）时名称相同是有意的。由 demo 或页面自己声明：demo 在 `meta` 写 `specimen: true`（渲染为 `data-specimen`），页面直接给容器加 `data-specimen`。一条 R2 的作用域内，同角色同名的控件全部落在声明的区域里，才单列为样张；有一个在外、或一个也定位不到，仍是普通发现。R3 不单列。样张仍计数、在报告的 `specimens` / `specimenAggregate` 与终端 `SPECIMEN` 段输出，所在页仍为 `FAIL`，`--strict` 也照样失败；脚本里不写页面或名称名单。`specimen` 只用于演示目的就是并列比较的情形，真实用法里同名仍须改名称。
+- 名称为空的控件不在此检查：`axe-audit.mjs` 的 `button-name`、`link-name`、`label` 等 WCAG 规则已覆盖，不重复。
+- 状态：每页 `PASS` / `FAIL`；加载失败或页面抛错为 `NOT_RUN`。**只报告不阻断**：只有 FAIL 时退出码为 0，有 `NOT_RUN` 或运行失败为 1；加 `--strict` 则 FAIL 也退出 1，留给以后改成门禁。
+- **弹层（`--popups`）**：在每个单元里依次打开每个开启器，按它要求的方式打开：`[aria-haspopup]` 与 `aria-expanded="false"` 的点击（输入框类点击没打开时再按 ArrowDown，Autocomplete 即如此），悬停卡片的触发器悬停，右键菜单的区域右键。跳过的不算未覆盖，单独计数（`popupSkipped`）：禁用的、只读的（`aria-readonly` / `readonly` / `data-readonly`，本来就不该打开），以及位于 `inert` 或 `aria-hidden` 范围里的（不暴露给辅助技术，如 /components 的标本台）。树和表格的行、选项、提示框的触发器不算开启器。
+  - 识别新弹层靠标记，不靠数数：动作前给所有可见候选打上「已在」标记，动作后取没有标记、可见、不包含触发器的最外层候选。候选是 dialog / alertdialog / menu / listbox / tree / grid，以及 Base UI 标为打开的元素（`data-open`）；遮罩、空的定位壳和提示框不算。上一个弹层的退场动画因此不会被误当成「没打开」。
+  - 新出现的在单元外（弹层）：作为单元单独检查，名为 `<所在单元> > popup "<触发器名>"`；再往下一层，依次打开弹层里的开启器（每个弹层最多 12 个），父弹层被关掉就重新打开它。新出现的在单元内，或触发器的 `aria-expanded` 变成 `true`（原位展开）：重读整个单元，名为 `> expanded "<触发器名>"`，静置时已经报过的问题不重复报。
+  - 关闭：Escape（悬停卡片则把指针移开）；原位展开的再点一次触发器；仍没关或地址变了就重载页面。
+  - 报告每页给出 `popupUnits`（弹层数）、`popupNested`（弹层里再打开的）、`popupExpanded`（原位展开）、`popupSkipped`，以及没能检查的：`popupUnopened`（动作后什么都没出现，列出单元和触发器名）、`popupHidden`（静置时不可见）、`popupCapped`（超出上限的部分）。开弹层会让单页从约 2 秒变成约 10 秒。
+- **UNVERIFIED**：不加 `--popups` 时，静置态的树里没有未打开的弹层、菜单、对话框内容，它们里面的重名不在覆盖范围内。加了以后仍不覆盖：弹层里第二层以下的弹层、树和表格行的展开、提示框（按定义不含控件）、只在窄屏出现的触发器（扫描只跑桌面宽度；侧栏抽屉 2026-11-21 用 600px 宽单独核对过一次，无问题），只在输入文字后才出现结果的搜索框（如 Cascader 弹层里的搜索、Command 的输入框：扫描不猜输入内容，在 `popupUnopened` 里注明 `input: may open only on a typed query`），以及上面三类没能检查的触发器。
+- 报告结果是线索：同名是否真的造成歧义、该改名称还是改结构，要人工判断；本检查不修任何东西。

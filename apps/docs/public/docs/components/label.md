@@ -1,6 +1,6 @@
 # 标签 Label
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/label
 Source: packages/ui/src/components/label.tsx
 Source SHA-256: 8fd751c16092f6e5c8f0709af79c56911c6b13e8ceb2ff5b7cff46bfb842c5e2
@@ -12,6 +12,7 @@ Field 内使用 FieldLabel。通用 Label 用 htmlFor 或原生嵌套关联一�
 
 ## Notes
 - Label 不拥有禁用状态；被命名控件使用自己的真实 disabled。
+- Combobox、Autocomplete 这类弹层输入框用 htmlFor 关联或放进 Field；不要用 label 包住控件、把文字放进子元素，弹层打开时这样写的名称会消失。
 
 ## Use and ownership
 - 原生控件需要持续可读的名称。

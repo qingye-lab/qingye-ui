@@ -1,0 +1,28 @@
+{
+  "name": "s1-consumer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@qingye_lab/ui": "file:./vendor/qingye_lab-ui-5.4.1.tgz",
+    "@tanstack/react-table": "^8.21.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-router": "^7.0.0",
+    "recharts": "^3.10.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.6.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "jsdom": "^26.0.0",
+    "postcss": "^8.5.0",
+    "typescript": "~5.9.3",
+    "vitest": "^3.2.0"
+  }
+}

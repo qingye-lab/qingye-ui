@@ -1,7 +1,7 @@
 import { Button } from "@qingye_lab/ui/components/button";
 import { IconDeviceFloppy } from "@tabler/icons-react";
 
-export const meta = { title: "忙碌与禁用", titleEn: "Busy and disabled" };
+export const meta = { title: "忙碌与禁用", titleEn: "Busy and disabled", specimen: true };
 
 export default function Demo() {
   return (

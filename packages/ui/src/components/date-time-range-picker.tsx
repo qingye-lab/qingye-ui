@@ -8,6 +8,7 @@ import * as React from "react";
 import { intersectNativeBounds, mergeCalendarBounds, readNativeEntry, useCustomValidity, useInputFacts, useInputRef, useTypingText, warnEmptyBounds } from "../input-facts";
 import { DraftSurface } from "../draft-surface";
 import { inputAdjunctClassName, withHiddenIndicator } from "../input-adjunct";
+import { useAdjunctName } from "../adjunct-name";
 import { InputGroupReadOnlyNote } from "../input-readonly-note";
 import { comparableTime, validLocalTime } from "../local-time";
 import { useUILocale } from "../locale";
@@ -146,7 +147,7 @@ export function DateTimeRangePicker(allProps: DateTimeRangePickerProps) {
   useCustomValidity(startRef, invalid === "order" ? messages.dateTimeRangeOrder : invalid === "bounds" ? messages.dateOutOfRange : invalid === "incomplete" ? messages.dateIncomplete : "");
 
   const field = fieldName ?? name;
-  // 两个输入各要一个名称：Field 的标签 + 「开始 / 结束日期和时间」；没有标签时只有后者（接线同 DateRangePicker）。
+  // 两个输入各要一个名称：Field 的标签 + 「开始 / 结束日期时间」；没有标签时只有后者（接线同 DateRangePicker）。
   const [wiring, setWiring] = React.useState<{ id: string; label: string | undefined; described: string | undefined }>({ id: "", label: undefined, described: undefined });
   React.useLayoutEffect(() => {
     const input = startRef.current;
@@ -155,6 +156,13 @@ export function DateTimeRangePicker(allProps: DateTimeRangePickerProps) {
     setWiring(previous => previous.id === next.id && previous.label === next.label && previous.described === next.described ? previous : next);
   });
   const named = (self: string, label: string) => wiring.label && self ? { "aria-label": label, "aria-labelledby": `${wiring.label} ${self}` } : { "aria-label": label };
+  // 附属按钮：动作在前、整个字段的标签在后；不照抄 named()（那是给开始/结束输入的「标签在前」）。
+  // 字段标签依次取：Field 的标签 → 调用方给起点输入的 aria-labelledby → 起点输入关联的 label（没有 id 时取文字）。
+  // 不按起点输入自己的命名取：它默认的 aria-label 是「开始日期」这类分端名称，不是整个范围的名称。
+  const rangeOwner = () => startRef.current?.labels?.[0];
+  const rangeLabel = wiring.label ?? (startRest["aria-labelledby"]?.trim() || undefined);
+  const clearName = useAdjunctName(messages.clearDateTimeRange, {}, rangeLabel ?? rangeOwner);
+  const openName = useAdjunctName(messages.selectDateTimeRange, {}, rangeLabel ?? rangeOwner);
 
   const handleEntry = (end: "from" | "to") => (event: InputEvents["change"]) => {
     (end === "from" ? onStartChange : onEndChange)?.(event);
@@ -225,8 +233,8 @@ export function DateTimeRangePicker(allProps: DateTimeRangePickerProps) {
           onChange={handleEntry("to")} onBlur={handleBlur("to")} />
         {readOnlyNow && !disabled ? <InputGroupReadOnlyNote /> : null}
         {/* 与 DateRangePicker 同一套清除：确认值非空且可编辑时出现；清除也放弃未采纳的键入与草稿，焦点回到起点输入。 */}
-        {value && editable && <Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.clearDateTimeRange} onClick={event => { releaseTyping(); change(undefined, event); setDraftState(undefined); startRef.current?.focus(); }}><IconX aria-hidden="true" /></Button>}
-        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} aria-label={messages.selectDateTimeRange} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
+        {value && editable && <Button variant="quiet" shape="icon" className={inputAdjunctClassName} {...clearName} onClick={event => { releaseTyping(); change(undefined, event); setDraftState(undefined); startRef.current?.focus(); }}><IconX aria-hidden="true" /></Button>}
+        <PopoverTrigger disabled={!editable} render={<Button variant="quiet" shape="icon" className={inputAdjunctClassName} {...openName} />}><IconCalendar aria-hidden="true" /></PopoverTrigger>
       </InputGroup>
       <PopoverPopup align="start" anchor={boundaryRef}><div className="grid gap-(--qy-field-group-gap)">
         <Calendar {...calendarProps} {...bounds} month={calendarProps.month ?? visibleMonth} onMonthChange={month => { setVisibleMonth(month); calendarProps.onMonthChange?.(month); }}

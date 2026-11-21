@@ -1,0 +1,8 @@
+{
+  "note": "DN（无指南）：删掉包内面向使用者/代理的指南及其生成副本，保留 README、类型声明、源码、tokens、registry。预设，2026-11-20。",
+  "package": "qingye_lab-ui-5.4.1.tgz",
+  "remove": ["ai", "design.md", "design.en.md", "catalog.json"],
+  "removeExports": ["./ai/*", "./catalog.json", "./design.md", "./design.en.md"],
+  "omitVendor": ["qingye-tooling-0.5.0.tgz"],
+  "sentinel": "关闭内置过滤"
+}

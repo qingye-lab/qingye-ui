@@ -2,9 +2,10 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRef, useState } from "react";
 import { expect, test, vi } from "vitest";
-import { Autocomplete, AutocompleteControl, AutocompleteClear, AutocompleteCollection, AutocompleteEmpty, AutocompleteGroup, AutocompleteGroupLabel, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteStatus } from "../src/components/autocomplete";
+import { Autocomplete, AutocompleteControl, AutocompleteClear, AutocompleteCollection, AutocompleteEmpty, AutocompleteGroup, AutocompleteGroupLabel, AutocompleteInput, AutocompleteItem, AutocompleteList, AutocompletePopup, AutocompleteStatus, AutocompleteTrigger } from "../src/components/autocomplete";
 import { Field, FieldDescription, FieldError, FieldLabel } from "../src/components/field";
-
+import { UILocaleProvider } from "../src/locale";
+import { enUS } from "../src/locales/en-US";
 const items = ["青叶", "青山", "白云"];
 const popup = <AutocompletePopup><AutocompleteList>{(item: string) => <AutocompleteItem key={item} value={item}>{item}</AutocompleteItem>}</AutocompleteList></AutocompletePopup>;
 
@@ -26,7 +27,7 @@ test("free text is the form value; highlight remains a suggestion until explicit
   await userEvent.keyboard("{Enter}");
   expect(input).toHaveValue("青叶");
   expect(new FormData(container.querySelector("form")!).getAll("text")).toEqual(["青叶"]);
-  await userEvent.click(screen.getByRole("button", { name: "清除选择" }));
+  await userEvent.click(screen.getByRole("button", { name: "清除选择 文字" }));
   expect(input).toHaveValue("");
 });
 
@@ -82,4 +83,35 @@ test("loading: the control shows one busy mark, input and list are busy, Status 
   expect(input).not.toHaveAttribute("aria-busy");
   expect(container.querySelector("[data-slot=autocomplete-busy]")).toBeNull();
   expect(await screen.findByText("没有可选项")).toBeInTheDocument();
+});
+
+// 与 Combobox 同一处理：打开后同级 label 被标 aria-hidden，名称经 aria-labelledby 保留。
+test("a label associated through htmlFor still names the input while suggestions are open", async () => {
+  const user = userEvent.setup();
+  render(<div><label htmlFor="word">文字</label><Autocomplete items={items}><AutocompleteControl><AutocompleteInput id="word" /></AutocompleteControl>{popup}</Autocomplete></div>);
+  expect(screen.getByRole("combobox", { name: "文字" })).toHaveAttribute("id", "word");
+  await user.click(screen.getByRole("combobox", { name: "文字" }));
+  await user.keyboard("{ArrowDown}");
+  expect(await screen.findByRole("listbox")).toBeInTheDocument();
+  expect(screen.getByText("文字")).toHaveAttribute("aria-hidden", "true");
+  expect(screen.getByRole("combobox", { name: "文字" })).toHaveAttribute("id", "word");
+});
+
+test("trigger and clear carry the field label after the action; two fields stay distinguishable, with no field label found the name is the action alone, and en-US follows", () => {
+  const parts = <><AutocompleteInput /><AutocompleteClear /><AutocompleteTrigger />{popup}</>;
+  const { unmount } = render(<form>
+    <Field><FieldLabel>负责人</FieldLabel><Autocomplete items={items} defaultValue="青叶">{parts}</Autocomplete></Field>
+    <Field><FieldLabel>评审人</FieldLabel><Autocomplete items={items} defaultValue="青山">{parts}</Autocomplete></Field>
+  </form>);
+  for (const action of ["展开选项", "清除选择"]) for (const label of ["负责人", "评审人"]) expect(screen.getByRole("button", { name: `${action} ${label}` })).toBeInTheDocument();
+  unmount();
+  render(<Autocomplete items={items} defaultValue="青叶">{parts}</Autocomplete>);
+  expect(screen.getByRole("button", { name: "展开选项" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除选择" })).toBeInTheDocument();
+});
+
+test("en-US: autocomplete trigger and clear read action then field label", () => {
+  render(<UILocaleProvider locale={enUS}><Field><FieldLabel>Owner</FieldLabel><Autocomplete items={items} defaultValue="青叶"><AutocompleteInput /><AutocompleteClear /><AutocompleteTrigger />{popup}</Autocomplete></Field></UILocaleProvider>);
+  expect(screen.getByRole("button", { name: "Show options Owner" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "Clear selection Owner" })).toBeInTheDocument();
 });

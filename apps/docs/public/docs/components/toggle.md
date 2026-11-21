@@ -1,6 +1,6 @@
 # 切换按钮 Toggle
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/toggle
 Source: packages/ui/src/components/toggle.tsx
 Source SHA-256: 36a4e2ae0efd10e7f8efa296ff5df32ccc2cf62485fe827d24a8ea57ea00a8ba
@@ -84,7 +84,7 @@ import { useState } from "react";
 import { IconBold, IconItalic } from "@tabler/icons-react";
 import { Toggle } from "@qingye_lab/ui/components/toggle";
 
-export const meta = { title: "切换态", titleEn: "Toggled state" };
+export const meta = { title: "切换态", titleEn: "Toggled state", specimen: true };
 export default function Demo() {
   const [pressed, setPressed] = useState(true);
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)">

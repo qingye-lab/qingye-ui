@@ -1,6 +1,6 @@
 # Tooltip
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
 Source SHA-256: 4dd9b24c79431acd6f078c8ffae3d40788c79a47f11561f55ceb4429e8a8aab6
@@ -13,7 +13,7 @@ Controls supply their own text or aria-label. Hints supplement it. Keep conseque
 ## Notes
 - Icon buttons supply aria-label. While open, aria-describedby links the hint and preserves existing descriptions.
 - Use short text only. Use Popover for click help or interactive content, and visible text for persistent information.
-- Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Keep the reason visible.
+- Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Write the disabled reason as visible text on the page: hints never appear on touch screens, so a reason that lives only in a hint cannot be read there.
 - The trigger brings no control of its own: the hint attaches to the caller's control, which must be keyboard focusable, so it is not a span.
 
 ## Use and ownership

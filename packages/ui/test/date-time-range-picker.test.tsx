@@ -18,7 +18,7 @@ test("popover: pick a date range and two times; Apply submits only a complete na
   }
   const { container } = render(<UILocaleProvider locale={enUS}><Example /></UILocaleProvider>);
   const form = container.querySelector("form")!;
-  await userEvent.click(screen.getByRole("button", { name: "Select date and time range" }));
+  await userEvent.click(screen.getByRole("button", { name: "Select date and time range 时段" }));
   await userEvent.click(await screen.findByRole("button", { name: /October 3, 2026/ }));
   await userEvent.click(screen.getByRole("button", { name: /October 5, 2026/ }));
   // 日期选完、时刻还空着：不能应用。
@@ -38,7 +38,7 @@ test("popover: pick a date range and two times; Apply submits only a complete na
   expect(end).toHaveAccessibleDescription("当地时间");
   expect(start.value).toBe("2026-10-03T09:30");
   expect(end.value).toBe("2026-10-05T17:00");
-  await userEvent.click(screen.getByRole("button", { name: "Select date and time range" }));
+  await userEvent.click(screen.getByRole("button", { name: "Select date and time range 时段" }));
   await userEvent.click(await screen.findByRole("button", { name: "Clear" }));
   expect(Array.from(new FormData(form).entries())).toEqual([]);
 });
@@ -186,4 +186,20 @@ test("read-only keeps values and hides the entry points to change them", () => {
   expect(screen.getByRole("button", { name: "Select date and time range" })).toBeDisabled();
   expect(screen.queryByRole("button", { name: "Clear date and time range" })).toBeNull();
   expect(new FormData(container.querySelector("form")!).get("slot.to")).toBe("2026-10-05T17:00");
+});
+
+test("inside a Field the buttons read action + the whole field's label; two fields are distinguishable; an aria-label on the start input does not name the range buttons", () => {
+  const value = { from: "2026-10-03T09:00", to: "2026-10-05T17:00" };
+  const { unmount } = render(<form>
+    <Field name="a"><FieldLabel>报告时段</FieldLabel><DateTimeRangePicker defaultValue={value} /></Field>
+    <Field name="b"><FieldLabel>对比时段</FieldLabel><DateTimeRangePicker defaultValue={value} /></Field>
+  </form>);
+  for (const label of ["报告时段", "对比时段"]) {
+    expect(screen.getByRole("button", { name: `选择日期时间范围 ${label}` })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: `清除日期时间范围 ${label}` })).toBeInTheDocument();
+  }
+  unmount();
+  render(<DateTimeRangePicker defaultValue={value} inputProps={{ "aria-label": "时段" }} />);
+  expect(screen.getByRole("button", { name: "选择日期时间范围" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "清除日期时间范围" })).toBeInTheDocument();
 });

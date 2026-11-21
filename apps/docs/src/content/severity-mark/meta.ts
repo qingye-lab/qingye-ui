@@ -8,9 +8,9 @@ export default {
   decisions: "级别由填充的格数承担，tone 只是附带的类别：两个级别如果格数相同、只有色相不同，隐藏名称后就分不开，所以不同的级别要用不同的 level。库不内置任何级别用词，也不从数字推断名称；label 必填。没有级别时不放这个标记，level 没有 0。", decisionsEn: "The level is carried by the number of filled cells and tone is only an accompanying category: two levels with the same cell count and different hues cannot be told apart once the name is hidden, so different levels take different level values. The library ships no level words and infers no name from the number; label is required. With no level, omit the mark: level has no 0.",
   design: {
     methods: ["名实相符", "随境取度"],
-    whenToUse: ["一行对象带有一个有次序的级别，需要不占一列文字就能比较高低。"],
-    avoid: ["对象处于哪一种状态用 StatusDot：状态之间没有次序。", "有单位的测量值用 Meter；任务完成比例用 Progress。", "不用色相区分格数相同的两个级别。"],
-    composition: ["同一列里的标记用同一个 max。", "name=\"hidden\" 时名称仍是可访问名称；同一行或表头要有文字让看得见的读者知道这一列是级别。", "与 StatusDot 同行时两种标记同高、同一条行中线。"],
+    whenToUse: ["一行对象带有一个有次序的级别（严重程度、优先级），读出的是级别名称，需要不占一列文字就能比较高低。"],
+    avoid: ["对象处于哪一种状态用 StatusDot：状态之间没有次序。", "范围内的测量读数用 Meter，读数本身以整格计时用 Meter 的 segments；任务完成比例用 Progress。", "不用色相区分格数相同的两个级别。"],
+    composition: ["同一列里的标记用同一个 max。", "name=\"hidden\" 时名称仍是可访问名称；同一行或表头要有文字让看得见的读者知道这一列是级别。", "读屏只读 label，不读格数与一共几级：名称本身要分得出高低（如高、中、低）。", "与 StatusDot 同行时两种标记同高、同一条行中线。"],
     stateOwner: {
       library: ["格数与填充的对应、图形语义与可访问名称。"],
       application: ["级别的数值、一共几级、每一级的名称与类别。"],
@@ -19,9 +19,9 @@ export default {
     customization: ["使用公开 render/ref、ARIA、事件与样式；不混用主题三轴。"],
   },
   designEn: {
-    whenToUse: ["A row's object has an ordered level that must be comparable without spending a text column."],
-    avoid: ["Use StatusDot for which state an object is in: states have no order.", "Use Meter for a measurement with a unit and Progress for task completion.", "Do not tell two levels with the same cell count apart by hue."],
-    composition: ["Marks in one column share one max.", "With name=\"hidden\" the name remains the accessible name; the row or the column header must still tell sighted readers that the column is a level.", "Beside a StatusDot both marks have the same height and share one row midline."],
+    whenToUse: ["A row's object has an ordered level (severity, priority) read as its name, and it must be comparable without spending a text column."],
+    avoid: ["Use StatusDot for which state an object is in: states have no order.", "Use Meter for a measured reading over a range, with segments when the reading itself counts whole cells; use Progress for task completion.", "Do not tell two levels with the same cell count apart by hue."],
+    composition: ["Marks in one column share one max.", "With name=\"hidden\" the name remains the accessible name; the row or the column header must still tell sighted readers that the column is a level.", "Screen readers read only label, not the cell count or the number of levels: the names themselves must tell high from low (such as high, medium, low).", "Beside a StatusDot both marks have the same height and share one row midline."],
     stateOwner: {
       library: ["The mapping from level to filled cells, the image semantics and the accessible name."],
       application: ["The level value, the number of levels, and each level's name and category."],

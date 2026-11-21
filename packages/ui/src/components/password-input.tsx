@@ -4,6 +4,7 @@ import { IconEye, IconEyeOff } from "@tabler/icons-react";
 import * as React from "react";
 import { withClassName } from "../input-adjunct";
 import { useInputFacts, useInputRef } from "../input-facts";
+import { useAdjunctName } from "../adjunct-name";
 import { useUILocale } from "../locale";
 import { cn } from "../utils";
 import { Input, type InputProps } from "./input";
@@ -40,6 +41,8 @@ export function PasswordInput({ visible: visibleProp, defaultVisible = false, on
   }, [missingAutoComplete]);
   const [uncontrolledVisible, setUncontrolledVisible] = React.useState(defaultVisible);
   const visible = visibleProp ?? uncontrolledVisible;
+  // 名称 = 动作 + 字段标签（见 adjunct-name.ts）；showLabel 是调用方给的完整名称，原样使用。
+  const toggleName = useAdjunctName(messages.showPassword, { "aria-label": showLabel }, () => inputRef.current);
   return (
     <InputGroup data-slot="password-input" data-readonly={facts.readOnly ? "" : undefined} className={cn("flex-nowrap", controlClassName)}>
       <Input
@@ -55,7 +58,7 @@ export function PasswordInput({ visible: visibleProp, defaultVisible = false, on
         // 平台自带的显示密码入口和这里的开关重复，隐藏前者。
         className={withClassName("[&::-ms-reveal]:hidden", className)}
       />
-      <InputGroupButton shape="icon" data-slot="password-input-toggle" aria-controls={inputId} aria-label={showLabel ?? messages.showPassword} aria-pressed={visible} disabled={facts.disabled}
+      <InputGroupButton shape="icon" data-slot="password-input-toggle" aria-controls={inputId} {...toggleName} aria-pressed={visible} disabled={facts.disabled}
         onClick={() => {
           if (inputRef.current?.disabled || inputRef.current?.matches(":disabled")) return;
           const next = !visible;

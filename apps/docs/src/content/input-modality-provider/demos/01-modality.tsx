@@ -3,7 +3,7 @@ import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import { Text } from "@qingye_lab/ui/components/typography";
 import { useEffect, useState } from "react";
 
-export const meta = { title: "输入方式", titleEn: "Input modality" };
+export const meta = { title: "输入方式", titleEn: "Input modality", specimen: true };
 
 export default function Demo() {
   const [input, setInput] = useState<string | null>(null);

@@ -1,0 +1,6 @@
+{ "id": "T1", "title": "工作区设置（选型消歧）", "editable": ["src/WorkspaceSettings.tsx"], "hidden": ["T1.test.tsx"],
+  "wrong": {
+    "local-filter": ["远程候选"],
+    "native-region": ["来自库"],
+    "stale-version": ["旧版本"]
+  } }

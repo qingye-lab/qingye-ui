@@ -1,0 +1,2 @@
+{ "id": "T15", "title": "最近登录时间（相对说法与可核对的绝对时间）", "editable": ["src/LastSignIn.tsx"], "hidden": ["T15.test.tsx"],
+  "wrong": { "title-only": ["LastSignIn 读屏文字包含绝对时间", "LastSignIn 来自库"], "tooltip-wrapped": ["LastSignIn 读屏文字包含绝对时间", "LastSignIn 来自库"] } }

@@ -1,6 +1,6 @@
-# Qingye UI 5.4.0: full text
+# Qingye UI 5.5.0: full text
 
-> @qingye_lab/ui@5.4.0. The design guide, installation notes and every component in one file, for tools that cannot follow links. Generated from the sources the site uses: design.md, the component metadata and the TypeScript types. Each component keeps its first source example here; the component's own Markdown file has them all.
+> @qingye_lab/ui@5.5.0. The design guide, installation notes and every component in one file, for tools that cannot follow links. Generated from the sources the site uses: design.md, the component metadata and the TypeScript types. Each component keeps its first source example here; the component's own Markdown file has them all.
 
 # Part 1. Design guide
 
@@ -159,6 +159,8 @@ The methods explain how to judge. These are the places those judgments affect an
 #### Names and states
 
 Use clear verbs and necessary objects. Distinguish saving a draft, publishing, archiving, removing from a collection, and permanently deleting. Bulk actions state their scope; confirmation concerns the current object, version, and changes.
+
+Objects of the same kind in the same place can be told apart by name alone. When one kind of region appears more than once on a page, each has a different name; controls of the same kind in one region do not share a name, and same-named controls in different regions are told apart by the region's name. An action repeated on every list or table row carries its object in its accessible name ("Delete Jane Doe") and contains the visible text. Screen-reader users, automated tests, and AI all find objects by role and name; when names cannot be told apart, only position is left.
 
 Labels, explanations, examples, and errors each express their own facts. A placeholder cannot be a field's sole name. Unknown, inapplicable, empty, and zero must not merge for visual tidiness.
 
@@ -351,7 +353,7 @@ Implement and verify within the authorized scope, and report ownership, actual e
 
 # Part 2. Installation
 
-## Install @qingye_lab/ui 5.4.0
+## Install @qingye_lab/ui 5.5.0
 
 Use this exact package version when the configured registry supplies it, or the corresponding release tarball. Check the project before installing.
 
@@ -369,7 +371,7 @@ Examples retain state locally. Reload persistence, permissions, backend writes a
 
 ## Accordion
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/accordion
 Source: packages/ui/src/components/accordion.tsx
 Source SHA-256: f26d950ad70f423b6c93d4deeef25da02fd927f85623521eaff44f13ca4ac328
@@ -479,7 +481,7 @@ export default function AccordionDemo() {
 
 ## Alert
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/alert
 Source: packages/ui/src/components/alert.tsx
 Source SHA-256: ed768584432728343fe968543826b25582cd834129d44b3091663fa7ef014040
@@ -583,7 +585,7 @@ export default function Demo() {
 
 ## AlertDialog
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/alert-dialog
 Source: packages/ui/src/components/alert-dialog.tsx
 Source SHA-256: 55f86b3e9bc7314a11a247382ac0691a92efc0d7d50b2c47500b16efe013e2ab
@@ -753,7 +755,7 @@ export default function Demo() {
 
 ## AsyncContent
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/async-content
 Source: packages/ui/src/components/async-content.tsx
 Source SHA-256: ff984eaf9c0ebd6721ed7198ee409a0ea629f91a265337afacb6b19328cae599
@@ -855,10 +857,10 @@ export default function Demo() {
 
 ## Autocomplete
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
-Source SHA-256: 49bfbb142fead787faba8f7c3ccab636efa729814296883018738bab136e0ca7
+Source SHA-256: b56390332369882f40dd618b614736dbecb995da1634da99f97332f6d7f1cf2c
 
 Edit free text with optional suggestions.
 
@@ -870,10 +872,12 @@ The text itself is the value. Highlighting does not change it; accepting a sugge
 - An empty set does not imply an error or service failure. Supply empty content from real facts; an empty AutocompleteEmpty uses the built-in "No options".
 - Caller positioning style merges last; colors, corners, highlights, and focus use existing theme roles.
 - Use Command for a command palette.
+- Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears.
 
 ### Use and ownership
-- Edit free text with optional suggestions.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- The typed text is the value and candidates are only acceptable suggestions (search terms, tag names, addresses).
+- Avoid: Use Combobox when the value must come from the candidates (Select when they are few and fixed).
+- Avoid: Use Command to run actions or navigate; use SearchInput for a plain search box.
 - Library: Suggestion highlighting, focus, and uncontrolled text.
 - Application: Controlled text, suggestion data, errors, and submission outcomes.
 
@@ -1034,7 +1038,7 @@ export default function Demo() {
 
 ## Avatar
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/avatar
 Source: packages/ui/src/components/avatar.tsx
 Source SHA-256: d6ca137a87d7eeb1a3ec766553246ed453cbcd78fdce9980f091bd27a21f417a
@@ -1138,7 +1142,7 @@ export default function Demo() {
 
 ## AvatarGroup
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/avatar-group
 Source: packages/ui/src/components/avatar-group.tsx
 Source SHA-256: 806282f5521b596540a007ca559299a7d312a09eca028fd5e9f8a9591375ea51
@@ -1225,7 +1229,7 @@ export default function Demo() {
 
 ## Badge
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/badge
 Source: packages/ui/src/components/badge.tsx
 Source SHA-256: 66ce5024d8e432327ddecdc8ae5c1d05c62b636f6af042a2a8c895793156a326
@@ -1305,7 +1309,7 @@ export default function Demo() {
 
 ## Breadcrumb
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/breadcrumb
 Source: packages/ui/src/components/breadcrumb.tsx
 Source SHA-256: fc48d9be8459b644e0133c7c3388e304dcc384b2d7052f80ea68e29057d6a7c0
@@ -1430,7 +1434,7 @@ export default function Demo() {
 
 ## BulkActionBar
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/bulk-action-bar
 Source: packages/ui/src/components/bulk-action-bar.tsx
 Source SHA-256: 5562a5a02d396089e7726042e528cd777bae5d96974767a833a7ac537f4d9680
@@ -1581,7 +1585,7 @@ export default function Demo() {
 
 ## Button
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
 Source SHA-256: 33bee148386b5e78157da9af6787ff6d23f8bb88bb47d5ae1aed705c86ef02df
@@ -1603,12 +1607,14 @@ A button only triggers an action, and busy is its only state: while busy it reta
 - Run a command with an object and consequence, submit a form, or stop the current task.
 - Avoid: Use native links for navigation.
 - Avoid: Writing the result into the button: the end of busy does not establish success; express failure and unknown results with Alert, Toast or FieldError.
+- Avoid: Putting the disabled reason only in a Tooltip or title: hints never appear on touch screens, so the reason cannot be read there. Disabled conditions must be readable (design.md: judgments machines can read must be written down); write the reason as visible text beside the button.
 - Library: Native and non-native command semantics, focus, and the activation guard and screen-reader wording while busy.
 - Application: Objects, scope, consequences, permissions, request facts, verification, recovery, and background cancellation.
 
 ### Composition
 - For an irreversible action the button is only the entry: it opens AlertDialog (or ConfirmAction), whose description states the consequence. Applications own confirmation criteria, permissions, and remote verification.
 - A two-state fact that persists after pressing (selected, on) is a Toggle; one of several is SegmentedControl, several of several is ToggleGroup. Button triggers an action and holds no selection.
+- When users can act first and correct afterwards (most form submissions), keep the button enabled and explain in place with FieldError or Alert after submitting. When disabling is necessary, use aria-disabled so the button stays focusable, put the reason in visible text beside it, and link it with aria-describedby.
 
 ### Responsive behavior
 - Choose dimensions for position; long labels may wrap and grow, icons retain matching geometry, and touch targets remain separate from appearance.
@@ -1683,7 +1689,7 @@ Source: apps/docs/src/content/button/demos/01-variants.tsx
 ```tsx
 import { Button } from "@qingye_lab/ui/components/button";
 
-export const meta = { title: "变体与色调", titleEn: "Variants and tones" };
+export const meta = { title: "变体与色调", titleEn: "Variants and tones", specimen: true };
 
 export default function Demo() {
   return (
@@ -1703,11 +1709,11 @@ export default function Demo() {
 }
 ```
 
-7 more examples: see the component page and its Markdown file.
+8 more examples: see the component page and its Markdown file.
 
 ## ButtonGroup
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
 Source SHA-256: 482f8c3c4b02b0a94fda90ea51948d653098e2af0fdd48ec9f67312a43d0c4fb
@@ -1807,7 +1813,7 @@ export default function Demo() {
 
 ## Calendar
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
 Source SHA-256: 47cf83b47a3b8c84798bb80a71f75a0ea1b9e5dedc1ac4cd5ad80bf8c24ef08e
@@ -1908,7 +1914,7 @@ export default function Demo() {
 
 ## Card
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/card
 Source: packages/ui/src/components/card.tsx
 Source SHA-256: 8250693638eb9e24a77a347acad743aecc580f0ebd5cbd13e6424ef201b5a4ae
@@ -1994,7 +2000,7 @@ export default function Demo() {
 
 ## Cascader
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/cascader
 Source: packages/ui/src/components/cascader.tsx
 Source SHA-256: cb9151f01ae01a2db194a6e5f29fc8a0f359768ddd0e0197f9c73655d9aaf3d8
@@ -2152,7 +2158,7 @@ export default function Demo() {
 
 ## Chart
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
 Source SHA-256: 2520f2b39351f8ffe7b60cb12afb200d3e3cab3b64c402eebcff4f19fd9db480
@@ -2353,7 +2359,7 @@ export default function Demo() {
 
 ## Checkbox
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
 Source SHA-256: f5464ad5133223a687ea8729b9aa748caf203971a657f18cab57359212eeab47
@@ -2454,7 +2460,7 @@ export default function Demo() {
 
 ## CheckboxGroup
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/checkbox-group
 Source: packages/ui/src/components/checkbox-group.tsx
 Source SHA-256: fe0248cc06c34c992d2211ae1c9fe08d3e9c7b8c9183375af4b2de25c4f813f0
@@ -2556,7 +2562,7 @@ export default function Demo() {
 
 ## Chip
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/chip
 Source: packages/ui/src/components/chip.tsx
 Source SHA-256: ad815ca9b19efbfb70cada333d50c9e9579ef78c9f00f139f16251c246b090d6
@@ -2647,10 +2653,10 @@ export default function Demo() {
 
 ## CodeBlock
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
-Source SHA-256: 1217799cec61621af3b4b3e2351b19de2c3197655267d7fc87ada9b27b9890ae
+Source SHA-256: 9649e32b6c3151ff361e2fc7c986031b6b61040d1a75bdaa3bccdbc65974bbb9
 
 Literal text with an optional title bar and actual copy results.
 
@@ -2737,7 +2743,7 @@ export default function Demo() {
 
 ## Collapsible
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/collapsible
 Source: packages/ui/src/components/collapsible.tsx
 Source SHA-256: 12c54767186d874e7c90f740a8b425bbaaaebbfdf1bb31ea2123aeb2b8f77b7e
@@ -2836,7 +2842,7 @@ export default function CollapsibleDemo() {
 
 ## ColorPicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/color-picker
 Source: packages/ui/src/components/color-picker.tsx
 Source SHA-256: aacdb9bc0a3ecbe1c0081eff0149c5f5f097de7d58c4d93f77cedd7042e41afd
@@ -2966,10 +2972,10 @@ export default function Demo() {
 
 ## Combobox
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
-Source SHA-256: 6086cd3f864daebe4e552412a30f2ebef502ac15555ed36e6f61364166ba74ca
+Source SHA-256: 81e5928924575a0502406debc3548efedf59479e2abb2130abc4636146650cf7
 
 Filter candidates and confirm one value or a set, with query text separate from selection.
 
@@ -2981,10 +2987,12 @@ value is the confirmed candidate; inputValue is the filter draft. Emptying the q
 - Popup caller style merges last; layer overrides can change the default order.
 - Popup surfaces and highlights use existing theme presets with internal focus signals.
 - For asynchronous candidates the application owns requests, cancellation, and failure: pass filter={null}, use ComboboxStatus for loading and counts, and ComboboxEmpty for no results (not while loading). An empty ComboboxEmpty uses the built-in "No options", worded and drawn like Select.
+- Name the input with Field + FieldLabel, or point Label's htmlFor at the input id; the name holds while the popup is open. Do not wrap the whole control in a label with its text in a child element: content outside the popup is hidden from screen readers while open, and that name disappears.
 
 ### Use and ownership
-- Filter candidates and confirm one value or a set, with query text separate from selection.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Many candidates that need filtering as you type, confirming one or several of them.
+- Avoid: Use Autocomplete when the typed text itself is the value; Select for few candidates, CheckboxGroup to see them all at once.
+- Avoid: Use TagInput when values do not come from candidates; Command to choose a command.
 - Library: Candidate keyboard behavior, focus, and uncontrolled query/confirmed value.
 - Application: Candidate data, controlled query/value, errors, and submission outcomes.
 
@@ -3190,7 +3198,7 @@ export default function Demo() {
 
 ## Command
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/command
 Source: packages/ui/src/components/command.tsx
 Source SHA-256: c7f5394e6236c173cce0773b9ee80ea7afaa65db6dca383596326bd0d9b5ff71
@@ -3207,8 +3215,9 @@ Items are commands (actions), not values filled into the input: selecting only f
 - Use Autocomplete or Combobox to choose a text value; a command palette chooses an action.
 
 ### Use and ownership
-- A search box over an always-open list of commands, for jumping somewhere or doing something.
-- Avoid: Do not put the only explanation of a critical consequence in a temporary popup; support both direct access and return navigation.
+- A command palette for jumping somewhere or running something; items are actions, not values to fill in.
+- Avoid: Use Select or Combobox to choose a value for a form.
+- Avoid: Use Menu for a few fixed actions; Autocomplete for input suggestions.
 - Library: Query text, filtering, highlight, the empty state, and group collapse.
 - Application: The list of commands, what onSelect does, the global shortcut, and opening the dialog.
 
@@ -3390,7 +3399,7 @@ export default function Demo() {
 
 ## Composer
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/composer
 Source: packages/ui/src/components/composer.tsx
 Source SHA-256: fef8f9c94f951cdabab88801f34d75427fb3c8b8a5d43b7a8170abdfa50b5fe7
@@ -3545,7 +3554,7 @@ export default function Demo() {
 
 ## Confirm
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/confirm
 Source: packages/ui/src/components/confirm.tsx
 Source SHA-256: 872303717eb2deacb43a5c70806eebba920ac0364d71e20500f286969a60d758
@@ -3651,7 +3660,7 @@ export default function Demo() { return <ConfirmProvider><Decision /></ConfirmPr
 
 ## ConfirmAction
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
 Source SHA-256: f06004bed955d140e115ce34060d56d54831d3dbc8d17efe55605ec8fb1a643d
@@ -3669,8 +3678,9 @@ Confirmation targets the reviewed opening snapshot. Changed identity, version, c
 - While a request is in flight the dialog cannot be closed (not by Esc, outside press or Back); once the result arrives, the application decides when to close it. This component does not keep failed objects or their reasons, and they do not return once the dialog closes: the application should write them to the page before closing (an Alert listing which objects failed and why, with retry or dismiss) and keep them until the user deals with them. See "Failures stay on the page".
 
 ### Use and ownership
-- Confirm a specific object, version, and change; review again when content changes.
-- Avoid: Do not substitute styling for semantics; distinguish empty, unknown, and zero values.
+- An action that needs confirmation of a specific object, version and change, and must be reread when the content changes.
+- Avoid: Use AlertDialog for a simple decision that needs no review of content.
+- Avoid: Use Dialog for ordinary editing or forms; report the outcome with Alert or Toast.
 - Library: Open state, reviewed snapshot, invalidation notice, and optional confirmation input.
 - Application: Objects, versions, changes, permissions, action states, and outcomes.
 
@@ -3760,7 +3770,7 @@ export default function Demo() {
 
 ## ContextMenu
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
 Source SHA-256: 735ccc846c990c30f8e0c87be3d494cc5d541b64a59db1c0e736f9616170d67a
@@ -3943,7 +3953,7 @@ export default function Demo() {
 
 ## Copy button
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/copy-button
 Source: packages/ui/src/components/copy-button.tsx
 Source SHA-256: 965565edbc2678a8309773c65d579ec3f47bd4dcea6736ea630fe959a6d25817
@@ -4032,7 +4042,7 @@ The hook behind CopyButton, for when you need your own button form or trigger. I
 Source: apps/docs/src/content/copy-button/demos/01-copy.tsx
 ```tsx
 import { CopyButton } from "@qingye_lab/ui/components/copy-button";
-export const meta = { title: "复制文本", titleEn: "Copy text" };
+export const meta = { title: "复制文本", titleEn: "Copy text", specimen: true };
 export default function Demo() {
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)"><code className="text-body">Qingye</code><CopyButton value="Qingye" /><CopyButton value="Qingye" shape="icon" /><CopyButton value="Qingye" disabled /></div>;
 }
@@ -4042,7 +4052,7 @@ export default function Demo() {
 
 ## CornerMark
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/corner-mark
 Source: packages/ui/src/components/corner-mark.tsx
 Source SHA-256: ac8892bd3e844d1037659b14d1fa362244bb04e8b5091d156c8d33fc39096a5a
@@ -4135,10 +4145,10 @@ export default function Demo() {
 
 ## DataTable
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 150b236250585679cc9891aef9aec40ab46b80dbbc0516f08b0e48dca47f3580
+Source SHA-256: 02c5537f5b7059f3756aab2b5b3fb9d3405b7f7e5cd6f2508bb5e35fbd304395
 
 Comparison, sorting, scoped selection and optional virtualization for a caller-owned collection.
 
@@ -4343,10 +4353,10 @@ export default function Demo() {
 
 ## DatePicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
-Source SHA-256: 2874fbc00dcb9d6f3ecdf9e421097e47d03d9ff810447d8a2d744435d3ccba60
+Source SHA-256: 7cb05d8df7e219e97b2e27a8c8ba4953ffebad3e5e4e0de66d143cdcc3b2dcdd
 
 Edit one local date or choose it from a calendar.
 
@@ -4361,8 +4371,9 @@ The caller owns the local Date. Input and calendar selection request changes; cl
 - The year can be typed to five or six digits and a segment can be left half-filled. These in-between entries are not values: they neither report nor clear the accepted date, and the input returns to it once focus leaves. Only emptying every segment clears.
 
 ### Use and ownership
-- Edit one local date or choose it from a calendar.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Choose a single date, by typing or from a calendar.
+- Avoid: Use DateRangePicker for a start and end date; DateTimePicker for a date with a time.
+- Avoid: Use TimeField for a time only; Calendar for a calendar kept on the page.
 - Library: Opening and calendar focus.
 - Application: Dates, constraints, errors, and submission outcomes.
 
@@ -4440,10 +4451,10 @@ export default function Demo() {
 
 ## DateRangePicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
-Source SHA-256: 9ba2abc7c00e37716a489e1ef61f4ed8a5d9d2e353db9accee0fd37f4a61c98c
+Source SHA-256: 0d0834aa70a325fc41b42045d1bc6db3d550265f91ac2c1276384c7099b5bb0c
 
 Type or pick start and end dates; only a complete, ordered range is a confirmed value.
 
@@ -4457,8 +4468,9 @@ Only a complete, ordered from/to is a confirmed value. The two native date input
 - Read-only does not open the popup: the value is there, focusable and readable, but it cannot change.
 
 ### Use and ownership
-- Type or pick start and end dates; only a complete, ordered range is a confirmed value.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Choose a start and end date, such as a report period or check-in and check-out.
+- Avoid: Use DatePicker for a single date; DateTimeRangePicker when the range also carries times.
+- Avoid: Use TimeRangeField for start and end times without dates.
 - Library: Opening, the current range draft, in-between typing, and focus return.
 - Application: Complete confirmed ranges, permitted dates, preset values, the explanation when invalid, and submission outcomes.
 
@@ -4545,10 +4557,10 @@ export default function Demo() {
 
 ## DateTimePicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
-Source SHA-256: ffa594e825dabe5935b253a86f90638a5b73fac7089de3996641e0af6d7461ca
+Source SHA-256: 2563a486ab93477cb5bfc927d99d67b598829707973d52d9908c94a4d6157e8b
 
 Edit complete local wall-clock date/time, or apply calendar and time drafts.
 
@@ -4561,8 +4573,9 @@ value is unzoned YYYY-MM-DDTHH:mm[:ss[.SSS]] wall-clock text, not a UTC instant.
 - The browser's display may vary by environment; submission remains unzoned local text.
 
 ### Use and ownership
-- Edit complete local wall-clock date/time, or apply calendar and time drafts.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Choose one wall-clock date and time without a time zone, such as a meeting start or a scheduled release.
+- Avoid: Use DatePicker for a date only and TimeField for a time only.
+- Avoid: Use DateTimeRangePicker when both ends need a time; the application handles UTC instants and time zones.
 - Library: Opening, date/time drafts, keyboard, and focus.
 - Application: Confirmed wall-clock text, zone/DST rules, constraints, and submission outcomes.
 
@@ -4638,10 +4651,10 @@ export default function Demo() {
 
 ## DateTimeRangePicker
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/date-time-range-picker
 Source: packages/ui/src/components/date-time-range-picker.tsx
-Source SHA-256: f0bf1dd0084422c8188b26900c7152b6394fe65411b1f5a8a794b68f18a53142
+Source SHA-256: ea0c19ac00afd1c2cb244948594c9dcb6c081e74fa647a7a66e90d74ca5d7594
 
 Type or pick a start and an end date and time; only a complete, ordered range is a confirmed value.
 
@@ -4654,8 +4667,9 @@ The value is { from, to }; each end is a DateTimePicker value (zone-free local t
 - With only one day chosen in the popup, both ends fall on that day. There is no default start or end time and no automatic repair.
 
 ### Use and ownership
-- Type or pick a start and an end date and time; only a complete, ordered range is a confirmed value.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Choose a range whose two ends both carry a wall-clock time, such as an event or a maintenance window.
+- Avoid: Use DateRangePicker for dates only; DateTimePicker for a single date and time.
+- Avoid: Use TimeRangeField for two times within one day.
 - Library: Opening, the current range draft, the popup's date and time draft, in-between typing, and focus return.
 - Application: The complete confirmed range, the permitted moments, the explanation when invalid, and submission outcomes.
 
@@ -4739,7 +4753,7 @@ export default function Demo() {
 
 ## DescriptionList
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/description-list
 Source: packages/ui/src/components/description-list.tsx
 Source SHA-256: 01619fae8f6efcc264c2e90e09c97edccf36c8ff6bfc2220e91e3877176c44c0
@@ -4851,7 +4865,7 @@ export default function Demo() {
 
 ## Dialog
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/dialog
 Source: packages/ui/src/components/dialog.tsx
 Source SHA-256: 08787666f8f19dd603cc200032cc3d0148451399fbd6a5dd21fc31bef18c3d3f
@@ -5027,7 +5041,7 @@ export default function Demo() {
 
 ## Drawer
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/drawer
 Source: packages/ui/src/components/drawer.tsx
 Source SHA-256: 63395abb3d4f641fe6170a87574be325b93daf28603ddc2e868606f68a69d652
@@ -5186,7 +5200,7 @@ export default function DrawerDemo() {
 
 ## Empty
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/empty
 Source: packages/ui/src/components/empty.tsx
 Source SHA-256: 9806b0c9c7f902d0f97e5d35050cece67dbd8636629dba29b4fa7c28c4147a58
@@ -5290,7 +5304,7 @@ export default function Demo() {
 
 ## Field
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
 Source SHA-256: 8bf6a3b75be2b323a1fa09109535f1b90b02ac3ab333f114872add2881f1b47f
@@ -5464,7 +5478,7 @@ export default function Demo() {
 
 ## Fieldset
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/fieldset
 Source: packages/ui/src/components/fieldset.tsx
 Source SHA-256: a7cb5961235149cd60abe9b0291b81238c755469f313982fd9446a41f0138ad4
@@ -5555,7 +5569,7 @@ export default function Demo() {
 
 ## FileTrigger
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/file-trigger
 Source: packages/ui/src/components/file-trigger.tsx
 Source SHA-256: 23cb93caa181ab49f3b19b3e3a030c60f68aa9624afa400f625ccde4e9c190c4
@@ -5571,8 +5585,9 @@ It only hands the selection to the application as soon as it is made: no retaine
 - Reading, parsing and uploading file contents belong to the application; accept checks only the file name and MIME type.
 
 ### Use and ownership
-- Press a button to choose files and hand them to the application at once, retaining no selection.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Press a button, choose files and hand them to the application at once, such as an import in a toolbar.
+- Avoid: Use FileUpload to retain the selection, list or remove files, submit with a form, or accept drag and drop.
+- Avoid: Rejected files come back only in details.rejected; the application must present them.
 - Library: Opening the chooser, splitting accepted from rejected by the rules, clearing the native input.
 - Application: Parsing and uploading the files, presenting rejection reasons.
 
@@ -5659,7 +5674,7 @@ export default function Demo() {
 
 ## FileUpload
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/file-upload
 Source: packages/ui/src/components/file-upload.tsx
 Source SHA-256: 9c5085b3e76d1365416ee5275b4396e1f81740f92e4e1d528dd4c9e1a42e67c9
@@ -5680,8 +5695,9 @@ The component manages local selection only. The application supplies upload stat
 - The chooser displays its action name and clears for reselection. The separate list expresses accepted files. Its decorative span creates no second interaction entry.
 
 ### Use and ownership
-- Choose or drop local files, retaining accepted files and real rejection reasons.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Choose or drop files in a form when the accepted set must be kept, listed and removable.
+- Avoid: Use FileTrigger to press once and hand files over without keeping a selection.
+- Avoid: The application presents upload progress and outcome; the component sends no request.
 - Library: Selection, drop, uncontrolled local collection, and actual rejection.
 - Application: Controlled collection, acceptance rules, upload state/progress, recovery, and outcomes.
 
@@ -5778,7 +5794,7 @@ export default function Demo() {
 
 ## FilterBar
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/filter-bar
 Source: packages/ui/src/components/filter-bar.tsx
 Source SHA-256: ded3c2eaf37f9dcb9852c5195cbdca5523d62233af35237c20026b61addc7431
@@ -5938,7 +5954,7 @@ export default function Demo() {
 
 ## Form
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/form
 Source: packages/ui/src/components/form.tsx
 Source SHA-256: 694187e034dce87a7c83e9e39b7976299568ecbefde556432eb49619dd98468b
@@ -6022,7 +6038,7 @@ export default function Demo() {
 
 ## Heatmap
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
 Source SHA-256: a0208da9a4fca7de7e68d8b4dc4bb6ba881b4b1fdc2ac6bcaf046febc74eec34
@@ -6137,7 +6153,7 @@ export default function Demo() {
 
 ## HoverCard
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/hover-card
 Source: packages/ui/src/components/hover-card.tsx
 Source SHA-256: 4b6ea56ca364d46fe0fb8fbbd17cabed7ea198ed446cdcb08c75c06076ec499b
@@ -6238,7 +6254,7 @@ export default function HoverCardDemo() {
 
 ## ImagePreview
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/image-preview
 Source: packages/ui/src/components/image-preview.tsx
 Source SHA-256: 23741daf38ba1fbc21c80c4eae46b218445b975188b4bbc3e6691bfd6a20803e
@@ -6322,7 +6338,7 @@ export default function Demo() {
 
 ## Input
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
 Source SHA-256: 1276c09d538105d1b2f715ed2df7d99bff636526763bba4c200346a7823104a7
@@ -6413,7 +6429,7 @@ export default function Demo() {
 
 ## InputGroup
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
 Source SHA-256: f88486029dc36fd228d2cee9649a1d29061e04dae1e4fc3998238074ca90e72c
@@ -6558,7 +6574,7 @@ export default function Demo() {
 
 ## InputModalityProvider
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/input-modality-provider
 Source: packages/ui/src/components/input-modality-provider.tsx
 Source SHA-256: 011d0f9673180acea6dd34d463e7cdf1436738881d96f8e20a7c7147c7940d46
@@ -6627,7 +6643,7 @@ import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import { Text } from "@qingye_lab/ui/components/typography";
 import { useEffect, useState } from "react";
 
-export const meta = { title: "输入方式", titleEn: "Input modality" };
+export const meta = { title: "输入方式", titleEn: "Input modality", specimen: true };
 
 export default function Demo() {
   const [input, setInput] = useState<string | null>(null);
@@ -6653,7 +6669,7 @@ export default function Demo() {
 
 ## Item
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/item
 Source: packages/ui/src/components/item.tsx
 Source SHA-256: 1f8aeb2d275d1293494b4ae60f7022b715f9ccbba1a5d159822caa9439489d23
@@ -6791,7 +6807,7 @@ export default function Demo() {
 
 ## Kbd
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/kbd
 Source: packages/ui/src/components/kbd.tsx
 Source SHA-256: a7fd414dd93120240d7eb2c1508627c3b2130c780ede7f079f4bd4ea04e7ec2f
@@ -6854,7 +6870,7 @@ export default function Demo() { return <Inline><Kbd>Ctrl</Kbd><Kbd>K</Kbd><Kbd>
 
 ## Label
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/label
 Source: packages/ui/src/components/label.tsx
 Source SHA-256: 8fd751c16092f6e5c8f0709af79c56911c6b13e8ceb2ff5b7cff46bfb842c5e2
@@ -6866,6 +6882,7 @@ Use FieldLabel inside Field. A standalone Label associates one control through h
 
 ### Notes
 - Label owns no disabled state; the named control uses its real disabled attribute.
+- For popup inputs such as Combobox and Autocomplete, associate through htmlFor or use Field; do not wrap the control in a label with its text in a child element, because that name disappears while the popup is open.
 
 ### Use and ownership
 - A native control needs a persistent readable name.
@@ -6929,7 +6946,7 @@ export default function Demo() {
 
 ## Layout
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/layout
 Source: packages/ui/src/components/layout.tsx
 Source SHA-256: a3eee1f77336d01017929f940f49949e11d348343948eff757e0cde9db884233
@@ -7050,7 +7067,7 @@ export default function Demo() {
 
 ## Link
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/link
 Source: packages/ui/src/components/link.tsx
 Source SHA-256: 1a9ed89613aea1ab58a66f68eeac3cfe5d71573b62df4089a78af1dc7a6926fe
@@ -7119,7 +7136,7 @@ export default function Demo() {
 
 ## Locale switch
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/locale-switch
 Source: packages/ui/src/components/locale-switch.tsx
 Source SHA-256: af568223120f14393e7ed79577f99f09b60d38043d1f6e943c7c66263534dfb5
@@ -7199,7 +7216,7 @@ export default function Demo() {
 
 ## Menu
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
 Source SHA-256: 546a0cba3c3ecf2f2eaa2cc8170a08b6f49bfa8b6e1e81ff5a9d7eba89cd69a2
@@ -7414,25 +7431,26 @@ export default function Demo() {
 
 ## Meter
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/meter
 Source: packages/ui/src/components/meter.tsx
-Source SHA-256: 9579a5e1dcfc8e727b00a72c3e2b16e1be3853063a55fdc4af3cd6a927040c7c
+Source SHA-256: 3b1233fa556bb4efd1a827ee8adfc0c4e36155e61816f0c7f378a8b23e793ca9
 
 A real measurement over a valid range.
 
 ### Decision
-Use Progress for task completion. Unknown measurements must not become zero. A level is "which of n steps", so use segments; tone is declared by the caller, and the cell count still reads without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).
+Use Progress for task completion. Unknown measurements must not become zero. When the reading itself counts whole cells, use segments and the screen reader still reads the reading; an ordered level of an object reads as the level's name, so use SeverityMark. tone is declared by the caller, and the cell count or reading still carries the fact without hue. When the value changes the fill travels to its new length (nothing animates on first render; with reduced motion or keyboard input it lands at once).
 
 ### Use and ownership
-- Present measured values and units.
+- Present a measurement over a valid range, with its unit; screen readers read the reading.
 - Avoid: Use Progress for task completion. Unknown measurements must not become zero.
+- Avoid: Use SeverityMark when an object has an ordered level read as its name (such as high, medium, low); use StatusDot for which state an object is in.
 - Library: Native semantics, public composition, and centralized roles.
 - Application: Objects, content, values, states, and request outcomes.
 
 ### Composition
 - Label associates the name, Value presents the actual reading, and track/indicator infer no judgment.
-- A level in a dense list uses segments={3} with tone, not StatusDot: status and degree are two facts.
+- segments only splits a reading that itself counts whole cells; getAriaValueText reads the actual reading and unit. A row's level uses SeverityMark.
 
 ### Responsive behavior
 - Measurement names and formatted readings wrap; an independent measurement role controls track thickness.
@@ -7453,7 +7471,7 @@ Use Progress for task completion. Unknown measurements must not become zero. A l
 Resolved from the TypeScript types of the installed source. Props inherited from the DOM or Base UI are counted, not listed.
 
 ### Meter
-- `segments?`: `number`. 这个量是离散的 n 级时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。
+- `segments?`: `number`. 读数本身以整格计（如四格里剩几格）时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。
 - `tone?`: `"info" | "warning" | "danger" | "success"`. 状态类别：由调用方声明，组件不从数值猜好坏（随类赋彩）。不给时指示用主色。
 - plus 284 inherited (@types/react 274, @base-ui/react 10); not expanded, see the installed declarations
 
@@ -7486,7 +7504,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### Meter
 Label associates the name, Value presents the actual reading, and track/indicator infer no judgment.
 - value / min / max: number. A known finite value in an increasing range; out-of-range, nonfinite, or reversed inputs throw RangeError.
-- segments: number. A discrete scale of n levels: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Name levels with getAriaValueText.
+- segments: number. A reading counted in n whole cells: the track splits into n equal cells with a 2px transparent gap. n is an integer of 2 or more; (value − min) must be a whole multiple of (max − min)/n, otherwise RangeError is thrown. Give the actual reading and unit with getAriaValueText.
 - tone: "danger" | "warning" | "success" | "info". The indicator's status category, declared by the caller; the component does not guess good or bad from the value. The root carries data-tone. Omitted, the primary color is used. An invalid value throws RangeError.
 - format / locale / getAriaValueText: Base UI Meter props. Actual units and accessible readings; locale defaults to UILocale.
 - render / ref / native props: current public component props. Forward attributes, events, and refs to the actual element; adjust presentation through className/style.
@@ -7522,7 +7540,7 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 
 ## NativeSelect
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
 Source SHA-256: c79d1ce39764a22c4952574d981ffccb7e4d732c9e1be7816a5a3154dad1745f
@@ -7617,7 +7635,7 @@ export default function Demo() {
 
 ## NavigationMenu
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
 Source SHA-256: c3608883416f4df54beb12ab8b53eff90781fec1dfcac588351999b0269008b4
@@ -7785,10 +7803,10 @@ export default function Demo() {
 
 ## NumberField
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
-Source SHA-256: dff96cde72e893230e62af74be7b834f9fbe557e58f8c71442fbea516644a727
+Source SHA-256: fd8dc4dc0d76b55c59175e4697ce16f1c98f0bd3e6afa4cf3cd836497722d340
 
 Edit an optional number and adjust it by a declared step.
 
@@ -7925,7 +7943,7 @@ export default function Demo() {
 
 ## OtpField
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
 Source SHA-256: d6ac787b80dd6a4b61a5012e7336bbd9e3ad112e170bb3e505fc59913e6c400b
@@ -8030,7 +8048,7 @@ export default function Demo() {
 
 ## PageHeader
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/page-header
 Source: packages/ui/src/components/page-header.tsx
 Source SHA-256: 534d0136bde2d51dd17682d9aa311fb79fd5667825007d59dc9e35496e8e79de
@@ -8142,7 +8160,7 @@ export default function Demo() {
 
 ## Pagination
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
 Source SHA-256: 6b4c3df196a315eb41ef9873ba55c26015781f71d73fe28557fedb9dd1120379
@@ -8329,10 +8347,10 @@ export default function Demo() {
 
 ## PasswordInput
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/password-input
 Source: packages/ui/src/components/password-input.tsx
-Source SHA-256: d979e4856bb9c60fc9b12a6418bd99fa1067317850359c6843c8caeab43e87d3
+Source SHA-256: 2cc5609ba3e912efe39c5fc9eb5a4dd9dbd280a509dd635309654d833a0b140b
 
 Enter a password and switch to plain text to check it.
 
@@ -8417,7 +8435,7 @@ export default function Demo() {
 
 ## PendingValue
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/pending-value
 Source: packages/ui/src/components/pending-value.tsx
 Source SHA-256: fb8550fe64f13a3f78a7d664a9afebac67328f26c997a51d3a2daebcf48e5f85
@@ -8486,7 +8504,7 @@ export default function Demo() { return <PendingValue label="值" numeric action
 
 ## Popover
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
 Source SHA-256: 50a0f9ad172921a100aa5958dc826f501b0eb504a7571a286038c1a9e902d12d
@@ -8653,7 +8671,7 @@ export default function Demo() {
 
 ## Progress
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/progress
 Source: packages/ui/src/components/progress.tsx
 Source SHA-256: 7a3b24ee301227032c1bfbb846e94f5949e7fc9578d5f0279700a65277c1accb
@@ -8763,7 +8781,7 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 
 ## Proportion
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/proportion
 Source: packages/ui/src/components/proportion.tsx
 Source SHA-256: 0844615af3d66aaf7d6ab710260f5c99501c0ab2008932df622d065b6e8b8a5d
@@ -8842,7 +8860,7 @@ export default function Demo() {
 
 ## Prose
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/prose
 Source: packages/ui/src/components/prose.tsx
 Source SHA-256: a94bcf0559188c47580dade7e018f602f7340e267230ace89e0c7d16d0df415e
@@ -8938,7 +8956,7 @@ export default function Demo() {
 
 ## RadioGroup
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
 Source SHA-256: f64be68df1c293fdbe85e23a2fe1beabaa6fb4dc93d4920d78d5c3234a97e0b2
@@ -9073,7 +9091,7 @@ export default function Demo() {
 
 ## Rating
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/rating
 Source: packages/ui/src/components/rating.tsx
 Source SHA-256: 280d62c431743cb0d2a9bee2a1f0a6897335c9a8fbb35d01d976fee4a78c1ebd
@@ -9174,7 +9192,7 @@ export default function Demo() {
 
 ## RelativeTime
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/relative-time
 Source: packages/ui/src/components/relative-time.tsx
 Source SHA-256: 6f2886b8777aa3c19b4c3773b05e84246c46295cb9e707a22aeab7a3487ad2f6
@@ -9255,7 +9273,7 @@ export default function Demo() {
 
 ## Resizable
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/resizable
 Source: packages/ui/src/components/resizable.tsx
 Source SHA-256: 275cd5bb5c655f0dfce41b9ae165de470d0a2507c08006653564e2bd34878f0a
@@ -9394,7 +9412,7 @@ export default function Demo() {
 
 ## Result
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/result
 Source: packages/ui/src/components/result.tsx
 Source SHA-256: 68a37124c7872d1d121516a465cd9f9fe0d764871e5ee1f9ce9b58399d44e43e
@@ -9505,7 +9523,7 @@ export default function Demo() {
 
 ## ScatterChart
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
 Source SHA-256: 91d9cdf6eb59bb5da1a566606bc87f7c19782ce98a4f38be03872593d2eafd31
@@ -9604,7 +9622,7 @@ export default function Demo() {
 
 ## Scroll area
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
 Source SHA-256: cac2e91684ebc4c766cf31f3d48387d72611874133cc8f8bb9b0609aab9afe14
@@ -9730,7 +9748,7 @@ export default function Demo() {
 
 ## SearchInput
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/search-input
 Source: packages/ui/src/components/search-input.tsx
 Source SHA-256: 0b4ce4a97d0fd6c0e87c4ba043c42efa071c3e8f54d3d5be21f2a083abaf9af7
@@ -9818,7 +9836,7 @@ export default function Demo() {
 
 ## Section
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/section
 Source: packages/ui/src/components/section.tsx
 Source SHA-256: 4878536a4cef8e4e4d2b42dd7f7e6a290cf1d0911cd35fd2cddd499fbdffa5ab
@@ -9940,7 +9958,7 @@ export default function Demo() {
 
 ## SegmentedControl
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
 Source SHA-256: f4665dbed362bff8a49503a39078814435fee87286a1eef4e431e26d75f2df6e
@@ -10049,7 +10067,7 @@ export default function Demo() {
 
 ## Select
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
 Source SHA-256: b17fc57dc658402188ba8a821eb0a99f9a034ed4217d47d74991b427c37583da
@@ -10242,7 +10260,7 @@ export default function Demo() {
 
 ## Separator
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/separator
 Source: packages/ui/src/components/separator.tsx
 Source SHA-256: c4d87fe0a3c5c89e644fe64b96c3fd897e89a0df3ed9c60c480ac2ce6007999e
@@ -10323,7 +10341,7 @@ export default function Demo() {
 
 ## SeverityMark
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/severity-mark
 Source: packages/ui/src/components/severity-mark.tsx
 Source SHA-256: b5ee87babb7044c0d014e89a44df856883f2893ada42f347674a9100cc8b0bf3
@@ -10339,9 +10357,9 @@ The level is carried by the number of filled cells and tone is only an accompany
 - In forced colors filled cells are solid CanvasText and empty cells are an outline; tone hues collapse to one color.
 
 ### Use and ownership
-- A row's object has an ordered level that must be comparable without spending a text column.
+- A row's object has an ordered level (severity, priority) read as its name, and it must be comparable without spending a text column.
 - Avoid: Use StatusDot for which state an object is in: states have no order.
-- Avoid: Use Meter for a measurement with a unit and Progress for task completion.
+- Avoid: Use Meter for a measured reading over a range, with segments when the reading itself counts whole cells; use Progress for task completion.
 - Avoid: Do not tell two levels with the same cell count apart by hue.
 - Library: The mapping from level to filled cells, the image semantics and the accessible name.
 - Application: The level value, the number of levels, and each level's name and category.
@@ -10349,6 +10367,7 @@ The level is carried by the number of filled cells and tone is only an accompany
 ### Composition
 - Marks in one column share one max.
 - With name="hidden" the name remains the accessible name; the row or the column header must still tell sighted readers that the column is a level.
+- Screen readers read only label, not the cell count or the number of levels: the names themselves must tell high from low (such as high, medium, low).
 - Beside a StatusDot both marks have the same height and share one row midline.
 
 ### Responsive behavior
@@ -10415,10 +10434,10 @@ export default function Demo() {
 
 ## Sidebar
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
-Source SHA-256: c1a2e83537c08c137c4b2a0266f85d16a4f021a4fd5586adc06de2a85434351c
+Source SHA-256: 3098b18a94f563faac4c8c907aa14400940981b3411c62438738b6d35d1e9039
 
 Persistent navigation, an icon rail when collapsed, and an expandable sub-level.
 
@@ -10646,7 +10665,7 @@ export default function Demo() {
 
 ## Skeleton
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/skeleton
 Source: packages/ui/src/components/skeleton.tsx
 Source SHA-256: 5ad0f53b67097d2054eae255fd7dcb65aa1ae2bf1fe3866ce8f7eb2493d8c82f
@@ -10757,7 +10776,7 @@ export default function Demo() {
 
 ## SkipLink
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/skip-link
 Source: packages/ui/src/components/skip-link.tsx
 Source SHA-256: 4333b6b70cefd7211580107717851060f8942bbe39dc19982442c7da5363f79e
@@ -10831,14 +10850,14 @@ export default function Demo() {
   return <Stack gap="panel">
     <SkipLink href="#skip-demo-main" className="static opacity-100 pointer-events-auto self-start">跳到正文</SkipLink>
     <nav aria-label="示例导航"><Stack gap="pair"><Link href="#a">首页</Link><Link href="#b">文档</Link><Link href="#c">更新记录</Link></Stack></nav>
-    <main id="skip-demo-main" className="outline-none focus-visible:ring-2"><Text>正文从这里开始。</Text></main>
+    <div id="skip-demo-main" className="outline-none focus-visible:ring-2"><Text>正文从这里开始。</Text></div>
   </Stack>;
 }
 ```
 
 ## Slider
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/slider
 Source: packages/ui/src/components/slider.tsx
 Source SHA-256: 836d2fa5c3b4ba8449b959f7b5f521c0ecaf427760c3edbd3a1c7309db591de5
@@ -10986,7 +11005,7 @@ export default function Demo() {
 
 ## Sparkline
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/sparkline
 Source: packages/ui/src/components/sparkline.tsx
 Source SHA-256: 856797e9c07fc4a1d7a230de40b6fabfea2d9b5a14a5958f43cdfae590ec0e58
@@ -11078,7 +11097,7 @@ export default function Demo() {
 
 ## Stat
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
 Source SHA-256: 26ce1b5ba1dddb58e0b6ca56364e84c6011d5e406ce93cd566530b998da05e75
@@ -11212,7 +11231,7 @@ export default function Demo() {
 
 ## StatusDot
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/status-dot
 Source: packages/ui/src/components/status-dot.tsx
 Source SHA-256: 460a2c7c93aa7bbf779ca0c9ad7e6f47f2d7fc13190afd17b95f4717319e3c74
@@ -11284,7 +11303,7 @@ export default function Demo() { return <Inline>{(["online","offline","pending",
 
 ## Steps
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/steps
 Source: packages/ui/src/components/steps.tsx
 Source SHA-256: 28a0975be5681464981373d19c4ce2ba6b475e90e6463937d4f5498a802a88a0
@@ -11387,7 +11406,7 @@ export default function Demo() {
 
 ## Switch
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
 Source SHA-256: 824244fef954f3b8bc97911a210e7e23e7554758faaad3f0d0f741a94dd345bc
@@ -11504,7 +11523,7 @@ export default function Demo() {
 
 ## Table
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
 Source SHA-256: 2c1f8ba7a99989283f696f918b46fd141ddb56278986f5b5f13a89bec4a6a99a
@@ -11660,7 +11679,7 @@ export default function Demo() {
 
 ## Tabs
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
 Source SHA-256: 8c8622ab9be09d415cd064c92ff7741e1190c7a1141a95c05e321c536a123a2b
@@ -11772,10 +11791,10 @@ export default function Demo() { return <Tabs defaultValue="text"><TabsList aria
 
 ## TagInput
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
-Source SHA-256: 8ec39c7dd44653e74738178db40ee5a62a4a34d551a80a03181428338f8035ec
+Source SHA-256: 2427982c90382e34627b781ce5b3c64a73456920ff2939538c746fc5dd3239a2
 
 Confirm a string collection while keeping its unconfirmed draft.
 
@@ -11885,7 +11904,7 @@ export default function Demo() {
 
 ## Textarea
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
 Source SHA-256: 25df3fcdf4732439bfe2d07f9abeb78fe822bd05e42808917dbc84a20b03d4aa
@@ -11984,7 +12003,7 @@ export default function Demo() {
 
 ## ThemeProvider
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/theme-provider
 Source: packages/ui/src/components/theme-provider.tsx
 Source SHA-256: cec0ce7f796c059c282ede1011646f364fb646b0106e2ecd65a22dc8b8dfd1d5
@@ -12107,7 +12126,7 @@ export default function Demo() {
 
 ## TimeField
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/time-field
 Source: packages/ui/src/components/time-field.tsx
 Source SHA-256: 937f151dd1ee52cbb707c4c4d6a087c0e7c791f4e723ba4cc751aa7237f82bcf
@@ -12124,8 +12143,9 @@ The value is zone-free text shaped like native input[type=time] (HH:mm or HH:mm:
 - There is no popup: a time of day has a small value space, and filling segments is faster than choosing from a list.
 
 ### Use and ownership
-- Fill in a time of day alone, segment by segment: hour, minute, second.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Fill in a single time of day, such as a reminder time or an opening time.
+- Avoid: Use TimeRangeField for a start and end time; DateTimePicker for a date with a time.
+- Avoid: Use DatePicker for a date only.
 - Library: Segment draft, typing buffer, and the focused segment.
 - Application: The time value, constraints, error text, and submission outcomes.
 
@@ -12230,7 +12250,7 @@ export default function Demo() {
 
 ## TimeRangeField
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/time-range-field
 Source: packages/ui/src/components/time-range-field.tsx
 Source SHA-256: c39fe59d6990ae7bb22f03e31bc6ceccc0d6e0ad00e14cd867631e29a3534bf3
@@ -12246,8 +12266,9 @@ The value is { start, end }; each end is a TimeField value (zone-free HH:mm[:ss]
 - Crossing midnight is an explicit choice, not an automatic repair: the library never swaps the ends or edits a value when the order is wrong.
 
 ### Use and ownership
-- Fill in a start and an end time of day in one edit boundary, such as opening hours or a shift.
-- Avoid: Do not use a placeholder as the only label; keep input after a failure unless there is a reason to clear it.
+- Fill in a start and end time within one editing boundary, such as opening hours or a shift.
+- Avoid: Use TimeField for a single time; DateTimeRangePicker when the range also needs dates.
+- Avoid: A range that crosses midnight needs allowCrossMidnight, otherwise an end before the start is invalid.
 - Library: Each end's segment draft and typing buffer, the focused segment, and the native check of the order.
 - Application: The start and end values, whether crossing midnight is allowed, the explanation when the order is wrong, and submission outcomes.
 
@@ -12331,7 +12352,7 @@ export default function Demo() {
 
 ## Timeline
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/timeline
 Source: packages/ui/src/components/timeline.tsx
 Source SHA-256: 2216da44b0e8c64960e232c1edae772136cdb7cae4c1c1c080e2b6e5e6a2ff66
@@ -12434,7 +12455,7 @@ export default function Demo() {
 
 ## Toast
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
 Source SHA-256: b6cc92a94f3d63e0faf1d8ffeb6e1779fbb48ca5b0b7e61ecff35a356f8ecc50
@@ -12558,10 +12579,10 @@ export default function Demo() {
 
 ## Toc
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
-Source SHA-256: 8d97141f492627f220e38c903da4c49540311794074937e3d4b82be9ec0b857d
+Source SHA-256: f4e51a4407103bc3e69e9f6612457ef1004296c3c79aa640a6305d7c0145cfdd
 
 A vertical in-page table of contents for moving between sections; the current location deepens its own segment of an existing thin line instead of adding a new shape.
 
@@ -12575,10 +12596,10 @@ Toc neither reads routing nor performs smooth scrolling: <a href="#id"> is a nat
 
 ### Use and ownership
 - A long article or documentation page needs quick movement between sections, with visible confirmation of the current one.
-- Avoid: A single destination makes no table of contents; the caller decides whether to render one (Toc itself only withholds rendering when items is empty).
+- Avoid: Writing your own check for whether to render Toc on a single-section page: Toc renders nothing with fewer than two destinations (counted as items, so one h2 with two h3s is three).
 - Avoid: Use Breadcrumb or NavigationMenu for destinations across pages; Toc only expresses position within the current page.
-- Library: The table of contents' layout, level indent, and the current item's visual expression.
-- Application: Headings' actual ids, the scroll container, sticky-header offsets, and whether a table of contents is needed at all.
+- Library: The table of contents' layout, level indent, and the current item's visual expression; it renders nothing with fewer than two items.
+- Application: Headings' actual ids, the scroll container, sticky-header offsets, and whether the layout reserves a column for the contents.
 
 ### Composition
 - items can be written by hand, or scanned from a container's h2/h3[id] with useTocHeadings (headings Prose renders already satisfy this).
@@ -12618,7 +12639,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 Written descriptions; the list above is the type-resolved fact.
 
 #### Toc
-The table of contents container; renders as nav, and renders nothing when there are no items.
+The table of contents container; renders as nav, and renders nothing with fewer than two items.
 - items: { id: string; label: string; level: 2 | 3 }[]. The destination list; id must match an anchor that actually exists on the page.
 - current: string. The id of the current destination; omitted means no item carries aria-current.
 - render / ref / className / style / native props: useRender.ComponentProps<"nav">. Forward attributes, events and refs to the actual element.
@@ -12677,7 +12698,7 @@ export default function Demo() {
 
 ## Toggle
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/toggle
 Source: packages/ui/src/components/toggle.tsx
 Source SHA-256: 36a4e2ae0efd10e7f8efa296ff5df32ccc2cf62485fe827d24a8ea57ea00a8ba
@@ -12761,7 +12782,7 @@ import { useState } from "react";
 import { IconBold, IconItalic } from "@tabler/icons-react";
 import { Toggle } from "@qingye_lab/ui/components/toggle";
 
-export const meta = { title: "切换态", titleEn: "Toggled state" };
+export const meta = { title: "切换态", titleEn: "Toggled state", specimen: true };
 export default function Demo() {
   const [pressed, setPressed] = useState(true);
   return <div className="flex flex-wrap items-center gap-(--qy-action-gap)">
@@ -12777,7 +12798,7 @@ export default function Demo() {
 
 ## ToggleGroup
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
 Source SHA-256: 7850bfe90e1c53a915357e2fe0de3d9df988b18a93125cb67b3b649996486a94
@@ -12886,7 +12907,7 @@ export default function Demo() {
 
 ## Toolbar
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/toolbar
 Source: packages/ui/src/components/toolbar.tsx
 Source SHA-256: 2cb3aa0977b43eb4eb9857dc5102b6c53efb2cfadbd272efd91a3caa547f3332
@@ -13005,7 +13026,7 @@ export default function Demo() {
 
 ## Tooltip
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
 Source SHA-256: 4dd9b24c79431acd6f078c8ffae3d40788c79a47f11561f55ceb4429e8a8aab6
@@ -13018,7 +13039,7 @@ Controls supply their own text or aria-label. Hints supplement it. Keep conseque
 ### Notes
 - Icon buttons supply aria-label. While open, aria-describedby links the hint and preserves existing descriptions.
 - Use short text only. Use Popover for click help or interactive content, and visible text for persistent information.
-- Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Keep the reason visible.
+- Directly rendered disabled controls also disable hints. Synchronize Trigger.disabled for disabling inside render functions or custom controls. Write the disabled reason as visible text on the page: hints never appear on touch screens, so a reason that lives only in a hint cannot be read there.
 - The trigger brings no control of its own: the hint attaches to the caller's control, which must be keyboard focusable, so it is not a span.
 
 ### Use and ownership
@@ -13155,7 +13176,7 @@ export default function Demo() {
 
 ## Tour
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/tour
 Source: packages/ui/src/components/tour.tsx
 Source SHA-256: add2cb8a6f949f9311df5c9e87450d71245d3caf1742edad83564a2edcb9e35b
@@ -13271,10 +13292,10 @@ export default function Demo() {
 
 ## Transfer
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/transfer
 Source: packages/ui/src/components/transfer.tsx
-Source SHA-256: 33edceaba8c73967d2c63e2a6120ec744e68eff44d41db0816c2075cecfa06c8
+Source SHA-256: a8fb40e9cf2f0175303dded681f41fa34c4e549ce2fa5c1e77a8c11cfba2b52b
 
 Move items between an available list and a selected list; the value is the keys on the selected side.
 
@@ -13379,7 +13400,7 @@ export default function Demo() {
 
 ## Tree
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
 Source SHA-256: 51af2eea6dd23fce52b0b5062e83fd08bbb41be9369d653212f2d152d4d86b7a
@@ -13510,7 +13531,7 @@ export default function Demo() {
 
 ## TreeSelect
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/tree-select
 Source: packages/ui/src/components/tree-select.tsx
 Source SHA-256: c24df0889faa5a44775500312b941d65ad25db540c3cbb8c82f1b30a98def50d
@@ -13640,7 +13661,7 @@ export default function Demo() {
 
 ## Typography
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
 Source SHA-256: bc92ccf04f040c45deae89471af71ba9f76f582784b6e4f1e639bdc725df13ca
@@ -13750,7 +13771,7 @@ export default function Demo() {
 
 ## Virtual list
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
 Source SHA-256: 87082ed536a385bbdbf9468c74888760cfcb6f86b0d6133541ae7715106a7fb0
@@ -13845,7 +13866,7 @@ export default function Demo() {
 
 ## Workspace
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
 Source SHA-256: faf8bd929a3e0e621471dd82684e4350bb698e1c606bb7b8b4e04c5295c54269

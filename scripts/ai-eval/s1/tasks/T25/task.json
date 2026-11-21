@@ -1,0 +1,2 @@
+{ "id": "T25", "title": "任务指派人的资料预览", "editable": ["src/Assignee.tsx"], "hidden": ["T25.test.tsx"],
+  "wrong": { "card-only": ["停用状态无需悬停"], "title-attr": ["停用状态无需悬停"], "tooltip": ["停用状态无需悬停"] } }

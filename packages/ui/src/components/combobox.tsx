@@ -3,6 +3,7 @@
 import { Combobox as ComboboxPrimitive } from "@base-ui/react/combobox";
 import { IconCheck, IconChevronDown, IconX } from "@tabler/icons-react";
 import * as React from "react";
+import { inControl as fieldIn, useAdjunctName } from "../adjunct-name";
 import { useUILocale } from "../locale";
 import { chipActionClassName, chipClassName, chipDraftControlClassName, chipFrameStyle, chipTextClassName } from "../chip";
 import { type CandidateStatusOptions, useCandidateStatus } from "../candidate-status";
@@ -10,6 +11,8 @@ import { popupOffset, useFloatingLayer } from "../floating-layer";
 import { inputAdjunctClassName } from "../input-adjunct";
 import { overlayGroupLabelClassName, overlaySeparatorClassName } from "../overlay-group";
 import { candidateEmptyClassName, candidateItemClassName, overlayItemClassName } from "../overlay-item";
+import { labelledByFallback, useExternalLabelledBy } from "../external-labels";
+import { useInputRef } from "../input-facts";
 import { cn } from "../utils";
 import { Button } from "./button";
 import { Input } from "./input";
@@ -40,10 +43,13 @@ export function ComboboxControl({ className, style, ...props }: InputGroupProps)
   // 渲染为原语的 InputGroup：候选面以整条编辑边界为锚点，与边界同宽、从边界下沿展开。
   return <InControl.Provider value={true}><ComboboxPrimitive.InputGroup data-slot="combobox-control" render={<InputGroup {...props} style={multiple ? { ...chipFrameStyle, ...style } : style} className={cn("flex-nowrap", multiple && "items-start gap-(--qy-tag-inset) p-(--qy-tag-inset)", className)} />} /></InControl.Provider>;
 }
-export function ComboboxInput({ render, onChange, ...props }: ComboboxPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>) {
+export function ComboboxInput({ render, onChange, onFocus, ref, ...props }: ComboboxPrimitive.Input.Props & React.RefAttributes<HTMLInputElement>) {
   const inControl = React.useContext(InControl);
   const chips = React.useContext(Multiple) && inControl;
-  return <ComboboxPrimitive.Input data-slot="combobox-input" {...props} onChange={event => { onChange?.(event); if (event.currentTarget.disabled || event.currentTarget.readOnly) event.preventBaseUIHandler(); }} render={(elementProps, state) => <Input nativeInput {...elementProps} unstyled={inControl} {...(chips ? { controlClassName: cn(chipDraftControlClassName, "min-w-[min(100%,var(--qy-field-min-text))]"), className: cn("px-(--qy-tag-padding)", elementProps.className) } : inControl ? { controlClassName: "flex-1" } : {})} render={typeof render === "function" ? inputProps => render(inputProps, state) : render} />} />;
+  // Field 之外用 htmlFor 关联的 label 经 aria-labelledby 引用，打开时名称不随 label 被隐藏而消失（见 external-labels.ts）。
+  const [inputRef, setInputRef] = useInputRef(ref);
+  const [externalLabels, refreshLabels] = useExternalLabelledBy(inputRef);
+  return <ComboboxPrimitive.Input data-slot="combobox-input" {...props} ref={setInputRef} onFocus={event => { onFocus?.(event); refreshLabels(); }} onChange={event => { onChange?.(event); if (event.currentTarget.disabled || event.currentTarget.readOnly) event.preventBaseUIHandler(); }} render={(elementProps, state) => <Input nativeInput {...elementProps} aria-labelledby={labelledByFallback(elementProps, externalLabels)} unstyled={inControl} {...(chips ? { controlClassName: cn(chipDraftControlClassName, "min-w-[min(100%,var(--qy-field-min-text))]"), className: cn("px-(--qy-tag-padding)", elementProps.className) } : inControl ? { controlClassName: "flex-1" } : {})} render={typeof render === "function" ? inputProps => render(inputProps, state) : render} />} />;
 }
 // 多选的编辑边界里，附属动作与已选项同高（一枚项高的正方形），停在第一行；单选时铺满边界内高。
 function adjunctClassName(inControl: boolean, chips: boolean, className: string | undefined) {
@@ -54,14 +60,16 @@ export function ComboboxTrigger({ render, children, ...props }: ComboboxPrimitiv
   const chips = React.useContext(Multiple) && inControl;
   const readOnly = React.useContext(ReadOnly);
   const { messages } = useUILocale();
-  return <ComboboxPrimitive.Trigger data-slot="combobox-trigger" aria-label={messages.showOptions} {...props} disabled={readOnly || props.disabled} aria-labelledby={props["aria-labelledby"] ?? ""} render={(elementProps, state) => <Button variant={inControl ? "quiet" : "bordered"} shape="icon" {...(chips ? { size: "xs" as const } : {})} {...elementProps} className={adjunctClassName(inControl, chips, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconChevronDown aria-hidden="true" />}</ComboboxPrimitive.Trigger>;
+  const name = useAdjunctName(messages.showOptions, props, fieldIn("combobox-control", "combobox-input"));
+  return <ComboboxPrimitive.Trigger data-slot="combobox-trigger" {...props} {...name} disabled={readOnly || props.disabled} aria-labelledby={name["aria-labelledby"] ?? ""} render={(elementProps, state) => <Button variant={inControl ? "quiet" : "bordered"} shape="icon" {...(chips ? { size: "xs" as const } : {})} {...elementProps} className={adjunctClassName(inControl, chips, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconChevronDown aria-hidden="true" />}</ComboboxPrimitive.Trigger>;
 }
 export function ComboboxClear({ render, children, ...props }: ComboboxPrimitive.Clear.Props & React.RefAttributes<HTMLButtonElement>) {
   const inControl = React.useContext(InControl);
   const chips = React.useContext(Multiple) && inControl;
   const readOnly = React.useContext(ReadOnly);
   const { messages } = useUILocale();
-  return <ComboboxPrimitive.Clear data-slot="combobox-clear" aria-label={messages.clearSelection} {...props} disabled={readOnly || props.disabled} render={(elementProps, state) => <Button variant="quiet" shape="icon" {...(chips ? { size: "xs" as const } : {})} {...elementProps} className={adjunctClassName(inControl, chips, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconX aria-hidden="true" />}</ComboboxPrimitive.Clear>;
+  const name = useAdjunctName(messages.clearSelection, props, fieldIn("combobox-control", "combobox-input"));
+  return <ComboboxPrimitive.Clear data-slot="combobox-clear" {...props} {...name} disabled={readOnly || props.disabled} render={(elementProps, state) => <Button variant="quiet" shape="icon" {...(chips ? { size: "xs" as const } : {})} {...elementProps} className={adjunctClassName(inControl, chips, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconX aria-hidden="true" />}</ComboboxPrimitive.Clear>;
 }
 /** 读取已确认的值；多选时用它把每个已选值摆成 ComboboxChip。 */
 export const ComboboxValue = ComboboxPrimitive.Value;

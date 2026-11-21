@@ -4,12 +4,15 @@ import { Autocomplete as AutocompletePrimitive } from "@base-ui/react/autocomple
 import { IconChevronDown, IconX } from "@tabler/icons-react";
 import * as React from "react";
 import { BusyMark } from "../busy-mark";
+import { inControl as fieldIn, useAdjunctName } from "../adjunct-name";
 import { useUILocale } from "../locale";
 import { type CandidateStatusOptions, useCandidateStatus } from "../candidate-status";
 import { popupOffset, useFloatingLayer } from "../floating-layer";
 import { inputAdjunctClassName } from "../input-adjunct";
 import { overlayGroupLabelClassName, overlaySeparatorClassName } from "../overlay-group";
 import { candidateEmptyClassName, candidateItemClassName, overlayItemClassName } from "../overlay-item";
+import { labelledByFallback, useExternalLabelledBy } from "../external-labels";
+import { useInputRef } from "../input-facts";
 import { cn } from "../utils";
 import { Button } from "./button";
 import { Input } from "./input";
@@ -45,22 +48,27 @@ export function AutocompleteControl({ className, children, ...props }: InputGrou
     {loading ? <BusyMark className="order-2 self-center ps-0 pe-(--qy-input-group-padding) text-muted-foreground" data-slot="autocomplete-busy" /> : null}
   </InputGroup>} /></InControl.Provider>;
 }
-export function AutocompleteInput({ render, onChange, ...props }: AutocompletePrimitive.Input.Props & React.RefAttributes<HTMLInputElement>) {
+export function AutocompleteInput({ render, onChange, onFocus, ref, ...props }: AutocompletePrimitive.Input.Props & React.RefAttributes<HTMLInputElement>) {
   const inControl = React.useContext(InControl);
   const loading = React.useContext(Loading);
-  return <AutocompletePrimitive.Input data-slot="autocomplete-input" aria-busy={loading || undefined} {...props} onChange={event => { onChange?.(event); if (event.currentTarget.disabled || event.currentTarget.readOnly) event.preventBaseUIHandler(); }} render={(elementProps, state) => <Input nativeInput {...elementProps} unstyled={inControl} {...(inControl ? { controlClassName: "flex-1" } : {})} render={typeof render === "function" ? inputProps => render(inputProps, state) : render} />} />;
+  // Field 之外用 htmlFor 关联的 label 经 aria-labelledby 引用，打开时名称不随 label 被隐藏而消失（见 external-labels.ts）。
+  const [inputRef, setInputRef] = useInputRef(ref);
+  const [externalLabels, refreshLabels] = useExternalLabelledBy(inputRef);
+  return <AutocompletePrimitive.Input data-slot="autocomplete-input" aria-busy={loading || undefined} {...props} ref={setInputRef} onFocus={event => { onFocus?.(event); refreshLabels(); }} onChange={event => { onChange?.(event); if (event.currentTarget.disabled || event.currentTarget.readOnly) event.preventBaseUIHandler(); }} render={(elementProps, state) => <Input nativeInput {...elementProps} aria-labelledby={labelledByFallback(elementProps, externalLabels)} unstyled={inControl} {...(inControl ? { controlClassName: "flex-1" } : {})} render={typeof render === "function" ? inputProps => render(inputProps, state) : render} />} />;
 }
 export function AutocompleteTrigger({ render, children, ...props }: AutocompletePrimitive.Trigger.Props & React.RefAttributes<HTMLButtonElement>) {
   const inControl = React.useContext(InControl);
   const readOnly = React.useContext(ReadOnly);
   const { messages } = useUILocale();
-  return <AutocompletePrimitive.Trigger data-slot="autocomplete-trigger" aria-label={messages.showOptions} {...props} disabled={readOnly || props.disabled} aria-labelledby={props["aria-labelledby"] ?? ""} render={(elementProps, state) => <Button variant={inControl ? "quiet" : "bordered"} shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconChevronDown aria-hidden="true" />}</AutocompletePrimitive.Trigger>;
+  const name = useAdjunctName(messages.showOptions, props, fieldIn("autocomplete-control", "autocomplete-input"));
+  return <AutocompletePrimitive.Trigger data-slot="autocomplete-trigger" {...props} {...name} disabled={readOnly || props.disabled} aria-labelledby={name["aria-labelledby"] ?? ""} render={(elementProps, state) => <Button variant={inControl ? "quiet" : "bordered"} shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconChevronDown aria-hidden="true" />}</AutocompletePrimitive.Trigger>;
 }
 export function AutocompleteClear({ render, children, ...props }: AutocompletePrimitive.Clear.Props & React.RefAttributes<HTMLButtonElement>) {
   const inControl = React.useContext(InControl);
   const readOnly = React.useContext(ReadOnly);
   const { messages } = useUILocale();
-  return <AutocompletePrimitive.Clear data-slot="autocomplete-clear" aria-label={messages.clearSelection} {...props} disabled={readOnly || props.disabled} render={(elementProps, state) => <Button variant="quiet" shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconX aria-hidden="true" />}</AutocompletePrimitive.Clear>;
+  const name = useAdjunctName(messages.clearSelection, props, fieldIn("autocomplete-control", "autocomplete-input"));
+  return <AutocompletePrimitive.Clear data-slot="autocomplete-clear" {...props} {...name} disabled={readOnly || props.disabled} render={(elementProps, state) => <Button variant="quiet" shape="icon" {...elementProps} className={cn(inControl && inputAdjunctClassName, elementProps.className)} render={typeof render === "function" ? p => render(p, state) : render} />}>{children ?? <IconX aria-hidden="true" />}</AutocompletePrimitive.Clear>;
 }
 export type AutocompletePopupProps = AutocompletePrimitive.Popup.Props & React.RefAttributes<HTMLDivElement> & { container?: AutocompletePrimitive.Portal.Props["container"]; positionerProps?: AutocompletePrimitive.Positioner.Props };
 // 边界与阴影档同 Popover（见 popover.tsx 的 PopoverPopup）：border-border 线 + shadow-raised。

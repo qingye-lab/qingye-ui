@@ -1,6 +1,6 @@
 # Composer
 
-Package: @qingye_lab/ui@5.4.0
+Package: @qingye_lab/ui@5.5.0
 Import: @qingye_lab/ui/components/composer
 Source: packages/ui/src/components/composer.tsx
 Source SHA-256: fef8f9c94f951cdabab88801f34d75427fb3c8b8a5d43b7a8170abdfa50b5fe7
@@ -222,7 +222,7 @@ Source: apps/docs/src/content/composer/demos/04-states.tsx
 import { Composer, ComposerInput, ComposerSubmit, ComposerToolbar, type ComposerSegment } from "@qingye_lab/ui/components/composer";
 import type { DemoMeta } from "@/lib/types";
 
-export const meta = { title: "状态与行数", titleEn: "States and rows" } satisfies DemoMeta;
+export const meta = { title: "状态与行数", titleEn: "States and rows", specimen: true } satisfies DemoMeta;
 
 const filled: ComposerSegment[] = [
   { type: "text", text: "请 " },
