@@ -69889,7 +69889,7 @@
   "patterns": [],
   "designGuide": {
     "file": "design.md",
-    "sha256": "e809ed3053e1226b836d71d3e169aec9b53c188730b9151196a4ebfa9740d123",
+    "sha256": "c8fa01e1f4c0b9e003938bc7b3a40873de07f633f62eb7844b94326c259016ab",
     "styleContract": {
       "file": "ai/style.md",
       "section": "设计契约",

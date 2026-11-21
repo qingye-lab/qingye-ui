@@ -160,6 +160,8 @@ Pattern 是比 Primitive 更值得沉淀的资产：`Button`、`Select`、`Dialo
 
 动作使用清楚的动词和必要对象。区分保存草稿、发布、归档、移出集合和永久删除。批量操作说明范围；确认针对当前对象、版本和变更内容。
 
+同一处的同类对象凭名称就能区分。同一种区域在页面里出现不止一次时，各有不同的名称；同一区域里的同类控件不重名，跨区域同名时由区域名称区分。列表行或表格行里重复的操作，可访问名称带上它作用的对象（如"删除 张三"），并包含可见文字。读屏用户、自动化测试和 AI 都靠角色与名称找到对象，名称分不开时只能依赖位置。
+
 Label、说明、示例和错误分别表达自己的事实。Placeholder 不能独自承担字段名称。未知、不适用、空值与零不得为了版面整齐混成一种显示。
 
 让结构、内容和状态承担解释。界面文案用于识别对象、说明必要后果、帮助修正与继续；删去重复标签、显然的操作说明和“这个界面如何设计”的自述。不要给每个控件、区块或空白都配一段描述。必要帮助按需出现，文档按阅读任务组织；简洁不应删掉字段名称、关键后果或错误恢复。
@@ -349,7 +351,7 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 在授权范围内实现并验证，说明修改归属、实际证据和未验证范围。
 ```
 
-<!-- qingye:translation:en:start source-sha256=aaece6e77485964e1367b8466132ea86f8e702bb6513e2af5c2f048301762606 -->
+<!-- qingye:translation:en:start source-sha256=0e2024ad37ff6c48a49b766b05156969eeade54b978c420a2fa42dc390aac236 -->
 ## Qingye UI Design Guide
 
 **Purpose first. Relationships guide the form. Fitness sets the measure.**
@@ -505,6 +507,8 @@ The methods explain how to judge. These are the places those judgments affect an
 #### Names and states
 
 Use clear verbs and necessary objects. Distinguish saving a draft, publishing, archiving, removing from a collection, and permanently deleting. Bulk actions state their scope; confirmation concerns the current object, version, and changes.
+
+Objects of the same kind in the same place can be told apart by name alone. When one kind of region appears more than once on a page, each has a different name; controls of the same kind in one region do not share a name, and same-named controls in different regions are told apart by the region's name. An action repeated on every list or table row carries its object in its accessible name ("Delete Jane Doe") and contains the visible text. Screen-reader users, automated tests, and AI all find objects by role and name; when names cannot be told apart, only position is left.
 
 Labels, explanations, examples, and errors each express their own facts. A placeholder cannot be a field's sole name. Unknown, inapplicable, empty, and zero must not merge for visual tidiness.
 

@@ -154,6 +154,8 @@ The methods explain how to judge. These are the places those judgments affect an
 
 Use clear verbs and necessary objects. Distinguish saving a draft, publishing, archiving, removing from a collection, and permanently deleting. Bulk actions state their scope; confirmation concerns the current object, version, and changes.
 
+Objects of the same kind in the same place can be told apart by name alone. When one kind of region appears more than once on a page, each has a different name; controls of the same kind in one region do not share a name, and same-named controls in different regions are told apart by the region's name. An action repeated on every list or table row carries its object in its accessible name ("Delete Jane Doe") and contains the visible text. Screen-reader users, automated tests, and AI all find objects by role and name; when names cannot be told apart, only position is left.
+
 Labels, explanations, examples, and errors each express their own facts. A placeholder cannot be a field's sole name. Unknown, inapplicable, empty, and zero must not merge for visual tidiness.
 
 Let structure, content, and state explain what they can. Interface text identifies objects, explains necessary consequences, and supports correction and continuation. Remove repeated labels, obvious instructions, and descriptions of the interface's design. Avoid a paragraph for every control, section, or blank space. Reveal necessary help when needed and organize documentation for its reading task. Concision must retain field names, critical consequences, and error recovery.
