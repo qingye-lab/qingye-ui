@@ -74,7 +74,7 @@ export default function Demo() {
   return <Stack gap="panel">
     <SkipLink href="#skip-demo-main" className="static opacity-100 pointer-events-auto self-start">跳到正文</SkipLink>
     <nav aria-label="示例导航"><Stack gap="pair"><Link href="#a">首页</Link><Link href="#b">文档</Link><Link href="#c">更新记录</Link></Stack></nav>
-    <main id="skip-demo-main" className="outline-none focus-visible:ring-2"><Text>正文从这里开始。</Text></main>
+    <div id="skip-demo-main" className="outline-none focus-visible:ring-2"><Text>正文从这里开始。</Text></div>
   </Stack>;
 }
 ```

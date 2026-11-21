@@ -156,8 +156,8 @@ export default function Demo() {
     {rows.map(row => <Item render={<li />} key={row.name}>
       <ItemContent><ItemTitle>{row.name}</ItemTitle><ItemDescription>{row.note}</ItemDescription></ItemContent>
       <ItemActions reveal="hover" resting={<time>{row.time}</time>}>
-        <Button variant="quiet" size="sm">重命名</Button>
-        <Button variant="quiet" size="sm">归档</Button>
+        <Button variant="quiet" size="sm" aria-label={`重命名 ${row.name}`}>重命名</Button>
+        <Button variant="quiet" size="sm" aria-label={`归档 ${row.name}`}>归档</Button>
       </ItemActions>
     </Item>)}
   </Stack>;

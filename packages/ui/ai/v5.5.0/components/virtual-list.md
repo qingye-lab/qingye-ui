@@ -145,7 +145,7 @@ export default function Demo() {
       renderItem={entry => <div className="grid gap-(--qy-space-2) px-(--qy-control-md-padding) py-(--qy-space-3)">
         <div className="flex items-center justify-between gap-(--qy-space-2)">
           <span className="text-support text-muted-foreground">记录 {entry.id + 1}</span>
-          <Button size="xs" variant="quiet" aria-expanded={entry.expanded ?? false} onClick={() => setEntries(current => current.map(item => item.id === entry.id ? { ...item, expanded: !item.expanded } : item))}>{entry.expanded ? "收起" : "详情"}</Button>
+          <Button size="xs" variant="quiet" aria-expanded={entry.expanded ?? false} aria-label={`${entry.expanded ? "收起" : "详情"} 记录 ${entry.id + 1}`} onClick={() => setEntries(current => current.map(item => item.id === entry.id ? { ...item, expanded: !item.expanded } : item))}>{entry.expanded ? "收起" : "详情"}</Button>
         </div>
         <p className="text-body">{entry.text}</p>
         {entry.expanded && <p className="text-body">复核范围包含手机窄屏、放大文字与连续键盘操作。当前记录只表达已完成的检查；待验证项仍由项目单独跟踪。详情展开后继续保留正在阅读的位置。</p>}
