@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-11-21T13:43:58.797Z",
-  "revision": "f041a94c9aa4723785405c50a00098da57a8f293",
+  "generatedAt": "2026-11-21T14:33:29.088Z",
+  "revision": "8d06213a9a632e950da19134599dee6051bc93d1",
   "static": {
     "fingerprint": {
-      "sha256": "c15fe06151376a9d88ff07fd6ff150c6c815a46f1a3b46f1f5bed39c71410a3a",
+      "sha256": "9b85aba8a67192f731c2d64611f942d15515e9f96bdf3e84c66fe348399334c3",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -13,7 +13,7 @@
         },
         {
           "path": "apps/docs/package.json",
-          "sha256": "4b6c17a9494562a0073b46df3a5ea2550a8d2bfaa208505119cbaf740521a7ea"
+          "sha256": "cb24a2d5cf09b9d32fd9f6a055cb70d7a5cff6f804be9877d2e381109a64b355"
         },
         {
           "path": "apps/docs/src/app.tsx",
@@ -2809,7 +2809,7 @@
         },
         {
           "path": "packages/ui/package.json",
-          "sha256": "d49956262caf86cbc6a0a1f694de7b4b46599de0509fd1a2dee500d157bdfe92"
+          "sha256": "1f8910ed4748090106c4e4ccdf0da7c3ba6696c154584b3e6099ceaf46bb47f2"
         },
         {
           "path": "packages/ui/prose.css",
@@ -3509,7 +3509,7 @@
         },
         {
           "path": "pnpm-lock.yaml",
-          "sha256": "aad0d550044a168554245f27221e33e8d3e5cb5362a4606a28f1c58c2352949e"
+          "sha256": "0f2372cccc1ceb022b21b8af3ec75c9f8c2bd1b6fba79bffe3d589206bcc82c3"
         },
         {
           "path": "scripts/lib/token-ledger-probes.mjs",
