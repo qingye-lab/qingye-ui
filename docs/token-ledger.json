@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-11-20T11:02:51.310Z",
-  "revision": "b0607698073d10a3dcc6f4618a07bdf541351ad1",
+  "generatedAt": "2026-11-21T08:16:35.788Z",
+  "revision": "edeed5c65e9ae3a9079e92ffb9f6aa2625340023",
   "static": {
     "fingerprint": {
-      "sha256": "890da090dc68f30238afe713b2571b4430ea9d32ee0af5ec0ad9314f33425fa0",
+      "sha256": "1c49aed69e043fd7b40ad86cb44afa64680d851b337aef58e6ed4a4bf9576667",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -1373,11 +1373,11 @@
         },
         {
           "path": "apps/docs/src/content/meter/demos/02-levels.tsx",
-          "sha256": "7cc03ce2057c77802c948501b85d04ac61fd278b71a92c1acb97322045d07a1a"
+          "sha256": "69d5ccc2f47bb4c4530deb97074bdb2d82603b1c8ad3a56af4d2f2fc04b8ab79"
         },
         {
           "path": "apps/docs/src/content/meter/meta.ts",
-          "sha256": "7bc65aea900b39f5c450d3dc973c21362f4680ddb073d464a7a8e0af4a04bd18"
+          "sha256": "34cfde4ad13f768caa89168d3a87cd990563cf72b4b53026951ac133dc6fd1af"
         },
         {
           "path": "apps/docs/src/content/native-select/cover.tsx",
@@ -1853,7 +1853,7 @@
         },
         {
           "path": "apps/docs/src/content/severity-mark/meta.ts",
-          "sha256": "74c5473738fce18f53edc4ba2456746b76d79b29f5781ee3855609d7c1fcbe69"
+          "sha256": "8ff938ae061d499ed01f03713bcac5a59f42c82e0b4a1c098df4666fb619e7b6"
         },
         {
           "path": "apps/docs/src/content/sidebar/cover.tsx",
@@ -3077,7 +3077,7 @@
         },
         {
           "path": "packages/ui/src/components/meter.tsx",
-          "sha256": "9579a5e1dcfc8e727b00a72c3e2b16e1be3853063a55fdc4af3cd6a927040c7c"
+          "sha256": "3b1233fa556bb4efd1a827ee8adfc0c4e36155e61816f0c7f378a8b23e793ca9"
         },
         {
           "path": "packages/ui/src/components/native-select.tsx",

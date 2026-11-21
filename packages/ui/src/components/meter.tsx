@@ -9,7 +9,7 @@ export type MeterProps = React.ComponentProps<typeof MeterPrimitive.Root> & {
   /** 状态类别：由调用方声明，组件不从数值猜好坏（随类赋彩）。不给时指示用主色。 */
   tone?: Tone;
   /**
-   * 这个量是离散的 n 级时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。
+   * 读数本身以整格计（如四格里剩几格）时，轨道按 n 个等宽格分开（n 为 2 以上的整数）。值必须落在格的边界上。
    * 格间空隙是透明的，规则见 utilities.css 的读数轨道分格。
    */
   segments?: number;
