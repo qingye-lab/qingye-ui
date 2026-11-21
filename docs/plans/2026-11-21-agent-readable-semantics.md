@@ -1,6 +1,6 @@
 # 让 AI 读得懂 Qingye 界面 · 方案
 
-> 状态：**已确认，执行中（2026-11-21）**。用户裁决"都做，先只报告"：三件事都做，检查第一轮只报告、不阻断 CI。
+> 状态：**三件事已完成（2026-11-21），两类裁决项待定**，见第七节。用户裁决"都做，先只报告"：三件事都做，检查第一轮只报告、不阻断 CI。
 > 执行中的调整：检查不放进会阻断的 `scripts/audit.mjs`，改为独立的 `scripts/name-audit.mjs`，经 `scripts/run-browser-audit.mjs --names` 运行；
 > R1（无名称控件）已由 `scripts/axe-audit.mjs` 的 WCAG 规则覆盖，新检查只做 R2、R3。
 > 起因：S2-OPEN 验证（`docs/architecture-review/S2_OPEN_Plan_2026-11-21.md` 第七节）后，用户问"不接 ui-sdk，自己做类似效果是否值得"。
@@ -95,12 +95,14 @@
 | 库缺陷：Transfer 在 Field 内条目、全选、筛选同名 | `5f398503` | Field 注入的 `aria-labelledby` 压过 `aria-label`，改为各自的 labelledby |
 | demo 与官网页 | `cffa10b9`、`5fe91a25`、`d6022f98` | 行内操作带对象名，重复地标与同名区域改名，样张放进以小节标题命名的 group |
 
-全量扫描（对开发服务器，每批 10 页，`light-desktop`）：playground 114 页 99 PASS、15 FAIL；官网 150 页 128 PASS、22 FAIL；页面 NOT_RUN 为 0。
+全量扫描（对开发服务器，每批 10 页，`light-desktop`）：playground 114 页 99 PASS、15 FAIL；官网 150 页 128 PASS、22 FAIL；页面 NOT_RUN 为 0（有 5 批在 Chrome 收尾时超时，事后核对无残留进程，不影响页面结果）。英文页未扫。
 静止态之外的弹层、菜单、对话框仍是 UNVERIFIED。剩余发现分两类，都待用户裁决，未修：
 
-1. **库内附属按钮的名称不带所属字段**（同一区域放两个同类字段即撞名）：Combobox / Autocomplete 的“展开选项”“清除选择”，日期类的“选择日期”“清除日期”及范围、日期时间变体，NumberField 的“增加”“减少”，PasswordInput 的“显示密码”，TagInput 的“添加标签”与“移除 X”，官网 CodeBlock 的“复制代码”，DataTable 内置分页的 `navigation "分页"`（R3）。
+1. **库内附属按钮的名称不带所属字段**（同一区域放两个同类字段即撞名）：Combobox / Autocomplete 的“展开选项”“清除选择”，日期类的“选择日期”“清除日期”及范围、日期时间变体，NumberField 的“增加”“减少”，PasswordInput 的“显示密码”，TagInput 的“添加标签”与“移除 X”，官网 CodeBlock 的“复制代码”，Sidebar 开关的“工作区导航”（两个侧栏各一个），DataTable 内置分页的 `navigation "分页"`（R3）。
    推荐做法与 React Aria 相同：名称 = 动作 + 字段标签（`aria-labelledby="自身id 字段标签id"`，本库 Combobox 的 ChipRemove 已是此写法）。这会改变这些按钮的可访问名称，按精确名称写的测试或脚本须改，属契约变更。
-2. **样张 demo**：同一个控件的多种外观或状态并列（Button 的保存、删除、新建设备，CopyButton，Toggle，InputModalityProvider，Composer，Sidebar，基础判断页的“同步”）。推荐保留并在检查器里单列为样张，不改名称，也不预先写豁免。
+2. **样张 demo**：同一个控件的多种外观或状态并列（Button 的保存、删除、新建设备，CopyButton，Toggle，InputModalityProvider，Composer，基础判断页的“同步”）。推荐保留并在检查器里单列为样张，不改名称，也不预先写豁免。
 
-收尾回归：用本提交树 `pnpm pack`（sha256 `de88f64ed29013703435638b2d40a846b685447d7f1ff07fca0228ff0186cb1c`），在验证包副本里跑 `pnpm verify`，未覆盖 `f2db7b2` 的证据：
-探针 PASS；C 通道 O1–O5 全部 PASS；A 通道 O3、O5 PASS，O1、O2、O4 FAIL，与修复前一致，没有退化。
+收尾回归：在 `5fe91a25` 上 `pnpm pack`（prepack 重生成的目录产物即 `d6022f98`；sha256 `de88f64ed29013703435638b2d40a846b685447d7f1ff07fca0228ff0186cb1c`，lockfile integrity 已变，确认装的是新包），
+在验证包副本里跑 `pnpm verify`。证据存于验证包 `results-5fe91a25/`（验证包提交 `7d4f567`），`f2db7b2` 的原证据未改动。
+探针 PASS；C 通道 O1–O5 全部 PASS；A 通道 O3、O5 PASS，O1、O2、O4 FAIL，与修复前一致。
+验证包页面不含 Transfer，本次只说明 Select、Combobox、Input、Dialog 路径没有退化；Transfer 由其单测与 name-audit 覆盖。
