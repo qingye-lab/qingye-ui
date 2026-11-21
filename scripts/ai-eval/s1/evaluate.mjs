@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // 评估一个运行目录：node evaluate.mjs <运行目录>
 // 结果写到 <运行目录>.result.json，并复制到 s1/results/<runId>.json。
-import { existsSync, readFileSync, mkdirSync, cpSync, rmSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, cpSync, rmSync, readdirSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { dirname, resolve, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -22,6 +22,24 @@ const taskInfo = json(resolve(here, 'tasks', taskId, 'task.json'));
 const reasons = [];
 const result = { runId, task: taskId, cond: meta.cond ?? null, agent: meta.agent ?? null, selftest: meta.selftest ?? null, rep: meta.rep ?? null, agentRun: { exitCode: meta.exitCode ?? null, signal: meta.signal ?? null, timedOut: meta.timedOut ?? false, durationSeconds: meta.durationSeconds ?? null, version: meta.version ?? null, model: meta.isolation?.model ?? null, effort: meta.isolation?.effort ?? null, profile: meta.agentProfile ?? null, network: meta.isolation?.network ?? null }, evaluatedAt: new Date().toISOString() };
 
+// v18：评估期间把受保护文件换成冻结版本，结束后放回代理的版本，重评时证据不丢。
+// 上次评估中途退出时，代理的版本还在暂存里，先放回。
+const stashPath = side('agent-protected.json');
+function restoreAgentFiles() {
+  if (!existsSync(stashPath)) return;
+  for (const [f, b64] of Object.entries(json(stashPath))) {
+    const current = resolve(runDir, f);
+    if (b64 === null) rmSync(current, { force: true }); else writeFileSync(current, Buffer.from(b64, 'base64'));
+  }
+  rmSync(stashPath, { force: true });
+}
+restoreAgentFiles();
+// v17 及以前的评估把受保护文件永久还原，代理改动已不在目录里；沿用那次（或其后沿用下来的）记录。
+const previous = existsSync(side('result.json')) ? json(side('result.json')) : null;
+const carried = !previous ? null : previous.evidence === 'restore-after' ? previous.evidenceCarried ?? null
+  : { from: previous.evaluatedAt, files: previous.changes?.files ?? [], outOfScope: previous.changes?.outOfScope ?? [], depsAdded: previous.changes?.depsAdded ?? [], depsChanged: previous.changes?.depsChanged ?? [], depsRemoved: previous.changes?.depsRemoved ?? [], protectedFilesModifiedByAgent: previous.protectedFilesModifiedByAgent ?? [] };
+const union = (a, b) => [...new Set([...(a ?? []), ...(b ?? [])])];
+
 // 1. 先取 git 变更（此时还没放入隐藏测试）
 const porcelain = sh('git', ['status', '--porcelain', '-uall']).stdout.split('\n').filter(Boolean).map(l => l.slice(3).replace(/^"|"$/g, ''));
 const stat = sh('git', ['diff', '--stat', 'HEAD']).stdout.trim().split('\n').pop() ?? '';
@@ -32,19 +50,26 @@ const depsAdded = Object.keys(nowDeps).filter(k => !(k in baseDeps)), depsChange
 const untracked = new Set(sh('git', ['ls-files', '--others', '--exclude-standard']).stdout.split('\n').filter(Boolean));
 const outOfScope = porcelain.filter(f => !taskInfo.editable.includes(f) && f !== 'report.md'
   && !(untracked.has(f) && f.startsWith('src/') && !f.startsWith('src/test/') && !f.startsWith('src/__hidden__/')));
-result.changes = { files: porcelain, diffStat: stat, outOfScope, depsAdded, depsChanged, depsRemoved, reportPresent: existsSync(resolve(runDir, 'report.md')) };
+result.changes = { files: union(porcelain, carried?.files), diffStat: stat, outOfScope: union(outOfScope, carried?.outOfScope), depsAdded: union(depsAdded, carried?.depsAdded), depsChanged: union(depsChanged, carried?.depsChanged), depsRemoved: union(depsRemoved, carried?.depsRemoved), reportPresent: existsSync(resolve(runDir, 'report.md')) };
+result.evidence = 'restore-after';
+if (carried) result.evidenceCarried = carried;
 
-// 2. 还原受保护文件（代理可能改过），记录被改动者；再放入隐藏测试
+// 2. 受保护文件换成冻结版本（代理可能改过），记录被改动者；再放入隐藏测试。
+// 冻结版本取模板；模板已删时取运行目录的 git HEAD（运行开始时的快照），不再静默跳过。
 const protectedFiles = ['vitest.config.ts', 'src/test/setup.ts', 'package.json', 'tsconfig.json'];
-const protectedChanged = [];
-if (meta.templateDir && existsSync(meta.templateDir)) {
-  for (const f of protectedFiles) {
-    const frozen = resolve(meta.templateDir, f), current = resolve(runDir, f);
-    if (!existsSync(frozen)) continue;
-    if (!existsSync(current) || read(current) !== read(frozen)) { protectedChanged.push(f); cpSync(frozen, current); }
-  }
+const protectedChanged = [], stash = {};
+const useTemplate = Boolean(meta.templateDir && existsSync(meta.templateDir));
+result.protectedSource = useTemplate ? 'template' : 'git HEAD';
+for (const f of protectedFiles) {
+  let frozen = null;
+  if (useTemplate) { const p = resolve(meta.templateDir, f); if (existsSync(p)) frozen = readFileSync(p); }
+  else { const g = sh('git', ['show', `HEAD:${f}`], { encoding: 'buffer' }); if (g.status === 0) frozen = g.stdout; }
+  if (!frozen) continue;
+  const current = resolve(runDir, f), now = existsSync(current) ? readFileSync(current) : null;
+  if (!now || !now.equals(frozen)) { protectedChanged.push(f); stash[f] = now ? now.toString('base64') : null; mkdirSync(dirname(current), { recursive: true }); writeFileSync(current, frozen); }
 }
-result.protectedFilesModifiedByAgent = protectedChanged;
+if (Object.keys(stash).length) writeJSON(stashPath, stash);
+result.protectedFilesModifiedByAgent = union(protectedChanged, carried?.protectedFilesModifiedByAgent);
 result.freezeVersion = meta.freezeVersion ?? null;
 try { result.scoredWithFreeze = JSON.parse(readFileSync(resolve(here, 'freeze.json'), 'utf8')).version; } catch { result.scoredWithFreeze = null; }
 const hiddenDir = resolve(runDir, 'src/__hidden__');
@@ -114,6 +139,9 @@ try {
   result.qingyeCheck = { exitCode: checkRun.status, status: c.status, completed: c.completed, counts: c.counts ?? null, byRuleStatus: groups, first10: (c.diagnostics ?? []).slice(0, 10).map(d => ({ rule: d.rule, status: d.status, file: d.file, line: d.line, evidence: String(d.evidence ?? '').slice(0, 80) })), error: c.error ?? null };
 } catch { result.qingyeCheck = { exitCode: checkRun.status, status: 'NOT_RUN', error: (checkRun.stderr || checkRun.stdout).slice(0, 300) }; }
 rmSync(resolve(runDir, '.qingye'), { recursive: true, force: true });
+// check 工具来自本仓库而不是冻结材料，记下它的提交与是否有未提交改动
+result.qingyeCheck.tooling = { commit: sh('git', ['log', '-1', '--format=%h', '--', 'packages/tooling'], { cwd: repoRoot }).stdout.trim() || null, dirty: sh('git', ['status', '--porcelain', '--', 'packages/tooling'], { cwd: repoRoot }).stdout.trim().length > 0 };
+restoreAgentFiles();
 
 // 6. 污染判定
 // 本仓库、评测框架、示范项目，以及代理的全局记忆（Codex 记忆与摘要、本项目在 Claude 下的记忆目录）
@@ -124,16 +152,19 @@ const hits = transcript ? markers.filter(m => transcript.includes(m)) : [];
 if (transcript) {
   // 同级运行目录（其他格的答案、带完整指南的模板、自测目录）：路径进入另一运行目录或模板。
   // v15：运行根目录名按 qingye-s1-<名> 推导（含 n0-dn 等新根）；逐个 JSON 字符串、逐行判定。
+  // v18：根目录下可再嵌两层（第三轮 qingye-s1-r3/<cond>/<lane>-<T>-<n>/）；自己的目录按完整路径判定，
+  // 截断的前缀（进度摘要里的 …、通配符 *）只在后面紧跟截断记号或字符串结束时才算自己的。
   // 只出现在沙箱拒绝行（Operation not permitted / Permission denied）的路径没有读到内容，记入 blockedSiblingAttempts，不算污染；其余出现（代理动作、正常工具结果、文本）照旧算污染。
-  const siblingRe = /qingye-s1-[a-z0-9-]+\/(?:T\d|_template|_strip)[A-Za-z0-9_.\/-]*/g;
-  const ownPrefix = (p) => p.replace(/^qingye-s1-[a-z0-9-]+\//, '');
-  const isOther = (p) => !p.includes(runId) && !runId.startsWith(ownPrefix(p)); // 后者是 Claude 进度摘要里的前缀或通配符
+  const siblingRe = /qingye-s1-[a-z0-9-]+\/(?:[^\/\s"'`\\]+\/){0,2}?(?:T\d|_template|_strip)[A-Za-z0-9_.\/-]*/g;
+  const ownRel = runDir.includes('qingye-s1-') ? runDir.slice(runDir.indexOf('qingye-s1-')) : null;
+  const isOwn = (p, next) => ownRel !== null && (p === ownRel || p.startsWith(ownRel + '/') || p.startsWith(ownRel + '.') || (/^(?:[*…?{[]|$)/.test(next) && ownRel.startsWith(p)));
+  const othersIn = (l) => [...l.matchAll(siblingRe)].filter(m => !isOwn(m[0], l[m.index + m[0].length] ?? '')).map(m => m[0]);
   const denied = /Operation not permitted|Permission denied/;
   const siblingSet = new Set(), blockedSet = new Set();
   for (const line of transcript.split('\n')) {
     let event; try { event = JSON.parse(line); } catch { event = line; }
     (function walk(v) {
-      if (typeof v === 'string') { for (const l of v.split('\n')) for (const p of (l.match(siblingRe) ?? []).filter(isOther)) (denied.test(l) ? blockedSet : siblingSet).add(p); }
+      if (typeof v === 'string') { for (const l of v.split('\n')) for (const p of othersIn(l)) (denied.test(l) ? blockedSet : siblingSet).add(p); }
       else if (Array.isArray(v)) v.forEach(walk);
       else if (v && typeof v === 'object') Object.values(v).forEach(walk);
     })(event);
@@ -184,13 +215,16 @@ if (meta.selftest?.startsWith('wrong:')) {
 
 // 7. 状态
 let status;
-if (!meta.selftest && (meta.spawnError || (meta.exitCode !== 0 && !porcelain.length))) { status = 'INVALID'; reasons.push(`代理未正常运行（退出码 ${meta.exitCode}${meta.spawnError ? '，' + meta.spawnError : ''}），不计入成绩`); }
+// v18：超时先于“非零退出且无改动”（被杀时退出码为 null）；污染先于测试与 tsc 的结论，污染的运行一律不计分。
+const invalid = (detail) => { status = 'INVALID'; reasons.push(`代理未正常运行（${detail}），不计入成绩`); };
+if (!meta.selftest && meta.spawnError) invalid(`退出码 ${meta.exitCode}，${meta.spawnError}`);
 else if (meta.timedOut) { status = 'UNVERIFIED'; reasons.push('代理超时'); }
+else if (!meta.selftest && meta.exitCode !== 0 && !porcelain.length) invalid(`退出码 ${meta.exitCode}`);
+else if (result.contaminated) { status = 'UNVERIFIED'; reasons.push('污染，结果无效：' + hits.join(', ')); }
 else if (!tests.ran || tests.parseError) { status = 'UNVERIFIED'; reasons.push('隐藏测试没有产出结果'); }
 else if (tests.failed > 0 || tests.failedSuites > 0 || tests.passed === 0) { status = 'FAIL'; reasons.push(`隐藏测试失败 ${tests.failed}，套件失败 ${tests.failedSuites}`); }
 else if (!result.tsc.ran) { status = 'UNVERIFIED'; reasons.push('tsc 没有运行'); }
 else if (result.tsc.errorCount > 0) { status = 'FAIL'; reasons.push(`tsc 错误 ${result.tsc.errorCount}`); }
-else if (result.contaminated) { status = 'UNVERIFIED'; reasons.push('污染，结果无效：' + hits.join(', ')); }
 else status = 'PASS';
 result.status = status;
 result.statusReasons = reasons;

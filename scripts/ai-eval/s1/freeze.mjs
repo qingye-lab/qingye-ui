@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// 冻结 S1 评测材料：对题目、隐藏测试、参考解、固定提示、脚本、fixture 和 tgz 记 sha256。
+// 冻结 S1 评测材料：对题目、隐藏测试、参考解、固定提示、脚本（含 ../lib.mjs）、fixture 和 tgz 记 sha256。
 // node freeze.mjs            生成 freeze.json
 // node freeze.mjs --verify   比对，有变化退出码 1
 import { existsSync, lstatSync, readdirSync, readFileSync } from 'node:fs';
@@ -24,7 +24,9 @@ function walk(path, files) {
 
 function collect() {
   const files = [];
-  for (const entry of ['tasks', 'private', 'reference', 'wrong', 'fixture', 'conditions', 'prompt.txt', 'run.mjs', 'evaluate.mjs']) {
+  // v18：评分口径还取决于共用函数（../lib.mjs）、冻结脚本自身和第三轮批跑脚本，一并冻结。
+  // 事后度量用的 qingye-ui check 来自仓库当前代码，不在此列；evaluate.mjs 把它的提交记入结果。
+  for (const entry of ['tasks', 'private', 'reference', 'wrong', 'fixture', 'conditions', 'prompt.txt', 'run.mjs', 'evaluate.mjs', 'freeze.mjs', 'r3-batch.sh', '../lib.mjs']) {
     const path = resolve(here, entry);
     if (existsSync(path)) walk(path, files);
   }
