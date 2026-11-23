@@ -1,6 +1,6 @@
 # NavigationMenu
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
 Source SHA-256: c3608883416f4df54beb12ab8b53eff90781fec1dfcac588351999b0269008b4
@@ -129,7 +129,7 @@ A nav, ul and navigation items with stable values.
 ### NavigationMenuTrigger / NavigationMenuLink
 Group triggers and real links.
 - href / active: native link / boolean. Href identifies a real destination; active writes aria-current=page.
-- description（NavigationMenuLink，面板内使用）: ReactNode. One muted description line, given only when it helps the reader decide; a single-line top-bar destination does not accept it.
+- description (NavigationMenuLink, inside panel): ReactNode. One muted description line, given only when it helps the reader decide; a single-line top-bar destination does not accept it.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 ### NavigationMenuGroup / NavigationMenuGroupLabel
@@ -141,6 +141,10 @@ Content and floating parts belonging to one navigation root.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 ## Keyboard
+- Tab / Shift+Tab: Move focus sequentially across top-level links, group triggers, and links inside an open panel.
+- ← / →: Move focus between top-level items in a horizontal navigation bar (↑ / ↓ when vertical).
+- Enter / Space: Toggle the associated navigation panel on a trigger; press Enter on a link to navigate to its destination.
+- Escape: Close the currently open navigation panel and return focus to its trigger.
 
 ## Source examples
 ### 真实目的地与分组

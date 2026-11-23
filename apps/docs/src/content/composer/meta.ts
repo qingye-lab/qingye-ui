@@ -32,7 +32,7 @@ export default {
     { keys: "Enter / Tab（加载失败时）", keysEn: "Enter / Tab (after a failed load)", description: "重试加载，不提交；Escape 关闭候选后 Enter 恢复提交。", descriptionEn: "Retry the load without submitting. After Escape closes the candidates, Enter submits again." },
     { keys: "Escape", description: "关闭候选，保留已输入的文字。", descriptionEn: "Close the candidates and keep the typed text." },
     { keys: "Backspace / Delete", description: "光标紧邻令牌时整体删除。", descriptionEn: "Delete an adjacent token as a whole." },
-    { keys: "Ctrl/⌘+Z、Ctrl/⌘+Shift+Z", description: "撤销与重做，用组件自己的快照栈。", descriptionEn: "Undo and redo using the component's own snapshot stack." },
+    { keys: "Ctrl/⌘+Z、Ctrl/⌘+Shift+Z", keysEn: "Ctrl/Cmd+Z / Ctrl/Cmd+Shift+Z", description: "撤销与重做，用组件自己的快照栈。", descriptionEn: "Undo and redo using the component's own snapshot stack." },
   ],
   notes: [
     "粘贴、拖放一律只收纯文字；复制与剪切输出纯文字，令牌写作“触发字符 + label”。",

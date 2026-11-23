@@ -1,9 +1,9 @@
 # Confirm
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/confirm
 Source: packages/ui/src/components/confirm.tsx
-Source SHA-256: 872303717eb2deacb43a5c70806eebba920ac0364d71e20500f286969a60d758
+Source SHA-256: 63fed3e6e581570b69b14f99a7eeac683e37e7b035ed2025f5e013217027082a
 
 Await one explicit decision, then let the caller continue.
 
@@ -66,7 +66,7 @@ Host one modal decision for descendant useConfirm calls without adding a wrapper
 ### useConfirm
 Return a stable confirm(options): Promise<boolean> function. Requires a ConfirmProvider.
 - title / description: ReactNode / ReactNode. Required and nonempty. The title names the decision; the description keeps necessary consequences visible and accessible. Options are captured per call; mutating the original options does not replace reviewed content.
-- confirmLabel / cancelLabel: ReactNode / ReactNode; default required / locale.cancel. confirmLabel is required and names what this decision does (Remove, Leave); there is no generic Confirm default, and a missing or blank value throws TypeError. Cancel and Escape resolve false; backdrop presses do not dismiss.
+- confirmLabel / cancelLabel: ReactNode / ReactNode; default required / locale.back. confirmLabel is required and names what this decision does (Remove, Leave); there is no generic Confirm default, and a missing or blank value throws TypeError. Cancel and Escape resolve false; backdrop presses do not dismiss.
 - tone: ButtonTone; default 'neutral'. The affirmative button's consequence tone. Pass danger explicitly when needed; tone grants no permission.
 - popupProps: Omit<AlertDialogPopupProps, 'children'>. Reuse public popup render, refs, ARIA, structural layers, and focus targets. Focus starts on the safe panel and returns to the element active at the call. Supply finalFocus with a surviving parent when the entry may be removed.
 - signal: AbortSignal. An already-aborted call immediately resolves false. Aborting an active decision closes it and resolves false. This cancels the decision only, not a business request already started.

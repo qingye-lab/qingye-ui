@@ -1,6 +1,6 @@
 # Meter
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/meter
 Source: packages/ui/src/components/meter.tsx
 Source SHA-256: 3b1233fa556bb4efd1a827ee8adfc0c4e36155e61816f0c7f378a8b23e793ca9

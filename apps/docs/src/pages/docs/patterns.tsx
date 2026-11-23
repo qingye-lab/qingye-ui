@@ -7,7 +7,7 @@ import { NotFoundContent } from "../not-found";
 export function PatternsIndexPage() {
   const locale = useDocsLocale(); const en = locale === "en";
   const patterns = components.filter(entry => entry.layer === "pattern");
-  return <Article><PageHeader title={en ? "Composition" : "组件组合"} description={en ? "Compose components around your application's objects, drafts, selection scope and confirmed results." : "围绕应用自己的对象、草稿、选择范围与已确认结果组合组件。"} />
+  return <Article><PageHeader title={en ? "Composition" : "组件组合"} />
     <Ul>{patterns.map(entry => <li key={entry.slug}><A href={`/components/${entry.slug}`}>{localizedMeta(entry, locale).title}</A></li>)}</Ul>
   </Article>;
 }

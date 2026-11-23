@@ -99,6 +99,13 @@ export default {
           "descriptionEn": "Actual row headers use th scope=row; comparison columns are never automatically hidden. With a visible row-header column, each row's aria-labelledby points at all of its row-header cells, so the row's accessible name is their text (several row-header columns join in column order). DataTableSelectionCell names each checkbox after this row, falling back to a generic name only without a row-header column. onRowActivate without a visible row-header column throws."
         },
         {
+          "name": "stickyHeader / stickyHeaderOffset",
+          "type": "boolean / number | string",
+          "default": "false",
+          "description": "表头吸在最近的滚动区顶部（同 DataTablePattern）：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口或 containerProps 设了 height / max-height 时是表格自己的容器。stickyHeaderOffset 让开顶部固定页眉，数字按 px。",
+          "descriptionEn": "Sticks the header to the top of the nearest scroll area (as in DataTablePattern): the page or Workspace content when the table fits horizontally, or the table's own container for horizontally overflowing tables, virtualization viewports, or height / max-height on containerProps. stickyHeaderOffset clears a fixed header above; numbers are px."
+        },
+        {
           "name": "render / ref / native props",
           "type": "Base UI part props",
           "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",

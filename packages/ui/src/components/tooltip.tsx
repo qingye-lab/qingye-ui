@@ -116,7 +116,7 @@ function TooltipPopup({
   // 提示面的内缘按 --qy-hint-padding-inline 的约定「面有线时减去 --qy-line-width」；
   // 一行字的高仍是小控件的高（线计入其中），所以块向留白也扣掉上下两道线。
   // 入退由 motion.css 拥有；圆角与表面是基础层预设。
-  const surface = "qy-tooltip-popup max-w-(--available-width) origin-(--transform-origin) rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised text-control-sm-mobile sm:text-control-sm min-h-(--qy-control-sm-narrow) sm:min-h-(--qy-control-sm) px-[calc(var(--qy-hint-padding-inline)-var(--qy-line-width))] py-[calc((var(--qy-control-sm-narrow)-var(--qy-text-control-sm-mobile-leading)-2*var(--qy-line-width))/2)] sm:py-[calc((var(--qy-control-sm)-var(--qy-text-control-sm-leading)-2*var(--qy-line-width))/2)] [overflow-wrap:anywhere]";
+  const surface = "qy-tooltip-popup max-w-(--available-width) origin-(--transform-origin) rounded-overlay border border-border bg-surface-raised text-foreground shadow-raised text-control-sm-mobile sm:text-control-sm min-h-(--qy-control-sm-narrow) sm:min-h-(--qy-control-sm) px-[calc(var(--qy-hint-padding-inline)-var(--qy-line-width))] py-[calc((var(--qy-control-sm-narrow)-var(--qy-text-control-sm-mobile-leading)-2*var(--qy-line-width))/2)] sm:py-[calc((var(--qy-control-sm)-var(--qy-text-control-sm-leading)-2*var(--qy-line-width))/2)] wrap-anywhere";
   const association = React.useContext(TooltipAssociation);
   const generatedId = React.useId();
   const attach = React.useCallback((element: HTMLDivElement) => {

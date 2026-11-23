@@ -26,11 +26,13 @@ export type CodeBlockProps = Omit<useRender.ComponentProps<"div">, "children" | 
    * 给长度的话字号或密度一变，能看到的行数就悄悄变了。
    */
   maxLines?: number;
+  /** 是否带外层围合（线、底、圆角）；默认 true。嵌入已有容器时传 false 去掉外层围合。 */
+  framed?: boolean;
   copyable?: boolean;
   onCopySuccess?: () => void;
   onCopyError?: (error: unknown) => void;
 };
-export function CodeBlock({ code, language, title, children, wrap = false, maxLines, copyable = true, onCopySuccess, onCopyError, render, className, ...props }: CodeBlockProps) {
+export function CodeBlock({ code, language, title, children, wrap = false, maxLines, framed = true, copyable = true, onCopySuccess, onCopyError, render, className, ...props }: CodeBlockProps) {
   const { messages } = useUILocale();
   if (maxLines !== undefined && (!Number.isInteger(maxLines) || maxLines < 1)) throw new RangeError(`CodeBlock maxLines must be a positive integer; received ${String(maxLines)}.`);
   // 代码面只有横向（或设了高度时纵向）溢出时才需要键盘滚动；不溢出就不进入 Tab 序列。
@@ -76,10 +78,11 @@ export function CodeBlock({ code, language, title, children, wrap = false, maxLi
   const copyButton = copyable && <Button data-slot="code-block-copy" variant="quiet" size="sm" shape="icon" aria-label={copyName} data-copied={copied ? "" : undefined} loading={isCopying} className={cn("text-muted-foreground not-aria-disabled:hover:text-foreground", hasBar ? "shrink-0" : "absolute end-(--qy-code-copy-inset) top-(--qy-code-copy-inset)")} onClick={() => { setRequestText(code); setFailed(false); copyToClipboard(code); }}><Icon aria-hidden="true" /></Button>;
   return useRender({ defaultTagName: "div", render, props: mergeProps({
     "data-slot": "code-block",
+    "data-framed": framed,
     className: cn("flex min-w-0 max-w-full flex-col gap-(--qy-field-gap) text-body [--qy-code-copy-inset:calc(var(--qy-panel-padding-sm)+var(--qy-cai)/2-var(--qy-control-sm)/2)] [--qy-code-bar-inset:calc((2*var(--qy-cai)-var(--qy-control-sm))/2-var(--qy-line-width))]", className),
     children: <>
       {language !== undefined && <span data-slot="code-block-language" className="min-w-0 text-support text-muted-foreground wrap-anywhere">{language}</span>}
-      <div data-slot="code-block-body" className="relative min-w-0 rounded-panel border border-border bg-(--qy-code-surface)">
+      <div data-slot="code-block-body" className={cn("relative min-w-0", framed && "rounded-panel border border-border bg-(--qy-code-surface)")}>
         {hasBar && <div data-slot="code-block-header" className={cn("flex min-h-[calc(2*var(--qy-cai))] min-w-0 items-center gap-(--qy-control-content-gap) border-b border-border pe-(--qy-code-bar-inset) pb-line [--qy-track-surface:transparent]", labelTitle ? "ps-(--qy-panel-padding-sm)" : "ps-(--qy-code-bar-inset)")}>
           {/* 字符串标题的起始边与代码文字的起始边对齐（同一个内缘）；其他节点与按钮对称，距栏起始边同一段。 */}
           <div data-slot="code-block-title" className={cn("flex min-w-0 flex-1 items-center", labelTitle && "font-mono text-support text-muted-foreground wrap-anywhere")}>{title}</div>

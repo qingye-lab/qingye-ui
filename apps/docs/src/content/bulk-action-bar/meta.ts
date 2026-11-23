@@ -77,6 +77,12 @@ export default {
           "type": "number / (event) => void",
           "description": "默认文字「选择全部 N 项」，数字按界面语言分组；onClick.preventDefault() 取消。",
           "descriptionEn": "Default text is Select all N items with locale-grouped digits; onClick.preventDefault() cancels."
+        },
+        {
+          "name": "onClick / Button props",
+          "type": "ButtonProps[\"onClick\"] / ButtonProps",
+          "description": "先于 onExtend 执行；调用 event.preventDefault() 或 event.preventBaseUIHandler() 可阻止扩展动作，其余属性透传 Button。",
+          "descriptionEn": "Runs before onExtend; calling event.preventDefault() or event.preventBaseUIHandler() cancels extending, and remaining props forward to Button."
         }
       ]
     },

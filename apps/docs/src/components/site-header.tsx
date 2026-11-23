@@ -2,6 +2,7 @@ import { Link } from "@/components/locale-link";
 import { buttonVariants } from "@qingye_lab/ui/components/button";
 import { Inline } from "@qingye_lab/ui/components/layout";
 import { NavigationMenu, NavigationMenuItem, NavigationMenuLink, NavigationMenuList } from "@qingye_lab/ui/components/navigation-menu";
+import { SidebarDrawerTrigger } from "@qingye_lab/ui/components/sidebar";
 import { cn } from "@qingye_lab/ui/utils";
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
@@ -10,6 +11,7 @@ import { GitHubIcon, LogoMark } from "./logo";
 import { SearchTrigger } from "./search";
 import { ThemeMenu } from "./theme-menu";
 import { LanguageSwitch } from "./language-switch";
+import { isDocsSidebarRoute, useDocsSidebarDrawer } from "./docs-sidebar-drawer";
 import { navLabel, navScope } from "@/lib/nav";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { PATHS, routeIdentity } from "@/lib/paths";
@@ -24,7 +26,9 @@ export function Wordmark({ className }: { className?: string }) {
 }
 export function SiteHeader() {
   const { pathname } = useLocation(); const locale = useDocsLocale(); const header = useRef<HTMLElement>(null);
+  const { handle, isTablet, tabletOpen, openTablet } = useDocsSidebarDrawer();
+  const showSidebarTrigger = isDocsSidebarRoute(pathname);
   useEffect(() => { const element = header.current; if (!element) return; const style = document.documentElement.style; const previous = style.getPropertyValue("--docs-header-height"); const measure = () => { const height = element.getBoundingClientRect().height; if (height > 0) style.setProperty("--docs-header-height", `${height}px`); }; measure(); const observer = new ResizeObserver(measure); observer.observe(element); return () => { observer.disconnect(); if (previous) style.setProperty("--docs-header-height", previous); else style.removeProperty("--docs-header-height"); }; }, []);
   // 所有页面同一个页头：吸顶、同一条底线、同一个宽度（--site-width）。
-  return <header className="docs-site-header sticky top-0 border-b border-border bg-background text-foreground" ref={header}><Inline className="site-frame min-h-(--qy-row-default) py-(--qy-field-gap)" gap="panel"><Wordmark /><NavigationMenu aria-label={locale === "en" ? "Main navigation" : "主导航"}><NavigationMenuList>{topLinks.map(link => <NavigationMenuItem key={link.to}><NavigationMenuLink active={link.match(routeIdentity(pathname))} render={<Link to={link.to} />}>{navLabel(link.label, locale)}</NavigationMenuLink></NavigationMenuItem>)}</NavigationMenuList></NavigationMenu><Inline className="ms-auto" gap="actions"><SearchTrigger /><a aria-label={locale === "en" ? "GitHub repository" : "GitHub 仓库"} className={buttonVariants({ shape: "icon", size: "md", variant: "quiet" })} href={SITE.repo} rel="noreferrer" target="_blank"><GitHubIcon aria-hidden="true" /></a><LanguageSwitch /><ThemeMenu /></Inline></Inline></header>;
+  return <header className="docs-site-header sticky top-0 border-b border-border bg-background text-foreground" ref={header}><Inline className="site-frame min-h-(--qy-row-default) py-(--qy-field-gap)" gap="panel">{showSidebarTrigger ? <SidebarDrawerTrigger aria-label={locale === "en" ? "Open documentation navigation" : "打开文档导航"} className="sm:inline-flex lg:hidden" handle={handle} {...(isTablet ? { "aria-expanded": tabletOpen, "data-popup-open": tabletOpen ? "" : undefined, onClick: (event) => { event.preventDefault(); openTablet(event.currentTarget); } } : {})} /> : null}<Wordmark /><NavigationMenu aria-label={locale === "en" ? "Main navigation" : "主导航"}><NavigationMenuList>{topLinks.map(link => <NavigationMenuItem key={link.to}><NavigationMenuLink active={link.match(routeIdentity(pathname))} render={<Link to={link.to} />}>{navLabel(link.label, locale)}</NavigationMenuLink></NavigationMenuItem>)}</NavigationMenuList></NavigationMenu><Inline className="ms-auto" gap="actions"><SearchTrigger /><a aria-label={locale === "en" ? "GitHub repository" : "GitHub 仓库"} className={buttonVariants({ shape: "icon", size: "md", variant: "quiet" })} href={SITE.repo} rel="noreferrer" target="_blank"><GitHubIcon aria-hidden="true" /></a><LanguageSwitch /><ThemeMenu /></Inline></Inline></header>;
 }

@@ -1,6 +1,6 @@
 import { act, render, screen } from "@testing-library/react";
 import * as React from "react";
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { Toc, scanTocHeadings, useTocHeadings, useTocScrollSpy, type TocItem } from "../src/components/toc";
 
 const items: TocItem[] = [
@@ -109,4 +109,24 @@ test("useTocScrollSpy returns undefined for an empty list instead of guessing a 
   }
   render(<Harness />);
   expect(screen.getByTestId("active")).toHaveTextContent("none");
+});
+
+test("useTocScrollSpy keeps listeners bound when rerendered with a fresh array of the same ids", () => {
+  const add = vi.spyOn(window, "addEventListener");
+  const remove = vi.spyOn(window, "removeEventListener");
+  function Harness({ tick }: { tick: number }) {
+    const current = useTocScrollSpy(items.map((item) => ({ ...item })));
+    return <p data-testid="active" data-tick={tick}>{current ?? "none"}</p>;
+  }
+  const { rerender, unmount } = render(<Harness tick={1} />);
+  const scrollAdds = () => add.mock.calls.filter(([type]) => type === "scroll").length;
+  const scrollRemoves = () => remove.mock.calls.filter(([type]) => type === "scroll").length;
+  expect(scrollAdds()).toBe(1);
+  expect(scrollRemoves()).toBe(0);
+  rerender(<Harness tick={2} />);
+  expect(scrollAdds()).toBe(1);
+  expect(scrollRemoves()).toBe(0);
+  unmount();
+  add.mockRestore();
+  remove.mockRestore();
 });

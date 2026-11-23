@@ -1,6 +1,6 @@
 # Sparkline
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/sparkline
 Source: packages/ui/src/components/sparkline.tsx
 Source SHA-256: 856797e9c07fc4a1d7a230de40b6fabfea2d9b5a14a5958f43cdfae590ec0e58
@@ -73,6 +73,11 @@ Ordered values and what they measure.
 - width: number; default 100. Plot width in px, five modules by default; a line is always one module tall.
 
 ## Keyboard
+- Tab / Shift+Tab: Enter or leave the point-inspection trigger when tooltip is enabled with data points; focusing opens the readout.
+- ← / →: Move to the previous or next data point and update the readout.
+- Home / End: Jump to the first or last data point.
+- Enter / Space: Toggle the current point readout open or closed.
+- Escape: Dismiss the point readout while keeping focus on the trigger.
 
 ## Source examples
 ### 读数旁的趋势

@@ -2,7 +2,7 @@
 
 Generated from the English source blocks in root design.md and STANDARDS.md. The Chinese criteria remain canonical; source hashes prevent silent translation drift.
 
-Read [design philosophy](design-philosophy.en.md) for method sources, [the matching resource index](v5.5.0/en/llms.txt) for component contracts, and [the public guide](../design.en.md) for project adoption.
+Read [design philosophy](design-philosophy.en.md) for method sources, [the matching resource index](v5.6.0/en/llms.txt) for component contracts, and [the public guide](../design.en.md) for project adoption.
 
 ## Use
 
@@ -119,6 +119,7 @@ Components are rewritten by current layers and roadmap batches. Read completed f
 - Use Base UI `render`, `useRender`, and `mergeProps` to replace rendered elements. Avoid aliases or an `as` API without a task basis. Current Card is a composition entry without automatic title slots or padding.
 - Components based on Base UI export their primitive namespace. Controlled state retains applicable controlled and uncontrolled entries. Assign responsibilities using [Assigning changes](../design.en.md#assigning-changes).
 - Request facts and outcome inference follow [Names and states](../design.en.md#names-and-states). Button has one state, busy (`loading`; user ruling, 2026-10-10): the caller owns the fact, and the button starts no request and infers no ending. Success, failure and unknown results are not written on the button; feedback components such as Alert, Toast, FieldError and StatusDot express them. Toast presents only the type the application gives it: it sets no deadline and never infers unknown from a long wait.
+- New components unify control-level and collection-level boolean busy states under `loading`; existing `busy` (such as DataTable and PaginationPattern) and `pending` (such as Switch) props remain in v5 and consolidate in v6.
 - One job per component (user ruling, 2026-10-10). Button only triggers an action and `tone="danger"` is only a tone. Consequence text and confirmation belong to AlertDialog / ConfirmAction, stated in the dialog description. Button no longer validates, wraps, or associates consequences; `ButtonProtection` is removed. A two-state fact that persists after pressing is a Toggle. A hint attaches to the caller's control (TooltipTrigger requires `render`) and brings no button of its own. Input only carries a value: clearing, a search icon and password visibility are composed by SearchInput, PasswordInput or InputGroup + InputGroupButton. Chart / ScatterChart / Heatmap only draw data (the equivalent data table is an accessibility alternative and stays): when the whole chart has no records, is unknown or does not apply, the caller puts Empty in its place.
 
 ### 2. Dimensions
@@ -188,6 +189,8 @@ Ownership and simultaneous states follow [Names and states](../design.en.md#name
 | selected / open | Consume actual primitive data states; preserve semantics when changing appearance |
 
 Foundation §15 records focus values: `--qy-focus-ring-width` currently chooses 2px and `--qy-focus-quiet-width` 1px. The adjunct actions of SearchInput / PasswordInput are InputGroupButton (a quiet Button with a 1px internal line); bare Popover entries currently use a 2px internal line rather than quiet Button's 1px. Popover panel actually receives focus; review observed focus-visible after opening with Enter, and its border only changes color.
+
+Structural physical exceptions (not treated as violations of the non-expanding focus rule): `ColorPicker` area thumbs sit over arbitrary colors where an inward contrasting ring cannot guarantee contrast, so an outward `outline-offset` is allowed; `ResizableHandle` is a 1px hairline with no inward geometry to inset into, so its focus ring may expand outward symmetrically. Outside these registered physical exceptions, focus indicators stay inset or recolor existing borders.
 
 In forced colors, systems remove box shadows. `styles.css` restores CSS outline with width and inward offset reading local `--qy-focus-ring-width`: 2px by default and 1px for quiet. System colors take over; `!important` overrides utilities-layer outline-none. Widths are choices rather than AA minimums. The full forced-color composition matrix remains UNVERIFIED.
 

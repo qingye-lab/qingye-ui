@@ -301,6 +301,8 @@ export function compareApi(slug, resolvedParts, writtenApi, metaPath) {
   const noPropsTable = [];
   const unchecked = [];
   const documentedParts = new Set();
+  const mentionedByPart = new Map();
+  const tableParts = new Map();
   const note = (list, item) => list.push({ component: slug, ...item });
   for (const written of writtenApi ?? []) {
     const groupNames = partNamesOf(written.name);
@@ -316,7 +318,13 @@ export function compareApi(slug, resolvedParts, writtenApi, metaPath) {
     const mentioned = new Set();
     for (const entry of written.props ?? []) {
       const { names, generic, unparsed } = parseWrittenName(entry.name);
-      for (const token of generic) note(unchecked, { part: written.name, written: entry.name, token, reason: "generic" });
+      for (const token of generic) {
+        if (IDENTIFIER.test(token) && checkable.some((target) => target.allPropNames.includes(token))) {
+          mentioned.add(token);
+        } else {
+          note(unchecked, { part: written.name, written: entry.name, token, reason: "generic" });
+        }
+      }
       for (const token of unparsed) note(unchecked, { part: written.name, written: entry.name, token, reason: "unparsed" });
       for (const { name, part, path } of names) {
         if (path && path.length > 1) { note(unchecked, { part: written.name, written: entry.name, token: path.join("."), reason: "dotted-path-into-another-type" }); mentioned.add(name); continue; }
@@ -329,14 +337,26 @@ export function compareApi(slug, resolvedParts, writtenApi, metaPath) {
         }
         if (!targets.length) { if (group.length) note(unchecked, { part: written.name, written: entry.name, token: name, reason: "no-resolved-part-in-group" }); continue; }
         mentioned.add(name);
+        for (const target of targets) {
+          const set = mentionedByPart.get(target.name) ?? new Set();
+          set.add(name);
+          mentionedByPart.set(target.name, set);
+        }
         // A merged table is true when at least one of its parts has the property.
         if (!targets.some((target) => target.allPropNames.includes(name))) note(documentedButMissing, { part: targets.map((target) => target.name).join(" / "), prop: name, written: entry.name, reason: "not-in-type", metaPath });
       }
     }
     for (const part of checkable) {
       if (!written.props?.length) { if (part.ownProps.length) note(noPropsTable, { part: part.name, ownProps: part.ownProps.map((prop) => prop.name) }); continue; }
-      for (const prop of part.ownProps) if (!mentioned.has(prop.name)) note(undocumented, { part: part.name, prop: prop.name, declaredAt: prop.declaredAt, ...viaComponent(prop.declaredAt, slug) });
+      tableParts.set(part.name, part);
+      const set = mentionedByPart.get(part.name) ?? new Set();
+      for (const name of mentioned) set.add(name);
+      mentionedByPart.set(part.name, set);
     }
+  }
+  for (const [partName, part] of tableParts) {
+    const mentioned = mentionedByPart.get(partName) ?? new Set();
+    for (const prop of part.ownProps) if (!mentioned.has(prop.name)) note(undocumented, { part: part.name, prop: prop.name, declaredAt: prop.declaredAt, ...viaComponent(prop.declaredAt, slug) });
   }
   const undocumentedParts = resolvedParts.filter((part) => part.status === "resolved" && part.ownProps.length && !documentedParts.has(part.name)).map((part) => ({ component: slug, part: part.name, ownProps: part.ownProps.map((prop) => prop.name) }));
   return { documentedButMissing, undocumented, noPropsTable, undocumentedParts, unchecked };
@@ -517,12 +537,14 @@ export function analyzeComponent(programs, slug, meta, metaPath) {
 
 const missingKey = (item) => [item.component, item.part, item.prop ?? "", item.reason].join("|");
 const unresolvedKey = (item) => `${item.component}|${item.reason}`;
+export const OWN_PROP_NOISE = new Set(["className", "data-slot", "ref", "children"]);
 
 /** Machine-readable report of every component's drift. Deterministic: no timestamps. */
 export function buildDriftReport(results) {
   const missing = results.flatMap((result) => result.comparison.documentedButMissing).map(({ metaPath, ...item }) => ({ ...item, meta: `${metaPath}${item.metaLine ? `:${item.metaLine}` : ""}` }));
   missing.forEach((item) => delete item.metaLine);
   const undocumented = results.flatMap((result) => result.comparison.undocumented);
+  const undocumentedOwnProps = undocumented.filter((item) => !item.viaComponent && !OWN_PROP_NOISE.has(item.prop));
   const unresolved = results.filter((result) => result.apiStatus === "curated-not-type-resolved").map((result) => ({ component: result.name, reason: result.typeApi.reason }));
   const byStatus = {};
   for (const result of results) byStatus[result.apiStatus] = (byStatus[result.apiStatus] ?? 0) + 1;
@@ -544,12 +566,14 @@ export function buildDriftReport(results) {
       components: results.length, byStatus,
       documentedButMissing: missing.length, undocumented: undocumented.length,
       undocumentedDeclaredInThisComponentsFile: undocumented.filter((item) => !item.viaComponent).length,
+      undocumentedOwnProps: undocumentedOwnProps.length,
       unresolved: unresolved.length, uncheckedWrittenNames: unchecked.length, uncheckedByReason,
     },
     gate: "documented-but-missing and unresolved must not exceed docs/api-drift.baseline.json; undocumented is report-only.",
     documentedButMissing: missing,
     unresolved,
     undocumented,
+    undocumentedOwnProps,
     undocumentedParts: results.flatMap((result) => result.comparison.undocumentedParts),
     noPropsTable: results.flatMap((result) => result.comparison.noPropsTable),
     unchecked,

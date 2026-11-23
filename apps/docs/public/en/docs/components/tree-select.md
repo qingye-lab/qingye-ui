@@ -1,6 +1,6 @@
 # TreeSelect
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/tree-select
 Source: packages/ui/src/components/tree-select.tsx
 Source SHA-256: c24df0889faa5a44775500312b941d65ad25db540c3cbb8c82f1b30a98def50d
@@ -80,6 +80,7 @@ Trigger, the Tree inside the popup, and the form value. The trigger shares Selec
 - disabled / readOnly / required: boolean; default false. Read-only keeps the value and never opens the popup; a disabled field is not submitted; required joins native validation and sets aria-required. invalid follows Field.
 - name / form: string. Name and owning form of the hidden input. Single submits the chosen id, or an empty string when nothing is chosen; multiple submits one value per chosen id and nothing when empty (required blocks submission).
 - aria-label / aria-labelledby / id / className: string. Name of the trigger and of the tree in the popup, and the trigger's styling entry. A missing name throws: use aria-label, aria-labelledby, or place it in a Field with a FieldLabel.
+- aria-describedby / aria-invalid: string / boolean | "true" | "false". Supplementary description reference and invalid state on the trigger; follows an enclosing Field when omitted.
 
 ## Keyboard
 - Enter / Space / ↓ / ↑: On the trigger, open the popup with focus on the chosen node (the first checked leaf in multiple mode, otherwise the first node) and its ancestors expanded.

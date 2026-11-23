@@ -1,6 +1,6 @@
 # Sidebar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
 Source SHA-256: 3098b18a94f563faac4c8c907aa14400940981b3411c62438738b6d35d1e9039
@@ -38,7 +38,7 @@ Collapsing produces an icon rail, not a hidden panel: navigation and links stay 
 - SidebarSub / SidebarSubTrigger / SidebarSubContent: An expandable sub-level of destinations: an inline panel when expanded, and a Popover over the same links in the rail, reachable by hover or focus.
 
 ## Responsive behavior
-- Keep actual desktop structure; menus fit available space and tables retain complete comparison columns.
+- Stays in place on wide screens and collapses to an icon rail; below 40rem moves into a drawer opened by SidebarDrawerTrigger in WorkspaceHeader.
 
 ## Customization
 - Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset.
@@ -200,6 +200,7 @@ A native nav and navigation groups.
 A real page link.
 - href / active: native anchor / boolean. Active explicitly writes aria-current; focus only falls back to Toggle when its location truly becomes unreachable after collapsing (for example, focus was inside a sub-level that the rail replaces).
 - icon: ReactNode. The only visible identifier in the rail; a link without an icon has nothing to show once collapsed. The name (children) is only visually hidden (sr-only) in the rail — the accessible name is unchanged, and a Tooltip restores a sighted label.
+- count / max: number / number; default max: 99. Unread or pending count (shown when > 0). Displayed as tabular text after the label when expanded, or pinned onto the icon via CornerMark in the rail; values past max render as "max+".
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 ### SidebarButton
@@ -209,10 +210,14 @@ An item that does not go to a page: an account-menu entry, search, anything that
 
 ### SidebarSub / SidebarSubTrigger / SidebarSubContent
 An expandable sub-level of destinations: an inline panel when expanded, and a Popover over the same links in the rail, reachable by hover or focus.
-- SidebarSub：open / defaultOpen / onOpenChange: boolean / callback. The same open state serves both the expanded panel and the rail's Popover; the remembered open/closed state survives collapsing even though the rail swaps in a Popover.
-- SidebarSubTrigger：icon: ReactNode. Same split as SidebarLink's icon; in the rail the button no longer toggles the inline panel, only opening the Popover, so collapsing never silently changes an open state the user never chose.
+- SidebarSub: open / defaultOpen / onOpenChange: boolean / callback. The same open state serves both the expanded panel and the rail's Popover; the remembered open/closed state survives collapsing even though the rail swaps in a Popover.
+- SidebarSubTrigger: icon: ReactNode. Same split as SidebarLink's icon; in the rail the button no longer toggles the inline panel, only opening the Popover, so collapsing never silently changes an open state the user never chose.
+- SidebarSub: children: ReactNode. Required: contains one SidebarSubTrigger and one SidebarSubContent; nesting another SidebarSub throws.
 
 ## Keyboard
+- Tab / Shift+Tab: Move focus across SidebarToggle, SidebarLink, SidebarButton, and SidebarSubTrigger; in narrow-screen drawer mode, focus follows Drawer rules.
+- Enter / Space: Toggle expanded/rail state on SidebarToggle, run an action on SidebarButton, or expand/collapse a sub-level on SidebarSubTrigger (opening the sub-level Popover in the rail); press Enter on SidebarLink to navigate.
+- Escape: Close an open sub-level Popover in the rail, or close the sidebar drawer on narrow screens and return focus to its trigger.
 
 ## Source examples
 ### 可逆导航与二级

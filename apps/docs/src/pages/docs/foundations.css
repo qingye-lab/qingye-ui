@@ -66,3 +66,6 @@
   gap: var(--qy-section-gap);
 }
 .spec-density-column { display: grid; gap: var(--qy-field-group-gap); }
+@media (width < 40rem) {
+  .spec-density { grid-template-columns: minmax(0, 1fr); }
+}

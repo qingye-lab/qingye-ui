@@ -147,7 +147,7 @@ export function ConfirmProvider({ children }: ConfirmProviderProps) {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <Button tone={pending.options.tone ?? "neutral"} onClick={() => finish(pending, true)}>{pending.options.confirmLabel}</Button>
-          <AlertDialogClose render={<Button variant="quiet" />}>{pending.options.cancelLabel ?? messages.cancel}</AlertDialogClose>
+          <AlertDialogClose render={<Button variant="quiet" />}>{pending.options.cancelLabel ?? messages.back}</AlertDialogClose>
         </AlertDialogFooter>
       </AlertDialogPopup>
     </AlertDialog>}

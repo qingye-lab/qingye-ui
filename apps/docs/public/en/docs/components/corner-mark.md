@@ -1,6 +1,6 @@
 # CornerMark
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/corner-mark
 Source: packages/ui/src/components/corner-mark.tsx
 Source SHA-256: ac8892bd3e844d1037659b14d1fa362244bb04e8b5091d156c8d33fc39096a5a
@@ -63,7 +63,7 @@ Written descriptions; the list above is the type-resolved fact.
 Wraps the host content; the mark is pinned to one of the host's corners (end-top by default).
 - count / max: number / number. The count variant; past max (default 99) it reads "max+" while the real number stays in label; a count of 0 hides the mark and its label together.
 - dot: true. A digit-free dot variant, mutually exclusive with count.
-- label: string（必填）. The mark itself is aria-hidden; this visually hidden text is the only guaranteed path for the count or status to reach assistive technology. Missing it throws in development.
+- label: string (required). The mark itself is aria-hidden; this visually hidden text is the only guaranteed path for the count or status to reach assistive technology. Missing it throws in development.
 - tone: "neutral" | "success" | "danger". Defaults to ink; success and danger are existing semantic categories, never hue without meaning.
 - placement / hostShape: "top-end" | "bottom-end" | "top-start" | "bottom-start" / "square" | "circle"; default "top-end" / "square". Corners use logical directions (end is the line end, so it sits on the left under right-to-left), never left/right. For a circular host (an avatar) set hostShape="circle" so the mark sits on the circle at 45 degrees instead of floating outside it.
 - className / wrapperClassName: string. className targets the mark itself (for example overriding the paper-colored ring to match the actual surface); wrapperClassName targets the outer positioning wrapper.

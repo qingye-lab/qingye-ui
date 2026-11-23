@@ -25,6 +25,7 @@ export default {
         { name: "onStepChange", type: "(step: number) => void", description: "换步时调用，参数是新步的下标；被跳过的步不会出现。", descriptionEn: "Called with the new step index; skipped steps never appear." },
         { name: "onFinish / onSkip", type: "() => void / (step) => void", description: "在最后一步点「完成」，或在某步点「跳过」。随后各自触发 onOpenChange。", descriptionEn: "Called on Done at the last step or Skip at any step, each followed by onOpenChange." },
         { name: "spotlight", type: "boolean", default: "false", description: "在锚点处挖洞的遮罩；不拦截指针，随窗口尺寸与滚动跟随锚点。", descriptionEn: "A mask with a cutout at the anchor. It does not intercept the pointer and follows window size and scroll." },
+        { name: "container", type: "HTMLElement | null", description: "观察锚点增删变化的 DOM 范围；缺省观察 document.body，缩小范围可减少无关子树变动触发的重解析。", descriptionEn: "DOM scope observed for anchor additions and removals; defaults to document.body. Narrowing it reduces re-resolution from unrelated subtree mutations." },
         { name: "className", type: "string", description: "追加到浮层。", descriptionEn: "Appended to the popup." },
       ],
     },
@@ -54,5 +55,13 @@ export default {
     stateOwner: { library: ["当前步、可用步的解析与跳过、焦点移入与返回、定位。"], application: ["何时开始、是否已看过、受控的 open 与 step。"] },
     responsive: ["浮层宽度受可用宽度限制；锚点在视口外时先滚入。"],
     customization: ["浮层宽度与方向可调；遮罩外扩与圆角随系统尺度，不单设令牌。"],
+  },
+  designEn: {
+    whenToUse: ["Point out a few key entries one after another on first use."],
+    avoid: ["Putting required operations inside a tour; blocking the page with a mask; too many steps."],
+    composition: ["Anchors are existing page elements; Tour only owns the current step and close requests without altering the anchors."],
+    stateOwner: { library: ["Current step, resolving and skipping unavailable steps, focus entry and return, and positioning."], application: ["When to start, whether the tour has been seen, and controlled open and step values."] },
+    responsive: ["Popup width stays within available space; anchors outside the viewport scroll into view first."],
+    customization: ["Popup width and placement are adjustable; cutout padding and radius follow the system scale rather than separate tokens."],
   },
 } satisfies ComponentMeta;

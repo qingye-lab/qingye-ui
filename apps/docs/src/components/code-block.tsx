@@ -12,35 +12,36 @@ function Highlighted({ code, lang }: { code: string; lang: CodeLang }) {
 
 /**
  * Highlighted source without a frame of its own, for places that already sit inside one (the demo
- * frame's code area). It uses the code surface and the library block's text and padding, and
- * scrolls horizontally; keyboard users can scroll it too.
+ * frame's code area). Reuses the library CodeBlock (`framed={false}`, `copyable={false}`) so
+ * overflowing code inherits conditional keyboard focus and an accessible region name.
  */
 export function CodeView({
   code,
   lang = "tsx",
   wrap = false,
+  maxLines,
   className,
 }: {
   code: string;
   lang?: CodeLang;
   /** Wrap long lines (commands, URLs) instead of scrolling. */
   wrap?: boolean;
+  /** Maximum visible lines before vertical scrolling inside the code surface. */
+  maxLines?: number;
   className?: string | undefined;
 }) {
   const text = code.replace(/\n$/, "");
   return (
-    <pre
-      className={cn(
-        "m-0 max-w-full overflow-x-auto bg-(--qy-code-surface) p-(--qy-panel-padding-sm) text-body text-foreground outline-none focus-visible:ring-(length:--qy-focus-quiet-width) focus-visible:ring-ring focus-visible:ring-inset",
-        wrap && "whitespace-pre-wrap wrap-anywhere",
-        className,
-      )}
-      tabIndex={0}
+    <LibraryCodeBlock
+      className={cn("bg-(--qy-code-surface)", className)}
+      code={text}
+      copyable={false}
+      framed={false}
+      {...(maxLines !== undefined ? { maxLines } : {})}
+      wrap={wrap}
     >
-      <code className="font-mono">
-        <Highlighted code={text} lang={lang} />
-      </code>
-    </pre>
+      <Highlighted code={text} lang={lang} />
+    </LibraryCodeBlock>
   );
 }
 

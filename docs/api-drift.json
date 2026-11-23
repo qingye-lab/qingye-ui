@@ -15,12 +15,13 @@
       "type-resolved": 114
     },
     "documentedButMissing": 0,
-    "undocumented": 152,
-    "undocumentedDeclaredInThisComponentsFile": 28,
+    "undocumented": 129,
+    "undocumentedDeclaredInThisComponentsFile": 5,
+    "undocumentedOwnProps": 0,
     "unresolved": 0,
-    "uncheckedWrittenNames": 215,
+    "uncheckedWrittenNames": 216,
     "uncheckedByReason": {
-      "generic": 151,
+      "generic": 152,
       "part-not-applicable": 33,
       "no-resolved-part-in-group": 13,
       "unparsed": 10,
@@ -51,12 +52,6 @@
       "prop": "loading",
       "declaredAt": "packages/ui/src/components/button.tsx:72",
       "viaComponent": "button"
-    },
-    {
-      "component": "bulk-action-bar",
-      "part": "BulkActionBarExtend",
-      "prop": "onClick",
-      "declaredAt": "packages/ui/src/components/bulk-action-bar.tsx:44"
     },
     {
       "component": "bulk-action-bar",
@@ -204,64 +199,10 @@
       "viaComponent": "layout"
     },
     {
-      "component": "cascader",
-      "part": "Cascader",
-      "prop": "aria-describedby",
-      "declaredAt": "packages/ui/src/components/cascader.tsx:43"
-    },
-    {
-      "component": "cascader",
-      "part": "Cascader",
-      "prop": "aria-invalid",
-      "declaredAt": "packages/ui/src/components/cascader.tsx:44"
-    },
-    {
-      "component": "chart",
-      "part": "Chart",
-      "prop": "events",
-      "declaredAt": "packages/ui/src/components/chart.tsx:103"
-    },
-    {
       "component": "command",
       "part": "CommandGroup",
       "prop": "children",
       "declaredAt": "packages/ui/src/components/command.tsx:116"
-    },
-    {
-      "component": "command",
-      "part": "CommandDialog",
-      "prop": "defaultQuery",
-      "declaredAt": "packages/ui/src/components/command.tsx:67"
-    },
-    {
-      "component": "command",
-      "part": "CommandDialog",
-      "prop": "filter",
-      "declaredAt": "packages/ui/src/components/command.tsx:64"
-    },
-    {
-      "component": "command",
-      "part": "CommandDialog",
-      "prop": "onItemSelect",
-      "declaredAt": "packages/ui/src/components/command.tsx:70"
-    },
-    {
-      "component": "command",
-      "part": "CommandDialog",
-      "prop": "onQueryChange",
-      "declaredAt": "packages/ui/src/components/command.tsx:68"
-    },
-    {
-      "component": "command",
-      "part": "CommandDialog",
-      "prop": "popupClassName",
-      "declaredAt": "packages/ui/src/components/command.tsx:219"
-    },
-    {
-      "component": "command",
-      "part": "CommandDialog",
-      "prop": "query",
-      "declaredAt": "packages/ui/src/components/command.tsx:66"
     },
     {
       "component": "composer",
@@ -401,18 +342,6 @@
       "part": "CornerMark",
       "prop": "children",
       "declaredAt": "packages/ui/src/components/corner-mark.tsx:13"
-    },
-    {
-      "component": "data-table",
-      "part": "DataTable",
-      "prop": "stickyHeader",
-      "declaredAt": "packages/ui/src/components/data-table.tsx:114"
-    },
-    {
-      "component": "data-table",
-      "part": "DataTable",
-      "prop": "stickyHeaderOffset",
-      "declaredAt": "packages/ui/src/components/data-table.tsx:116"
     },
     {
       "component": "data-table",
@@ -667,12 +596,6 @@
       "viaComponent": "button"
     },
     {
-      "component": "input",
-      "part": "Input",
-      "prop": "size",
-      "declaredAt": "packages/ui/src/components/input.tsx:14"
-    },
-    {
       "component": "input-group",
       "part": "InputGroupTextarea",
       "prop": "controlClassName",
@@ -734,24 +657,6 @@
       "prop": "selectClassName",
       "declaredAt": "packages/ui/src/components/native-select.tsx:11",
       "viaComponent": "native-select"
-    },
-    {
-      "component": "menu",
-      "part": "MenuItem",
-      "prop": "tone",
-      "declaredAt": "packages/ui/src/components/menu.tsx:58"
-    },
-    {
-      "component": "menu",
-      "part": "MenuGroupLabel",
-      "prop": "inset",
-      "declaredAt": "packages/ui/src/components/menu.tsx:27"
-    },
-    {
-      "component": "menu",
-      "part": "MenuGroupLabel",
-      "prop": "size",
-      "declaredAt": "packages/ui/src/components/menu.tsx:27"
     },
     {
       "component": "otp-field",
@@ -894,12 +799,6 @@
       "viaComponent": "typography"
     },
     {
-      "component": "scatter-chart",
-      "part": "ScatterChart",
-      "prop": "style",
-      "declaredAt": "packages/ui/src/components/scatter-chart.tsx:19"
-    },
-    {
       "component": "search-input",
       "part": "SearchInput",
       "prop": "nativeInput",
@@ -1019,46 +918,10 @@
       "viaComponent": "button"
     },
     {
-      "component": "sidebar",
-      "part": "SidebarLink",
-      "prop": "count",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
-    },
-    {
-      "component": "sidebar",
-      "part": "SidebarLink",
-      "prop": "max",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:237"
-    },
-    {
-      "component": "sidebar",
-      "part": "SidebarSub",
-      "prop": "children",
-      "declaredAt": "packages/ui/src/components/sidebar.tsx:304"
-    },
-    {
       "component": "theme-provider",
       "part": "ThemeProvider",
       "prop": "children",
       "declaredAt": "packages/ui/src/components/theme-provider.tsx:20"
-    },
-    {
-      "component": "toolbar",
-      "part": "ToolbarButton",
-      "prop": "shape",
-      "declaredAt": "packages/ui/src/components/toolbar.tsx:17"
-    },
-    {
-      "component": "tree-select",
-      "part": "TreeSelect",
-      "prop": "aria-describedby",
-      "declaredAt": "packages/ui/src/components/tree-select.tsx:30"
-    },
-    {
-      "component": "tree-select",
-      "part": "TreeSelect",
-      "prop": "aria-invalid",
-      "declaredAt": "packages/ui/src/components/tree-select.tsx:31"
     },
     {
       "component": "workspace",
@@ -1068,6 +931,7 @@
       "viaComponent": "typography"
     }
   ],
+  "undocumentedOwnProps": [],
   "undocumentedParts": [
     {
       "component": "autocomplete",
@@ -1326,6 +1190,13 @@
     },
     {
       "component": "bulk-action-bar",
+      "part": "BulkActionBarExtend",
+      "written": "onClick / Button props",
+      "token": "Button props",
+      "reason": "generic"
+    },
+    {
+      "component": "bulk-action-bar",
       "part": "BulkActionBarActions / BulkActionBarAction / BulkActionBarClear",
       "written": "Button props",
       "token": "Button props",
@@ -1357,13 +1228,6 @@
       "part": "Card",
       "written": "原生属性",
       "token": "原生属性",
-      "reason": "generic"
-    },
-    {
-      "component": "chart",
-      "part": "Chart",
-      "written": "events",
-      "token": "events",
       "reason": "generic"
     },
     {
@@ -1928,6 +1792,13 @@
     },
     {
       "component": "menu",
+      "part": "MenuItem",
+      "written": "render / ref / native props",
+      "token": "native props",
+      "reason": "generic"
+    },
+    {
+      "component": "menu",
       "part": "MenuTrigger / MenuPositioner / MenuPopup / MenuPortal",
       "written": "render / ref / native props",
       "token": "native props",
@@ -1935,7 +1806,7 @@
     },
     {
       "component": "menu",
-      "part": "MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger",
+      "part": "MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger",
       "written": "render / ref / native props",
       "token": "native props",
       "reason": "generic"

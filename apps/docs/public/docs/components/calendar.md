@@ -1,6 +1,6 @@
 # 日历 Calendar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
 Source SHA-256: 47cf83b47a3b8c84798bb80a71f75a0ea1b9e5dedc1ac4cd5ad80bf8c24ef08e

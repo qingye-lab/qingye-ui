@@ -1,6 +1,6 @@
-# Qingye UI 5.5.0: full text
+# Qingye UI 5.6.0: full text
 
-> @qingye_lab/ui@5.5.0. 设计指南、安装说明与全部组件合为一个文件，供无法跟随链接的工具读取。与官网同源生成：design.md、组件元数据与 TypeScript 类型。这里每个组件只保留第一个源码示例，完整示例见该组件自己的 Markdown 文件。
+> @qingye_lab/ui@5.6.0. 设计指南、安装说明与全部组件合为一个文件，供无法跟随链接的工具读取。与官网同源生成：design.md、组件元数据与 TypeScript 类型。这里每个组件只保留第一个源码示例，完整示例见该组件自己的 Markdown 文件。
 
 # 第一部分 设计指南
 
@@ -702,7 +702,7 @@ Implement and verify within the authorized scope, and report ownership, actual e
 
 # 第二部分 安装
 
-## Install @qingye_lab/ui 5.5.0
+## Install @qingye_lab/ui 5.6.0
 
 Use this exact package version when the configured registry supplies it, or the corresponding release tarball. Check the project before installing.
 
@@ -720,7 +720,7 @@ Examples retain state locally. Reload persistence, permissions, backend writes a
 
 ## 分组展开 Accordion
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/accordion
 Source: packages/ui/src/components/accordion.tsx
 Source SHA-256: f26d950ad70f423b6c93d4deeef25da02fd927f85623521eaff44f13ca4ac328
@@ -830,7 +830,7 @@ export default function AccordionDemo() {
 
 ## 就地说明 Alert
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/alert
 Source: packages/ui/src/components/alert.tsx
 Source SHA-256: ed768584432728343fe968543826b25582cd834129d44b3091663fa7ef014040
@@ -934,7 +934,7 @@ export default function Demo() {
 
 ## 决定对话框 AlertDialog
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/alert-dialog
 Source: packages/ui/src/components/alert-dialog.tsx
 Source SHA-256: 55f86b3e9bc7314a11a247382ac0691a92efc0d7d50b2c47500b16efe013e2ab
@@ -1104,7 +1104,7 @@ export default function Demo() {
 
 ## 异步内容 AsyncContent
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/async-content
 Source: packages/ui/src/components/async-content.tsx
 Source SHA-256: ff984eaf9c0ebd6721ed7198ee409a0ea629f91a265337afacb6b19328cae599
@@ -1206,7 +1206,7 @@ export default function Demo() {
 
 ## 建议输入 Autocomplete
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/autocomplete
 Source: packages/ui/src/components/autocomplete.tsx
 Source SHA-256: b56390332369882f40dd618b614736dbecb995da1634da99f97332f6d7f1cf2c
@@ -1387,7 +1387,7 @@ export default function Demo() {
 
 ## 身份图像 Avatar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/avatar
 Source: packages/ui/src/components/avatar.tsx
 Source SHA-256: d6ca137a87d7eeb1a3ec766553246ed453cbcd78fdce9980f091bd27a21f417a
@@ -1491,7 +1491,7 @@ export default function Demo() {
 
 ## 头像组 AvatarGroup
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/avatar-group
 Source: packages/ui/src/components/avatar-group.tsx
 Source SHA-256: 806282f5521b596540a007ca559299a7d312a09eca028fd5e9f8a9591375ea51
@@ -1578,7 +1578,7 @@ export default function Demo() {
 
 ## 标记 Badge
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/badge
 Source: packages/ui/src/components/badge.tsx
 Source SHA-256: 66ce5024d8e432327ddecdc8ae5c1d05c62b636f6af042a2a8c895793156a326
@@ -1658,7 +1658,7 @@ export default function Demo() {
 
 ## 路径 Breadcrumb
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/breadcrumb
 Source: packages/ui/src/components/breadcrumb.tsx
 Source SHA-256: fc48d9be8459b644e0133c7c3388e304dcc384b2d7052f80ea68e29057d6a7c0
@@ -1783,7 +1783,7 @@ export default function Demo() {
 
 ## 批量操作 BulkActionBar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/bulk-action-bar
 Source: packages/ui/src/components/bulk-action-bar.tsx
 Source SHA-256: 5562a5a02d396089e7726042e528cd777bae5d96974767a833a7ac537f4d9680
@@ -1904,6 +1904,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### BulkActionBarExtend
 把本页选择扩展为整个集合的入口；仅在调用方渲染时出现，不推断是否还有更多。
 - count / onExtend: number / (event) => void. 默认文字「选择全部 N 项」，数字按界面语言分组；onClick.preventDefault() 取消。
+- onClick / Button props: ButtonProps["onClick"] / ButtonProps. 先于 onExtend 执行；调用 event.preventDefault() 或 event.preventBaseUIHandler() 可阻止扩展动作，其余属性透传 Button。
 
 #### BulkActionBarActions / BulkActionBarAction / BulkActionBarClear
 同组动作与清除选择。
@@ -1934,7 +1935,7 @@ export default function Demo() {
 
 ## 按钮 Button
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/button
 Source: packages/ui/src/components/button.tsx
 Source SHA-256: 33bee148386b5e78157da9af6787ff6d23f8bb88bb47d5ae1aed705c86ef02df
@@ -2062,7 +2063,7 @@ export default function Demo() {
 
 ## 动作组 ButtonGroup
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/button-group
 Source: packages/ui/src/components/button-group.tsx
 Source SHA-256: 482f8c3c4b02b0a94fda90ea51948d653098e2af0fdd48ec9f67312a43d0c4fb
@@ -2162,7 +2163,7 @@ export default function Demo() {
 
 ## 日历 Calendar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
 Source SHA-256: 47cf83b47a3b8c84798bb80a71f75a0ea1b9e5dedc1ac4cd5ad80bf8c24ef08e
@@ -2263,7 +2264,7 @@ export default function Demo() {
 
 ## 卡片 Card
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/card
 Source: packages/ui/src/components/card.tsx
 Source SHA-256: 8250693638eb9e24a77a347acad743aecc580f0ebd5cbd13e6424ef201b5a4ae
@@ -2349,7 +2350,7 @@ export default function Demo() {
 
 ## 级联选择 Cascader
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/cascader
 Source: packages/ui/src/components/cascader.tsx
 Source SHA-256: cb9151f01ae01a2db194a6e5f29fc8a0f359768ddd0e0197f9c73655d9aaf3d8
@@ -2437,6 +2438,7 @@ Written descriptions; the list above is the type-resolved fact.
 - disabled / readOnly / required: boolean; default false. 只读保留当前值且不打开候选面；禁用的字段不提交；required 参与原生校验并标 aria-required。invalid 跟随 Field。
 - name / form: string. 隐藏输入的名称与所属表单。提交值是路径各段用 "/" 连接，例如 "zj/hz/xh"，段内的 "%"、"/" 转义为 %25、%2F（按 "/" 拆开后逐段 decodeURIComponent 还原），未选择提交空字符串；多选每条路径一条同名值，未选择不提交（required 时拦下提交）。
 - aria-label / aria-labelledby / id / className: string. 触发器的名称与样式入口。没有名称会抛错：用 aria-label、aria-labelledby，或放进带 FieldLabel 的 Field。
+- aria-describedby / aria-invalid: string / boolean | "true" | "false". 触发器的补充说明引用与校验无效状态；未显式传入时跟随外层 Field。
 
 ### Keyboard
 - Enter / Space / ↓ / ↑: 在触发器上打开候选面，焦点落在当前路径的末项（无值时是第一项）。
@@ -2507,7 +2509,7 @@ export default function Demo() {
 
 ## 图表 Chart
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/chart
 Source: packages/ui/src/components/chart.tsx
 Source SHA-256: 2520f2b39351f8ffe7b60cb12afb200d3e3cab3b64c402eebcff4f19fd9db480
@@ -2708,7 +2710,7 @@ export default function Demo() {
 
 ## 复选框 Checkbox
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/checkbox
 Source: packages/ui/src/components/checkbox.tsx
 Source SHA-256: f5464ad5133223a687ea8729b9aa748caf203971a657f18cab57359212eeab47
@@ -2809,7 +2811,7 @@ export default function Demo() {
 
 ## 复选组 CheckboxGroup
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/checkbox-group
 Source: packages/ui/src/components/checkbox-group.tsx
 Source SHA-256: fe0248cc06c34c992d2211ae1c9fe08d3e9c7b8c9183375af4b2de25c4f813f0
@@ -2911,7 +2913,7 @@ export default function Demo() {
 
 ## 标签片 Chip
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/chip
 Source: packages/ui/src/components/chip.tsx
 Source SHA-256: ad815ca9b19efbfb70cada333d50c9e9579ef78c9f00f139f16251c246b090d6
@@ -3002,10 +3004,10 @@ export default function Demo() {
 
 ## 代码 CodeBlock
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
-Source SHA-256: 9649e32b6c3151ff361e2fc7c986031b6b61040d1a75bdaa3bccdbc65974bbb9
+Source SHA-256: 53234b6b2978982a42d1317201f3ae2a2487c705f3e793aade8ae89b3cf160ce
 
 文本原样展示、可选标题栏与真实复制结果。
 
@@ -3044,6 +3046,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `children?`: `React.ReactNode`. 已高亮的标记：给出时放进 code 元素，代替纯文本 code 的显示。
 - `code`: `string`. 被复制的文本；渲染内容由 children 替换时，复制的仍是它。
 - `copyable?`: `boolean`.
+- `framed?`: `boolean`. 是否带外层围合（线、底、圆角）；默认 true。嵌入已有容器时传 false 去掉外层围合。
 - `language?`: `string`.
 - `maxLines?`: `number`. 代码面最多显示的行数，超出后代码面纵向滚动（可聚焦、有名称）。折行后按视觉行计。 选行数而不是 CSS 长度：读代码的人数的是行，行高由系统的「材」决定（正文一行 = 1 材）， 给长度的话字号或密度一变，能看到的行数就悄悄变了。
 - `onCopyError?`: `(error: unknown) => void`.
@@ -3069,6 +3072,7 @@ Written descriptions; the list above is the type-resolved fact.
 - children: ReactNode. 已高亮的标记，放进 code 元素代替纯文本显示；复制与可访问内容以 code 为准，两者文字应一致。
 - wrap: boolean; default false. 长行折行（在任意位置断开），而不是横向滚动。
 - maxLines: number. 代码面最多显示的行数（正整数），超出后纵向滚动。折行后按视觉行计。选行数而不是 CSS 长度：读代码的人数的是行，行高由系统的「材」决定（正文一行 = 1 材），字号或密度变了，行数不会悄悄变。滚动时代码面可聚焦、有名称（取标题，其次语言，再退到「代码」），复制按钮不随代码滚动。
+- framed: boolean; default true. 是否带外层围合（线、底、圆角）；嵌入已有容器时传 false 去掉外层围合。
 - copyable: boolean; default true. 是否提供复制按钮与真实反馈。
 - onCopySuccess / onCopyError: () => void / (error: unknown) => void. 实际写入成功或失败后的回调；原生 onCopy 事件另行透传。
 - render / ref / ARIA / className / style / native props: useRender.ComponentProps<div>. 属性属于外部 div（原生 title 属性被 title 槽取代）；复制的文本由 code 参数唯一提供。
@@ -3092,7 +3096,7 @@ export default function Demo() {
 
 ## 单段展开 Collapsible
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/collapsible
 Source: packages/ui/src/components/collapsible.tsx
 Source SHA-256: 12c54767186d874e7c90f740a8b425bbaaaebbfdf1bb31ea2123aeb2b8f77b7e
@@ -3191,10 +3195,10 @@ export default function CollapsibleDemo() {
 
 ## 颜色选择 ColorPicker
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/color-picker
 Source: packages/ui/src/components/color-picker.tsx
-Source SHA-256: aacdb9bc0a3ecbe1c0081eff0149c5f5f097de7d58c4d93f77cedd7042e41afd
+Source SHA-256: a5f6c5e299b36e407c068835ebf3031200b172384bda3c5c69ccf1e06a1dbc47
 
 选取用户数据里的颜色：标签颜色、主题配置取值，得到一个 #rrggbb。
 
@@ -3321,7 +3325,7 @@ export default function Demo() {
 
 ## 候选输入 Combobox
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
 Source SHA-256: 81e5928924575a0502406debc3548efedf59479e2abb2130abc4636146650cf7
@@ -3547,10 +3551,10 @@ export default function Demo() {
 
 ## 命令面板 Command
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/command
 Source: packages/ui/src/components/command.tsx
-Source SHA-256: c7f5394e6236c173cce0773b9ee80ea7afaa65db6dca383596326bd0d9b5ff71
+Source SHA-256: 0faa06a6dacca30a77dbe5226b181c1d6960d85fdbea4610e3761e0197e04879
 
 输入框加一张常开的命令列表，用来跳到某处或执行某事。
 
@@ -3612,19 +3616,23 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 278 inherited (@types/react 278); not expanded, see the installed declarations
 
 ### CommandDialog
-- `aria-label?`: `string`. 对话框的名字，二选一必填，缺失抛错。
+- `aria-label?`: `string`. 对话框的名字，未提供 title 时二选一必填，缺失抛错。
 - `aria-labelledby?`: `string`.
 - `closeOnSelect?`: `boolean`. 选中条目后关闭，默认 true。
 - `defaultOpen?`: `boolean`.
 - `defaultQuery?`: `string`.
+- `description?`: `React.ReactNode`. 可见说明，随 title 渲染在 DialogHeader 内。
 - `filter?`: `CommandFilter`. 覆盖默认过滤。
 - `onItemSelect?`: `(value: string) => void`. 任一条目被选中后调用（在条目自己的 onSelect 之后）；CommandDialog 靠它关闭。
 - `onOpenChange?`: `(open: boolean) => void`.
+- `onOpenChangeComplete?`: `DialogProps["onOpenChangeComplete"]`.
 - `onQueryChange?`: `(query: string) => void`.
 - `open?`: `boolean`.
 - `popupClassName?`: `string`. 对话框面板的宽度等。
+- `popupProps?`: `Omit<DialogPopupProps, "children" | "className" | "aria-label" | "aria-labelledby">`. 透传给内部 DialogPopup 的属性（如 initialFocus / finalFocus / portalProps 等）；名字走上面的 title / aria-label，data-slot 不可覆盖。
 - `query?`: `string`. 查询文字；受控。
-- plus 276 inherited (@types/react 276); not expanded, see the installed declarations
+- `title?`: `React.ReactNode`. 可见标题；提供时渲染 DialogHeader + DialogTitle（及可选 description），并以它为对话框的名字——此时 aria-label / aria-labelledby 被忽略，读屏名称与屏幕上的标题一致。
+- plus 275 inherited (@types/react 275); not expanded, see the installed declarations
 
 ### CommandEmpty
 - no props declared by this library
@@ -3700,9 +3708,12 @@ listbox。内容多时在列表内滚动，输入框始终可见。需要名字�
 
 #### CommandDialog
 Dialog 里放一份 Command。每次打开都是新的一份，查询自然清空。
-- open / defaultOpen / onOpenChange: boolean / boolean / (open: boolean) => void. 打开状态，受控或非受控。
-- aria-label / aria-labelledby: string. 二选一必填，缺失抛错。
+- open / defaultOpen / onOpenChange / onOpenChangeComplete: boolean / boolean / (open: boolean) => void / DialogProps["onOpenChangeComplete"]. 打开状态，受控或非受控；onOpenChangeComplete 在开合动画结束后调用。
+- title / description: ReactNode / ReactNode. 可见标题与可选说明；提供 title 时渲染 DialogHeader + DialogTitle，不再强制要求 aria-label / aria-labelledby。
+- aria-label / aria-labelledby: string. 未提供 title 时二选一必填，缺失抛错；提供 title 时被忽略，名字取可见标题。
 - closeOnSelect: boolean; default true. 选中条目后关闭。
+- popupClassName / popupProps: string / Omit<DialogPopupProps, "children" | "className" | "aria-label" | "aria-labelledby">. 对话框面板的 className 及透传给内部 DialogPopup 的其余属性（如 initialFocus、finalFocus、portalProps）。
+- filter / query / defaultQuery / onQueryChange / onItemSelect: CommandProps. 转发给内部 Command；含义同 Command。
 
 ### Keyboard
 - ArrowDown / ArrowUp: 移动高亮；禁用项被跳过。列表挂载时第一项已高亮。
@@ -3748,10 +3759,10 @@ export default function Demo() {
 
 ## 对话输入框 Composer
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/composer
 Source: packages/ui/src/components/composer.tsx
-Source SHA-256: fef8f9c94f951cdabab88801f34d75427fb3c8b8a5d43b7a8170abdfa50b5fe7
+Source SHA-256: 318ec3f44b4529c8d359cedbe716327761934252518851976925f94309b6844c
 
 多行输入，支持 @ 提及、/ 命令与原子令牌，值是文字与令牌片段的数组。
 
@@ -3903,10 +3914,10 @@ export default function Demo() {
 
 ## 异步确认 Confirm
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/confirm
 Source: packages/ui/src/components/confirm.tsx
-Source SHA-256: 872303717eb2deacb43a5c70806eebba920ac0364d71e20500f286969a60d758
+Source SHA-256: 63fed3e6e581570b69b14f99a7eeac683e37e7b035ed2025f5e013217027082a
 
 等待一次明确决定，再由调用方继续执行。
 
@@ -3969,7 +3980,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### useConfirm
 返回稳定的 confirm(options): Promise<boolean>；必须位于 ConfirmProvider 内。
 - title / description: ReactNode / ReactNode. 必需且非空；标题标识决定，说明持续显示必要后果并建立可访问关联。调用时捕获选项，之后修改原 options 不替换已读内容。
-- confirmLabel / cancelLabel: ReactNode / ReactNode; default 必填 / locale.cancel. confirmLabel 必填，写出这个决定具体做什么（「移出」「离开」），没有通用的「确认」默认；缺省或空白抛 TypeError。取消按钮和 Escape 都返回 false；点遮罩不关闭。
+- confirmLabel / cancelLabel: ReactNode / ReactNode; default 必填 / locale.back. confirmLabel 必填，写出这个决定具体做什么（「移出」「离开」），没有通用的「确认」默认；缺省或空白抛 TypeError。取消按钮和 Escape 都返回 false；点遮罩不关闭。
 - tone: ButtonTone; default 'neutral'. 确认按钮的后果色调；需要危险色时显式传 danger，不赋予权限。
 - popupProps: Omit<AlertDialogPopupProps, 'children'>. 复用公共浮层的 render、ref、ARIA、承载层和焦点入口。默认聚焦安全面板，关闭回到调用时的活动元素；入口可能移除时用 finalFocus 指向仍在的上级。
 - signal: AbortSignal. 已中止的调用直接 false；决定中中止会关闭并返回 false。只中止此次决定，不取消已开始的业务请求。
@@ -4009,7 +4020,7 @@ export default function Demo() { return <ConfirmProvider><Decision /></ConfirmPr
 
 ## 确认动作 ConfirmAction
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/confirm-action
 Source: packages/ui/src/components/confirm-action.tsx
 Source SHA-256: f06004bed955d140e115ce34060d56d54831d3dbc8d17efe55605ec8fb1a643d
@@ -4119,7 +4130,7 @@ export default function Demo() {
 
 ## 上下文菜单 ContextMenu
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
 Source SHA-256: 735ccc846c990c30f8e0c87be3d494cc5d541b64a59db1c0e736f9616170d67a
@@ -4281,6 +4292,11 @@ Written descriptions; the list above is the type-resolved fact.
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ### Keyboard
+- Shift+F10 / ContextMenu: 在聚焦的 ContextMenuTrigger 上打开上下文菜单。
+- ↑ / ↓ / Home / End: 在菜单项之间移动焦点。
+- → / ←: 打开或收起子菜单（RTL 方向相反）。
+- Enter / Space: 执行当前可用命令、切换勾选/开关或打开子菜单。
+- Escape: 关闭上下文菜单并将焦点返回触发区域。
 
 ### Source example
 #### 可见入口与右键
@@ -4302,7 +4318,7 @@ export default function Demo() {
 
 ## 复制按钮 CopyButton
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/copy-button
 Source: packages/ui/src/components/copy-button.tsx
 Source SHA-256: 965565edbc2678a8309773c65d579ec3f47bd4dcea6736ea630fe959a6d25817
@@ -4401,7 +4417,7 @@ export default function Demo() {
 
 ## 角标 CornerMark
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/corner-mark
 Source: packages/ui/src/components/corner-mark.tsx
 Source SHA-256: ac8892bd3e844d1037659b14d1fa362244bb04e8b5091d156c8d33fc39096a5a
@@ -4494,10 +4510,10 @@ export default function Demo() {
 
 ## 数据集合 DataTable
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 02c5537f5b7059f3756aab2b5b3fb9d3405b7f7e5cd6f2508bb5e35fbd304395
+Source SHA-256: 06fcff20256740a95e3d101ba620699aa199057709aa3e91d90ee77dabf4cc5a
 
 调用方真实集合的比较、排序、范围选择与可选虚拟化。
 
@@ -4620,6 +4636,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Optional peers: @tanstack/react-table
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context PatternLiveContext: without a provider nullable; provided by DataTablePattern
 
 ### Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -4648,6 +4665,7 @@ Written descriptions; the list above is the type-resolved fact.
 - columnDef.meta.numeric: boolean; default false. 数值列由列定义声明，不由内容猜：表头与该列每个单元格同一对齐——行内末端（RTL 下在左）并用等宽数字。Pattern 的列配置同名。
 - selectionAppearance / onRowActivate / virtualization: row | checkbox / (row: Row<T>, event: DataTableActivateEvent) => void / DataTableVirtualization. 选择外观与虚拟化同 Pattern；行激活回调收到 TanStack Row 与触发它的鼠标或键盘事件（可读修饰键），调用方持有 activeRowId。整张表只有一行在 Tab 序列里（最近聚焦的行，否则活动行，否则第一行），方向键在行间移动。点击内部交互元素不激活，data-row-activate-ignore 可排除自定义区域；不改变选择。需要一个可见的 meta.rowHeader 列给行命名，否则抛错。
 - columnDef.meta.rowHeader: boolean. 实际行标题用 th scope=row；比较列不自动隐藏。有可见行标题列时，每一行的 aria-labelledby 指向该行所有行标题单元格，行的可访问名称即这些单元格的文字（多个行标题列按列序连接）。DataTableSelectionCell 用它给每个选择框命名为「选择“该行名称”」，没有行标题列时才用泛称。设置了 onRowActivate 却没有可见的行标题列时抛错。
+- stickyHeader / stickyHeaderOffset: boolean / number | string; default false. 表头吸在最近的滚动区顶部（同 DataTablePattern）：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口或 containerProps 设了 height / max-height 时是表格自己的容器。stickyHeaderOffset 让开顶部固定页眉，数字按 px。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 #### DataTableSortButton
@@ -4702,7 +4720,7 @@ export default function Demo() {
 
 ## 日期输入 DatePicker
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/date-picker
 Source: packages/ui/src/components/date-picker.tsx
 Source SHA-256: 7cb05d8df7e219e97b2e27a8c8ba4953ffebad3e5e4e0de66d143cdcc3b2dcdd
@@ -4800,7 +4818,7 @@ export default function Demo() {
 
 ## 日期范围 DateRangePicker
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/date-range-picker
 Source: packages/ui/src/components/date-range-picker.tsx
 Source SHA-256: 0d0834aa70a325fc41b42045d1bc6db3d550265f91ac2c1276384c7099b5bb0c
@@ -4906,7 +4924,7 @@ export default function Demo() {
 
 ## 日期时间 DateTimePicker
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/date-time-picker
 Source: packages/ui/src/components/date-time-picker.tsx
 Source SHA-256: 2563a486ab93477cb5bfc927d99d67b598829707973d52d9908c94a4d6157e8b
@@ -5000,7 +5018,7 @@ export default function Demo() {
 
 ## 日期时间范围 DateTimeRangePicker
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/date-time-range-picker
 Source: packages/ui/src/components/date-time-range-picker.tsx
 Source SHA-256: ea0c19ac00afd1c2cb244948594c9dcb6c081e74fa647a7a66e90d74ca5d7594
@@ -5102,7 +5120,7 @@ export default function Demo() {
 
 ## 名称与值 DescriptionList
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/description-list
 Source: packages/ui/src/components/description-list.tsx
 Source SHA-256: 01619fae8f6efcc264c2e90e09c97edccf36c8ff6bfc2220e91e3877176c44c0
@@ -5214,7 +5232,7 @@ export default function Demo() {
 
 ## 对话框 Dialog
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/dialog
 Source: packages/ui/src/components/dialog.tsx
 Source SHA-256: 08787666f8f19dd603cc200032cc3d0148451399fbd6a5dd21fc31bef18c3d3f
@@ -5390,10 +5408,10 @@ export default function Demo() {
 
 ## 边缘工作面 Drawer
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/drawer
 Source: packages/ui/src/components/drawer.tsx
-Source SHA-256: 63395abb3d4f641fe6170a87574be325b93daf28603ddc2e868606f68a69d652
+Source SHA-256: d0718765806363fa99df3caed3289f62a98e5f5c368e6fb20d7037e31e93eb25
 
 从边缘进入工作面，再返回入口。
 
@@ -5549,7 +5567,7 @@ export default function DrawerDemo() {
 
 ## 空与未知 Empty
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/empty
 Source: packages/ui/src/components/empty.tsx
 Source SHA-256: 9806b0c9c7f902d0f97e5d35050cece67dbd8636629dba29b4fa7c28c4147a58
@@ -5653,7 +5671,7 @@ export default function Demo() {
 
 ## 字段 Field
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/field
 Source: packages/ui/src/components/field.tsx
 Source SHA-256: 8bf6a3b75be2b323a1fa09109535f1b90b02ac3ab333f114872add2881f1b47f
@@ -5827,7 +5845,7 @@ export default function Demo() {
 
 ## 字段组 Fieldset
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/fieldset
 Source: packages/ui/src/components/fieldset.tsx
 Source SHA-256: a7cb5961235149cd60abe9b0291b81238c755469f313982fd9446a41f0138ad4
@@ -5918,7 +5936,7 @@ export default function Demo() {
 
 ## 文件触发 FileTrigger
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/file-trigger
 Source: packages/ui/src/components/file-trigger.tsx
 Source SHA-256: 23cb93caa181ab49f3b19b3e3a030c60f68aa9624afa400f625ccde4e9c190c4
@@ -6023,7 +6041,7 @@ export default function Demo() {
 
 ## 文件输入 FileUpload
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/file-upload
 Source: packages/ui/src/components/file-upload.tsx
 Source SHA-256: 9c5085b3e76d1365416ee5275b4396e1f81740f92e4e1d528dd4c9e1a42e67c9
@@ -6143,7 +6161,7 @@ export default function Demo() {
 
 ## 筛选条件 FilterBar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/filter-bar
 Source: packages/ui/src/components/filter-bar.tsx
 Source SHA-256: ded3c2eaf37f9dcb9852c5195cbdca5523d62233af35237c20026b61addc7431
@@ -6303,7 +6321,7 @@ export default function Demo() {
 
 ## 表单 Form
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/form
 Source: packages/ui/src/components/form.tsx
 Source SHA-256: 694187e034dce87a7c83e9e39b7976299568ecbefde556432eb49619dd98468b
@@ -6387,10 +6405,10 @@ export default function Demo() {
 
 ## 两维度的量 Heatmap
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
-Source SHA-256: a0208da9a4fca7de7e68d8b4dc4bb6ba881b4b1fdc2ac6bcaf046febc74eec34
+Source SHA-256: 6df5ef870950dfd8dfb024b637f1ed94139e8f5a67b9f0dcc70d670cf8aca7ea
 
 两个类别维度上的量，例如「星期 × 时段」的同步热度；单色顺序色阶（第一色由淡到足）或应用声明的分档，可用键盘逐格读，另有按需展开的数据表。
 
@@ -6502,7 +6520,7 @@ export default function Demo() {
 
 ## 链接预览 HoverCard
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/hover-card
 Source: packages/ui/src/components/hover-card.tsx
 Source SHA-256: 4b6ea56ca364d46fe0fb8fbbd17cabed7ea198ed446cdcb08c75c06076ec499b
@@ -6603,10 +6621,10 @@ export default function HoverCardDemo() {
 
 ## 图片预览 ImagePreview
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/image-preview
 Source: packages/ui/src/components/image-preview.tsx
-Source SHA-256: 23741daf38ba1fbc21c80c4eae46b218445b975188b4bbc3e6691bfd6a20803e
+Source SHA-256: 64aec292f6b034b610a31fdbf4803c94b5c20d1b7e35316f4fbfaeb27cd18078
 
 缩略图打开大图，可在同组图片间切换并放大。
 
@@ -6660,6 +6678,11 @@ Written descriptions; the list above is the type-resolved fact.
 - className / native props: React.ComponentProps<div>. 其余属性透传到根元素。
 
 ### Keyboard
+- Enter / Space: 在缩略图按钮上打开预览对话框，或在对话框控制按钮上执行对应操作。
+- ← / →: 在同组图片中切换上一张 / 下一张（RTL 下方向相反，到头即止）；放大且焦点位于舞台上时方向键用于滚动，不切图。
+- + / = / - / 0: 放大一级（+ / =）、缩小一级（-）或重置为适应窗口（0）。
+- Tab / Shift+Tab: 在预览对话框内的控制按钮（及放大后可滚动的舞台）间移动焦点。
+- Escape: 关闭预览对话框并将焦点返回打开它的缩略图按钮。
 
 ### Source example
 #### 同组图片与单张
@@ -6687,7 +6710,7 @@ export default function Demo() {
 
 ## 输入框 Input
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
 Source SHA-256: 1276c09d538105d1b2f715ed2df7d99bff636526763bba4c200346a7823104a7
@@ -6752,6 +6775,7 @@ Written descriptions; the list above is the type-resolved fact.
 - type: React.HTMLInputTypeAttribute; default "text". 原生类型原样生效，不附带任何额外动作。搜索与密码用 SearchInput / PasswordInput。
 - value / defaultValue / onValueChange: 原生值 / 初始值 / (value, details) => void. 支持受控与非受控值；onChange 同样透传。
 - readOnly: boolean; default false. 保留焦点、复制与表单提交，阻止编辑；默认显示只读标记。
+- size: number. 原生 input.size 的字符宽度含义，与控件外观尺寸无关；填值控件只有一套几何，跟随密度轴。
 - className / style / render / ref: Base UI Input props. 全部作用于真实 input；className/style 支持状态函数。
 - controlClassName: string. 调整共同编辑边界，例如宽度与所在布局；不替代原生属性。
 - unstyled: boolean; default false. 由 InputGroup 等公共组合承担边界；保留内高、档案与原生状态。
@@ -6778,7 +6802,7 @@ export default function Demo() {
 
 ## 输入组合 InputGroup
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/input-group
 Source: packages/ui/src/components/input-group.tsx
 Source SHA-256: f88486029dc36fd228d2cee9649a1d29061e04dae1e4fc3998238074ca90e72c
@@ -6923,7 +6947,7 @@ export default function Demo() {
 
 ## 输入方式 InputModalityProvider
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/input-modality-provider
 Source: packages/ui/src/components/input-modality-provider.tsx
 Source SHA-256: 011d0f9673180acea6dd34d463e7cdf1436738881d96f8e20a7c7147c7940d46
@@ -7018,7 +7042,7 @@ export default function Demo() {
 
 ## 条目 Item
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/item
 Source: packages/ui/src/components/item.tsx
 Source SHA-256: 1f8aeb2d275d1293494b4ae60f7022b715f9ccbba1a5d159822caa9439489d23
@@ -7156,7 +7180,7 @@ export default function Demo() {
 
 ## 键位 Kbd
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/kbd
 Source: packages/ui/src/components/kbd.tsx
 Source SHA-256: a7fd414dd93120240d7eb2c1508627c3b2130c780ede7f079f4bd4ea04e7ec2f
@@ -7219,7 +7243,7 @@ export default function Demo() { return <Inline><Kbd>Ctrl</Kbd><Kbd>K</Kbd><Kbd>
 
 ## 标签 Label
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/label
 Source: packages/ui/src/components/label.tsx
 Source SHA-256: 8fd751c16092f6e5c8f0709af79c56911c6b13e8ceb2ff5b7cff46bfb842c5e2
@@ -7295,7 +7319,7 @@ export default function Demo() {
 
 ## 布局 Layout
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/layout
 Source: packages/ui/src/components/layout.tsx
 Source SHA-256: a3eee1f77336d01017929f940f49949e11d348343948eff757e0cde9db884233
@@ -7416,7 +7440,7 @@ export default function Demo() {
 
 ## 链接 Link
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/link
 Source: packages/ui/src/components/link.tsx
 Source SHA-256: 1a9ed89613aea1ab58a66f68eeac3cfe5d71573b62df4089a78af1dc7a6926fe
@@ -7485,7 +7509,7 @@ export default function Demo() {
 
 ## 语言切换 LocaleSwitch
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/locale-switch
 Source: packages/ui/src/components/locale-switch.tsx
 Source SHA-256: af568223120f14393e7ed79577f99f09b60d38043d1f6e943c7c66263534dfb5
@@ -7565,7 +7589,7 @@ export default function Demo() {
 
 ## 命令菜单 Menu
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
 Source SHA-256: 546a0cba3c3ecf2f2eaa2cc8170a08b6f49bfa8b6e1e81ff5a9d7eba89cd69a2
@@ -7589,7 +7613,7 @@ Menu 执行动作，LinkItem 导航。禁用不等于隐藏；原语可让禁用
 - Menu / MenuSubmenu：公开 Base UI 命令根与子菜单。
 - MenuItem：一条命令；与 ContextMenuItem 共用。
 - MenuTrigger / MenuPositioner / MenuPopup / MenuPortal：触发器与同一 Root 所属的浮层。
-- MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger：动作、真实导航、勾选、单选与下级命令。
+- MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger：真实导航、勾选、单选与下级命令。
 - MenuSwitchItem：开关式的勾选项：语义仍是 menuitemcheckbox，尾部的标记换成一条开关槽。
 - MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive：组语义与底层公开原语。
 
@@ -7730,14 +7754,15 @@ Written descriptions; the list above is the type-resolved fact.
 一条命令；与 ContextMenuItem 共用。
 - tone: "neutral" | "danger"; default "neutral". 与 Button 的 tone 同义：danger 只标出这是一条危险类动作（字与图标用危险前景，悬停与高亮用危险柔底）。后果说明与确认不在菜单项里，激活后应打开 AlertDialog 或 ConfirmAction。
 - size / inset / disabled / onClick: Base UI Item props. 尺寸档、与带前导标记的项对齐的缩进、禁用与命令。
+- render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 #### MenuTrigger / MenuPositioner / MenuPopup / MenuPortal
 触发器与同一 Root 所属的浮层。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 - side / align / style: Base UI Positioner props. 共享 popup 层级写在 Positioner；调用方 style 最后合并。
 
-#### MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger
-动作、真实导航、勾选、单选与下级命令。
+#### MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger
+真实导航、勾选、单选与下级命令。
 - size: xs | sm | md | lg | xl; default md. 复用 Button 五档；禁用项可聚焦但不能执行。
 - inset: boolean. 在逻辑起点为同档图标与字段间隔留位，使无图标命令与前导标记的文字列对齐；默认 false。MenuGroupLabel 也支持 size/inset。
 - markerPosition: start | end. 仅勾选与单选项，控制实际标记的逻辑位置；默认 end 保持现有外观。状态与键盘语义不变。
@@ -7752,6 +7777,7 @@ Written descriptions; the list above is the type-resolved fact.
 #### MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive
 组语义与底层公开原语。
 - value / defaultValue / onValueChange: Base UI MenuRadioGroup props. 单选组的当前值在 MenuRadioGroup 上。
+- MenuGroupLabel：size / inset: xs | sm | md | lg | xl / boolean; default md / false. 分组标题的尺寸档与前导缩进，与同组菜单项的文字起点对齐。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ### Keyboard
@@ -7780,7 +7806,7 @@ export default function Demo() {
 
 ## 测量 Meter
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/meter
 Source: packages/ui/src/components/meter.tsx
 Source SHA-256: 3b1233fa556bb4efd1a827ee8adfc0c4e36155e61816f0c7f378a8b23e793ca9
@@ -7889,7 +7915,7 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 
 ## 原生选择 NativeSelect
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
 Source SHA-256: c79d1ce39764a22c4952574d981ffccb7e4d732c9e1be7816a5a3154dad1745f
@@ -7984,7 +8010,7 @@ export default function Demo() {
 
 ## 导航菜单 NavigationMenu
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
 Source SHA-256: c3608883416f4df54beb12ab8b53eff90781fec1dfcac588351999b0269008b4
@@ -8125,6 +8151,10 @@ nav、ul 与稳定 value 的导航项。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ### Keyboard
+- Tab / Shift+Tab: 在顶栏链接、分组触发器以及展开面板内的链接之间依次移动焦点。
+- ← / →: 在横向导航栏的顶层条目间移动焦点（垂直方向使用 ↑ / ↓）。
+- Enter / Space: 在触发器上展开或收起对应导航面板；在链接上按 Enter 前往真实目标。
+- Escape: 关闭当前展开的导航面板，焦点回到对应的触发器。
 
 ### Source example
 #### 真实目的地与分组
@@ -8152,7 +8182,7 @@ export default function Demo() {
 
 ## 数值输入 NumberField
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
 Source SHA-256: fd8dc4dc0d76b55c59175e4697ce16f1c98f0bd3e6afa4cf3cd836497722d340
@@ -8292,7 +8322,7 @@ export default function Demo() {
 
 ## 分段文本 OtpField
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/otp-field
 Source: packages/ui/src/components/otp-field.tsx
 Source SHA-256: d6ac787b80dd6a4b61a5012e7336bbd9e3ad112e170bb3e505fc59913e6c400b
@@ -8397,7 +8427,7 @@ export default function Demo() {
 
 ## 页面标题 PageHeader
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/page-header
 Source: packages/ui/src/components/page-header.tsx
 Source SHA-256: 534d0136bde2d51dd17682d9aa311fb79fd5667825007d59dc9e35496e8e79de
@@ -8509,7 +8539,7 @@ export default function Demo() {
 
 ## 分页 Pagination
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
 Source SHA-256: 6b4c3df196a315eb41ef9873ba55c26015781f71d73fe28557fedb9dd1120379
@@ -8677,6 +8707,8 @@ a，匹配当前页时 aria-current=page，并以选中面加中等字重呈现�
 - children / render / native props: useRender.ComponentProps<span>. 仅在已知有省略页时提供。
 
 ### Keyboard
+- Tab / Shift+Tab: 在上一页、各页码入口、下一页及条数选择（Select）间移动焦点；busy 期间翻页按钮保持可聚焦而不丢焦点。
+- Enter / Space: 激活聚焦的翻页或页码按钮；使用链接原语 PaginationLink（<a>）时按 Enter 导航。
 
 ### Source example
 #### 页码与每页条数
@@ -8696,7 +8728,7 @@ export default function Demo() {
 
 ## 密码输入 PasswordInput
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/password-input
 Source: packages/ui/src/components/password-input.tsx
 Source SHA-256: 2cc5609ba3e912efe39c5fc9eb5a4dd9dbd280a509dd635309654d833a0b140b
@@ -8784,7 +8816,7 @@ export default function Demo() {
 
 ## 结果未知 PendingValue
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/pending-value
 Source: packages/ui/src/components/pending-value.tsx
 Source SHA-256: fb8550fe64f13a3f78a7d664a9afebac67328f26c997a51d3a2daebcf48e5f85
@@ -8853,7 +8885,7 @@ export default function Demo() { return <PendingValue label="值" numeric action
 
 ## 浮起面板 Popover
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/popover
 Source: packages/ui/src/components/popover.tsx
 Source SHA-256: 50a0f9ad172921a100aa5958dc826f501b0eb504a7571a286038c1a9e902d12d
@@ -9020,7 +9052,7 @@ export default function Demo() {
 
 ## 进度 Progress
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/progress
 Source: packages/ui/src/components/progress.tsx
 Source SHA-256: 7a3b24ee301227032c1bfbb846e94f5949e7fc9578d5f0279700a65277c1accb
@@ -9130,7 +9162,7 @@ export default function Demo() { return <Stack gap="fields" className="w-full ma
 
 ## 构成 Proportion
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/proportion
 Source: packages/ui/src/components/proportion.tsx
 Source SHA-256: 0844615af3d66aaf7d6ab710260f5c99501c0ab2008932df622d065b6e8b8a5d
@@ -9209,7 +9241,7 @@ export default function Demo() {
 
 ## 长文 Prose
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/prose
 Source: packages/ui/src/components/prose.tsx
 Source SHA-256: a94bcf0559188c47580dade7e018f602f7340e267230ace89e0c7d16d0df415e
@@ -9305,7 +9337,7 @@ export default function Demo() {
 
 ## 单选组 RadioGroup
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/radio-group
 Source: packages/ui/src/components/radio-group.tsx
 Source SHA-256: f64be68df1c293fdbe85e23a2fe1beabaa6fb4dc93d4920d78d5c3234a97e0b2
@@ -9440,7 +9472,7 @@ export default function Demo() {
 
 ## 评分 Rating
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/rating
 Source: packages/ui/src/components/rating.tsx
 Source SHA-256: 280d62c431743cb0d2a9bee2a1f0a6897335c9a8fbb35d01d976fee4a78c1ebd
@@ -9541,7 +9573,7 @@ export default function Demo() {
 
 ## 相对时间 RelativeTime
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/relative-time
 Source: packages/ui/src/components/relative-time.tsx
 Source SHA-256: 6f2886b8777aa3c19b4c3773b05e84246c46295cb9e707a22aeab7a3487ad2f6
@@ -9622,7 +9654,7 @@ export default function Demo() {
 
 ## 分栏 Resizable
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/resizable
 Source: packages/ui/src/components/resizable.tsx
 Source SHA-256: 275cd5bb5c655f0dfce41b9ae165de470d0a2507c08006653564e2bd34878f0a
@@ -9761,7 +9793,7 @@ export default function Demo() {
 
 ## 结果 Result
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/result
 Source: packages/ui/src/components/result.tsx
 Source SHA-256: 68a37124c7872d1d121516a465cd9f9fe0d764871e5ee1f9ce9b58399d44e43e
@@ -9872,7 +9904,7 @@ export default function Demo() {
 
 ## 两量关系 ScatterChart
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
 Source SHA-256: 91d9cdf6eb59bb5da1a566606bc87f7c19782ce98a4f38be03872593d2eafd31
@@ -9942,6 +9974,7 @@ figure 名称、命名的双轴、按系列着色的标记与同源可见 Table�
 - xLabel / yLabel: string. 横轴与纵轴量的是什么，例如「记录数」「失败率」。
 - series: readonly { key: string; label: string; points: readonly { id: string; label: string; x: number; y: number }[] }[]. 1 至 3 个系列。只有一个系列时取第一色、不显示图例；两个以上按 chart1..3 取色并配不同标记形状。每个点需要稳定 id 与非空名称。
 - formatX / formatY: (value: number) => ReactNode. 格式化已知数值；默认按 UILocale 数值 Intl。读数与数据表可用节点；轴上的文字只取字符串或数字结果，返回节点时退回默认数值格式。
+- style / className / render / ref: ChartStyle / useRender 组合. 根 style 可覆写 --qy-chart-plot-height（默认 10 材）；render、ref 与其余 figure 属性透传到根节点。
 
 ### Keyboard
 
@@ -9971,10 +10004,10 @@ export default function Demo() {
 
 ## 滚动区域 ScrollArea
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: cac2e91684ebc4c766cf31f3d48387d72611874133cc8f8bb9b0609aab9afe14
+Source SHA-256: eb6c10dda6868344c92e36e18202d387afc75ea75dee1954d9c05b64be32ef84
 
 真实原生滚动，或显式组合可拖动滚动条。
 
@@ -10038,7 +10071,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
 
 ### ScrollAreaScrollbar
-- no props declared by this library
+- `visibility?`: `"always" | "auto"`. 滚动条显隐策略：auto（默认）静止时隐身，悬停或滚动时淡入；always 有溢出即常驻可见。
 - plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
 
 ### ScrollAreaThumb
@@ -10046,7 +10079,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ### ScrollAreaViewport
-- no props declared by this library
+- `fade?`: `boolean`. 边缘渐隐：依赖原语提供的 data-overflow-*-start/end 状态，在被切掉的一端平滑淡出。
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ### Dependencies and providers
@@ -10068,11 +10101,13 @@ Written descriptions; the list above is the type-resolved fact.
 
 #### ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent
 自定义滚动条的显式组合；Root 拥有布局与溢出事实，Viewport 才是真实滚动元素，Content 用于测量内容。
+- fade: boolean; default false. ScrollAreaViewport 边缘渐隐：在内容被切掉的一端平滑淡出，无系统占位条遮挡。
 - render / ref / className / style / native props: ScrollAreaPrimitive part props. 各部位保留自身原语 props；滚动事件、scrollTop/scrollLeft 和聚焦均属于 Viewport，不能把旧视口 ref 直接接到 Root。
 
 #### ScrollAreaScrollbar
-随实际溢出出现的可拖动轨道；未给 children 时内置真实 Thumb。
+随实际溢出出现的可拖动细轨道；未给 children 时内置真实 Thumb。
 - orientation: vertical | horizontal; default vertical. 选择受控轴；双轴时组合两条轨道与 Corner。
+- visibility: "auto" | "always"; default "auto". auto 静止时隐身、悬停或滚动时淡入；always 有溢出即常驻显示。
 - keepMounted: boolean; default false. 无溢出时仍保留 DOM，但隐藏轨道，不制造不存在的滚动范围。
 
 #### ScrollAreaThumb / ScrollAreaCorner / ScrollAreaPrimitive
@@ -10097,10 +10132,10 @@ export default function Demo() {
 
 ## 搜索输入 SearchInput
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/search-input
 Source: packages/ui/src/components/search-input.tsx
-Source SHA-256: 0b4ce4a97d0fd6c0e87c4ba043c42efa071c3e8f54d3d5be21f2a083abaf9af7
+Source SHA-256: 5a7fd002fddbeaf6fbe2da3af06d3e53daf35e4302c727c0c6e3d91f3a9cce15
 
 输入一个搜索词，并能一步清空。
 
@@ -10185,7 +10220,7 @@ export default function Demo() {
 
 ## 区块 Section
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/section
 Source: packages/ui/src/components/section.tsx
 Source SHA-256: 4878536a4cef8e4e4d2b42dd7f7e6a290cf1d0911cd35fd2cddd499fbdffa5ab
@@ -10307,7 +10342,7 @@ export default function Demo() {
 
 ## 分段控件 SegmentedControl
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
 Source SHA-256: f4665dbed362bff8a49503a39078814435fee87286a1eef4e431e26d75f2df6e
@@ -10416,7 +10451,7 @@ export default function Demo() {
 
 ## 选择器 Select
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/select
 Source: packages/ui/src/components/select.tsx
 Source SHA-256: b17fc57dc658402188ba8a821eb0a99f9a034ed4217d47d74991b427c37583da
@@ -10609,7 +10644,7 @@ export default function Demo() {
 
 ## 分隔线 Separator
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/separator
 Source: packages/ui/src/components/separator.tsx
 Source SHA-256: c4d87fe0a3c5c89e644fe64b96c3fd897e89a0df3ed9c60c480ac2ce6007999e
@@ -10690,7 +10725,7 @@ export default function Demo() {
 
 ## 级别 SeverityMark
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/severity-mark
 Source: packages/ui/src/components/severity-mark.tsx
 Source SHA-256: b5ee87babb7044c0d014e89a44df856883f2893ada42f347674a9100cc8b0bf3
@@ -10783,7 +10818,7 @@ export default function Demo() {
 
 ## 侧栏导航 Sidebar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
 Source SHA-256: 3098b18a94f563faac4c8c907aa14400940981b3411c62438738b6d35d1e9039
@@ -10983,6 +11018,7 @@ Written descriptions; the list above is the type-resolved fact.
 真实页面链接。
 - href / active: native anchor / boolean. active 显式写 aria-current；焦点所在之处收起后真的不可达时，才会回退到 Toggle（例如焦点原本在一个二级子级里，侧栏收起换成 rail）。
 - icon: ReactNode. 收起为 rail 时唯一可见的识别物；没有图标的条目收起后没有可展示的内容。名称（children）在 rail 下只是视觉隐藏（sr-only），可访问名称不变，并由 Tooltip 把名称重新摆给看得见的人。
+- count / max: number / number; default max: 99. 未读或待处理计数（> 0 时显示）。展开态紧随名称以等宽数字展示；rail 态在有 icon 时转为 CornerMark 钉在图标角上，超过 max 显示「max+」。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 #### SidebarButton
@@ -10994,8 +11030,12 @@ Written descriptions; the list above is the type-resolved fact.
 可展开的二级目的地：展开态是内嵌面板，rail 态换成同一组链接的 Popover，悬停或聚焦都能打开。
 - SidebarSub：open / defaultOpen / onOpenChange: boolean / callback. 展开态与 rail 态共用同一个开合状态；rail 下即使换成 Popover，用户的开合记忆也不因收起/展开侧栏而改变。
 - SidebarSubTrigger：icon: ReactNode. 与 SidebarLink 的 icon 同一分工；rail 下按钮不再承担内嵌展开，只作为 Popover 入口，避免收起侧栏悄悄改变用户没点开过的展开记忆。
+- SidebarSub：children: ReactNode. 必填：包含一个 SidebarSubTrigger 与一个 SidebarSubContent；不可再嵌套 SidebarSub。
 
 ### Keyboard
+- Tab / Shift+Tab: 在侧栏切换按钮（SidebarToggle）、导航链接（SidebarLink）、动作条目（SidebarButton）与二级入口（SidebarSubTrigger）间移动焦点；窄屏抽屉模式下按 Drawer 规则管理焦点。
+- Enter / Space: 在 SidebarToggle 上切换展开与图标 rail，在 SidebarButton 上执行动作，在 SidebarSubTrigger 上展开或收起二级子级（rail 下打开二级 Popover）；在 SidebarLink 上按 Enter 前往真实目标。
+- Escape: 在 rail 态关闭已打开的二级 Popover，或在窄屏 drawer 模式下关闭侧栏抽屉并将焦点返回触发按钮。
 
 ### Source example
 #### 可逆导航与二级
@@ -11014,7 +11054,7 @@ export default function Demo() {
 
 ## 骨架屏 Skeleton
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/skeleton
 Source: packages/ui/src/components/skeleton.tsx
 Source SHA-256: 5ad0f53b67097d2054eae255fd7dcb65aa1ae2bf1fe3866ce8f7eb2493d8c82f
@@ -11125,10 +11165,10 @@ export default function Demo() {
 
 ## 跳转链接 SkipLink
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/skip-link
 Source: packages/ui/src/components/skip-link.tsx
-Source SHA-256: 4333b6b70cefd7211580107717851060f8942bbe39dc19982442c7da5363f79e
+Source SHA-256: cfee10a53d3eb7001530339e61be1cd731feb3923b4e432c0669838feffd0e01
 
 让键盘用户越过重复的导航，直达主要内容。
 
@@ -11206,7 +11246,7 @@ export default function Demo() {
 
 ## 滑块 Slider
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/slider
 Source: packages/ui/src/components/slider.tsx
 Source SHA-256: 836d2fa5c3b4ba8449b959f7b5f521c0ecaf427760c3edbd3a1c7309db591de5
@@ -11354,7 +11394,7 @@ export default function Demo() {
 
 ## 行内趋势 Sparkline
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/sparkline
 Source: packages/ui/src/components/sparkline.tsx
 Source SHA-256: 856797e9c07fc4a1d7a230de40b6fabfea2d9b5a14a5958f43cdfae590ec0e58
@@ -11427,6 +11467,11 @@ Written descriptions; the list above is the type-resolved fact.
 - width: number; default 100. 坐标宽度（px），默认 5 材；line 的高度固定一材。
 
 ### Keyboard
+- Tab / Shift+Tab: 仅开启 tooltip 且有数据点时进入或离开逐点读数入口；聚焦即打开当前点提示。
+- ← / →: 在逐点读数中移动至前一个 / 后一个数据点并更新提示。
+- Home / End: 跳转至第一个 / 最后一个数据点。
+- Enter / Space: 切换当前数据点提示的显示与关闭。
+- Escape: 关闭逐点提示，焦点留在入口上。
 
 ### Source example
 #### 读数旁的趋势
@@ -11446,7 +11491,7 @@ export default function Demo() {
 
 ## 度量 Stat
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/stat
 Source: packages/ui/src/components/stat.tsx
 Source SHA-256: 26ce1b5ba1dddb58e0b6ca56364e84c6011d5e406ce93cd566530b998da05e75
@@ -11580,7 +11625,7 @@ export default function Demo() {
 
 ## 状态 StatusDot
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/status-dot
 Source: packages/ui/src/components/status-dot.tsx
 Source SHA-256: 460a2c7c93aa7bbf779ca0c9ad7e6f47f2d7fc13190afd17b95f4717319e3c74
@@ -11652,7 +11697,7 @@ export default function Demo() { return <Inline>{(["online","offline","pending",
 
 ## 步骤 Steps
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/steps
 Source: packages/ui/src/components/steps.tsx
 Source SHA-256: 28a0975be5681464981373d19c4ce2ba6b475e90e6463937d4f5498a802a88a0
@@ -11736,6 +11781,8 @@ div / p 内容槽。
 - children / render / ref / native props: useRender.ComponentProps<div | p>. 应用提供标题、解释和恢复链接。
 
 ### Keyboard
+- Tab / Shift+Tab: 步骤本身是只读有序列表，不占 Tab 停靠点；仅当应用在步骤内容中放入链接或恢复按钮时，焦点按文档顺序经过这些原生控件。
+- Enter / Space: 激活步骤内由应用提供的链接（Enter）或恢复按钮（Enter / Space）。
 
 ### Source example
 #### 明确的过程状态
@@ -11755,7 +11802,7 @@ export default function Demo() {
 
 ## 开关 Switch
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/switch
 Source: packages/ui/src/components/switch.tsx
 Source SHA-256: 824244fef954f3b8bc97911a210e7e23e7554758faaad3f0d0f741a94dd345bc
@@ -11872,10 +11919,10 @@ export default function Demo() {
 
 ## 比较表 Table
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: 2c1f8ba7a99989283f696f918b46fd141ddb56278986f5b5f13a89bec4a6a99a
+Source SHA-256: dcdd6e9b5b3cba088fccd4182b46c87f6882dbcc48e259f559ad6c589d66f384
 
 原生二维关系与完整比较列。
 
@@ -12028,7 +12075,7 @@ export default function Demo() {
 
 ## 视角标签 Tabs
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/tabs
 Source: packages/ui/src/components/tabs.tsx
 Source SHA-256: 8c8622ab9be09d415cd064c92ff7741e1190c7a1141a95c05e321c536a123a2b
@@ -12140,7 +12187,7 @@ export default function Demo() { return <Tabs defaultValue="text"><TabsList aria
 
 ## 标签集合 TagInput
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/tag-input
 Source: packages/ui/src/components/tag-input.tsx
 Source SHA-256: 2427982c90382e34627b781ce5b3c64a73456920ff2939538c746fc5dd3239a2
@@ -12253,7 +12300,7 @@ export default function Demo() {
 
 ## 多行输入 Textarea
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/textarea
 Source: packages/ui/src/components/textarea.tsx
 Source SHA-256: 25df3fcdf4732439bfe2d07f9abeb78fe822bd05e42808917dbc84a20b03d4aa
@@ -12352,7 +12399,7 @@ export default function Demo() {
 
 ## 主题 ThemeProvider
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/theme-provider
 Source: packages/ui/src/components/theme-provider.tsx
 Source SHA-256: cec0ce7f796c059c282ede1011646f364fb646b0106e2ecd65a22dc8b8dfd1d5
@@ -12475,10 +12522,10 @@ export default function Demo() {
 
 ## 时间输入 TimeField
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/time-field
 Source: packages/ui/src/components/time-field.tsx
-Source SHA-256: 937f151dd1ee52cbb707c4c4d6a087c0e7c791f4e723ba4cc751aa7237f82bcf
+Source SHA-256: b240d9a8214f302f93d570118dfc06cdd4a2cca6274e4701c262976f6b6e8357
 
 只填一个时刻，按时、分、秒分段输入。
 
@@ -12599,7 +12646,7 @@ export default function Demo() {
 
 ## 时间段 TimeRangeField
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/time-range-field
 Source: packages/ui/src/components/time-range-field.tsx
 Source SHA-256: c39fe59d6990ae7bb22f03e31bc6ceccc0d6e0ad00e14cd867631e29a3534bf3
@@ -12701,7 +12748,7 @@ export default function Demo() {
 
 ## 时间序列 Timeline
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/timeline
 Source: packages/ui/src/components/timeline.tsx
 Source SHA-256: 2216da44b0e8c64960e232c1edae772136cdb7cae4c1c1c080e2b6e5e6a2ff66
@@ -12804,7 +12851,7 @@ export default function Demo() {
 
 ## 通知 Toast
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/toast
 Source: packages/ui/src/components/toast.tsx
 Source SHA-256: b6cc92a94f3d63e0faf1d8ffeb6e1779fbb48ca5b0b7e61ecff35a356f8ecc50
@@ -12928,10 +12975,10 @@ export default function Demo() {
 
 ## 阅读目录 Toc
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
-Source SHA-256: f4e51a4407103bc3e69e9f6612457ef1004296c3c79aa640a6305d7c0145cfdd
+Source SHA-256: 25f506ebf93fb2311f6ac2f8567687a2e5351077c5105b17899145dd975eba8f
 
 本页内几个段落之间走动的纵向目录：当前位置把一条清墨基线上自己那一段加深为焦墨，不新增形状。
 
@@ -13047,7 +13094,7 @@ export default function Demo() {
 
 ## 切换按钮 Toggle
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/toggle
 Source: packages/ui/src/components/toggle.tsx
 Source SHA-256: 36a4e2ae0efd10e7f8efa296ff5df32ccc2cf62485fe827d24a8ea57ea00a8ba
@@ -13147,7 +13194,7 @@ export default function Demo() {
 
 ## 切换组 ToggleGroup
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
 Source SHA-256: 7850bfe90e1c53a915357e2fe0de3d9df988b18a93125cb67b3b649996486a94
@@ -13256,7 +13303,7 @@ export default function Demo() {
 
 ## 工具组 Toolbar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/toolbar
 Source: packages/ui/src/components/toolbar.tsx
 Source SHA-256: 2cb3aa0977b43eb4eb9857dc5102b6c53efb2cfadbd272efd91a3caa547f3332
@@ -13345,7 +13392,7 @@ Base UI Toolbar.Root。
 
 #### ToolbarButton
 真实命令；默认组合 Button。
-- size / variant: ButtonProps[size | variant]; default size="md", variant="quiet". 复用基础层尺寸和表面预设。
+- size / variant / shape: ButtonProps[size | variant | shape]; default size="md", variant="quiet", shape="label". 复用基础层尺寸、表面与形状预设；仅图标命令用 shape="icon" 并提供 aria-label。
 - disabled / focusableWhenDisabled / render / ref / nativeButton: ToolbarPrimitive.Button.Props. 自定义 render 时提供合法按钮或成熟触发器，保留焦点与事件链。
 
 #### ToolbarLink / ToolbarSeparator
@@ -13375,10 +13422,10 @@ export default function Demo() {
 
 ## 文字提示 Tooltip
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
-Source SHA-256: 4dd9b24c79431acd6f078c8ffae3d40788c79a47f11561f55ceb4429e8a8aab6
+Source SHA-256: 215f0d78120f358f46c1c592bf3b4775aeb95e883385cb0b80582b6b84d8754f
 
 悬停或聚焦时阅读快捷键、格式与短解释。
 
@@ -13525,10 +13572,10 @@ export default function Demo() {
 
 ## 新手引导 Tour
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/tour
 Source: packages/ui/src/components/tour.tsx
-Source SHA-256: add2cb8a6f949f9311df5c9e87450d71245d3caf1742edad83564a2edcb9e35b
+Source SHA-256: 3bf614d1913cac2dea9b1a5ef9937e48e29954af45fb4f4eddf28e737c5f1dae
 
 依次指向页面上的元素并逐步说明的非阻断引导，可选聚光遮罩。
 
@@ -13569,6 +13616,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### Tour
 - `className?`: `string`.
+- `container?`: `HTMLElement | null`. 观察锚点增删变化的 DOM 范围；缺省观察 document.body。缩小范围可减少无关子树变动触发的重解析。
 - `defaultOpen?`: `boolean`.
 - `defaultStep?`: `number`.
 - `onFinish?`: `() => void`. 在最后一步点「完成」。随后 onOpenChange(false, { reason: "finish" })。
@@ -13599,6 +13647,7 @@ Written descriptions; the list above is the type-resolved fact.
 - onStepChange: (step: number) => void. 换步时调用，参数是新步的下标；被跳过的步不会出现。
 - onFinish / onSkip: () => void / (step) => void. 在最后一步点「完成」，或在某步点「跳过」。随后各自触发 onOpenChange。
 - spotlight: boolean; default false. 在锚点处挖洞的遮罩；不拦截指针，随窗口尺寸与滚动跟随锚点。
+- container: HTMLElement | null. 观察锚点增删变化的 DOM 范围；缺省观察 document.body，缩小范围可减少无关子树变动触发的重解析。
 - className: string. 追加到浮层。
 
 ### Keyboard
@@ -13641,7 +13690,7 @@ export default function Demo() {
 
 ## 穿梭框 Transfer
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/transfer
 Source: packages/ui/src/components/transfer.tsx
 Source SHA-256: a8fb40e9cf2f0175303dded681f41fa34c4e549ce2fa5c1e77a8c11cfba2b52b
@@ -13749,7 +13798,7 @@ export default function Demo() {
 
 ## 层级集合 Tree
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
 Source SHA-256: 51af2eea6dd23fce52b0b5062e83fd08bbb41be9369d653212f2d152d4d86b7a
@@ -13842,6 +13891,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### Keyboard
 - ↑ / ↓ / Home / End: 在可见且可用节点间移动。
 - ← / →: 关闭/展开或移动到父/子节点；RTL 相反。展开与收起由方向键承担；行首的展开图标只供指针使用，不进 Tab 序列，也不进可访问树。
+- →（RTL 为 ←，加载失败时）: 在已展开但异步加载失败的节点上重新触发 loadChildren 重试。
 - Ctrl/⌘+X，Alt+↑ / ↓ / Enter，Esc: 仅 draggable：Ctrl/⌘+X 取起当前节点，方向键移动焦点，Alt+↑ 放到焦点节点之前、Alt+↓ 放到之后、Alt+Enter 放到之内，Esc 或焦点离开则取消。每一步都有播报。
 - Enter / Space / 字首: 单选当前节点，或键入标签开头定位：连续键入的字符（间隔 500ms 内，预设）累积成前缀；重复键入同一个字符则在以它开头的节点间循环。checkable 模式下 Space 改为勾选/取消勾选当前节点及其启用的叶子后代，Enter 不触发单选。
 
@@ -13880,7 +13930,7 @@ export default function Demo() {
 
 ## 树形选择 TreeSelect
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/tree-select
 Source: packages/ui/src/components/tree-select.tsx
 Source SHA-256: c24df0889faa5a44775500312b941d65ad25db540c3cbb8c82f1b30a98def50d
@@ -13960,6 +14010,7 @@ Written descriptions; the list above is the type-resolved fact.
 - disabled / readOnly / required: boolean; default false. 只读保留当前值且不打开弹层；禁用的字段不提交；required 参与原生校验并标 aria-required。invalid 跟随 Field。
 - name / form: string. 隐藏输入的名称与所属表单。单选提交所选 id，未选择提交空字符串；多选每个已选 id 一条同名值，未选择不提交（required 时拦下提交）。
 - aria-label / aria-labelledby / id / className: string. 触发器与弹层里树的名称、触发器的样式入口。没有名称会抛错：用 aria-label、aria-labelledby，或放进带 FieldLabel 的 Field。
+- aria-describedby / aria-invalid: string / boolean | "true" | "false". 触发器的补充说明引用与校验无效状态；未显式传入时跟随外层 Field。
 
 ### Keyboard
 - Enter / Space / ↓ / ↑: 在触发器上打开弹层，焦点落在已选节点（多选是第一个已勾选的叶子，都没有则是第一个节点），其祖先已展开。
@@ -14010,7 +14061,7 @@ export default function Demo() {
 
 ## 排版 Typography
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/typography
 Source: packages/ui/src/components/typography.tsx
 Source SHA-256: bc92ccf04f040c45deae89471af71ba9f76f582784b6e4f1e639bdc725df13ca
@@ -14120,7 +14171,7 @@ export default function Demo() {
 
 ## 虚拟列表 VirtualList
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
 Source SHA-256: 87082ed536a385bbdbf9468c74888760cfcb6f86b0d6133541ae7715106a7fb0
@@ -14215,7 +14266,7 @@ export default function Demo() {
 
 ## 工作面 Workspace
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/workspace
 Source: packages/ui/src/components/workspace.tsx
 Source SHA-256: faf8bd929a3e0e621471dd82684e4350bb698e1c606bb7b8b4e04c5295c54269

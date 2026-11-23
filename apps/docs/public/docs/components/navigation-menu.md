@@ -1,6 +1,6 @@
 # 导航菜单 NavigationMenu
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/navigation-menu
 Source: packages/ui/src/components/navigation-menu.tsx
 Source SHA-256: c3608883416f4df54beb12ab8b53eff90781fec1dfcac588351999b0269008b4
@@ -141,6 +141,10 @@ nav、ul 与稳定 value 的导航项。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ## Keyboard
+- Tab / Shift+Tab: 在顶栏链接、分组触发器以及展开面板内的链接之间依次移动焦点。
+- ← / →: 在横向导航栏的顶层条目间移动焦点（垂直方向使用 ↑ / ↓）。
+- Enter / Space: 在触发器上展开或收起对应导航面板；在链接上按 Enter 前往真实目标。
+- Escape: 关闭当前展开的导航面板，焦点回到对应的触发器。
 
 ## Source examples
 ### 真实目的地与分组

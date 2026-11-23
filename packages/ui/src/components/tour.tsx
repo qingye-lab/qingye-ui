@@ -50,6 +50,8 @@ export interface TourProps {
   onSkip?: (step: number) => void;
   /** 在锚点处挖洞的聚光遮罩；遮罩不拦截指针，引导始终是非阻断的。默认不显示。 */
   spotlight?: boolean;
+  /** 观察锚点增删变化的 DOM 范围；缺省观察 document.body。缩小范围可减少无关子树变动触发的重解析。 */
+  container?: HTMLElement | null;
   className?: string;
 }
 
@@ -146,6 +148,7 @@ export function Tour({
   onFinish,
   onSkip,
   spotlight = false,
+  container,
   className,
 }: TourProps): React.ReactElement | null {
   const { messages } = useUILocale();
@@ -191,14 +194,16 @@ export function Tour({
   const [revision, setRevision] = React.useState(0);
   React.useEffect(() => {
     if (!open || typeof MutationObserver === "undefined") return;
+    const target = container ?? document.body;
+    if (!target) return;
     let frame = 0;
     const observer = new MutationObserver(() => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => setRevision(value => value + 1));
     });
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(target, { childList: true, subtree: true });
     return () => { cancelAnimationFrame(frame); observer.disconnect(); };
-  }, [open]);
+  }, [open, container]);
 
   // 解析所有锚点，缺失的步骤不进入可用表；当前步骤不可用时就近改道，全部不可用则结束。
   React.useLayoutEffect(() => {

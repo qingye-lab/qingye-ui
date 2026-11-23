@@ -1,6 +1,9 @@
-import { cn } from "@qingye_lab/ui/utils";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Popover, PopoverPopup, PopoverTrigger } from "@qingye_lab/ui/components/popover";
+import { ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaViewport } from "@qingye_lab/ui/components/scroll-area";
 import { Toc, useTocHeadings, useTocScrollSpy } from "@qingye_lab/ui/components/toc";
-import { IconEdit } from "@tabler/icons-react";
+import { cn } from "@qingye_lab/ui/utils";
+import { IconEdit, IconList } from "@tabler/icons-react";
 import { useEffect, useState, type MouseEvent, type RefObject } from "react";
 import { useLocation } from "react-router-dom";
 import { componentPath, GUIDES, OVERVIEW } from "@/lib/nav";
@@ -78,4 +81,49 @@ export function TableOfContents({ container }: { container: RefObject<HTMLElemen
     if (id) onHashClick(event as MouseEvent<HTMLAnchorElement>, id);
   };
   return <><Toc current={current} items={items} onClick={onClick} />{edit}</>;
+}
+
+/**
+ * Sticky icon button anchored at the top-right of the article paper whenever the right-hand TOC
+ * column is hidden by the container query (< 66.25rem). Opens a dropdown popover with the page's Toc.
+ */
+export function TocPopoverButton({ container }: { container: RefObject<HTMLElement | null> }) {
+  const en = useDocsLocale() === "en";
+  const items = useTocHeadings(container, HEADINGS);
+  const current = useTocScrollSpy(items, { offset: useScrollPadding() });
+  const onHashClick = useHashLink();
+  const [open, setOpen] = useState(false);
+
+  if (items.length < 2) return null;
+
+  const label = en ? "On this page" : "本页目录";
+  const onClick = (event: MouseEvent<HTMLElement>) => {
+    const link = (event.target as Element).closest<HTMLAnchorElement>('a[href^="#"]');
+    const id = link ? decodeURIComponent(link.hash.slice(1)) : "";
+    if (id) {
+      onHashClick(event as MouseEvent<HTMLAnchorElement>, id);
+      setOpen(false);
+    }
+  };
+
+  return (
+    <Popover onOpenChange={setOpen} open={open}>
+      <PopoverTrigger
+        aria-label={label}
+        className="mt-(--qy-fen) bg-surface"
+        data-docs-toc-trigger=""
+        render={<Button shape="icon" size="md" variant="bordered" />}
+      >
+        <IconList aria-hidden="true" />
+      </PopoverTrigger>
+      <PopoverPopup align="end" positionerProps={{ collisionPadding: 16 }} side="bottom" viewportProps={{ className: "p-0" }}>
+        <ScrollAreaRoot className="max-h-[min(24rem,65dvh)] w-[min(15rem,calc(100vw-2*var(--qy-panel-padding)))]">
+          <ScrollAreaViewport className="max-h-[min(24rem,65dvh)] p-(--qy-panel-padding-sm)" fade tabIndex={-1}>
+            <Toc aria-label={label} current={current} items={items} onClick={onClick} />
+          </ScrollAreaViewport>
+          <ScrollAreaScrollbar />
+        </ScrollAreaRoot>
+      </PopoverPopup>
+    </Popover>
+  );
 }

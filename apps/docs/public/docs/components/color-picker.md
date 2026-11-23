@@ -1,9 +1,9 @@
 # 颜色选择 ColorPicker
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/color-picker
 Source: packages/ui/src/components/color-picker.tsx
-Source SHA-256: aacdb9bc0a3ecbe1c0081eff0149c5f5f097de7d58c4d93f77cedd7042e41afd
+Source SHA-256: a5f6c5e299b36e407c068835ebf3031200b172384bda3c5c69ccf1e06a1dbc47
 
 选取用户数据里的颜色：标签颜色、主题配置取值，得到一个 #rrggbb。
 

@@ -1,6 +1,6 @@
 # 两量关系 ScatterChart
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
 Source SHA-256: 91d9cdf6eb59bb5da1a566606bc87f7c19782ce98a4f38be03872593d2eafd31
@@ -70,6 +70,7 @@ figure 名称、命名的双轴、按系列着色的标记与同源可见 Table�
 - xLabel / yLabel: string. 横轴与纵轴量的是什么，例如「记录数」「失败率」。
 - series: readonly { key: string; label: string; points: readonly { id: string; label: string; x: number; y: number }[] }[]. 1 至 3 个系列。只有一个系列时取第一色、不显示图例；两个以上按 chart1..3 取色并配不同标记形状。每个点需要稳定 id 与非空名称。
 - formatX / formatY: (value: number) => ReactNode. 格式化已知数值；默认按 UILocale 数值 Intl。读数与数据表可用节点；轴上的文字只取字符串或数字结果，返回节点时退回默认数值格式。
+- style / className / render / ref: ChartStyle / useRender 组合. 根 style 可覆写 --qy-chart-plot-height（默认 10 材）；render、ref 与其余 figure 属性透传到根节点。
 
 ## Keyboard
 

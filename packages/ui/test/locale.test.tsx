@@ -41,3 +41,14 @@ test("the provider hands its direction to Base UI: a horizontal tablist reverses
   render(<UILocaleProvider dir="rtl">{tabs}</UILocaleProvider>);
   await userEvent.tab(); await userEvent.keyboard("{ArrowRight}"); expect(screen.getByRole("tab", { name: "甲" })).toHaveFocus();
 });
+
+test("zhCN and enUS expose identical message key sets, including deprecated v5 keys kept for compatibility", () => {
+  expect(Object.keys(enUS.messages).sort()).toEqual(Object.keys(zhCN.messages).sort());
+  for (const locale of [zhCN, enUS]) {
+    expect(locale.messages.inputClear).toBeTruthy();
+    expect(locale.messages.expand).toBeTruthy();
+    expect(locale.messages.lightTheme).toBeTruthy();
+    expect(locale.messages.darkTheme).toBeTruthy();
+    expect(locale.messages.paginationSummary(1, 3, 25)).toBeTruthy();
+  }
+});

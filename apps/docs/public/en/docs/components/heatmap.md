@@ -1,9 +1,9 @@
 # Heatmap
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/heatmap
 Source: packages/ui/src/components/heatmap.tsx
-Source SHA-256: a0208da9a4fca7de7e68d8b4dc4bb6ba881b4b1fdc2ac6bcaf046febc74eec34
+Source SHA-256: 6df5ef870950dfd8dfb024b637f1ed94139e8f5a67b9f0dcc70d670cf8aca7ea
 
 A quantity over two categorical dimensions, such as sync activity by weekday and hour; a single-hue sequential scale (the first series color, light to full) or application-declared levels, readable cell by cell from the keyboard, with an on-demand data table.
 

@@ -1,9 +1,9 @@
 # SearchInput
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/search-input
 Source: packages/ui/src/components/search-input.tsx
-Source SHA-256: 0b4ce4a97d0fd6c0e87c4ba043c42efa071c3e8f54d3d5be21f2a083abaf9af7
+Source SHA-256: 5a7fd002fddbeaf6fbe2da3af06d3e53daf35e4302c727c0c6e3d91f3a9cce15
 
 Enter a search term and clear it in one step.
 

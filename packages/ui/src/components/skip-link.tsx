@@ -36,7 +36,7 @@ export function SkipLink({ href, children, className, onClick, ...props }: SkipL
         target.scrollIntoView({ block: "start" });
       }}
       className={cn(
-        "pointer-events-none fixed start-(--qy-space-2) top-(--qy-space-2) z-10 inline-flex min-h-(--qy-fill-height) items-center rounded-overlay border border-border bg-surface-raised px-(--qy-control-sm-padding) text-body text-foreground opacity-0 shadow-raised outline-none focus:pointer-events-auto focus:opacity-100 focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color)",
+        "touch-target pointer-events-none fixed pointer-coarse:fixed start-(--qy-space-2) top-(--qy-space-2) z-10 inline-flex min-h-(--qy-fill-height) items-center rounded-overlay border border-border bg-surface-raised px-(--qy-control-sm-padding) text-body text-foreground opacity-0 shadow-raised outline-none focus:pointer-events-auto focus:opacity-100 focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color)",
         className,
       )}
     >{children ?? messages.skipToContent}</a>

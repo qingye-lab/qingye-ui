@@ -1,9 +1,9 @@
 # TimeField
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/time-field
 Source: packages/ui/src/components/time-field.tsx
-Source SHA-256: 937f151dd1ee52cbb707c4c4d6a087c0e7c791f4e723ba4cc751aa7237f82bcf
+Source SHA-256: b240d9a8214f302f93d570118dfc06cdd4a2cca6274e4701c262976f6b6e8357
 
 Fill in a time of day alone, segment by segment: hour, minute, second.
 

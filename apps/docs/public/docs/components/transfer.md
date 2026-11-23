@@ -1,6 +1,6 @@
 # 穿梭框 Transfer
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/transfer
 Source: packages/ui/src/components/transfer.tsx
 Source SHA-256: a8fb40e9cf2f0175303dded681f41fa34c4e549ce2fa5c1e77a8c11cfba2b52b

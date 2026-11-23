@@ -19,7 +19,7 @@ function LocalePreview() {
 }
 export default function I18nPage() {
   const en = useDocsLocale() === "en";
-  return <Article><PageHeader title={en ? "Internationalization" : "国际化"} description={en ? "Built-in messages default to Chinese. UILocaleProvider switches or overrides them; your own content and labels stay yours." : "内置文案默认中文，用 UILocaleProvider 切换或覆盖；内容与标签仍由你提供。"} />
+  return <Article><PageHeader title={en ? "Internationalization" : "国际化"} />
     <H2 id="english">{en ? "Choose a language" : "选择语言"}</H2><P><Code>UILocaleProvider</Code>{en ? " uses only the locale you pass; it does not read the browser language. Set <html lang> to the page's actual language so screen readers and hyphenation follow it." : " 只按你传入的 locale 选择内置文案，不读取浏览器语言。把 <html lang> 设成页面实际的语言，读屏与断字才会按这门语言处理。"}</P><CodeBlock code={'import { UILocaleProvider } from "@qingye_lab/ui/locale";\nimport { enUS } from "@qingye_lab/ui/locales/en-US";\n\n<UILocaleProvider locale={enUS}><App /></UILocaleProvider>'} /><LocalePreview />
     <H2 id="overrides">{en ? "Override messages" : "覆盖文案"}</H2><P>{en ? "messages replaces only the keys it lists; the rest come from the enclosing language. Parameterized messages are functions: keep their parameters. When a single component needs a different name, pass a public prop such as aria-label." : "messages 只替换列出的键，其余沿用外层语言。带参数的文案是函数，覆盖时保持同样的参数。单个组件需要不同的名称时，直接传 aria-label 等公开属性。"}</P><CodeBlock code={'<UILocaleProvider messages={{ close: "Close preview" }}>\n  <App />\n</UILocaleProvider>'} />
     <H2 id="direction">{en ? "Writing direction" : "书写方向"}</H2><P>{en

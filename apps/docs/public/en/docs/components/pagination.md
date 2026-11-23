@@ -1,6 +1,6 @@
 # Pagination
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
 Source SHA-256: 6b4c3df196a315eb41ef9873ba55c26015781f71d73fe28557fedb9dd1120379
@@ -168,6 +168,8 @@ An omitted-pages marker, not a final page.
 - children / render / native props: useRender.ComponentProps<span>. Use only when omitted pages are known to exist.
 
 ## Keyboard
+- Tab / Shift+Tab: Move focus across previous/next controls, page entries, and the page-size Select; buttons remain focusable while busy so focus is not lost.
+- Enter / Space: Activate the focused paging button; when using anchor-based PaginationLink, press Enter to navigate.
 
 ## Source examples
 ### 页码与每页条数

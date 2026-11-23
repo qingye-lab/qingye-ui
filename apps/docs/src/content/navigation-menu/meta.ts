@@ -65,6 +65,7 @@ export default {
         },
         {
           "name": "description（NavigationMenuLink，面板内使用）",
+          "nameEn": "description (NavigationMenuLink, inside panel)",
           "type": "ReactNode",
           "description": "一行浓墨说明，只在能帮读者判断去留时给出；顶栏导航线的单行目的地不接受它。",
           "descriptionEn": "One muted description line, given only when it helps the reader decide; a single-line top-bar destination does not accept it."
@@ -109,6 +110,28 @@ export default {
   ],
   "notesEn": [
     "Links retain real href values; no router is built in."
+  ],
+  "keyboard": [
+    {
+      "keys": "Tab / Shift+Tab",
+      "description": "在顶栏链接、分组触发器以及展开面板内的链接之间依次移动焦点。",
+      "descriptionEn": "Move focus sequentially across top-level links, group triggers, and links inside an open panel."
+    },
+    {
+      "keys": "← / →",
+      "description": "在横向导航栏的顶层条目间移动焦点（垂直方向使用 ↑ / ↓）。",
+      "descriptionEn": "Move focus between top-level items in a horizontal navigation bar (↑ / ↓ when vertical)."
+    },
+    {
+      "keys": "Enter / Space",
+      "description": "在触发器上展开或收起对应导航面板；在链接上按 Enter 前往真实目标。",
+      "descriptionEn": "Toggle the associated navigation panel on a trigger; press Enter on a link to navigate to its destination."
+    },
+    {
+      "keys": "Escape",
+      "description": "关闭当前展开的导航面板，焦点回到对应的触发器。",
+      "descriptionEn": "Close the currently open navigation panel and return focus to its trigger."
+    }
   ],
   "design": {
     "methods": [

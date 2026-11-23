@@ -1,6 +1,6 @@
 # 工具组 Toolbar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/toolbar
 Source: packages/ui/src/components/toolbar.tsx
 Source SHA-256: 2cb3aa0977b43eb4eb9857dc5102b6c53efb2cfadbd272efd91a3caa547f3332
@@ -89,7 +89,7 @@ Base UI Toolbar.Root。
 
 ### ToolbarButton
 真实命令；默认组合 Button。
-- size / variant: ButtonProps[size | variant]; default size="md", variant="quiet". 复用基础层尺寸和表面预设。
+- size / variant / shape: ButtonProps[size | variant | shape]; default size="md", variant="quiet", shape="label". 复用基础层尺寸、表面与形状预设；仅图标命令用 shape="icon" 并提供 aria-label。
 - disabled / focusableWhenDisabled / render / ref / nativeButton: ToolbarPrimitive.Button.Props. 自定义 render 时提供合法按钮或成熟触发器，保留焦点与事件链。
 
 ### ToolbarLink / ToolbarSeparator

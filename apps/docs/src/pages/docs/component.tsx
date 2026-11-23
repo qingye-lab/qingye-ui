@@ -1,8 +1,9 @@
 import { METHODS, methodsFor } from "@/lib/design-guidance";
 import { Kbd } from "@qingye_lab/ui/components/kbd";
 import { Prose } from "@qingye_lab/ui/components/prose";
+import { SegmentedControl, SegmentedControlItem } from "@qingye_lab/ui/components/segmented-control";
 import { Table, TableContainer, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@qingye_lab/ui/components/table";
-import { use, type ReactNode } from "react";
+import { use, useState, type ReactNode } from "react";
 import { useParams } from "react-router-dom";
 import { CodeBlock } from "@/components/code-block";
 import { importSnippet } from "@/lib/highlight";
@@ -21,7 +22,7 @@ import "./component.css";
 const componentCopy = {
   zh: {
     layer: "层", methods: "方法", exports: "导出", separator: "、",
-    examples: "示例", when: "何时使用", use: "适用", avoid: "不适用",
+    examples: "示例", density: "示例密度", densityDefault: "舒展", densityCompact: "紧凑", when: "何时使用", use: "适用", avoid: "不适用",
     state: "状态归属", library: "组件负责", application: "应用负责",
     decisions: "设计决定", api: "API", keyboard: "键盘交互", notes: "使用建议",
     prop: "属性", type: "类型", default: "默认值", description: "说明",
@@ -31,7 +32,7 @@ const componentCopy = {
   },
   en: {
     layer: "Layer", methods: "Methods", exports: "Exports", separator: ", ",
-    examples: "Examples", when: "When to use", use: "Use for", avoid: "Not for",
+    examples: "Examples", density: "Example density", densityDefault: "Default", densityCompact: "Compact", when: "When to use", use: "Use for", avoid: "Not for",
     state: "State ownership", library: "Handled by the component", application: "Handled by your application",
     decisions: "Decisions", api: "API", keyboard: "Keyboard interactions", notes: "Usage notes",
     prop: "Prop", type: "Type", default: "Default", description: "Description",
@@ -84,6 +85,7 @@ function LoadedComponentDoc({ slug }: { slug: string }) {
 function ComponentDoc({ entry }: { entry: ComponentEntry }) {
   const locale = useDocsLocale();
   const text = componentCopy[locale];
+  const [density, setDensity] = useState<"default" | "compact">("default");
   const { zh, en } = splitTitle(entry.title);
   const design = entry.design ?? {};
   const use = clean(design.whenToUse);
@@ -110,10 +112,23 @@ function ComponentDoc({ entry }: { entry: ComponentEntry }) {
         />
       </PageHeader>
 
-      <H2 id="examples">{text.examples}</H2>
-      <ContentBoundary key={entry.slug} title={text.demosFailed}>
-        <Demos slug={entry.slug} />
-      </ContentBoundary>
+      <div className="component-examples-head">
+        <H2 className="text-prose-h2" id="examples">{text.examples}</H2>
+        <SegmentedControl
+          aria-label={text.density}
+          onValueChange={(value) => setDensity(value as "default" | "compact")}
+          size="sm"
+          value={density}
+        >
+          <SegmentedControlItem value="default">{text.densityDefault}</SegmentedControlItem>
+          <SegmentedControlItem value="compact">{text.densityCompact}</SegmentedControlItem>
+        </SegmentedControl>
+      </div>
+      <div data-density={density === "compact" ? "compact" : undefined}>
+        <ContentBoundary key={entry.slug} title={text.demosFailed}>
+          <Demos slug={entry.slug} />
+        </ContentBoundary>
+      </div>
 
       {use.length || avoid.length ? (
         <>

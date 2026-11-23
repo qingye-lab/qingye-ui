@@ -1,6 +1,6 @@
 # Toolbar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/toolbar
 Source: packages/ui/src/components/toolbar.tsx
 Source SHA-256: 2cb3aa0977b43eb4eb9857dc5102b6c53efb2cfadbd272efd91a3caa547f3332
@@ -89,7 +89,7 @@ Name and disable related actions together.
 
 ### ToolbarButton
 An actual command that composes Button by default.
-- size / variant: ButtonProps[size | variant]; default size="md", variant="quiet". Reuse foundation size and surface presets.
+- size / variant / shape: ButtonProps[size | variant | shape]; default size="md", variant="quiet", shape="label". Reuse foundation size, surface, and shape presets; icon-only commands use shape="icon" with an aria-label.
 - disabled / focusableWhenDisabled / render / ref / nativeButton: ToolbarPrimitive.Button.Props. Custom renders must supply a valid button or mature trigger and retain the focus and event chain.
 
 ### ToolbarLink / ToolbarSeparator

@@ -213,11 +213,11 @@ export function Heatmap({ label, framed = true, render, ref, className, rowLabel
       <div className="min-w-0 w-full overflow-x-auto"><div role="grid" {...naming.name} aria-readonly="true" onKeyDown={onKeyDown} className="inline-grid min-w-full gap-fen-half" style={{ gridTemplateColumns: `max-content repeat(${columns.length}, minmax(${CELL}, 1fr))${rowSummary ? " max-content" : ""}` }}>
         <div aria-hidden="true" className="col-span-full grid grid-cols-subgrid">
           <span />
-          {columns.map(column => <span key={column.key} className="flex min-w-0 items-end justify-center px-(--qy-space-1) text-dense text-muted-foreground wrap-anywhere">{column.label}</span>)}
-          {rowSummary && <span className="flex min-w-0 items-end justify-end ps-(--qy-space-2) text-dense text-muted-foreground wrap-anywhere">{rowSummary.label}</span>}
+          {columns.map(column => <span key={column.key} data-slot="heatmap-col-header" className="flex min-w-0 items-end justify-center px-(--qy-space-1) text-dense text-muted-foreground wrap-anywhere">{column.label}</span>)}
+          {rowSummary && <span data-slot="heatmap-col-header" className="flex min-w-0 items-end justify-end ps-(--qy-space-2) text-dense text-muted-foreground wrap-anywhere">{rowSummary.label}</span>}
         </div>
         {rows.map((row, rowIndex) => <div key={row.id} role="row" className="col-span-full grid grid-cols-subgrid">
-          <span aria-hidden="true" className="flex items-center justify-end pe-(--qy-space-2) text-dense text-muted-foreground wrap-anywhere">{row.label}</span>
+          <span aria-hidden="true" data-slot="heatmap-row-header" className="flex items-center justify-end pe-(--qy-space-2) text-dense text-muted-foreground wrap-anywhere">{row.label}</span>
           {columns.map((column, columnIndex) => {
             const value = grid[rowIndex]![columnIndex]!;
             const known = typeof value === "number";

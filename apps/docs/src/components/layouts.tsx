@@ -1,14 +1,18 @@
-import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
+import { Button } from "@qingye_lab/ui/components/button";
+import { Drawer, DrawerClose, DrawerContent, DrawerHeader, DrawerPopup, DrawerTitle } from "@qingye_lab/ui/components/drawer";
+import { ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaViewport } from "@qingye_lab/ui/components/scroll-area";
 import { Skeleton, SkeletonBlock, SkeletonLine } from "@qingye_lab/ui/components/skeleton";
 import { SkipLink } from "@qingye_lab/ui/components/skip-link";
+import { IconX } from "@tabler/icons-react";
 import { Suspense, useRef, type ReactNode } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import { useRouteEffects } from "@/lib/use-route-effects";
 import { DocsNav } from "./docs-nav";
+import { DocsSidebarDrawerProvider, useDocsSidebarDrawer } from "./docs-sidebar-drawer";
 import { DocFooter } from "./pager";
 import { SearchProvider } from "./search";
 import { SiteHeader } from "./site-header";
-import { EditLink, TableOfContents } from "./toc";
+import { EditLink, TableOfContents, TocPopoverButton } from "./toc";
 import { SiteFooter } from "./site-footer";
 import { DocsBreadcrumbs } from "./docs-breadcrumbs";
 import { useDocsLocale } from "@/lib/docs-locale";
@@ -39,13 +43,15 @@ function RouteFallback() {
 export function SiteShell() {
   useRouteEffects();
   return (
-    <SearchProvider>
-      <DocsSkipLink />
-      <SiteHeader />
-      <Suspense fallback={<RouteFallback />}>
-        <Outlet />
-      </Suspense>
-    </SearchProvider>
+    <DocsSidebarDrawerProvider>
+      <SearchProvider>
+        <DocsSkipLink />
+        <SiteHeader />
+        <Suspense fallback={<RouteFallback />}>
+          <Outlet />
+        </Suspense>
+      </SearchProvider>
+    </DocsSidebarDrawerProvider>
   );
 }
 
@@ -73,14 +79,33 @@ export function DocsLayout({ children }: { children?: ReactNode }) {
   const en = useDocsLocale() === "en";
   const visit = routeVisitKey(pathname);
   const article = useRef<HTMLDivElement>(null);
+  const { handle, isTablet, tabletOpen, setTabletOpen, getTabletTrigger } = useDocsSidebarDrawer();
   return (
     <>
       <div className="site-frame flex pb-[calc(2*var(--qy-cai))]" data-docs-frame>
         <div className="sticky top-(--docs-header-height) hidden h-[calc(100dvh-var(--docs-header-height))] w-(--docs-rail) shrink-0 lg:block" data-docs-sidebar>
-          <ScrollArea className="h-full" tabIndex={-1}>
-            <DocsNav className="pt-[calc(2*var(--qy-cai))] pb-(--qy-section-gap) pe-(--qy-panel-padding)" />
-          </ScrollArea>
+          <ScrollAreaRoot className="h-full">
+            <ScrollAreaViewport className="h-full" fade tabIndex={-1}>
+              <DocsNav className="lg:pt-[calc(2*var(--qy-cai))] lg:pb-(--qy-section-gap) lg:pe-(--qy-panel-padding)" drawer drawerHandle={handle} />
+            </ScrollAreaViewport>
+            <ScrollAreaScrollbar />
+          </ScrollAreaRoot>
         </div>
+        {isTablet ? (
+          <Drawer onOpenChange={setTabletOpen} open={tabletOpen} swipeDirection="left">
+            <DrawerPopup aria-label={en ? "Documentation navigation" : "文档导航"} className="w-[min(20rem,calc(100vw-2*var(--qy-cai)))]" finalFocus={() => getTabletTrigger() ?? true}>
+              <DrawerHeader className="flex flex-row items-center justify-between">
+                <DrawerTitle>{en ? "Documentation" : "文档导航"}</DrawerTitle>
+                <DrawerClose render={<Button aria-label={en ? "Close" : "关闭"} shape="icon" variant="quiet" />}>
+                  <IconX aria-hidden="true" />
+                </DrawerClose>
+              </DrawerHeader>
+              <DrawerContent>
+                <DocsNav className="bg-transparent" onNavigate={() => setTabletOpen(false)} />
+              </DrawerContent>
+            </DrawerPopup>
+          </Drawer>
+        ) : null}
         <div className="flex min-w-0 flex-1 gap-(--docs-gap)" data-docs-body>
           <main
             className="mt-(--qy-cai) min-w-0 flex-1 self-start rounded-panel border border-border bg-card p-[calc(var(--qy-prose-inset)-1px)] text-card-foreground outline-none"
@@ -90,6 +115,9 @@ export function DocsLayout({ children }: { children?: ReactNode }) {
             <div className="w-full" data-route-enter key={visit} ref={article}>
               {/* No Suspense here: the shell's boundary lets navigation keep the old page until the new one is ready. */}
               <DocsBreadcrumbs />
+              <div className="docs-toc-float" data-docs-toc-float="">
+                <TocPopoverButton container={article} key={visit} />
+              </div>
               {children ?? <Outlet />}
               <DocFooter path={pathname} />
               {/* Where the contents column is hidden, the edit link closes the article instead (index.css). */}

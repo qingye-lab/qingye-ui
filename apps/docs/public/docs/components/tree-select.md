@@ -1,6 +1,6 @@
 # 树形选择 TreeSelect
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/tree-select
 Source: packages/ui/src/components/tree-select.tsx
 Source SHA-256: c24df0889faa5a44775500312b941d65ad25db540c3cbb8c82f1b30a98def50d
@@ -80,6 +80,7 @@ Written descriptions; the list above is the type-resolved fact.
 - disabled / readOnly / required: boolean; default false. 只读保留当前值且不打开弹层；禁用的字段不提交；required 参与原生校验并标 aria-required。invalid 跟随 Field。
 - name / form: string. 隐藏输入的名称与所属表单。单选提交所选 id，未选择提交空字符串；多选每个已选 id 一条同名值，未选择不提交（required 时拦下提交）。
 - aria-label / aria-labelledby / id / className: string. 触发器与弹层里树的名称、触发器的样式入口。没有名称会抛错：用 aria-label、aria-labelledby，或放进带 FieldLabel 的 Field。
+- aria-describedby / aria-invalid: string / boolean | "true" | "false". 触发器的补充说明引用与校验无效状态；未显式传入时跟随外层 Field。
 
 ## Keyboard
 - Enter / Space / ↓ / ↑: 在触发器上打开弹层，焦点落在已选节点（多选是第一个已勾选的叶子，都没有则是第一个节点），其祖先已展开。

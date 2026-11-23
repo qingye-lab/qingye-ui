@@ -1,6 +1,6 @@
 # 上下文菜单 ContextMenu
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
 Source SHA-256: 735ccc846c990c30f8e0c87be3d494cc5d541b64a59db1c0e736f9616170d67a
@@ -162,6 +162,11 @@ Written descriptions; the list above is the type-resolved fact.
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ## Keyboard
+- Shift+F10 / ContextMenu: 在聚焦的 ContextMenuTrigger 上打开上下文菜单。
+- ↑ / ↓ / Home / End: 在菜单项之间移动焦点。
+- → / ←: 打开或收起子菜单（RTL 方向相反）。
+- Enter / Space: 执行当前可用命令、切换勾选/开关或打开子菜单。
+- Escape: 关闭上下文菜单并将焦点返回触发区域。
 
 ## Source examples
 ### 可见入口与右键

@@ -1,6 +1,6 @@
 # 数值输入 NumberField
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/number-field
 Source: packages/ui/src/components/number-field.tsx
 Source SHA-256: fd8dc4dc0d76b55c59175e4697ce16f1c98f0bd3e6afa4cf3cd836497722d340

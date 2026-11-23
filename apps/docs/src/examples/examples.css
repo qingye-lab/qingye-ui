@@ -25,6 +25,7 @@
   outline: none;
 }
 .examples-preview:focus-visible { box-shadow: inset 0 0 0 var(--qy-focus-quiet-width) var(--qy-ring); }
+.examples-preview-stage { position: absolute; inset: 0; pointer-events: none; }
 /* iframe 按桌面宽 1440 渲染（高随画面比例），再缩放到画面的实际宽度；比例由脚本按画面宽写入 --preview-scale。 */
 .examples-preview iframe {
   position: absolute;
@@ -53,7 +54,6 @@
 }
 .examples-name-block { display: grid; gap: var(--qy-fen); }
 .examples-about { display: grid; gap: var(--qy-field-group-gap); }
-.examples-uses { display: flex; flex-wrap: wrap; gap: var(--qy-fen) var(--qy-field-group-gap); font-size: var(--qy-text-body-size); line-height: var(--qy-text-body-leading); }
 .examples-actions { display: flex; flex-wrap: wrap; justify-content: end; gap: var(--qy-field-gap); }
 @media (width < 72rem) {
   .examples-caption { grid-template-columns: minmax(0, 1fr); }
@@ -64,37 +64,178 @@
   .examples-list { gap: calc(5 * var(--qy-cai)); }
 }
 
-/* 查看：栏在站框里，应用铺满宽度；栏与应用之间一道线，应用自己在框内滚动。 */
+/* 查看：单行切换带（36px）不铺底色，只以一条清墨线与下方应用分界。 */
 .example-view { display: grid; grid-template-rows: auto minmax(0, 1fr); block-size: calc(100dvh - var(--docs-header-height, 0px)); }
+.example-bar-band {
+  border-bottom: 1px solid var(--qy-border);
+}
 .example-bar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  gap: var(--qy-field-gap) var(--qy-field-group-gap);
-  padding-block: var(--qy-field-gap);
+  gap: var(--qy-fen) var(--qy-field-group-gap);
+  min-block-size: calc(9 * var(--qy-fen));
+  padding-block: var(--qy-fen-half);
 }
-.example-uses { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--qy-fen) var(--qy-field-group-gap); font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); }
-.example-uses ul { display: flex; flex-wrap: wrap; gap: var(--qy-fen) var(--qy-field-gap); margin: 0; padding: 0; list-style: none; }
+.example-bar-left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--qy-field-gap);
+  min-inline-size: 0;
+}
+.example-bar-back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--qy-fen);
+  min-block-size: var(--qy-control-xs);
+  padding-inline: var(--qy-fen);
+  margin-inline-start: calc(-1 * var(--qy-fen));
+  border-radius: var(--qy-radius-xs);
+  color: var(--qy-foreground-muted);
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  text-decoration: none;
+  outline: none;
+  transition: color var(--qy-duration-fast) var(--qy-ease-out), background-color var(--qy-duration-fast) var(--qy-ease-out);
+}
+.example-bar-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--qy-fen-half);
+}
+.example-bar-tab {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--qy-control-xs);
+  padding-inline: var(--qy-field-gap);
+  border-radius: var(--qy-radius-xs);
+  color: var(--qy-foreground-muted);
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  font-weight: var(--qy-weight-regular);
+  text-decoration: none;
+  outline: none;
+  transition: color var(--qy-duration-fast) var(--qy-ease-out), background-color var(--qy-duration-fast) var(--qy-ease-out);
+}
+.example-bar-tab[data-active] {
+  background: var(--qy-surface);
+  color: var(--qy-foreground);
+  font-weight: var(--qy-weight-medium);
+  box-shadow: 0 0 0 1px var(--qy-border);
+}
+@media (hover: hover) {
+  .example-bar-back:hover,
+  .example-bar-tab:not([data-active]):hover {
+    color: var(--qy-foreground);
+    background: var(--qy-surface-hover);
+  }
+}
+.example-bar-back:focus-visible,
+.example-bar-tab:focus-visible {
+  box-shadow: inset 0 0 0 var(--qy-focus-quiet-width) var(--qy-ring);
+}
+.example-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--qy-field-gap);
+}
+.example-uses-popover-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--qy-field-gap);
+  padding: var(--qy-panel-padding-sm) var(--qy-panel-padding);
+  border-bottom: 1px solid var(--qy-border);
+}
+.example-uses-popover-scroll {
+  max-block-size: min(24rem, 60dvh);
+}
+.example-uses-groups {
+  display: grid;
+  gap: var(--qy-panel-gap);
+  padding: var(--qy-panel-padding-sm) var(--qy-panel-padding) var(--qy-panel-padding);
+}
+.example-uses-group {
+  display: grid;
+  gap: var(--qy-field-gap);
+}
+.example-uses-group-title {
+  margin: 0;
+  color: var(--qy-foreground-muted);
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  font-weight: var(--qy-weight-medium);
+}
+.example-uses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--qy-fen) var(--qy-field-gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.example-uses-link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--qy-field-gap);
+  min-block-size: var(--qy-control-sm);
+  padding: var(--qy-fen) var(--qy-field-gap);
+  border-radius: var(--qy-radius-xs);
+  color: var(--qy-foreground);
+  font-size: var(--qy-text-body-size);
+  line-height: var(--qy-text-body-leading);
+  text-decoration: none;
+  outline: none;
+  transition: background-color var(--qy-duration-fast) var(--qy-ease-out);
+}
+.example-uses-link-title {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.example-uses-link-hint {
+  flex-shrink: 0;
+  color: var(--qy-foreground-muted);
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+}
+@media (hover: hover) {
+  .example-uses-link:hover {
+    background: var(--qy-surface-hover);
+  }
+}
+.example-uses-link:focus-visible {
+  box-shadow: inset 0 0 0 var(--qy-focus-quiet-width) var(--qy-ring);
+}
+@media (width < 36rem) {
+  .example-uses-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 .example-frame { min-block-size: 0; overflow: hidden; border-top: 1px solid var(--qy-border); background: var(--qy-background); }
 
 /* ─── 会议室预约 ─────────────────────────────────────── */
-/* 日常应用：一条顶栏，正文在页中——左侧步骤（同时是摘要），右侧当前这一步。正文 38 材（预设）。 */
-.booking { display: flex; flex-direction: column; block-size: 100%; overflow: auto; background: var(--qy-background); color: var(--qy-foreground); }
-.booking-bar { display: flex; align-items: center; gap: var(--qy-field-gap); min-block-size: var(--qy-row-default); padding: var(--qy-field-gap) var(--qy-panel-padding); border-bottom: 1px solid var(--qy-border); background: var(--qy-surface); }
+/* 同一张底纸上的应用：顶栏之下，步骤栏 | 表单 | 占用侧栏三列，靠列间距分开，不设卡片与竖线。 */
+.booking { display: grid; grid-template-rows: auto minmax(0, 1fr); block-size: 100%; overflow: hidden; background: var(--qy-background); color: var(--qy-foreground); }
+.booking-bar { display: flex; align-items: center; gap: var(--qy-field-gap); min-block-size: var(--qy-row-default); padding: var(--qy-field-gap) var(--qy-panel-padding); border-bottom: 1px solid var(--qy-border); }
 .booking-mark { display: inline-grid; place-items: center; inline-size: var(--qy-control-xs); block-size: var(--qy-control-xs); border-radius: var(--qy-radius-xs); background: var(--qy-primary); color: var(--qy-primary-foreground); font-size: var(--qy-text-support-size); font-weight: var(--qy-weight-semibold); }
 .booking-main {
   display: grid;
-  grid-template-columns: calc(9 * var(--qy-cai)) minmax(0, calc(28 * var(--qy-cai))) minmax(calc(16 * var(--qy-cai)), calc(24 * var(--qy-cai)));
+  grid-template-columns: calc(11 * var(--qy-cai)) minmax(0, calc(30 * var(--qy-cai))) minmax(calc(20 * var(--qy-cai)), calc(26 * var(--qy-cai)));
   justify-content: center;
   align-items: start;
   gap: calc(3 * var(--qy-cai));
   inline-size: 100%;
-  padding: calc(3 * var(--qy-cai)) var(--qy-panel-padding);
+  padding: calc(2.5 * var(--qy-cai)) var(--qy-page-gutter);
   outline: none;
 }
-.booking-steps { position: sticky; top: calc(3 * var(--qy-cai)); padding-block-start: var(--qy-panel-padding); }
-.booking-panel { padding: var(--qy-panel-padding); border: 1px solid var(--qy-border); border-radius: var(--qy-radius-panel); background: var(--qy-surface); }
+.booking-steps { display: grid; align-content: start; }
+.booking-panel { min-inline-size: 0; }
 .booking-stack { display: grid; gap: var(--qy-field-group-gap); }
 .booking-stack > h1 { outline: none; }
 .booking-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--qy-field-group-gap); align-items: start; }
@@ -102,16 +243,38 @@
 .booking-capacity { margin-inline-start: var(--qy-field-gap); color: var(--qy-foreground-muted); font-weight: var(--qy-weight-regular); }
 .booking-narrow { max-inline-size: calc(10 * var(--qy-cai)); }
 .booking-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--qy-field-gap); padding-top: var(--qy-field-gap); }
-/* 当天占用：库的 Heatmap，不铺纸（framed={false}），只陈述事实，不是一张卡。 */
-.booking-schedule { display: grid; gap: var(--qy-field-group-gap); align-content: start; padding-block-start: var(--qy-panel-padding); }
-@media (width < 80rem) {
-  .booking-main { grid-template-columns: calc(9 * var(--qy-cai)) minmax(0, calc(28 * var(--qy-cai))); }
-  .booking-schedule { grid-column: 2; }
+.booking-schedule { display: grid; gap: var(--qy-section-gap); align-content: start; padding-block-start: var(--qy-field-gap); }
+.booking-agenda { display: grid; gap: var(--qy-field-gap); padding-top: var(--qy-panel-gap); border-top: 1px solid var(--qy-border); }
+.booking-agenda-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--qy-field-gap); }
+.booking-agenda-list { display: grid; margin: 0; padding: 0; list-style: none; }
+.booking-agenda-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qy-field-gap);
+  padding-block: var(--qy-field-gap);
+  border-bottom: 1px solid var(--qy-border);
+}
+.booking-agenda-item:last-child { border-bottom: 0; }
+.booking-occ { inline-size: 100%; border-collapse: separate; border-spacing: 0 var(--qy-fen); table-layout: fixed; }
+.booking-occ caption { padding-bottom: var(--qy-field-gap); text-align: start; }
+.booking-occ th { padding: 0; color: var(--qy-foreground-muted); font-size: var(--qy-text-support-size); font-weight: var(--qy-weight-regular); text-align: center; }
+.booking-occ thead th[data-picked] { color: var(--qy-primary); font-weight: var(--qy-weight-medium); }
+.booking-occ tbody th { inline-size: calc(3 * var(--qy-cai)); color: var(--qy-foreground); text-align: start; }
+.booking-occ td { block-size: var(--qy-control-sm); padding: 0; border-inline-start: 1px solid var(--qy-background); }
+.booking-occ td[data-state="busy"], .booking-swatch[data-state="busy"] { background: color-mix(in oklab, var(--qy-foreground) 12%, transparent); }
+.booking-occ td[data-state="mine"], .booking-swatch[data-state="mine"] { background: color-mix(in oklab, var(--qy-primary) 28%, transparent); }
+.booking-occ td[data-state="clash"], .booking-swatch[data-state="clash"] { background: var(--qy-danger); }
+.booking-legend { display: flex; flex-wrap: wrap; gap: var(--qy-field-group-gap); margin: 0; padding: 0; list-style: none; color: var(--qy-foreground-muted); font-size: var(--qy-text-support-size); }
+.booking-legend li { display: inline-flex; align-items: center; gap: var(--qy-field-gap); }
+.booking-swatch { inline-size: var(--qy-field-group-gap); block-size: var(--qy-field-group-gap); border-radius: var(--qy-radius-xs); }
+@media (width < 76rem) {
+  .booking-main { grid-template-columns: calc(11 * var(--qy-cai)) minmax(0, 1fr); }
+  .booking-schedule { grid-column: 1 / -1; }
 }
 @media (width < 48rem) {
+  .booking-main { padding: var(--qy-panel-padding) var(--qy-panel-padding-sm); }
   .booking-main { grid-template-columns: minmax(0, 1fr); }
-  .booking-schedule { grid-column: auto; }
-  .booking-steps { position: static; }
   .booking-row, .booking-rooms { grid-template-columns: minmax(0, 1fr); }
 }
 

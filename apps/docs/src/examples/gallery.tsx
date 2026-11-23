@@ -1,30 +1,57 @@
-import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { IconArrowLeft, IconArrowUpRight, IconChevronDown, IconComponents } from "@tabler/icons-react";
 import { AXES_MESSAGE, AXES_READY, applyAxes, axesFromSearch, type Axes } from "@/lib/axes";
 import { Route, Routes, useLocation } from "react-router-dom";
-import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@qingye_lab/ui/components/breadcrumb";
-import { buttonVariants } from "@qingye_lab/ui/components/button";
-import { linkClassName } from "@qingye_lab/ui/components/link";
+import { Badge } from "@qingye_lab/ui/components/badge";
+import { Button, buttonVariants } from "@qingye_lab/ui/components/button";
+import { Empty, EmptyActions, EmptyTitle } from "@qingye_lab/ui/components/empty";
+import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
+import { ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaViewport } from "@qingye_lab/ui/components/scroll-area";
+import { Separator } from "@qingye_lab/ui/components/separator";
 import { Heading, Text } from "@qingye_lab/ui/components/typography";
 import { Link } from "@/components/locale-link";
 import { useDocumentTitle } from "@/components/prose";
 import { SiteFooter } from "@/components/site-footer";
 import { useDocsLocale } from "@/lib/docs-locale";
-import { componentLabel } from "@/lib/nav";
+import { componentLabel, navLabel } from "@/lib/nav";
 import { findComponent } from "@/lib/registry";
 import { repoFile } from "@/lib/site";
-import { Empty, EmptyActions, EmptyTitle } from "@qingye_lab/ui/components/empty";
-import { localePath } from "@/lib/paths";
+import { CATEGORIES, type Category } from "@/lib/types";
+import { localePath, type DocsLocale } from "@/lib/paths";
 import { NotFoundContent } from "@/pages/not-found";
 import { EXAMPLES, findExample, type ExampleEntry } from "./list";
 import { ExampleEmbeddedProvider, useExampleEmbedded } from "./embedding";
-import type { DocsLocale } from "@/lib/paths";
-
-const findComponentLabel = (slug: string, locale: DocsLocale) => { const entry = findComponent(slug); return entry ? componentLabel(entry, locale).title : slug; };
 import "./examples.css";
+
+type UsedComponentItem = {
+  slug: string;
+  title: string;
+  hint?: string;
+  category: Category | "其他";
+};
+
+function resolveUsedComponents(slugs: readonly string[], locale: DocsLocale): { category: Category | "其他"; items: UsedComponentItem[] }[] {
+  const byCategory = new Map<Category | "其他", UsedComponentItem[]>();
+  for (const slug of slugs) {
+    const entry = findComponent(slug);
+    const label = entry ? componentLabel(entry, locale) : { title: slug };
+    const category: Category | "其他" = entry?.category ?? "其他";
+    const list = byCategory.get(category) ?? [];
+    list.push({ slug, title: label.title, ...(label.hint ? { hint: label.hint } : {}), category });
+    byCategory.set(category, list);
+  }
+  const ordered: { category: Category | "其他"; items: UsedComponentItem[] }[] = [];
+  for (const cat of [...CATEGORIES, "其他" as const]) {
+    const items = byCategory.get(cat);
+    if (items?.length) ordered.push({ category: cat, items });
+  }
+  return ordered;
+}
 
 const WorkspaceApp = lazy(() => import("./workspace"));
 const RecordsPage = lazy(() => import("./records"));
 const BookingApp = lazy(() => import("./booking"));
+const ReviewApp = lazy(() => import("./review"));
 
 /** 示例应用本身，按 id 取；总览的缩略（裸框路由）与查看页用同一份。 */
 export function ExampleRoutes() {
@@ -33,15 +60,12 @@ export function ExampleRoutes() {
       <Route element={<WorkspaceApp />} path="workspace/*" />
       <Route element={<RecordsPage />} path="records" />
       <Route element={<BookingApp />} path="booking" />
+      <Route element={<ReviewApp />} path="review" />
       <Route element={<Missing />} path="*" />
     </Routes>
   </Suspense>;
 }
 
-/**
- * 已知示例下的未知路径（如 /examples/records/x）：留在示例框内，说清没有这一页，去处是示例总览。
- * 查看页里外层已有 <main>，这里用 div；裸框里它自己是 main，链接在顶层窗口打开（target="_top"），不把站点载进框里。
- */
 function Missing() {
   const embedded = useExampleEmbedded();
   const en = useDocsLocale() === "en";
@@ -57,21 +81,15 @@ function Missing() {
     : <main className="h-full overflow-y-auto p-(--qy-panel-padding) outline-none" id="main" tabIndex={-1}>{body}</main>;
 }
 
-/*
- * 示例总览（2026-10-30 重做，与首页同一种语言：尺度、墨与位置，不加装饰）。
- * 每个示例是一段：上面是它的真实画面（裸框路由在 iframe 里按桌面宽 1440 渲染、缩放到画面实际宽度，不可交互、不进读屏），整幅占满站框，是这一段的主体；
- * 下面一行说明分三栏：名称与类型、说明与用到的组件、动作。画面载入前是一层清染的占位，载入后才显出，不出现空白框。
- */
-/** The preview renders the app at a desktop width of 1440 CSS px and scales that to the preview's actual width. */
 const PREVIEW_WIDTH = 1440;
 function Preview({ example, eager }: { example: ExampleEntry; eager: boolean }) {
   const locale = useDocsLocale();
   const en = locale === "en";
   const [loaded, setLoaded] = useState(false);
-  const frame = useRef<HTMLIFrameElement>(null);
+  const [mounted, setMounted] = useState(eager);
+  const stage = useRef<HTMLSpanElement>(null);
   useEffect(() => {
-    // 画面框是 iframe 的父元素（站内 Link 不转发 ref）。
-    const node = frame.current?.parentElement;
+    const node = stage.current?.parentElement;
     if (!node) return;
     const measure = () => node.style.setProperty("--preview-scale", String(node.clientWidth / PREVIEW_WIDTH));
     measure();
@@ -79,9 +97,29 @@ function Preview({ example, eager }: { example: ExampleEntry; eager: boolean }) 
     observer.observe(node);
     return () => observer.disconnect();
   }, []);
+  useEffect(() => {
+    if (mounted) return;
+    const node = stage.current?.parentElement;
+    if (!node || typeof IntersectionObserver === "undefined") {
+      setMounted(true);
+      return;
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setMounted(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px 0px" },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [mounted]);
   const title = en ? example.title.en : example.title.zh;
   return <Link aria-label={`${en ? "Open" : "打开"} ${title}`} className="examples-preview" data-loaded={loaded || undefined} to={`/examples/${example.id}`}>
-    <iframe aria-hidden="true" inert loading={eager ? "eager" : "lazy"} onLoad={() => setLoaded(true)} ref={frame} src={`/frame/examples/${example.id}`} tabIndex={-1} title={title} />
+    <span aria-hidden="true" className="examples-preview-stage" ref={stage} />
+    {mounted ? <iframe aria-hidden="true" inert onLoad={() => setLoaded(true)} src={`/frame/examples/${example.id}`} tabIndex={-1} title={title} /> : null}
   </Link>;
 }
 
@@ -94,7 +132,6 @@ function ExamplesIndex() {
     <main className="examples site-frame" id="main" tabIndex={-1}>
       <header className="examples-head">
         <Heading level={1} step="display-lg">{en ? "Examples" : "示例"}</Heading>
-        <Text className="text-muted-foreground" step="reading">{en ? "Complete applications built only from @qingye_lab/ui, with local data." : "只用 @qingye_lab/ui 搭成的完整应用，数据都在本地。"}</Text>
       </header>
       <ul className="examples-list">
         {EXAMPLES.map((example, index) => (
@@ -107,9 +144,6 @@ function ExamplesIndex() {
               </div>
               <div className="examples-about">
                 <Text step="reading">{t(example.text)}</Text>
-                <ul aria-label={en ? "Components used" : "用到的组件"} className="examples-uses">
-                  {example.uses.map((slug) => <li key={slug}><Link className={linkClassName} to={`/components/${slug}`}>{findComponentLabel(slug, locale)}</Link></li>)}
-                </ul>
               </div>
               <div className="examples-actions">
                 <Link aria-label={`${en ? "Open" : "打开"} ${t(example.title)}`} className={buttonVariants({ variant: "bordered" })} to={`/examples/${example.id}`}>{en ? "Open" : "打开"}</Link>
@@ -125,32 +159,101 @@ function ExamplesIndex() {
 }
 
 /*
- * 查看一个示例：一行查看栏（回到总览的位置、示例名与源码）在站框里；其下示例应用铺满整个宽度、在自己的框内滚动。
- * 不再给应用外面套一道圆角框——工作区自己有面与边界，外面再围一圈就是同一范围画两次（NG11）。
+ * 查看一个示例：极轻的清墨底单行切换带（36px）退居视觉底层，
+ * 左侧「示例」返回与 4 个示例直达切换，右侧按需展开的组件清单与源码入口；
+ * 彻底消除「大白顶栏 + 应用品牌顶栏」的层叠压迫感，把全部舞台交还给示例应用。
  */
 function ExampleView({ example, children }: { example: ExampleEntry; children: ReactNode }) {
   const locale = useDocsLocale();
   const en = locale === "en";
   const title = en ? example.title.en : example.title.zh;
   useDocumentTitle(title);
-  // 查看页的主体是一个 <main>：查看栏与示例应用都在其中（见 embedding.ts）。
+  const groups = useMemo(() => resolveUsedComponents(example.uses, locale), [example.uses, locale]);
+
   return <main className="example-view" id="main" tabIndex={-1}>
-    <div className="example-bar site-frame">
-      {/* 示例应用自己也有面包屑；这一条命名为「示例位置」，两条在读屏的地标列表里分得开。 */}
-      <Breadcrumb aria-label={en ? "Example location" : "示例位置"}>
-        <BreadcrumbList>
-          <BreadcrumbItem><BreadcrumbLink render={<Link to="/examples" />}>{en ? "Examples" : "示例"}</BreadcrumbLink></BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem><BreadcrumbCurrent>{title}</BreadcrumbCurrent></BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      {/* 示例是为了演示组件库：这一页用到的主要组件，各自去往组件页。 */}
-      <div className="example-uses">
-        <span className="text-muted-foreground">{en ? "Built with" : "用到"}</span>
-        <ul aria-label={en ? "Components used" : "用到的组件"}>
-          {example.uses.map((slug) => <li key={slug}><Link className={linkClassName} to={`/components/${slug}`}>{findComponentLabel(slug, locale)}</Link></li>)}
-        </ul>
-        <a className={linkClassName} href={repoFile(example.source)} rel="noreferrer" target="_blank">{en ? "Source" : "源码"}</a>
+    <div className="example-bar-band">
+      <div className="example-bar site-frame">
+        <div className="example-bar-left">
+          <Link className="example-bar-back" to="/examples">
+            <IconArrowLeft aria-hidden="true" className="size-3.5" />
+            <span>{en ? "Examples" : "示例"}</span>
+          </Link>
+          <Separator className="h-3.5" orientation="vertical" />
+          <nav aria-label={en ? "Switch example" : "切换示例"} className="example-bar-switcher">
+            {EXAMPLES.map((entry) => {
+              const active = entry.id === example.id;
+              return (
+                <Link
+                  aria-current={active ? "page" : undefined}
+                  className="example-bar-tab"
+                  data-active={active || undefined}
+                  key={entry.id}
+                  to={`/examples/${entry.id}`}
+                >
+                  {en ? entry.title.en : entry.title.zh}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+
+        <div className="example-bar-actions">
+          <Popover>
+            <PopoverTrigger render={<Button size="xs" variant="quiet" />}>
+              <IconComponents aria-hidden="true" />
+              <span>{en ? "Components" : "组件"}</span>
+              <Badge className="numeric">{example.uses.length}</Badge>
+              <IconChevronDown aria-hidden="true" className="text-muted-foreground" />
+            </PopoverTrigger>
+            <PopoverPopup
+              align="end"
+              className="w-[min(calc(22*var(--qy-cai)),calc(100vw-2rem))]"
+              positionerProps={{ collisionPadding: 12 }}
+              viewportProps={{ className: "p-0 overflow-hidden" }}
+            >
+              <div className="example-uses-popover-head">
+                <PopoverTitle>{en ? "Components used" : "本示例用到的组件"}</PopoverTitle>
+                <span className="numeric text-support text-muted-foreground">
+                  {en ? `${example.uses.length} total` : `共 ${example.uses.length} 个`}
+                </span>
+              </div>
+              <ScrollAreaRoot className="example-uses-popover-scroll">
+                <ScrollAreaViewport className="example-uses-popover-scroll" fade tabIndex={-1}>
+                  <div className="example-uses-groups">
+                    {groups.map((group) => (
+                      <section className="example-uses-group" key={group.category}>
+                        <h3 className="example-uses-group-title">{navLabel(group.category, locale)}</h3>
+                        <ul className="example-uses-grid">
+                          {group.items.map((item) => (
+                            <li key={item.slug}>
+                              <Link className="example-uses-link" to={`/components/${item.slug}`}>
+                                <span className="example-uses-link-title">{item.title}</span>
+                                {item.hint && <span className="example-uses-link-hint">{item.hint}</span>}
+                              </Link>
+                            </li>
+                          ))}
+                        </ul>
+                      </section>
+                    ))}
+                  </div>
+                </ScrollAreaViewport>
+                <ScrollAreaScrollbar />
+              </ScrollAreaRoot>
+            </PopoverPopup>
+          </Popover>
+
+          <Separator className="h-3.5" orientation="vertical" />
+
+          <a
+            className={buttonVariants({ size: "xs", variant: "quiet" })}
+            href={repoFile(example.source)}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <span>{en ? "Source" : "源码"}</span>
+            <IconArrowUpRight aria-hidden="true" className="text-muted-foreground" />
+          </a>
+        </div>
       </div>
     </div>
     <div className="example-frame" data-slot="example-frame"><ExampleEmbeddedProvider value>{children}</ExampleEmbeddedProvider></div>
@@ -161,15 +264,10 @@ export default function ExamplesGallery() {
   const { pathname } = useLocation();
   const id = pathname.replace(/^(\/en)?\/examples\/?/, "").split("/")[0];
   if (!id) return <ExamplesIndex />;
-  // 未知的示例：站点统一的未找到状态，不套查看栏（没有可以回到的示例）。
   if (!findExample(id)) return <main className="site-frame outline-none" id="main" tabIndex={-1}><NotFoundContent /></main>;
   return <ExampleView example={findExample(id)!}><ExampleRoutes /></ExampleView>;
 }
 
-/**
- * 裸框：只有示例本身，供总览的缩略与首页的示例窗口使用。明暗由框内的 ThemeProvider 跟随站点（同一份存储）；
- * 地址里的 density / brand 是初值，同源的父页面可以用 postMessage 再改，不必重载。
- */
 export function ExampleFrame() {
   useEffect(() => {
     const root = document.documentElement;
@@ -179,10 +277,8 @@ export function ExampleFrame() {
       applyAxes(root, event.data.axes as Partial<Axes>);
     };
     window.addEventListener("message", onMessage);
-    // 框是懒加载的：父页面在它挂上监听之前发来的消息会丢。挂上之后告诉父页面「已就绪」，父页面再发一次当前的两轴。
     if (window.parent !== window) window.parent.postMessage({ type: AXES_READY }, window.location.origin);
     return () => window.removeEventListener("message", onMessage);
   }, []);
   return <div className="h-dvh" data-example-bare><ExampleRoutes /></div>;
 }
-

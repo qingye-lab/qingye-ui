@@ -1,6 +1,6 @@
 import { render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { useState } from "react";
+import { createRef, useState } from "react";
 import { expect, test, vi } from "vitest";
 import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator } from "../src/components/command";
 
@@ -142,6 +142,12 @@ test("CommandDialog without a name throws", () => {
   error.mockRestore();
 });
 
+test("CommandDialog treats an empty Fragment title as no name", () => {
+  const error = vi.spyOn(console, "error").mockImplementation(() => {});
+  expect(() => render(<CommandDialog open title={<></>}><CommandInput aria-label="搜索" /></CommandDialog>)).toThrow(/CommandDialog requires/);
+  error.mockRestore();
+});
+
 function DialogExample({ closeOnSelect, onSelect }: { closeOnSelect?: boolean; onSelect?: (value: string) => void }) {
   const [open, setOpen] = useState(false);
   return <>
@@ -182,4 +188,29 @@ test("the empty state renders its children once, outside the listbox, so interac
   expect(await screen.findByRole("status")).toHaveTextContent("没有结果");
   expect(screen.getAllByRole("button", { name: "新建" })).toHaveLength(1);
   expect(screen.getByRole("listbox").querySelector("[data-slot=command-empty], button")).toBeNull();
+});
+
+test("CommandDialog renders a visible title/description without requiring aria-label and forwards popupProps.finalFocus", async () => {
+  const user = userEvent.setup();
+  const returnTarget = createRef<HTMLButtonElement>();
+  function Example() {
+    const [open, setOpen] = useState(false);
+    return <>
+      <button type="button" onClick={() => setOpen(true)}>打开面板</button>
+      <button type="button" ref={returnTarget}>回落目标</button>
+      <CommandDialog open={open} onOpenChange={setOpen} title="快速跳转" description="输入页面名或操作。" popupProps={{ finalFocus: returnTarget }}>
+        <CommandInput aria-label="搜索命令" />
+        <CommandList><CommandItem value="概览">概览</CommandItem></CommandList>
+      </CommandDialog>
+    </>;
+  }
+  render(<Example />);
+  await user.click(screen.getByRole("button", { name: "打开面板" }));
+  const dialog = await screen.findByRole("dialog", { name: "快速跳转" });
+  expect(dialog).toHaveAccessibleDescription("输入页面名或操作。");
+  expect(within(dialog).getByText("快速跳转")).toHaveAttribute("data-slot", "dialog-title");
+  expect(within(dialog).getByText("输入页面名或操作。")).toHaveAttribute("data-slot", "dialog-description");
+  await user.keyboard("{Escape}");
+  await waitFor(() => expect(screen.queryByRole("dialog")).not.toBeInTheDocument());
+  await waitFor(() => expect(returnTarget.current).toHaveFocus());
 });

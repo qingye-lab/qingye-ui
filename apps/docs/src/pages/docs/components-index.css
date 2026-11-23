@@ -10,6 +10,40 @@
  * - 列间 = 行间 = 段间隔（2 材）：格是同一级的并列物，两向同一个关系；示例到名称 = 字段间隔。
  * - 栏宽 760 时为三列：每格以 11 材（220px）为下限；单栏更窄时服从实际可用宽度。
  */
+/* ─── 工具条（搜索、分层筛选、分类快捷跳转） ───────────── */
+.components-index-toolbar {
+  display: grid;
+  gap: var(--qy-field-group-gap);
+  margin: 0 0 var(--qy-section-gap);
+}
+.components-index-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--qy-field-gap) var(--qy-field-group-gap);
+}
+.components-index-search {
+  flex: 1 1 calc(14 * var(--qy-cai));
+  min-inline-size: min(100%, calc(12 * var(--qy-cai)));
+}
+.components-index-count {
+  margin-inline-start: auto;
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  color: var(--qy-foreground-muted);
+  white-space: nowrap;
+}
+.components-index-jumps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--qy-field-gap) var(--qy-field-group-gap);
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+}
+.components-index-empty {
+  margin-block: var(--qy-section-gap);
+}
+
 .components-index-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, calc(11 * var(--qy-cai))), 1fr));

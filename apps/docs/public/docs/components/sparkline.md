@@ -1,6 +1,6 @@
 # 行内趋势 Sparkline
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/sparkline
 Source: packages/ui/src/components/sparkline.tsx
 Source SHA-256: 856797e9c07fc4a1d7a230de40b6fabfea2d9b5a14a5958f43cdfae590ec0e58
@@ -73,6 +73,11 @@ Written descriptions; the list above is the type-resolved fact.
 - width: number; default 100. 坐标宽度（px），默认 5 材；line 的高度固定一材。
 
 ## Keyboard
+- Tab / Shift+Tab: 仅开启 tooltip 且有数据点时进入或离开逐点读数入口；聚焦即打开当前点提示。
+- ← / →: 在逐点读数中移动至前一个 / 后一个数据点并更新提示。
+- Home / End: 跳转至第一个 / 最后一个数据点。
+- Enter / Space: 切换当前数据点提示的显示与关闭。
+- Escape: 关闭逐点提示，焦点留在入口上。
 
 ## Source examples
 ### 读数旁的趋势

@@ -1,9 +1,9 @@
 # Tooltip
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/tooltip
 Source: packages/ui/src/components/tooltip.tsx
-Source SHA-256: 4dd9b24c79431acd6f078c8ffae3d40788c79a47f11561f55ceb4429e8a8aab6
+Source SHA-256: 215f0d78120f358f46c1c592bf3b4775aeb95e883385cb0b80582b6b84d8754f
 
 Read shortcuts, formats and brief context on hover or focus.
 

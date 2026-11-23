@@ -27,9 +27,12 @@ export default {
     { name: "CommandEmpty", description: "没有任何条目匹配时显示。省略 children 用内置缺省文案；元素常驻，内容变化时读屏才会播报。", descriptionEn: "Shown when nothing matches. Omit children for the built-in text. The element stays mounted so that screen readers announce the change." },
     { name: "CommandSeparator", description: "组与组之间的分界。查询非空时不渲染，因为此时组会随结果收起。", descriptionEn: "A divider between groups. Not rendered while the query is non-empty, since groups collapse with the results." },
     { name: "CommandDialog", description: "Dialog 里放一份 Command。每次打开都是新的一份，查询自然清空。", descriptionEn: "A Command inside a Dialog. Each opening is a fresh instance, so the query starts empty.", props: [
-      { name: "open / defaultOpen / onOpenChange", type: "boolean / boolean / (open: boolean) => void", description: "打开状态，受控或非受控。", descriptionEn: "Open state, controlled or uncontrolled." },
-      { name: "aria-label / aria-labelledby", type: "string", description: "二选一必填，缺失抛错。", descriptionEn: "One is required; omitting both throws." },
+      { name: "open / defaultOpen / onOpenChange / onOpenChangeComplete", type: "boolean / boolean / (open: boolean) => void / DialogProps[\"onOpenChangeComplete\"]", description: "打开状态，受控或非受控；onOpenChangeComplete 在开合动画结束后调用。", descriptionEn: "Open state, controlled or uncontrolled; onOpenChangeComplete runs after open/close transitions finish." },
+      { name: "title / description", type: "ReactNode / ReactNode", description: "可见标题与可选说明；提供 title 时渲染 DialogHeader + DialogTitle，不再强制要求 aria-label / aria-labelledby。", descriptionEn: "Visible title and optional description; providing title renders DialogHeader + DialogTitle and waives aria-label / aria-labelledby." },
+      { name: "aria-label / aria-labelledby", type: "string", description: "未提供 title 时二选一必填，缺失抛错；提供 title 时被忽略，名字取可见标题。", descriptionEn: "One is required when title is omitted; omitting both throws. Ignored when title is given: the visible title names the dialog." },
       { name: "closeOnSelect", type: "boolean", default: "true", description: "选中条目后关闭。", descriptionEn: "Close after an item is selected." },
+      { name: "popupClassName / popupProps", type: "string / Omit<DialogPopupProps, \"children\" | \"className\" | \"aria-label\" | \"aria-labelledby\">", description: "对话框面板的 className 及透传给内部 DialogPopup 的其余属性（如 initialFocus、finalFocus、portalProps）。", descriptionEn: "Dialog popup className and remaining props forwarded to the inner DialogPopup (such as initialFocus, finalFocus, portalProps)." },
+      { name: "filter / query / defaultQuery / onQueryChange / onItemSelect", type: "CommandProps", description: "转发给内部 Command；含义同 Command。", descriptionEn: "Forwarded to the inner Command, with the same meaning." },
     ] },
   ],
   keyboard: [

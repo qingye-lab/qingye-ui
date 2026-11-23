@@ -9,5 +9,10 @@ export default {
     { name: "Steps", description: "有名称的 ol。", descriptionEn: "A named ordered list.", props: [{ name: "aria-label / render / ref / native props", type: "useRender.ComponentProps<ol>", description: "默认名称来自 locale。", descriptionEn: "The default name comes from locale." }] },
     { name: "Step", description: "一个 li，状态独立于前后位置。", descriptionEn: "A li with state independent of preceding positions.", props: [{ name: "state", type: '"upcoming" | "current" | "complete" | "error"', description: "必填的应用事实，提供本地化辅助名称。", descriptionEn: "Required application fact with a localized assistive label." }, { name: "render / ref / native props", type: "useRender.ComponentProps<li>", description: "状态不自动产生导航。", descriptionEn: "State does not generate navigation." }] },
     { name: "StepTitle / StepDescription", description: "div / p 内容槽。", descriptionEn: "div / p content slots.", props: [{ name: "children / render / ref / native props", type: "useRender.ComponentProps<div | p>", description: "应用提供标题、解释和恢复链接。", descriptionEn: "The application provides titles, explanation and recovery links." }] },
-  ], notes: ["不能由当前索引把之前各项自动标记完成。"], notesEn: ["Do not automatically complete earlier items from a current index."],
+  ],
+  keyboard: [
+    { keys: "Tab / Shift+Tab", description: "步骤本身是只读有序列表，不占 Tab 停靠点；仅当应用在步骤内容中放入链接或恢复按钮时，焦点按文档顺序经过这些原生控件。", descriptionEn: "Steps itself is a read-only ordered list with no Tab stops of its own; focus visits links or recovery buttons placed inside step content by the application in document order." },
+    { keys: "Enter / Space", description: "激活步骤内由应用提供的链接（Enter）或恢复按钮（Enter / Space）。", descriptionEn: "Activate an application-provided link (Enter) or recovery button (Enter / Space) inside a step." },
+  ],
+  notes: ["不能由当前索引把之前各项自动标记完成。"], notesEn: ["Do not automatically complete earlier items from a current index."],
 } satisfies ComponentMeta;

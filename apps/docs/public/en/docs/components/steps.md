@@ -1,6 +1,6 @@
 # Steps
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/steps
 Source: packages/ui/src/components/steps.tsx
 Source SHA-256: 28a0975be5681464981373d19c4ce2ba6b475e90e6463937d4f5498a802a88a0
@@ -84,6 +84,8 @@ div / p content slots.
 - children / render / ref / native props: useRender.ComponentProps<div | p>. The application provides titles, explanation and recovery links.
 
 ## Keyboard
+- Tab / Shift+Tab: Steps itself is a read-only ordered list with no Tab stops of its own; focus visits links or recovery buttons placed inside step content by the application in document order.
+- Enter / Space: Activate an application-provided link (Enter) or recovery button (Enter / Space) inside a step.
 
 ## Source examples
 ### 明确的过程状态

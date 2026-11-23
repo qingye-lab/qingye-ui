@@ -1,9 +1,9 @@
 # ImagePreview
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/image-preview
 Source: packages/ui/src/components/image-preview.tsx
-Source SHA-256: 23741daf38ba1fbc21c80c4eae46b218445b975188b4bbc3e6691bfd6a20803e
+Source SHA-256: 64aec292f6b034b610a31fdbf4803c94b5c20d1b7e35316f4fbfaeb27cd18078
 
 Thumbnails open a large view with switching within the set and zoom.
 
@@ -57,6 +57,11 @@ A row of thumbnail buttons that open the large view in a Dialog.
 - className / native props: React.ComponentProps<div>. Remaining attributes forward to the root.
 
 ## Keyboard
+- Enter / Space: Open the preview dialog from a thumbnail button, or activate a control button inside the dialog.
+- ← / →: Switch to the previous or next image in the set (reversed in RTL; stops at the ends). When zoomed and focus is on the stage, arrow keys scroll instead of switching.
+- + / = / - / 0: Zoom in (+ / =), zoom out (-), or reset to fit the stage (0).
+- Tab / Shift+Tab: Move focus across controls inside the preview dialog (and the scrollable stage when zoomed).
+- Escape: Close the preview dialog and return focus to the thumbnail button that opened it.
 
 ## Source examples
 ### 同组图片与单张

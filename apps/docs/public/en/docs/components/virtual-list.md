@@ -1,6 +1,6 @@
 # Virtual list
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/virtual-list
 Source: packages/ui/src/components/virtual-list.tsx
 Source SHA-256: 87082ed536a385bbdbf9468c74888760cfcb6f86b0d6133541ae7715106a7fb0

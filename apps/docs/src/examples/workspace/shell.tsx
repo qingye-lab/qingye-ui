@@ -1,28 +1,30 @@
 import * as React from "react";
-import { IconBell, IconBook2, IconDatabase, IconLayoutDashboard, IconSearch, IconSettings } from "@tabler/icons-react";
+import { IconBell, IconBook2, IconDatabase, IconLayoutDashboard, IconRefresh, IconSearch, IconSettings } from "@tabler/icons-react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Link } from "@/components/locale-link";
 import { useDocsLocale } from "@/lib/docs-locale";
 import { localePath } from "@/lib/paths";
+import { AlertDialog, AlertDialogClose, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogPopup, AlertDialogTitle } from "@qingye_lab/ui/components/alert-dialog";
 import { Avatar, AvatarFallback } from "@qingye_lab/ui/components/avatar";
 import { Breadcrumb, BreadcrumbCurrent, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@qingye_lab/ui/components/breadcrumb";
 import { Button } from "@qingye_lab/ui/components/button";
-import { CommandDialog, CommandEmpty, CommandInput, CommandItem, CommandList, type CommandFilter } from "@qingye_lab/ui/components/command";
+import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandSeparator, type CommandFilter } from "@qingye_lab/ui/components/command";
 import { CornerMark } from "@qingye_lab/ui/components/corner-mark";
 import { Kbd } from "@qingye_lab/ui/components/kbd";
 import { Menu, MenuItem, MenuPopup, MenuPortal, MenuPositioner, MenuSeparator, MenuTrigger } from "@qingye_lab/ui/components/menu";
 import { Popover, PopoverPopup, PopoverTitle, PopoverTrigger } from "@qingye_lab/ui/components/popover";
-import { Sidebar, SidebarButton, SidebarContent, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
+import { Result, ResultActions, ResultDescription, ResultTitle } from "@qingye_lab/ui/components/result";
+import { Sidebar, SidebarButton, SidebarContent, SidebarDrawerTrigger, SidebarFooter, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle } from "@qingye_lab/ui/components/sidebar";
+import { StatusDot } from "@qingye_lab/ui/components/status-dot";
 import { Timeline, TimelineDescription, TimelineItem, TimelineTime, TimelineTitle } from "@qingye_lab/ui/components/timeline";
 import { Workspace, WorkspaceContent, WorkspaceHeader, WorkspaceSurface } from "@qingye_lab/ui/components/workspace";
-import { ACTIVITY, COLLECTIONS, findCollection } from "./data";
 import { useExampleEmbedded } from "../embedding";
+import { useWorkspaceStore } from "./store";
+import { syncDot } from "./status";
 
 /* 应用外壳：库的 Workspace——侧栏（可收起成图标栏）+ 一张工作面（顶栏：位置、搜索、动态；内容区）。
  * 外壳自带跳过链接、侧栏与工作面之间的间隔和面的圆角线；这里只放内容。页面级操作经 WorkspaceHeaderPortal 进顶栏。 */
 
-// 基址随这份文档所在的路由取：裸框（/frame/examples/…）是首页窗口与总览缩略里的 iframe，是独立的文档、各有一份模块，
-// 框里的链接与跳转要留在框里，不能跳到站点的 /examples/…（那会把整个站点连页头一起载进窗口）。服务端与测试里没有 window，取站点基址。
 const inFrame = typeof window !== "undefined" && /^(\/en)?\/frame\//.test(window.location.pathname);
 export const BASE = inFrame ? "/frame/examples/workspace" : "/examples/workspace";
 const at = (path = "") => `${BASE}${path}`;
@@ -38,10 +40,11 @@ export const SETTINGS = [{ id: "general", label: "常规" }, { id: "members", la
 
 function useCrumbs() {
   const { pathname } = useLocation();
+  const { collections } = useWorkspaceStore();
   const rest = pathname.replace(/^.*\/examples\/workspace/, "").replace(/\/$/, "");
   const [, first = "", second] = rest.split("/");
   const crumbs: { label: string; to?: string }[] = [{ label: PLACES[first ? `/${first}` : ""] ?? "未找到", to: at(first ? `/${first}` : "") }];
-  if (first === "collections" && second) crumbs.push({ label: findCollection(second)?.name ?? second });
+  if (first === "collections" && second) crumbs.push({ label: collections.find(item => item.id === second)?.name ?? second });
   if (first === "settings") crumbs.push({ label: SETTINGS.find(item => item.id === (second ?? "general"))?.label ?? "未找到" });
   crumbs[crumbs.length - 1] = { label: crumbs[crumbs.length - 1]!.label };
   return { crumbs, section: first, sub: second };
@@ -51,16 +54,45 @@ function useCrumbs() {
 const Scroller = React.createContext<React.RefObject<HTMLElement | null>>({ current: null });
 export const useWorkspaceScroller = () => React.useContext(Scroller);
 
-/** 搜集合：只按名称包含匹配（查询已去掉首尾空白）。 */
-const byName: CommandFilter = (entry, query) => entry.label.includes(query);
+/** 搜集合与快捷动作：按名称包含匹配（查询已去掉首尾空白）。 */
+const byName: CommandFilter = (entry, query) => entry.label.toLowerCase().includes(query.toLowerCase());
 
 function SearchDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (open: boolean) => void }) {
   const go = useWorkspaceNavigate();
-  return <CommandDialog open={open} onOpenChange={onOpenChange} aria-label="搜索集合" filter={byName} onItemSelect={id => go(`/collections/${id}`)}>
-    <CommandInput aria-label="搜索集合" placeholder="搜索集合" />
-    <CommandList aria-label="集合">
-      {COLLECTIONS.map(item => <CommandItem key={item.id} value={item.id}>{item.name}</CommandItem>)}
-      <CommandEmpty>没有匹配的集合</CommandEmpty>
+  const { collections, triggerSync } = useWorkspaceStore();
+  const attentionIds = collections.filter(item => item.state === "失败" || item.state === "未同步").map(item => item.id);
+
+  const onSelect = (value: string) => {
+    if (value.startsWith("col:")) go(`/collections/${value.slice(4)}`);
+    else if (value === "act:sync-attention") triggerSync(attentionIds);
+    else if (value.startsWith("nav:")) go(value.slice(4));
+  };
+
+  return <CommandDialog open={open} onOpenChange={onOpenChange} aria-label="命令与搜索" filter={byName} onItemSelect={onSelect}>
+    <CommandInput aria-label="搜索集合或命令" placeholder="搜索集合、页面或快捷命令" />
+    <CommandList aria-label="集合与命令">
+      <CommandGroup heading="集合">
+        {collections.map(item => (
+          <CommandItem key={item.id} value={`col:${item.id}`} keywords={[item.name, item.source, item.owner]}>
+            <span className="truncate">{item.name}</span>
+            <StatusDot className="ms-auto shrink-0 text-muted-foreground" status={syncDot[item.state]} label={item.state} />
+          </CommandItem>
+        ))}
+      </CommandGroup>
+      <CommandSeparator />
+      <CommandGroup heading="页面与操作">
+        {attentionIds.length > 0 && (
+          <CommandItem value="act:sync-attention" keywords={["同步全部异常集合", "重试", "失败"]}>
+            <IconRefresh aria-hidden="true" className="size-4 shrink-0 text-muted-foreground" />
+            <span>同步全部异常集合（{attentionIds.length}）</span>
+          </CommandItem>
+        )}
+        <CommandItem value="nav:" keywords={["概览", "首页"]}>概览</CommandItem>
+        <CommandItem value="nav:/collections" keywords={["集合列表", "数据表"]}>全部集合</CommandItem>
+        <CommandItem value="nav:/settings/members" keywords={["成员与角色", "邀请"]}>成员与角色</CommandItem>
+        <CommandItem value="nav:/help" keywords={["帮助", "文档", "故障排查"]}>同步帮助与故障排查</CommandItem>
+      </CommandGroup>
+      <CommandEmpty>没有匹配的集合或命令</CommandEmpty>
     </CommandList>
   </CommandDialog>;
 }
@@ -68,30 +100,62 @@ function SearchDialog({ open, onOpenChange }: { open: boolean; onOpenChange: (op
 export function WorkspaceShell() {
   const embedded = useExampleEmbedded();
   const { crumbs, section, sub } = useCrumbs();
+  const { workspaceName, collections, activity, unreadCount, markActivityRead, signedOut, setSignedOut } = useWorkspaceStore();
   const scroller = React.useRef<HTMLElement | null>(null);
   const [searching, setSearching] = React.useState(false);
+  const [signOutOpen, setSignOutOpen] = React.useState(false);
+
   React.useEffect(() => {
-    // 应用内的 ⌘K 是应用自己的搜索：在捕获阶段接下并止步，站点的文档搜索（挂在 document 上）不再同时打开。
-    const onKey = (event: KeyboardEvent) => { if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") { event.preventDefault(); event.stopPropagation(); setSearching(true); } };
-    window.addEventListener("keydown", onKey, true); return () => window.removeEventListener("keydown", onKey, true);
+    const onKey = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {
+        event.preventDefault();
+        event.stopPropagation();
+        setSearching(true);
+      }
+    };
+    window.addEventListener("keydown", onKey, true);
+    return () => window.removeEventListener("keydown", onKey, true);
   }, []);
-  const failing = COLLECTIONS.filter(item => item.state === "失败" || item.state === "未同步").length;
+
+  const failing = collections.filter(item => item.state === "失败" || item.state === "未同步").length;
   const link = (path: string) => <Link to={at(path)} />;
 
+  if (signedOut) {
+    return <div className="grid h-full place-items-center bg-background p-(--qy-page-gutter)">
+      <Result tone="info">
+        <ResultTitle level={1}>已退出{workspaceName}</ResultTitle>
+        <ResultDescription>本示例的会话状态仅保存在当前页面中，可以随时重新进入。</ResultDescription>
+        <ResultActions>
+          <Button onClick={() => setSignedOut(false)}>重新进入工作区</Button>
+        </ResultActions>
+      </Result>
+    </div>;
+  }
+
   return <Workspace>
-    {/* 侧栏是一个有名字的区域（section → region 地标）：工作区的标识、导航与账户都在其中，不游离在地标之外。
-        不用 aside：侧栏里的主导航不是页面的补充内容（库在 Sidebar 根上的说明）；nav 仍是 SidebarContent 自己。 */}
-    <Sidebar className="shrink-0" render={<section aria-label="青野工作区" />}>
-      {/* 顶：这是谁的工作区。印与名一行，与收起按钮同一条中线；收起时只留印，收起按钮落到印下。 */}
+    <Sidebar className="shrink-0" drawer render={<section aria-label={workspaceName} />}>
       <SidebarHeader>
-        <span aria-hidden="true" className="grid size-(--qy-control-xs) shrink-0 place-items-center rounded-(--qy-radius-xs) bg-foreground text-support-strong text-surface">青</span>
-        <SidebarTitle>青野工作区</SidebarTitle>
+        <span aria-hidden="true" className="grid size-(--qy-control-xs) shrink-0 place-items-center rounded-(--qy-radius-xs) bg-foreground text-support-strong text-surface">{workspaceName.slice(0, 1)}</span>
+        <SidebarTitle>{workspaceName}</SidebarTitle>
         <SidebarToggle />
       </SidebarHeader>
       <SidebarContent aria-label="工作区" className="mt-(--qy-field-group-gap) flex-1">
         <SidebarGroup>
           <SidebarLink render={link("")} active={section === ""} icon={<IconLayoutDashboard aria-hidden="true" />}>概览</SidebarLink>
-          <SidebarLink render={link("/collections")} active={section === "collections"} icon={<IconDatabase aria-hidden="true" />} count={failing}>集合</SidebarLink>
+          <SidebarLink render={link("/collections")} active={section === "collections"} icon={<IconDatabase aria-hidden="true" />} {...(failing > 0 ? { count: failing } : {})}>集合</SidebarLink>
+        </SidebarGroup>
+        <SidebarGroup>
+          <SidebarGroupLabel>常用集合</SidebarGroupLabel>
+          {collections.slice(0, 4).map(item => (
+            <SidebarLink
+              key={item.id}
+              render={link(`/collections/${item.id}`)}
+              active={section === "collections" && sub === item.id}
+              icon={<StatusDot status={syncDot[item.state]} label={item.state} className="[&>span:last-child]:sr-only" />}
+            >
+              {item.name}
+            </SidebarLink>
+          ))}
         </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupLabel>工作区</SidebarGroupLabel>
@@ -104,7 +168,6 @@ export function WorkspaceShell() {
           <SidebarLink render={link("/help")} active={section === "help"} icon={<IconBook2 aria-hidden="true" />}>帮助</SidebarLink>
         </SidebarGroup>
       </SidebarContent>
-      {/* 底：我是谁。点开是本人的命令。 */}
       <SidebarFooter>
         <Menu>
           <MenuTrigger render={<SidebarButton icon={<Avatar size="sm" label="陈致远" aria-hidden="true"><AvatarFallback>陈</AvatarFallback></Avatar>} />}>陈致远</MenuTrigger>
@@ -112,7 +175,7 @@ export function WorkspaceShell() {
             <MenuItem render={link("/settings/members")}>成员与角色</MenuItem>
             <MenuItem render={link("/help")}>帮助</MenuItem>
             <MenuSeparator />
-            <MenuItem>退出登录</MenuItem>
+            <MenuItem onClick={() => setSignOutOpen(true)}>退出登录</MenuItem>
           </MenuPopup></MenuPositioner></MenuPortal>
         </Menu>
       </SidebarFooter>
@@ -120,26 +183,38 @@ export function WorkspaceShell() {
 
     <WorkspaceSurface>
       <WorkspaceHeader>
+        <SidebarDrawerTrigger />
         <Breadcrumb className="min-w-0 flex-1">
           <BreadcrumbList>
-            <BreadcrumbItem><BreadcrumbLink render={link("")}>青野工作区</BreadcrumbLink></BreadcrumbItem>
+            <BreadcrumbItem><BreadcrumbLink render={link("")}>{workspaceName}</BreadcrumbLink></BreadcrumbItem>
             {crumbs.map((crumb, index) => <React.Fragment key={index}>
               <BreadcrumbSeparator />
               <BreadcrumbItem>{crumb.to ? <BreadcrumbLink render={<Link to={crumb.to} />}>{crumb.label}</BreadcrumbLink> : <BreadcrumbCurrent>{crumb.label}</BreadcrumbCurrent>}</BreadcrumbItem>
             </React.Fragment>)}
           </BreadcrumbList>
         </Breadcrumb>
-        <Button variant="bordered" size="sm" onClick={() => setSearching(true)} className="w-[calc(10*var(--qy-cai))] justify-start text-muted-foreground">
-          <IconSearch aria-hidden="true" />搜索<Kbd className="ms-auto">⌘K</Kbd>
+        <Button variant="bordered" size="sm" onClick={() => setSearching(true)} className="w-[calc(10*var(--qy-cai))] justify-start text-muted-foreground max-sm:w-auto">
+          <IconSearch aria-hidden="true" /><span className="max-sm:sr-only">搜索</span><Kbd className="ms-auto max-sm:hidden">⌘K</Kbd>
         </Button>
         <Popover>
-          <PopoverTrigger render={<Button variant="quiet" shape="icon" aria-label={`动态，${ACTIVITY.length} 条新`} />}>
-            <CornerMark count={ACTIVITY.length} label={`${ACTIVITY.length} 条新动态`}><IconBell aria-hidden="true" /></CornerMark>
+          <PopoverTrigger render={<Button variant="quiet" shape="icon" aria-label={unreadCount > 0 ? `动态，${unreadCount} 条未读` : "动态"} />}>
+            {unreadCount > 0
+              ? <CornerMark count={unreadCount} label={`${unreadCount} 条新动态`}><IconBell aria-hidden="true" /></CornerMark>
+              : <IconBell aria-hidden="true" />}
           </PopoverTrigger>
-          <PopoverPopup align="end" className="w-[calc(16*var(--qy-cai))]">
-            <PopoverTitle>今天</PopoverTitle>
+          <PopoverPopup align="end" className="w-[min(calc(18*var(--qy-cai)),calc(100vw-2rem))]">
+            <div className="flex items-center justify-between gap-(--qy-field-gap)">
+              <PopoverTitle>工作区动态</PopoverTitle>
+              {unreadCount > 0 && <Button size="sm" variant="quiet" onClick={markActivityRead}>全部已读</Button>}
+            </div>
             <Timeline className="mt-(--qy-field-group-gap)">
-              {ACTIVITY.map(item => <TimelineItem key={item.id}><TimelineTime dateTime={item.dateTime}>{item.time}</TimelineTime><TimelineTitle>{item.title}</TimelineTitle><TimelineDescription>{item.detail}</TimelineDescription></TimelineItem>)}
+              {activity.slice(0, 6).map(item => (
+                <TimelineItem key={item.id}>
+                  <TimelineTime dateTime={item.dateTime}>{item.time}</TimelineTime>
+                  <TimelineTitle>{item.title}</TimelineTitle>
+                  <TimelineDescription>{item.detail}</TimelineDescription>
+                </TimelineItem>
+              ))}
             </Timeline>
           </PopoverPopup>
         </Popover>
@@ -148,6 +223,20 @@ export function WorkspaceShell() {
         <Scroller.Provider value={scroller}><Outlet /></Scroller.Provider>
       </WorkspaceContent>
     </WorkspaceSurface>
+
     <SearchDialog open={searching} onOpenChange={setSearching} />
+
+    <AlertDialog open={signOutOpen} onOpenChange={setSignOutOpen}>
+      <AlertDialogPopup>
+        <AlertDialogHeader>
+          <AlertDialogTitle>退出{workspaceName}</AlertDialogTitle>
+          <AlertDialogDescription>当前演示中的本地修改仍会保留在内存里，稍后可以一键返回。</AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogClose>取消</AlertDialogClose>
+          <Button variant="bordered" onClick={() => { setSignOutOpen(false); setSignedOut(true); }}>确认退出</Button>
+        </AlertDialogFooter>
+      </AlertDialogPopup>
+    </AlertDialog>
   </Workspace>;
 }

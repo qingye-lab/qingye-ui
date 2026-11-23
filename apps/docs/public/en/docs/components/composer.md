@@ -1,9 +1,9 @@
 # Composer
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/composer
 Source: packages/ui/src/components/composer.tsx
-Source SHA-256: fef8f9c94f951cdabab88801f34d75427fb3c8b8a5d43b7a8170abdfa50b5fe7
+Source SHA-256: 318ec3f44b4529c8d359cedbe716327761934252518851976925f94309b6844c
 
 Multi-line input with @ mentions, / commands and atomic tokens; its value is an array of text and token segments.
 
@@ -127,7 +127,7 @@ The toolbar holds xs buttons; ComposerSubmit is unavailable when empty, disabled
 - Enter / Tab (after a failed load): Retry the load without submitting. After Escape closes the candidates, Enter submits again.
 - Escape: Close the candidates and keep the typed text.
 - Backspace / Delete: Delete an adjacent token as a whole.
-- Ctrl/⌘+Z、Ctrl/⌘+Shift+Z: Undo and redo using the component's own snapshot stack.
+- Ctrl/Cmd+Z / Ctrl/Cmd+Shift+Z: Undo and redo using the component's own snapshot stack.
 
 ## Source examples
 ### 输入与提交

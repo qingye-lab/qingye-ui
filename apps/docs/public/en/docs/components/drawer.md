@@ -1,9 +1,9 @@
 # Drawer
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/drawer
 Source: packages/ui/src/components/drawer.tsx
-Source SHA-256: 63395abb3d4f641fe6170a87574be325b93daf28603ddc2e868606f68a69d652
+Source SHA-256: d0718765806363fa99df3caed3289f62a98e5f5c368e6fb20d7037e31e93eb25
 
 Enter an edge-aligned work surface and return to its entry point.
 

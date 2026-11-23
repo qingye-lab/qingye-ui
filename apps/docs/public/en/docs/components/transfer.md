@@ -1,6 +1,6 @@
 # Transfer
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/transfer
 Source: packages/ui/src/components/transfer.tsx
 Source SHA-256: a8fb40e9cf2f0175303dded681f41fa34c4e549ce2fa5c1e77a8c11cfba2b52b
@@ -71,7 +71,7 @@ Two checkbox lists with move buttons between them. Each item is on exactly one s
 - items: { value: string; label: string; disabled?: boolean }[]. All items. value and label must be non-empty and value unique within items, or it throws.
 - value / defaultValue: string[]; default []. Keys of the items on the right (selected), controlled or uncontrolled.
 - onValueChange: (value: string[], details: { direction: "toTarget" | "toSource"; moved: string[] }) => void. Called when a move happens: the new full set of keys plus the direction and the keys moved. Keys moved in are appended after the current value.
-- titles: [string, string]; default 候选 / 已选. The two titles, which also name each list for assistive technology.
+- titles: [string, string]; default Available / Selected. The two titles, which also name each list for assistive technology.
 - searchable: boolean; default false. Adds a filter input to each side. Select all, the count and moving act on the visible, filtered items only.
 - name: string. Each key on the right is submitted as a hidden field of this name; a form reset restores the default value.
 - disabled: boolean; default false. The whole component is inert and is not submitted.
@@ -80,7 +80,7 @@ Two checkbox lists with move buttons between them. Each item is on exactly one s
 ## Keyboard
 - Tab / Shift+Tab: Passes through, in order: the left select-all, filter, item checkboxes, the move buttons, then the same controls on the right.
 - Space: Toggles the focused checkbox (an item or select all).
-- Enter（移动按钮）: On a move button: moves the checked items to the other side; does nothing when none can move.
+- Enter (move button): On a move button: moves the checked items to the other side; does nothing when none can move.
 
 ## Source examples
 ### 基础

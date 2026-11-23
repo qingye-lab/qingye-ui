@@ -1,9 +1,9 @@
 # 比较表 Table
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/table
 Source: packages/ui/src/components/table.tsx
-Source SHA-256: 2c1f8ba7a99989283f696f918b46fd141ddb56278986f5b5f13a89bec4a6a99a
+Source SHA-256: dcdd6e9b5b3cba088fccd4182b46c87f6882dbcc48e259f559ad6c589d66f384
 
 原生二维关系与完整比较列。
 

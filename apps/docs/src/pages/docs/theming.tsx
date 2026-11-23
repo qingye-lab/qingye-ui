@@ -222,7 +222,7 @@ export function ThemeSwitch() {
 
 export default function ThemingPage() {
   const en = useDocsLocale() === "en";
-  return <Article><PageHeader title={en ? "Theming" : "主题"} description={en ? "Brand, light/dark and density each live on their own attribute and never override one another." : "品牌、明暗与密度各写在自己的属性上，互不覆盖。"} />
+  return <Article><PageHeader title={en ? "Theming" : "主题"} />
     <H2 id="axes">{en ? "Three settings" : "三个设置"}</H2>
     <Facts items={[
       { term: en ? "Brand" : "品牌", detail: <><Code>{'html[data-brand="…"]'}</Code>{en ? ", written statically by the project." : "，由项目静态写入。"}</> },

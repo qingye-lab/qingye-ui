@@ -18,6 +18,9 @@
 .ledger-legend dt { font-weight: var(--qy-weight-medium); color: var(--qy-foreground); }
 .ledger-legend dd { margin: 0; color: var(--qy-foreground-muted); }
 .ledger-legend [data-current] dd { color: var(--qy-foreground); }
+@media (width < 40rem) {
+  .ledger-legend { grid-template-columns: minmax(0, 1fr); }
+}
 
 .ledger-section { margin-top: calc(3 * var(--qy-cai)); }
 .ledger-section > [data-slot="table-container"],

@@ -1,6 +1,6 @@
 # ToggleGroup
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/toggle-group
 Source: packages/ui/src/components/toggle-group.tsx
 Source SHA-256: 7850bfe90e1c53a915357e2fe0de3d9df988b18a93125cb67b3b649996486a94

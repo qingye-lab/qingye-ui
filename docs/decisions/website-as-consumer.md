@@ -1,6 +1,6 @@
 # 官网作为组件库的第一方消费端
 
-当前裁决：2026-10-03 重写任务，执行收尾跨至 2026-10-04；2026-10-30 随 5.0.0 补充新组件的采用（见文内同日一节）。取代本文件早期的 88 模块、业务任务模拟和移动外壳安排；历史裁决见对应日期的计划与执行记录。
+当前裁决：2026-10-03 重写任务，执行收尾跨至 2026-10-04；2026-10-30 随 5.0.0 补充新组件的采用（见文内同日一节）；2026-11-23 解除「仅桌面、不启抽屉」限制以对齐 NG13 并调整核心页面（见文末同日一节）。取代本文件早期的 88 模块、业务任务模拟和移动外壳安排；历史裁决见对应日期的计划与执行记录。
 
 ## 任务与边界
 
@@ -184,3 +184,25 @@
 本批执行者只运行定点 strict TS、官网真实 DOM/SSR 契约和 TypeScript AST 控件检查。执行记录见 `docs/implementation/2026-10-03-website-consumer.md`。
 
 生成、构建、浏览器由主 agent 串行执行。桌面浅深色首页预览容量、组件页长表、搜索、复制、组合状态、英文路由和公开 Markdown 是实际验收对象；类型检查和 DOM 契约不代表人工视觉、辅助技术或真机验收。没有恢复旧业务测试，也不为通过测试恢复被禁用模块。
+
+## 对齐 NG13 与核心页面重构（2026-11-23）
+
+正式解除早先「当前范围是桌面网站、不启用窄屏侧栏抽屉」的阶段性限制，使官网外壳与示例在窄屏与中等宽度下同样满足 `design.md` NG13（全尺寸可用性），并完成下列核心页面重构：
+
+- **窄屏导航抽屉（NG13）**：
+  - 文档/组件路由在 `< 1024px`（`< lg`）由 `SiteHeader` 呈现 `<SidebarDrawerTrigger>`（桌面 `>= lg` 视觉与 DOM 占位不变）；`DocsLayout` / `DocsNav` 挂载共享的 `createSidebarDrawerHandle()`（`< 40rem` 由 `Sidebar` 内置抽屉接管，`40rem–64rem` 平板宽度由库 `Drawer` 承载同一棵 `DocsNav` 树），点击链接跳转后自动关闭抽屉。
+  - `/examples/workspace` 的 `<Sidebar>` 启用 `drawer` 并在 `WorkspaceHeader` 起始位放入 `<SidebarDrawerTrigger>`。
+  - `SiteHeader` 的 `SearchTrigger` 在 `< 40rem` 收拢为仅放大镜图标，保留完整 `aria-label` 与快捷键语义。
+- **中等宽度本页目录与窄屏多列修复**：
+  - 在 `DocsLayout` 正文顶部增设基于库 `Collapsible` + `Toc` 的可折叠「本页目录」，仅当右侧 `[data-docs-toc]` 被容器查询隐藏（`< 66.25rem`）且本页至少有两项标题时呈现，点击锚点跳转后自动收起；宽屏仍由容器查询隐藏。
+  - 修复 `.component-pairs`、`.ledger-legend`、`.spec-density` 三处在 `< 40rem` 下的多列挤压，统一退回单列。
+- **首页转化路径与 `HomeWindow` 打磨**：
+  - 保留「墨阶」128px 细体海报与同源 `iframe` 运行窗口（保障 `html[data-try-brand]` 与浮层 Portal 隔离）。
+  - 首屏右下 `.home-intro` 增加紧凑安装命令（复用库 `CodeBlock`），主次动作调整为「浏览组件」（`/docs/components`）与「开始使用」（`/docs/installation`）；移除示例段落违反 NG8 的自述说明。
+  - `HomeWindow` 的 `iframe` 补齐 `data-loaded` 清染占位与加载淡入；英文首页底栏简洁注明示例界面为中文。
+- **组件总览检索与分层筛选**：
+  - `/docs/components` 保留 `ComponentSpecimen` 视口懒挂载，页头下方增设由库 `SearchInput`（即时过滤名称/英文名/slug/描述/关键词）、`SegmentedControl`（按 `全部 / Foundation / Primitive / Pattern` 筛选并显示结果计数）与分类快捷跳转锚点组成的工具条；无匹配时呈现库 `Empty` 与重置动作。同步更新站点搜索契约测试。
+- **示例总览降本、组件页就地密度切换与基础清理**：
+  - `/examples` 总览删除违反 NG8 的自述句，`Preview` 增加 `IntersectionObserver({ rootMargin: "200px 0px" })` 按需挂载非首屏 `iframe`。
+  - 组件详情页「示例」节标题行右侧增加 `SegmentedControl size="sm"`（`舒展 / 紧凑`），仅在示例容器上切换 `data-density="compact"`，不叠加局部品牌色。
+  - 官网 `Facts`（`components/prose.tsx`）迁移复用库 `DescriptionList` 系列；修复 `registry.ts` 中 `loadComponent` 失败 Promise 被永久缓存的缺陷。

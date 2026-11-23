@@ -1,9 +1,9 @@
 # Tour
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/tour
 Source: packages/ui/src/components/tour.tsx
-Source SHA-256: add2cb8a6f949f9311df5c9e87450d71245d3caf1742edad83564a2edcb9e35b
+Source SHA-256: 3bf614d1913cac2dea9b1a5ef9937e48e29954af45fb4f4eddf28e737c5f1dae
 
 A non-modal, step-by-step guide that points at page elements one after another, with an optional spotlight.
 
@@ -17,19 +17,19 @@ A tour only points the way: it neither does the task for the user nor blocks the
 - With reduced motion the cutout jumps into place and scrolling is no longer smooth.
 
 ## Use and ownership
-- 首次使用时依次指出几处关键入口。
-- Avoid: 把必须完成的操作放进引导；用遮罩阻断页面；步数过多。
-- Library: 当前步、可用步的解析与跳过、焦点移入与返回、定位。
-- Application: 何时开始、是否已看过、受控的 open 与 step。
+- Point out a few key entries one after another on first use.
+- Avoid: Putting required operations inside a tour; blocking the page with a mask; too many steps.
+- Library: Current step, resolving and skipping unavailable steps, focus entry and return, and positioning.
+- Application: When to start, whether the tour has been seen, and controlled open and step values.
 
 ## Composition
-- 锚点是页面上已有的元素；Tour 只持有当前步与打开请求，不改动锚点。
+- Anchors are existing page elements; Tour only owns the current step and close requests without altering the anchors.
 
 ## Responsive behavior
-- 浮层宽度受可用宽度限制；锚点在视口外时先滚入。
+- Popup width stays within available space; anchors outside the viewport scroll into view first.
 
 ## Customization
-- 浮层宽度与方向可调；遮罩外扩与圆角随系统尺度，不单设令牌。
+- Popup width and placement are adjustable; cutout padding and radius follow the system scale rather than separate tokens.
 
 ## Current exports
 - Tour: function; owner tour; PASS; props: TourProps
@@ -44,6 +44,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### Tour
 - `className?`: `string`.
+- `container?`: `HTMLElement | null`. 观察锚点增删变化的 DOM 范围；缺省观察 document.body。缩小范围可减少无关子树变动触发的重解析。
 - `defaultOpen?`: `boolean`.
 - `defaultStep?`: `number`.
 - `onFinish?`: `() => void`. 在最后一步点「完成」。随后 onOpenChange(false, { reason: "finish" })。
@@ -74,6 +75,7 @@ Anchors a popup to each step's element in order, reusing Popover positioning. Sc
 - onStepChange: (step: number) => void. Called with the new step index; skipped steps never appear.
 - onFinish / onSkip: () => void / (step) => void. Called on Done at the last step or Skip at any step, each followed by onOpenChange.
 - spotlight: boolean; default false. A mask with a cutout at the anchor. It does not intercept the pointer and follows window size and scroll.
+- container: HTMLElement | null. DOM scope observed for anchor additions and removals; defaults to document.body. Narrowing it reduces re-resolution from unrelated subtree mutations.
 - className: string. Appended to the popup.
 
 ## Keyboard

@@ -1,6 +1,6 @@
 # SegmentedControl
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/segmented-control
 Source: packages/ui/src/components/segmented-control.tsx
 Source SHA-256: f4665dbed362bff8a49503a39078814435fee87286a1eef4e431e26d75f2df6e

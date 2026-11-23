@@ -1,9 +1,9 @@
 # ColorPicker
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/color-picker
 Source: packages/ui/src/components/color-picker.tsx
-Source SHA-256: aacdb9bc0a3ecbe1c0081eff0149c5f5f097de7d58c4d93f77cedd7042e41afd
+Source SHA-256: a5f6c5e299b36e407c068835ebf3031200b172384bda3c5c69ccf1e06a1dbc47
 
 Choose a colour that belongs to the user's data, such as a label colour or a theme setting, and get a #rrggbb string.
 
@@ -86,7 +86,7 @@ Free choice: a button shows the current colour and its hex; it opens a saturatio
 - swatches: { value: string; label: string }[]. A preset row using ColorSwatchPicker, with the same rules.
 - name / form / disabled: string / string / boolean. With name, #rrggbb is submitted with the form. When disabled it is neither submitted nor openable.
 - aria-label / aria-labelledby: string. The trigger name. Inside a Field it comes from the FieldLabel; otherwise a missing name throws.
-- className / style / 其余 button 属性: ComponentProps<"button">. Passed to the trigger button.
+- className / style / remaining button props: ComponentProps<"button">. Passed to the trigger button.
 
 ## Keyboard
 - ← / → (area): Saturation −1 / +1; Shift uses 10. Home / End go to saturation 0 / 100.

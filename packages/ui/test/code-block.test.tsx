@@ -104,3 +104,18 @@ describe("CodeBlock copy button name", () => {
     expect(screen.getByRole("button", { name: "复制代码 pnpm add @qingye_lab/ui" })).toBeInTheDocument();
   });
 });
+
+describe("CodeBlock framed option", () => {
+  it("marks data-framed by default and with framed={false} while keeping copy working", async () => {
+    const writeText = vi.fn().mockResolvedValue(undefined);
+    vi.stubGlobal("navigator", { clipboard: { writeText } });
+    const { container, rerender } = render(<CodeBlock code="const x = 1;" title="x.ts" />);
+    expect(container.querySelector("[data-slot=code-block]")).toHaveAttribute("data-framed", "true");
+
+    rerender(<CodeBlock code="const x = 1;" title="x.ts" framed={false} />);
+    expect(container.querySelector("[data-slot=code-block]")).toHaveAttribute("data-framed", "false");
+    fireEvent.click(screen.getByRole("button", { name: "复制代码 x.ts" }));
+    expect(writeText).toHaveBeenCalledWith("const x = 1;");
+    await waitFor(() => expect(screen.getByRole("button", { name: "已复制 x.ts" })).toBeInTheDocument());
+  });
+});

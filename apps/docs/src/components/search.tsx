@@ -79,7 +79,7 @@ export function SearchTrigger({ className }: { className?: string }) {
       aria-label={label}
       aria-keyshortcuts={mac ? "Meta+K" : "Control+K"}
       className={cn(
-        "shrink-0 text-muted-foreground",
+        "shrink-0 text-muted-foreground max-sm:w-(--qy-control-md) max-sm:px-0",
         className,
       )}
       onClick={openSearch}
@@ -87,7 +87,7 @@ export function SearchTrigger({ className }: { className?: string }) {
       variant="quiet"
     >
       <IconSearch aria-hidden="true" />
-      <span>{label}</span>
+      <span className="hidden sm:inline">{label}</span>
       <span className="hidden items-center gap-(--qy-space-1) md:inline-flex pointer-coarse:hidden">
         <Kbd>{mac ? "⌘" : "Ctrl"}</Kbd>
         <Kbd>K</Kbd>

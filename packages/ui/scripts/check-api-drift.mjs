@@ -3,7 +3,8 @@
 //   node scripts/check-api-drift.mjs            summary; exit 1 on documented-but-missing / unresolved
 //                                               that the baseline does not already list
 //   node scripts/check-api-drift.mjs --list     print every documented-but-missing entry
-//   node scripts/check-api-drift.mjs --undocumented [n]   print undocumented own props
+//   node scripts/check-api-drift.mjs --undocumented [n]      print undocumented own props
+//   node scripts/check-api-drift.mjs --undocumented-own [n]  print undocumented own-file props (excluding className/data-slot/ref/children)
 //
 // The full report is written by gen-catalog.mjs to docs/api-drift.json; this script recomputes it
 // from source so it never trusts a stale file. docs/api-drift.baseline.json lists drift that was
@@ -23,9 +24,11 @@ console.log(`API tables vs types (${report.checker}): ${summary.components} comp
 for (const [status, count] of Object.entries(summary.byStatus)) console.log(`  ${status}: ${count}`);
 console.log(`  documented-but-missing ${summary.documentedButMissing} (gated); unresolved ${summary.unresolved} (gated)`);
 console.log(`  undocumented ${summary.undocumented} (${summary.undocumentedDeclaredInThisComponentsFile} declared in the component's own file; report only)`);
+console.log(`  undocumentedOwnProps ${summary.undocumentedOwnProps} (excluding className/data-slot/ref/children; report only)`);
 console.log(`  written names not checked ${summary.uncheckedWrittenNames}: ${JSON.stringify(summary.uncheckedByReason)}`);
 if (args.includes("--list")) for (const item of report.documentedButMissing) console.log(`  MISSING ${item.component} ${item.part}${item.prop ? ` .${item.prop}` : ""} [${item.reason}] ${item.meta}`);
 if (args.includes("--undocumented")) for (const item of report.undocumented.slice(0, Number(args[args.indexOf("--undocumented") + 1]) || 30)) console.log(`  UNDOCUMENTED ${item.component} ${item.part}.${item.prop} ${item.declaredAt ?? ""}`);
+if (args.includes("--undocumented-own")) for (const item of report.undocumentedOwnProps.slice(0, Number(args[args.indexOf("--undocumented-own") + 1]) || 30)) console.log(`  UNDOCUMENTED_OWN ${item.component} ${item.part}.${item.prop} ${item.declaredAt ?? ""}`);
 for (const item of fixed) console.log(`  FIXED (remove from docs/api-drift.baseline.json): ${item}`);
 if (added.length) {
   console.log(`FAIL: ${added.length} new entr${added.length === 1 ? "y" : "ies"} not in the baseline`);

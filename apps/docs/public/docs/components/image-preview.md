@@ -1,9 +1,9 @@
 # 图片预览 ImagePreview
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/image-preview
 Source: packages/ui/src/components/image-preview.tsx
-Source SHA-256: 23741daf38ba1fbc21c80c4eae46b218445b975188b4bbc3e6691bfd6a20803e
+Source SHA-256: 64aec292f6b034b610a31fdbf4803c94b5c20d1b7e35316f4fbfaeb27cd18078
 
 缩略图打开大图，可在同组图片间切换并放大。
 
@@ -57,6 +57,11 @@ Written descriptions; the list above is the type-resolved fact.
 - className / native props: React.ComponentProps<div>. 其余属性透传到根元素。
 
 ## Keyboard
+- Enter / Space: 在缩略图按钮上打开预览对话框，或在对话框控制按钮上执行对应操作。
+- ← / →: 在同组图片中切换上一张 / 下一张（RTL 下方向相反，到头即止）；放大且焦点位于舞台上时方向键用于滚动，不切图。
+- + / = / - / 0: 放大一级（+ / =）、缩小一级（-）或重置为适应窗口（0）。
+- Tab / Shift+Tab: 在预览对话框内的控制按钮（及放大后可滚动的舞台）间移动焦点。
+- Escape: 关闭预览对话框并将焦点返回打开它的缩略图按钮。
 
 ## Source examples
 ### 同组图片与单张

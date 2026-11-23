@@ -114,6 +114,33 @@ export default {
   "notesEn": [
     "The visible Menu and context region share commands; no business service is simulated."
   ],
+  "keyboard": [
+    {
+      "keys": "Shift+F10 / ContextMenu",
+      "description": "在聚焦的 ContextMenuTrigger 上打开上下文菜单。",
+      "descriptionEn": "Open the context menu on a focused ContextMenuTrigger."
+    },
+    {
+      "keys": "↑ / ↓ / Home / End",
+      "description": "在菜单项之间移动焦点。",
+      "descriptionEn": "Move focus among menu items."
+    },
+    {
+      "keys": "→ / ←",
+      "description": "打开或收起子菜单（RTL 方向相反）。",
+      "descriptionEn": "Open or close a submenu (reversed in RTL)."
+    },
+    {
+      "keys": "Enter / Space",
+      "description": "执行当前可用命令、切换勾选/开关或打开子菜单。",
+      "descriptionEn": "Run an enabled command, toggle a checkbox/switch item, or open a submenu."
+    },
+    {
+      "keys": "Escape",
+      "description": "关闭上下文菜单并将焦点返回触发区域。",
+      "descriptionEn": "Close the context menu and return focus to the trigger region."
+    }
+  ],
   "design": {
     "methods": [
       "名实相符",

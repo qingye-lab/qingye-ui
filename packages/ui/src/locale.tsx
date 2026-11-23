@@ -4,7 +4,9 @@ import { DirectionProvider } from "@base-ui/react/direction-provider";
 import { createContext, useContext, useMemo, type ReactNode } from "react";
 
 export type UILocaleMessages = {
-  buttonWaiting: string; buttonInProgress: string; buttonUnknown: string; buttonFailed: string; inputClear: string;
+  buttonWaiting: string; buttonInProgress: string; buttonUnknown: string; buttonFailed: string;
+  /** @deprecated 库内组件不再消费该键（SearchInput 读 clearSearch，选择器读 clearSelection，日期族读 clearDate*）；v5 保留以维持类型兼容，计划于 v6 移除。 */
+  inputClear: string;
   close: string; loading: string; readOnly: string; breadcrumb: string; more: string;
   dismissFileRejection: (name: string) => string;
   toastSuccess: string;
@@ -46,9 +48,17 @@ export type UILocaleMessages = {
   steps: string; stepComplete: string; stepCurrent: string; stepUpcoming: string; stepError: string; timeline: string;
   tourPrevious: string; tourNext: string; tourFinish: string; tourSkip: string; tourProgress: (current: number, total: number) => string;
   // General actions
-  clear: string; cancel: string; confirm: string; apply: string; reset: string; back: string; search: string; expand: string; collapse: string;
+  clear: string; cancel: string; confirm: string; apply: string; reset: string; back: string; search: string;
+  /** @deprecated 库内组件不再消费该键（各展开控件已改用具体语义键或原语状态）；v5 保留以维持类型兼容，计划于 v6 移除。 */
+  expand: string;
+  collapse: string;
   // Theme
-  theme: string; lightTheme: string; darkTheme: string; systemTheme: string;
+  theme: string;
+  /** @deprecated 库内组件不消费该键；消费方自建主题菜单请自行持有文案，计划于 v6 移除。 */
+  lightTheme: string;
+  /** @deprecated 库内组件不消费该键；消费方自建主题菜单请自行持有文案，计划于 v6 移除。 */
+  darkTheme: string;
+  systemTheme: string;
   // Selection and input
   selectPlaceholder: string; addTag: string; tagExists: (tag: string) => string;
   // Dates

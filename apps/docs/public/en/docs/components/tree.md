@@ -1,6 +1,6 @@
 # Tree
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
 Source SHA-256: 51af2eea6dd23fce52b0b5062e83fd08bbb41be9369d653212f2d152d4d86b7a
@@ -93,6 +93,7 @@ A complete hierarchical collection.
 ## Keyboard
 - ↑ / ↓ / Home / End: Move between visible enabled nodes.
 - ← / →: Collapse/expand or move to parent/child; reversed in RTL. Expansion belongs to the arrow keys; the chevron at the row start is for pointers only and is outside both the Tab sequence and the accessibility tree.
+- → (← in RTL, after a failed load): Retry loadChildren on an expanded node whose asynchronous load failed.
 - Ctrl/Cmd+X, Alt+↑ / ↓ / Enter, Esc: Only with draggable: Ctrl/Cmd+X picks up the focused node, the arrow keys move focus, Alt+↑ drops before the focused node, Alt+↓ after it and Alt+Enter inside it, and Esc or leaving the tree cancels. Every step is announced.
 - Enter / Space / Typeahead: Select the current node, or type the start of a label to move: characters typed in quick succession (within 500ms, a preset) accumulate into a prefix, and repeating one character cycles through nodes starting with it. In checkable mode, Space toggles the current node and its enabled leaf descendants instead, and Enter does not select.
 

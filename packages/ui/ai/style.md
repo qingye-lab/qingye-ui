@@ -2,7 +2,7 @@
 
 本文件由根 `design.md` 的设计契约与交付检查、`STANDARDS.md` 的组件实现规则生成。改规则时修改对应源文件。
 
-方法来源见[设计理念](design-philosophy.md)；组件使用限制与 API 见[同版本索引](v5.5.0/llms.txt)。项目接入见[公开指南](../design.md)。
+方法来源见[设计理念](design-philosophy.md)；组件使用限制与 API 见[同版本索引](v5.6.0/llms.txt)。项目接入见[公开指南](../design.md)。
 
 ## 使用方式
 
@@ -119,6 +119,7 @@
 - 改渲染元素使用 Base UI `render`、`useRender` 与 `mergeProps`；不新增无任务依据的别名或 `as` API。当前 Card 是组合入口，不自动提供标题槽或 padding。
 - 基于 Base UI 的组件导出所用原语命名空间。可控状态同时保留适用的受控与非受控入口；职责按 [design.md「明确修改归属」](../design.md#明确修改归属) 判断。
 - 请求事实与结果推断按 [design.md「名称与状态」](../design.md#名称与状态)。Button 只有忙碌一种状态（`loading`，用户裁决 2026-10-10）：事实由调用方持有，按钮不启动请求、不推断结束。成功、失败与结果未知不写在按钮上，由 Alert、Toast、FieldError、StatusDot 等提示组件表达。Toast 只呈现应用给出的类型，不设期限、不把久等推断为未知。
+- 控件与集合级布尔忙碌态在新组件中统一命名为 `loading`；已有组件的 `busy`（如 DataTable、PaginationPattern）与 `pending`（如 Switch）在 v5 保留，留待 v6 主版本统一收口。
 - 功能纯粹（用户裁决 2026-10-10）：一个组件只做自己的事。Button 只触发动作，`tone="danger"` 只是色调；后果说明与确认属于 AlertDialog / ConfirmAction，后果写在对话框的说明里。Button 不再校验、包装或关联后果，`ButtonProtection` 已移除。按下后保持的二态用 Toggle；提示附在调用方给出的控件上（TooltipTrigger 的 `render` 必填），不自带按钮。Input 只承载值：清空、搜索图标与显示密码由 SearchInput、PasswordInput 或 InputGroup + InputGroupButton 组合。Chart / ScatterChart / Heatmap 只画数据（等价数据表是无障碍替代，保留）：整图没有记录、未知或不适用时由调用方在原位放 Empty。
 
 ### 2. 尺寸
@@ -188,6 +189,8 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 | selected / open | 使用原语实际提供的 data 状态；事实与名称对应，换外观不换语义 |
 
 焦点值见基础层 §15：`--qy-focus-ring-width` 当前选择 2px，`--qy-focus-quiet-width` 选择 1px。SearchInput / PasswordInput 的附属动作是 InputGroupButton（quiet Button，1px 内线）；裸 Popover 入口目前用 2px 内线，不能把它误写成 quiet Button。Popover 面板会实际获得焦点，审查记录 Enter 打开后匹配 focus-visible；其边框只变色。
+
+结构性物理例外（不视作违反焦点不外扩）：`ColorPicker` 色板抓手位于任意色面上，无法保证内侧反色线与背景对比，允许使用外侧 `outline-offset`；`ResizableHandle` 分隔条本身为 1px 细线，没有向内收拢的几何空间，允许焦点环向外居中展开。除上述登记在案的物理例外外，其余组件焦点一律向内收拢或仅改现有边框色。
 
 强制颜色下 box-shadow 会被系统移除，`styles.css` 统一恢复 CSS outline：宽度和内缩位置均读取局部 `--qy-focus-ring-width`，默认 2px，quiet 为 1px；系统色接管。`!important` 用于覆盖 utilities 层的 outline-none。宽度是选择，不是 AA 下限。完整强制颜色组合矩阵仍为 UNVERIFIED。
 

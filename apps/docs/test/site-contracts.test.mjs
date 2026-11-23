@@ -57,13 +57,24 @@ test("sidebar entries are destinations and navigation focuses the surviving page
   assert.ok(document.activeElement.isConnected);
 });
 
-test("one public search trigger serves the directory; there is no second query field", async () => {
+test("one global search trigger serves documentation while the components index filters locally with empty recovery", async () => {
   await mount(fixture.searchScene());
   const triggers = document.querySelectorAll('button[aria-label="搜索文档"]');
   assert.equal(triggers.length, 1);
-  assert.equal(document.querySelectorAll('input[type="search"]').length, 0);
   assert.ok(triggers[0].querySelector("svg"));
   assert.equal(triggers[0].dataset.slot, "button");
+  const filter = document.querySelector('input[type="search"][aria-label="筛选组件"]');
+  assert.ok(filter);
+  assert.equal(document.querySelectorAll('input[type="search"]').length, 1);
+  await act(() => {
+    Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set.call(filter, "qqzz-no-matching-component");
+    filter.dispatchEvent(new Event("input", { bubbles: true }));
+  });
+  assert.ok(document.querySelector('[data-slot="empty"][data-state="empty"]'));
+  const reset = [...document.querySelectorAll("button")].find((node) => node.textContent?.trim() === "重置筛选");
+  await click(reset);
+  assert.equal(document.querySelector('[data-slot="empty"]'), null);
+  assert.ok(document.querySelectorAll('[data-slot="docs-index-grid"] li').length > 0);
 });
 
 test("search navigates from the highlighted top result on Enter and focuses the new page", async () => {
