@@ -1,9 +1,9 @@
 # 新手引导 Tour
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/tour
 Source: packages/ui/src/components/tour.tsx
-Source SHA-256: add2cb8a6f949f9311df5c9e87450d71245d3caf1742edad83564a2edcb9e35b
+Source SHA-256: 3bf614d1913cac2dea9b1a5ef9937e48e29954af45fb4f4eddf28e737c5f1dae
 
 依次指向页面上的元素并逐步说明的非阻断引导，可选聚光遮罩。
 
@@ -44,6 +44,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 
 ### Tour
 - `className?`: `string`.
+- `container?`: `HTMLElement | null`. 观察锚点增删变化的 DOM 范围；缺省观察 document.body。缩小范围可减少无关子树变动触发的重解析。
 - `defaultOpen?`: `boolean`.
 - `defaultStep?`: `number`.
 - `onFinish?`: `() => void`. 在最后一步点「完成」。随后 onOpenChange(false, { reason: "finish" })。
@@ -74,6 +75,7 @@ Written descriptions; the list above is the type-resolved fact.
 - onStepChange: (step: number) => void. 换步时调用，参数是新步的下标；被跳过的步不会出现。
 - onFinish / onSkip: () => void / (step) => void. 在最后一步点「完成」，或在某步点「跳过」。随后各自触发 onOpenChange。
 - spotlight: boolean; default false. 在锚点处挖洞的遮罩；不拦截指针，随窗口尺寸与滚动跟随锚点。
+- container: HTMLElement | null. 观察锚点增删变化的 DOM 范围；缺省观察 document.body，缩小范围可减少无关子树变动触发的重解析。
 - className: string. 追加到浮层。
 
 ## Keyboard

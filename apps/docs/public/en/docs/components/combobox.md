@@ -1,6 +1,6 @@
 # Combobox
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/combobox
 Source: packages/ui/src/components/combobox.tsx
 Source SHA-256: 81e5928924575a0502406debc3548efedf59479e2abb2130abc4636146650cf7

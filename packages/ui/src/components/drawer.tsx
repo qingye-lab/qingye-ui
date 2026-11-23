@@ -38,7 +38,7 @@ export type DrawerPopupProps = Omit<DrawerPrimitive.Popup.Props, "initialFocus" 
 // 间距读与 Dialog 相同的 --qy-panel-gap / --qy-panel-padding。边界与阴影档：border-border + shadow-overlay（理由见 popover.tsx 的 PopoverPopup；
 // 非阻断的抽屉仍是占据整边的工作面，不降为贴着触发物的 shadow-raised）。
 // 抽屉贴着视口的一边：贴边那一侧没有圆角也没有线——它是从边上拉出来的，不是浮在空中的一张卡（应物象形）。
-const edges = { down: "inset-x-0 bottom-0 w-full rounded-b-none border-b-0", up: "inset-x-0 top-0 w-full rounded-t-none border-t-0", left: "inset-y-0 left-0 h-full w-fit rounded-s-none border-s-0", right: "inset-y-0 right-0 h-full w-fit rounded-e-none border-e-0" };
+const edges = { down: "inset-x-0 bottom-0 w-full rounded-b-none border-b-0", up: "inset-x-0 top-0 w-full rounded-t-none border-t-0", left: "inset-y-0 left-0 h-full w-fit rounded-l-none border-l-0", right: "inset-y-0 right-0 h-full w-fit rounded-r-none border-r-0" };
 // inset 的两个值各有来处，没有新取值：距视口的边 = --qy-space-2，与 Workspace 的侧栏、工作面离视口的边相同（workspace.tsx）——
 // 同样是「浮在视口里的一块面板」，离边的距离应一致；四角仍是 rounded-overlay，与 Dialog 同档（不再有贴边的一侧，所以没有要去掉的角）。
 // 关闭时的位移须再加上这段距离才能完全出屏，见 motion.css 的 [data-inset]。

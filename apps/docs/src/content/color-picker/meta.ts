@@ -21,7 +21,7 @@ export default {
       { name: "swatches", type: "{ value: string; label: string }[]", description: "预设行，复用 ColorSwatchPicker，规则相同。", descriptionEn: "A preset row using ColorSwatchPicker, with the same rules." },
       { name: "name / form / disabled", type: "string / string / boolean", description: "name 存在时随表单提交 #rrggbb；disabled 时不提交、不可打开。", descriptionEn: "With name, #rrggbb is submitted with the form. When disabled it is neither submitted nor openable." },
       { name: "aria-label / aria-labelledby", type: "string", description: "触发器的名称。放在带 FieldLabel 的 Field 内时来自标签，否则缺名称抛错。", descriptionEn: "The trigger name. Inside a Field it comes from the FieldLabel; otherwise a missing name throws." },
-      { name: "className / style / 其余 button 属性", type: "ComponentProps<\"button\">", description: "交给触发按钮。", descriptionEn: "Passed to the trigger button." },
+      { name: "className / style / 其余 button 属性", nameEn: "className / style / remaining button props", type: "ComponentProps<\"button\">", description: "交给触发按钮。", descriptionEn: "Passed to the trigger button." },
     ] },
   ],
   keyboard: [

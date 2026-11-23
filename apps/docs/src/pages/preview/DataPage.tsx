@@ -15,7 +15,7 @@ import { Inline, Stack } from "@qingye_lab/ui/components/layout";
 import { Meter, MeterIndicator, MeterLabel, MeterTrack, MeterValue } from "@qingye_lab/ui/components/meter";
 import { Pagination, PaginationEllipsis, PaginationItem, PaginationLink, PaginationList, PaginationNext, PaginationPrevious } from "@qingye_lab/ui/components/pagination";
 import { Progress, ProgressIndicator, ProgressLabel, ProgressTrack, ProgressValue } from "@qingye_lab/ui/components/progress";
-import { ScrollArea } from "@qingye_lab/ui/components/scroll-area";
+import { ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaViewport } from "@qingye_lab/ui/components/scroll-area";
 import { Separator } from "@qingye_lab/ui/components/separator";
 import { Proportion } from "@qingye_lab/ui/components/proportion";
 import { Sparkline } from "@qingye_lab/ui/components/sparkline";
@@ -180,11 +180,14 @@ export default function DataPage() {
         <VirtualList aria-label="同步日志" items={logRows} getKey={item => item.id} itemSize={ROW} height={ROW * 5} className="rounded-panel border border-border" renderItem={item => <span className="flex h-full items-center px-(--qy-panel-padding-sm) text-body numeric">{item.text}</span>} />
       </Row>
       <Row label="滚动区域" block lead="framed-row">
-        <ScrollArea aria-label="成员" className="rounded-panel border border-border" style={{ maxHeight: "12rem" }}>
-          {["陈致远", "李一鸣", "王一帆", "赵子纯", "孙若溪", "周景行", "吴念安", "郑清和"].map(name => <div key={name} className="flex min-h-(--qy-row-default) items-center gap-(--qy-field-gap) px-(--qy-panel-padding-sm) py-(--qy-field-gap) text-body">
-            <Avatar size="xs" label={name}><AvatarFallback>{name.slice(0, 1)}</AvatarFallback></Avatar>{name}
-          </div>)}
-        </ScrollArea>
+        <ScrollAreaRoot className="rounded-panel border border-border" style={{ height: "12rem" }}>
+          <ScrollAreaViewport aria-label="成员" className="h-full" fade tabIndex={0}>
+            {["陈致远", "李一鸣", "王一帆", "赵子纯", "孙若溪", "周景行", "吴念安", "郑清和"].map(name => <div key={name} className="flex min-h-(--qy-row-default) items-center gap-(--qy-field-gap) px-(--qy-panel-padding-sm) py-(--qy-field-gap) text-body">
+              <Avatar size="xs" label={name}><AvatarFallback>{name.slice(0, 1)}</AvatarFallback></Avatar>{name}
+            </div>)}
+          </ScrollAreaViewport>
+          <ScrollAreaScrollbar />
+        </ScrollAreaRoot>
       </Row>
     </Section>
 

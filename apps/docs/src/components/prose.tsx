@@ -1,4 +1,5 @@
 import { cn } from "@qingye_lab/ui";
+import { DescriptionList, DescriptionListDetail, DescriptionListItem, DescriptionListTerm } from "@qingye_lab/ui/components/description-list";
 import { linkClassName } from "@qingye_lab/ui/components/link";
 import { Prose, type ProseProps } from "@qingye_lab/ui/components/prose";
 import { IconLink } from "@tabler/icons-react";
@@ -166,13 +167,13 @@ export function A({ href, className, children, ...props }: ComponentProps<"a"> &
 /** A quiet two-column definition list for short reference facts. */
 export function Facts({ items, className }: { items: { term: ReactNode; detail: ReactNode }[]; className?: string }) {
   return (
-    <dl className={cn(flow, measure, "grid grid-cols-1 sm:grid-cols-[max-content_minmax(0,1fr)] gap-x-(--qy-section-gap) gap-y-(--qy-field-gap)", className)}>
+    <DescriptionList className={cn(flow, measure, className)}>
       {items.map((item, index) => (
-        <div className="contents" key={index}>
-          <dt className="text-reading text-muted-foreground">{item.term}</dt>
-          <dd className="m-0 text-reading text-foreground">{item.detail}</dd>
-        </div>
+        <DescriptionListItem key={index}>
+          <DescriptionListTerm>{item.term}</DescriptionListTerm>
+          <DescriptionListDetail>{item.detail}</DescriptionListDetail>
+        </DescriptionListItem>
       ))}
-    </dl>
+    </DescriptionList>
   );
 }

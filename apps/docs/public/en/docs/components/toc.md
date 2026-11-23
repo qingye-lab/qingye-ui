@@ -1,9 +1,9 @@
 # Toc
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
-Source SHA-256: f4e51a4407103bc3e69e9f6612457ef1004296c3c79aa640a6305d7c0145cfdd
+Source SHA-256: 25f506ebf93fb2311f6ac2f8567687a2e5351077c5105b17899145dd975eba8f
 
 A vertical in-page table of contents for moving between sections; the current location deepens its own segment of an existing thin line instead of adding a new shape.
 
@@ -31,7 +31,7 @@ Toc neither reads routing nor performs smooth scrolling: <a href="#id"> is a nat
 - Items sit in a tight vertical stack without touch-target (it would cover adjacent items); padding alone widens the hit area.
 
 ## Customization
-- 使用公开 render/ref/className/style 与原生属性；不混用主题三轴。
+- Use the public render/ref/className/style and native props; do not mix the three theme axes.
 
 ## Current exports
 - scanTocHeadings: function; owner toc; PASS; props: Element

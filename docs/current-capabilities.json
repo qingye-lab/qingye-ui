@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-21T13:44:00.185Z",
-  "revision": "f041a94c9aa4723785405c50a00098da57a8f293",
+  "generatedAt": "2026-11-23T12:42:32.320Z",
+  "revision": "df383d94ecb70a98ec3746bcde98f5b0cd8c672d",
   "fingerprint": {
-    "sha256": "1afac5e8dde4e82f949dc12e8828ef221445bd74ce51f0a3b9dd2a6fb99e4598",
+    "sha256": "e719e7ed9904fcc546738a56d5f684c52c40a468516b67884dced11e3ef33524",
     "inputs": [
       {
         "path": "apps/docs/package.json",
-        "sha256": "4b6c17a9494562a0073b46df3a5ea2550a8d2bfaa208505119cbaf740521a7ea"
+        "sha256": "cb24a2d5cf09b9d32fd9f6a055cb70d7a5cff6f804be9877d2e381109a64b355"
       },
       {
         "path": "apps/docs/src/content/accordion/meta.ts",
@@ -48,7 +48,7 @@
       },
       {
         "path": "apps/docs/src/content/bulk-action-bar/meta.ts",
-        "sha256": "34f19579bcd0ffe7c01e8345269cf708c21c491a3005a89cb9d009e5f8ffdadf"
+        "sha256": "8e0fc2906df2e23a4055521998f9598a5e9a948585c4774871aa263d74304089"
       },
       {
         "path": "apps/docs/src/content/button-group/meta.ts",
@@ -60,7 +60,7 @@
       },
       {
         "path": "apps/docs/src/content/calendar/meta.ts",
-        "sha256": "379d9c14f1e83180cfa54cffd990196daa46fe47ccfda4c9f65a4bfec95e7715"
+        "sha256": "5d344df28d90716e95d2fecabae718bdcda924dec748648b3918ad53c223eba4"
       },
       {
         "path": "apps/docs/src/content/card/meta.ts",
@@ -68,7 +68,7 @@
       },
       {
         "path": "apps/docs/src/content/cascader/meta.ts",
-        "sha256": "ef4e0e8ffa3624459073d4e3e4283d8bf1f5c1d3c94818edbae87359e8d11b83"
+        "sha256": "44ae9403e1eabd840469526242625cca05991b4b3ec7b2f31a3025965431ada7"
       },
       {
         "path": "apps/docs/src/content/chart/meta.ts",
@@ -88,7 +88,7 @@
       },
       {
         "path": "apps/docs/src/content/code-block/meta.ts",
-        "sha256": "cdf648b25304c64fc982e0ff5bd46df0f7cf8695d5dfafeca585bb4d57d5bf21"
+        "sha256": "492534cd6d6dc61b7fe161b38cda5abf521292a85e338bb995c1ff0eb631f45c"
       },
       {
         "path": "apps/docs/src/content/collapsible/meta.ts",
@@ -96,7 +96,7 @@
       },
       {
         "path": "apps/docs/src/content/color-picker/meta.ts",
-        "sha256": "0d56cb2b2930f656209a96fed06e45da86c0a548ee73fe0c6fa23d7fdb50f09f"
+        "sha256": "8f4634678428fecb0cd65ae74d79c031b8b4fa8e4d0ca948464bc4232f7f5a19"
       },
       {
         "path": "apps/docs/src/content/combobox/meta.ts",
@@ -104,11 +104,11 @@
       },
       {
         "path": "apps/docs/src/content/command/meta.ts",
-        "sha256": "8589f0c574bdc69c7b9fe6def620175960cec60db914cf6a77faa7299365295d"
+        "sha256": "5eb937b1961bea8a9a2dba1c63f5b676916b1bc4f4d2ef13764e31443b52da8e"
       },
       {
         "path": "apps/docs/src/content/composer/meta.ts",
-        "sha256": "75c7db292fb65037fe14032946e520c58ddcd1461da7f92ba16e05a64be50e05"
+        "sha256": "4200daba7328530fa8e909190f575beda54ff5c7181847abf0c9a0037f8a103d"
       },
       {
         "path": "apps/docs/src/content/confirm-action/meta.ts",
@@ -116,11 +116,11 @@
       },
       {
         "path": "apps/docs/src/content/confirm/meta.ts",
-        "sha256": "5ae1207ca630e85bc1fafe888cafb642d2a86290c80e02885fae361afbb901a3"
+        "sha256": "4c6147e2847699f090fd9d26b1b7b0f0377a3d0e84928ced027bd2146a0a2d80"
       },
       {
         "path": "apps/docs/src/content/context-menu/meta.ts",
-        "sha256": "8898e40e83be3d93d4251efd93bdf70f1680ec72a2ffb6d3dffa9f83bb49696a"
+        "sha256": "27ed084336ed0318f170ec0c178af4d32b2efc3412905d4a6837219845f2fa57"
       },
       {
         "path": "apps/docs/src/content/copy-button/meta.ts",
@@ -128,11 +128,11 @@
       },
       {
         "path": "apps/docs/src/content/corner-mark/meta.ts",
-        "sha256": "68128a9218429415c8dd55a5dac361a6bb9337ac24155013d058de1d8188d484"
+        "sha256": "35d27648fd7b70533340652b91a06b78858e238232a4c2e20591d2c31f840a40"
       },
       {
         "path": "apps/docs/src/content/data-table/meta.ts",
-        "sha256": "4bda3ad89faa75b4bc3d01d7829e16300bb4b9309cc1785bcc4a815122e5551a"
+        "sha256": "f7fc9a4b3e1370ef899b388c50360d5fb051cae1054ec972a82de34e507daa7e"
       },
       {
         "path": "apps/docs/src/content/date-picker/meta.ts",
@@ -200,7 +200,7 @@
       },
       {
         "path": "apps/docs/src/content/image-preview/meta.ts",
-        "sha256": "8c2b1a64c18ef0508cccaa257bfafab71a41703e6009319a8854c909abd71f56"
+        "sha256": "89266ec5a49e8fd224f74ae40e521d9283bad73cf01c4487785e9c440e8525e5"
       },
       {
         "path": "apps/docs/src/content/input-group/meta.ts",
@@ -212,7 +212,7 @@
       },
       {
         "path": "apps/docs/src/content/input/meta.ts",
-        "sha256": "464125c1e3930c3a3c47e7513bc5db163bca27f07a0fd1c9af2f9506a3a3f6ea"
+        "sha256": "392783c374e572340690de372d1c998357b56eb3d9d5f764ea799fa46668e2e3"
       },
       {
         "path": "apps/docs/src/content/item/meta.ts",
@@ -240,7 +240,7 @@
       },
       {
         "path": "apps/docs/src/content/menu/meta.ts",
-        "sha256": "1a69b673183dcba0a6880543e6583b6727c436c63d99a3b8790b83f042ff507c"
+        "sha256": "c5a30c5f91318810860b495e3b59aa8b80ea214034cf18cc2f227f8d52881283"
       },
       {
         "path": "apps/docs/src/content/meter/meta.ts",
@@ -252,7 +252,7 @@
       },
       {
         "path": "apps/docs/src/content/navigation-menu/meta.ts",
-        "sha256": "cfc9c99aecef962e76db63354383d7d314913a1a9cb17a258e1688af2838fff9"
+        "sha256": "ed4506224b70a4731876385b99922c8f9c65faf332f82be5a005dd349288b026"
       },
       {
         "path": "apps/docs/src/content/number-field/meta.ts",
@@ -268,7 +268,7 @@
       },
       {
         "path": "apps/docs/src/content/pagination/meta.ts",
-        "sha256": "f88897f1ce950ca51c5304022cd20f0cb18426c2b7073ffcac22a72867f58375"
+        "sha256": "cdff962bf1af5adf130a12b710b5658f16bfc6333063d0d601f5e393fed933f4"
       },
       {
         "path": "apps/docs/src/content/password-input/meta.ts",
@@ -292,7 +292,7 @@
       },
       {
         "path": "apps/docs/src/content/prose/meta.ts",
-        "sha256": "5c3521de912028c3b031a833805ae81634ad33a0dbbea008baf1724c57f5e4d8"
+        "sha256": "0f26dc8da9fe5fc89d8990a68a96aab2c352777cc4b665d292c9a90e5bdacfcc"
       },
       {
         "path": "apps/docs/src/content/radio-group/meta.ts",
@@ -316,11 +316,11 @@
       },
       {
         "path": "apps/docs/src/content/scatter-chart/meta.ts",
-        "sha256": "1219375e7dc48e95dfc6468c34e15b75f809345adb72c42b377760cd86a4ebfc"
+        "sha256": "72e49557fec252b9e0c7c8f56a771b81fecbd775c8d9350438d7e532a0416a14"
       },
       {
         "path": "apps/docs/src/content/scroll-area/meta.ts",
-        "sha256": "74bbd7d05efd31277e78268a43b0d3e9a73c422a5e130624e3a36364b39c28e2"
+        "sha256": "76c034f4b3757897928197f583b70ae79d83bc552f314b98b727b778c08e5c76"
       },
       {
         "path": "apps/docs/src/content/search-input/meta.ts",
@@ -348,11 +348,11 @@
       },
       {
         "path": "apps/docs/src/content/sidebar/meta.ts",
-        "sha256": "d370381e76bf9cb6313996e2c7bdc3f01679a7d4a4c2c3cead13c778591d0d4d"
+        "sha256": "eab55fb6fb4d78b43807e158c17122e1d5e4fbf4f214c4bdb521a6f17875929d"
       },
       {
         "path": "apps/docs/src/content/skeleton/meta.ts",
-        "sha256": "78682fbe420011c0812f66831189419d5209e9d294deb403f2773a38ef1c60de"
+        "sha256": "4d6cd1fb3b66119e86d1c26c6240c464c7be5800a4fa65cfbd1e671f5e04e313"
       },
       {
         "path": "apps/docs/src/content/skip-link/meta.ts",
@@ -364,7 +364,7 @@
       },
       {
         "path": "apps/docs/src/content/sparkline/meta.ts",
-        "sha256": "da14451f4168ece977622cab8a63c8752b75d30c6cfb66c53cd0e8a6eaadefff"
+        "sha256": "c86d829e211c84b2b4deb9f96260e48bd1b9c214cc8dc8ec4550fdd34cbd2498"
       },
       {
         "path": "apps/docs/src/content/stat/meta.ts",
@@ -376,7 +376,7 @@
       },
       {
         "path": "apps/docs/src/content/steps/meta.ts",
-        "sha256": "4a7138b1f60edd2620f6307ba6d9b369f5a6804cb02d8f8fcae5b09448319ea6"
+        "sha256": "61229721a8ccc44d603636d2d37ea40c53e4c1512d220ba4b612c13579a7e857"
       },
       {
         "path": "apps/docs/src/content/switch/meta.ts",
@@ -408,7 +408,7 @@
       },
       {
         "path": "apps/docs/src/content/time-range-field/meta.ts",
-        "sha256": "172fbc40152dbd29dc37549f304347c229e7d1c51931cd4be4354e61f5a3002a"
+        "sha256": "c381217ce68cc54638828e660b967141f1400bdb6d4db546c2b9844fe7535b4b"
       },
       {
         "path": "apps/docs/src/content/timeline/meta.ts",
@@ -420,7 +420,7 @@
       },
       {
         "path": "apps/docs/src/content/toc/meta.ts",
-        "sha256": "199a04e7fe59b245b153f1d158a3048b173c0949df19bfc8454733fabc24fcd0"
+        "sha256": "eff9cf561782905823581532a183dafecc674dd8a3fcfb4f8715a8245ff8b2be"
       },
       {
         "path": "apps/docs/src/content/toggle-group/meta.ts",
@@ -432,7 +432,7 @@
       },
       {
         "path": "apps/docs/src/content/toolbar/meta.ts",
-        "sha256": "93e05ecdacce2e1fdae5c1ea83acb1856cbfdd17e2bd980b7cbe2db7a3356889"
+        "sha256": "2e3287268ad6fa1bdcc1dfc23a2f58450da094a8ca443a379057051bd117ec33"
       },
       {
         "path": "apps/docs/src/content/tooltip/meta.ts",
@@ -440,19 +440,19 @@
       },
       {
         "path": "apps/docs/src/content/tour/meta.ts",
-        "sha256": "67adefe5ea31da4cda308a0f0db0da1830ec83b3de6ae5f1b59372ce8421c34f"
+        "sha256": "402e3b50d9639d26a06d2de164fcbe12be463217269cd5cebd794cd137c1f1a3"
       },
       {
         "path": "apps/docs/src/content/transfer/meta.ts",
-        "sha256": "a750682abab819ed53d467332f98c28ef47e90fdfcc29bc194180d48f3787342"
+        "sha256": "33368b441fb7f9708d253d972ca42acfc5c65ef613c81e03c4c5301730e442d0"
       },
       {
         "path": "apps/docs/src/content/tree-select/meta.ts",
-        "sha256": "04a562664e04f07118ba704e6deca8226824ca83047bd22fc2f5431fcea1ecd3"
+        "sha256": "d7b3ebdb689b014a5cfa7291ebb1dc646188cf4b5f3f8154563da2d3b9c6a3dc"
       },
       {
         "path": "apps/docs/src/content/tree/meta.ts",
-        "sha256": "154c83ee406e804475ea234797d4c5859d2d965a6e5867708f7bc3cad7bbb876"
+        "sha256": "d7cf2d577997674adaa06510239292e518065152e039672b47e5e42c069e8325"
       },
       {
         "path": "apps/docs/src/content/typography/meta.ts",
@@ -476,11 +476,11 @@
       },
       {
         "path": "package.json",
-        "sha256": "e1569de5b7ba19e43023586911bf1d7285b4e1ba4fa71e307db14791c5506d25"
+        "sha256": "a6b1ceba799f262e1784308b8a4223ba2d5047c5d0c73fbcbd191c0d0033b353"
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "7054ecc09f9d7b81b792e411a2974bca83f432a596139c67556b9020b25c95d0"
+        "sha256": "f414de297bfdbc5970f807c7db63f681b543976e8c0a33408ed3bcaa46a4aba1"
       },
       {
         "path": "packages/ui/motion.css",
@@ -488,7 +488,7 @@
       },
       {
         "path": "packages/ui/package.json",
-        "sha256": "d49956262caf86cbc6a0a1f694de7b4b46599de0509fd1a2dee500d157bdfe92"
+        "sha256": "ce98f041a95fc44c6e87332e155e0f936afb635ed8d6eed47961c77a92e0c978"
       },
       {
         "path": "packages/ui/prose.css",
@@ -572,7 +572,7 @@
       },
       {
         "path": "packages/ui/src/components/code-block.tsx",
-        "sha256": "9649e32b6c3151ff361e2fc7c986031b6b61040d1a75bdaa3bccdbc65974bbb9"
+        "sha256": "53234b6b2978982a42d1317201f3ae2a2487c705f3e793aade8ae89b3cf160ce"
       },
       {
         "path": "packages/ui/src/components/collapsible.tsx",
@@ -580,7 +580,7 @@
       },
       {
         "path": "packages/ui/src/components/color-picker.tsx",
-        "sha256": "aacdb9bc0a3ecbe1c0081eff0149c5f5f097de7d58c4d93f77cedd7042e41afd"
+        "sha256": "a5f6c5e299b36e407c068835ebf3031200b172384bda3c5c69ccf1e06a1dbc47"
       },
       {
         "path": "packages/ui/src/components/combobox.tsx",
@@ -588,11 +588,11 @@
       },
       {
         "path": "packages/ui/src/components/command.tsx",
-        "sha256": "c7f5394e6236c173cce0773b9ee80ea7afaa65db6dca383596326bd0d9b5ff71"
+        "sha256": "0faa06a6dacca30a77dbe5226b181c1d6960d85fdbea4610e3761e0197e04879"
       },
       {
         "path": "packages/ui/src/components/composer.tsx",
-        "sha256": "fef8f9c94f951cdabab88801f34d75427fb3c8b8a5d43b7a8170abdfa50b5fe7"
+        "sha256": "318ec3f44b4529c8d359cedbe716327761934252518851976925f94309b6844c"
       },
       {
         "path": "packages/ui/src/components/confirm-action.tsx",
@@ -600,7 +600,7 @@
       },
       {
         "path": "packages/ui/src/components/confirm.tsx",
-        "sha256": "872303717eb2deacb43a5c70806eebba920ac0364d71e20500f286969a60d758"
+        "sha256": "63fed3e6e581570b69b14f99a7eeac683e37e7b035ed2025f5e013217027082a"
       },
       {
         "path": "packages/ui/src/components/context-menu.tsx",
@@ -616,7 +616,7 @@
       },
       {
         "path": "packages/ui/src/components/data-table.tsx",
-        "sha256": "02c5537f5b7059f3756aab2b5b3fb9d3405b7f7e5cd6f2508bb5e35fbd304395"
+        "sha256": "06fcff20256740a95e3d101ba620699aa199057709aa3e91d90ee77dabf4cc5a"
       },
       {
         "path": "packages/ui/src/components/date-picker.tsx",
@@ -644,7 +644,7 @@
       },
       {
         "path": "packages/ui/src/components/drawer.tsx",
-        "sha256": "63395abb3d4f641fe6170a87574be325b93daf28603ddc2e868606f68a69d652"
+        "sha256": "d0718765806363fa99df3caed3289f62a98e5f5c368e6fb20d7037e31e93eb25"
       },
       {
         "path": "packages/ui/src/components/empty.tsx",
@@ -676,7 +676,7 @@
       },
       {
         "path": "packages/ui/src/components/heatmap.tsx",
-        "sha256": "a0208da9a4fca7de7e68d8b4dc4bb6ba881b4b1fdc2ac6bcaf046febc74eec34"
+        "sha256": "6df5ef870950dfd8dfb024b637f1ed94139e8f5a67b9f0dcc70d670cf8aca7ea"
       },
       {
         "path": "packages/ui/src/components/hover-card.tsx",
@@ -684,7 +684,7 @@
       },
       {
         "path": "packages/ui/src/components/image-preview.tsx",
-        "sha256": "23741daf38ba1fbc21c80c4eae46b218445b975188b4bbc3e6691bfd6a20803e"
+        "sha256": "64aec292f6b034b610a31fdbf4803c94b5c20d1b7e35316f4fbfaeb27cd18078"
       },
       {
         "path": "packages/ui/src/components/input-group.tsx",
@@ -804,11 +804,11 @@
       },
       {
         "path": "packages/ui/src/components/scroll-area.tsx",
-        "sha256": "cac2e91684ebc4c766cf31f3d48387d72611874133cc8f8bb9b0609aab9afe14"
+        "sha256": "eb6c10dda6868344c92e36e18202d387afc75ea75dee1954d9c05b64be32ef84"
       },
       {
         "path": "packages/ui/src/components/search-input.tsx",
-        "sha256": "0b4ce4a97d0fd6c0e87c4ba043c42efa071c3e8f54d3d5be21f2a083abaf9af7"
+        "sha256": "5a7fd002fddbeaf6fbe2da3af06d3e53daf35e4302c727c0c6e3d91f3a9cce15"
       },
       {
         "path": "packages/ui/src/components/section.tsx",
@@ -840,7 +840,7 @@
       },
       {
         "path": "packages/ui/src/components/skip-link.tsx",
-        "sha256": "4333b6b70cefd7211580107717851060f8942bbe39dc19982442c7da5363f79e"
+        "sha256": "cfee10a53d3eb7001530339e61be1cd731feb3923b4e432c0669838feffd0e01"
       },
       {
         "path": "packages/ui/src/components/slider.tsx",
@@ -868,7 +868,7 @@
       },
       {
         "path": "packages/ui/src/components/table.tsx",
-        "sha256": "2c1f8ba7a99989283f696f918b46fd141ddb56278986f5b5f13a89bec4a6a99a"
+        "sha256": "dcdd6e9b5b3cba088fccd4182b46c87f6882dbcc48e259f559ad6c589d66f384"
       },
       {
         "path": "packages/ui/src/components/tabs.tsx",
@@ -888,7 +888,7 @@
       },
       {
         "path": "packages/ui/src/components/time-field.tsx",
-        "sha256": "937f151dd1ee52cbb707c4c4d6a087c0e7c791f4e723ba4cc751aa7237f82bcf"
+        "sha256": "b240d9a8214f302f93d570118dfc06cdd4a2cca6274e4701c262976f6b6e8357"
       },
       {
         "path": "packages/ui/src/components/time-range-field.tsx",
@@ -904,7 +904,7 @@
       },
       {
         "path": "packages/ui/src/components/toc.tsx",
-        "sha256": "f4e51a4407103bc3e69e9f6612457ef1004296c3c79aa640a6305d7c0145cfdd"
+        "sha256": "25f506ebf93fb2311f6ac2f8567687a2e5351077c5105b17899145dd975eba8f"
       },
       {
         "path": "packages/ui/src/components/toggle-group.tsx",
@@ -920,11 +920,11 @@
       },
       {
         "path": "packages/ui/src/components/tooltip.tsx",
-        "sha256": "4dd9b24c79431acd6f078c8ffae3d40788c79a47f11561f55ceb4429e8a8aab6"
+        "sha256": "215f0d78120f358f46c1c592bf3b4775aeb95e883385cb0b80582b6b84d8754f"
       },
       {
         "path": "packages/ui/src/components/tour.tsx",
-        "sha256": "add2cb8a6f949f9311df5c9e87450d71245d3caf1742edad83564a2edcb9e35b"
+        "sha256": "3bf614d1913cac2dea9b1a5ef9937e48e29954af45fb4f4eddf28e737c5f1dae"
       },
       {
         "path": "packages/ui/src/components/transfer.tsx",
@@ -987,7 +987,7 @@
   "scope": "Implementation facts; PRESENT means source exists, not runtime acceptance. Internal docs are not added to package files.",
   "package": {
     "name": "@qingye_lab/ui",
-    "version": "5.5.0",
+    "version": "5.6.0",
     "exports": {
       ".": {
         "types": "./dist/index.d.ts",
@@ -1092,7 +1092,8 @@
       "!ai/v5.1.0",
       "!ai/v5.2.0",
       "!ai/v5.3.0",
-      "!ai/v5.4.0"
+      "!ai/v5.4.0",
+      "!ai/v5.5.0"
     ],
     "source": "packages/ui/package.json"
   },
@@ -1415,7 +1416,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -1845,7 +1846,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2081,7 +2082,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2259,7 +2260,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -2839,7 +2840,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3025,7 +3026,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3293,7 +3294,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3475,7 +3476,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -3845,7 +3846,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4054,6 +4055,12 @@
                 "type": "number / (event) => void",
                 "description": "默认文字「选择全部 N 项」，数字按界面语言分组；onClick.preventDefault() 取消。",
                 "descriptionEn": "Default text is Select all N items with locale-grouped digits; onClick.preventDefault() cancels."
+              },
+              {
+                "name": "onClick / Button props",
+                "type": "ButtonProps[\"onClick\"] / ButtonProps",
+                "description": "先于 onExtend 执行；调用 event.preventDefault() 或 event.preventBaseUIHandler() 可阻止扩展动作，其余属性透传 Button。",
+                "descriptionEn": "Runs before onExtend; calling event.preventDefault() or event.preventBaseUIHandler() cancels extending, and remaining props forward to Button."
               }
             ]
           },
@@ -4212,7 +4219,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4495,7 +4502,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4796,7 +4803,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -4974,6 +4981,7 @@
         "keyboard": [
           {
             "keys": "Arrow keys / Home / End / PageUp / PageDown（月、季、年格）",
+            "keysEn": "Arrow keys / Home / End / PageUp / PageDown (month, quarter, year grids)",
             "description": "方向键按格移动；Home / End 到一行的头尾；PageUp / PageDown 翻一页（月、季为一年，年格为 12 年）。",
             "descriptionEn": "On the month, quarter and year grids, arrow keys move cell by cell, Home / End go to the row ends, and PageUp / PageDown turn a page (a year for months and quarters, twelve years for the year grid)."
           },
@@ -5127,7 +5135,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5305,7 +5313,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -5355,7 +5363,7 @@
         "description": "沿「根到叶」的路径选一个值或勾选若干路径，每一级的候选各占一列。",
         "descriptionEn": "Choose one value along a root-to-leaf path, or check several paths, with each level's candidates in its own column.",
         "category": "表单",
-        "layer": "primitive",
+        "layer": "pattern",
         "source": "local",
         "exports": [
           "Cascader"
@@ -5447,6 +5455,12 @@
                 "type": "string",
                 "description": "触发器的名称与样式入口。没有名称会抛错：用 aria-label、aria-labelledby，或放进带 FieldLabel 的 Field。",
                 "descriptionEn": "Name and styling entries of the trigger. A missing name throws: use aria-label, aria-labelledby, or place it in a Field with a FieldLabel."
+              },
+              {
+                "name": "aria-describedby / aria-invalid",
+                "type": "string / boolean | \"true\" | \"false\"",
+                "description": "触发器的补充说明引用与校验无效状态；未显式传入时跟随外层 Field。",
+                "descriptionEn": "Supplementary description reference and invalid state on the trigger; follows an enclosing Field when omitted."
               }
             ]
           }
@@ -5598,7 +5612,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6174,7 +6188,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6413,7 +6427,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6655,7 +6669,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6860,7 +6874,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -6883,7 +6897,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/code-block.tsx",
-            "line": 33
+            "line": 35
           }
         },
         {
@@ -7005,6 +7019,13 @@
                 "descriptionEn": "The most lines the code surface shows (a positive integer); more scroll vertically. Wrapped lines count as visual lines. Lines rather than a CSS length because readers count lines, and a line is one module of the system (one body line = 1 module), so a change of type size or density does not silently change the count. While scrolling the code surface is focusable and named (the title, then the language, then \"Code\"), and the copy button does not scroll with the code."
               },
               {
+                "name": "framed",
+                "type": "boolean",
+                "default": "true",
+                "description": "是否带外层围合（线、底、圆角）；嵌入已有容器时传 false 去掉外层围合。",
+                "descriptionEn": "Whether to render the outer frame (border, surface, radius); pass false when embedded in an existing container."
+              },
+              {
                 "name": "copyable",
                 "type": "boolean",
                 "default": "true",
@@ -7049,11 +7070,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/code-block.tsx",
-              "line": 33
+              "line": 35
             },
             "rootEntry": {
               "path": "packages/ui/src/components/code-block.tsx",
-              "line": 33
+              "line": 35
             },
             "status": "PRESENT"
           }
@@ -7069,7 +7090,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7357,7 +7378,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -7510,6 +7531,7 @@
               },
               {
                 "name": "className / style / 其余 button 属性",
+                "nameEn": "className / style / remaining button props",
                 "type": "ComponentProps<\"button\">",
                 "description": "交给触发按钮。",
                 "descriptionEn": "Passed to the trigger button."
@@ -7660,7 +7682,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8391,7 +8413,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -8422,7 +8444,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 227
+            "line": 242
           }
         },
         {
@@ -8430,7 +8452,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 209
+            "line": 217
           }
         },
         {
@@ -8535,7 +8557,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/autocomplete/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/command.tsx",
-            "line": 238
+            "line": 269
           }
         },
         {
@@ -8696,16 +8718,22 @@
             "descriptionEn": "A Command inside a Dialog. Each opening is a fresh instance, so the query starts empty.",
             "props": [
               {
-                "name": "open / defaultOpen / onOpenChange",
-                "type": "boolean / boolean / (open: boolean) => void",
-                "description": "打开状态，受控或非受控。",
-                "descriptionEn": "Open state, controlled or uncontrolled."
+                "name": "open / defaultOpen / onOpenChange / onOpenChangeComplete",
+                "type": "boolean / boolean / (open: boolean) => void / DialogProps[\"onOpenChangeComplete\"]",
+                "description": "打开状态，受控或非受控；onOpenChangeComplete 在开合动画结束后调用。",
+                "descriptionEn": "Open state, controlled or uncontrolled; onOpenChangeComplete runs after open/close transitions finish."
+              },
+              {
+                "name": "title / description",
+                "type": "ReactNode / ReactNode",
+                "description": "可见标题与可选说明；提供 title 时渲染 DialogHeader + DialogTitle，不再强制要求 aria-label / aria-labelledby。",
+                "descriptionEn": "Visible title and optional description; providing title renders DialogHeader + DialogTitle and waives aria-label / aria-labelledby."
               },
               {
                 "name": "aria-label / aria-labelledby",
                 "type": "string",
-                "description": "二选一必填，缺失抛错。",
-                "descriptionEn": "One is required; omitting both throws."
+                "description": "未提供 title 时二选一必填，缺失抛错；提供 title 时被忽略，名字取可见标题。",
+                "descriptionEn": "One is required when title is omitted; omitting both throws. Ignored when title is given: the visible title names the dialog."
               },
               {
                 "name": "closeOnSelect",
@@ -8713,6 +8741,18 @@
                 "default": "true",
                 "description": "选中条目后关闭。",
                 "descriptionEn": "Close after an item is selected."
+              },
+              {
+                "name": "popupClassName / popupProps",
+                "type": "string / Omit<DialogPopupProps, \"children\" | \"className\" | \"aria-label\" | \"aria-labelledby\">",
+                "description": "对话框面板的 className 及透传给内部 DialogPopup 的其余属性（如 initialFocus、finalFocus、portalProps）。",
+                "descriptionEn": "Dialog popup className and remaining props forwarded to the inner DialogPopup (such as initialFocus, finalFocus, portalProps)."
+              },
+              {
+                "name": "filter / query / defaultQuery / onQueryChange / onItemSelect",
+                "type": "CommandProps",
+                "description": "转发给内部 Command；含义同 Command。",
+                "descriptionEn": "Forwarded to the inner Command, with the same meaning."
               }
             ]
           }
@@ -8899,11 +8939,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 227
+              "line": 242
             },
             "rootEntry": {
               "path": "packages/ui/src/components/command.tsx",
-              "line": 227
+              "line": 242
             },
             "status": "PRESENT"
           }
@@ -8919,7 +8959,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9300,6 +9340,7 @@
           },
           {
             "keys": "Ctrl/⌘+Z、Ctrl/⌘+Shift+Z",
+            "keysEn": "Ctrl/Cmd+Z / Ctrl/Cmd+Shift+Z",
             "description": "撤销与重做，用组件自己的快照栈。",
             "descriptionEn": "Undo and redo using the component's own snapshot stack."
           }
@@ -9527,7 +9568,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9798,7 +9839,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -9907,8 +9948,8 @@
               {
                 "name": "confirmLabel / cancelLabel",
                 "type": "ReactNode / ReactNode",
-                "default": "必填 / locale.cancel",
-                "defaultEn": "required / locale.cancel",
+                "default": "必填 / locale.back",
+                "defaultEn": "required / locale.back",
                 "description": "confirmLabel 必填，写出这个决定具体做什么（「移出」「离开」），没有通用的「确认」默认；缺省或空白抛 TypeError。取消按钮和 Escape 都返回 false；点遮罩不关闭。",
                 "descriptionEn": "confirmLabel is required and names what this decision does (Remove, Leave); there is no generic Confirm default, and a missing or blank value throws TypeError. Cancel and Escape resolve false; backdrop presses do not dismiss."
               },
@@ -10065,7 +10106,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10359,6 +10400,33 @@
         "notesEn": [
           "The visible Menu and context region share commands; no business service is simulated."
         ],
+        "keyboard": [
+          {
+            "keys": "Shift+F10 / ContextMenu",
+            "description": "在聚焦的 ContextMenuTrigger 上打开上下文菜单。",
+            "descriptionEn": "Open the context menu on a focused ContextMenuTrigger."
+          },
+          {
+            "keys": "↑ / ↓ / Home / End",
+            "description": "在菜单项之间移动焦点。",
+            "descriptionEn": "Move focus among menu items."
+          },
+          {
+            "keys": "→ / ←",
+            "description": "打开或收起子菜单（RTL 方向相反）。",
+            "descriptionEn": "Open or close a submenu (reversed in RTL)."
+          },
+          {
+            "keys": "Enter / Space",
+            "description": "执行当前可用命令、切换勾选/开关或打开子菜单。",
+            "descriptionEn": "Run an enabled command, toggle a checkbox/switch item, or open a submenu."
+          },
+          {
+            "keys": "Escape",
+            "description": "关闭上下文菜单并将焦点返回触发区域。",
+            "descriptionEn": "Close the context menu and return focus to the trigger region."
+          }
+        ],
         "design": {
           "methods": [
             "名实相符",
@@ -10642,7 +10710,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10878,7 +10946,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -10978,6 +11046,7 @@
               {
                 "name": "label",
                 "type": "string（必填）",
+                "typeEn": "string (required)",
                 "description": "角标本身 aria-hidden；这段视觉隐藏文字是数字或状态唯一确定能被读屏听到的途径，开发环境缺失时会抛错。",
                 "descriptionEn": "The mark itself is aria-hidden; this visually hidden text is the only guaranteed path for the count or status to reach assistive technology. Missing it throws in development."
               },
@@ -11084,7 +11153,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11147,7 +11216,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/data-table.tsx",
-            "line": 677
+            "line": 681
           }
         },
         {
@@ -11416,6 +11485,13 @@
                 "descriptionEn": "Actual row headers use th scope=row; comparison columns are never automatically hidden. With a visible row-header column, each row's aria-labelledby points at all of its row-header cells, so the row's accessible name is their text (several row-header columns join in column order). DataTableSelectionCell names each checkbox after this row, falling back to a generic name only without a row-header column. onRowActivate without a visible row-header column throws."
               },
               {
+                "name": "stickyHeader / stickyHeaderOffset",
+                "type": "boolean / number | string",
+                "default": "false",
+                "description": "表头吸在最近的滚动区顶部（同 DataTablePattern）：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口或 containerProps 设了 height / max-height 时是表格自己的容器。stickyHeaderOffset 让开顶部固定页眉，数字按 px。",
+                "descriptionEn": "Sticks the header to the top of the nearest scroll area (as in DataTablePattern): the page or Workspace content when the table fits horizontally, or the table's own container for horizontally overflowing tables, virtualization viewports, or height / max-height on containerProps. stickyHeaderOffset clears a fixed header above; numbers are px."
+              },
+              {
                 "name": "render / ref / native props",
                 "type": "Base UI part props",
                 "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
@@ -11541,11 +11617,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 677
+              "line": 681
             },
             "rootEntry": {
               "path": "packages/ui/src/components/data-table.tsx",
-              "line": 677
+              "line": 681
             },
             "status": "PRESENT"
           },
@@ -11613,7 +11689,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -11841,7 +11917,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12112,7 +12188,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12329,7 +12405,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12579,7 +12655,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -12856,7 +12932,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13347,7 +13423,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -13830,7 +13906,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14107,7 +14183,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14662,7 +14738,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -14899,7 +14975,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15103,7 +15179,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15405,7 +15481,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -15812,7 +15888,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16018,7 +16094,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16315,7 +16391,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16620,7 +16696,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -16767,6 +16843,33 @@
             ]
           }
         ],
+        "keyboard": [
+          {
+            "keys": "Enter / Space",
+            "description": "在缩略图按钮上打开预览对话框，或在对话框控制按钮上执行对应操作。",
+            "descriptionEn": "Open the preview dialog from a thumbnail button, or activate a control button inside the dialog."
+          },
+          {
+            "keys": "← / →",
+            "description": "在同组图片中切换上一张 / 下一张（RTL 下方向相反，到头即止）；放大且焦点位于舞台上时方向键用于滚动，不切图。",
+            "descriptionEn": "Switch to the previous or next image in the set (reversed in RTL; stops at the ends). When zoomed and focus is on the stage, arrow keys scroll instead of switching."
+          },
+          {
+            "keys": "+ / = / - / 0",
+            "description": "放大一级（+ / =）、缩小一级（-）或重置为适应窗口（0）。",
+            "descriptionEn": "Zoom in (+ / =), zoom out (-), or reset to fit the stage (0)."
+          },
+          {
+            "keys": "Tab / Shift+Tab",
+            "description": "在预览对话框内的控制按钮（及放大后可滚动的舞台）间移动焦点。",
+            "descriptionEn": "Move focus across controls inside the preview dialog (and the scrollable stage when zoomed)."
+          },
+          {
+            "keys": "Escape",
+            "description": "关闭预览对话框并将焦点返回打开它的缩略图按钮。",
+            "descriptionEn": "Close the preview dialog and return focus to the thumbnail button that opened it."
+          }
+        ],
         "notes": [
           "键盘：左右方向键切图（从右向左排版时对调）、+ / - 缩放、0 适应窗口；到头即止，不循环。"
         ],
@@ -16799,7 +16902,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17260,7 +17363,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17440,7 +17543,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -17590,6 +17693,12 @@
                 "descriptionEn": "Retains focus, copying, and form submission while blocking edits. Shows a read-only marker."
               },
               {
+                "name": "size",
+                "type": "number",
+                "description": "原生 input.size 的字符宽度含义，与控件外观尺寸无关；填值控件只有一套几何，跟随密度轴。",
+                "descriptionEn": "Native input.size character width, unrelated to control visual height; fill controls share one geometry driven by the density axis."
+              },
+              {
                 "name": "className / style / render / ref",
                 "type": "Base UI Input props",
                 "description": "全部作用于真实 input；className/style 支持状态函数。",
@@ -17663,7 +17772,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18019,7 +18128,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18172,7 +18281,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18337,7 +18446,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18674,7 +18783,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -18854,7 +18963,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19034,7 +19143,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -19388,6 +19497,12 @@
                 "type": "Base UI Item props",
                 "description": "尺寸档、与带前导标记的项对齐的缩进、禁用与命令。",
                 "descriptionEn": "Size step, indent aligning with items that have leading markers, disabled state, and the command."
+              },
+              {
+                "name": "render / ref / native props",
+                "type": "Base UI part props",
+                "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
+                "descriptionEn": "Props and refs target actual elements; caller events and styles are preserved."
               }
             ]
           },
@@ -19411,9 +19526,9 @@
             ]
           },
           {
-            "name": "MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger",
-            "description": "动作、真实导航、勾选、单选与下级命令。",
-            "descriptionEn": "Commands, true navigation, checked choices, radio choices and submenus.",
+            "name": "MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger",
+            "description": "真实导航、勾选、单选与下级命令。",
+            "descriptionEn": "True navigation, checked choices, radio choices and submenus.",
             "props": [
               {
                 "name": "size",
@@ -19477,6 +19592,14 @@
                 "type": "Base UI MenuRadioGroup props",
                 "description": "单选组的当前值在 MenuRadioGroup 上。",
                 "descriptionEn": "The radio group's current value lives on MenuRadioGroup."
+              },
+              {
+                "name": "MenuGroupLabel：size / inset",
+                "nameEn": "MenuGroupLabel: size / inset",
+                "type": "xs | sm | md | lg | xl / boolean",
+                "default": "md / false",
+                "description": "分组标题的尺寸档与前导缩进，与同组菜单项的文字起点对齐。",
+                "descriptionEn": "Size step and leading indent for the group label, aligning its text start with menu items in the same group."
               },
               {
                 "name": "render / ref / native props",
@@ -19790,7 +19913,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20108,7 +20231,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20299,7 +20422,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -20593,6 +20716,7 @@
               },
               {
                 "name": "description（NavigationMenuLink，面板内使用）",
+                "nameEn": "description (NavigationMenuLink, inside panel)",
                 "type": "ReactNode",
                 "description": "一行浓墨说明，只在能帮读者判断去留时给出；顶栏导航线的单行目的地不接受它。",
                 "descriptionEn": "One muted description line, given only when it helps the reader decide; a single-line top-bar destination does not accept it."
@@ -20637,6 +20761,28 @@
         ],
         "notesEn": [
           "Links retain real href values; no router is built in."
+        ],
+        "keyboard": [
+          {
+            "keys": "Tab / Shift+Tab",
+            "description": "在顶栏链接、分组触发器以及展开面板内的链接之间依次移动焦点。",
+            "descriptionEn": "Move focus sequentially across top-level links, group triggers, and links inside an open panel."
+          },
+          {
+            "keys": "← / →",
+            "description": "在横向导航栏的顶层条目间移动焦点（垂直方向使用 ↑ / ↓）。",
+            "descriptionEn": "Move focus between top-level items in a horizontal navigation bar (↑ / ↓ when vertical)."
+          },
+          {
+            "keys": "Enter / Space",
+            "description": "在触发器上展开或收起对应导航面板；在链接上按 Enter 前往真实目标。",
+            "descriptionEn": "Toggle the associated navigation panel on a trigger; press Enter on a link to navigate to its destination."
+          },
+          {
+            "keys": "Escape",
+            "description": "关闭当前展开的导航面板，焦点回到对应的触发器。",
+            "descriptionEn": "Close the currently open navigation panel and return focus to its trigger."
+          }
         ],
         "design": {
           "methods": [
@@ -20869,7 +21015,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21291,7 +21437,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21542,7 +21688,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -21834,7 +21980,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22239,6 +22385,18 @@
             ]
           }
         ],
+        "keyboard": [
+          {
+            "keys": "Tab / Shift+Tab",
+            "description": "在上一页、各页码入口、下一页及条数选择（Select）间移动焦点；busy 期间翻页按钮保持可聚焦而不丢焦点。",
+            "descriptionEn": "Move focus across previous/next controls, page entries, and the page-size Select; buttons remain focusable while busy so focus is not lost."
+          },
+          {
+            "keys": "Enter / Space",
+            "description": "激活聚焦的翻页或页码按钮；使用链接原语 PaginationLink（<a>）时按 Enter 导航。",
+            "descriptionEn": "Activate the focused paging button; when using anchor-based PaginationLink, press Enter to navigate."
+          }
+        ],
         "notes": [
           "只有一页时 PaginationPattern 收起页窗，范围摘要和条数选择仍在这一行，内容不会跳；不放一排全部禁用的翻页按钮，因为它们不对应任何可做的事。",
           "标准组合不请求数据或保存路由；受控 value 越界时呈现校正页，并以 total-change 通知一次，应用据此更新状态和请求。未知总数不证明有无下一页。",
@@ -22381,7 +22539,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22595,7 +22753,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -22776,7 +22934,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23170,7 +23328,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23501,7 +23659,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23686,7 +23844,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -23810,6 +23968,9 @@
           "responsive": [
             "The column is 38 材 (760px) and does not widen with the viewport; paragraphs, lists and quotes stop at a measure of 40 reading characters (640px), while code blocks and tables may use the whole column. The paper's inset is 2 材 and tightens to the panel padding on narrow screens. All three are presets, set through --qy-prose-column, --qy-prose-measure and --qy-prose-inset.",
             "A very wide table does not yet scroll independently inside Prose (the paper's rounded corners need overflow-hidden rather than overflow-x-auto), so cells simply wrap — a known gap, not a missing default treatment."
+          ],
+          "customization": [
+            "Use the public render/ref/className/style and native props; do not mix the three theme axes."
           ]
         },
         "api": [
@@ -23875,7 +24036,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24207,7 +24368,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24439,7 +24600,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24631,7 +24792,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -24974,7 +25135,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25271,7 +25432,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25388,6 +25549,13 @@
                 "type": "(value: number) => ReactNode",
                 "description": "格式化已知数值；默认按 UILocale 数值 Intl。读数与数据表可用节点；轴上的文字只取字符串或数字结果，返回节点时退回默认数值格式。",
                 "descriptionEn": "Format known values; defaults to Intl number formatting for UILocale. The readout and table accept nodes; axis ticks are read for strings or numbers only and fall back to the default number format when a node is returned."
+              },
+              {
+                "name": "style / className / render / ref",
+                "type": "ChartStyle / useRender 组合",
+                "typeEn": "ChartStyle / useRender composition",
+                "description": "根 style 可覆写 --qy-chart-plot-height（默认 10 材）；render、ref 与其余 figure 属性透传到根节点。",
+                "descriptionEn": "Root style may override --qy-chart-plot-height (default 10 modules); render, ref and remaining figure attributes forward to the root."
               }
             ]
           }
@@ -25486,7 +25654,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25517,7 +25685,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 107
+            "line": 122
           }
         },
         {
@@ -25525,7 +25693,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 106
+            "line": 121
           }
         },
         {
@@ -25533,7 +25701,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 132
+            "line": 157
           }
         },
         {
@@ -25541,7 +25709,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 131
+            "line": 156
           }
         },
         {
@@ -25550,7 +25718,7 @@
           "target": "\"/Volumes/SUNSANG 1/Codex/qingye-ui/node_modules/.pnpm/@base-ui+react@1.9.0_@date-fns+tz@1.5.0_@types+react@19.2.7_date-fns@4.4.0_react-dom@19.2.1_react@19.2.1__react@19.2.1/node_modules/@base-ui/react/scroll-area/index.parts\"",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 136
+            "line": 161
           }
         },
         {
@@ -25566,7 +25734,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 97
+            "line": 108
           }
         },
         {
@@ -25574,7 +25742,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 96
+            "line": 107
           }
         },
         {
@@ -25582,7 +25750,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 112
+            "line": 130
           }
         },
         {
@@ -25590,7 +25758,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 111
+            "line": 126
           }
         },
         {
@@ -25598,7 +25766,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 123
+            "line": 147
           }
         },
         {
@@ -25606,7 +25774,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 122
+            "line": 146
           }
         },
         {
@@ -25614,7 +25782,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 102
+            "line": 116
           }
         },
         {
@@ -25622,7 +25790,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/scroll-area.tsx",
-            "line": 101
+            "line": 112
           }
         }
       ],
@@ -25700,6 +25868,13 @@
             "descriptionEn": "Explicit styled-scrollbar composition: Root owns layout/overflow facts, Viewport is the actual scroll element and Content supports measurement.",
             "props": [
               {
+                "name": "fade",
+                "type": "boolean",
+                "default": "false",
+                "description": "ScrollAreaViewport 边缘渐隐：在内容被切掉的一端平滑淡出，无系统占位条遮挡。",
+                "descriptionEn": "ScrollAreaViewport edge fade: smoothly fades cut-off edges without a platform gutter scrollbar."
+              },
+              {
                 "name": "render / ref / className / style / native props",
                 "type": "ScrollAreaPrimitive part props",
                 "description": "各部位保留自身原语 props；滚动事件、scrollTop/scrollLeft 和聚焦均属于 Viewport，不能把旧视口 ref 直接接到 Root。",
@@ -25709,8 +25884,8 @@
           },
           {
             "name": "ScrollAreaScrollbar",
-            "description": "随实际溢出出现的可拖动轨道；未给 children 时内置真实 Thumb。",
-            "descriptionEn": "A draggable track shown for actual overflow; includes a real Thumb when children are omitted.",
+            "description": "随实际溢出出现的可拖动细轨道；未给 children 时内置真实 Thumb。",
+            "descriptionEn": "A slim draggable track shown for actual overflow; includes a real Thumb when children are omitted.",
             "props": [
               {
                 "name": "orientation",
@@ -25718,6 +25893,13 @@
                 "default": "vertical",
                 "description": "选择受控轴；双轴时组合两条轨道与 Corner。",
                 "descriptionEn": "Chooses the controlled axis; compose two tracks and Corner for both axes."
+              },
+              {
+                "name": "visibility",
+                "type": "\"auto\" | \"always\"",
+                "default": "\"auto\"",
+                "description": "auto 静止时隐身、悬停或滚动时淡入；always 有溢出即常驻显示。",
+                "descriptionEn": "auto stays hidden at rest and fades in while hovering or scrolling; always stays visible whenever overflowing."
               },
               {
                 "name": "keepMounted",
@@ -25830,11 +26012,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 97
+              "line": 108
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 97
+              "line": 108
             },
             "status": "PRESENT"
           },
@@ -25843,11 +26025,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 102
+              "line": 116
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 102
+              "line": 116
             },
             "status": "PRESENT"
           },
@@ -25856,11 +26038,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 107
+              "line": 122
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 107
+              "line": 122
             },
             "status": "PRESENT"
           },
@@ -25869,11 +26051,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 112
+              "line": 130
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 112
+              "line": 130
             },
             "status": "PRESENT"
           },
@@ -25882,11 +26064,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 123
+              "line": 147
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 123
+              "line": 147
             },
             "status": "PRESENT"
           },
@@ -25895,11 +26077,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 132
+              "line": 157
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 132
+              "line": 157
             },
             "status": "PRESENT"
           },
@@ -25908,11 +26090,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 136
+              "line": 161
             },
             "rootEntry": {
               "path": "packages/ui/src/components/scroll-area.tsx",
-              "line": 136
+              "line": 161
             },
             "status": "PRESENT"
           }
@@ -25928,7 +26110,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -25951,7 +26133,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/search-input.tsx",
-            "line": 30
+            "line": 31
           }
         },
         {
@@ -25959,7 +26141,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/search-input.tsx",
-            "line": 13
+            "line": 14
           }
         }
       ],
@@ -26133,11 +26315,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/search-input.tsx",
-              "line": 30
+              "line": 31
             },
             "rootEntry": {
               "path": "packages/ui/src/components/search-input.tsx",
-              "line": 30
+              "line": 31
             },
             "status": "PRESENT"
           }
@@ -26153,7 +26335,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26465,7 +26647,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -26787,7 +26969,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27370,7 +27552,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27564,7 +27746,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -27772,7 +27954,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28179,6 +28361,13 @@
                 "descriptionEn": "The only visible identifier in the rail; a link without an icon has nothing to show once collapsed. The name (children) is only visually hidden (sr-only) in the rail — the accessible name is unchanged, and a Tooltip restores a sighted label."
               },
               {
+                "name": "count / max",
+                "type": "number / number",
+                "default": "max: 99",
+                "description": "未读或待处理计数（> 0 时显示）。展开态紧随名称以等宽数字展示；rail 态在有 icon 时转为 CornerMark 钉在图标角上，超过 max 显示「max+」。",
+                "descriptionEn": "Unread or pending count (shown when > 0). Displayed as tabular text after the label when expanded, or pinned onto the icon via CornerMark in the rail; values past max render as \"max+\"."
+              },
+              {
                 "name": "render / ref / native props",
                 "type": "Base UI part props",
                 "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
@@ -28212,17 +28401,43 @@
             "props": [
               {
                 "name": "SidebarSub：open / defaultOpen / onOpenChange",
+                "nameEn": "SidebarSub: open / defaultOpen / onOpenChange",
                 "type": "boolean / callback",
                 "description": "展开态与 rail 态共用同一个开合状态；rail 下即使换成 Popover，用户的开合记忆也不因收起/展开侧栏而改变。",
                 "descriptionEn": "The same open state serves both the expanded panel and the rail's Popover; the remembered open/closed state survives collapsing even though the rail swaps in a Popover."
               },
               {
                 "name": "SidebarSubTrigger：icon",
+                "nameEn": "SidebarSubTrigger: icon",
                 "type": "ReactNode",
                 "description": "与 SidebarLink 的 icon 同一分工；rail 下按钮不再承担内嵌展开，只作为 Popover 入口，避免收起侧栏悄悄改变用户没点开过的展开记忆。",
                 "descriptionEn": "Same split as SidebarLink's icon; in the rail the button no longer toggles the inline panel, only opening the Popover, so collapsing never silently changes an open state the user never chose."
+              },
+              {
+                "name": "SidebarSub：children",
+                "nameEn": "SidebarSub: children",
+                "type": "ReactNode",
+                "description": "必填：包含一个 SidebarSubTrigger 与一个 SidebarSubContent；不可再嵌套 SidebarSub。",
+                "descriptionEn": "Required: contains one SidebarSubTrigger and one SidebarSubContent; nesting another SidebarSub throws."
               }
             ]
+          }
+        ],
+        "keyboard": [
+          {
+            "keys": "Tab / Shift+Tab",
+            "description": "在侧栏切换按钮（SidebarToggle）、导航链接（SidebarLink）、动作条目（SidebarButton）与二级入口（SidebarSubTrigger）间移动焦点；窄屏抽屉模式下按 Drawer 规则管理焦点。",
+            "descriptionEn": "Move focus across SidebarToggle, SidebarLink, SidebarButton, and SidebarSubTrigger; in narrow-screen drawer mode, focus follows Drawer rules."
+          },
+          {
+            "keys": "Enter / Space",
+            "description": "在 SidebarToggle 上切换展开与图标 rail，在 SidebarButton 上执行动作，在 SidebarSubTrigger 上展开或收起二级子级（rail 下打开二级 Popover）；在 SidebarLink 上按 Enter 前往真实目标。",
+            "descriptionEn": "Toggle expanded/rail state on SidebarToggle, run an action on SidebarButton, or expand/collapse a sub-level on SidebarSubTrigger (opening the sub-level Popover in the rail); press Enter on SidebarLink to navigate."
+          },
+          {
+            "keys": "Escape",
+            "description": "在 rail 态关闭已打开的二级 Popover，或在窄屏 drawer 模式下关闭侧栏抽屉并将焦点返回触发按钮。",
+            "descriptionEn": "Close an open sub-level Popover in the rail, or close the sidebar drawer on narrow screens and return focus to its trigger."
           }
         ],
         "notes": [
@@ -28290,7 +28505,7 @@
             ]
           },
           "responsive": [
-            "Keep actual desktop structure; menus fit available space and tables retain complete comparison columns."
+            "Stays in place on wide screens and collapses to an icon rail; below 40rem moves into a drawer opened by SidebarDrawerTrigger in WorkspaceHeader."
           ],
           "customization": [
             "Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset."
@@ -28504,7 +28719,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28717,6 +28932,7 @@
                 "name": "className",
                 "type": "string",
                 "default": "h-[5 材]",
+                "defaultEn": "h-[5 modules]",
                 "description": "块高，例如 h-40。",
                 "descriptionEn": "Block height, e.g. h-40."
               }
@@ -28802,7 +29018,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -28972,7 +29188,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -29463,7 +29679,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -29591,6 +29807,33 @@
             ]
           }
         ],
+        "keyboard": [
+          {
+            "keys": "Tab / Shift+Tab",
+            "description": "仅开启 tooltip 且有数据点时进入或离开逐点读数入口；聚焦即打开当前点提示。",
+            "descriptionEn": "Enter or leave the point-inspection trigger when tooltip is enabled with data points; focusing opens the readout."
+          },
+          {
+            "keys": "← / →",
+            "description": "在逐点读数中移动至前一个 / 后一个数据点并更新提示。",
+            "descriptionEn": "Move to the previous or next data point and update the readout."
+          },
+          {
+            "keys": "Home / End",
+            "description": "跳转至第一个 / 最后一个数据点。",
+            "descriptionEn": "Jump to the first or last data point."
+          },
+          {
+            "keys": "Enter / Space",
+            "description": "切换当前数据点提示的显示与关闭。",
+            "descriptionEn": "Toggle the current point readout open or closed."
+          },
+          {
+            "keys": "Escape",
+            "description": "关闭逐点提示，焦点留在入口上。",
+            "descriptionEn": "Dismiss the point readout while keeping focus on the trigger."
+          }
+        ],
         "design": {
           "methods": [
             "名实相符",
@@ -29683,7 +29926,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30076,7 +30319,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30261,7 +30504,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30467,6 +30710,18 @@
             ]
           }
         ],
+        "keyboard": [
+          {
+            "keys": "Tab / Shift+Tab",
+            "description": "步骤本身是只读有序列表，不占 Tab 停靠点；仅当应用在步骤内容中放入链接或恢复按钮时，焦点按文档顺序经过这些原生控件。",
+            "descriptionEn": "Steps itself is a read-only ordered list with no Tab stops of its own; focus visits links or recovery buttons placed inside step content by the application in document order."
+          },
+          {
+            "keys": "Enter / Space",
+            "description": "激活步骤内由应用提供的链接（Enter）或恢复按钮（Enter / Space）。",
+            "descriptionEn": "Activate an application-provided link (Enter) or recovery button (Enter / Space) inside a step."
+          }
+        ],
         "notes": [
           "不能由当前索引把之前各项自动标记完成。"
         ],
@@ -30538,7 +30793,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30781,7 +31036,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -30844,7 +31099,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 163
+            "line": 164
           }
         },
         {
@@ -30852,7 +31107,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 162
+            "line": 163
           }
         },
         {
@@ -30892,7 +31147,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 159
+            "line": 160
           }
         },
         {
@@ -30916,7 +31171,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/table.tsx",
-            "line": 153
+            "line": 154
           }
         },
         {
@@ -31222,11 +31477,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 159
+              "line": 160
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 159
+              "line": 160
             },
             "status": "PRESENT"
           },
@@ -31235,11 +31490,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 163
+              "line": 164
             },
             "rootEntry": {
               "path": "packages/ui/src/components/table.tsx",
-              "line": 163
+              "line": 164
             },
             "status": "PRESENT"
           }
@@ -31255,7 +31510,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31609,7 +31864,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -31878,7 +32133,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32136,7 +32391,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32413,7 +32668,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32436,7 +32691,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/time-field.tsx",
-            "line": 88
+            "line": 89
           }
         },
         {
@@ -32636,11 +32891,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/time-field.tsx",
-              "line": 88
+              "line": 89
             },
             "rootEntry": {
               "path": "packages/ui/src/components/time-field.tsx",
-              "line": 88
+              "line": 89
             },
             "status": "PRESENT"
           }
@@ -32656,7 +32911,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -32788,6 +33043,7 @@
           },
           {
             "keys": "ArrowUp / ArrowDown / 数字键",
+            "keysEn": "ArrowUp / ArrowDown / Digit keys",
             "description": "改变当前分段，键入逐段进行（同 TimeField）。",
             "descriptionEn": "Changes the current segment; typing goes segment by segment (as in TimeField)."
           },
@@ -32889,7 +33145,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -33181,7 +33437,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -33568,7 +33824,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -33591,7 +33847,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 115
+            "line": 116
           }
         },
         {
@@ -33623,7 +33879,7 @@
           "kind": "type",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 148
+            "line": 149
           }
         },
         {
@@ -33631,7 +33887,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 124
+            "line": 125
           }
         },
         {
@@ -33639,7 +33895,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/toc.tsx",
-            "line": 156
+            "line": 157
           }
         }
       ],
@@ -33726,6 +33982,9 @@
           },
           "responsive": [
             "Items sit in a tight vertical stack without touch-target (it would cover adjacent items); padding alone widens the hit area."
+          ],
+          "customization": [
+            "Use the public render/ref/className/style and native props; do not mix the three theme axes."
           ]
         },
         "api": [
@@ -33812,11 +34071,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 115
+              "line": 116
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 115
+              "line": 116
             },
             "status": "PRESENT"
           },
@@ -33825,11 +34084,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 124
+              "line": 125
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 124
+              "line": 125
             },
             "status": "PRESENT"
           },
@@ -33838,11 +34097,11 @@
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 156
+              "line": 157
             },
             "rootEntry": {
               "path": "packages/ui/src/components/toc.tsx",
-              "line": 156
+              "line": 157
             },
             "status": "PRESENT"
           }
@@ -33858,7 +34117,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -34148,7 +34407,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -34400,7 +34659,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -34610,11 +34869,11 @@
             "descriptionEn": "An actual command that composes Button by default.",
             "props": [
               {
-                "name": "size / variant",
-                "type": "ButtonProps[size | variant]",
-                "default": "size=\"md\", variant=\"quiet\"",
-                "description": "复用基础层尺寸和表面预设。",
-                "descriptionEn": "Reuse foundation size and surface presets."
+                "name": "size / variant / shape",
+                "type": "ButtonProps[size | variant | shape]",
+                "default": "size=\"md\", variant=\"quiet\", shape=\"label\"",
+                "description": "复用基础层尺寸、表面与形状预设；仅图标命令用 shape=\"icon\" 并提供 aria-label。",
+                "descriptionEn": "Reuse foundation size, surface, and shape presets; icon-only commands use shape=\"icon\" with an aria-label."
               },
               {
                 "name": "disabled / focusableWhenDisabled / render / ref / nativeButton",
@@ -34753,7 +35012,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -35193,7 +35452,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -35216,7 +35475,7 @@
           "kind": "value",
           "source": {
             "path": "packages/ui/src/components/tour.tsx",
-            "line": 138
+            "line": 140
           }
         },
         {
@@ -35334,6 +35593,12 @@
                 "descriptionEn": "A mask with a cutout at the anchor. It does not intercept the pointer and follows window size and scroll."
               },
               {
+                "name": "container",
+                "type": "HTMLElement | null",
+                "description": "观察锚点增删变化的 DOM 范围；缺省观察 document.body，缩小范围可减少无关子树变动触发的重解析。",
+                "descriptionEn": "DOM scope observed for anchor additions and removals; defaults to document.body. Narrowing it reduces re-resolution from unrelated subtree mutations."
+              },
+              {
                 "name": "className",
                 "type": "string",
                 "description": "追加到浮层。",
@@ -35401,17 +35666,42 @@
             "浮层宽度与方向可调；遮罩外扩与圆角随系统尺度，不单设令牌。"
           ]
         },
+        "designEn": {
+          "whenToUse": [
+            "Point out a few key entries one after another on first use."
+          ],
+          "avoid": [
+            "Putting required operations inside a tour; blocking the page with a mask; too many steps."
+          ],
+          "composition": [
+            "Anchors are existing page elements; Tour only owns the current step and close requests without altering the anchors."
+          ],
+          "stateOwner": {
+            "library": [
+              "Current step, resolving and skipping unavailable steps, focus entry and return, and positioning."
+            ],
+            "application": [
+              "When to start, whether the tour has been seen, and controlled open and step values."
+            ]
+          },
+          "responsive": [
+            "Popup width stays within available space; anchors outside the viewport scroll into view first."
+          ],
+          "customization": [
+            "Popup width and placement are adjustable; cutout padding and radius follow the system scale rather than separate tokens."
+          ]
+        },
         "usageResolution": [
           {
             "name": "Tour",
             "kind": "value",
             "componentEntry": {
               "path": "packages/ui/src/components/tour.tsx",
-              "line": 138
+              "line": 140
             },
             "rootEntry": {
               "path": "packages/ui/src/components/tour.tsx",
-              "line": 138
+              "line": 140
             },
             "status": "PRESENT"
           }
@@ -35427,7 +35717,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -35493,7 +35783,7 @@
         "description": "把条目在「候选」与「已选」两个列表之间移动，值是已选一侧的键。",
         "descriptionEn": "Move items between an available list and a selected list; the value is the keys on the selected side.",
         "category": "表单",
-        "layer": "primitive",
+        "layer": "pattern",
         "source": "local",
         "exports": [
           "Transfer"
@@ -35537,6 +35827,7 @@
                 "name": "titles",
                 "type": "[string, string]",
                 "default": "候选 / 已选",
+                "defaultEn": "Available / Selected",
                 "description": "两侧标题，同时是各自列表的可访问名称。",
                 "descriptionEn": "The two titles, which also name each list for assistive technology."
               },
@@ -35582,6 +35873,7 @@
           },
           {
             "keys": "Enter（移动按钮）",
+            "keysEn": "Enter (move button)",
             "description": "把所选条目移到另一侧；没有可移动条目时不动作。",
             "descriptionEn": "On a move button: moves the checked items to the other side; does nothing when none can move."
           }
@@ -35689,7 +35981,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -35739,7 +36031,7 @@
         "description": "在弹层里的树上选一个节点，或勾选若干叶子。",
         "descriptionEn": "Choose one node, or check several leaves, on a tree inside a popup.",
         "category": "表单",
-        "layer": "primitive",
+        "layer": "pattern",
         "source": "local",
         "exports": [
           "TreeSelect"
@@ -35812,6 +36104,12 @@
                 "type": "string",
                 "description": "触发器与弹层里树的名称、触发器的样式入口。没有名称会抛错：用 aria-label、aria-labelledby，或放进带 FieldLabel 的 Field。",
                 "descriptionEn": "Name of the trigger and of the tree in the popup, and the trigger's styling entry. A missing name throws: use aria-label, aria-labelledby, or place it in a Field with a FieldLabel."
+              },
+              {
+                "name": "aria-describedby / aria-invalid",
+                "type": "string / boolean | \"true\" | \"false\"",
+                "description": "触发器的补充说明引用与校验无效状态；未显式传入时跟随外层 Field。",
+                "descriptionEn": "Supplementary description reference and invalid state on the trigger; follows an enclosing Field when omitted."
               }
             ]
           }
@@ -35940,7 +36238,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -36197,6 +36495,12 @@
             "descriptionEn": "Collapse/expand or move to parent/child; reversed in RTL. Expansion belongs to the arrow keys; the chevron at the row start is for pointers only and is outside both the Tab sequence and the accessibility tree."
           },
           {
+            "keys": "→（RTL 为 ←，加载失败时）",
+            "keysEn": "→ (← in RTL, after a failed load)",
+            "description": "在已展开但异步加载失败的节点上重新触发 loadChildren 重试。",
+            "descriptionEn": "Retry loadChildren on an expanded node whose asynchronous load failed."
+          },
+          {
             "keys": "Ctrl/⌘+X，Alt+↑ / ↓ / Enter，Esc",
             "keysEn": "Ctrl/Cmd+X, Alt+↑ / ↓ / Enter, Esc",
             "description": "仅 draggable：Ctrl/⌘+X 取起当前节点，方向键移动焦点，Alt+↑ 放到焦点节点之前、Alt+↓ 放到之后、Alt+Enter 放到之内，Esc 或焦点离开则取消。每一步都有播报。",
@@ -36235,7 +36539,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -36539,7 +36843,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -36783,7 +37087,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -37286,7 +37590,7 @@
       },
       "catalog": {
         "present": true,
-        "version": "5.5.0",
+        "version": "5.6.0",
         "source": "packages/ui/catalog.json"
       },
       "dist": {
@@ -45531,7 +45835,7 @@
     },
     {
       "name": "--qy-control-sm",
-      "componentSourceOccurrences": 12,
+      "componentSourceOccurrences": 15,
       "evidenceKind": "SOURCE_OCCURRENCES_ONLY",
       "runtimeStatus": "NOT_RUN"
     },
@@ -45802,7 +46106,7 @@
       "source": "packages/ui/package.json",
       "scripts": {
         "build": "pnpm gen:catalog && tsc -p tsconfig.json && node scripts/build.mjs",
-        "typecheck": "tsc -p tsconfig.json --noEmit",
+        "typecheck": "node ../../node_modules/typescript-7/bin/tsc -p tsconfig.json --noEmit",
         "prepack": "pnpm build",
         "check:pack": "node scripts/check-pack.mjs",
         "test": "vitest run",
@@ -45817,7 +46121,7 @@
         "dev": "vite",
         "build": "node scripts/generate-fixtures.mjs && node scripts/generate-sitemap.mjs && tsc --noEmit && vite build",
         "preview": "vite preview",
-        "typecheck": "tsc --noEmit",
+        "typecheck": "node ../../node_modules/typescript-7/bin/tsc --noEmit",
         "check:components": "node scripts/check-library-controls.mjs",
         "test": "node scripts/generate-fixtures.mjs && node --test test/*.test.mjs"
       }

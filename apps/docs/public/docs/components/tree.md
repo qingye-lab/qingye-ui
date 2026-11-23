@@ -1,6 +1,6 @@
 # 层级集合 Tree
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/tree
 Source: packages/ui/src/components/tree.tsx
 Source SHA-256: 51af2eea6dd23fce52b0b5062e83fd08bbb41be9369d653212f2d152d4d86b7a
@@ -93,6 +93,7 @@ Written descriptions; the list above is the type-resolved fact.
 ## Keyboard
 - ↑ / ↓ / Home / End: 在可见且可用节点间移动。
 - ← / →: 关闭/展开或移动到父/子节点；RTL 相反。展开与收起由方向键承担；行首的展开图标只供指针使用，不进 Tab 序列，也不进可访问树。
+- →（RTL 为 ←，加载失败时）: 在已展开但异步加载失败的节点上重新触发 loadChildren 重试。
 - Ctrl/⌘+X，Alt+↑ / ↓ / Enter，Esc: 仅 draggable：Ctrl/⌘+X 取起当前节点，方向键移动焦点，Alt+↑ 放到焦点节点之前、Alt+↓ 放到之后、Alt+Enter 放到之内，Esc 或焦点离开则取消。每一步都有播报。
 - Enter / Space / 字首: 单选当前节点，或键入标签开头定位：连续键入的字符（间隔 500ms 内，预设）累积成前缀；重复键入同一个字符则在以它开头的节点间循环。checkable 模式下 Space 改为勾选/取消勾选当前节点及其启用的叶子后代，Enter 不触发单选。
 

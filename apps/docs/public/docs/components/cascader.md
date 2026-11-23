@@ -1,6 +1,6 @@
 # 级联选择 Cascader
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/cascader
 Source: packages/ui/src/components/cascader.tsx
 Source SHA-256: cb9151f01ae01a2db194a6e5f29fc8a0f359768ddd0e0197f9c73655d9aaf3d8
@@ -88,6 +88,7 @@ Written descriptions; the list above is the type-resolved fact.
 - disabled / readOnly / required: boolean; default false. 只读保留当前值且不打开候选面；禁用的字段不提交；required 参与原生校验并标 aria-required。invalid 跟随 Field。
 - name / form: string. 隐藏输入的名称与所属表单。提交值是路径各段用 "/" 连接，例如 "zj/hz/xh"，段内的 "%"、"/" 转义为 %25、%2F（按 "/" 拆开后逐段 decodeURIComponent 还原），未选择提交空字符串；多选每条路径一条同名值，未选择不提交（required 时拦下提交）。
 - aria-label / aria-labelledby / id / className: string. 触发器的名称与样式入口。没有名称会抛错：用 aria-label、aria-labelledby，或放进带 FieldLabel 的 Field。
+- aria-describedby / aria-invalid: string / boolean | "true" | "false". 触发器的补充说明引用与校验无效状态；未显式传入时跟随外层 Field。
 
 ## Keyboard
 - Enter / Space / ↓ / ↑: 在触发器上打开候选面，焦点落在当前路径的末项（无值时是第一项）。

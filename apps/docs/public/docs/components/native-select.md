@@ -1,6 +1,6 @@
 # 原生选择 NativeSelect
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/native-select
 Source: packages/ui/src/components/native-select.tsx
 Source SHA-256: c79d1ce39764a22c4952574d981ffccb7e4d732c9e1be7816a5a3154dad1745f

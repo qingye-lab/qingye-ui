@@ -1,6 +1,6 @@
 # Input
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
 Source SHA-256: 1276c09d538105d1b2f715ed2df7d99bff636526763bba4c200346a7823104a7
@@ -65,6 +65,7 @@ A real border identifies the editable area. Base UI Input retains Field registra
 - type: React.HTMLInputTypeAttribute; default "text". The native type applies as is, with no extra action attached. Use SearchInput / PasswordInput for search and passwords.
 - value / defaultValue / onValueChange: Native value / initial value / (value, details) => void. Controlled and uncontrolled values; onChange is also forwarded.
 - readOnly: boolean; default false. Retains focus, copying, and form submission while blocking edits. Shows a read-only marker.
+- size: number. Native input.size character width, unrelated to control visual height; fill controls share one geometry driven by the density axis.
 - className / style / render / ref: Base UI Input props. Applied to the real input. className/style support state functions.
 - controlClassName: string. Styles the shared editable boundary, including its width and placement.
 - unstyled: boolean; default false. Lets a public composition such as InputGroup supply the boundary while retaining inner geometry and native state.

@@ -1,6 +1,6 @@
 # Prose
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/prose
 Source: packages/ui/src/components/prose.tsx
 Source SHA-256: a94bcf0559188c47580dade7e018f602f7340e267230ace89e0c7d16d0df415e
@@ -37,7 +37,7 @@ Prose neither parses Markdown nor bundles a renderer: callers use any tool (reac
 - A very wide table does not yet scroll independently inside Prose (the paper's rounded corners need overflow-hidden rather than overflow-x-auto), so cells simply wrap — a known gap, not a missing default treatment.
 
 ## Customization
-- 使用公开 render/ref/className/style 与原生属性；不混用主题三轴。
+- Use the public render/ref/className/style and native props; do not mix the three theme axes.
 
 ## Current exports
 - Prose: function; owner prose; PASS; props: ProseProps

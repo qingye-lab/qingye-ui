@@ -137,3 +137,27 @@ table 是 Pattern 而非 Primitive：它无业务对象成立，但表达的是�
 - `packages/ui/scripts/gen-catalog.mjs` 的目录输出按层重新排序；`ai/v<version>/llms.txt` 的组件段随之分组。
 - 删除组件意味着破坏性变更：`sheet`、`command`、`menubar`、`resizable` 的消费方需要迁移到 `drawer`、`menu` 组合、`navigation-menu` 与布局能力。迁移说明写入 `ai/` 分发包，不在本文展开。
 - 分层的可验证性受限于一个事实：层级是设计判断，不是运行时属性。其验收方式是「删除检验」与「情境变化检验」，不是类型检查。声称某组件「属于 Primitive」时，须能回答它在没有业务对象时是否仍然成立。
+
+## 演进修订（2026-11-23）
+
+### 组件总量演进（82 → 114）
+
+自 2026-10-07 盘点（82 个组件）起，经 2026-10-20 消费端常用组合补齐（`async-content`、`confirm` 等）与 2026-11-01 缺口盘点落地（见 [2026-11-01-component-gap-rulings.md](2026-11-01-component-gap-rulings.md)，补充时间/区间族、`composer`、`transfer`、`rating`、`tour`、`chip`、`result`、`skip-link`、`image-preview`、`avatar-group`、`tree-select`、`cascader` 等），`packages/ui/src/components/*.tsx` 演进至 **114 个组件**（与 `apps/docs/src/content/*/meta.ts` 114 个组件文档一一对应）。
+
+组件数量本身不是 KPI 或配额；每一项增补与回归均继续受「无业务对象是否仍然成立」及 `STANDARDS.md` 第 1 节「一个组件只做自己的事」约束，Capability 与 Experience 层仍不进库。
+
+### 5 个曾删/合并组件的回归依据与约束边界
+
+2026-10-03 初版分层曾删除 `skeleton`、`command`、`resizable` 并合并 `search-input`、`password-input`。后续在真实消费与按 `design.md` 重写过程中，这 5 个组件以收紧后的契约与边界重新入库：
+
+| 组件 | 原处置 | 回归依据 | 约束边界 |
+|---|---|---|---|
+| `skeleton` | 删除 | 首次加载尚无内容时，原位摆出将到内容的高度与结构能避免到达后版面跳位（2026-10-09 重写） | 仅用于**首次加载尚无内容**，刷新已有内容时仍必须保留有效工作面（配合 `AsyncContent` / `aria-busy`）；行高严格取一材（`--qy-text-body-leading`）；**禁止脉动/闪烁动画**（NG6），以 `role="status"` 与文案作为加载证据；不自行超时 |
+| `command` | 删除 | 命令面板虽以 `Autocomplete`（inline + open）与 `Dialog` 为底座，但反复需要三项原语不提供的共同契约：JSX 条目自过滤、无可见条目时整组收起与空态协调、与 `Menu` 相同的动作项几何 | 只承担命令检索与触发面板本身；**不注册全局快捷键（如 `⌘K`）**，全局监听与打开时机由应用持有 |
+| `resizable` | 删除 | 后台工作台列表/详情分栏需要用户自主调节宽度，属于无业务对象仍成立的 WAI-ARIA APG「Window Splitter」交互模式 | 面板宽度以 `flex: 0 1 {size}%` 与 `ResizeObserver` 像素下限换算表达，**不动画 `width`**；受控 `layout` 在松手时一次性经 `onLayout` 提交；`ResizableHandle`（1px 细线）的焦点外扩作为结构性物理例外登记在 `STANDARDS.md §5` |
+| `search-input` | 合并至 `input` | 搜索框是最高频的联合输入形态，各应用反复手拼清空按钮、忙碌态与可访问名称极易漏掉表单语义 | **仍恪守 `Input` 只承载值**：`SearchInput` 完全由公开部件 `InputGroup + Input + InputGroupAddon + InputGroupButton` 组合，补齐 `loading`（不阻断继续输入与清空）、清空不提交表单与只读说明 |
+| `password-input` | 合并至 `input` | 密码可见性切换的稳定可访问名称（`aria-pressed` 表达可见状态、名称不随切换翻转）与受控/非受控切换是高频共享契约 | 完全由公开部件 `InputGroup + Input + InputGroupButton` 组合，`Input` 本体不内置可见性切换 |
+
+### 维持删除的组件
+
+原判据仍完全成立的删除项保持不恢复：`sheet`（与 `drawer` 同义）、`disclosure`（与 `collapsible` 同义）、`menubar`（桌面范式，由 `navigation-menu` 覆盖）、`preview-card`（产品特定预览）、`frame`（与 `card` 重叠，2026-11-01 再次确认不恢复）、`spinner`（等待不可脱离对象，2026-11-01 再次确认不恢复独立组件，旋转记号作为内部共享部件仅供控件忙碌态使用）。

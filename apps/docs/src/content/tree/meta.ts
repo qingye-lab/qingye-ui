@@ -142,6 +142,12 @@ export default {
       "descriptionEn": "Collapse/expand or move to parent/child; reversed in RTL. Expansion belongs to the arrow keys; the chevron at the row start is for pointers only and is outside both the Tab sequence and the accessibility tree."
     },
     {
+      "keys": "→（RTL 为 ←，加载失败时）",
+      "keysEn": "→ (← in RTL, after a failed load)",
+      "description": "在已展开但异步加载失败的节点上重新触发 loadChildren 重试。",
+      "descriptionEn": "Retry loadChildren on an expanded node whose asynchronous load failed."
+    },
+    {
       "keys": "Ctrl/⌘+X，Alt+↑ / ↓ / Enter，Esc", keysEn: "Ctrl/Cmd+X, Alt+↑ / ↓ / Enter, Esc",
       "description": "仅 draggable：Ctrl/⌘+X 取起当前节点，方向键移动焦点，Alt+↑ 放到焦点节点之前、Alt+↓ 放到之后、Alt+Enter 放到之内，Esc 或焦点离开则取消。每一步都有播报。",
       "descriptionEn": "Only with draggable: Ctrl/Cmd+X picks up the focused node, the arrow keys move focus, Alt+↑ drops before the focused node, Alt+↓ after it and Alt+Enter inside it, and Esc or leaving the tree cancels. Every step is announced."

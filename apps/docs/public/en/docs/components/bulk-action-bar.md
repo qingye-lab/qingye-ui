@@ -1,6 +1,6 @@
 # BulkActionBar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/bulk-action-bar
 Source: packages/ui/src/components/bulk-action-bar.tsx
 Source SHA-256: 5562a5a02d396089e7726042e528cd777bae5d96974767a833a7ac537f4d9680
@@ -121,6 +121,7 @@ Identifiable operation targets and scope.
 ### BulkActionBarExtend
 Entry that extends the page selection to the whole set; it appears only when rendered and never infers whether more exist.
 - count / onExtend: number / (event) => void. Default text is Select all N items with locale-grouped digits; onClick.preventDefault() cancels.
+- onClick / Button props: ButtonProps["onClick"] / ButtonProps. Runs before onExtend; calling event.preventDefault() or event.preventBaseUIHandler() cancels extending, and remaining props forward to Button.
 
 ### BulkActionBarActions / BulkActionBarAction / BulkActionBarClear
 Related actions and selection clearing.

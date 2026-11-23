@@ -325,3 +325,28 @@ test("reduced motion scrolls straight to the anchor", async () => {
     window.matchMedia = original;
   }
 });
+
+test("container narrows the MutationObserver scope instead of observing document.body", async () => {
+  vi.spyOn(console, "warn").mockImplementation(() => {});
+  const scope = document.createElement("div");
+  const early = document.createElement("button");
+  early.id = "scope-early";
+  scope.append(early);
+  document.body.append(scope);
+  const observe = vi.spyOn(MutationObserver.prototype, "observe");
+  try {
+    render(<Tour defaultOpen container={scope} steps={[
+      { target: () => scope.querySelector<HTMLElement>("#scope-early"), title: "局部先到" },
+      { target: () => scope.querySelector<HTMLElement>("#scope-late"), title: "局部晚到" },
+    ]} />);
+    expect(await dialog("局部先到")).toBeInTheDocument();
+    expect(observe).toHaveBeenCalledWith(scope, { childList: true, subtree: true });
+    expect(observe).not.toHaveBeenCalledWith(document.body, { childList: true, subtree: true });
+    const late = document.createElement("button");
+    late.id = "scope-late";
+    act(() => { scope.append(late); });
+    await waitFor(() => expect(screen.getByRole("dialog", { name: "局部先到" })).toHaveTextContent("第 1 / 2 步"));
+  } finally {
+    scope.remove();
+  }
+});

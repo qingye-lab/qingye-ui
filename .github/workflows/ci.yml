@@ -25,6 +25,10 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - uses: ./.github/actions/setup
+      - name: Check generated index is current
+        run: |
+          pnpm --filter @qingye_lab/ui gen:index
+          git diff --exit-code -- packages/ui/src/index.ts
       - name: Typecheck
         run: pnpm typecheck
       - name: Test
@@ -113,6 +117,11 @@ jobs:
       - name: Foundations
         if: matrix.group == 'foundations'
         run: node scripts/run-browser-audit.mjs --foundations
+      - name: Accessible name audit
+        if: ${{ !cancelled() && matrix.group == 'foundations' }}
+        run: |
+          mkdir -p test-results/name-audit
+          node scripts/run-browser-audit.mjs --names --report test-results/name-audit/report.json
       - name: Task patterns
         if: matrix.group == 'patterns'
         run: node scripts/run-browser-audit.mjs --patterns
@@ -134,6 +143,7 @@ jobs:
             test-results/task-patterns/
             test-results/consumer-migration/
             test-results/ui-foundations-final/
+            test-results/name-audit/
             test-results/studio/**/report.json
             test-results/studio/**/*.png
           if-no-files-found: ignore

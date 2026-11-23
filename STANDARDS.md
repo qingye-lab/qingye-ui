@@ -16,6 +16,7 @@
 - 改渲染元素使用 Base UI `render`、`useRender` 与 `mergeProps`；不新增无任务依据的别名或 `as` API。当前 Card 是组合入口，不自动提供标题槽或 padding。
 - 基于 Base UI 的组件导出所用原语命名空间。可控状态同时保留适用的受控与非受控入口；职责按 [design.md「明确修改归属」](design.md#明确修改归属) 判断。
 - 请求事实与结果推断按 [design.md「名称与状态」](design.md#名称与状态)。Button 只有忙碌一种状态（`loading`，用户裁决 2026-10-10）：事实由调用方持有，按钮不启动请求、不推断结束。成功、失败与结果未知不写在按钮上，由 Alert、Toast、FieldError、StatusDot 等提示组件表达。Toast 只呈现应用给出的类型，不设期限、不把久等推断为未知。
+- 控件与集合级布尔忙碌态在新组件中统一命名为 `loading`；已有组件的 `busy`（如 DataTable、PaginationPattern）与 `pending`（如 Switch）在 v5 保留，留待 v6 主版本统一收口。
 - 功能纯粹（用户裁决 2026-10-10）：一个组件只做自己的事。Button 只触发动作，`tone="danger"` 只是色调；后果说明与确认属于 AlertDialog / ConfirmAction，后果写在对话框的说明里。Button 不再校验、包装或关联后果，`ButtonProtection` 已移除。按下后保持的二态用 Toggle；提示附在调用方给出的控件上（TooltipTrigger 的 `render` 必填），不自带按钮。Input 只承载值：清空、搜索图标与显示密码由 SearchInput、PasswordInput 或 InputGroup + InputGroupButton 组合。Chart / ScatterChart / Heatmap 只画数据（等价数据表是无障碍替代，保留）：整图没有记录、未知或不适用时由调用方在原位放 Empty。
 
 ## 2. 尺寸
@@ -86,6 +87,8 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 
 焦点值见基础层 §15：`--qy-focus-ring-width` 当前选择 2px，`--qy-focus-quiet-width` 选择 1px。SearchInput / PasswordInput 的附属动作是 InputGroupButton（quiet Button，1px 内线）；裸 Popover 入口目前用 2px 内线，不能把它误写成 quiet Button。Popover 面板会实际获得焦点，审查记录 Enter 打开后匹配 focus-visible；其边框只变色。
 
+结构性物理例外（不视作违反焦点不外扩）：`ColorPicker` 色板抓手位于任意色面上，无法保证内侧反色线与背景对比，允许使用外侧 `outline-offset`；`ResizableHandle` 分隔条本身为 1px 细线，没有向内收拢的几何空间，允许焦点环向外居中展开。除上述登记在案的物理例外外，其余组件焦点一律向内收拢或仅改现有边框色。
+
 强制颜色下 box-shadow 会被系统移除，`styles.css` 统一恢复 CSS outline：宽度和内缩位置均读取局部 `--qy-focus-ring-width`，默认 2px，quiet 为 1px；系统色接管。`!important` 用于覆盖 utilities 层的 outline-none。宽度是选择，不是 AA 下限。完整强制颜色组合矩阵仍为 UNVERIFIED。
 
 测试 focus-visible 使用真实 `keyboard.press("Tab")`，等过渡至少 500ms 再取 computed 值；聚焦前后宽高不变、信号可见、无外扩。静态样式与候选覆盖页不等于运行验收。
@@ -145,7 +148,7 @@ neutral bordered 的 `--qy-button-bordered-border` 取墨阶的「淡」（24%�
 
 检查范围与证据状态引用 [design.md「人和 AI 的交付检查」](design.md#人和-ai-的交付检查)，按当前任务影响与用户裁定选择组合；焦点采样方式见本规范 §5。截图只发现变化，不为通过而批量更新。改断言必须逐条说明理由。
 
-<!-- qingye:translation:en:start source-sha256=89041b8f9e9dbb4707df758e10836767929feb2476958f5fddd9af5ef2984447 -->
+<!-- qingye:translation:en:start source-sha256=12452915704cc279be9ba6f583055b47a0abc9eac369c8e900ec3246c66cdf81 -->
 # Component Standards
 
 These are implementation rules for `@qingye_lab/ui`. The generator projects them into the distributed `ai/style.en.md`; edit this source rather than generated copies. The design basis is [design.en.md](design.en.md). Current values and classifications are recorded in the [foundation](docs/decisions/2026-10-03-foundation.md), revised through [value adjudication](docs/decisions/2026-10-03-value-adjudication.md). The Chinese source remains authoritative; the generator checks this translation's source hash.
@@ -164,6 +167,7 @@ Components are rewritten by current layers and roadmap batches. Read completed f
 - Use Base UI `render`, `useRender`, and `mergeProps` to replace rendered elements. Avoid aliases or an `as` API without a task basis. Current Card is a composition entry without automatic title slots or padding.
 - Components based on Base UI export their primitive namespace. Controlled state retains applicable controlled and uncontrolled entries. Assign responsibilities using [Assigning changes](design.en.md#assigning-changes).
 - Request facts and outcome inference follow [Names and states](design.en.md#names-and-states). Button has one state, busy (`loading`; user ruling, 2026-10-10): the caller owns the fact, and the button starts no request and infers no ending. Success, failure and unknown results are not written on the button; feedback components such as Alert, Toast, FieldError and StatusDot express them. Toast presents only the type the application gives it: it sets no deadline and never infers unknown from a long wait.
+- New components unify control-level and collection-level boolean busy states under `loading`; existing `busy` (such as DataTable and PaginationPattern) and `pending` (such as Switch) props remain in v5 and consolidate in v6.
 - One job per component (user ruling, 2026-10-10). Button only triggers an action and `tone="danger"` is only a tone. Consequence text and confirmation belong to AlertDialog / ConfirmAction, stated in the dialog description. Button no longer validates, wraps, or associates consequences; `ButtonProtection` is removed. A two-state fact that persists after pressing is a Toggle. A hint attaches to the caller's control (TooltipTrigger requires `render`) and brings no button of its own. Input only carries a value: clearing, a search icon and password visibility are composed by SearchInput, PasswordInput or InputGroup + InputGroupButton. Chart / ScatterChart / Heatmap only draw data (the equivalent data table is an accessibility alternative and stays): when the whole chart has no records, is unknown or does not apply, the caller puts Empty in its place.
 
 ## 2. Dimensions
@@ -233,6 +237,8 @@ Ownership and simultaneous states follow [Names and states](design.en.md#names-a
 | selected / open | Consume actual primitive data states; preserve semantics when changing appearance |
 
 Foundation §15 records focus values: `--qy-focus-ring-width` currently chooses 2px and `--qy-focus-quiet-width` 1px. The adjunct actions of SearchInput / PasswordInput are InputGroupButton (a quiet Button with a 1px internal line); bare Popover entries currently use a 2px internal line rather than quiet Button's 1px. Popover panel actually receives focus; review observed focus-visible after opening with Enter, and its border only changes color.
+
+Structural physical exceptions (not treated as violations of the non-expanding focus rule): `ColorPicker` area thumbs sit over arbitrary colors where an inward contrasting ring cannot guarantee contrast, so an outward `outline-offset` is allowed; `ResizableHandle` is a 1px hairline with no inward geometry to inset into, so its focus ring may expand outward symmetrically. Outside these registered physical exceptions, focus indicators stay inset or recolor existing borders.
 
 In forced colors, systems remove box shadows. `styles.css` restores CSS outline with width and inward offset reading local `--qy-focus-ring-width`: 2px by default and 1px for quiet. System colors take over; `!important` overrides utilities-layer outline-none. Widths are choices rather than AA minimums. The full forced-color composition matrix remains UNVERIFIED.
 

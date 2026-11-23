@@ -34,6 +34,16 @@
 
 /* ─── 组件页：示例框 ──────────────────────────────── */
 
+.component-examples-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qy-field-gap) var(--qy-field-group-gap);
+  margin: 0 0 var(--qy-field-group-gap);
+}
+.component-examples-head > h2 { margin: 0; }
+
 .component-demo + .component-demo { margin-block-start: var(--qy-section-gap); }
 .component-demo-description {
   max-inline-size: var(--docs-measure);
@@ -74,8 +84,8 @@
   padding-inline: calc((2 * var(--qy-cai) - var(--qy-control-sm)) / 2);
   border-block-start: 1px solid var(--qy-border);
 }
-/* 代码在工具行之下、框之内：与工具行之间一道清墨线，上限 24 材，超出时在代码区内滚动。 */
-.component-demo-code { max-block-size: calc(24 * var(--qy-cai)); border-block-start: 1px solid var(--qy-border); }
+/* 代码在工具行之下、框之内：与工具行之间一道清墨线，上限由 CodeView maxLines={24} 控制，超出时在代码区内滚动。 */
+.component-demo-code { border-block-start: 1px solid var(--qy-border); }
 
 /* ─── 组件页：对照两栏（何时使用、状态归属） ─────────── */
 
@@ -101,4 +111,10 @@
   color: var(--qy-foreground);
   overflow-wrap: break-word;
   text-wrap: pretty;
+}
+@media (width < 40rem) {
+  .component-pairs {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: var(--qy-section-gap);
+  }
 }

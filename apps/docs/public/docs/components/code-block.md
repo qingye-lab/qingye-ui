@@ -1,9 +1,9 @@
 # 代码 CodeBlock
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/code-block
 Source: packages/ui/src/components/code-block.tsx
-Source SHA-256: 9649e32b6c3151ff361e2fc7c986031b6b61040d1a75bdaa3bccdbc65974bbb9
+Source SHA-256: 53234b6b2978982a42d1317201f3ae2a2487c705f3e793aade8ae89b3cf160ce
 
 文本原样展示、可选标题栏与真实复制结果。
 
@@ -42,6 +42,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - `children?`: `React.ReactNode`. 已高亮的标记：给出时放进 code 元素，代替纯文本 code 的显示。
 - `code`: `string`. 被复制的文本；渲染内容由 children 替换时，复制的仍是它。
 - `copyable?`: `boolean`.
+- `framed?`: `boolean`. 是否带外层围合（线、底、圆角）；默认 true。嵌入已有容器时传 false 去掉外层围合。
 - `language?`: `string`.
 - `maxLines?`: `number`. 代码面最多显示的行数，超出后代码面纵向滚动（可聚焦、有名称）。折行后按视觉行计。 选行数而不是 CSS 长度：读代码的人数的是行，行高由系统的「材」决定（正文一行 = 1 材）， 给长度的话字号或密度一变，能看到的行数就悄悄变了。
 - `onCopyError?`: `(error: unknown) => void`.
@@ -67,6 +68,7 @@ Written descriptions; the list above is the type-resolved fact.
 - children: ReactNode. 已高亮的标记，放进 code 元素代替纯文本显示；复制与可访问内容以 code 为准，两者文字应一致。
 - wrap: boolean; default false. 长行折行（在任意位置断开），而不是横向滚动。
 - maxLines: number. 代码面最多显示的行数（正整数），超出后纵向滚动。折行后按视觉行计。选行数而不是 CSS 长度：读代码的人数的是行，行高由系统的「材」决定（正文一行 = 1 材），字号或密度变了，行数不会悄悄变。滚动时代码面可聚焦、有名称（取标题，其次语言，再退到「代码」），复制按钮不随代码滚动。
+- framed: boolean; default true. 是否带外层围合（线、底、圆角）；嵌入已有容器时传 false 去掉外层围合。
 - copyable: boolean; default true. 是否提供复制按钮与真实反馈。
 - onCopySuccess / onCopyError: () => void / (error: unknown) => void. 实际写入成功或失败后的回调；原生 onCopy 事件另行透传。
 - render / ref / ARIA / className / style / native props: useRender.ComponentProps<div>. 属性属于外部 div（原生 title 属性被 title 槽取代）；复制的文本由 code 参数唯一提供。

@@ -1,74 +1,91 @@
 /*
- * 首页（2026-10-30 第三稿「墨阶」）。
- *
- * 画面只靠尺度、墨与地：
- *   海报   第一屏（视口高减页头，至多 40 材）。总纲三句细字重 128px，三行依次焦 88、浓 66、重 50；
- *          说明与动作一小块，落在右下，与末行同一条下缘。大块与小块之比约 8:1。
- *   示例   示例一段整幅铺一层清染（与站点同一种明暗，不翻转：窗口里的应用跟随站点明暗，翻转的底会让它像一张贴上去的截图），上下各 8 材。
- *   总纲   三条名与释义：名列 16 材，释义 36 材以内。
- *   开始   大号安装命令。
- * 段间 8 材（taste 的 120–240 之间），段内用库的关系间距。上列材数、海报占满一屏、深地与名列宽都是首页预设。
- * 不用：卡片、色块、阴影、渐变、入场与滚动动效、编号、眉题。
+ * 首页（2026-11-23 第四稿「器物与法度」）。
+ * 全部几何落到材（--qy-cai = 20px）与分（--qy-fen = 4px）上，零装饰渐变、零同平面阴影、零重复边界。
  */
 .home {
-  --home-gap: calc(8 * var(--qy-cai));
-  /* 总纲的海报尺度是首页自己的预设，不改库的公共档：取 display-xl（64 / 20 分）的两倍字身（128px），
-   * 行高 1.7 倍（34 分 = 136px，字身的 1.06 倍，三行叠成一块），细字重 300（海报尺度下常规字重的笔画显得粗重）。 */
-  --home-motto-size: calc(var(--qy-text-display-xl-size) * 2);
-  --home-motto-leading: calc(var(--qy-text-display-xl-leading) * 1.7);
+  --home-section-gap: calc(5 * var(--qy-cai));
   color: var(--qy-foreground);
   outline: none;
   text-spacing-trim: trim-start;
 }
 :where(.home) :where(h1, h2, h3, p, dl, dt, dd, ul, li) { margin: 0; padding: 0; }
 .home p { text-wrap: pretty; }
-/* 章题与海报同一种声音：常规字重。粗字放在 40px 的汉字上显得笨重，层级已经由尺度给出。 */
-.home h2 { font-weight: var(--qy-weight-regular); }
 
-/* ─── 海报 ─────────────────────────────────────────────── */
+/* ─── 首屏 Hero（紧实利落，让下方实时舞台在首屏内自然露头） ───────── */
 .home-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: end;
-  column-gap: var(--home-gap);
-  row-gap: var(--qy-section-gap);
-  min-block-size: min(calc(100svh - var(--docs-header-height)), calc(40 * var(--qy-cai)));
-  padding-block: calc(5 * var(--qy-cai)) calc(4 * var(--qy-cai));
+  gap: calc(1.5 * var(--qy-cai));
+  padding-block: calc(3.5 * var(--qy-cai)) calc(2.5 * var(--qy-cai));
 }
-/* 大块压住左上，小块在右下应答：总纲靠上，说明靠下。 */
-.home-motto { align-self: start; }
-.home-motto { font-size: var(--home-motto-size); line-height: var(--home-motto-leading); font-weight: 300; }
-.home-motto span { display: block; white-space: nowrap; }
-/* 墨分五色：三句的先后用墨的浓淡表达。字是不透明的墨与纸调和（与库的文字色同一写法），任何底上读出来都是同一级。 */
-.home-motto span:nth-child(1) { color: var(--qy-foreground); }
-.home-motto span:nth-child(2) { color: var(--qy-foreground-muted); }
-.home-motto span:nth-child(3) { color: color-mix(in srgb, var(--qy-ink) var(--qy-ink-zhong), var(--qy-paper)); }
-/* 右下的一小块：下缘与总纲末行的字身下缘对齐（减去末行行高多出的半个行距）。 */
-.home-intro {
+.home-hero-copy {
   display: grid;
-  justify-items: start;
-  gap: var(--qy-fen);
-  max-inline-size: calc(20 * var(--qy-cai));
-  padding-block-end: calc((var(--home-motto-leading) - var(--home-motto-size)) / 2);
+  gap: var(--qy-panel-padding-sm);
+  max-inline-size: calc(52 * var(--qy-cai));
 }
-.home-actions { display: flex; flex-wrap: wrap; gap: var(--qy-field-gap); margin-top: var(--qy-field-group-gap); }
-/* 英文一句是三到四个词，按汉字的字身排会折成五行：取总纲字身的 0.6（约 77px），每句仍占一行。 */
-:lang(en) .home-motto { font-size: calc(var(--home-motto-size) * 0.6); line-height: calc(var(--home-motto-leading) * 0.6); }
-
-/* ─── 示例 ─────────────────────────────────────────────── */
-/* 整幅一层清染（内嵌承载面，透明叠在页面底上）：用面的一级分出这一段，不画线、不翻转明暗。内容仍在站框里。 */
-.home-field {
-  padding-block: var(--home-gap);
-  background: var(--qy-surface-inset);
+.home-title {
+  /* 现代紧实尺度：3.25rem (52px) / 16 分行高 (64px)，居中于 display-lg 与 display-xl 之间，
+     单行 12 字约 624px 在站框内稳重利落，不虚不飘。 */
+  font-size: clamp(2rem, 3.6vw, 3.25rem);
+  line-height: 1.22;
+  letter-spacing: -0.03em;
+  font-weight: var(--qy-weight-semibold);
+  text-wrap: balance;
 }
-.home-field-head { display: grid; gap: var(--qy-field-gap); max-inline-size: var(--qy-prose-measure); margin-bottom: var(--qy-section-gap); }
+:lang(zh) .home-title {
+  letter-spacing: -0.015em;
+}
+.home-subtitle {
+  max-inline-size: calc(36 * var(--qy-cai));
+}
 
-/* 窗口：一道线围出，顶栏与框之间同一道线；框内圆角由外框裁出。 */
+/* 同一水平基线：lg 按钮与安装条外高严格同为 --qy-control-lg（行气检验） */
+.home-action-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--qy-field-gap) var(--qy-field-group-gap);
+}
+.home-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--qy-action-gap);
+}
+.home-install-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--qy-field-gap);
+  min-block-size: var(--qy-control-lg-narrow);
+  padding-inline: var(--qy-control-md-padding) var(--qy-fen);
+  border: var(--qy-line-width) solid var(--qy-border);
+  border-radius: var(--qy-radius-lg);
+  background: var(--qy-surface);
+  max-inline-size: 100%;
+}
+@media (width >= 40rem) {
+  .home-install-pill {
+    min-block-size: var(--qy-control-lg);
+  }
+}
+.home-install-code {
+  font-family: var(--qy-font-mono);
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  color: var(--qy-foreground);
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+/* ─── 实时运行舞台（HomeWindow） ───────────────────────────── */
+.home-stage {
+  padding-block-end: var(--home-section-gap);
+}
 .home-window {
   display: grid;
-  grid-template-rows: auto calc(38 * var(--qy-cai)) auto;
+  grid-template-rows: auto calc(36 * var(--qy-cai)) auto;
   overflow: hidden;
-  border: 1px solid var(--qy-border);
+  border: var(--qy-line-width) solid var(--qy-border);
   border-radius: var(--qy-radius-panel);
   background: var(--qy-surface);
 }
@@ -78,12 +95,17 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--qy-field-gap) var(--qy-field-group-gap);
-  padding: var(--qy-field-gap);
-  border-bottom: 1px solid var(--qy-border);
+  padding: var(--qy-field-gap) var(--qy-panel-padding-sm);
+  border-bottom: var(--qy-line-width) solid var(--qy-border);
 }
 .home-window-axes { display: flex; flex-wrap: wrap; gap: var(--qy-field-gap); }
 .home-dot { display: inline-block; inline-size: calc(2 * var(--qy-fen)); block-size: calc(2 * var(--qy-fen)); border-radius: 50%; margin-inline-end: var(--qy-fen); flex: none; }
-.home-window-frame { display: block; inline-size: 100%; block-size: 100%; border: 0; background: var(--qy-background); }
+.home-window-stage { position: relative; inline-size: 100%; block-size: 100%; background: var(--qy-surface-inset); }
+.home-window-frame { display: block; inline-size: 100%; block-size: 100%; border: 0; background: var(--qy-background); opacity: 0; transition: opacity var(--qy-duration-base) var(--qy-ease-out); }
+.home-window-stage[data-loaded] .home-window-frame { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .home-window-frame { transition: none; }
+}
 .home-window-foot {
   display: flex;
   flex-wrap: wrap;
@@ -91,53 +113,268 @@
   justify-content: space-between;
   gap: var(--qy-fen) var(--qy-field-group-gap);
   padding: var(--qy-field-gap) var(--qy-panel-padding-sm);
-  border-top: 1px solid var(--qy-border);
+  border-top: var(--qy-line-width) solid var(--qy-border);
   font-size: var(--qy-text-support-size);
   line-height: var(--qy-text-support-leading);
   color: var(--qy-foreground-muted);
 }
+.home-window-locale-note { color: var(--qy-foreground-muted); }
 
-/* ─── 总纲 ─────────────────────────────────────────────── */
-.home-principles { padding-block-start: var(--home-gap); }
-.home-principle-list { display: grid; gap: calc(3 * var(--qy-cai)); margin-top: var(--qy-section-gap); }
-.home-principle {
-  display: grid;
-  grid-template-columns: minmax(0, calc(16 * var(--qy-cai))) minmax(0, calc(36 * var(--qy-cai)));
-  column-gap: calc(4 * var(--qy-cai));
+/* ─── 共用章节头 ───────────────────────────────────────────── */
+.home-section-head {
+  margin-block-end: calc(1.5 * var(--qy-cai));
+}
+.home-section-head-split {
+  display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
+  justify-content: space-between;
+  gap: var(--qy-field-gap) var(--qy-field-group-gap);
 }
-.home-principle dt {
-  font-size: var(--qy-text-display-size);
-  line-height: var(--qy-text-display-leading);
-  font-weight: var(--qy-weight-regular);
-}
-.home-principle dd { display: grid; gap: var(--qy-field-gap); }
-.home-principle-text { font-size: var(--qy-text-reading-size); line-height: var(--qy-text-reading-leading); }
-.home-principle-source { font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); color: var(--qy-foreground-muted); }
-.home-aside { display: block; font-size: var(--qy-text-support-size); line-height: var(--qy-text-support-leading); font-weight: var(--qy-weight-regular); color: var(--qy-foreground-muted); }
-.home-more { display: inline-block; margin-top: var(--qy-section-gap); font-size: var(--qy-text-reading-size); }
 
-/* ─── 开始使用 ─────────────────────────────────────────── */
-.home-start { display: grid; justify-items: start; gap: var(--qy-section-gap); padding-block: var(--home-gap); }
-/* 命令是这一段的画面：代码字放大到 title 档；仍是库的 CodeBlock（复制、可访问名称不变）。 */
-.home-install { inline-size: min(100%, calc(32 * var(--qy-cai))); }
-.home-install pre, .home-install code { font-size: var(--qy-text-title-size); line-height: var(--qy-text-title-leading); }
-.home-start-links { display: flex; flex-wrap: wrap; gap: var(--qy-field-gap) var(--qy-field-group-gap); font-size: var(--qy-text-reading-size); line-height: var(--qy-text-reading-leading); }
-
-/* ─── 窄桌面与窄屏 ─────────────────────────────────────── */
-/* 两栏要放得下：一句总纲 640 + 栏距 160 + 说明 400 + 两侧留白 80 = 1280px（80rem）。不足时上下排。 */
-@media (width < 80rem) {
-  .home-hero { grid-template-columns: minmax(0, 1fr); align-items: start; min-block-size: 0; padding-block: calc(5 * var(--qy-cai)) var(--home-gap); }
-  .home-intro { padding-block-end: 0; }
-  .home-principle { grid-template-columns: minmax(0, 1fr); row-gap: var(--qy-field-gap); }
+/* ─── 第二段：细节与法度（非对称 1px 清墨线建筑画幅） ──────── */
+.home-craft {
+  padding-block-end: var(--home-section-gap);
 }
-@media (width < 48rem) {
-  .home { --home-gap: calc(5 * var(--qy-cai)); }
-  /* 一句五字要放进窄屏（390 宽的版心 310px）：字身取总纲字身的 0.45（约 58px，五字 288px），行高同比。 */
-  .home-motto { font-size: calc(var(--home-motto-size) * 0.45); line-height: calc(var(--home-motto-leading) * 0.45); }
-  :lang(en) .home-motto { font-size: calc(var(--home-motto-size) * 0.3); line-height: calc(var(--home-motto-leading) * 0.3); }
-  :lang(en) .home-motto span { white-space: normal; }
-  .home-hero { padding-block-start: calc(3 * var(--qy-cai)); }
-  .home-window { grid-template-rows: auto calc(30 * var(--qy-cai)) auto; }
-  .home-install pre, .home-install code { font-size: var(--qy-text-reading-size); line-height: var(--qy-text-reading-leading); }
+.home-craft-sheet {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  border: var(--qy-line-width) solid var(--qy-border);
+  border-radius: var(--qy-radius-panel);
+  background: var(--qy-surface);
+  overflow: hidden;
+}
+.home-craft-cell {
+  display: grid;
+  align-content: space-between;
+  gap: calc(1.5 * var(--qy-cai));
+  padding: calc(1.5 * var(--qy-cai));
+  min-inline-size: 0;
+}
+.home-craft-focus {
+  grid-row: 1 / span 2;
+  border-inline-end: var(--qy-line-width) solid var(--qy-border);
+}
+.home-craft-ink {
+  border-bottom: var(--qy-line-width) solid var(--qy-border);
+}
+.home-craft-cell-head {
+  display: grid;
+  gap: var(--qy-fen);
+}
+
+/* 左主格：真实控件工作台 */
+.home-craft-workbench {
+  display: grid;
+  gap: var(--qy-field-group-gap);
+  padding: var(--qy-panel-padding);
+  border-radius: var(--qy-radius-overlay);
+  background: var(--qy-background);
+}
+.home-craft-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--qy-panel-padding-sm);
+}
+.home-craft-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qy-field-gap);
+}
+.home-craft-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--qy-action-gap);
+}
+
+/* 右上格：墨阶与五矿植物数据色 */
+.home-craft-palette {
+  display: grid;
+  gap: var(--qy-field-group-gap);
+}
+.home-ink-strip {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: var(--qy-action-gap);
+}
+.home-ink-chip {
+  display: grid;
+  gap: var(--qy-fen);
+  min-inline-size: 0;
+}
+.home-ink-bar {
+  display: block;
+  block-size: calc(2 * var(--qy-cai));
+  border-radius: var(--qy-radius-item);
+  border: var(--qy-line-width) solid var(--qy-border);
+}
+.home-ink-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--qy-fen-half);
+  font-size: var(--qy-text-caption-size);
+  line-height: var(--qy-text-caption-leading);
+}
+.home-ink-name {
+  color: var(--qy-foreground);
+  font-weight: var(--qy-weight-medium);
+}
+.home-ink-pct {
+  color: var(--qy-foreground-muted);
+}
+.home-pigment-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--qy-field-gap) var(--qy-panel-padding-sm);
+  padding-top: var(--qy-panel-padding-sm);
+  border-top: var(--qy-line-width) solid var(--qy-border);
+}
+.home-pigment-item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--qy-control-content-gap);
+  font-size: var(--qy-text-caption-size);
+  line-height: var(--qy-text-caption-leading);
+  color: var(--qy-foreground-muted);
+}
+.home-pigment-swatch {
+  display: inline-block;
+  inline-size: calc(2.5 * var(--qy-fen));
+  block-size: calc(2.5 * var(--qy-fen));
+  border-radius: var(--qy-swatch-radius);
+  flex: none;
+}
+
+/* 右下格：五等按钮阶梯 */
+.home-scale-stairs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--qy-field-gap) var(--qy-panel-padding-sm);
+}
+.home-scale-step {
+  display: grid;
+  justify-items: center;
+  gap: var(--qy-fen);
+}
+.home-scale-px {
+  font-size: var(--qy-text-caption-size);
+  line-height: var(--qy-text-caption-leading);
+  color: var(--qy-foreground-muted);
+}
+
+/* ─── 第三段：总纲（一排三列建筑栏） ──────────────────────── */
+.home-principles {
+  padding-block-end: var(--home-section-gap);
+}
+.home-principle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: calc(2 * var(--qy-cai));
+  padding-top: calc(1.5 * var(--qy-cai));
+  border-top: var(--qy-line-width) solid var(--qy-border);
+}
+.home-principle-col {
+  display: grid;
+  align-content: start;
+  gap: var(--qy-panel-padding-sm);
+  min-inline-size: 0;
+}
+.home-principle-col dt {
+  display: grid;
+  gap: var(--qy-fen-half);
+}
+.home-principle-name {
+  font-size: var(--qy-text-title-size);
+  line-height: var(--qy-text-title-leading);
+  letter-spacing: var(--qy-text-title-tracking);
+  font-weight: var(--qy-weight-semibold);
+}
+.home-aside {
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  color: var(--qy-foreground-muted);
+}
+.home-principle-col dd {
+  display: grid;
+  gap: var(--qy-field-gap);
+}
+.home-principle-text {
+  font-size: var(--qy-text-body-size);
+  line-height: var(--qy-text-reading-leading);
+  color: var(--qy-foreground);
+}
+.home-principle-source {
+  font-size: var(--qy-text-caption-size);
+  line-height: var(--qy-text-caption-leading);
+  color: var(--qy-foreground-muted);
+}
+
+/* ─── 第四段：极简收口带（零重复） ────────────────────────── */
+.home-closing {
+  padding-block-end: var(--home-section-gap);
+}
+.home-closing-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qy-field-group-gap);
+  padding-top: calc(2 * var(--qy-cai));
+  border-top: var(--qy-line-width) solid var(--qy-border);
+}
+.home-closing-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--qy-field-gap) var(--qy-field-group-gap);
+  font-size: var(--qy-text-body-size);
+  line-height: var(--qy-text-body-leading);
+}
+
+/* ─── 响应式 ──────────────────────────────────────────────── */
+@media (width < 60rem) {
+  .home-craft-sheet {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto;
+  }
+  .home-craft-focus {
+    grid-row: auto;
+    border-inline-end: 0;
+    border-bottom: var(--qy-line-width) solid var(--qy-border);
+  }
+  .home-principle-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: calc(1.5 * var(--qy-cai));
+  }
+}
+
+@media (width < 40rem) {
+  .home {
+    --home-section-gap: calc(3.5 * var(--qy-cai));
+  }
+  .home-hero {
+    padding-block: calc(2 * var(--qy-cai)) calc(1.5 * var(--qy-cai));
+  }
+  .home-window {
+    grid-template-rows: auto calc(30 * var(--qy-cai)) auto;
+  }
+  .home-craft-cell {
+    padding: var(--qy-panel-padding);
+  }
+  .home-craft-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .home-ink-strip {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .home-ink-meta {
+    flex-direction: column;
+    gap: 0;
+  }
 }

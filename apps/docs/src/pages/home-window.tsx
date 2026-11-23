@@ -19,6 +19,7 @@ export function HomeWindow() {
   const [example, setExample] = useState<string>(() => typeof window !== "undefined" && window.matchMedia?.("(width < 48rem)").matches ? "booking" : EXAMPLES[0]!.id);
   const [density, setDensity] = useState<Density>("default");
   const [brand, setBrand] = useState("ink");
+  const [loaded, setLoaded] = useState(false);
   const frame = useRef<HTMLIFrameElement>(null);
   const axes: Axes = { density, brand };
 
@@ -36,7 +37,7 @@ export function HomeWindow() {
     window.addEventListener("message", onReady);
     return () => window.removeEventListener("message", onReady);
   }, []);
-  const choose = (id: string) => { setExample(id); setSrc(frameSrc(id, axes)); };
+  const choose = (id: string) => { setExample(id); setLoaded(false); setSrc(frameSrc(id, axes)); };
   const current = EXAMPLES.find((item) => item.id === example)!;
 
   return (
@@ -61,9 +62,22 @@ export function HomeWindow() {
           </SegmentedControl>
         </div>
       </div>
-      <iframe className="home-window-frame" key={src} loading="lazy" onLoad={post} ref={frame} src={src} title={en ? current.title.en : current.title.zh} />
+      <div className="home-window-stage" data-loaded={loaded || undefined}>
+        <iframe
+          className="home-window-frame"
+          key={src}
+          loading="lazy"
+          onLoad={() => { setLoaded(true); post(); }}
+          ref={frame}
+          src={src}
+          title={en ? current.title.en : current.title.zh}
+        />
+      </div>
       <div className="home-window-foot">
-        <span>{en ? current.text.en : current.text.zh}</span>
+        <span>
+          {en ? current.text.en : current.text.zh}
+          {en ? " (UI in Chinese)" : null}
+        </span>
         <Link className={linkClassName} to={`/examples/${current.id}`}>{t("全屏打开", "Open full page")}</Link>
       </div>
     </section>

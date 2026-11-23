@@ -2,7 +2,7 @@
  * 工作区示例的版面（2026-10-30）。用间距成组：读数带、图、两栏，段与段之间 2 × 章内间隔；不画卡片。
  * 读数带四列等分，列间 4 材；两栏 2 : 1，栏距 3 材。材数都是示例预设。
  */
-.ws-overview { row-gap: calc(2 * var(--qy-section-gap)); }
+.ws-overview { row-gap: calc(1.5 * var(--qy-section-gap)); }
 .ws-metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--qy-section-gap) calc(4 * var(--qy-cai)); padding-top: var(--qy-field-group-gap); }
 /* 读数下的趋势线：与读数同宽，坐在读数带里，不另成卡片。 */
 .ws-trend { margin: 0; margin-top: auto; }

@@ -1,7 +1,8 @@
 "use client";
 
-import { IconLoader2, IconSearch, IconX } from "@tabler/icons-react";
+import { IconSearch, IconX } from "@tabler/icons-react";
 import * as React from "react";
+import { BusyMark } from "../busy-mark";
 import { withClassName } from "../input-adjunct";
 import { useInputFacts, useInputRef, writeInputValue } from "../input-facts";
 import { InputGroupReadOnlyNote } from "../input-readonly-note";
@@ -42,8 +43,8 @@ export function SearchInput({ clearLabel, onClear, loading = false, controlClass
   return (
     <InputGroup data-slot="search-input" data-readonly={facts.readOnly ? "" : undefined} data-loading={loading ? "" : undefined} className={cn("flex-nowrap", controlClassName)}>
       {/* 保持 InputGroupAddon 自己的 data-slot：附件与输入之间的贴合间距由 InputGroup 按它识别。 */}
-      {/* 忙碌时记号换在搜索图标的位置：同一图标尺寸、同一槽位，边界不因状态改变尺寸；qy-spin 与 Button 的忙碌记号是同一个转动。 */}
-      <InputGroupAddon aria-hidden="true">{loading ? <IconLoader2 className="qy-spin size-(--qy-fill-icon-narrow) sm:size-(--qy-fill-icon)" data-slot="search-input-loading" /> : <IconSearch className="size-(--qy-fill-icon-narrow) sm:size-(--qy-fill-icon)" />}</InputGroupAddon>
+      {/* 忙碌时记号换在搜索图标的位置：同一图标尺寸、同一槽位，边界不因状态改变尺寸；BusyMark 与 Button、InputGroup 共用同一个转动记号。 */}
+      <InputGroupAddon aria-hidden="true">{loading ? <BusyMark className="[&_svg]:size-(--qy-fill-icon-narrow) sm:[&_svg]:size-(--qy-fill-icon)" data-slot="search-input-loading" /> : <IconSearch className="size-(--qy-fill-icon-narrow) sm:size-(--qy-fill-icon)" />}</InputGroupAddon>
       <Input
         {...props}
         ref={setInputRef}

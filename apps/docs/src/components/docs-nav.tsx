@@ -1,4 +1,4 @@
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger } from "@qingye_lab/ui/components/sidebar";
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupLabel, SidebarHeader, SidebarLink, SidebarSub, SidebarSubContent, SidebarSubTrigger, SidebarTitle, SidebarToggle, type SidebarDrawerHandle } from "@qingye_lab/ui/components/sidebar";
 import { cn } from "@qingye_lab/ui/utils";
 import { useLayoutEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
@@ -41,8 +41,18 @@ function groupSections(sections: NavSection[]) {
   return groups;
 }
 
-/** The documentation index in the desktop sidebar. */
-export function DocsNav({ onNavigate, className }: { onNavigate?: () => void; className?: string }) {
+/** The documentation index in the desktop sidebar and narrow-viewport drawer. */
+export function DocsNav({
+  onNavigate,
+  className,
+  drawer = false,
+  drawerHandle,
+}: {
+  onNavigate?: () => void;
+  className?: string;
+  drawer?: boolean;
+  drawerHandle?: SidebarDrawerHandle;
+}) {
   const locale = useDocsLocale();
   const sections = navSections(locale);
   const { pathname } = useLocation();
@@ -62,7 +72,7 @@ export function DocsNav({ onNavigate, className }: { onNavigate?: () => void; cl
   useLayoutEffect(() => {
     const nav = root.current;
     const entry = nav?.querySelector<HTMLElement>('[aria-current="page"]');
-    const viewport = nav?.closest<HTMLElement>('[data-slot="scroll-area"]');
+    const viewport = nav?.closest<HTMLElement>('[data-slot="scroll-area-viewport"], [data-slot="scroll-area"]');
     if (!entry || !viewport) return;
     const item = entry.getBoundingClientRect();
     const box = viewport.getBoundingClientRect();
@@ -71,7 +81,13 @@ export function DocsNav({ onNavigate, className }: { onNavigate?: () => void; cl
   }, [visit]);
 
   return (
-    <Sidebar className={cn("w-full", className)}>
+    <Sidebar className={cn("w-full", className)} drawer={drawer} {...(drawerHandle ? { drawerHandle } : {})}>
+      {drawer ? (
+        <SidebarHeader className="sm:hidden">
+          <SidebarTitle>{locale === "en" ? "Documentation" : "文档导航"}</SidebarTitle>
+          <SidebarToggle />
+        </SidebarHeader>
+      ) : null}
       <SidebarContent aria-label={locale === "en" ? "Documentation navigation" : "文档导航"} ref={root}>
         {groupSections(sections).map((group) => (
           <SidebarGroup key={group.title}>

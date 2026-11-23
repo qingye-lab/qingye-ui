@@ -83,7 +83,8 @@ const shellClassName = cn(
 );
 // 分段：宽度由内容（两位数字，等宽数字）决定，圆角取外框同心内圆角（外圆角 − 一道线宽）；
 // 当前分段用 bg-accent 标出（与菜单的键盘位置同一档），空段用辅助色。内边距 space-1 是预设。
-const segmentClassName = "rounded-[max(0px,calc(var(--qy-fill-radius)-var(--qy-line-width)))] px-(--qy-space-1) text-center tabular-nums outline-none focus:bg-accent data-empty:text-muted-foreground aria-disabled:cursor-not-allowed";
+// 粗指针下在流内放宽到 --qy-control-sm 见方与 space-2 左右内距，不外扩遮挡相邻分段。
+const segmentClassName = "inline-flex items-center justify-center rounded-[max(0px,calc(var(--qy-fill-radius)-var(--qy-line-width)))] px-(--qy-space-1) pointer-coarse:min-h-(--qy-control-sm) pointer-coarse:min-w-(--qy-control-sm) pointer-coarse:px-(--qy-space-2) text-center tabular-nums outline-none focus:bg-accent data-empty:text-muted-foreground aria-disabled:cursor-not-allowed";
 
 export function TimeField(allProps: TimeFieldProps) {
   const { value: valueProp, defaultValue = null, onValueChange, granularity = "minute", hourCycle, min, max, name, form, disabled = false, readOnly = false, required = false, className, ref, ...props } = allProps;

@@ -1,9 +1,9 @@
 # Command
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/command
 Source: packages/ui/src/components/command.tsx
-Source SHA-256: c7f5394e6236c173cce0773b9ee80ea7afaa65db6dca383596326bd0d9b5ff71
+Source SHA-256: 0faa06a6dacca30a77dbe5226b181c1d6960d85fdbea4610e3761e0197e04879
 
 A search box over an always-open list of commands, for jumping somewhere or doing something.
 
@@ -65,19 +65,23 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 278 inherited (@types/react 278); not expanded, see the installed declarations
 
 ### CommandDialog
-- `aria-label?`: `string`. 对话框的名字，二选一必填，缺失抛错。
+- `aria-label?`: `string`. 对话框的名字，未提供 title 时二选一必填，缺失抛错。
 - `aria-labelledby?`: `string`.
 - `closeOnSelect?`: `boolean`. 选中条目后关闭，默认 true。
 - `defaultOpen?`: `boolean`.
 - `defaultQuery?`: `string`.
+- `description?`: `React.ReactNode`. 可见说明，随 title 渲染在 DialogHeader 内。
 - `filter?`: `CommandFilter`. 覆盖默认过滤。
 - `onItemSelect?`: `(value: string) => void`. 任一条目被选中后调用（在条目自己的 onSelect 之后）；CommandDialog 靠它关闭。
 - `onOpenChange?`: `(open: boolean) => void`.
+- `onOpenChangeComplete?`: `DialogProps["onOpenChangeComplete"]`.
 - `onQueryChange?`: `(query: string) => void`.
 - `open?`: `boolean`.
 - `popupClassName?`: `string`. 对话框面板的宽度等。
+- `popupProps?`: `Omit<DialogPopupProps, "children" | "className" | "aria-label" | "aria-labelledby">`. 透传给内部 DialogPopup 的属性（如 initialFocus / finalFocus / portalProps 等）；名字走上面的 title / aria-label，data-slot 不可覆盖。
 - `query?`: `string`. 查询文字；受控。
-- plus 276 inherited (@types/react 276); not expanded, see the installed declarations
+- `title?`: `React.ReactNode`. 可见标题；提供时渲染 DialogHeader + DialogTitle（及可选 description），并以它为对话框的名字——此时 aria-label / aria-labelledby 被忽略，读屏名称与屏幕上的标题一致。
+- plus 275 inherited (@types/react 275); not expanded, see the installed declarations
 
 ### CommandEmpty
 - no props declared by this library
@@ -153,9 +157,12 @@ A divider between groups. Not rendered while the query is non-empty, since group
 
 ### CommandDialog
 A Command inside a Dialog. Each opening is a fresh instance, so the query starts empty.
-- open / defaultOpen / onOpenChange: boolean / boolean / (open: boolean) => void. Open state, controlled or uncontrolled.
-- aria-label / aria-labelledby: string. One is required; omitting both throws.
+- open / defaultOpen / onOpenChange / onOpenChangeComplete: boolean / boolean / (open: boolean) => void / DialogProps["onOpenChangeComplete"]. Open state, controlled or uncontrolled; onOpenChangeComplete runs after open/close transitions finish.
+- title / description: ReactNode / ReactNode. Visible title and optional description; providing title renders DialogHeader + DialogTitle and waives aria-label / aria-labelledby.
+- aria-label / aria-labelledby: string. One is required when title is omitted; omitting both throws. Ignored when title is given: the visible title names the dialog.
 - closeOnSelect: boolean; default true. Close after an item is selected.
+- popupClassName / popupProps: string / Omit<DialogPopupProps, "children" | "className" | "aria-label" | "aria-labelledby">. Dialog popup className and remaining props forwarded to the inner DialogPopup (such as initialFocus, finalFocus, portalProps).
+- filter / query / defaultQuery / onQueryChange / onItemSelect: CommandProps. Forwarded to the inner Command, with the same meaning.
 
 ## Keyboard
 - ArrowDown / ArrowUp: Move the highlight, skipping disabled items. The first item is highlighted when the list mounts.

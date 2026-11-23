@@ -130,6 +130,13 @@ export default {
           "descriptionEn": "The only visible identifier in the rail; a link without an icon has nothing to show once collapsed. The name (children) is only visually hidden (sr-only) in the rail — the accessible name is unchanged, and a Tooltip restores a sighted label."
         },
         {
+          "name": "count / max",
+          "type": "number / number",
+          "default": "max: 99",
+          "description": "未读或待处理计数（> 0 时显示）。展开态紧随名称以等宽数字展示；rail 态在有 icon 时转为 CornerMark 钉在图标角上，超过 max 显示「max+」。",
+          "descriptionEn": "Unread or pending count (shown when > 0). Displayed as tabular text after the label when expanded, or pinned onto the icon via CornerMark in the rail; values past max render as \"max+\"."
+        },
+        {
           "name": "render / ref / native props",
           "type": "Base UI part props",
           "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
@@ -163,17 +170,43 @@ export default {
       "props": [
         {
           "name": "SidebarSub：open / defaultOpen / onOpenChange",
+          "nameEn": "SidebarSub: open / defaultOpen / onOpenChange",
           "type": "boolean / callback",
           "description": "展开态与 rail 态共用同一个开合状态；rail 下即使换成 Popover，用户的开合记忆也不因收起/展开侧栏而改变。",
           "descriptionEn": "The same open state serves both the expanded panel and the rail's Popover; the remembered open/closed state survives collapsing even though the rail swaps in a Popover."
         },
         {
           "name": "SidebarSubTrigger：icon",
+          "nameEn": "SidebarSubTrigger: icon",
           "type": "ReactNode",
           "description": "与 SidebarLink 的 icon 同一分工；rail 下按钮不再承担内嵌展开，只作为 Popover 入口，避免收起侧栏悄悄改变用户没点开过的展开记忆。",
           "descriptionEn": "Same split as SidebarLink's icon; in the rail the button no longer toggles the inline panel, only opening the Popover, so collapsing never silently changes an open state the user never chose."
+        },
+        {
+          "name": "SidebarSub：children",
+          "nameEn": "SidebarSub: children",
+          "type": "ReactNode",
+          "description": "必填：包含一个 SidebarSubTrigger 与一个 SidebarSubContent；不可再嵌套 SidebarSub。",
+          "descriptionEn": "Required: contains one SidebarSubTrigger and one SidebarSubContent; nesting another SidebarSub throws."
         }
       ]
+    }
+  ],
+  "keyboard": [
+    {
+      "keys": "Tab / Shift+Tab",
+      "description": "在侧栏切换按钮（SidebarToggle）、导航链接（SidebarLink）、动作条目（SidebarButton）与二级入口（SidebarSubTrigger）间移动焦点；窄屏抽屉模式下按 Drawer 规则管理焦点。",
+      "descriptionEn": "Move focus across SidebarToggle, SidebarLink, SidebarButton, and SidebarSubTrigger; in narrow-screen drawer mode, focus follows Drawer rules."
+    },
+    {
+      "keys": "Enter / Space",
+      "description": "在 SidebarToggle 上切换展开与图标 rail，在 SidebarButton 上执行动作，在 SidebarSubTrigger 上展开或收起二级子级（rail 下打开二级 Popover）；在 SidebarLink 上按 Enter 前往真实目标。",
+      "descriptionEn": "Toggle expanded/rail state on SidebarToggle, run an action on SidebarButton, or expand/collapse a sub-level on SidebarSubTrigger (opening the sub-level Popover in the rail); press Enter on SidebarLink to navigate."
+    },
+    {
+      "keys": "Escape",
+      "description": "在 rail 态关闭已打开的二级 Popover，或在窄屏 drawer 模式下关闭侧栏抽屉并将焦点返回触发按钮。",
+      "descriptionEn": "Close an open sub-level Popover in the rail, or close the sidebar drawer on narrow screens and return focus to its trigger."
     }
   ],
   "notes": [
@@ -224,5 +257,5 @@ export default {
     "customization": [
       "控件档案、间距和浮层表面消费现有角色；具体外观是预设。"
     ]
-  }, designEn: {"whenToUse":["Persistent navigation beside a workspace."],"avoid":["No built-in business directory; third-level navigation goes in content-area Tabs, not the sidebar."],"stateOwner":{"library":["Collapsing, nav semantics, and focus return."],"application":["Actual destinations, active state, and layout width."]},"responsive":["Keep actual desktop structure; menus fit available space and tables retain complete comparison columns."],"customization":["Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset."]}
+  }, designEn: {"whenToUse":["Persistent navigation beside a workspace."],"avoid":["No built-in business directory; third-level navigation goes in content-area Tabs, not the sidebar."],"stateOwner":{"library":["Collapsing, nav semantics, and focus return."],"application":["Actual destinations, active state, and layout width."]},"responsive":["Stays in place on wide screens and collapses to an icon rail; below 40rem moves into a drawer opened by SidebarDrawerTrigger in WorkspaceHeader."],"customization":["Control profiles, spacing, and popup surfaces consume existing roles; their appearance is a preset."]}
 } satisfies ComponentMeta;

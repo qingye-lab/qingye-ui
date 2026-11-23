@@ -1,9 +1,9 @@
 # 数据集合 DataTable
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 02c5537f5b7059f3756aab2b5b3fb9d3405b7f7e5cd6f2508bb5e35fbd304395
+Source SHA-256: 06fcff20256740a95e3d101ba620699aa199057709aa3e91d90ee77dabf4cc5a
 
 调用方真实集合的比较、排序、范围选择与可选虚拟化。
 
@@ -126,6 +126,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Optional peers: @tanstack/react-table
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context PatternLiveContext: without a provider nullable; provided by DataTablePattern
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -154,6 +155,7 @@ Written descriptions; the list above is the type-resolved fact.
 - columnDef.meta.numeric: boolean; default false. 数值列由列定义声明，不由内容猜：表头与该列每个单元格同一对齐——行内末端（RTL 下在左）并用等宽数字。Pattern 的列配置同名。
 - selectionAppearance / onRowActivate / virtualization: row | checkbox / (row: Row<T>, event: DataTableActivateEvent) => void / DataTableVirtualization. 选择外观与虚拟化同 Pattern；行激活回调收到 TanStack Row 与触发它的鼠标或键盘事件（可读修饰键），调用方持有 activeRowId。整张表只有一行在 Tab 序列里（最近聚焦的行，否则活动行，否则第一行），方向键在行间移动。点击内部交互元素不激活，data-row-activate-ignore 可排除自定义区域；不改变选择。需要一个可见的 meta.rowHeader 列给行命名，否则抛错。
 - columnDef.meta.rowHeader: boolean. 实际行标题用 th scope=row；比较列不自动隐藏。有可见行标题列时，每一行的 aria-labelledby 指向该行所有行标题单元格，行的可访问名称即这些单元格的文字（多个行标题列按列序连接）。DataTableSelectionCell 用它给每个选择框命名为「选择“该行名称”」，没有行标题列时才用泛称。设置了 onRowActivate 却没有可见的行标题列时抛错。
+- stickyHeader / stickyHeaderOffset: boolean / number | string; default false. 表头吸在最近的滚动区顶部（同 DataTablePattern）：表格横向放得下时是页面或 Workspace 内容区；横向溢出的宽表、虚拟化视口或 containerProps 设了 height / max-height 时是表格自己的容器。stickyHeaderOffset 让开顶部固定页眉，数字按 px。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ### DataTableSortButton

@@ -3,7 +3,7 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "级联选择 Cascader", titleEn: "Cascader",
   description: "沿「根到叶」的路径选一个值或勾选若干路径，每一级的候选各占一列。", descriptionEn: "Choose one value along a root-to-leaf path, or check several paths, with each level's candidates in its own column.",
-  category: "表单", layer: "primitive", source: "local",
+  category: "表单", layer: "pattern", source: "local",
   exports: ["Cascader"],
   keywords: ["cascade", "cascader", "级联", "联动", "省市区", "类目", "路径", "tree select", "选择"],
   api: [
@@ -19,6 +19,7 @@ export default {
       { name: "disabled / readOnly / required", type: "boolean", default: "false", description: "只读保留当前值且不打开候选面；禁用的字段不提交；required 参与原生校验并标 aria-required。invalid 跟随 Field。", descriptionEn: "Read-only keeps the value and never opens the popup; a disabled field is not submitted; required joins native validation and sets aria-required. invalid follows Field." },
       { name: "name / form", type: "string", description: "隐藏输入的名称与所属表单。提交值是路径各段用 \"/\" 连接，例如 \"zj/hz/xh\"，段内的 \"%\"、\"/\" 转义为 %25、%2F（按 \"/\" 拆开后逐段 decodeURIComponent 还原），未选择提交空字符串；多选每条路径一条同名值，未选择不提交（required 时拦下提交）。", descriptionEn: "Name and owning form of the hidden input. The submitted value is the path segments joined with \"/\", such as \"zj/hz/xh\"; a \"%\" or \"/\" inside a segment is escaped as %25 or %2F (split on \"/\" and decodeURIComponent each segment to restore it); an empty string when nothing is selected. Multiple submits one value per path and nothing when empty (required blocks submission)." },
       { name: "aria-label / aria-labelledby / id / className", type: "string", description: "触发器的名称与样式入口。没有名称会抛错：用 aria-label、aria-labelledby，或放进带 FieldLabel 的 Field。", descriptionEn: "Name and styling entries of the trigger. A missing name throws: use aria-label, aria-labelledby, or place it in a Field with a FieldLabel." },
+      { name: "aria-describedby / aria-invalid", type: "string / boolean | \"true\" | \"false\"", description: "触发器的补充说明引用与校验无效状态；未显式传入时跟随外层 Field。", descriptionEn: "Supplementary description reference and invalid state on the trigger; follows an enclosing Field when omitted." },
     ] },
   ],
   keyboard: [

@@ -78,6 +78,9 @@ export default {
     "responsive": [
       "The column is 38 材 (760px) and does not widen with the viewport; paragraphs, lists and quotes stop at a measure of 40 reading characters (640px), while code blocks and tables may use the whole column. The paper's inset is 2 材 and tightens to the panel padding on narrow screens. All three are presets, set through --qy-prose-column, --qy-prose-measure and --qy-prose-inset.",
       "A very wide table does not yet scroll independently inside Prose (the paper's rounded corners need overflow-hidden rather than overflow-x-auto), so cells simply wrap — a known gap, not a missing default treatment."
+    ],
+    "customization": [
+      "Use the public render/ref/className/style and native props; do not mix the three theme axes."
     ]
   },
   "api": [

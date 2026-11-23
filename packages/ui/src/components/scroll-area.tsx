@@ -92,37 +92,62 @@ function ScrollAreaView({ render, ref, className, tabIndex, scrollable, edges, g
   }, props, { className: cn(className) }) });
 }
 
+/* 组合式 Viewport 隐藏了系统占位滚动条，遮罩只需两向渐变叠合，不再预留滚动条条带。 */
+const viewportFadeClassName = [
+  "[--qy-scroll-fade:var(--qy-fill-height)] [--qy-scroll-fade-x-start:0px] [--qy-scroll-fade-x-end:0px] [--qy-scroll-fade-y-start:0px] [--qy-scroll-fade-y-end:0px]",
+  "data-overflow-x-start:[--qy-scroll-fade-x-start:var(--qy-scroll-fade)] data-overflow-x-end:[--qy-scroll-fade-x-end:var(--qy-scroll-fade)]",
+  "data-overflow-y-start:[--qy-scroll-fade-y-start:var(--qy-scroll-fade)] data-overflow-y-end:[--qy-scroll-fade-y-end:var(--qy-scroll-fade)]",
+  "scroll-p-(--qy-scroll-fade)",
+  "[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-composite:intersect] [&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[-webkit-mask-composite:source-in] [&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-repeat:no-repeat]",
+  "[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-image:linear-gradient(to_bottom,transparent_0,currentcolor_var(--qy-scroll-fade-y-start),currentcolor_calc(100%-var(--qy-scroll-fade-y-end)),transparent_100%),linear-gradient(to_right,transparent_0,currentcolor_var(--qy-scroll-fade-x-start),currentcolor_calc(100%-var(--qy-scroll-fade-x-end)),transparent_100%)]",
+  "rtl:[&[data-overflow-x-start],&[data-overflow-x-end],&[data-overflow-y-start],&[data-overflow-y-end]]:[mask-image:linear-gradient(to_bottom,transparent_0,currentcolor_var(--qy-scroll-fade-y-start),currentcolor_calc(100%-var(--qy-scroll-fade-y-end)),transparent_100%),linear-gradient(to_left,transparent_0,currentcolor_var(--qy-scroll-fade-x-start),currentcolor_calc(100%-var(--qy-scroll-fade-x-end)),transparent_100%)]",
+].join(" ");
+
 /** Styled scrollbars are opt-in; ScrollArea itself retains its native viewport/ref contract. */
 export type ScrollAreaRootProps = ScrollAreaPrimitive.Root.Props;
 export function ScrollAreaRoot({ className, ...props }: ScrollAreaRootProps) {
   return <ScrollAreaPrimitive.Root data-slot="scroll-area-root" {...props} className={state => cn("relative min-h-0 min-w-0 overflow-hidden", typeof className === "function" ? className(state) : className)} />;
 }
 
-export type ScrollAreaViewportProps = ScrollAreaPrimitive.Viewport.Props;
-export function ScrollAreaViewport({ className, ...props }: ScrollAreaViewportProps) {
-  return <ScrollAreaPrimitive.Viewport data-slot="scroll-area-viewport" {...props} className={state => cn("h-full w-full min-w-0 overscroll-contain outline-none focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-quiet-width)] focus-visible:ring-ring", typeof className === "function" ? className(state) : className)} />;
+export type ScrollAreaViewportProps = ScrollAreaPrimitive.Viewport.Props & {
+  /** 边缘渐隐：依赖原语提供的 data-overflow-*-start/end 状态，在被切掉的一端平滑淡出。 */
+  fade?: boolean;
+};
+export function ScrollAreaViewport({ className, fade = false, ...props }: ScrollAreaViewportProps) {
+  return <ScrollAreaPrimitive.Viewport data-slot="scroll-area-viewport" {...props} className={state => cn("h-full w-full min-w-0 overscroll-contain outline-none focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-quiet-width)] focus-visible:ring-ring", fade && viewportFadeClassName, typeof className === "function" ? className(state) : className)} />;
 }
 
+/* 滚动条悬浮在内容上（2 分宽），Content 在尾端与底端让出同宽，最后一列/行不被盖住，也不会被滚动条接走指针。 */
 export type ScrollAreaContentProps = ScrollAreaPrimitive.Content.Props;
 export function ScrollAreaContent({ className, ...props }: ScrollAreaContentProps) {
-  return <ScrollAreaPrimitive.Content data-slot="scroll-area-content" {...props} className={state => cn("min-w-full pe-[calc(3*var(--qy-fen))] pb-[calc(3*var(--qy-fen))]", typeof className === "function" ? className(state) : className)} />;
+  return <ScrollAreaPrimitive.Content data-slot="scroll-area-content" {...props} className={state => cn("min-w-full pe-[calc(2*var(--qy-fen))] pb-[calc(2*var(--qy-fen))]", typeof className === "function" ? className(state) : className)} />;
 }
 
-export type ScrollAreaScrollbarProps = ScrollAreaPrimitive.Scrollbar.Props;
-export function ScrollAreaScrollbar({ className, children, orientation = "vertical", ...props }: ScrollAreaScrollbarProps) {
-  return <ScrollAreaPrimitive.Scrollbar data-slot="scroll-area-scrollbar" {...props} orientation={orientation} className={state => cn(
-    // 轨道 3 分、两侧各半分留白是此组合的预设；滑块长度和位移须共同由原语测量。
-    "z-1 flex touch-none select-none p-[calc(var(--qy-fen)/2)]",
-    !(orientation === "vertical" ? state.hasOverflowY : state.hasOverflowX) && "invisible pointer-events-none",
-    orientation === "vertical" ? "inset-y-0 end-0 w-[calc(3*var(--qy-fen))]" : "inset-x-0 bottom-0 h-[calc(3*var(--qy-fen))]",
-    typeof className === "function" ? className(state) : className,
-  )}>{children ?? <ScrollAreaThumb />}</ScrollAreaPrimitive.Scrollbar>;
+export type ScrollAreaScrollbarProps = ScrollAreaPrimitive.Scrollbar.Props & {
+  /** 滚动条显隐策略：auto（默认）静止时隐身，悬停或滚动时淡入；always 有溢出即常驻可见。 */
+  visibility?: "auto" | "always";
+};
+export function ScrollAreaScrollbar({ className, children, orientation = "vertical", visibility = "auto", ...props }: ScrollAreaScrollbarProps) {
+  return <ScrollAreaPrimitive.Scrollbar data-slot="scroll-area-scrollbar" data-visibility={visibility} {...props} orientation={orientation} className={state => {
+    const overflow = orientation === "vertical" ? state.hasOverflowY : state.hasOverflowX;
+    const shown = overflow && (visibility === "always" || state.hovering || state.scrolling);
+    return cn(
+      // 轨道 2 分（8px）、两侧各半分留白，滑块净宽 1 分（4px），悬浮于内容边缘不挤占布局。
+      "z-1 flex touch-none select-none p-(--qy-fen-half) transition-opacity duration-(--qy-duration-fast) ease-(--qy-ease-out) motion-reduce:transition-none",
+      !overflow && "invisible pointer-events-none",
+      overflow && !shown && "opacity-0 pointer-events-none",
+      shown && "opacity-100",
+      orientation === "vertical" ? "inset-y-0 end-0 w-[calc(2*var(--qy-fen))]" : "inset-x-0 bottom-0 h-[calc(2*var(--qy-fen))]",
+      typeof className === "function" ? className(state) : className,
+    );
+  }}>{children ?? <ScrollAreaThumb />}</ScrollAreaPrimitive.Scrollbar>;
 }
 
 export type ScrollAreaThumbProps = ScrollAreaPrimitive.Thumb.Props;
 export function ScrollAreaThumb({ className, ...props }: ScrollAreaThumbProps) {
   return <ScrollAreaPrimitive.Thumb data-slot="scroll-area-thumb" {...props} className={state => cn(
-    "relative rounded-(--qy-radius-track) bg-muted-foreground hover:bg-foreground data-scrolling:bg-foreground",
+    // 滑块可见时是必要的图形信息，须与底面 ≥ 3:1：静止用浅墨辅助色，悬停/拖动加深到正文墨色。
+    "relative rounded-(--qy-radius-track) bg-muted-foreground transition-colors duration-(--qy-duration-fast) ease-(--qy-ease-out) hover:bg-foreground data-scrolling:bg-foreground",
     state.orientation === "vertical" ? "w-full" : "h-full",
     typeof className === "function" ? className(state) : className,
   )} />;
@@ -130,7 +155,7 @@ export function ScrollAreaThumb({ className, ...props }: ScrollAreaThumbProps) {
 
 export type ScrollAreaCornerProps = ScrollAreaPrimitive.Corner.Props;
 export function ScrollAreaCorner({ className, ...props }: ScrollAreaCornerProps) {
-  return <ScrollAreaPrimitive.Corner data-slot="scroll-area-corner" {...props} className={state => cn("absolute end-0 bottom-0 size-[calc(3*var(--qy-fen))]", typeof className === "function" ? className(state) : className)} />;
+  return <ScrollAreaPrimitive.Corner data-slot="scroll-area-corner" {...props} className={state => cn("absolute end-0 bottom-0 size-[calc(2*var(--qy-fen))]", typeof className === "function" ? className(state) : className)} />;
 }
 
 export { ScrollAreaPrimitive };

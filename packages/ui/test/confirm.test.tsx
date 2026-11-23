@@ -328,12 +328,19 @@ test("confirm called inside a dialog returns to its requester without closing th
 
 test("defaults follow UILocale and explicit action labels take precedence", async () => {
   let confirm!: ConfirmFunction;
-  render(<UILocaleProvider locale={enUS}><ConfirmProvider><Consumer capture={value => { confirm = value; }} /></ConfirmProvider></UILocaleProvider>);
+  const { unmount } = render(<UILocaleProvider locale={enUS}><ConfirmProvider><Consumer capture={value => { confirm = value; }} /></ConfirmProvider></UILocaleProvider>);
   let pending!: Promise<boolean>;
   act(() => { pending = confirm({ title: "Leave collection?", description: "The record remains available.", confirmLabel: "Leave" }); });
   expect(screen.getByRole("button", { name: "Leave" })).toBeInTheDocument();
-  expect(screen.getByRole("button", { name: "Cancel" })).toBeInTheDocument();
-  await userEvent.click(screen.getByRole("button", { name: "Cancel" }));
+  expect(screen.getByRole("button", { name: enUS.messages.back })).toBeInTheDocument();
+  await userEvent.click(screen.getByRole("button", { name: enUS.messages.back }));
+  await expect(pending).resolves.toBe(false);
+  unmount();
+
+  render(<ConfirmProvider><Consumer capture={value => { confirm = value; }} /></ConfirmProvider>);
+  act(() => { pending = confirm({ title: "离开当前页？", description: "未保存的内容将不会保留。", confirmLabel: "离开" }); });
+  expect(screen.getByRole("button", { name: "返回" })).toBeInTheDocument();
+  await userEvent.click(screen.getByRole("button", { name: "返回" }));
   await expect(pending).resolves.toBe(false);
 });
 

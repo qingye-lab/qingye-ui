@@ -665,8 +665,8 @@ export function ComposerInput({
                   className={cn(candidateItemClassName, overlayItemClassName, "flex items-center")}
                 >
                   {item.icon}
-                  <span className="min-w-0 flex-1">{item.label}</span>
-                  {item.description && <span className="min-w-0 text-caption text-muted-foreground">{item.description}</span>}
+                  <span className="min-w-0 flex-1 wrap-anywhere">{item.label}</span>
+                  {item.description && <span className="min-w-0 text-caption text-muted-foreground wrap-anywhere">{item.description}</span>}
                 </div>;
               });
               if (group === undefined) return <React.Fragment key={`g${groupIndex}`}>{options}</React.Fragment>;

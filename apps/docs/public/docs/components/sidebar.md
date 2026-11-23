@@ -1,6 +1,6 @@
 # 侧栏导航 Sidebar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/sidebar
 Source: packages/ui/src/components/sidebar.tsx
 Source SHA-256: 3098b18a94f563faac4c8c907aa14400940981b3411c62438738b6d35d1e9039
@@ -200,6 +200,7 @@ Written descriptions; the list above is the type-resolved fact.
 真实页面链接。
 - href / active: native anchor / boolean. active 显式写 aria-current；焦点所在之处收起后真的不可达时，才会回退到 Toggle（例如焦点原本在一个二级子级里，侧栏收起换成 rail）。
 - icon: ReactNode. 收起为 rail 时唯一可见的识别物；没有图标的条目收起后没有可展示的内容。名称（children）在 rail 下只是视觉隐藏（sr-only），可访问名称不变，并由 Tooltip 把名称重新摆给看得见的人。
+- count / max: number / number; default max: 99. 未读或待处理计数（> 0 时显示）。展开态紧随名称以等宽数字展示；rail 态在有 icon 时转为 CornerMark 钉在图标角上，超过 max 显示「max+」。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ### SidebarButton
@@ -211,8 +212,12 @@ Written descriptions; the list above is the type-resolved fact.
 可展开的二级目的地：展开态是内嵌面板，rail 态换成同一组链接的 Popover，悬停或聚焦都能打开。
 - SidebarSub：open / defaultOpen / onOpenChange: boolean / callback. 展开态与 rail 态共用同一个开合状态；rail 下即使换成 Popover，用户的开合记忆也不因收起/展开侧栏而改变。
 - SidebarSubTrigger：icon: ReactNode. 与 SidebarLink 的 icon 同一分工；rail 下按钮不再承担内嵌展开，只作为 Popover 入口，避免收起侧栏悄悄改变用户没点开过的展开记忆。
+- SidebarSub：children: ReactNode. 必填：包含一个 SidebarSubTrigger 与一个 SidebarSubContent；不可再嵌套 SidebarSub。
 
 ## Keyboard
+- Tab / Shift+Tab: 在侧栏切换按钮（SidebarToggle）、导航链接（SidebarLink）、动作条目（SidebarButton）与二级入口（SidebarSubTrigger）间移动焦点；窄屏抽屉模式下按 Drawer 规则管理焦点。
+- Enter / Space: 在 SidebarToggle 上切换展开与图标 rail，在 SidebarButton 上执行动作，在 SidebarSubTrigger 上展开或收起二级子级（rail 下打开二级 Popover）；在 SidebarLink 上按 Enter 前往真实目标。
+- Escape: 在 rail 态关闭已打开的二级 Popover，或在窄屏 drawer 模式下关闭侧栏抽屉并将焦点返回触发按钮。
 
 ## Source examples
 ### 可逆导航与二级

@@ -1,6 +1,6 @@
 # Skeleton
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/skeleton
 Source: packages/ui/src/components/skeleton.tsx
 Source SHA-256: 5ad0f53b67097d2054eae255fd7dcb65aa1ae2bf1fe3866ce8f7eb2493d8c82f
@@ -76,7 +76,7 @@ The place of one text line, one module high; width comes from className.
 
 ### SkeletonBlock
 The place of a whole block (image, chart, table); height comes from className.
-- className: string; default h-[5 材]. Block height, e.g. h-40.
+- className: string; default h-[5 modules]. Block height, e.g. h-40.
 
 ### SkeletonControl
 The place of a value-filling control (input, select, button); height and radius follow the fill-control role, so it matches an Input in the same density, width comes from className.

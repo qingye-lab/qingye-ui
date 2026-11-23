@@ -110,7 +110,6 @@ html[data-try-brand="rose"] { --qy-primary: var(--qy-try-rose); --qy-primary-for
 @layer base {
   html {
     scroll-padding-top: calc(var(--docs-header-height) + var(--qy-cai));
-    scrollbar-color: color-mix(in srgb, var(--qy-foreground) 22%, transparent) transparent;
     -webkit-tap-highlight-color: transparent;
     text-size-adjust: 100%;
   }
@@ -173,10 +172,31 @@ html[data-try-brand="rose"] { --qy-primary: var(--qy-try-rose); --qy-primary-for
     display: block;
   }
 }
-/* Where that column is hidden (the same condition, inverted) the edit link stays in the article. */
+/* Sticky top-right TOC dropdown trigger inside the article paper while the static TOC column is hidden (< 66.25rem). */
+.docs-toc-float {
+  position: sticky;
+  top: calc(var(--docs-header-height) + var(--qy-field-gap));
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  block-size: 0;
+  overflow: visible;
+  pointer-events: none;
+}
+.docs-toc-float > * {
+  pointer-events: auto;
+}
+:where([data-docs-frame]) [data-route-enter]:has([data-docs-toc-trigger]) .docs-page-title {
+  padding-inline-end: calc(var(--qy-control-md) + var(--qy-field-gap));
+}
+/* Where that column is hidden (the same condition, inverted) the edit link and floating TOC trigger stay in the article. */
 @container docs-reading-layout (min-width: 66.25rem) {
-  :where([data-docs-frame]) [data-docs-edit-inline] {
+  :where([data-docs-frame]) [data-docs-edit-inline],
+  :where([data-docs-frame]) [data-docs-toc-float] {
     display: none;
+  }
+  :where([data-docs-frame]) [data-route-enter]:has([data-docs-toc-trigger]) .docs-page-title {
+    padding-inline-end: 0;
   }
 }
 

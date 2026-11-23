@@ -40,6 +40,7 @@ export default {
         {
           "name": "label",
           "type": "string（必填）",
+          "typeEn": "string (required)",
           "description": "角标本身 aria-hidden；这段视觉隐藏文字是数字或状态唯一确定能被读屏听到的途径，开发环境缺失时会抛错。",
           "descriptionEn": "The mark itself is aria-hidden; this visually hidden text is the only guaranteed path for the count or status to reach assistive technology. Missing it throws in development."
         },

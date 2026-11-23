@@ -1,9 +1,9 @@
 # Scroll area
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: cac2e91684ebc4c766cf31f3d48387d72611874133cc8f8bb9b0609aab9afe14
+Source SHA-256: eb6c10dda6868344c92e36e18202d387afc75ea75dee1954d9c05b64be32ef84
 
 Native scrolling with an optional composition of draggable scrollbars.
 
@@ -67,7 +67,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
 
 ### ScrollAreaScrollbar
-- no props declared by this library
+- `visibility?`: `"always" | "auto"`. 滚动条显隐策略：auto（默认）静止时隐身，悬停或滚动时淡入；always 有溢出即常驻可见。
 - plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
 
 ### ScrollAreaThumb
@@ -75,7 +75,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ### ScrollAreaViewport
-- no props declared by this library
+- `fade?`: `boolean`. 边缘渐隐：依赖原语提供的 data-overflow-*-start/end 状态，在被切掉的一端平滑淡出。
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -97,11 +97,13 @@ An actual scrollable div; native scrollbars respect platform settings.
 
 ### ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent
 Explicit styled-scrollbar composition: Root owns layout/overflow facts, Viewport is the actual scroll element and Content supports measurement.
+- fade: boolean; default false. ScrollAreaViewport edge fade: smoothly fades cut-off edges without a platform gutter scrollbar.
 - render / ref / className / style / native props: ScrollAreaPrimitive part props. Each part retains its primitive props. Scroll events, scrollTop/scrollLeft and focus belong to Viewport; do not move a legacy viewport ref to Root.
 
 ### ScrollAreaScrollbar
-A draggable track shown for actual overflow; includes a real Thumb when children are omitted.
+A slim draggable track shown for actual overflow; includes a real Thumb when children are omitted.
 - orientation: vertical | horizontal; default vertical. Chooses the controlled axis; compose two tracks and Corner for both axes.
+- visibility: "auto" | "always"; default "auto". auto stays hidden at rest and fades in while hovering or scrolling; always stays visible whenever overflowing.
 - keepMounted: boolean; default false. Retains hidden DOM without inventing a scroll range when content does not overflow.
 
 ### ScrollAreaThumb / ScrollAreaCorner / ScrollAreaPrimitive

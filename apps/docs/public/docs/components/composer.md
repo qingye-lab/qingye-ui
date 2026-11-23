@@ -1,9 +1,9 @@
 # 对话输入框 Composer
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/composer
 Source: packages/ui/src/components/composer.tsx
-Source SHA-256: fef8f9c94f951cdabab88801f34d75427fb3c8b8a5d43b7a8170abdfa50b5fe7
+Source SHA-256: 318ec3f44b4529c8d359cedbe716327761934252518851976925f94309b6844c
 
 多行输入，支持 @ 提及、/ 命令与原子令牌，值是文字与令牌片段的数组。
 

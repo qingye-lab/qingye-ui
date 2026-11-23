@@ -1,6 +1,6 @@
 # 批量操作 BulkActionBar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/bulk-action-bar
 Source: packages/ui/src/components/bulk-action-bar.tsx
 Source SHA-256: 5562a5a02d396089e7726042e528cd777bae5d96974767a833a7ac537f4d9680
@@ -121,6 +121,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### BulkActionBarExtend
 把本页选择扩展为整个集合的入口；仅在调用方渲染时出现，不推断是否还有更多。
 - count / onExtend: number / (event) => void. 默认文字「选择全部 N 项」，数字按界面语言分组；onClick.preventDefault() 取消。
+- onClick / Button props: ButtonProps["onClick"] / ButtonProps. 先于 onExtend 执行；调用 event.preventDefault() 或 event.preventBaseUIHandler() 可阻止扩展动作，其余属性透传 Button。
 
 ### BulkActionBarActions / BulkActionBarAction / BulkActionBarClear
 同组动作与清除选择。

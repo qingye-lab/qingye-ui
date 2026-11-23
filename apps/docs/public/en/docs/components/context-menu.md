@@ -1,6 +1,6 @@
 # ContextMenu
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/context-menu
 Source: packages/ui/src/components/context-menu.tsx
 Source SHA-256: 735ccc846c990c30f8e0c87be3d494cc5d541b64a59db1c0e736f9616170d67a
@@ -162,6 +162,11 @@ Groups, separators and public primitives.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 ## Keyboard
+- Shift+F10 / ContextMenu: Open the context menu on a focused ContextMenuTrigger.
+- ↑ / ↓ / Home / End: Move focus among menu items.
+- → / ←: Open or close a submenu (reversed in RTL).
+- Enter / Space: Run an enabled command, toggle a checkbox/switch item, or open a submenu.
+- Escape: Close the context menu and return focus to the trigger region.
 
 ## Source examples
 ### 可见入口与右键

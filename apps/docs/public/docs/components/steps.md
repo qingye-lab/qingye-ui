@@ -1,6 +1,6 @@
 # 步骤 Steps
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/steps
 Source: packages/ui/src/components/steps.tsx
 Source SHA-256: 28a0975be5681464981373d19c4ce2ba6b475e90e6463937d4f5498a802a88a0
@@ -84,6 +84,8 @@ div / p 内容槽。
 - children / render / ref / native props: useRender.ComponentProps<div | p>. 应用提供标题、解释和恢复链接。
 
 ## Keyboard
+- Tab / Shift+Tab: 步骤本身是只读有序列表，不占 Tab 停靠点；仅当应用在步骤内容中放入链接或恢复按钮时，焦点按文档顺序经过这些原生控件。
+- Enter / Space: 激活步骤内由应用提供的链接（Enter）或恢复按钮（Enter / Space）。
 
 ## Source examples
 ### 明确的过程状态

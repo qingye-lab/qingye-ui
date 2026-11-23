@@ -1,6 +1,6 @@
 # 输入框 Input
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/input
 Source: packages/ui/src/components/input.tsx
 Source SHA-256: 1276c09d538105d1b2f715ed2df7d99bff636526763bba4c200346a7823104a7
@@ -65,6 +65,7 @@ Written descriptions; the list above is the type-resolved fact.
 - type: React.HTMLInputTypeAttribute; default "text". 原生类型原样生效，不附带任何额外动作。搜索与密码用 SearchInput / PasswordInput。
 - value / defaultValue / onValueChange: 原生值 / 初始值 / (value, details) => void. 支持受控与非受控值；onChange 同样透传。
 - readOnly: boolean; default false. 保留焦点、复制与表单提交，阻止编辑；默认显示只读标记。
+- size: number. 原生 input.size 的字符宽度含义，与控件外观尺寸无关；填值控件只有一套几何，跟随密度轴。
 - className / style / render / ref: Base UI Input props. 全部作用于真实 input；className/style 支持状态函数。
 - controlClassName: string. 调整共同编辑边界，例如宽度与所在布局；不替代原生属性。
 - unstyled: boolean; default false. 由 InputGroup 等公共组合承担边界；保留内高、档案与原生状态。

@@ -147,6 +147,7 @@ export function TableRow({ render, className, ...props }: TableRowProps) {
  * 数值列由列的调用方声明，不由内容猜：`numeric` 同时让这一列的表头与单元格在行内末端对齐（text-end，RTL 下在左）并用等宽数字——
  * 数位对齐才能比较大小（基础层 §19）。表头与单元格必须同时声明，否则列名与数字各靠一边。
  * 表头里的排序按钮内容反向排列（写成「列名、箭头」，显示为「箭头、列名」）：列名紧贴末端，与单元格数字的末端边是同一条线。
+ * 数值单元格不折行：折断的数字读不成一个数；列宽不足时由表格容器的横向滚动（带渐隐）承担，不溢出页面。
  * 声明写在 data-numeric 上，供样式之外的消费者（测试、审计）读取。
  */
 type NumericColumn = { numeric?: boolean | undefined };
@@ -161,5 +162,5 @@ export function TableHead({ render, className, scope = "col", numeric = false, .
 }
 export type TableCellProps = useRender.ComponentProps<"td"> & NumericColumn;
 export function TableCell({ render, className, numeric = false, ...props }: TableCellProps) {
-  return useRender({ defaultTagName: "td", render, props: mergeProps({ "data-slot": "table-cell", "data-numeric": numeric || undefined, className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-var(--qy-line-width))] align-middle wrap-anywhere [&>[data-slot]]:align-top", numeric && "text-end numeric", className) }, props) });
+  return useRender({ defaultTagName: "td", render, props: mergeProps({ "data-slot": "table-cell", "data-numeric": numeric || undefined, className: cn(cellX, "pt-(--qy-field-gap) pb-[calc(var(--qy-field-gap)-var(--qy-line-width))] align-middle [&>[data-slot]]:align-top", numeric ? "text-end numeric whitespace-nowrap" : "wrap-anywhere", className) }, props) });
 }

@@ -1,6 +1,6 @@
 # ScatterChart
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/scatter-chart
 Source: packages/ui/src/components/scatter-chart.tsx
 Source SHA-256: 91d9cdf6eb59bb5da1a566606bc87f7c19782ce98a4f38be03872593d2eafd31
@@ -70,6 +70,7 @@ A named figure, named x/y axes, series-colored markers and a visible same-source
 - xLabel / yLabel: string. What the x and y axes measure, e.g. "records" and "failure rate".
 - series: readonly { key: string; label: string; points: readonly { id: string; label: string; x: number; y: number }[] }[]. One to three series. A single series takes the first color without a legend; two or more take the chart1..3 order with distinct marker shapes. Every point needs a stable id and a nonempty name.
 - formatX / formatY: (value: number) => ReactNode. Format known values; defaults to Intl number formatting for UILocale. The readout and table accept nodes; axis ticks are read for strings or numbers only and fall back to the default number format when a node is returned.
+- style / className / render / ref: ChartStyle / useRender composition. Root style may override --qy-chart-plot-height (default 10 modules); render, ref and remaining figure attributes forward to the root.
 
 ## Keyboard
 

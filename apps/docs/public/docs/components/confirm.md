@@ -1,9 +1,9 @@
 # 异步确认 Confirm
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/confirm
 Source: packages/ui/src/components/confirm.tsx
-Source SHA-256: 872303717eb2deacb43a5c70806eebba920ac0364d71e20500f286969a60d758
+Source SHA-256: 63fed3e6e581570b69b14f99a7eeac683e37e7b035ed2025f5e013217027082a
 
 等待一次明确决定，再由调用方继续执行。
 
@@ -66,7 +66,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### useConfirm
 返回稳定的 confirm(options): Promise<boolean>；必须位于 ConfirmProvider 内。
 - title / description: ReactNode / ReactNode. 必需且非空；标题标识决定，说明持续显示必要后果并建立可访问关联。调用时捕获选项，之后修改原 options 不替换已读内容。
-- confirmLabel / cancelLabel: ReactNode / ReactNode; default 必填 / locale.cancel. confirmLabel 必填，写出这个决定具体做什么（「移出」「离开」），没有通用的「确认」默认；缺省或空白抛 TypeError。取消按钮和 Escape 都返回 false；点遮罩不关闭。
+- confirmLabel / cancelLabel: ReactNode / ReactNode; default 必填 / locale.back. confirmLabel 必填，写出这个决定具体做什么（「移出」「离开」），没有通用的「确认」默认；缺省或空白抛 TypeError。取消按钮和 Escape 都返回 false；点遮罩不关闭。
 - tone: ButtonTone; default 'neutral'. 确认按钮的后果色调；需要危险色时显式传 danger，不赋予权限。
 - popupProps: Omit<AlertDialogPopupProps, 'children'>. 复用公共浮层的 render、ref、ARIA、承载层和焦点入口。默认聚焦安全面板，关闭回到调用时的活动元素；入口可能移除时用 finalFocus 指向仍在的上级。
 - signal: AbortSignal. 已中止的调用直接 false；决定中中止会关闭并返回 false。只中止此次决定，不取消已开始的业务请求。

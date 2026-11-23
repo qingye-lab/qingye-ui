@@ -3,7 +3,7 @@ import type { ComponentMeta } from "@/lib/types";
 export default {
   title: "树形选择 TreeSelect", titleEn: "TreeSelect",
   description: "在弹层里的树上选一个节点，或勾选若干叶子。", descriptionEn: "Choose one node, or check several leaves, on a tree inside a popup.",
-  category: "表单", layer: "primitive", source: "local",
+  category: "表单", layer: "pattern", source: "local",
   exports: ["TreeSelect"],
   keywords: ["tree select", "treeselect", "树形选择", "树形下拉", "组织架构", "部门", "层级", "多选", "选择"],
   api: [
@@ -16,6 +16,7 @@ export default {
       { name: "disabled / readOnly / required", type: "boolean", default: "false", description: "只读保留当前值且不打开弹层；禁用的字段不提交；required 参与原生校验并标 aria-required。invalid 跟随 Field。", descriptionEn: "Read-only keeps the value and never opens the popup; a disabled field is not submitted; required joins native validation and sets aria-required. invalid follows Field." },
       { name: "name / form", type: "string", description: "隐藏输入的名称与所属表单。单选提交所选 id，未选择提交空字符串；多选每个已选 id 一条同名值，未选择不提交（required 时拦下提交）。", descriptionEn: "Name and owning form of the hidden input. Single submits the chosen id, or an empty string when nothing is chosen; multiple submits one value per chosen id and nothing when empty (required blocks submission)." },
       { name: "aria-label / aria-labelledby / id / className", type: "string", description: "触发器与弹层里树的名称、触发器的样式入口。没有名称会抛错：用 aria-label、aria-labelledby，或放进带 FieldLabel 的 Field。", descriptionEn: "Name of the trigger and of the tree in the popup, and the trigger's styling entry. A missing name throws: use aria-label, aria-labelledby, or place it in a Field with a FieldLabel." },
+      { name: "aria-describedby / aria-invalid", type: "string / boolean | \"true\" | \"false\"", description: "触发器的补充说明引用与校验无效状态；未显式传入时跟随外层 Field。", descriptionEn: "Supplementary description reference and invalid state on the trigger; follows an enclosing Field when omitted." },
     ] },
   ],
   keyboard: [

@@ -1,6 +1,6 @@
 # 分页 Pagination
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/pagination
 Source: packages/ui/src/components/pagination.tsx
 Source SHA-256: 6b4c3df196a315eb41ef9873ba55c26015781f71d73fe28557fedb9dd1120379
@@ -168,6 +168,8 @@ a，匹配当前页时 aria-current=page，并以选中面加中等字重呈现�
 - children / render / native props: useRender.ComponentProps<span>. 仅在已知有省略页时提供。
 
 ## Keyboard
+- Tab / Shift+Tab: 在上一页、各页码入口、下一页及条数选择（Select）间移动焦点；busy 期间翻页按钮保持可聚焦而不丢焦点。
+- Enter / Space: 激活聚焦的翻页或页码按钮；使用链接原语 PaginationLink（<a>）时按 Enter 导航。
 
 ## Source examples
 ### 页码与每页条数

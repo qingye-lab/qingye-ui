@@ -1,9 +1,9 @@
 # 跳转链接 SkipLink
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/skip-link
 Source: packages/ui/src/components/skip-link.tsx
-Source SHA-256: 4333b6b70cefd7211580107717851060f8942bbe39dc19982442c7da5363f79e
+Source SHA-256: cfee10a53d3eb7001530339e61be1cd731feb3923b4e432c0669838feffd0e01
 
 让键盘用户越过重复的导航，直达主要内容。
 

@@ -70,6 +70,9 @@ export default {
     },
     "responsive": [
       "Items sit in a tight vertical stack without touch-target (it would cover adjacent items); padding alone widens the hit area."
+    ],
+    "customization": [
+      "Use the public render/ref/className/style and native props; do not mix the three theme axes."
     ]
   },
   "api": [

@@ -1,9 +1,9 @@
 # 阅读目录 Toc
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/toc
 Source: packages/ui/src/components/toc.tsx
-Source SHA-256: f4e51a4407103bc3e69e9f6612457ef1004296c3c79aa640a6305d7c0145cfdd
+Source SHA-256: 25f506ebf93fb2311f6ac2f8567687a2e5351077c5105b17899145dd975eba8f
 
 本页内几个段落之间走动的纵向目录：当前位置把一条清墨基线上自己那一段加深为焦墨，不新增形状。
 

@@ -151,13 +151,18 @@ export function ColorPicker({ value: valueProp, defaultValue, onValueChange, onV
   const controlled = valueProp !== undefined;
   const initial = valueProp ?? defaultValue ?? "#000000";
   if (!isHexColor(initial)) throw new RangeError(`ColorPicker value must be a "#rrggbb" string; received ${received(initial)}.`);
-  const [hsv, setHsv] = React.useState<Hsv>(() => hexToHsv(initial.toLowerCase()));
-  const shown = controlled ? valueProp.toLowerCase() : hsvToHex(hsv);
-  // 受控值被应用改写时，面与滑条跟着走。灰色（饱和度或明度为 0）没有确定的色相，沿用当前色相，拖到灰再拖回来色相不跳。
-  if (controlled && hsvToHex(hsv) !== shown) {
+  const [innerHsv, setInnerHsv] = React.useState<Hsv>(() => hexToHsv(initial.toLowerCase()));
+  const shown = controlled ? valueProp.toLowerCase() : hsvToHex(innerHsv);
+  // 受控值被应用改写时，面与滑条直接从 shown 安全派生（不在渲染期调用 setState）。
+  // 灰色（饱和度或明度为 0）没有确定的色相，沿用当前色相，拖到灰再拖回来色相不跳。
+  const hsv = React.useMemo<Hsv>(() => {
+    if (!controlled || hsvToHex(innerHsv) === shown) return innerHsv;
     const next = hexToHsv(shown);
-    setHsv(next.s === 0 || next.v === 0 ? { ...next, h: hsv.h } : next);
-  }
+    return next.s === 0 || next.v === 0 ? { ...next, h: innerHsv.h } : next;
+  }, [controlled, innerHsv, shown]);
+  React.useEffect(() => {
+    if (controlled && hsv !== innerHsv) setInnerHsv(hsv);
+  }, [controlled, hsv, innerHsv]);
 
   const [draft, setDraft] = React.useState<string | null>(null);
   const [rejected, setRejected] = React.useState(false);
@@ -167,7 +172,7 @@ export function ColorPicker({ value: valueProp, defaultValue, onValueChange, onV
   const update = (next: Hsv) => {
     const hex = hsvToHex(next);
     latest.current.hsv = next;
-    setHsv(next);
+    setInnerHsv(next);
     setDraft(null);
     setRejected(false);
     if (hex === latest.current.hex) return;
@@ -193,7 +198,7 @@ export function ColorPicker({ value: valueProp, defaultValue, onValueChange, onV
     if (!owner || controlled) return;
     const reset = (event: Event) => queueMicrotask(() => {
       if (event.defaultPrevented) return;
-      setHsv(hexToHsv((defaultValue ?? "#000000").toLowerCase()));
+      setInnerHsv(hexToHsv((defaultValue ?? "#000000").toLowerCase()));
       setDraft(null); setRejected(false);
     });
     owner.addEventListener("reset", reset);

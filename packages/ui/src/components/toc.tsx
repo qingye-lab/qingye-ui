@@ -84,12 +84,13 @@ export function Toc({ items, current, render, className, ...props }: TocProps) {
       "aria-label": messages.toc,
       className: cn("min-w-0", className),
       children: (
-        <ul className={navLineListClassNameVertical}>
+        <ul data-slot="toc-list" className={navLineListClassNameVertical}>
           {items.map((item) => {
             const isCurrent = item.id === current;
             return (
               <li key={item.id} data-slot="toc-item" className="min-w-0">
                 <a
+                  data-slot="toc-link"
                   href={`#${item.id}`}
                   aria-current={isCurrent ? "location" : undefined}
                   className={cn(navLineItemClassNameVertical, "py-(--qy-fen)", INDENT[item.level], isCurrent && [navLineCurrentClassName, FORCED_COLORS_CURRENT])}
@@ -156,26 +157,30 @@ export type TocScrollSpyOptions = {
 export function useTocScrollSpy(items: TocItem[], options: TocScrollSpyOptions = {}): string | undefined {
   const { container, offset = 0 } = options;
   const [active, setActive] = React.useState<string | undefined>(undefined);
+  const idsKey = `${items.length}\0${items.map((item) => item.id).join("\0")}`;
+  // 按 id 签名稳定化依赖：调用方传入内联 items 数组时，id 序列未变就不重绑 scroll/resize。
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const ids = React.useMemo(() => items.map((item) => item.id), [idsKey]);
   React.useEffect(() => {
-    if (!items.length) {
+    if (!ids.length) {
       setActive(undefined);
       return;
     }
     const scrollTarget: HTMLElement | Window = container?.current ?? window;
     let frame = 0;
     const update = () => {
-      let next = items[0]!.id;
-      for (const item of items) {
-        const el = document.getElementById(item.id);
+      let next = ids[0]!;
+      for (const id of ids) {
+        const el = document.getElementById(id);
         if (!el) continue;
-        if (el.getBoundingClientRect().top - offset <= 0) next = item.id;
+        if (el.getBoundingClientRect().top - offset <= 0) next = id;
         else break;
       }
       const el = container?.current;
       const scrollTop = el ? el.scrollTop : window.scrollY;
       const scrollHeight = el ? el.scrollHeight : document.documentElement.scrollHeight;
       const clientHeight = el ? el.clientHeight : window.innerHeight;
-      if (clientHeight + scrollTop >= scrollHeight - 4 && scrollTop > 0) next = items.at(-1)!.id;
+      if (clientHeight + scrollTop >= scrollHeight - 4 && scrollTop > 0) next = ids.at(-1)!;
       setActive(next);
     };
     const onScroll = () => {
@@ -190,6 +195,6 @@ export function useTocScrollSpy(items: TocItem[], options: TocScrollSpyOptions =
       scrollTarget.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
-  }, [items, offset, container]);
+  }, [ids, offset, container]);
   return active;
 }

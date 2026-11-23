@@ -1,9 +1,9 @@
 # 滚动区域 ScrollArea
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/scroll-area
 Source: packages/ui/src/components/scroll-area.tsx
-Source SHA-256: cac2e91684ebc4c766cf31f3d48387d72611874133cc8f8bb9b0609aab9afe14
+Source SHA-256: eb6c10dda6868344c92e36e18202d387afc75ea75dee1954d9c05b64be32ef84
 
 真实原生滚动，或显式组合可拖动滚动条。
 
@@ -67,7 +67,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 279 inherited (@types/react 275, @base-ui/react 4); not expanded, see the installed declarations
 
 ### ScrollAreaScrollbar
-- no props declared by this library
+- `visibility?`: `"always" | "auto"`. 滚动条显隐策略：auto（默认）静止时隐身，悬停或滚动时淡入；always 有溢出即常驻可见。
 - plus 280 inherited (@types/react 275, @base-ui/react 5); not expanded, see the installed declarations
 
 ### ScrollAreaThumb
@@ -75,7 +75,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ### ScrollAreaViewport
-- no props declared by this library
+- `fade?`: `boolean`. 边缘渐隐：依赖原语提供的 data-overflow-*-start/end 状态，在被切掉的一端平滑淡出。
 - plus 278 inherited (@types/react 275, @base-ui/react 3); not expanded, see the installed declarations
 
 ## Dependencies and providers
@@ -97,11 +97,13 @@ Written descriptions; the list above is the type-resolved fact.
 
 ### ScrollAreaRoot / ScrollAreaViewport / ScrollAreaContent
 自定义滚动条的显式组合；Root 拥有布局与溢出事实，Viewport 才是真实滚动元素，Content 用于测量内容。
+- fade: boolean; default false. ScrollAreaViewport 边缘渐隐：在内容被切掉的一端平滑淡出，无系统占位条遮挡。
 - render / ref / className / style / native props: ScrollAreaPrimitive part props. 各部位保留自身原语 props；滚动事件、scrollTop/scrollLeft 和聚焦均属于 Viewport，不能把旧视口 ref 直接接到 Root。
 
 ### ScrollAreaScrollbar
-随实际溢出出现的可拖动轨道；未给 children 时内置真实 Thumb。
+随实际溢出出现的可拖动细轨道；未给 children 时内置真实 Thumb。
 - orientation: vertical | horizontal; default vertical. 选择受控轴；双轴时组合两条轨道与 Corner。
+- visibility: "auto" | "always"; default "auto". auto 静止时隐身、悬停或滚动时淡入；always 有溢出即常驻显示。
 - keepMounted: boolean; default false. 无溢出时仍保留 DOM，但隐藏轨道，不制造不存在的滚动范围。
 
 ### ScrollAreaThumb / ScrollAreaCorner / ScrollAreaPrimitive

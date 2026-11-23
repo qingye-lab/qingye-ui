@@ -155,3 +155,16 @@ test("a scrolling, unnamed tab stop warns in development; a name or an explicit 
   render(<ScrollArea>长</ScrollArea>);
   expect(warn).toHaveBeenCalledTimes(1);
 });
+
+test("scrollbar defaults to auto visibility with always override", () => {
+  render(<ScrollAreaRoot>
+    <ScrollAreaViewport fade aria-label="渐隐视口" role="region" tabIndex={0}>
+      <ScrollAreaContent>内容</ScrollAreaContent>
+    </ScrollAreaViewport>
+    <ScrollAreaScrollbar keepMounted data-testid="auto-bar" />
+    <ScrollAreaScrollbar keepMounted visibility="always" data-testid="always-bar" />
+  </ScrollAreaRoot>);
+  expect(screen.getByRole("region", { name: "渐隐视口" })).toBeInTheDocument();
+  expect(screen.getByTestId("auto-bar")).toHaveAttribute("data-visibility", "auto");
+  expect(screen.getByTestId("always-bar")).toHaveAttribute("data-visibility", "always");
+});

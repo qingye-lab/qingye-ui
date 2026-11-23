@@ -4,6 +4,7 @@ import { Link as RouterLink } from "@/components/locale-link";
 import { buttonVariants } from "@qingye_lab/ui/components/button";
 import { Empty, EmptyActions, EmptyTitle } from "@qingye_lab/ui/components/empty";
 import { BASE, WorkspaceShell } from "./shell";
+import { WorkspaceStoreProvider } from "./store";
 
 const Overview = lazy(() => import("./overview"));
 const Collections = lazy(() => import("./collections"));
@@ -18,19 +19,21 @@ function Missing() {
   </div>;
 }
 
-/** 示例应用：一个完整的工作区，只用 @qingye_lab/ui 组合。 */
+/** 示例应用：一个完整的工作区，只用 @qingye_lab/ui 组合，跨页共享真实本地状态。 */
 export default function WorkspaceApp() {
-  return <Suspense>
-    <Routes>
-      <Route element={<WorkspaceShell />}>
-        <Route index element={<Overview />} />
-        <Route path="collections" element={<Collections />} />
-        <Route path="collections/:id" element={<CollectionDetail />} />
-        <Route path="settings" element={<Navigate to="general" replace />} />
-        <Route path="settings/:section" element={<Settings />} />
-        <Route path="help" element={<Help />} />
-        <Route path="*" element={<Missing />} />
-      </Route>
-    </Routes>
-  </Suspense>;
+  return <WorkspaceStoreProvider>
+    <Suspense>
+      <Routes>
+        <Route element={<WorkspaceShell />}>
+          <Route index element={<Overview />} />
+          <Route path="collections" element={<Collections />} />
+          <Route path="collections/:id" element={<CollectionDetail />} />
+          <Route path="settings" element={<Navigate to="general" replace />} />
+          <Route path="settings/:section" element={<Settings />} />
+          <Route path="help" element={<Help />} />
+          <Route path="*" element={<Missing />} />
+        </Route>
+      </Routes>
+    </Suspense>
+  </WorkspaceStoreProvider>;
 }

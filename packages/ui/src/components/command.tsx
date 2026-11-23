@@ -10,7 +10,7 @@ import { isName, received } from "../require-name";
 import { cn } from "../utils";
 import { AutocompleteInput } from "./autocomplete";
 import { buttonVariants } from "./button";
-import { Dialog, DialogPopup } from "./dialog";
+import { Dialog, DialogDescription, DialogHeader, DialogPopup, DialogTitle, type DialogPopupProps, type DialogProps } from "./dialog";
 import { Kbd } from "./kbd";
 
 /*
@@ -206,17 +206,32 @@ export function CommandItem({ value, keywords, onSelect, disabled = false, short
   </AutocompletePrimitive.Item>;
 }
 
-export type CommandDialogProps = Omit<CommandProps, "aria-label" | "aria-labelledby"> & {
+function hasNodeContent(value: React.ReactNode): boolean {
+  return React.Children.toArray(value).some(child => {
+    if (typeof child === "string") return child.trim() !== "";
+    if (React.isValidElement<{ children?: React.ReactNode }>(child) && child.type === React.Fragment) return hasNodeContent(child.props.children);
+    return true;
+  });
+}
+
+export type CommandDialogProps = Omit<CommandProps, "aria-label" | "aria-labelledby" | "title"> & {
   open?: boolean;
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  onOpenChangeComplete?: DialogProps["onOpenChangeComplete"];
   /** 选中条目后关闭，默认 true。 */
   closeOnSelect?: boolean;
-  /** 对话框的名字，二选一必填，缺失抛错。 */
+  /** 可见标题；提供时渲染 DialogHeader + DialogTitle（及可选 description），并以它为对话框的名字——此时 aria-label / aria-labelledby 被忽略，读屏名称与屏幕上的标题一致。 */
+  title?: React.ReactNode;
+  /** 可见说明，随 title 渲染在 DialogHeader 内。 */
+  description?: React.ReactNode;
+  /** 对话框的名字，未提供 title 时二选一必填，缺失抛错。 */
   "aria-label"?: string;
   "aria-labelledby"?: string;
   /** 对话框面板的宽度等。 */
   popupClassName?: string;
+  /** 透传给内部 DialogPopup 的属性（如 initialFocus / finalFocus / portalProps 等）；名字走上面的 title / aria-label，data-slot 不可覆盖。 */
+  popupProps?: Omit<DialogPopupProps, "children" | "className" | "aria-label" | "aria-labelledby">;
 };
 
 /*
@@ -224,12 +239,28 @@ export type CommandDialogProps = Omit<CommandProps, "aria-label" | "aria-labelle
  * 窄视口退到容器宽度；其余内边距、圆角、阴影来自 Dialog，不另写。
  * 每次打开都是新的一份（Dialog 关闭即卸载），所以查询自然清空，不需要重置逻辑。
  */
-export function CommandDialog({ open, defaultOpen, onOpenChange, closeOnSelect = true, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, popupClassName, onItemSelect, children, ...props }: CommandDialogProps) {
-  if (!isName(ariaLabel) && !isName(ariaLabelledBy)) throw new Error(`CommandDialog requires a nonempty aria-label or aria-labelledby naming the dialog; received aria-label ${received(ariaLabel)} and aria-labelledby ${received(ariaLabelledBy)}.`);
+export function CommandDialog({ open, defaultOpen, onOpenChange, onOpenChangeComplete, closeOnSelect = true, title, description, "aria-label": ariaLabel, "aria-labelledby": ariaLabelledBy, popupClassName, popupProps, onItemSelect, children, ...props }: CommandDialogProps) {
+  const hasTitle = hasNodeContent(title);
+  const hasDescription = hasNodeContent(description);
+  if (!hasTitle && !isName(ariaLabel) && !isName(ariaLabelledBy)) throw new Error(`CommandDialog requires a nonempty title, aria-label, or aria-labelledby naming the dialog; received aria-label ${received(ariaLabel)} and aria-labelledby ${received(ariaLabelledBy)}.`);
+  // 名字只有一个来源：有可见标题时由 DialogTitle 命名，不让 aria-label/labelledby 盖过它；popupProps 不参与命名，也不能覆盖 data-slot。
+  const { "aria-label": _popupLabel, "aria-labelledby": _popupLabelledBy, ...popupRest } = (popupProps ?? {}) as DialogPopupProps;
   const [inner, setInner] = React.useState(defaultOpen ?? false);
   const change = (next: boolean) => { if (open === undefined) setInner(next); onOpenChange?.(next); };
-  return <Dialog open={open ?? inner} onOpenChange={change}>
-    <DialogPopup aria-label={ariaLabel} aria-labelledby={ariaLabelledBy} data-slot="command-dialog" className={cn("w-[min(32rem,100%)]", popupClassName)}>
+  return <Dialog open={open ?? inner} onOpenChange={change} {...(onOpenChangeComplete ? { onOpenChangeComplete } : {})}>
+    <DialogPopup
+      {...popupRest}
+      data-slot="command-dialog"
+      {...(!hasTitle && ariaLabel !== undefined ? { "aria-label": ariaLabel } : {})}
+      {...(!hasTitle && ariaLabelledBy !== undefined ? { "aria-labelledby": ariaLabelledBy } : {})}
+      className={cn("w-[min(32rem,100%)]", popupClassName)}
+    >
+      {hasTitle && (
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+          {hasDescription && <DialogDescription>{description}</DialogDescription>}
+        </DialogHeader>
+      )}
       <Command {...props} onItemSelect={value => { onItemSelect?.(value); if (closeOnSelect) change(false); }}>{children}</Command>
     </DialogPopup>
   </Dialog>;

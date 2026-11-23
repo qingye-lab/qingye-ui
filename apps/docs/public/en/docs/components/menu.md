@@ -1,6 +1,6 @@
 # Menu
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
 Source SHA-256: 546a0cba3c3ecf2f2eaa2cc8170a08b6f49bfa8b6e1e81ff5a9d7eba89cd69a2
@@ -24,7 +24,7 @@ Menu items execute commands; LinkItem navigates. Disabled items remain discovera
 - Menu / MenuSubmenu: Public Base UI command roots and submenus.
 - MenuItem: One command; shared with ContextMenuItem.
 - MenuTrigger / MenuPositioner / MenuPopup / MenuPortal: Trigger and floating parts owned by the same root.
-- MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger: Commands, true navigation, checked choices, radio choices and submenus.
+- MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger: True navigation, checked choices, radio choices and submenus.
 - MenuSwitchItem: A switch-style checked item: still a menuitemcheckbox, with the trailing mark replaced by a switch track.
 - MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive: Group semantics and the public primitive namespace.
 
@@ -165,14 +165,15 @@ Public Base UI command roots and submenus.
 One command; shared with ContextMenuItem.
 - tone: "neutral" | "danger"; default "neutral". Same meaning as Button's tone: danger only marks a dangerous class of action (danger foreground for text and icon, danger soft fill on hover and highlight). Consequences and confirmation do not live in the item; activating it should open AlertDialog or ConfirmAction.
 - size / inset / disabled / onClick: Base UI Item props. Size step, indent aligning with items that have leading markers, disabled state, and the command.
+- render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 ### MenuTrigger / MenuPositioner / MenuPopup / MenuPortal
 Trigger and floating parts owned by the same root.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 - side / align / style: Base UI Positioner props. Shared popup layering targets the Positioner; caller style merges last.
 
-### MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger
-Commands, true navigation, checked choices, radio choices and submenus.
+### MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger
+True navigation, checked choices, radio choices and submenus.
 - size: xs | sm | md | lg | xl; default md. Reuses all five Button sizes; disabled items may receive focus but cannot execute.
 - inset: boolean. Reserves a same-size icon and field gap at the logical start, aligning unmarked commands with leading markers. Defaults to false; MenuGroupLabel also supports size/inset.
 - markerPosition: start | end. Checkbox and radio items only: controls the logical marker position. Defaults to end, preserving existing appearance, state and keyboard semantics.
@@ -187,6 +188,7 @@ A switch-style checked item: still a menuitemcheckbox, with the trailing mark re
 ### MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive
 Group semantics and the public primitive namespace.
 - value / defaultValue / onValueChange: Base UI MenuRadioGroup props. The radio group's current value lives on MenuRadioGroup.
+- MenuGroupLabel: size / inset: xs | sm | md | lg | xl / boolean; default md / false. Size step and leading indent for the group label, aligning its text start with menu items in the same group.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 ## Keyboard

@@ -78,7 +78,7 @@ export function ImagePreview({ images, thumbnailClassName, className, ...props }
         <button key={`${position}:${item.src}`} type="button" aria-haspopup="dialog" data-slot="image-preview-thumbnail"
           ref={element => { thumbs.current[position] = element; }}
           onClick={() => { origin.current = position; setCurrent(position); setZoom(1); setOpen(true); }}
-          className={cn("relative inline-flex size-[calc(4*var(--qy-cai))] shrink-0 cursor-zoom-in items-center justify-center overflow-hidden rounded-panel border border-border bg-neutral-soft p-0 text-muted-foreground outline-none focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color)", thumbnailClassName)}>
+          className={cn("relative inline-flex size-[calc(4*var(--qy-cai))] shrink-0 cursor-zoom-in items-center justify-center overflow-hidden rounded-panel border border-border bg-neutral-soft p-0 text-muted-foreground outline-none focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color)", thumbnailClassName)}>
           {failed.has(item.thumbnailSrc ?? item.src)
             ? <span className="min-w-0 p-(--qy-space-1) text-support wrap-anywhere">{item.alt}</span>
             : <img src={item.thumbnailSrc ?? item.src} alt={item.alt} onError={() => markFailed(item.thumbnailSrc ?? item.src)} className="size-full object-cover" />}
@@ -88,7 +88,7 @@ export function ImagePreview({ images, thumbnailClassName, className, ...props }
         <DialogPopup onKeyDown={onKeyDown} data-slot="image-preview-dialog" finalFocus={() => thumbs.current[origin.current] ?? true}>
           <DialogTitle className="sr-only">{image.alt}</DialogTitle>
           <div ref={stage} tabIndex={zoom > 1 ? 0 : undefined} data-slot="image-preview-stage" data-zoom={zoom}
-            className="flex h-[70dvh] w-[min(calc(48*var(--qy-cai)),calc(100vw-4*var(--qy-panel-padding)))] min-w-0 overflow-auto rounded-item outline-none focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color)">
+            className="flex h-[70dvh] w-[min(calc(48*var(--qy-cai)),calc(100vw-4*var(--qy-panel-padding)))] min-w-0 overflow-auto rounded-item outline-none focus-visible:ring-inset focus-visible:ring-[length:var(--qy-focus-ring-width)] focus-visible:ring-(--qy-focus-ring-color)">
             {failed.has(image.src)
               ? <div role="img" aria-label={`${messages.imagePreviewFailed}: ${image.alt}`} className="m-auto grid min-w-0 gap-(--qy-space-1) p-(--qy-panel-padding)">
                 <Text className="text-muted-foreground">{messages.imagePreviewFailed}</Text>

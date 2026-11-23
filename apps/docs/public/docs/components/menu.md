@@ -1,6 +1,6 @@
 # 命令菜单 Menu
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/menu
 Source: packages/ui/src/components/menu.tsx
 Source SHA-256: 546a0cba3c3ecf2f2eaa2cc8170a08b6f49bfa8b6e1e81ff5a9d7eba89cd69a2
@@ -24,7 +24,7 @@ Menu 执行动作，LinkItem 导航。禁用不等于隐藏；原语可让禁用
 - Menu / MenuSubmenu：公开 Base UI 命令根与子菜单。
 - MenuItem：一条命令；与 ContextMenuItem 共用。
 - MenuTrigger / MenuPositioner / MenuPopup / MenuPortal：触发器与同一 Root 所属的浮层。
-- MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger：动作、真实导航、勾选、单选与下级命令。
+- MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger：真实导航、勾选、单选与下级命令。
 - MenuSwitchItem：开关式的勾选项：语义仍是 menuitemcheckbox，尾部的标记换成一条开关槽。
 - MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive：组语义与底层公开原语。
 
@@ -165,14 +165,15 @@ Written descriptions; the list above is the type-resolved fact.
 一条命令；与 ContextMenuItem 共用。
 - tone: "neutral" | "danger"; default "neutral". 与 Button 的 tone 同义：danger 只标出这是一条危险类动作（字与图标用危险前景，悬停与高亮用危险柔底）。后果说明与确认不在菜单项里，激活后应打开 AlertDialog 或 ConfirmAction。
 - size / inset / disabled / onClick: Base UI Item props. 尺寸档、与带前导标记的项对齐的缩进、禁用与命令。
+- render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ### MenuTrigger / MenuPositioner / MenuPopup / MenuPortal
 触发器与同一 Root 所属的浮层。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 - side / align / style: Base UI Positioner props. 共享 popup 层级写在 Positioner；调用方 style 最后合并。
 
-### MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger
-动作、真实导航、勾选、单选与下级命令。
+### MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger
+真实导航、勾选、单选与下级命令。
 - size: xs | sm | md | lg | xl; default md. 复用 Button 五档；禁用项可聚焦但不能执行。
 - inset: boolean. 在逻辑起点为同档图标与字段间隔留位，使无图标命令与前导标记的文字列对齐；默认 false。MenuGroupLabel 也支持 size/inset。
 - markerPosition: start | end. 仅勾选与单选项，控制实际标记的逻辑位置；默认 end 保持现有外观。状态与键盘语义不变。
@@ -187,6 +188,7 @@ Written descriptions; the list above is the type-resolved fact.
 ### MenuGroup / MenuGroupLabel / MenuSeparator / MenuRadioGroup / MenuPrimitive
 组语义与底层公开原语。
 - value / defaultValue / onValueChange: Base UI MenuRadioGroup props. 单选组的当前值在 MenuRadioGroup 上。
+- MenuGroupLabel：size / inset: xs | sm | md | lg | xl / boolean; default md / false. 分组标题的尺寸档与前导缩进，与同组菜单项的文字起点对齐。
 - render / ref / native props: Base UI part props. 属性和 ref 归属实际元素；调用方事件与样式保留。
 
 ## Keyboard

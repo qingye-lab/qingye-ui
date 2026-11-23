@@ -40,7 +40,7 @@ export default {
       { name: "className", type: "string", default: "w-full", description: "行宽，例如 w-2/3。", descriptionEn: "Row width, e.g. w-2/3." },
     ] },
     { name: "SkeletonBlock", description: "整块内容（图、图表、表格）的位置；高度由 className 给出。", descriptionEn: "The place of a whole block (image, chart, table); height comes from className.", props: [
-      { name: "className", type: "string", default: "h-[5 材]", description: "块高，例如 h-40。", descriptionEn: "Block height, e.g. h-40." },
+      { name: "className", type: "string", default: "h-[5 材]", defaultEn: "h-[5 modules]", description: "块高，例如 h-40。", descriptionEn: "Block height, e.g. h-40." },
     ] },
     { name: "SkeletonControl", description: "填值控件（输入框、选择器）的位置；高与角取填值控件的角色，随密度与同环境的 Input 等高，宽度由 className 给出。", descriptionEn: "The place of a value-filling control (input, select, button); height and radius follow the fill-control role, so it matches an Input in the same density, width comes from className.", props: [
       { name: "className", type: "string", default: "w-full", description: "宽度，例如 w-24。高度跟随密度，不由 className 给出。", descriptionEn: "Width, e.g. w-24. Height follows density and is not set through className." },

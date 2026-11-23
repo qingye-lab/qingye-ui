@@ -16,5 +16,12 @@ export default {
       { name: "className / native props", type: "React.ComponentProps<div>", description: "其余属性透传到根元素。", descriptionEn: "Remaining attributes forward to the root." },
     ] },
   ],
+  keyboard: [
+    { keys: "Enter / Space", description: "在缩略图按钮上打开预览对话框，或在对话框控制按钮上执行对应操作。", descriptionEn: "Open the preview dialog from a thumbnail button, or activate a control button inside the dialog." },
+    { keys: "← / →", description: "在同组图片中切换上一张 / 下一张（RTL 下方向相反，到头即止）；放大且焦点位于舞台上时方向键用于滚动，不切图。", descriptionEn: "Switch to the previous or next image in the set (reversed in RTL; stops at the ends). When zoomed and focus is on the stage, arrow keys scroll instead of switching." },
+    { keys: "+ / = / - / 0", description: "放大一级（+ / =）、缩小一级（-）或重置为适应窗口（0）。", descriptionEn: "Zoom in (+ / =), zoom out (-), or reset to fit the stage (0)." },
+    { keys: "Tab / Shift+Tab", description: "在预览对话框内的控制按钮（及放大后可滚动的舞台）间移动焦点。", descriptionEn: "Move focus across controls inside the preview dialog (and the scrollable stage when zoomed)." },
+    { keys: "Escape", description: "关闭预览对话框并将焦点返回打开它的缩略图按钮。", descriptionEn: "Close the preview dialog and return focus to the thumbnail button that opened it." },
+  ],
   notes: ["键盘：左右方向键切图（从右向左排版时对调）、+ / - 缩放、0 适应窗口；到头即止，不循环。"], notesEn: ["Keyboard: Left/Right switch images (swapped under right-to-left), +/- zoom, 0 fits; stops at the ends, no looping."],
 } satisfies ComponentMeta;

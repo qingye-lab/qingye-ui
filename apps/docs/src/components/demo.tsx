@@ -59,7 +59,7 @@ export function DemoFrame({ slug, demo }: { slug: string; demo: LoadedDemo }) {
           </div>
         </div>
         <CollapsiblePanel>
-          <CodeView className="component-demo-code" code={source} />
+          <CodeView className="component-demo-code" code={source} maxLines={24} />
         </CollapsiblePanel>
       </Collapsible>
     </Prose>

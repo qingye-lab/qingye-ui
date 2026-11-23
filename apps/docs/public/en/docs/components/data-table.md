@@ -1,9 +1,9 @@
 # DataTable
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/data-table
 Source: packages/ui/src/components/data-table.tsx
-Source SHA-256: 02c5537f5b7059f3756aab2b5b3fb9d3405b7f7e5cd6f2508bb5e35fbd304395
+Source SHA-256: 06fcff20256740a95e3d101ba620699aa199057709aa3e91d90ee77dabf4cc5a
 
 Comparison, sorting, scoped selection and optional virtualization for a caller-owned collection.
 
@@ -126,6 +126,7 @@ Resolved from the TypeScript types of the installed source. Props inherited from
 - Optional peers: @tanstack/react-table
 - Required providers: none
 - Locale: reads UILocale; works without UILocaleProvider (default locale)
+- Context PatternLiveContext: without a provider nullable; provided by DataTablePattern
 
 ## Curated API
 Written descriptions; the list above is the type-resolved fact.
@@ -154,6 +155,7 @@ A native two-dimensional collection.
 - columnDef.meta.numeric: boolean; default false. A numeric column is declared by the column definition, never guessed from content: header and every cell share one alignment, at the inline end (left in RTL), with tabular figures. The Pattern column config uses the same name.
 - selectionAppearance / onRowActivate / virtualization: row | checkbox / (row: Row<T>, event: DataTableActivateEvent) => void / DataTableVirtualization. Selection appearance and virtualization match Pattern. Row activation receives a TanStack Row and the mouse or keyboard event that triggered it (modifier keys readable); the caller owns activeRowId. Only one row is in the Tab sequence (the last focused row, else the active row, else the first) and arrow keys move between rows. Nested interactive elements and custom data-row-activate-ignore regions are excluded, and activation never changes selection. A visible meta.rowHeader column is required to name the rows; without one it throws.
 - columnDef.meta.rowHeader: boolean. Actual row headers use th scope=row; comparison columns are never automatically hidden. With a visible row-header column, each row's aria-labelledby points at all of its row-header cells, so the row's accessible name is their text (several row-header columns join in column order). DataTableSelectionCell names each checkbox after this row, falling back to a generic name only without a row-header column. onRowActivate without a visible row-header column throws.
+- stickyHeader / stickyHeaderOffset: boolean / number | string; default false. Sticks the header to the top of the nearest scroll area (as in DataTablePattern): the page or Workspace content when the table fits horizontally, or the table's own container for horizontally overflowing tables, virtualization viewports, or height / max-height on containerProps. stickyHeaderOffset clears a fixed header above; numbers are px.
 - render / ref / native props: Base UI part props. Props and refs target actual elements; caller events and styles are preserved.
 
 ### DataTableSortButton

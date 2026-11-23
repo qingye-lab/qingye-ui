@@ -60,6 +60,12 @@ export default {
           "type": "Base UI Item props",
           "description": "尺寸档、与带前导标记的项对齐的缩进、禁用与命令。",
           "descriptionEn": "Size step, indent aligning with items that have leading markers, disabled state, and the command."
+        },
+        {
+          "name": "render / ref / native props",
+          "type": "Base UI part props",
+          "description": "属性和 ref 归属实际元素；调用方事件与样式保留。",
+          "descriptionEn": "Props and refs target actual elements; caller events and styles are preserved."
         }
       ]
     },
@@ -83,9 +89,9 @@ export default {
       ]
     },
     {
-      "name": "MenuItem / MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger",
-      "description": "动作、真实导航、勾选、单选与下级命令。",
-      "descriptionEn": "Commands, true navigation, checked choices, radio choices and submenus.",
+      "name": "MenuLinkItem / MenuCheckboxItem / MenuRadioItem / MenuSubmenuTrigger",
+      "description": "真实导航、勾选、单选与下级命令。",
+      "descriptionEn": "True navigation, checked choices, radio choices and submenus.",
       "props": [
         {
           "name": "size",
@@ -149,6 +155,14 @@ export default {
           "type": "Base UI MenuRadioGroup props",
           "description": "单选组的当前值在 MenuRadioGroup 上。",
           "descriptionEn": "The radio group's current value lives on MenuRadioGroup."
+        },
+        {
+          "name": "MenuGroupLabel：size / inset",
+          "nameEn": "MenuGroupLabel: size / inset",
+          "type": "xs | sm | md | lg | xl / boolean",
+          "default": "md / false",
+          "description": "分组标题的尺寸档与前导缩进，与同组菜单项的文字起点对齐。",
+          "descriptionEn": "Size step and leading indent for the group label, aligning its text start with menu items in the same group."
         },
         {
           "name": "render / ref / native props",

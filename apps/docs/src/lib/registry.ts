@@ -37,7 +37,10 @@ export function loadComponent(slug: string): Promise<ComponentEntry | undefined>
     // An entry that already carries its API is complete (and a missing file has nothing to add).
     promise = !summary ? Promise.resolve(undefined)
       : "api" in summary || !loader ? Promise.resolve(summary as ComponentEntry)
-      : loader().then((module) => ({ ...summary, ...module.default }));
+      : loader().then((module) => ({ ...summary, ...module.default })).catch((err) => {
+          full.delete(slug);
+          throw err;
+        });
     full.set(slug, promise);
   }
   return promise;

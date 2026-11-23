@@ -1,6 +1,6 @@
 # TimeRangeField
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/time-range-field
 Source: packages/ui/src/components/time-range-field.tsx
 Source SHA-256: c39fe59d6990ae7bb22f03e31bc6ceccc0d6e0ad00e14cd867631e29a3534bf3
@@ -79,7 +79,7 @@ Two TimeFields and a separator in one edit boundary. The Field label names the w
 ## Keyboard
 - Tab / Shift+Tab: Moves between the start group and the end group; the first segment of each is the entry.
 - ArrowLeft / ArrowRight: Moves between the segments of one end.
-- ArrowUp / ArrowDown / 数字键: Changes the current segment; typing goes segment by segment (as in TimeField).
+- ArrowUp / ArrowDown / Digit keys: Changes the current segment; typing goes segment by segment (as in TimeField).
 - Backspace / Delete: Clears the current segment; clearing a complete end reports it as null.
 
 ## Source examples

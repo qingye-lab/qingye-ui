@@ -477,7 +477,7 @@ export function DataTable<TData>({ table, caption, emptyContent, busy = false, e
   return <div data-slot="data-table-frame" className={cn("flex min-w-0 flex-col gap-(--qy-panel-gap)", fillsParent && fillParentClassName)}>
     {error != null && error !== false && <div data-slot="data-table-error" role="alert" className="min-w-0">{error}</div>}
     {/* 等待记号叠在纸的顶缘：绝对定位，不占布局，旧数据行不动、不变暗；它在容器之外，横向滚动时不随内容移走。 */}
-    <div className={cn("relative min-w-0 rounded-panel", fillsParent && "min-h-0 flex-1")}>
+    <div data-slot="data-table-surface" className={cn("relative min-w-0 rounded-panel", fillsParent && "min-h-0 flex-1")}>
     {busy && <Progress value={null} aria-label={messages.loading} data-slot="data-table-busy" className={cn("pointer-events-none absolute z-[2] block overflow-hidden rounded-t-panel", containerProps?.framed === false ? "inset-x-0 top-0" : "inset-x-(--qy-line-width) top-(--qy-line-width)")}><ProgressTrack className="rounded-none bg-transparent"><ProgressIndicator /></ProgressTrack></Progress>}
     <TableContainer data-slot="data-table-container" fade={pinnedIds.length > 0 ? "end" : true} {...containerProps} {...(virtualization ? { tabIndex: containerProps?.tabIndex ?? 0 } : {})} className={cn(virtualization && "overflow-auto", fillsParent && "h-full", containerProps?.className)} style={virtualization ? { ...containerProps?.style, ...(virtualization.height === undefined ? { contain: "size" } : { height: virtualization.height }) } : containerProps?.style} onWheel={event => { containerProps?.onWheel?.(event); virtualizer.cancelScroll(); pendingFocus.current = null; }} onTouchStart={event => { containerProps?.onTouchStart?.(event); virtualizer.cancelScroll(); pendingFocus.current = null; }} onKeyDown={event => { containerProps?.onKeyDown?.(event); if (event.target === event.currentTarget) navigate(event); }}><Table data-slot="data-table" data-selection-appearance={selectionAppearance} aria-busy={busy} aria-rowcount={virtualization ? headerGroups.length + Math.max(1, rows.length) : undefined} {...props} className={cn(className)} style={{ ...tableWidth, ...style }} onFocusCapture={event => {
     onFocusCapture?.(event);
@@ -643,20 +643,24 @@ export type DataTablePatternProps<TData> = Omit<React.ComponentPropsWithRef<"div
 };
 
 type PatternUpdate = (next: DataTablePatternState | ((previous: DataTablePatternState) => DataTablePatternState), reason: DataTablePatternChangeDetails["reason"]) => void;
-type PatternColumnMeta<TData> = DataTableColumnMeta & {
-  config: DataTablePatternColumn<TData>;
+type PatternLive<TData> = {
   activeRow: DataTablePatternProps<TData>["activeRow"];
   state: DataTablePatternState;
   update: PatternUpdate;
+  selection: DataTablePatternProps<TData>["selection"];
 };
-type PatternSelectionMeta<TData> = DataTableColumnMeta & { selection: NonNullable<DataTablePatternProps<TData>["selection"]> };
+// 列定义按 columns 缓存，随渲染变化的值经 context 交给单元格，不在渲染期写 ref（并发渲染下会读到未提交的值）。
+const PatternLiveContext = React.createContext<PatternLive<any> | null>(null);
+function usePatternLive<TData>() { return React.useContext(PatternLiveContext) as PatternLive<TData>; }
+type PatternColumnMeta<TData> = DataTableColumnMeta & { config: DataTablePatternColumn<TData> };
 // Stable component identities preserve the actual input/button and focus when state or caller configuration changes.
 function PatternColumnHeader<TData>({ column }: HeaderContext<TData, unknown>) {
   const { config } = column.columnDef.meta as PatternColumnMeta<TData>;
   return config.sortable ? <DataTableSortButton column={column}>{config.header}</DataTableSortButton> : config.header;
 }
 function PatternColumnCell<TData>(context: CellContext<TData, unknown>) {
-  const { config, activeRow, state, update } = context.column.columnDef.meta as PatternColumnMeta<TData>;
+  const { config } = context.column.columnDef.meta as PatternColumnMeta<TData>;
+  const { activeRow, state, update } = usePatternLive<TData>();
   const { messages } = useUILocale(); const value = context.getValue();
   const content = config.cell ? config.cell(context.row.original, value) : value == null || value === "" ? config.empty ?? <span data-slot="data-table-empty"><span aria-hidden="true" className="text-muted-foreground">—</span><span className="sr-only">{messages.tableNoValue}</span></span> : String(value);
   return activeRow?.trigger !== "row" && activeRow?.columnId === config.id ? <Button data-slot="data-table-activate" variant="quiet" size="sm" className="-mx-(--qy-control-sm-padding) font-normal text-body sm:text-body" aria-current={context.row.id === state.activeRowId ? "true" : undefined} onClick={event => {
@@ -664,12 +668,12 @@ function PatternColumnCell<TData>(context: CellContext<TData, unknown>) {
     activeRow.onActivate?.(context.row.original, event);
   }}>{content}</Button> : content;
 }
-function PatternSelectionHeader<TData>({ table, column }: HeaderContext<TData, unknown>) {
-  const { selection } = column.columnDef.meta as PatternSelectionMeta<TData>;
+function PatternSelectionHeader<TData>({ table }: HeaderContext<TData, unknown>) {
+  const selection = usePatternLive<TData>().selection!;
   return <DataTableSelectAll table={table} scope={selection.scope ?? "page"} aria-label={selection.label} />;
 }
-function PatternSelectionCell<TData>({ row, column }: CellContext<TData, unknown>) {
-  const { selection } = column.columnDef.meta as PatternSelectionMeta<TData>;
+function PatternSelectionCell<TData>({ row }: CellContext<TData, unknown>) {
+  const selection = usePatternLive<TData>().selection!;
   return <DataTableSelectionCell row={row} aria-label={selection.rowLabel(row.original)} />;
 }
 
@@ -689,23 +693,28 @@ export function DataTablePattern<TData>({ data, columns, getRowId, mode = "clien
     if (state === undefined) { currentRef.current = result; setInternalState(result); }
     onStateChange?.(result, { reason });
   };
+  const live: PatternLive<TData> = { activeRow, state: current, update, selection };
+  const hasSelection = Boolean(selection);
   if (!getRowId) throw new Error("DataTablePattern requires an explicit stable getRowId.");
   if (columns.length === 0 || new Set(columns.map(column => column.id)).size !== columns.length || columns.some(column => !column.id || column.id === "__qy_selection")) throw new Error("DataTablePattern requires distinct nonempty column IDs; __qy_selection is reserved.");
   if (selection?.scope === "filtered" && mode === "server") throw new Error("DataTablePattern selection.scope \"filtered\" requires mode=\"client\": a server page holds only part of the result. Select a server-side result in full with BulkActionBar's extent / BulkActionBarExtend instead.");
   if (activeRow && activeRow.trigger !== "row" && !columns.some(column => column.id === activeRow.columnId)) throw new Error("DataTablePattern activeRow.columnId must identify a configured column.");
-  const definitions: ColumnDef<TData, unknown>[] = columns.map(column => ({
-    id: column.id,
-    accessorFn: column.accessor,
-    enableSorting: column.sortable ?? false,
-    ...(column.sortDescFirst === undefined ? {} : { sortDescFirst: column.sortDescFirst }),
-    ...(column.size === undefined ? {} : { size: column.size }),
-    ...(column.minSize === undefined ? {} : { minSize: column.minSize }),
-    ...(column.maxSize === undefined ? {} : { maxSize: column.maxSize }),
-    meta: { rowHeader: column.rowHeader, numeric: column.numeric, ellipsis: column.ellipsis, pinned: column.pinned, grow: column.grow, fit: column.fit, config: column, activeRow, state: current, update },
-    header: PatternColumnHeader<TData>,
-    cell: PatternColumnCell<TData>,
-  }));
-  if (selection) definitions.unshift({ id: "__qy_selection", enableSorting: false, meta: { marker: true, pinned: columns.some(column => column.pinned), selection }, header: PatternSelectionHeader<TData>, cell: PatternSelectionCell<TData> });
+  const definitions = React.useMemo<ColumnDef<TData, unknown>[]>(() => {
+    const list: ColumnDef<TData, unknown>[] = columns.map(column => ({
+      id: column.id,
+      accessorFn: column.accessor,
+      enableSorting: column.sortable ?? false,
+      ...(column.sortDescFirst === undefined ? {} : { sortDescFirst: column.sortDescFirst }),
+      ...(column.size === undefined ? {} : { size: column.size }),
+      ...(column.minSize === undefined ? {} : { minSize: column.minSize }),
+      ...(column.maxSize === undefined ? {} : { maxSize: column.maxSize }),
+      meta: { rowHeader: column.rowHeader, numeric: column.numeric, ellipsis: column.ellipsis, pinned: column.pinned, grow: column.grow, fit: column.fit, config: column },
+      header: PatternColumnHeader<TData>,
+      cell: PatternColumnCell<TData>,
+    }));
+    if (hasSelection) list.unshift({ id: "__qy_selection", enableSorting: false, meta: { marker: true, pinned: columns.some(column => column.pinned) }, header: PatternSelectionHeader<TData>, cell: PatternSelectionCell<TData> });
+    return list;
+  }, [columns, hasSelection]);
   const table = useReactTable({
     data, columns: definitions, getRowId,
     getCoreRowModel: getCoreRowModel(),
@@ -735,10 +744,10 @@ export function DataTablePattern<TData>({ data, columns, getRowId, mode = "clien
     : tableLabelledBy ? { id: paginationId, "aria-label": messages.pagination, "aria-labelledby": `${paginationId} ${tableLabelledBy}` }
     : tableLabel ? { "aria-label": `${messages.pagination} ${tableLabel}` } : {};
   return <div data-slot="data-table-pattern" {...props} className={cn("flex min-w-0 flex-col gap-(--qy-panel-gap)", virtualization && virtualization.height === undefined && fillParentClassName, className)}>
-    <DataTable<TData> {...tableProps} table={table} caption={captionNode} emptyContent={emptyContent} busy={busy} error={error} activeRowId={current.activeRowId} selectionAppearance={selectionAppearance} {...(virtualization ? { virtualization } : {})} {...(stickyHeader ? { stickyHeader } : {})} {...(stickyHeaderOffset !== undefined ? { stickyHeaderOffset } : {})} {...(activeRow?.trigger === "row" ? { onRowActivate: (row, event) => {
+    <PatternLiveContext.Provider value={live}><DataTable<TData> {...tableProps} table={table} caption={captionNode} emptyContent={emptyContent} busy={busy} error={error} activeRowId={current.activeRowId} selectionAppearance={selectionAppearance} {...(virtualization ? { virtualization } : {})} {...(stickyHeader ? { stickyHeader } : {})} {...(stickyHeaderOffset !== undefined ? { stickyHeaderOffset } : {})} {...(activeRow?.trigger === "row" ? { onRowActivate: (row, event) => {
       update(previous => ({ ...previous, activeRowId: row.id }), "active-row");
       activeRow.onActivate?.(row.original, event);
-    } } : {})} />
+    } } : {})} /></PatternLiveContext.Provider>
     {pagination && <PaginationPattern busy={busy} value={source.pagination} onValueChange={next => update(previous => ({ ...previous, pagination: next }), "pagination")} {...(totalCount === null ? { totalCount: null, hasNextPage: pagination.hasNextPage! } : { totalCount })} {...(pagination.pageSizeOptions ? { pageSizeOptions: pagination.pageSizeOptions } : {})} {...paginationName} />}
   </div>;
 }

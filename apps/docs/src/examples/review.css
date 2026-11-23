@@ -1,0 +1,577 @@
+/*
+ * 变更审阅台（Linear + Vercel 三栏空间工作台）。
+ * 素纸清墨，一刀见骨：
+ * - 左栏队列（落在地色 --qy-background 上，与站点框架同层，以一条清墨线与主舞台分界）：快捷视图 + FilterBar + 队列导航，选中行以选中面（8% 填充）与 font-medium 标明；
+ * - 中栏主舞台（--qy-surface，全页唯一的纸面，比两侧高一层）：素纸承托语法分层的多文件 Diff、悬停行内评论与审阅动态流，让代码改动成为视觉「君」；
+ * - 右栏检查器（同左栏落在地色上，以一条清墨线与主舞台分界）：Linear 式交互属性行 + Vercel 式可展开门禁卡片 + 改动占比与文件速跳；
+ * - 宽屏（>= 80rem）三栏同屏；中屏（64rem..80rem）右栏收入 Drawer；窄屏（< 64rem）三段切换。
+ */
+.review {
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  block-size: 100%;
+  background: var(--qy-surface);
+  color: var(--qy-foreground);
+  overflow: hidden;
+}
+
+.review-mobile-bar {
+  display: none;
+}
+
+.review-body {
+  min-block-size: 0;
+  overflow: hidden;
+  outline: none;
+}
+
+.review-pane {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  block-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 0;
+}
+
+.review-pane-queue {
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background: var(--qy-background);
+  border-inline-end: 1px solid var(--qy-border);
+}
+
+.review-pane-detail {
+  background: var(--qy-surface);
+}
+
+/* ─── 左栏：变更队列 ───────────────────────────────────── */
+/* 三栏首行同一条中线：首行高度与中栏面包屑条相同（--review-bar），各栏只留上下 1 分。 */
+.review {
+  --review-bar: 2.75rem;
+}
+
+.review-queue-head {
+  display: grid;
+  gap: var(--qy-field-gap);
+  padding: var(--qy-fen) var(--qy-panel-padding-sm) var(--qy-field-group-gap);
+}
+
+.review-queue-head-row {
+  min-block-size: calc(var(--review-bar, 2.75rem) - 2 * var(--qy-fen));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qy-field-gap);
+}
+
+.review-queue-pills {
+  min-inline-size: 0;
+}
+
+.review-queue-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 0;
+}
+
+.review-queue-btn {
+  display: grid;
+  gap: var(--qy-fen);
+  margin-inline: 0;
+  inline-size: 100%;
+  min-block-size: auto;
+  /* 项内 1 分、项间 6 分：一项的标题与元信息先成组，再与下一项分开。 */
+  padding: calc(var(--qy-field-gap) + var(--qy-fen)) var(--qy-panel-padding-sm);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--qy-foreground);
+  text-align: start;
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--qy-duration-fast) var(--qy-ease-out);
+}
+
+@media (hover: hover) {
+  .review-queue-btn:not([aria-current="true"]):hover {
+    background: var(--qy-surface-hover);
+  }
+}
+
+/* 选中：8% 填充 + font-medium；Item 的悬停面读 --qy-accent，选中项把它指向选中面，悬停时不变浅。 */
+.review-queue-btn[aria-current="true"] {
+  --qy-accent: var(--qy-surface-selected);
+  background: var(--qy-surface-selected);
+}
+
+.review-queue-btn[aria-current="true"] .review-queue-title {
+  font-weight: var(--qy-weight-medium);
+}
+
+.review-queue-btn:focus-visible {
+  box-shadow: inset 0 0 0 var(--qy-focus-quiet-width) var(--qy-ring);
+}
+
+.review-queue-top {
+  display: flex;
+  align-items: center;
+  gap: var(--qy-field-gap);
+  min-inline-size: 0;
+}
+
+.review-queue-title {
+  min-inline-size: 0;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: var(--qy-text-body-size);
+  line-height: var(--qy-text-body-leading);
+  font-weight: var(--qy-weight-regular);
+}
+
+.review-queue-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--qy-field-gap);
+  padding-inline-start: calc(var(--qy-status-dot-size) + var(--qy-field-gap));
+  color: var(--qy-foreground-muted);
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+}
+
+/* 队列里的增删数只供估量，不与状态点争色。编号不折行。 */
+.review-queue-meta .review-stat-add,
+.review-queue-meta .review-stat-del {
+  color: inherit;
+}
+
+.review-queue-meta > code {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.review-queue-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qy-field-gap);
+  padding: var(--qy-field-gap) var(--qy-panel-padding-sm);
+  color: var(--qy-foreground-muted);
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+}
+
+.review-diff-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--qy-fen);
+  font-family: var(--qy-font-mono);
+  font-size: var(--qy-text-support-size);
+  font-variant-numeric: tabular-nums;
+}
+
+.review-stat-add {
+  color: var(--qy-success-foreground);
+}
+
+.review-stat-del {
+  color: var(--qy-danger-foreground);
+}
+
+/* ─── 中栏 + 右栏组合网格 ──────────────────────────────── */
+.review-stage-wrap {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) calc(16 * var(--qy-cai));
+  block-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 0;
+  overflow: hidden;
+}
+
+.review-stage {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  block-size: 100%;
+  min-inline-size: 0;
+  min-block-size: 0;
+  background: var(--qy-surface);
+}
+
+/* 顶部单行面包屑条：与左栏首行平齐，简洁克制 */
+.review-stage-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qy-field-gap);
+  min-block-size: var(--review-bar);
+  padding: var(--qy-fen) var(--qy-panel-padding);
+  background: var(--qy-surface);
+}
+
+.review-stage-crumb {
+  display: flex;
+  align-items: center;
+  gap: var(--qy-fen);
+  min-inline-size: 0;
+  color: var(--qy-foreground-muted);
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.review-stage-scroll {
+  display: grid;
+  gap: var(--qy-panel-gap);
+  padding: var(--qy-panel-padding-sm) var(--qy-panel-padding) var(--qy-section-gap);
+  max-inline-size: 62rem;
+}
+
+/* 三级节奏：组内 2 分（标题与摘要）、同级 5 分（文件与文件）、段间 10 分（摘要→文件→动态）。
+   舞台栅格的行距是同级 5 分，段间多出的部分由段首/段尾补足。 */
+.review-stage-intro {
+  display: grid;
+  gap: var(--qy-field-gap);
+  margin-block-end: calc(var(--qy-section-gap) - var(--qy-panel-gap));
+}
+
+/* 本页主题：用章级字号，与 14px 正文拉开一级，成为整页的入口。 */
+.review-title {
+  margin: 0;
+  font-size: var(--qy-text-chapter-size);
+  line-height: var(--qy-text-chapter-leading);
+  font-weight: var(--qy-text-chapter-weight);
+  letter-spacing: -0.015em;
+}
+
+.review-summary {
+  margin: 0;
+  max-inline-size: 68ch;
+  color: var(--qy-foreground);
+  font-size: var(--qy-text-body-size);
+  line-height: var(--qy-text-body-leading);
+}
+
+/* ─── 多文件语法分层 Diff ──────────────────────────────── */
+.review-diff-file {
+  border: 1px solid var(--qy-border);
+  border-radius: var(--qy-radius-item);
+  background: var(--qy-surface);
+  overflow: hidden;
+  scroll-margin-top: var(--qy-panel-padding-sm);
+}
+
+.review-diff-file-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qy-field-gap);
+  padding: var(--qy-fen) var(--qy-panel-padding-sm);
+  border-bottom: 1px solid var(--qy-border);
+}
+
+.review-diff-path {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--qy-field-gap);
+  min-inline-size: 0;
+  font-family: var(--qy-font-mono);
+  font-size: var(--qy-text-support-size);
+  color: var(--qy-foreground);
+}
+
+.review-diff-code {
+  margin: 0;
+  padding-block: var(--qy-fen);
+  font-family: var(--qy-font-mono);
+  font-size: var(--qy-text-support-size);
+  line-height: 1.7;
+  outline: none;
+}
+
+.review-diff-scroll:focus-visible {
+  box-shadow: inset 0 0 0 var(--qy-focus-quiet-width) var(--qy-ring);
+}
+
+.review-diff-code > code {
+  display: block;
+  min-inline-size: max-content;
+}
+
+/* 5 列：悬停评论按钮 | 旧行号 | 新行号 | +/- 标记 | 代码内容 */
+.review-diff-line {
+  display: grid;
+  grid-template-columns: 2rem 2.25rem 2.25rem 1.25rem minmax(0, 1fr);
+  align-items: center;
+  padding-inline: var(--qy-fen) var(--qy-panel-padding-sm);
+  white-space: pre;
+  transition: background-color var(--qy-duration-fast) var(--qy-ease-out);
+}
+
+@media (hover: hover) {
+  .review-diff-line[data-kind="ctx"]:hover {
+    background: var(--qy-surface-hover);
+  }
+}
+
+.review-diff-line[data-kind="add"] {
+  background: var(--qy-success-soft);
+}
+
+.review-diff-line[data-kind="del"] {
+  background: var(--qy-danger-soft);
+}
+
+.review-diff-comment-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--qy-duration-fast) var(--qy-ease-out);
+}
+
+.review-diff-line:hover .review-diff-comment-trigger,
+.review-diff-line:focus-within .review-diff-comment-trigger,
+.review-diff-line[data-commented="true"] .review-diff-comment-trigger {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .review-diff-comment-trigger {
+    opacity: 1;
+  }
+}
+
+.review-diff-ln {
+  user-select: none;
+  text-align: end;
+  padding-inline-end: var(--qy-field-gap);
+  color: var(--qy-foreground-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.review-diff-sig {
+  user-select: none;
+  text-align: center;
+  font-weight: var(--qy-weight-semibold);
+}
+
+.review-diff-line[data-kind="add"] .review-diff-sig {
+  color: var(--qy-success-foreground);
+}
+
+.review-diff-line[data-kind="del"] .review-diff-sig {
+  color: var(--qy-danger-foreground);
+}
+
+.review-tok-kw {
+  color: var(--qy-info-foreground);
+  font-weight: var(--qy-weight-medium);
+}
+
+.review-tok-str {
+  color: var(--qy-success-foreground);
+}
+
+.review-tok-cm {
+  color: var(--qy-foreground-muted);
+}
+
+/* 就地行内评论区：平铺嵌入代码行间，不做框中套框 */
+.review-inline-thread {
+  display: grid;
+  gap: var(--qy-field-group-gap);
+  padding: var(--qy-field-group-gap) var(--qy-panel-padding);
+  border-block: 1px solid var(--qy-border);
+  background: var(--qy-surface);
+  font-family: var(--qy-font-sans);
+  white-space: normal;
+  line-height: var(--qy-text-body-leading);
+}
+
+.review-inline-note {
+  display: grid;
+  gap: var(--qy-fen-half);
+}
+
+.review-inline-note + .review-inline-note {
+  padding-top: var(--qy-field-gap);
+}
+
+/* 审阅动态流 */
+.review-activity {
+  display: grid;
+  gap: var(--qy-field-group-gap);
+  padding-top: calc(var(--qy-section-gap) - var(--qy-panel-gap));
+}
+
+/* ─── 右栏：Linear 属性检查器 + Vercel 门禁流水线 ──────── */
+.review-inspector {
+  background: var(--qy-background);
+  border-inline-start: 1px solid var(--qy-border);
+  min-inline-size: 0;
+  min-block-size: 0;
+  overflow: hidden;
+}
+
+.review-inspector-actions {
+  display: grid;
+  align-content: start;
+  gap: var(--qy-field-gap);
+  padding: var(--qy-fen) var(--qy-panel-padding-sm) 0;
+}
+
+.review-inspector-actions > :first-child {
+  min-block-size: calc(var(--review-bar, 2.75rem) - 2 * var(--qy-fen));
+  align-items: center;
+}
+
+.review-inspector-body {
+  display: grid;
+  gap: var(--qy-section-gap);
+  padding: var(--qy-field-group-gap) var(--qy-panel-padding-sm) var(--qy-section-gap);
+}
+
+.review-inspector-section {
+  display: grid;
+  gap: var(--qy-field-gap);
+}
+
+/* 三栏的分区标题（变更队列、属性、自动化门禁、改动文件、审阅动态）统一为正文号中等字重，比 13px 的行内容高一级。 */
+.review-inspector-label {
+  margin: 0;
+  color: var(--qy-foreground);
+  font-size: var(--qy-text-body-size);
+  line-height: var(--qy-text-body-leading);
+  font-weight: var(--qy-weight-medium);
+}
+
+.review-prop-row {
+  display: grid;
+  grid-template-columns: 3.75rem minmax(0, 1fr);
+  align-items: center;
+  gap: var(--qy-field-gap);
+  min-block-size: 2rem;
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+}
+
+.review-prop-key {
+  color: var(--qy-foreground-muted);
+}
+
+.review-check-list {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.review-check-card {
+  display: grid;
+  padding: var(--qy-field-gap) 0;
+  background: transparent;
+}
+
+.review-check-log {
+  margin: 0;
+  padding: var(--qy-field-gap);
+  border: 1px solid var(--qy-border);
+  border-radius: var(--qy-radius-item);
+  background: var(--qy-surface);
+  color: var(--qy-foreground);
+  font-family: var(--qy-font-mono);
+  font-size: var(--qy-text-support-size);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+}
+
+.review-file-jump-list {
+  display: grid;
+  gap: var(--qy-fen-half);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.review-file-jump {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--qy-field-gap);
+  margin-inline: 0;
+  inline-size: 100%;
+  min-block-size: auto;
+  padding: var(--qy-fen) var(--qy-field-gap);
+  border-radius: var(--qy-radius-control);
+  background: transparent;
+  color: var(--qy-foreground);
+  font-family: var(--qy-font-mono);
+  font-size: var(--qy-text-support-size);
+  line-height: var(--qy-text-support-leading);
+  text-align: start;
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--qy-duration-fast) var(--qy-ease-out);
+}
+
+@media (hover: hover) {
+  .review-file-jump:hover {
+    background: var(--qy-surface-hover);
+  }
+}
+
+.review-file-jump:focus-visible {
+  box-shadow: inset 0 0 0 var(--qy-focus-quiet-width) var(--qy-ring);
+}
+
+/* ─── 响应式断点 ───────────────────────────────────────── */
+/* 中屏（64rem..80rem）：右栏收入 Drawer，避免主舞台过窄 */
+@media (width < 80rem) {
+  .review-stage-wrap {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .review-stage-wrap > .review-inspector {
+    display: none;
+  }
+}
+
+/* 窄屏（< 64rem）：顶部三段切换（队列 / 改动 / 门禁） */
+@media (width < 64rem) {
+  .review {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .review-mobile-bar {
+    display: block;
+    padding: var(--qy-field-gap) var(--qy-panel-padding-sm);
+    border-bottom: 1px solid var(--qy-border);
+    background: var(--qy-surface);
+  }
+
+  .review-pane-queue {
+    grid-template-rows: auto minmax(0, 1fr);
+  }
+
+  .review-queue-foot {
+    display: none;
+  }
+
+  .review-stage-bar {
+    padding-inline: var(--qy-panel-padding-sm);
+  }
+
+  .review-stage-scroll {
+    padding: var(--qy-panel-padding-sm) var(--qy-panel-padding-sm) var(--qy-section-gap);
+  }
+
+  .review-inspector {
+    border-inline-start: none;
+  }
+}

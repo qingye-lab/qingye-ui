@@ -1,6 +1,6 @@
 # Calendar
 
-Package: @qingye_lab/ui@5.5.0
+Package: @qingye_lab/ui@5.6.0
 Import: @qingye_lab/ui/components/calendar
 Source: packages/ui/src/components/calendar.tsx
 Source SHA-256: 47cf83b47a3b8c84798bb80a71f75a0ea1b9e5dedc1ac4cd5ad80bf8c24ef08e
@@ -79,7 +79,7 @@ Convert local date fields to and from YYYY-MM-DD. Reject invalid dates without U
 The installed @daypicker/react namespace.
 
 ## Keyboard
-- Arrow keys / Home / End / PageUp / PageDown（月、季、年格）: On the month, quarter and year grids, arrow keys move cell by cell, Home / End go to the row ends, and PageUp / PageDown turn a page (a year for months and quarters, twelve years for the year grid).
+- Arrow keys / Home / End / PageUp / PageDown (month, quarter, year grids): On the month, quarter and year grids, arrow keys move cell by cell, Home / End go to the row ends, and PageUp / PageDown turn a page (a year for months and quarters, twelve years for the year grid).
 - Arrow keys / Home / End: The date primitive moves focus through the calendar grid.
 - PageUp / PageDown: Navigate months using the primitive's calendar rules.
 - Enter / Space: Select the focused day within the declared mode and disabled rules.
