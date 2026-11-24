@@ -5,6 +5,7 @@ import { resolve, relative } from 'node:path';
 import { createRequire } from 'node:module';
 import { loadProject, walkFiles, inside, tokenRegistry, read, json, hash, writeAtomic } from './project.js';
 import { inspectColors } from './color-check.js';
+import { DIAGNOSTIC_RULES, type RuleId } from './rules.js';
 import { ToolError, type Diagnostic, type Project } from './types.js';
 
 const paintProperty = /^(color|background(?:-color)?|border(?:-(?:top|right|bottom|left))?(?:-color)?|outline(?:-color)?|fill|stroke|box-shadow|text-shadow)$/;
@@ -51,11 +52,13 @@ export function checkProject(projectPath: string, options: { mode?: 'report' | '
   const policy=PRESET_POLICIES[project.config.diagnostics.preset], req=createRequire(resolve(project.root,'package.json'));
   const definitionPaths = new Set([...project.config.tokenSources,...project.config.theme.legacyCss ?? [],project.config.theme.generated].map(name => inside(project.root,name)));
   const inAdapter = (path: string) => project.config.adapters.some(name => path === inside(project.root,name) || path.startsWith(`${inside(project.root,name)}/`));
-  function add(rule: string, status: Diagnostic['status'], file: string, line: number, evidence: string, decision: string, severity: Diagnostic['severity'] = status === 'FAIL' ? 'error' : 'warning', limitation = 'Static syntax evidence; browser layout/focus/state behavior remains NOT_RUN') {
+  function add(rule: RuleId, status: Diagnostic['status'], file: string, line: number, evidence: string, limitation = 'Static syntax evidence; browser layout/focus/state behavior remains NOT_RUN') {
+    let severity: Diagnostic['severity'] = status === 'FAIL' ? 'error' : 'warning';
+    const meta = DIAGNOSTIC_RULES[rule];
     const rel = relative(project.root,file), id = hash(JSON.stringify({ rule, file: rel, line, evidence }));
     if (seen.has(id)) return; seen.add(id);
     if(rule.startsWith('visual/') && status==='FAIL')severity=policy.visualSeverity;
-    diagnostics.push({ id,rule,ruleVersion:1,status,certainty:status==='UNVERIFIED'?'unknown':'certain',severity,file:rel,line,evidence,decision,layer:'P',safeAutofix:false,limitation });
+    diagnostics.push({ id,rule,ruleVersion:meta.ruleVersion,status,certainty:status==='UNVERIFIED'?'unknown':'certain',severity,file:rel,line,evidence,decision:meta.defaultDecision,repairGuide:meta.repairGuide,layer:meta.layer,safeAutofix:false,limitation });
   }
   for (const path of files) {
     const text = read(path);
@@ -64,11 +67,11 @@ export function checkProject(projectPath: string, options: { mode?: 'report' | '
       try { ast = postcss.parse(text,{ from:path }); } catch(error) { throw new ToolError(`CSS scanner failed: ${relative(project.root,path)} ${(error as Error).message}`, 'SCAN_FAILURE'); }
       ast.walkDecls(decl => {
         const line = decl.source?.start?.line ?? 1;
-        if (decl.prop.startsWith('--qy-') && !registry.has(decl.prop)) add('token/undefined','FAIL',path,line,decl.toString(),'Register a meaningful shared/project token at its owning source');
-        for (const ref of references(decl.value)) if (!registry.has(ref)) add('token/undefined','FAIL',path,line,ref,'Use an installed registered token or explicit project token definition');
-        if (!definitionPaths.has(path) && !inAdapter(path) && ((paintProperty.test(decl.prop) && rawPaint.test(decl.value)) || (designProperty.test(decl.prop) && !decl.value.includes('var(')))) add('visual/hardcoded','FAIL',path,line,decl.toString(),'Move repeated visual decisions into the configured project theme/recipe');
+        if (decl.prop.startsWith('--qy-') && !registry.has(decl.prop)) add('token/undefined','FAIL',path,line,decl.toString());
+        for (const ref of references(decl.value)) if (!registry.has(ref)) add('token/undefined','FAIL',path,line,ref);
+        if (!definitionPaths.has(path) && !inAdapter(path) && ((paintProperty.test(decl.prop) && rawPaint.test(decl.value)) || (designProperty.test(decl.prop) && !decl.value.includes('var(')))) add('visual/hardcoded','FAIL',path,line,decl.toString());
       });
-      ast.walkRules(rule => { const match = /\[data-theme\s*=\s*['"]?([^'"\]\s]+)/.exec(rule.selector); if (match && !['light','dark'].includes(match[1]!)) add('theme/axes','FAIL',path,rule.source?.start?.line ?? 1,rule.selector,'Use data-brand for brand and reserve data-theme for light/dark'); });
+      ast.walkRules(rule => { const match = /\[data-theme\s*=\s*['"]?([^'"\]\s]+)/.exec(rule.selector); if (match && !['light','dark'].includes(match[1]!)) add('theme/axes','FAIL',path,rule.source?.start?.line ?? 1,rule.selector); });
       continue;
     }
     const source = program.getSourceFile(path) ?? ts.createSourceFile(path,text,ts.ScriptTarget.Latest,true,ts.ScriptKind.TSX);
@@ -76,8 +79,8 @@ export function checkProject(projectPath: string, options: { mode?: 'report' | '
     if (syntax.length) throw new ToolError(`TS scanner failed: ${relative(project.root,path)} ${ts.flattenDiagnosticMessageText(syntax[0]!.messageText,' ')}`, 'SCAN_FAILURE');
     if (!definitionPaths.has(path) && !inAdapter(path)) {
       const inspection = inspectColors(text,path);
-      for (const entry of inspection.violations) add('visual/hardcoded','FAIL',path,entry.line,entry.value,'Use registered project/theme paint roles instead of scattered colors');
-      for (const entry of inspection.unresolved) add('visual/dynamic','UNVERIFIED',path,1,entry,'Review runtime visual expression; static scan cannot determine its value');
+      for (const entry of inspection.violations) add('visual/hardcoded','FAIL',path,entry.line,entry.value);
+      for (const entry of inspection.unresolved) add('visual/dynamic','UNVERIFIED',path,1,entry);
     }
     const lineOf = (node: ts.Node) => source.getLineAndCharacterOfPosition(node.getStart(source)).line+1;
     const usedBindings=new Set<ts.Symbol>();
@@ -89,7 +92,7 @@ export function checkProject(projectPath: string, options: { mode?: 'report' | '
       for(const peer of entry.dependencies?.optionalPeers??[]) {
         if(typeof peer!=='string')continue;
         try{req.resolve(peer);}catch{
-          add('imports/missing-peer','FAIL',path,lineOf(node),`${entry.name} requires ${peer}`,'Install the optional peer required by this actually used component, or choose a component without it');
+          add('imports/missing-peer','FAIL',path,lineOf(node),`${entry.name} requires ${peer}`);
           if(!executionFaults.includes(peer))executionFaults.push(peer);
         }
       }
@@ -106,16 +109,16 @@ export function checkProject(projectPath: string, options: { mode?: 'report' | '
     function moduleRule(node: ts.ImportDeclaration | ts.ExportDeclaration) {
       if (!node.moduleSpecifier || !ts.isStringLiteral(node.moduleSpecifier)) return;
       const moduleName = node.moduleSpecifier.text;
-      if (moduleName.startsWith('@qingye_lab/ui/') && !isPublicSubpath(project,moduleName.slice('@qingye_lab/ui'.length))) {add('imports/private','FAIL',path,lineOf(node),moduleName,'Import through an installed package public export');return;}
+      if (moduleName.startsWith('@qingye_lab/ui/') && !isPublicSubpath(project,moduleName.slice('@qingye_lab/ui'.length))) {add('imports/private','FAIL',path,lineOf(node),moduleName);return;}
       const resolved = ts.resolveModuleName(moduleName,path,program.getCompilerOptions(),ts.sys).resolvedModule;
-      if (!resolved) { add('imports/unresolved','UNVERIFIED',path,lineOf(node),moduleName,'Resolve the actual dependency/alias; unresolved modules are not validated'); return; }
+      if (!resolved) { add('imports/unresolved','UNVERIFIED',path,lineOf(node),moduleName); return; }
       const symbol = checker.getSymbolAtLocation(node.moduleSpecifier);
-      if (!symbol) { add('imports/unresolved','UNVERIFIED',path,lineOf(node),moduleName,'Module resolved but exports could not be inspected'); return; }
+      if (!symbol) { add('imports/unresolved','UNVERIFIED',path,lineOf(node),moduleName,'Module resolved but its exports could not be inspected; export and optional-peer checks did not run'); return; }
       const exported = new Set(checker.getExportsOfModule(symbol).map(s => s.name));
       const names = ts.isImportDeclaration(node) && node.importClause?.namedBindings && ts.isNamedImports(node.importClause.namedBindings) ? node.importClause.namedBindings.elements : ts.isExportDeclaration(node) && node.exportClause && ts.isNamedExports(node.exportClause) ? node.exportClause.elements : [];
       for (const item of names) {
         const imported = item.propertyName?.text ?? item.name.text;
-        if (!exported.has(imported)) add('imports/invalid-export','FAIL',path,lineOf(item),`${moduleName}:${imported}`,'Use the actual installed module exports');
+        if (!exported.has(imported)) add('imports/invalid-export','FAIL',path,lineOf(item),`${moduleName}:${imported}`);
         if(ts.isImportDeclaration(node) && ts.isImportSpecifier(item) && !item.isTypeOnly && !node.importClause?.isTypeOnly){const local=checker.getSymbolAtLocation(item.name);if(local&&usedBindings.has(local)){
           let actual=local.flags&ts.SymbolFlags.Alias?checker.getAliasedSymbol(local):local;
           if(actual.declarations?.some(d=>d.getSourceFile().fileName.startsWith(`${project.packageRoot}/`)))componentPeers(actual.name,item);
@@ -129,15 +132,15 @@ export function checkProject(projectPath: string, options: { mode?: 'report' | '
         const name = node.name.getText(source);
         if (['className','style'].includes(name)) {
           for (const value of values(node.initializer)) {
-            for (const token of references(value)) if (!registry.has(token)) add('token/undefined','FAIL',path,lineOf(node),token,'Use a registered token');
-            if (!inAdapter(path) && name === 'className') for (const match of value.matchAll(designClass)) add('visual/hardcoded','FAIL',path,lineOf(node),match[0].trim(),'Use a registered visual role; structural grid/flex dimensions and data are allowed');
+            for (const token of references(value)) if (!registry.has(token)) add('token/undefined','FAIL',path,lineOf(node),token);
+            if (!inAdapter(path) && name === 'className') for (const match of value.matchAll(designClass)) add('visual/hardcoded','FAIL',path,lineOf(node),match[0].trim());
           }
-          if (name === 'style' && ts.isJsxExpression(node.initializer) && node.initializer.expression && ts.isObjectLiteralExpression(node.initializer.expression) && !inAdapter(path)) for (const prop of node.initializer.expression.properties) if (ts.isPropertyAssignment(prop) && designStyle.test(prop.name.getText(source).replace(/['"]/g,'')) && (ts.isNumericLiteral(prop.initializer) || values(prop.initializer).some(v => !v.includes('var(')))) add('visual/hardcoded','FAIL',path,lineOf(prop),prop.getText(source),'Move visual type/radius/motion decisions to the configured source');
+          if (name === 'style' && ts.isJsxExpression(node.initializer) && node.initializer.expression && ts.isObjectLiteralExpression(node.initializer.expression) && !inAdapter(path)) for (const prop of node.initializer.expression.properties) if (ts.isPropertyAssignment(prop) && designStyle.test(prop.name.getText(source).replace(/['"]/g,'')) && (ts.isNumericLiteral(prop.initializer) || values(prop.initializer).some(v => !v.includes('var(')))) add('visual/hardcoded','FAIL',path,lineOf(prop),prop.getText(source));
         }
         if (name === 'data-theme') {
           const possible = values(node.initializer);
-          if (!possible.length) add('theme/dynamic','UNVERIFIED',path,lineOf(node),node.getText(source),'Verify dynamic theme axis at runtime');
-          for (const value of possible) if (!['light','dark'].includes(value)) add('theme/axes','FAIL',path,lineOf(node),value,'Brand belongs in data-brand');
+          if (!possible.length) add('theme/dynamic','UNVERIFIED',path,lineOf(node),node.getText(source));
+          for (const value of possible) if (!['light','dark'].includes(value)) add('theme/axes','FAIL',path,lineOf(node),value);
         }
       }
       ts.forEachChild(node,visit);
@@ -166,7 +169,7 @@ function applyDispositions(project: Project, diagnostics: Diagnostic[]) {
   }
   if (cfg.exceptions) {
     const exceptions = json(inside(project.root,cfg.exceptions));
-    if (exceptions.schemaVersion!==1 || !Array.isArray(exceptions.exceptions) || exceptions.exceptions.some((i:any)=>!i.rule || !i.file || !Number.isInteger(i.line) || typeof i.evidence!=='string' || !i.reason || !i.reviewAfter || i.file.includes('*') || Number.isNaN(Date.parse(i.reviewAfter)))) throw new ToolError('Invalid precise exceptions; require rule/file/line/evidence/reason/reviewAfter','INVALID_EXCEPTIONS');
+    if (exceptions.schemaVersion!==1 || !Array.isArray(exceptions.exceptions) || exceptions.exceptions.some((i:any)=>!i.rule || !i.file || !Number.isInteger(i.line) || typeof i.evidence!=='string' || !i.reason || !i.reviewAfter || i.file.includes('*') || !Object.hasOwn(DIAGNOSTIC_RULES,i.rule) || Number.isNaN(Date.parse(i.reviewAfter)))) throw new ToolError('Invalid precise exceptions; require a known rule and file/line/evidence/reason/reviewAfter','INVALID_EXCEPTIONS');
     for (const d of diagnostics) { const match=exceptions.exceptions.find((i:any)=>i.rule===d.rule && i.file===d.file && i.line===d.line && i.evidence===d.evidence && Date.parse(i.reviewAfter)>Date.now()); if(match) { d.disposition='exception'; d.reason=match.reason; } }
   }
 }

@@ -8,7 +8,7 @@ Source SHA-256: ff984eaf9c0ebd6721ed7198ee409a0ea629f91a265337afacb6b19328cae599
 Present request status separately from content that remains valid.
 
 ## Decision
-status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it.
+status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it. Low-risk reversible optimistic writes belong in application state without announcing Saved before confirmation; unknown write outcomes belong in PendingValue.
 
 ## Notes
 - Error feedback is wrapped in role=alert by the component, so errorContent need not add its own (nesting announces twice); retained content is never made live.

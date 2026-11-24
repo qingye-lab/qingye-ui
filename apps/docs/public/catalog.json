@@ -1667,6 +1667,17 @@
         "刷新",
         "重试"
       ],
+      "confusions": [
+        {
+          "mistaken": "刷新时用 Skeleton 替换旧内容",
+          "mistakenEn": "Replacing valid content with Skeleton on refresh",
+          "use": [
+            "AsyncContent"
+          ],
+          "note": "已有内容刷新时用 AsyncContent 并保持 hasContent={true}，保留工作面与焦点。",
+          "noteEn": "Keep existing content and focus during refresh with AsyncContent and hasContent={true}."
+        }
+      ],
       "api": [
         {
           "name": "AsyncContent",
@@ -1913,13 +1924,13 @@
         "sha256": "ff984eaf9c0ebd6721ed7198ee409a0ea629f91a265337afacb6b19328cae599",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "status 是最近请求的事实，hasContent 是应用对现有内容有效性的判断。首次加载没有内容；后台刷新和刷新失败保留内容及其组件身份。只有 success 且 hasContent=false 呈现空态。权限变化若使旧内容失效，应用须同时撤下它。",
+      "decisions": "status 是最近请求的事实，hasContent 是应用对现有内容有效性的判断。首次加载没有内容；后台刷新和刷新失败保留内容及其组件身份。只有 success 且 hasContent=false 呈现空态。权限变化若使旧内容失效，应用须同时撤下它。低风险可逆写入的乐观结果由应用状态呈现，确认前不宣称已保存；写入结果未知改用 PendingValue。",
       "localized": {
         "en": {
           "title": "AsyncContent",
           "description": "Present request status separately from content that remains valid.",
           "category": "Feedback",
-          "decisions": "status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it.",
+          "decisions": "status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it. Low-risk reversible optimistic writes belong in application state without announcing Saved before confirmation; unknown write outcomes belong in PendingValue.",
           "notes": [
             "Error feedback is wrapped in role=alert by the component, so errorContent need not add its own (nesting announces twice); retained content is never made live.",
             "Feedback always follows the content: refresh and failure do not push the content being read, only elements after it move with the feedback.",
@@ -5809,6 +5820,17 @@
         "忙碌",
         "加载中",
         "危险动作"
+      ],
+      "confusions": [
+        {
+          "mistaken": "独立 Spinner 或按钮内成功/失败状态",
+          "mistakenEn": "Standalone Spinner or success/error state inside Button",
+          "use": [
+            "Button"
+          ],
+          "note": "Button 只有布尔 loading 忙碌态，结果交由 Alert / toastManager，确认交由 AlertDialog / ConfirmAction；不提供独立 Spinner。",
+          "noteEn": "Button only has boolean loading; express outcomes with Alert or toastManager and confirmation with AlertDialog or ConfirmAction. No standalone Spinner is provided."
+        }
       ],
       "api": [
         {
@@ -23601,6 +23623,16 @@
         "弹出框",
         "模态"
       ],
+      "confusions": [
+        {
+          "mistaken": "DialogContent",
+          "use": [
+            "DialogPopup"
+          ],
+          "note": "对话框承载面名为 DialogPopup（长内容滚动区配 DialogPanel）。",
+          "noteEn": "The dialog surface is DialogPopup (pair with DialogPanel for scrolling content)."
+        }
+      ],
       "api": [
         {
           "name": "Dialog",
@@ -24446,6 +24478,17 @@
         "sheet",
         "边缘",
         "抽屉"
+      ],
+      "confusions": [
+        {
+          "mistaken": "Sheet / SheetContent",
+          "use": [
+            "Drawer",
+            "DrawerPopup"
+          ],
+          "note": "边缘工作面统一用 Drawer 与 DrawerPopup（对应 SheetContent），方向由 swipeDirection 指定；DrawerContent 只是承载面内的可滚动内容区，不能代替 DrawerPopup。",
+          "noteEn": "Edge workspaces use Drawer and DrawerPopup (the SheetContent counterpart), with swipeDirection choosing the edge. DrawerContent is only the scrollable area inside the surface and does not replace DrawerPopup."
+        }
       ],
       "api": [
         {
@@ -35440,6 +35483,18 @@
         "下拉菜单",
         "更多操作"
       ],
+      "confusions": [
+        {
+          "mistaken": "DropdownMenu / DropdownMenuContent",
+          "use": [
+            "Menu",
+            "MenuPopup",
+            "MenuItem"
+          ],
+          "note": "命令下拉菜单统一用 Menu 族导出，无 DropdownMenu* 别名。",
+          "noteEn": "Command dropdown menus use the Menu family of exports; there are no DropdownMenu* aliases."
+        }
+      ],
       "api": [
         {
           "name": "Menu / MenuSubmenu",
@@ -42280,6 +42335,17 @@
         "加载中的值",
         "占位"
       ],
+      "confusions": [
+        {
+          "mistaken": "用错误提示代替写入结果未知",
+          "mistakenEn": "Reporting an unknown write outcome as a confirmed error",
+          "use": [
+            "PendingValue"
+          ],
+          "note": "写入已发出但超时或断连无法确认结果时，用 PendingValue 保留原值并提供核实入口。",
+          "noteEn": "Use PendingValue when a write outcome is unknown after timeout or disconnect, keeping the original value and verification actions."
+        }
+      ],
       "api": [
         {
           "name": "PendingValue",
@@ -42490,13 +42556,13 @@
         "sha256": "fb8550fe64f13a3f78a7d664a9afebac67328f26c997a51d3a2daebcf48e5f85",
         "extraction": "TypeScript AST for export signatures; props resolved with the TypeScript type checker (typeApi). Missing signatures remain UNVERIFIED."
       },
-      "decisions": "不把未知当失败，不默认重试危险写入。",
+      "decisions": "不把未知当失败，不默认重试危险写入。低风险可逆写入的乐观态由应用暂显预期值并在失败时回退，确认前不宣称已保存；一旦写入结果未知，改为保留原值并核实。",
       "localized": {
         "en": {
           "title": "PendingValue",
           "description": "An unresolved write result with its original value.",
           "category": "Feedback",
-          "decisions": "Unknown is not failure; never retry a dangerous write by default.",
+          "decisions": "Unknown is not failure; never retry a dangerous write by default. Low-risk reversible optimistic updates may show an expected value in application state and roll back on failure without claiming Saved; once an outcome is unknown, keep the original value and verify.",
           "notes": [],
           "api": [
             {
@@ -58613,6 +58679,17 @@
         "选项卡",
         "页签"
       ],
+      "confusions": [
+        {
+          "mistaken": "TabsTrigger / TabsContent",
+          "use": [
+            "TabsTab",
+            "TabsPanel"
+          ],
+          "note": "标签触发器与内容面板名为 TabsTab 与 TabsPanel。",
+          "noteEn": "Tab triggers and content panels are TabsTab and TabsPanel."
+        }
+      ],
       "api": [
         {
           "name": "Tabs / TabsList",
@@ -62371,6 +62448,17 @@
         "notification",
         "通知",
         "消息"
+      ],
+      "confusions": [
+        {
+          "mistaken": "Toast",
+          "use": [
+            "ToastProvider",
+            "toastManager"
+          ],
+          "note": "库不导出 Toast 组件；挂载 ToastProvider 并调用 toastManager.add/update/promise。",
+          "noteEn": "There is no Toast component export; mount ToastProvider and call toastManager.add/update/promise."
+        }
       ],
       "api": [
         {
@@ -70364,7 +70452,7 @@
   "patterns": [],
   "designGuide": {
     "file": "design.md",
-    "sha256": "c8fa01e1f4c0b9e003938bc7b3a40873de07f633f62eb7844b94326c259016ab",
+    "sha256": "74f81d8ab54d893965f445ee37054d5e543ff04444dc55a899062c19dd410752",
     "styleContract": {
       "file": "ai/style.md",
       "section": "设计契约",

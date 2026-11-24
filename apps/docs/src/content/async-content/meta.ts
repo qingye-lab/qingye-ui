@@ -5,8 +5,17 @@ export default {
   description: "分别呈现请求状态与仍然有效的内容。", descriptionEn: "Present request status separately from content that remains valid.",
   category: "反馈", layer: "pattern", source: "local", exports: ["AsyncContent"],
   keywords: ["async", "loading", "refresh", "error", "异步", "刷新", "重试"],
-  decisions: "status 是最近请求的事实，hasContent 是应用对现有内容有效性的判断。首次加载没有内容；后台刷新和刷新失败保留内容及其组件身份。只有 success 且 hasContent=false 呈现空态。权限变化若使旧内容失效，应用须同时撤下它。",
-  decisionsEn: "status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it.",
+  confusions: [
+    {
+      mistaken: "刷新时用 Skeleton 替换旧内容",
+      mistakenEn: "Replacing valid content with Skeleton on refresh",
+      use: ["AsyncContent"],
+      note: "已有内容刷新时用 AsyncContent 并保持 hasContent={true}，保留工作面与焦点。",
+      noteEn: "Keep existing content and focus during refresh with AsyncContent and hasContent={true}.",
+    },
+  ],
+  decisions: "status 是最近请求的事实，hasContent 是应用对现有内容有效性的判断。首次加载没有内容；后台刷新和刷新失败保留内容及其组件身份。只有 success 且 hasContent=false 呈现空态。权限变化若使旧内容失效，应用须同时撤下它。低风险可逆写入的乐观结果由应用状态呈现，确认前不宣称已保存；写入结果未知改用 PendingValue。",
+  decisionsEn: "status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it. Low-risk reversible optimistic writes belong in application state without announcing Saved before confirmation; unknown write outcomes belong in PendingValue.",
   api: [{ name: "AsyncContent", description: "不发请求的内容状态组合。", descriptionEn: "A content-state composition that makes no requests.", props: [
     { name: "status", type: '"pending" | "success" | "error"', description: "应用声明请求事实，不用超时猜测失败。", descriptionEn: "Application-declared request fact; elapsed time never implies failure." },
     { name: "hasContent / children", type: "boolean / ReactNode", description: "有效内容保持挂载；不会自动禁用、清空草稿或移动焦点。", descriptionEn: "Valid content stays mounted without automatic disabling, draft clearing or focus movement." },

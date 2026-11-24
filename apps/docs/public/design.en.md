@@ -193,6 +193,8 @@ Modern imagery and vivid expression are allowed. Check actual Chinese punctuatio
 
 Design slow responses, in-place errors, partial success, return, abandonment, and re-entry as well as the normal path. Express an unknown write outcome accurately, then verify or recover within the application's capabilities. Do not assume the server did nothing.
 
+Low-risk, reversible writes that the application can roll back may show the expected result immediately; never announce "Saved" before server confirmation, and on failure roll back to the actual state while preserving the user's input intent and stating what happened. High-risk or irreversible actions must not use optimistic feedback as if completed.
+
 Define separate consequences for closing an interface, canceling editing, requesting background cancellation, and undoing a saved action. Sending a cancellation request does not confirm cancellation. When permissions are revoked or sensitive information is involved, identify work that must be cleared rather than retaining everything forever.
 
 Motion explains actual changes and permits interruption. With reduced motion, names, states, inputs, and exits must remain usable.

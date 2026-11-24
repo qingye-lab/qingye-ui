@@ -12,7 +12,17 @@ export default {
     "PendingValue"
   ],
   "keywords": ["pending-value", "loading value", "unknown", "placeholder", "待定", "未知", "加载中的值", "占位"],
-  "decisions": "不把未知当失败，不默认重试危险写入。", decisionsEn: "Unknown is not failure; never retry a dangerous write by default.",
+  "confusions": [
+    {
+      "mistaken": "用错误提示代替写入结果未知",
+      "mistakenEn": "Reporting an unknown write outcome as a confirmed error",
+      "use": ["PendingValue"],
+      "note": "写入已发出但超时或断连无法确认结果时，用 PendingValue 保留原值并提供核实入口。",
+      "noteEn": "Use PendingValue when a write outcome is unknown after timeout or disconnect, keeping the original value and verification actions."
+    }
+  ],
+  "decisions": "不把未知当失败，不默认重试危险写入。低风险可逆写入的乐观态由应用暂显预期值并在失败时回退，确认前不宣称已保存；一旦写入结果未知，改为保留原值并核实。",
+  "decisionsEn": "Unknown is not failure; never retry a dangerous write by default. Low-risk reversible optimistic updates may show an expected value in application state and roll back on failure without claiming Saved; once an outcome is unknown, keep the original value and verify.",
   "design": {
     "methods": [
       "名实相符",

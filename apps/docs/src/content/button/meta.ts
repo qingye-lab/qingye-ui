@@ -24,6 +24,15 @@ export default {
   source: "local",
   exports: ["Button", "ButtonPrimitive", "buttonVariants"],
   keywords: ["button", "按钮", "操作", "提交", "loading", "忙碌", "加载中", "危险动作"],
+  confusions: [
+    {
+      mistaken: "独立 Spinner 或按钮内成功/失败状态",
+      mistakenEn: "Standalone Spinner or success/error state inside Button",
+      use: ["Button"],
+      note: "Button 只有布尔 loading 忙碌态，结果交由 Alert / toastManager，确认交由 AlertDialog / ConfirmAction；不提供独立 Spinner。",
+      noteEn: "Button only has boolean loading; express outcomes with Alert or toastManager and confirmation with AlertDialog or ConfirmAction. No standalone Spinner is provided.",
+    },
+  ],
   api: [
     {
       name: "Button",

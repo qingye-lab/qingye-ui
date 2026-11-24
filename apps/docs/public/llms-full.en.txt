@@ -199,6 +199,8 @@ Modern imagery and vivid expression are allowed. Check actual Chinese punctuatio
 
 Design slow responses, in-place errors, partial success, return, abandonment, and re-entry as well as the normal path. Express an unknown write outcome accurately, then verify or recover within the application's capabilities. Do not assume the server did nothing.
 
+Low-risk, reversible writes that the application can roll back may show the expected result immediately; never announce "Saved" before server confirmation, and on failure roll back to the actual state while preserving the user's input intent and stating what happened. High-risk or irreversible actions must not use optimistic feedback as if completed.
+
 Define separate consequences for closing an interface, canceling editing, requesting background cancellation, and undoing a saved action. Sending a cancellation request does not confirm cancellation. When permissions are revoked or sensitive information is involved, identify work that must be cleared rather than retaining everything forever.
 
 Motion explains actual changes and permits interruption. With reduced motion, names, states, inputs, and exits must remain usable.
@@ -763,7 +765,7 @@ Source SHA-256: ff984eaf9c0ebd6721ed7198ee409a0ea629f91a265337afacb6b19328cae599
 Present request status separately from content that remains valid.
 
 ### Decision
-status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it.
+status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it. Low-risk reversible optimistic writes belong in application state without announcing Saved before confirmation; unknown write outcomes belong in PendingValue.
 
 ### Notes
 - Error feedback is wrapped in role=alert by the component, so errorContent need not add its own (nesting announces twice); retained content is never made live.
@@ -8475,7 +8477,7 @@ Source SHA-256: fb8550fe64f13a3f78a7d664a9afebac67328f26c997a51d3a2daebcf48e5f85
 An unresolved write result with its original value.
 
 ### Decision
-Unknown is not failure; never retry a dangerous write by default.
+Unknown is not failure; never retry a dangerous write by default. Low-risk reversible optimistic updates may show an expected value in application state and roll back on failure without claiming Saved; once an outcome is unknown, keep the original value and verify.
 
 ### Use and ownership
 - A write occurred without a reliable outcome.

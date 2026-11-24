@@ -8,7 +8,7 @@ Source SHA-256: fb8550fe64f13a3f78a7d664a9afebac67328f26c997a51d3a2daebcf48e5f85
 An unresolved write result with its original value.
 
 ## Decision
-Unknown is not failure; never retry a dangerous write by default.
+Unknown is not failure; never retry a dangerous write by default. Low-risk reversible optimistic updates may show an expected value in application state and roll back on failure without claiming Saved; once an outcome is unknown, keep the original value and verify.
 
 ## Use and ownership
 - A write occurred without a reliable outcome.

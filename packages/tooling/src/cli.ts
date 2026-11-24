@@ -47,4 +47,4 @@ export async function main(args: string[]) {
     return result.exitCode??(command==='theme'&&subject==='validate'&&result.status==='FAIL'?1:0);
   }catch(error){console.error(JSON.stringify({status:'NOT_RUN',completed:false,code:error instanceof ToolError?error.code:'EXECUTION_FAILURE',error:(error as Error).message,exitCode:2},null,2));return 2;}
 }
-function human(result:any){if(result.diagnostics)return `${result.status} · installed ${result.installedVersion} · ${result.mode}\n${result.diagnostics.map((d:any)=>`${d.status} ${d.rule} ${d.file}:${d.line} ${d.evidence}${d.disposition?` [${d.disposition}]`:''}`).join('\n')}\nBrowser: NOT_RUN · report exit 0 is not diagnostic PASS`;return JSON.stringify(result,null,2);}
+function human(result:any){if(result.diagnostics)return `${result.status} · installed ${result.installedVersion} · ${result.mode}\n${result.diagnostics.map((d:any)=>`${d.status} ${d.rule} [${d.layer}] ${d.file}:${d.line} ${d.evidence}${d.disposition?` [${d.disposition}]`:''} (${d.repairGuide})`).join('\n')}\nBrowser: NOT_RUN · report exit 0 is not diagnostic PASS`;return JSON.stringify(result,null,2);}

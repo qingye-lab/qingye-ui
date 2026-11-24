@@ -35,6 +35,21 @@ Component capabilities come from the installed @qingye_lab/ui catalog.json, type
 
 After upgrades, read the installed guide and declarations again. Website resources help discovery but cannot replace local version facts. Other stacks may save this guide in project documentation and apply its methods, but must verify platform semantics separately; these React APIs cannot be assumed to apply.
 
+## Common naming and usage corrections
+
+Common consumer mistakes: some follow naming habits from other React UI libraries (not former Qingye names), others misuse state semantics. Generated from component metadata and validated against each module's current exports:
+
+| Common mistake | Actual exports | Note |
+|---|---|---|
+| Replacing valid content with Skeleton on refresh | `AsyncContent` (`@qingye_lab/ui/components/async-content`) | Keep existing content and focus during refresh with AsyncContent and hasContent={true}. |
+| Standalone Spinner or success/error state inside Button | `Button` (`@qingye_lab/ui/components/button`) | Button only has boolean loading; express outcomes with Alert or toastManager and confirmation with AlertDialog or ConfirmAction. No standalone Spinner is provided. |
+| DialogContent | `DialogPopup` (`@qingye_lab/ui/components/dialog`) | The dialog surface is DialogPopup (pair with DialogPanel for scrolling content). |
+| Sheet / SheetContent | `Drawer` / `DrawerPopup` (`@qingye_lab/ui/components/drawer`) | Edge workspaces use Drawer and DrawerPopup (the SheetContent counterpart), with swipeDirection choosing the edge. DrawerContent is only the scrollable area inside the surface and does not replace DrawerPopup. |
+| DropdownMenu / DropdownMenuContent | `Menu` / `MenuPopup` / `MenuItem` (`@qingye_lab/ui/components/menu`) | Command dropdown menus use the Menu family of exports; there are no DropdownMenu* aliases. |
+| Reporting an unknown write outcome as a confirmed error | `PendingValue` (`@qingye_lab/ui/components/pending-value`) | Use PendingValue when a write outcome is unknown after timeout or disconnect, keeping the original value and verification actions. |
+| TabsTrigger / TabsContent | `TabsTab` / `TabsPanel` (`@qingye_lab/ui/components/tabs`) | Tab triggers and content panels are TabsTab and TabsPanel. |
+| Toast | `ToastProvider` / `toastManager` (`@qingye_lab/ui/components/toast`) | There is no Toast component export; mount ToastProvider and call toastManager.add/update/promise. |
+
 ## Style contract
 
 Read [style.en.md](style.en.md) before implementing UI. It contains the translated design contract from ../design.en.md and implementation rules from STANDARDS.md; Chinese source criteria remain canonical.
@@ -60,7 +75,7 @@ Preserve grouping, hierarchy, and action reachability when text grows. Density m
 3. Load related resources from ai/v<installed-version>/en/components. actualExports and local declarations are authority. api is curated guidance; typeApi lists the props this library declares, resolved from its types, and providers lists what each component needs from the app. Anything marked UNVERIFIED stays unverified. Inspect example imports and optionalPeers.
 4. Reuse current props and combinations. The library owns shared UI behavior, the project owns recipes/theme, the application owns permissions/drafts/requests/versions, and tooling owns facts/diagnostics. Do not copy foundation controls.
 5. Implement normal, waiting, relevant failure/unknown, cancellation and return paths. Timeout does not prove a write failed. Confirm current objects and revisions. Cancellation requested differs from cancellation complete.
-6. Run existing checks. Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.
+6. Run existing checks. If the project configures `@qingye/tooling`, run `qingye-ui check` and follow each diagnostic's `repairGuide` anchor (`@qingye/tooling/diagnostics.md#<rule-slug>`, where the slug replaces `/` with `-`, e.g. `#imports-invalid-export`). Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.
 
 Read [design-philosophy.en.md](design-philosophy.en.md) for methods and their sources; [the public guide](../design.en.md) for project adoption; [installation](v5.6.0/installation.md) for styles and dependencies; [the resource index](v5.6.0/en/llms.txt) for component constraints. Examples retain their authored language and local component state; they do not prove backend permissions, persistence, idempotency or cancellation.
 

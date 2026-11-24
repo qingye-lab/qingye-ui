@@ -1,4 +1,7 @@
+import type { RuleId } from './rules.js';
+
 export type Status = 'PASS' | 'FAIL' | 'UNVERIFIED' | 'NOT_RUN';
+export type Layer = 'L' | 'P' | 'A' | 'T';
 export type Theme = { schemaVersion: 1; brand: string; common: Record<string,string>; light: Record<string,string>; dark: Record<string,string>; compact: Record<string,string> };
 export type ProjectConfig = {
   schemaVersion: 1; package: '@qingye_lab/ui'; publicEntry: string; styleEntry: string;
@@ -9,5 +12,5 @@ export type ProjectConfig = {
 };
 export type Catalog = { schemaVersion?: number; version: string; components: any[]; patterns?: any[]; [key: string]: unknown };
 export type Project = { root: string; configPath: string; config: ProjectConfig; packageRoot: string; packageJson: any; catalog: Catalog; configFingerprint: string };
-export type Diagnostic = { id: string; rule: string; ruleVersion: 1; status: Status; certainty: 'certain' | 'unknown'; severity: 'error' | 'warning' | 'info'; file: string; line: number; evidence: string; decision: string; layer: 'L' | 'P' | 'A' | 'T'; safeAutofix: false; limitation: string; disposition?: 'baseline' | 'exception'; reason?: string };
+export type Diagnostic = { id: string; rule: RuleId; ruleVersion: 1; status: Status; certainty: 'certain' | 'unknown'; severity: 'error' | 'warning' | 'info'; file: string; line: number; evidence: string; decision: string; repairGuide: string; layer: Layer; safeAutofix: false; limitation: string; disposition?: 'baseline' | 'exception'; reason?: string };
 export class ToolError extends Error { constructor(message: string, public code = 'EXECUTION_FAILURE') { super(message); this.name = 'ToolError'; } }

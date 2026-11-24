@@ -213,6 +213,24 @@ const components = names.map((name) => {
     if (!fact) throw new Error(`Metadata names a missing public export: ${name}.${item}`);
     return { name: item, import: own ? `${pkg.name}/components/${name}` : fact.module, owner: fact.owner, status: fact.status };
   });
+  const confusions = (meta.confusions ?? []).map((entry, index) => {
+    if (!entry?.mistaken?.trim() || !Array.isArray(entry.use) || !entry.use.length || !entry.note?.trim()) {
+      throw new Error(`Invalid confusion entry in ${name}.confusions[${index}]`);
+    }
+    for (const symbol of entry.use) {
+      // SKILL rows render the owning component's import path, so only that module's own exports are valid.
+      if (!actualExports.some((fact) => fact.name === symbol)) {
+        throw new Error(`Confusion entry in ${name} names ${symbol}, which ${pkg.name}/components/${name} does not export`);
+      }
+    }
+    return {
+      mistaken: entry.mistaken.trim(),
+      ...(entry.mistakenEn?.trim() ? { mistakenEn: entry.mistakenEn.trim() } : {}),
+      use: entry.use,
+      note: entry.note.trim(),
+      ...(entry.noteEn?.trim() ? { noteEn: entry.noteEn.trim() } : {}),
+    };
+  });
   const imports = [...new Set(importsOf(path, true).map(packageOf))];
   const demosPath = join(content, name, "demos");
   const examples = existsSync(demosPath) ? readdirSync(demosPath).filter((file) => file.endsWith(".tsx")).sort().map((file) => {
@@ -230,6 +248,7 @@ const components = names.map((name) => {
     ...(meta.layer ? { layer: meta.layer } : {}),
     import: `${pkg.name}/components/${name}`, exports: meta.exports, docs: `/docs/components/${name}`,
     ...(meta.notes?.length ? { notes: meta.notes } : {}), ...(meta.keywords?.length ? { keywords: meta.keywords } : {}),
+    ...(confusions.length ? { confusions } : {}),
     api: meta.api, apiStatus: analysis.apiStatus, typeApi: analysis.typeApi, keyboard: meta.keyboard ?? [], actualExports, types, usageImports,
     dependencies: { runtime: imports.filter((item) => pkg.dependencies?.[item] || (pkg.peerDependencies?.[item] && !pkg.peerDependenciesMeta?.[item]?.optional)), optionalPeers: imports.filter((item) => pkg.peerDependenciesMeta?.[item]?.optional) },
     providers: { exports: actualExports.filter((item) => /Provider$/.test(item.name)).map((item) => item.name), guidance: (meta.notes ?? []).filter((note) => /Provider|上下文/.test(note)).map((text) => ({ text, source: publicPath(relative(repo, metaPath)), certainty: "documented" })), ...(resolvedProviders ? resolvedProviders : { required: [], status: "UNVERIFIED", ...(analysis.providersError ? { unverified: `provider analysis failed: ${analysis.providersError}` } : {}) }) },
@@ -280,6 +299,38 @@ write(join(aiRoot, "design-philosophy.md"), packagedPhilosophy);
 write(join(aiRoot, "design-philosophy.en.md"), packagedPhilosophyEn);
 write(join(siteAi, "design-philosophy.md"), philosophy);
 write(join(siteAi, "design-philosophy.en.md"), philosophyEn);
+const confusionRows = components.flatMap((component) =>
+  (component.confusions ?? []).map((entry) => ({
+    component: component.name,
+    importPath: component.import,
+    mistaken: entry.mistaken,
+    mistakenEn: entry.mistakenEn ?? entry.mistaken,
+    use: entry.use,
+    note: entry.note,
+    noteEn: entry.noteEn ?? entry.note,
+  })),
+);
+const tableCell = (text) => String(text).replace(/\r?\n/g, " ").replace(/\|/g, "\\|");
+const confusionRow = (mistaken, row, note) =>
+  `| ${tableCell(mistaken)} | ${row.use.map((name) => `\`${name}\``).join(" / ")} (\`${row.importPath}\`) | ${tableCell(note)} |`;
+const confusionSection = confusionRows.length ? [
+  "## 常见名称与用法纠偏",
+  "",
+  "以下是消费方常见的误写与误用：部分来自其他 React 组件库的命名习惯（非本库历史旧名），部分是状态语义的误用。全部由组件元数据生成，并校验为所在模块的当前真实导出：",
+  "",
+  "| 常见误写 / 误用 | 当前导出 | 说明 |",
+  "|---|---|---|",
+  ...confusionRows.map((row) => confusionRow(row.mistaken, row, row.note)),
+].join("\n") : "";
+const confusionSectionEn = confusionRows.length ? [
+  "## Common naming and usage corrections",
+  "",
+  "Common consumer mistakes: some follow naming habits from other React UI libraries (not former Qingye names), others misuse state semantics. Generated from component metadata and validated against each module's current exports:",
+  "",
+  "| Common mistake | Actual exports | Note |",
+  "|---|---|---|",
+  ...confusionRows.map((row) => confusionRow(row.mistakenEn, row, row.noteEn)),
+].join("\n") : "";
 const skill = `---
 name: qingye-ui
 description: Build complete React tasks using the installed Qingye UI version, public methods and verified facts.
@@ -290,7 +341,7 @@ description: Build complete React tasks using the installed Qingye UI version, p
 This file accompanies ${pkg.name} ${pkg.version}. Read the installed version first; a website or upstream namesake may describe another API.
 
 ${projectAdoption}
-
+${confusionSection ? `\n${confusionSection}\n` : ""}
 ## Style contract
 
 Read [style.md](style.md) before implementing UI. It contains the 设计契约 from
@@ -311,7 +362,7 @@ steps, never a one-off value.
 3. Load related resources from ai/v<installed-version>/components${patterns.length ? " and patterns" : ""}. actualExports and local declarations are authority. api is curated guidance; typeApi lists the props this library declares, resolved from its types, and providers lists what each component needs from the app. Anything marked UNVERIFIED stays unverified. Inspect example imports and optionalPeers.
 4. Reuse current props and combinations. The library owns shared UI behavior, the project owns recipes/theme, the application owns permissions/drafts/requests/versions, and tooling owns facts/diagnostics. Do not copy foundation controls.
 5. Implement normal, waiting, relevant failure/unknown, cancellation and return paths. Timeout does not prove a write failed. Confirm current objects and revisions. Cancellation requested differs from cancellation complete.
-6. Run existing checks. Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.
+6. Run existing checks. If the project configures \`@qingye/tooling\`, run \`qingye-ui check\` and follow each diagnostic's \`repairGuide\` anchor (\`@qingye/tooling/diagnostics.md#<rule-slug>\`, where the slug replaces \`/\` with \`-\`, e.g. \`#imports-invalid-export\`). Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.
 
 Read [design-philosophy.md](design-philosophy.md) for methods and their sources; [the public guide](../design.md) for project adoption; [installation](${versionPath}/installation.md) for styles and dependencies; [the resource index](${versionPath}/llms.txt) for ${patterns.length ? "component and pattern" : "component"} constraints. Examples use synthetic local application state and do not prove backend permissions, persistence, idempotency or cancellation.
 
@@ -347,7 +398,8 @@ bothAi("style.md", [
   "",
 ].join("\n"));
 bothAi("SKILL.md", skill);
-const skillEn = skill.replace(projectAdoption, projectAdoptionEn).replace(banSummary, banSummaryEn)
+// Function replacers keep `$&` / `$'` in translated text literal; an absent section is not replaced at all.
+const skillEn = skill.replace(projectAdoption, () => projectAdoptionEn).replace(confusionSection || /(?!)/, () => confusionSectionEn).replace(banSummary, () => banSummaryEn)
   .replace("Read [style.md](style.md) before implementing UI. It contains the 设计契约 from\n../design.md and the component implementation rules from STANDARDS.md.", "Read [style.en.md](style.en.md) before implementing UI. It contains the translated design contract from ../design.en.md and implementation rules from STANDARDS.md; Chinese source criteria remain canonical.")
   .replaceAll("[design-philosophy.md](design-philosophy.md)", "[design-philosophy.en.md](design-philosophy.en.md)")
   .replaceAll("[the public guide](../design.md)", "[the public guide](../design.en.md)")

@@ -35,6 +35,21 @@ This file accompanies @qingye_lab/ui 5.6.0. Read the installed version first; a 
 
 包升级后仍读取安装版指南和声明；网站资料用于发现，不能替代本地版本事实。其他技术栈可把完整指南保存为项目文档并引用该路径，采用设计方法，但须另行验证平台语义，不能假定本库 API 可用。
 
+## 常见名称与用法纠偏
+
+以下是消费方常见的误写与误用：部分来自其他 React 组件库的命名习惯（非本库历史旧名），部分是状态语义的误用。全部由组件元数据生成，并校验为所在模块的当前真实导出：
+
+| 常见误写 / 误用 | 当前导出 | 说明 |
+|---|---|---|
+| 刷新时用 Skeleton 替换旧内容 | `AsyncContent` (`@qingye_lab/ui/components/async-content`) | 已有内容刷新时用 AsyncContent 并保持 hasContent={true}，保留工作面与焦点。 |
+| 独立 Spinner 或按钮内成功/失败状态 | `Button` (`@qingye_lab/ui/components/button`) | Button 只有布尔 loading 忙碌态，结果交由 Alert / toastManager，确认交由 AlertDialog / ConfirmAction；不提供独立 Spinner。 |
+| DialogContent | `DialogPopup` (`@qingye_lab/ui/components/dialog`) | 对话框承载面名为 DialogPopup（长内容滚动区配 DialogPanel）。 |
+| Sheet / SheetContent | `Drawer` / `DrawerPopup` (`@qingye_lab/ui/components/drawer`) | 边缘工作面统一用 Drawer 与 DrawerPopup（对应 SheetContent），方向由 swipeDirection 指定；DrawerContent 只是承载面内的可滚动内容区，不能代替 DrawerPopup。 |
+| DropdownMenu / DropdownMenuContent | `Menu` / `MenuPopup` / `MenuItem` (`@qingye_lab/ui/components/menu`) | 命令下拉菜单统一用 Menu 族导出，无 DropdownMenu* 别名。 |
+| 用错误提示代替写入结果未知 | `PendingValue` (`@qingye_lab/ui/components/pending-value`) | 写入已发出但超时或断连无法确认结果时，用 PendingValue 保留原值并提供核实入口。 |
+| TabsTrigger / TabsContent | `TabsTab` / `TabsPanel` (`@qingye_lab/ui/components/tabs`) | 标签触发器与内容面板名为 TabsTab 与 TabsPanel。 |
+| Toast | `ToastProvider` / `toastManager` (`@qingye_lab/ui/components/toast`) | 库不导出 Toast 组件；挂载 ToastProvider 并调用 toastManager.add/update/promise。 |
+
 ## Style contract
 
 Read [style.md](style.md) before implementing UI. It contains the 设计契约 from
@@ -63,7 +78,7 @@ steps, never a one-off value.
 3. Load related resources from ai/v<installed-version>/components. actualExports and local declarations are authority. api is curated guidance; typeApi lists the props this library declares, resolved from its types, and providers lists what each component needs from the app. Anything marked UNVERIFIED stays unverified. Inspect example imports and optionalPeers.
 4. Reuse current props and combinations. The library owns shared UI behavior, the project owns recipes/theme, the application owns permissions/drafts/requests/versions, and tooling owns facts/diagnostics. Do not copy foundation controls.
 5. Implement normal, waiting, relevant failure/unknown, cancellation and return paths. Timeout does not prove a write failed. Confirm current objects and revisions. Cancellation requested differs from cancellation complete.
-6. Run existing checks. Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.
+6. Run existing checks. If the project configures `@qingye/tooling`, run `qingye-ui check` and follow each diagnostic's `repairGuide` anchor (`@qingye/tooling/diagnostics.md#<rule-slug>`, where the slug replaces `/` with `-`, e.g. `#imports-invalid-export`). Separate source, computed styles, interactions, accessibility and human visual judgment. Report PASS, FAIL, UNVERIFIED, NOT_RUN or justified N/A. Never relax tests or invent success.
 
 Read [design-philosophy.md](design-philosophy.md) for methods and their sources; [the public guide](../design.md) for project adoption; [installation](v5.6.0/installation.md) for styles and dependencies; [the resource index](v5.6.0/llms.txt) for component constraints. Examples use synthetic local application state and do not prove backend permissions, persistence, idempotency or cancellation.
 
