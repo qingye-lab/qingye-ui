@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/token-ledger.mjs",
-  "generatedAt": "2026-11-23T12:42:30.893Z",
-  "revision": "df383d94ecb70a98ec3746bcde98f5b0cd8c672d",
+  "generatedAt": "2026-11-24T13:47:11.531Z",
+  "revision": "3458f0bf08f3edcdbde9ec45709c5c3d67837fc4",
   "static": {
     "fingerprint": {
-      "sha256": "9dbbeb9b77f69551e995a4d64c8e864ed9076760197462be465d134db9098df9",
+      "sha256": "100088d69f3de4c1c31b7867c5fa01a0f8ae1400327ede7fe73e0188f5537aa4",
       "inputs": [
         {
           "path": "apps/docs/index.html",
@@ -161,7 +161,7 @@
         },
         {
           "path": "apps/docs/src/content/async-content/meta.ts",
-          "sha256": "68b08c5ae17aad7df6753321ed8a0605394f3c6bb8082c8840cda16e49a28121"
+          "sha256": "9471d115ddaeb49fe9e0686b11f007a569d7fbbfaa4f3441c72e4ceed6881024"
         },
         {
           "path": "apps/docs/src/content/autocomplete/cover.tsx",
@@ -329,7 +329,7 @@
         },
         {
           "path": "apps/docs/src/content/button/meta.ts",
-          "sha256": "986c76faee731cb6de959c2e67f81d97aa1041644d39cdd370ec5a9c449a0e38"
+          "sha256": "ff9ea8284cc05acd2d6727c6eb1b3699bfd618325b82ffab5157d7c74a3f6e39"
         },
         {
           "path": "apps/docs/src/content/calendar/cover.tsx",
@@ -933,7 +933,7 @@
         },
         {
           "path": "apps/docs/src/content/dialog/meta.ts",
-          "sha256": "c3bf512ecb8a8a1bb76ab8161482f208c1fd93b67d9e150b6d7b115c69085d76"
+          "sha256": "3474269bebd4884b415ab062553fd8a8e39c53aca92bf4932999e5a4822aa9d5"
         },
         {
           "path": "apps/docs/src/content/drawer/cover.tsx",
@@ -965,7 +965,7 @@
         },
         {
           "path": "apps/docs/src/content/drawer/meta.ts",
-          "sha256": "632529915fae1d2d9e85b1aa10a3d848ae3ad18cdacc3f1a8a19a2358c3c550a"
+          "sha256": "dca08161034f6794dc7727c41231dd8914d334527a144b6320061edaa5bcfb98"
         },
         {
           "path": "apps/docs/src/content/empty/cover.tsx",
@@ -1369,7 +1369,7 @@
         },
         {
           "path": "apps/docs/src/content/menu/meta.ts",
-          "sha256": "c5a30c5f91318810860b495e3b59aa8b80ea214034cf18cc2f227f8d52881283"
+          "sha256": "debfcb3e0afc05d08f614fe7521c7158b1048c084af6880ad6933aebecd0f2e1"
         },
         {
           "path": "apps/docs/src/content/meter/cover.tsx",
@@ -1525,7 +1525,7 @@
         },
         {
           "path": "apps/docs/src/content/pending-value/meta.ts",
-          "sha256": "c7169a0b77afd22761970ad893d36ade11f42eaca857162d36ba8f2757c03954"
+          "sha256": "ed0096670d84551c8f4e8f7bdfc6b21494ab0c5e58b7207d3f39180ee5432bf4"
         },
         {
           "path": "apps/docs/src/content/popover/cover.tsx",
@@ -2077,7 +2077,7 @@
         },
         {
           "path": "apps/docs/src/content/tabs/meta.ts",
-          "sha256": "e74426513bd33148dc61c84779150701065705caa1689756f219138e0d87630b"
+          "sha256": "7d783a52a665049559e3d1d43e65589c1c0f2d1dd35a60b88b7050f3f7a83de7"
         },
         {
           "path": "apps/docs/src/content/tag-input/cover.tsx",
@@ -2225,7 +2225,7 @@
         },
         {
           "path": "apps/docs/src/content/toast/meta.ts",
-          "sha256": "9d41c4d8c4d7de4a1fa706b103404bcee218305b0618f681d90b7e6ebfceda16"
+          "sha256": "b5ab403b026456f6323f9bc765080381aab9738df2f1dc9fe2146056240c4b48"
         },
         {
           "path": "apps/docs/src/content/toc/cover.tsx",
@@ -2581,7 +2581,7 @@
         },
         {
           "path": "apps/docs/src/lib/types.ts",
-          "sha256": "0428b2f7c80618e72bcbd1f1fcd8311c896ebe9de80cbb6f6f6ecf6047e6e87e"
+          "sha256": "a166521bd29d3218faa6303ca94fe2473932a9ea622dad75d1f48978424e871a"
         },
         {
           "path": "apps/docs/src/lib/use-route-effects.ts",
