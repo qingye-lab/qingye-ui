@@ -17,6 +17,14 @@ export default {
   "decisions": "默认手动激活、面板保留挂载；切换视角不等于批准或保存草稿。",
   "decisionsEn": "Manual activation and mounted panels are defaults; switching views does not approve or save a draft.",
   "keywords": ["tab", "tablist", "标签页", "选项卡", "页签"],
+  "confusions": [
+    {
+      "mistaken": "TabsTrigger / TabsContent",
+      "use": ["TabsTab", "TabsPanel"],
+      "note": "标签触发器与内容面板名为 TabsTab 与 TabsPanel。",
+      "noteEn": "Tab triggers and content panels are TabsTab and TabsPanel."
+    }
+  ],
   "api": [
     {
       "name": "Tabs / TabsList",

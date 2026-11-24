@@ -6,6 +6,14 @@ export default {
   category: "浮层", layer: "primitive", source: "local",
   exports: ["Dialog", "DialogTrigger", "DialogPopup", "DialogHeader", "DialogTitle", "DialogDescription", "DialogPanel", "DialogFooter", "DialogClose"],
   keywords: ["dialog", "modal", "对话框", "阻断", "编辑", "弹窗", "弹出框", "模态"],
+  confusions: [
+    {
+      mistaken: "DialogContent",
+      use: ["DialogPopup"],
+      note: "对话框承载面名为 DialogPopup（长内容滚动区配 DialogPanel）。",
+      noteEn: "The dialog surface is DialogPopup (pair with DialogPanel for scrolling content).",
+    },
+  ],
   decisions: "关闭结束当前呈现并返回触发者，不代表保存。输入内容与后续动作由调用方持有。",
   decisionsEn: "Closing ends the presentation and returns to the trigger; it does not imply saving. The caller owns input values and subsequent actions.",
   api: [

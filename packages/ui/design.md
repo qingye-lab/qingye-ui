@@ -193,6 +193,8 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 
 正常流程之外，设计慢响应、原位错误、部分成功、返回、放弃与重新进入。写入结果未知时先如实表达，再按应用能力核实或恢复；不要猜测服务端没有执行。
 
+低风险、可逆且应用具备回滚能力的写入，可以先呈现预期结果；但服务端确认前不得宣称“已保存”，失败时回退到真实状态、保留用户输入意图并给出明确提示。高风险或不可逆操作不得用乐观反馈冒充完成。
+
 关闭界面、取消编辑、请求取消后台任务、撤销已保存动作分别定义后果。取消请求发出不等于取消已经完成。与权限撤回或敏感信息相关时，明确哪些工作必须清除，不能无条件永久保留。
 
 动效说明真实变化，允许中断；减少动态效果后名称、状态、输入和退出仍然可用。
@@ -345,7 +347,7 @@ Tabs 切换面板，Select 选择值，Menu 执行命令，Progress 表达进度
 在授权范围内实现并验证，说明修改归属、实际证据和未验证范围。
 ```
 
-<!-- qingye:translation:en:start source-sha256=0e2024ad37ff6c48a49b766b05156969eeade54b978c420a2fa42dc390aac236 -->
+<!-- qingye:translation:en:start source-sha256=8512488f73bc494b98d610f7a57921c9ae616284971dbf14e9c2f25383f17793 -->
 # Qingye UI Design Guide
 
 **Purpose first. Relationships guide the form. Fitness sets the measure.**
@@ -540,6 +542,8 @@ Modern imagery and vivid expression are allowed. Check actual Chinese punctuatio
 ### Change and recovery
 
 Design slow responses, in-place errors, partial success, return, abandonment, and re-entry as well as the normal path. Express an unknown write outcome accurately, then verify or recover within the application's capabilities. Do not assume the server did nothing.
+
+Low-risk, reversible writes that the application can roll back may show the expected result immediately; never announce "Saved" before server confirmation, and on failure roll back to the actual state while preserving the user's input intent and stating what happened. High-risk or irreversible actions must not use optimistic feedback as if completed.
 
 Define separate consequences for closing an interface, canceling editing, requesting background cancellation, and undoing a saved action. Sending a cancellation request does not confirm cancellation. When permissions are revoked or sensitive information is involved, identify work that must be cleared rather than retaining everything forever.
 

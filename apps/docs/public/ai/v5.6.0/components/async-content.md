@@ -8,7 +8,7 @@ Source SHA-256: ff984eaf9c0ebd6721ed7198ee409a0ea629f91a265337afacb6b19328cae599
 分别呈现请求状态与仍然有效的内容。
 
 ## Decision
-status 是最近请求的事实，hasContent 是应用对现有内容有效性的判断。首次加载没有内容；后台刷新和刷新失败保留内容及其组件身份。只有 success 且 hasContent=false 呈现空态。权限变化若使旧内容失效，应用须同时撤下它。
+status 是最近请求的事实，hasContent 是应用对现有内容有效性的判断。首次加载没有内容；后台刷新和刷新失败保留内容及其组件身份。只有 success 且 hasContent=false 呈现空态。权限变化若使旧内容失效，应用须同时撤下它。低风险可逆写入的乐观结果由应用状态呈现，确认前不宣称已保存；写入结果未知改用 PendingValue。
 
 ## Notes
 - error 状态的反馈由组件包在 role=alert 里宣告，errorContent 不必再自带 role=alert（嵌套会重复播报）；有效内容不设为 live region。

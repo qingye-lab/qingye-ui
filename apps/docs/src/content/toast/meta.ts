@@ -7,6 +7,14 @@ export default {
   category: "反馈", layer: "primitive", source: "local",
   exports: ["ToastProvider", "toastManager", "AnchoredToastProvider", "anchoredToastManager", "ToastPrimitive"],
   keywords: ["toast", "notification", "通知", "消息"],
+  confusions: [
+    {
+      mistaken: "Toast",
+      use: ["ToastProvider", "toastManager"],
+      note: "库不导出 Toast 组件；挂载 ToastProvider 并调用 toastManager.add/update/promise。",
+      noteEn: "There is no Toast component export; mount ToastProvider and call toastManager.add/update/promise.",
+    },
+  ],
   api: [
     { name: "ToastProvider", description: "同一通知通道挂载一次。", descriptionEn: "Mount once per notification channel.", props: [
       { name: "position", type: '"top-left" | "top-center" | "top-right" | "bottom-left" | "bottom-center" | "bottom-right"', default: '"bottom-right"', description: "通知区域的位置。", descriptionEn: "Notification region placement." },

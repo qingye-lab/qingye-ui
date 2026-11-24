@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "generatedBy": "scripts/gen-capabilities.mjs",
-  "generatedAt": "2026-11-23T12:42:32.320Z",
-  "revision": "df383d94ecb70a98ec3746bcde98f5b0cd8c672d",
+  "generatedAt": "2026-11-24T13:47:12.916Z",
+  "revision": "3458f0bf08f3edcdbde9ec45709c5c3d67837fc4",
   "fingerprint": {
-    "sha256": "e719e7ed9904fcc546738a56d5f684c52c40a468516b67884dced11e3ef33524",
+    "sha256": "074a32477ed308b800d27983a4490c99f06fe6c9fe0a142c6b2bec14edb2a6b7",
     "inputs": [
       {
         "path": "apps/docs/package.json",
@@ -24,7 +24,7 @@
       },
       {
         "path": "apps/docs/src/content/async-content/meta.ts",
-        "sha256": "68b08c5ae17aad7df6753321ed8a0605394f3c6bb8082c8840cda16e49a28121"
+        "sha256": "9471d115ddaeb49fe9e0686b11f007a569d7fbbfaa4f3441c72e4ceed6881024"
       },
       {
         "path": "apps/docs/src/content/autocomplete/meta.ts",
@@ -56,7 +56,7 @@
       },
       {
         "path": "apps/docs/src/content/button/meta.ts",
-        "sha256": "986c76faee731cb6de959c2e67f81d97aa1041644d39cdd370ec5a9c449a0e38"
+        "sha256": "ff9ea8284cc05acd2d6727c6eb1b3699bfd618325b82ffab5157d7c74a3f6e39"
       },
       {
         "path": "apps/docs/src/content/calendar/meta.ts",
@@ -156,11 +156,11 @@
       },
       {
         "path": "apps/docs/src/content/dialog/meta.ts",
-        "sha256": "c3bf512ecb8a8a1bb76ab8161482f208c1fd93b67d9e150b6d7b115c69085d76"
+        "sha256": "3474269bebd4884b415ab062553fd8a8e39c53aca92bf4932999e5a4822aa9d5"
       },
       {
         "path": "apps/docs/src/content/drawer/meta.ts",
-        "sha256": "632529915fae1d2d9e85b1aa10a3d848ae3ad18cdacc3f1a8a19a2358c3c550a"
+        "sha256": "dca08161034f6794dc7727c41231dd8914d334527a144b6320061edaa5bcfb98"
       },
       {
         "path": "apps/docs/src/content/empty/meta.ts",
@@ -240,7 +240,7 @@
       },
       {
         "path": "apps/docs/src/content/menu/meta.ts",
-        "sha256": "c5a30c5f91318810860b495e3b59aa8b80ea214034cf18cc2f227f8d52881283"
+        "sha256": "debfcb3e0afc05d08f614fe7521c7158b1048c084af6880ad6933aebecd0f2e1"
       },
       {
         "path": "apps/docs/src/content/meter/meta.ts",
@@ -276,7 +276,7 @@
       },
       {
         "path": "apps/docs/src/content/pending-value/meta.ts",
-        "sha256": "c7169a0b77afd22761970ad893d36ade11f42eaca857162d36ba8f2757c03954"
+        "sha256": "ed0096670d84551c8f4e8f7bdfc6b21494ab0c5e58b7207d3f39180ee5432bf4"
       },
       {
         "path": "apps/docs/src/content/popover/meta.ts",
@@ -388,7 +388,7 @@
       },
       {
         "path": "apps/docs/src/content/tabs/meta.ts",
-        "sha256": "e74426513bd33148dc61c84779150701065705caa1689756f219138e0d87630b"
+        "sha256": "7d783a52a665049559e3d1d43e65589c1c0f2d1dd35a60b88b7050f3f7a83de7"
       },
       {
         "path": "apps/docs/src/content/tag-input/meta.ts",
@@ -416,7 +416,7 @@
       },
       {
         "path": "apps/docs/src/content/toast/meta.ts",
-        "sha256": "9d41c4d8c4d7de4a1fa706b103404bcee218305b0618f681d90b7e6ebfceda16"
+        "sha256": "b5ab403b026456f6323f9bc765080381aab9738df2f1dc9fe2146056240c4b48"
       },
       {
         "path": "apps/docs/src/content/toc/meta.ts",
@@ -468,11 +468,11 @@
       },
       {
         "path": "apps/docs/src/lib/types.ts",
-        "sha256": "0428b2f7c80618e72bcbd1f1fcd8311c896ebe9de80cbb6f6f6ecf6047e6e87e"
+        "sha256": "a166521bd29d3218faa6303ca94fe2473932a9ea622dad75d1f48978424e871a"
       },
       {
         "path": "design.md",
-        "sha256": "c8fa01e1f4c0b9e003938bc7b3a40873de07f633f62eb7844b94326c259016ab"
+        "sha256": "74f81d8ab54d893965f445ee37054d5e543ff04444dc55a899062c19dd410752"
       },
       {
         "path": "package.json",
@@ -480,7 +480,7 @@
       },
       {
         "path": "packages/ui/catalog.json",
-        "sha256": "f414de297bfdbc5970f807c7db63f681b543976e8c0a33408ed3bcaa46a4aba1"
+        "sha256": "de81666c2e87954061b1128acf7ab93d0c6d257d123f6a744c6f8edcf3d48ac0"
       },
       {
         "path": "packages/ui/motion.css",
@@ -2138,8 +2138,19 @@
           "刷新",
           "重试"
         ],
-        "decisions": "status 是最近请求的事实，hasContent 是应用对现有内容有效性的判断。首次加载没有内容；后台刷新和刷新失败保留内容及其组件身份。只有 success 且 hasContent=false 呈现空态。权限变化若使旧内容失效，应用须同时撤下它。",
-        "decisionsEn": "status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it.",
+        "confusions": [
+          {
+            "mistaken": "刷新时用 Skeleton 替换旧内容",
+            "mistakenEn": "Replacing valid content with Skeleton on refresh",
+            "use": [
+              "AsyncContent"
+            ],
+            "note": "已有内容刷新时用 AsyncContent 并保持 hasContent={true}，保留工作面与焦点。",
+            "noteEn": "Keep existing content and focus during refresh with AsyncContent and hasContent={true}."
+          }
+        ],
+        "decisions": "status 是最近请求的事实，hasContent 是应用对现有内容有效性的判断。首次加载没有内容；后台刷新和刷新失败保留内容及其组件身份。只有 success 且 hasContent=false 呈现空态。权限变化若使旧内容失效，应用须同时撤下它。低风险可逆写入的乐观结果由应用状态呈现，确认前不宣称已保存；写入结果未知改用 PendingValue。",
+        "decisionsEn": "status describes the latest request; hasContent says whether existing content is still valid. Initial loading has no content; refresh and refresh failure retain content and component identity. Only success with hasContent=false shows an empty state. Applications must remove content if a permission change invalidates it. Low-risk reversible optimistic writes belong in application state without announcing Saved before confirmation; unknown write outcomes belong in PendingValue.",
         "api": [
           {
             "name": "AsyncContent",
@@ -4643,6 +4654,17 @@
           "忙碌",
           "加载中",
           "危险动作"
+        ],
+        "confusions": [
+          {
+            "mistaken": "独立 Spinner 或按钮内成功/失败状态",
+            "mistakenEn": "Standalone Spinner or success/error state inside Button",
+            "use": [
+              "Button"
+            ],
+            "note": "Button 只有布尔 loading 忙碌态，结果交由 Alert / toastManager，确认交由 AlertDialog / ConfirmAction；不提供独立 Spinner。",
+            "noteEn": "Button only has boolean loading; express outcomes with Alert or toastManager and confirmation with AlertDialog or ConfirmAction. No standalone Spinner is provided."
+          }
         ],
         "api": [
           {
@@ -13102,6 +13124,16 @@
           "弹出框",
           "模态"
         ],
+        "confusions": [
+          {
+            "mistaken": "DialogContent",
+            "use": [
+              "DialogPopup"
+            ],
+            "note": "对话框承载面名为 DialogPopup（长内容滚动区配 DialogPanel）。",
+            "noteEn": "The dialog surface is DialogPopup (pair with DialogPanel for scrolling content)."
+          }
+        ],
         "decisions": "关闭结束当前呈现并返回触发者，不代表保存。输入内容与后续动作由调用方持有。",
         "decisionsEn": "Closing ends the presentation and returns to the trigger; it does not imply saving. The caller owns input values and subsequent actions.",
         "api": [
@@ -13582,6 +13614,17 @@
           "sheet",
           "边缘",
           "抽屉"
+        ],
+        "confusions": [
+          {
+            "mistaken": "Sheet / SheetContent",
+            "use": [
+              "Drawer",
+              "DrawerPopup"
+            ],
+            "note": "边缘工作面统一用 Drawer 与 DrawerPopup（对应 SheetContent），方向由 swipeDirection 指定；DrawerContent 只是承载面内的可滚动内容区，不能代替 DrawerPopup。",
+            "noteEn": "Edge workspaces use Drawer and DrawerPopup (the SheetContent counterpart), with swipeDirection choosing the edge. DrawerContent is only the scrollable area inside the surface and does not replace DrawerPopup."
+          }
         ],
         "decisions": "方向由公开 swipeDirection 决定；实际 modal 决定焦点与背景阻断，关闭不代表撤销。",
         "decisionsEn": "Public swipeDirection controls the edge. Actual modality controls focus and background blocking; closing does not imply undo.",
@@ -19466,6 +19509,18 @@
           "下拉菜单",
           "更多操作"
         ],
+        "confusions": [
+          {
+            "mistaken": "DropdownMenu / DropdownMenuContent",
+            "use": [
+              "Menu",
+              "MenuPopup",
+              "MenuItem"
+            ],
+            "note": "命令下拉菜单统一用 Menu 族导出，无 DropdownMenu* 别名。",
+            "noteEn": "Command dropdown menus use the Menu family of exports; there are no DropdownMenu* aliases."
+          }
+        ],
         "api": [
           {
             "name": "Menu / MenuSubmenu",
@@ -22810,8 +22865,19 @@
           "加载中的值",
           "占位"
         ],
-        "decisions": "不把未知当失败，不默认重试危险写入。",
-        "decisionsEn": "Unknown is not failure; never retry a dangerous write by default.",
+        "confusions": [
+          {
+            "mistaken": "用错误提示代替写入结果未知",
+            "mistakenEn": "Reporting an unknown write outcome as a confirmed error",
+            "use": [
+              "PendingValue"
+            ],
+            "note": "写入已发出但超时或断连无法确认结果时，用 PendingValue 保留原值并提供核实入口。",
+            "noteEn": "Use PendingValue when a write outcome is unknown after timeout or disconnect, keeping the original value and verification actions."
+          }
+        ],
+        "decisions": "不把未知当失败，不默认重试危险写入。低风险可逆写入的乐观态由应用暂显预期值并在失败时回退，确认前不宣称已保存；一旦写入结果未知，改为保留原值并核实。",
+        "decisionsEn": "Unknown is not failure; never retry a dangerous write by default. Low-risk reversible optimistic updates may show an expected value in application state and roll back on failure without claiming Saved; once an outcome is unknown, keep the original value and verify.",
         "design": {
           "methods": [
             "名实相符",
@@ -31635,6 +31701,17 @@
           "选项卡",
           "页签"
         ],
+        "confusions": [
+          {
+            "mistaken": "TabsTrigger / TabsContent",
+            "use": [
+              "TabsTab",
+              "TabsPanel"
+            ],
+            "note": "标签触发器与内容面板名为 TabsTab 与 TabsPanel。",
+            "noteEn": "Tab triggers and content panels are TabsTab and TabsPanel."
+          }
+        ],
         "api": [
           {
             "name": "Tabs / TabsList",
@@ -33542,6 +33619,17 @@
           "notification",
           "通知",
           "消息"
+        ],
+        "confusions": [
+          {
+            "mistaken": "Toast",
+            "use": [
+              "ToastProvider",
+              "toastManager"
+            ],
+            "note": "库不导出 Toast 组件；挂载 ToastProvider 并调用 toastManager.add/update/promise。",
+            "noteEn": "There is no Toast component export; mount ToastProvider and call toastManager.add/update/promise."
+          }
         ],
         "api": [
           {
@@ -45965,7 +46053,7 @@
       "optional": false,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 68
+        "line": 79
       }
     },
     {
@@ -45974,7 +46062,7 @@
       "optional": false,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 70
+        "line": 81
       }
     },
     {
@@ -45983,7 +46071,7 @@
       "optional": false,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 71
+        "line": 82
       }
     },
     {
@@ -45992,7 +46080,7 @@
       "optional": true,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 73
+        "line": 84
       }
     },
     {
@@ -46001,7 +46089,7 @@
       "optional": false,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 75
+        "line": 86
       }
     },
     {
@@ -46010,7 +46098,7 @@
       "optional": false,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 77
+        "line": 88
       }
     },
     {
@@ -46019,7 +46107,7 @@
       "optional": false,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 78
+        "line": 89
       }
     },
     {
@@ -46028,7 +46116,7 @@
       "optional": true,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 79
+        "line": 90
       }
     },
     {
@@ -46037,7 +46125,7 @@
       "optional": true,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 81
+        "line": 92
       }
     },
     {
@@ -46046,7 +46134,7 @@
       "optional": true,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 83
+        "line": 94
       }
     },
     {
@@ -46055,7 +46143,16 @@
       "optional": true,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 85
+        "line": 96
+      }
+    },
+    {
+      "name": "confusions",
+      "type": "ComponentConfusion[]",
+      "optional": true,
+      "source": {
+        "path": "apps/docs/src/lib/types.ts",
+        "line": 98
       }
     },
     {
@@ -46064,7 +46161,7 @@
       "optional": true,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 86
+        "line": 99
       }
     },
     {
@@ -46073,7 +46170,7 @@
       "optional": true,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 87
+        "line": 100
       }
     },
     {
@@ -46082,7 +46179,7 @@
       "optional": true,
       "source": {
         "path": "apps/docs/src/lib/types.ts",
-        "line": 101
+        "line": 114
       }
     }
   ],

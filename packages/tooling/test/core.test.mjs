@@ -5,7 +5,7 @@ import {tmpdir} from 'node:os';
 import {resolve,dirname} from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
-import {loadProject,projectInfo,componentDocs,inside,checkProject,getTheme,updateTheme,validateTheme,themeCss,initProject,readReports,getImpact} from '../dist/index.js';
+import {loadProject,projectInfo,componentDocs,inside,checkProject,getTheme,updateTheme,validateTheme,themeCss,initProject,readReports,getImpact,DIAGNOSTIC_RULES} from '../dist/index.js';
 
 const config={schemaVersion:1,package:'@qingye_lab/ui',publicEntry:'src/ui.ts',styleEntry:'src/ui.css',theme:{source:'ui.theme.json',generated:'ui.theme.generated.css',mode:'class'},scan:['src'],compositions:[],tokenSources:[],adapters:[],diagnostics:{preset:'personal',mode:'report',report:'.qingye/report.json'}};
 const theme={schemaVersion:1,brand:'azure',common:{'--qy-control-md':'2rem'},light:{'--qy-primary':'#174c83','--qy-primary-foreground':'#fff'},dark:{'--qy-primary':'#93c5fd'},compact:{'--qy-control-md':'1.75rem'}};
@@ -116,3 +116,49 @@ test('CLI preserves a null expected source fingerprint instead of trusting a new
 });
 
 test('CLI accepts a CSS custom property as the token argument and rejects a missing value',t=>{const {root}=fixture(t),bin=fileURLToPath(new URL('../bin/qingye-ui.mjs',import.meta.url));const run=args=>spawnSync(process.execPath,[bin,'impact','--project',root,...args],{encoding:'utf8'});const result=run(['--token','--qy-primary','--json']);assert.equal(result.status,0);assert.equal(JSON.parse(result.stdout).status,'NOT_RUN');const missing=run(['--token','--json']);assert.equal(missing.status,2);assert.equal(JSON.parse(missing.stderr).code,'INVALID_ARGUMENT');});
+
+test('every diagnostic rule maps to a tooling diagnostics.md anchor, accurate layer and its single-source decision',t=>{
+  const guidePath=fileURLToPath(new URL('../diagnostics.md',import.meta.url));
+  const guide=readFileSync(guidePath,'utf8');
+  const pkg=JSON.parse(readFileSync(fileURLToPath(new URL('../package.json',import.meta.url)),'utf8'));
+  assert.equal(pkg.exports['./diagnostics.md'],'./diagnostics.md');
+  assert.ok(pkg.files.includes('diagnostics.md'));
+  for(const def of Object.values(DIAGNOSTIC_RULES)){
+    assert.equal(def.anchor,def.rule.replace('/','-'));
+    assert.equal(def.repairGuide,`@qingye/tooling/diagnostics.md#${def.anchor}`);
+    assert.match(guide,new RegExp(`^## ${def.anchor}$`,'m'));
+    assert.ok(guide.includes(`- **诊断建议**（\`decision\`）：${def.defaultDecision}.`),`diagnostics.md lacks the emitted decision for ${def.rule}`);
+  }
+  const {root,put}=fixture(t),bin=fileURLToPath(new URL('../bin/qingye-ui.mjs',import.meta.url));
+  put('src/app.tsx','import {NoSuchExport} from "@qingye_lab/ui"; export const App=()=> <main data-theme="brand" className="bg-[#123456]"/>;');
+  const result=checkProject(root);
+  const byRule=new Map(result.diagnostics.map(d=>[d.rule,d]));
+  assert.equal(byRule.get('imports/invalid-export')?.layer,'A');
+  assert.equal(byRule.get('imports/invalid-export')?.repairGuide,'@qingye/tooling/diagnostics.md#imports-invalid-export');
+  assert.equal(byRule.get('theme/axes')?.layer,'P');
+  assert.equal(byRule.get('theme/axes')?.repairGuide,'@qingye/tooling/diagnostics.md#theme-axes');
+  assert.equal(byRule.get('visual/hardcoded')?.layer,'P');
+  assert.equal(byRule.get('visual/hardcoded')?.repairGuide,'@qingye/tooling/diagnostics.md#visual-hardcoded');
+  for(const diagnostic of result.diagnostics){
+    const def=DIAGNOSTIC_RULES[diagnostic.rule];
+    assert.ok(def,`unknown rule ${diagnostic.rule}`);
+    assert.equal(diagnostic.decision,def.defaultDecision);
+    assert.equal(diagnostic.layer,def.layer);
+  }
+  const human=spawnSync(process.execPath,[bin,'check','--project',root],{encoding:'utf8'});
+  assert.equal(human.status,0);
+  assert.match(human.stdout,/\[A\].*@qingye\/tooling\/diagnostics\.md#imports-invalid-export/);
+  assert.match(human.stdout,/\[P\].*@qingye\/tooling\/diagnostics\.md#theme-axes/);
+});
+
+test('exceptions naming an unknown rule are rejected instead of silently never matching',t=>{
+  const {root,put,config}=fixture(t);
+  put('src/app.tsx','export const App=()=> <div className="bg-[#123456]"/>;');
+  const diagnostic=checkProject(root).diagnostics[0];
+  config.diagnostics.exceptions='exceptions.json';
+  put('ui.config.json',config);
+  put('exceptions.json',{schemaVersion:1,exceptions:[{rule:'visual/hardcode',file:diagnostic.file,line:diagnostic.line,evidence:diagnostic.evidence,reason:'typo',reviewAfter:'2099-01-01'}]});
+  assert.throws(()=>checkProject(root),{code:'INVALID_EXCEPTIONS'});
+  put('exceptions.json',{schemaVersion:1,exceptions:[{rule:diagnostic.rule,file:diagnostic.file,line:diagnostic.line,evidence:diagnostic.evidence,reason:'approved',reviewAfter:'2099-01-01'}]});
+  assert.equal(checkProject(root).diagnostics.find(d=>d.id===diagnostic.id).disposition,'exception');
+});

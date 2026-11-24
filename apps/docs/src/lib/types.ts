@@ -43,6 +43,17 @@ export interface KeyboardRow {
   descriptionEn?: string;
 }
 
+/** Consumer-side naming or usage correction (not a former Qingye name). */
+export interface ComponentConfusion {
+  /** Mistaken name (often a habit from other React UI libraries) or state-semantics misuse. */
+  mistaken: string;
+  mistakenEn?: string;
+  /** Exports of this component's own module to use instead (validated against its actual exports). */
+  use: string[];
+  note: string;
+  noteEn?: string;
+}
+
 /** Public design guidance; APIs remain in the source and api metadata. */
 export interface ComponentDesign {
   methods: string[];
@@ -83,6 +94,8 @@ export interface ComponentMeta extends LocalizedMeta {
   notesEn?: string[];
   /** Search aliases, e.g. ["下拉", "dropdown"]. */
   keywords?: string[];
+  /** Consumer-side naming or usage corrections projected into ai/SKILL.md. */
+  confusions?: ComponentConfusion[];
   design?: Partial<ComponentDesign>;
   designEn?: ComponentDesignTranslation;
   /**

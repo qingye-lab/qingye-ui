@@ -52,3 +52,32 @@ test("current component resources match the live public catalog after removals a
   expect(names).toContain("search-input.md");
   expect(names).toContain("password-input.md");
 });
+
+test("both skills project validated component naming corrections from catalog metadata", () => {
+  const catalog = JSON.parse(read("packages/ui/catalog.json"));
+  const confusions = catalog.components.flatMap((component: { name: string; actualExports: { name: string }[]; confusions?: { mistaken: string; mistakenEn?: string; use: string[] }[] }) =>
+    (component.confusions ?? []).map((entry) => ({ component: component.name, exports: new Set(component.actualExports.map((e) => e.name)), ...entry })),
+  );
+  expect(confusions.length).toBeGreaterThan(0);
+  const skillZh = read("packages/ui/ai/SKILL.md");
+  const skillEn = read("packages/ui/ai/SKILL.en.md");
+  expect(read("apps/docs/public/ai/SKILL.md")).toBe(skillZh);
+  expect(read("apps/docs/public/ai/SKILL.en.md")).toBe(skillEn);
+  expect(skillZh).toContain("## 常见名称与用法纠偏");
+  expect(skillEn).toContain("## Common naming and usage corrections");
+  for (const skill of [skillZh, skillEn]) {
+    const section = skill.split(/^## /m).find((part) => /^(常见名称与用法纠偏|Common naming and usage corrections)/.test(part))!;
+    const rows = section.split("\n").filter((line) => line.startsWith("| ") && !/^\| (常见误写|Common mistake)/.test(line));
+    expect(rows).toHaveLength(confusions.length);
+    for (const row of rows) expect(row.split(/(?<!\\)\|/)).toHaveLength(5);
+  }
+  for (const item of confusions) {
+    expect(skillZh).toContain(item.mistaken);
+    expect(skillEn).toContain(item.mistakenEn ?? item.mistaken);
+    for (const symbol of item.use) {
+      expect(item.exports.has(symbol)).toBe(true);
+      expect(skillZh).toContain(`\`${symbol}\``);
+      expect(skillEn).toContain(`\`${symbol}\``);
+    }
+  }
+});
